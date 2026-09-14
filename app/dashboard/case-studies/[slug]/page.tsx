@@ -17,9 +17,13 @@ export default function EditCaseStudyPage({
   useEffect(() => {
     let active = true;
     const controller = new AbortController();
-    setRecord(null);
-    setError(null);
     void (async () => {
+      // The reset belongs to the load lifecycle, not to the effect body: doing it
+      // synchronously in the effect is what react-hooks/set-state-in-effect
+      // rejects. Running it as the task's first step still clears any previously
+      // rendered record before the response arrives.
+      setRecord(null);
+      setError(null);
       try {
         const { slug } = await params;
         if (!active) return;

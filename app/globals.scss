@@ -678,7 +678,7 @@ button,
   background: none;
   border: none;
   cursor: pointer;
-  appearance: button;
+  appearance: auto;
 }
 
 button::-moz-focus-inner,
@@ -847,7 +847,7 @@ article pre,
   font-family: monospace;
   line-height: 1.6;
   white-space: pre-wrap;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 
   code {
     padding: 0;

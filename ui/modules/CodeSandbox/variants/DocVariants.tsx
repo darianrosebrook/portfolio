@@ -33,38 +33,34 @@ export function DocVariants({
     onSelectionChange?.(next);
   };
 
-  // Initialize default values from controls
-  React.useEffect(() => {
-    const defaults: Record<string, any> = {};
+  // Control defaults and the URL query are pure functions of the props, so they
+  // are derived here and the explicit user selection is layered on top. Both
+  // used to be pushed into state from effects, which is set-state-in-effect.
+  const effectiveValues = React.useMemo(() => {
+    const derived: Record<string, any> = {};
+
     controls.forEach((control) => {
-      if (
-        control.defaultValue !== undefined &&
-        values[control.id] === undefined
-      ) {
-        defaults[control.id] = control.defaultValue;
+      if (control.defaultValue !== undefined) {
+        derived[control.id] = control.defaultValue;
       }
     });
-    if (Object.keys(defaults).length > 0) {
-      setValues((prev) => ({ ...prev, ...defaults }));
-    }
-  }, [controls, values]);
 
-  // Initialize from URL query if enabled
-  React.useEffect(() => {
-    if (!linkSelectionToURL) return;
-    if (typeof window === 'undefined') return;
-    const params = new URLSearchParams(window.location.search);
-    const init: Record<string, any> = {};
-    init[grid.rows.id] =
-      params.get(grid.rows.id) ?? grid.rows.defaultValue ?? grid.rows.values[0];
-    if (grid.cols) {
-      init[grid.cols.id] =
-        params.get(grid.cols.id) ??
-        grid.cols.defaultValue ??
-        grid.cols.values[0];
+    if (linkSelectionToURL && typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      derived[grid.rows.id] =
+        params.get(grid.rows.id) ??
+        grid.rows.defaultValue ??
+        grid.rows.values[0];
+      if (grid.cols) {
+        derived[grid.cols.id] =
+          params.get(grid.cols.id) ??
+          grid.cols.defaultValue ??
+          grid.cols.values[0];
+      }
     }
-    if (Object.keys(init).length) setValues((prev) => ({ ...prev, ...init }));
-  }, [linkSelectionToURL, grid.rows, grid.cols]);
+
+    return { ...derived, ...values };
+  }, [controls, linkSelectionToURL, grid.rows, grid.cols, values]);
 
   // Reflect selection in URL if enabled (debounced)
   React.useEffect(() => {
@@ -79,7 +75,7 @@ export function DocVariants({
     // Debounce URL updates to prevent history spam
     timeoutRef.current = setTimeout(() => {
       const params = new URLSearchParams(window.location.search);
-      const rowVal = values[grid.rows.id];
+      const rowVal = effectiveValues[grid.rows.id];
       if (rowVal) {
         params.set(grid.rows.id, String(rowVal));
       } else {
@@ -87,7 +83,7 @@ export function DocVariants({
       }
 
       if (grid.cols) {
-        const colVal = values[grid.cols.id];
+        const colVal = effectiveValues[grid.cols.id];
         if (colVal) {
           params.set(grid.cols.id, String(colVal));
         } else {
@@ -110,7 +106,7 @@ export function DocVariants({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [linkSelectionToURL, values, grid.rows, grid.cols]);
+  }, [linkSelectionToURL, effectiveValues, grid.rows, grid.cols]);
 
   // Create reset keys from identifiers
   const projectKey = JSON.stringify(project.files.map((f) => f.path).sort());
@@ -131,13 +127,13 @@ export function DocVariants({
         <div>
           <PropControls
             controls={controls}
-            values={values}
+            values={effectiveValues}
             onChange={handleChange}
           />
         </div>
         <div style={{ minHeight: 320, height }}>
           <CodeWorkbench project={project} engine="sandpack" height={height}>
-            <PropsBridge values={values} />
+            <PropsBridge values={effectiveValues} />
             <CodePreview height="100%" />
           </CodeWorkbench>
         </div>

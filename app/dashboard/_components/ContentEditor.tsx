@@ -91,7 +91,11 @@ function ContentEditorSession({
   const recoveryPendingRef = useRef(false);
   const acknowledgedRef = useRef(draftFingerprint(record));
   const canonicalRef = useRef(canonical);
-  canonicalRef.current = canonical;
+  // Mirrored in an effect rather than assigned while rendering, which is what
+  // react-hooks/refs rejects. Async save paths read the ref, not the render value.
+  useEffect(() => {
+    canonicalRef.current = canonical;
+  }, [canonical]);
 
   const updateRecord = (next: RecordType) => {
     if (transitionRef.current || recoveryPendingRef.current) return;
@@ -128,6 +132,14 @@ function ContentEditorSession({
         draftFingerprint(local) !== draftFingerprint(recordRef.current)
       ) {
         recoveryPendingRef.current = true;
+        // Deliberate exception to react-hooks/set-state-in-effect. This is a
+        // one-time post-mount reconciliation with browser storage: localStorage
+        // does not exist during SSR, and reading it while rendering would both
+        // break hydration and re-run under StrictMode's double-invoked
+        // initializers. Deriving it is not possible without changing when the
+        // recovery banner appears, which is the behaviour FIX-EDITOR-RELIABILITY-001
+        // established.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setRecovery(local);
       } else if (local)
         acknowledgeRecovery(window.localStorage, storageKey, recordRef.current);
@@ -686,7 +698,7 @@ function ContentEditorSession({
               />
             </div>
             <RelatedContentPicker
-              slug={routeSlugRef.current}
+              slug={canonical.slug}
               contentType={entity === 'articles' ? 'article' : 'case-study'}
               excludeId={record.id}
             />

@@ -195,7 +195,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     // rationale (no cleaner React 18/19 primitive without useEffectEvent).
     useLayoutEffect(() => {
       if (isVisible) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect -- canonical measure-DOM-then-setPosition in useLayoutEffect
         updatePosition();
       }
     }, [isVisible, updatePosition]);

@@ -4,14 +4,14 @@
  */
 
 .showcase {
+  z-index: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(40px, 4fr));
   grid-auto-rows: max-content;
   gap: var(--semantic-spacing-gap-grid);
+  align-items: start;
   width: calc(100% / 0.75);
   max-width: calc(1920px / 0.75);
-  align-items: start;
-  z-index: 0;
   transform: scale(0.75);
   transform-origin: top left;
 
@@ -28,17 +28,17 @@
   @media (width <= 768px) {
     grid-template-columns: 1fr;
     gap: var(--semantic-spacing-gap-grid);
-    transform: none;
     width: 100%;
     max-width: 100%;
+    transform: none;
   }
 }
 
 /* Hero Section - Spans full width in masonry */
 .heroSection {
-  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-column: 1 / -1;
   gap: var(--semantic-spacing-gap-grid);
   width: 100%;
 }
@@ -46,28 +46,28 @@
 .heroCard {
   display: flex;
   flex-direction: column;
-  background: var(--semantic-color-background-primary);
-  border-radius: var(--semantic-shape-card-radius, 12px);
   overflow: hidden;
-  border: 1px solid var(--semantic-color-border-default);
   height: fit-content;
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
   transition: transform var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing),
     box-shadow var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
-    transform: translateY(-2px);
     box-shadow: var(--semantic-shape-card-elevation-far);
+    transform: translateY(-2px);
   }
 }
 
 .cardImage {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 200px;
   background: var(--semantic-color-background-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .imagePlaceholder {
@@ -75,39 +75,39 @@
 }
 
 .cardContent {
-  padding: var(--semantic-spacing-padding-card);
   display: flex;
   flex-direction: column;
   gap: var(--semantic-spacing-gap-component);
+  padding: var(--semantic-spacing-padding-card);
 
   h3 {
     margin: 0;
-    font-size: 12px;
-    font-weight: var(--semantic-typography-body-font-weight);
     color: var(--semantic-color-foreground-secondary);
-    text-transform: uppercase;
+    font-weight: var(--semantic-typography-body-font-weight);
+    font-size: 12px;
     letter-spacing: 0.5px;
+    text-transform: uppercase;
   }
 
   h4 {
     margin: 0;
-    font-size: 18px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 18px;
   }
 
   p {
     margin: 0;
-    font-size: 14px;
     color: var(--semantic-color-foreground-secondary);
+    font-size: 14px;
     line-height: 1.5;
   }
 }
 
 .price {
-  font-size: 24px !important;
-  font-weight: 700 !important;
   color: var(--semantic-color-foreground-primary) !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
 }
 
 .description {
@@ -117,9 +117,9 @@
 
 .cardActions {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--semantic-spacing-gap-component);
   margin-top: var(--semantic-spacing-margin-component);
-  flex-wrap: wrap;
 }
 
 .cardButton {
@@ -127,11 +127,11 @@
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-button-radius, 8px);
-  font-size: 14px;
-  font-weight: var(--semantic-typography-body-font-weight);
   color: var(--semantic-color-foreground-primary);
-  cursor: pointer;
+  font-weight: var(--semantic-typography-body-font-weight);
+  font-size: 14px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     background: var(--semantic-color-background-tertiary);
@@ -143,19 +143,19 @@
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
-  font-size: 14px;
   color: var(--semantic-color-foreground-primary);
-  cursor: pointer;
+  font-size: 14px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
   }
 
   &:focus {
-    outline: none;
     border-color: var(--semantic-color-border-focus);
     box-shadow: 0 0 0 2px var(--semantic-color-background-accent);
+    outline: none;
   }
 }
 
@@ -164,11 +164,11 @@
   background: var(--semantic-color-background-accent);
   border: none;
   border-radius: var(--semantic-shape-button-radius, 8px);
-  font-size: 14px;
-  font-weight: var(--semantic-typography-heading-font-weight);
   color: var(--semantic-color-foreground-inverse);
-  cursor: pointer;
+  font-weight: var(--semantic-typography-heading-font-weight);
+  font-size: 14px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     filter: brightness(1.1);
@@ -185,17 +185,17 @@
 }
 
 .formCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--core-shape-radius-03);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 
   h3 {
     margin: 0 0 var(--semantic-spacing-margin-section);
-    font-size: 18px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 18px;
   }
 }
 
@@ -214,14 +214,14 @@
 
 .formGroup {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: var(--semantic-spacing-gap-gridSmall);
-  flex: 1;
 
   label {
-    font-size: 13px;
-    font-weight: var(--semantic-typography-body-font-weight);
     color: var(--semantic-color-foreground-secondary);
+    font-weight: var(--semantic-typography-body-font-weight);
+    font-size: 13px;
   }
 }
 
@@ -230,14 +230,14 @@
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
-  font-size: 14px;
   color: var(--semantic-color-foreground-primary);
+  font-size: 14px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
 
   &:focus {
-    outline: none;
     border-color: var(--semantic-color-border-focus);
     box-shadow: 0 0 0 2px var(--semantic-color-background-accent);
+    outline: none;
   }
 }
 
@@ -248,16 +248,16 @@
 }
 
 .mediaItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   aspect-ratio: 1;
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-element-radius, 8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: var(--semantic-color-foreground-tertiary);
-  cursor: pointer;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -265,9 +265,9 @@
 }
 
 .textEditor {
+  overflow: hidden;
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
-  overflow: hidden;
 }
 
 .editorToolbar {
@@ -279,17 +279,17 @@
 }
 
 .toolButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 32px;
   height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: transparent;
   border: none;
   border-radius: 4px;
   color: var(--semantic-color-foreground-secondary);
-  cursor: pointer;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     background: var(--semantic-color-background-tertiary);
@@ -301,8 +301,8 @@
   padding: var(--semantic-spacing-padding-component);
   background: var(--semantic-color-background-primary);
   border: none;
-  font-size: 14px;
   color: var(--semantic-color-foreground-primary);
+  font-size: 14px;
   font-family: inherit;
   resize: vertical;
 
@@ -322,10 +322,10 @@
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-badge-radius, 16px);
-  font-size: 13px;
   color: var(--semantic-color-foreground-primary);
-  cursor: pointer;
+  font-size: 13px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -349,8 +349,8 @@
   height: 32px;
   border: 2px solid var(--semantic-color-border-default);
   border-radius: 50%;
-  cursor: pointer;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.1);
@@ -369,8 +369,8 @@
 
 .sizeGrid {
   display: flex;
-  gap: var(--semantic-spacing-gap-component);
   flex-wrap: wrap;
+  gap: var(--semantic-spacing-gap-component);
 }
 
 .sizeButton {
@@ -378,10 +378,10 @@
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
-  font-size: 14px;
   color: var(--semantic-color-foreground-primary);
-  cursor: pointer;
+  font-size: 14px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -390,17 +390,17 @@
 
 /* Size Card */
 .sizeCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 
   h4 {
     margin: 0 0 var(--semantic-spacing-margin-component);
-    font-size: 14px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 14px;
   }
 }
 
@@ -416,10 +416,10 @@
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
-  font-size: 14px;
   color: var(--semantic-color-foreground-primary);
-  cursor: pointer;
+  font-size: 14px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -434,8 +434,8 @@
 
 .materialSelector {
   display: flex;
-  gap: var(--semantic-spacing-gap-component);
   flex-wrap: wrap;
+  gap: var(--semantic-spacing-gap-component);
   margin-bottom: var(--semantic-spacing-margin-section);
 }
 
@@ -444,10 +444,10 @@
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
-  font-size: 14px;
   color: var(--semantic-color-foreground-primary);
-  cursor: pointer;
+  font-size: 14px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -465,11 +465,11 @@
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
-  font-size: 13px;
   color: var(--semantic-color-foreground-primary);
-  cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  font-size: 13px;
   text-align: left;
+  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -492,11 +492,11 @@
 }
 
 .ordersTable {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 }
 
 .tableHeader {
@@ -507,15 +507,15 @@
 
   h3 {
     margin: 0;
-    font-size: 18px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 18px;
   }
 }
 
 .dateLabel {
-  font-size: 13px;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 13px;
 }
 
 .table {
@@ -530,15 +530,15 @@
   }
 
   th {
-    font-weight: var(--semantic-typography-heading-font-weight);
-    color: var(--semantic-color-foreground-secondary);
     border-bottom: 1px solid var(--semantic-color-border-default);
+    color: var(--semantic-color-foreground-secondary);
+    font-weight: var(--semantic-typography-heading-font-weight);
   }
 
   td {
-    font-weight: 400;
-    color: var(--semantic-color-foreground-primary);
     border-bottom: 1px solid var(--semantic-color-border-default);
+    color: var(--semantic-color-foreground-primary);
+    font-weight: 400;
   }
 
   tbody tr {
@@ -557,42 +557,42 @@
 .badge {
   display: inline-block;
   padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
-  font-size: 11px;
-  font-weight: var(--semantic-typography-body-font-weight);
   border-radius: var(--semantic-shape-badge-radius, 12px);
+  font-weight: var(--semantic-typography-body-font-weight);
+  font-size: 11px;
 
   &.success {
-    color: var(--semantic-color-feedback-success-default);
     background: var(--semantic-color-feedback-success-background);
+    color: var(--semantic-color-feedback-success-default);
   }
 
   &.warning {
-    color: var(--semantic-color-feedback-warning-default);
     background: var(--semantic-color-feedback-warning-background);
+    color: var(--semantic-color-feedback-warning-default);
   }
 
   &.error {
-    color: var(--semantic-color-feedback-error-default);
     background: var(--semantic-color-feedback-error-background);
+    color: var(--semantic-color-feedback-error-default);
   }
 
   &.neutral {
-    color: var(--semantic-color-foreground-secondary);
     background: var(--semantic-color-background-tertiary);
+    color: var(--semantic-color-foreground-secondary);
   }
 }
 
 .showMoreButton {
   width: 100%;
-  padding: var(--semantic-spacing-padding-component);
   margin-top: var(--semantic-spacing-margin-component);
+  padding: var(--semantic-spacing-padding-component);
   background: transparent;
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-button-radius, 8px);
-  font-size: 14px;
   color: var(--semantic-color-foreground-primary);
-  cursor: pointer;
+  font-size: 14px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     background: var(--semantic-color-background-secondary);
@@ -601,17 +601,17 @@
 
 /* Shopping Cart */
 .cartCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 
   h3 {
     margin: 0 0 var(--semantic-spacing-margin-component);
-    font-size: 18px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 18px;
   }
 }
 
@@ -624,23 +624,23 @@
 
 .cartItem {
   display: flex;
-  align-items: center;
   gap: var(--semantic-spacing-gap-grid-medium);
+  align-items: center;
   padding: var(--semantic-spacing-padding-component);
   background: var(--semantic-color-background-secondary);
   border-radius: var(--semantic-shape-element-radius, 8px);
 }
 
 .itemImage {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
   width: 48px;
   height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: var(--semantic-color-background-tertiary);
   border-radius: var(--semantic-shape-element-radius, 6px);
   color: var(--semantic-color-foreground-tertiary);
-  flex-shrink: 0;
 }
 
 .itemDetails {
@@ -650,15 +650,15 @@
 
 .itemName {
   margin: 0 0 2px;
-  font-size: 14px;
-  font-weight: var(--semantic-typography-body-font-weight);
   color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-body-font-weight);
+  font-size: 14px;
 }
 
 .itemSize {
   margin: 0;
-  font-size: 12px;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 12px;
 }
 
 .quantitySelect {
@@ -666,16 +666,16 @@
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
-  font-size: 13px;
   color: var(--semantic-color-foreground-primary);
+  font-size: 13px;
   cursor: pointer;
 }
 
 .itemPrice {
   margin: 0;
-  font-size: 14px;
-  font-weight: var(--semantic-typography-heading-font-weight);
   color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-heading-font-weight);
+  font-size: 14px;
   white-space: nowrap;
 }
 
@@ -685,15 +685,15 @@
   align-items: center;
   padding: var(--semantic-spacing-padding-card) 0;
   border-top: 1px solid var(--semantic-color-border-default);
-  font-size: 14px;
-  font-weight: var(--semantic-typography-body-font-weight);
   color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-body-font-weight);
+  font-size: 14px;
 }
 
 .totalAmount {
-  font-size: 20px;
-  font-weight: 700;
   color: var(--semantic-color-foreground-primary);
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .checkoutButton {
@@ -702,11 +702,11 @@
   background: var(--semantic-color-background-accent);
   border: none;
   border-radius: var(--semantic-shape-button-radius, 8px);
-  font-size: 14px;
-  font-weight: var(--semantic-typography-heading-font-weight);
   color: var(--semantic-color-foreground-inverse);
-  cursor: pointer;
+  font-weight: var(--semantic-typography-heading-font-weight);
+  font-size: 14px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     filter: brightness(1.1);
@@ -723,17 +723,17 @@
 }
 
 .deliveryCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 
   h3 {
     margin: 0 0 var(--semantic-spacing-margin-component);
-    font-size: 18px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 18px;
   }
 }
 
@@ -748,10 +748,10 @@
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
-  font-size: 14px;
   color: var(--semantic-color-foreground-primary);
-  cursor: pointer;
+  font-size: 14px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -763,15 +763,15 @@
 
   .label {
     margin: 0 0 4px;
-    font-size: 13px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 13px;
   }
 
   .time {
     margin: 0;
-    font-size: 13px;
     color: var(--semantic-color-foreground-secondary);
+    font-size: 13px;
   }
 }
 
@@ -780,23 +780,23 @@
 
   .name {
     margin: 0 0 4px;
-    font-size: 14px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 14px;
   }
 
   .address {
     margin: 0;
-    font-size: 13px;
     color: var(--semantic-color-foreground-secondary);
+    font-size: 13px;
   }
 }
 
 .mapPlaceholder {
-  margin-bottom: var(--semantic-spacing-margin-component);
-  border-radius: var(--semantic-shape-element-radius, 8px);
   overflow: hidden;
+  margin-bottom: var(--semantic-spacing-margin-component);
   border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-element-radius, 8px);
 }
 
 .deliveryActions {
@@ -810,11 +810,11 @@
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-button-radius, 8px);
-  font-size: 14px;
-  font-weight: var(--semantic-typography-body-font-weight);
   color: var(--semantic-color-foreground-primary);
-  cursor: pointer;
+  font-weight: var(--semantic-typography-body-font-weight);
+  font-size: 14px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     background: var(--semantic-color-background-tertiary);
@@ -822,17 +822,17 @@
 }
 
 .bookmarksCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 
   h3 {
     margin: 0;
-    font-size: 18px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 18px;
   }
 }
 
@@ -847,10 +847,10 @@
   padding: 0;
   background: none;
   border: none;
-  font-size: 14px;
   color: var(--semantic-color-foreground-accent);
-  cursor: pointer;
+  font-size: 14px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;
@@ -870,51 +870,51 @@
 }
 
 .bookmarkImage {
-  aspect-ratio: 1;
-  border-radius: var(--semantic-shape-element-radius, 8px);
-  max-width: 256px;
   overflow: hidden;
+  max-width: 256px;
+  aspect-ratio: 1;
   border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-element-radius, 8px);
 }
 
 .bookmarkName {
   margin: 0;
-  font-size: 13px;
-  font-weight: var(--semantic-typography-body-font-weight);
   color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-body-font-weight);
+  font-size: 13px;
 }
 
 .bookmarkPrice {
   margin: 0;
-  font-size: 13px;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 13px;
 }
 
 /* Search Card */
 .searchCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 
   h3 {
     margin: 0 0 var(--semantic-spacing-margin-component);
-    font-size: 18px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 18px;
   }
 }
 
 .searchInput {
   display: flex;
-  align-items: center;
   gap: var(--semantic-spacing-gap-grid-medium);
+  align-items: center;
+  margin-bottom: var(--semantic-spacing-margin-component);
   padding: var(--semantic-spacing-padding-component);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 8px);
-  margin-bottom: var(--semantic-spacing-margin-component);
   color: var(--semantic-color-foreground-tertiary);
 }
 
@@ -922,8 +922,8 @@
   flex: 1;
   background: none;
   border: none;
-  font-size: 14px;
   color: var(--semantic-color-foreground-primary);
+  font-size: 14px;
 
   &:focus {
     outline: none;
@@ -936,8 +936,8 @@
 
 .filterTags {
   display: flex;
-  gap: var(--semantic-spacing-gap-component);
   flex-wrap: wrap;
+  gap: var(--semantic-spacing-gap-component);
 }
 
 .filterTag {
@@ -945,10 +945,10 @@
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-badge-radius, 16px);
-  font-size: 13px;
   color: var(--semantic-color-foreground-primary);
-  cursor: pointer;
+  font-size: 13px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -963,11 +963,11 @@
 
 /* Notification Card */
 .notificationCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 }
 
 .notificationHeader {
@@ -977,15 +977,15 @@
 }
 
 .notificationIcon {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
   width: 40px;
   height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: var(--semantic-color-background-accent);
   border-radius: var(--semantic-shape-element-radius, 8px);
   color: var(--semantic-color-foreground-inverse);
-  flex-shrink: 0;
 }
 
 .notificationContent {
@@ -993,30 +993,30 @@
 
   h4 {
     margin: 0 0 4px;
-    font-size: 14px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 14px;
   }
 
   p {
     margin: 0;
-    font-size: 13px;
     color: var(--semantic-color-foreground-secondary);
+    font-size: 13px;
   }
 }
 
 .closeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 32px;
   height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: transparent;
   border: none;
   border-radius: var(--semantic-shape-element-radius, 6px);
   color: var(--semantic-color-foreground-tertiary);
-  cursor: pointer;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  cursor: pointer;
 
   &:hover {
     background: var(--semantic-color-background-secondary);
@@ -1031,11 +1031,11 @@
 
 /* Profile Card */
 .profileCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 }
 
 .profileHeader {
@@ -1045,17 +1045,17 @@
 }
 
 .profileAvatar {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
   width: 56px;
   height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: var(--semantic-color-background-accent);
   border-radius: var(--semantic-shape-element-radius, 12px);
   color: var(--semantic-color-foreground-inverse);
-  font-size: 18px;
   font-weight: var(--semantic-typography-heading-font-weight);
-  flex-shrink: 0;
+  font-size: 18px;
 }
 
 .profileInfo {
@@ -1063,15 +1063,15 @@
 
   h4 {
     margin: 0 0 4px;
-    font-size: 16px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 16px;
   }
 
   p {
     margin: 0;
-    font-size: 13px;
     color: var(--semantic-color-foreground-secondary);
+    font-size: 13px;
   }
 }
 
@@ -1088,34 +1088,34 @@
 .statItem {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: var(--semantic-spacing-gap-gridSmall);
+  align-items: center;
 }
 
 .statValue {
-  font-size: 20px;
-  font-weight: 700;
   color: var(--semantic-color-foreground-primary);
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .statLabel {
-  font-size: 12px;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 12px;
 }
 
 /* Stats Card */
 .statsCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 
   h3 {
     margin: 0 0 var(--semantic-spacing-margin-section);
-    font-size: 18px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 18px;
   }
 }
 
@@ -1138,13 +1138,13 @@
 }
 
 .metricLabel {
-  font-size: 13px;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 13px;
 }
 
 .metricChange {
-  font-size: 12px;
   font-weight: var(--semantic-typography-heading-font-weight);
+  font-size: 12px;
 
   &.positive {
     color: var(--semantic-color-feedback-success-default);
@@ -1156,16 +1156,16 @@
 }
 
 .metricValue {
-  font-size: 24px;
-  font-weight: 700;
   color: var(--semantic-color-foreground-primary);
+  font-weight: 700;
+  font-size: 24px;
 }
 
 .metricBar {
+  overflow: hidden;
   height: 6px;
   background: var(--semantic-color-background-tertiary);
   border-radius: var(--semantic-shape-badge-radius, 9999px);
-  overflow: hidden;
 }
 
 .metricBarFill {
@@ -1177,17 +1177,17 @@
 
 /* Activity Card */
 .activityCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 
   h3 {
     margin: 0 0 var(--semantic-spacing-margin-component);
-    font-size: 18px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 18px;
   }
 }
 
@@ -1204,15 +1204,15 @@
 }
 
 .activityIcon {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
   width: 32px;
   height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: var(--semantic-color-background-secondary);
   border-radius: var(--semantic-shape-element-radius, 6px);
   color: var(--semantic-color-foreground-accent);
-  flex-shrink: 0;
 }
 
 .activityContent {
@@ -1221,29 +1221,29 @@
 
 .activityText {
   margin: 0 0 4px;
-  font-size: 14px;
   color: var(--semantic-color-foreground-primary);
+  font-size: 14px;
 }
 
 .activityTime {
   margin: 0;
-  font-size: 12px;
   color: var(--semantic-color-foreground-tertiary);
+  font-size: 12px;
 }
 
 /* Settings Card */
 .settingsCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 
   h3 {
     margin: 0 0 var(--semantic-spacing-margin-section);
-    font-size: 18px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 18px;
   }
 }
 
@@ -1261,20 +1261,20 @@
 
 .settingLabel {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: var(--semantic-spacing-gap-gridSmall);
-  flex: 1;
 
   span:first-child {
-    font-size: 14px;
-    font-weight: var(--semantic-typography-body-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-body-font-weight);
+    font-size: 14px;
   }
 }
 
 .settingDescription {
-  font-size: 12px;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 12px;
 }
 
 .toggle {
@@ -1286,31 +1286,28 @@
 }
 
 .toggle input {
-  opacity: 0;
   width: 0;
   height: 0;
+  opacity: 0;
 }
 
 .toggleSlider {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: var(--semantic-color-background-tertiary);
   border-radius: var(--semantic-shape-badge-radius, 9999px);
   transition: all var(--semantic-motion-interaction-enter-duration) var(--semantic-motion-interaction-enter-easing);
 
   &::before {
-    content: '';
     position: absolute;
-    height: 18px;
-    width: 18px;
-    left: 3px;
     bottom: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
     background: var(--semantic-color-background-primary);
     border-radius: 50%;
     transition: all var(--semantic-motion-interaction-enter-duration) var(--semantic-motion-interaction-enter-easing);
+    content: '';
   }
 }
 
@@ -1324,11 +1321,11 @@
 
 /* Tabs Card */
 .tabsCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 }
 
 .tabList {
@@ -1339,38 +1336,38 @@
 }
 
 .tab {
+  margin-bottom: -1px;
   padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
   background: transparent;
   border: none;
   border-bottom: 2px solid transparent;
-  font-size: 14px;
   color: var(--semantic-color-foreground-secondary);
-  cursor: pointer;
+  font-size: 14px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
-  margin-bottom: -1px;
+  cursor: pointer;
 
   &:hover {
     color: var(--semantic-color-foreground-primary);
   }
 
   &.tabActive {
-    color: var(--semantic-color-foreground-accent);
     border-bottom-color: var(--semantic-color-background-accent);
+    color: var(--semantic-color-foreground-accent);
   }
 }
 
 .tabContent {
   h4 {
     margin: 0 0 8px;
-    font-size: 16px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 16px;
   }
 
   p {
     margin: 0 0 var(--semantic-spacing-margin-component);
-    font-size: 14px;
     color: var(--semantic-color-foreground-secondary);
+    font-size: 14px;
   }
 }
 
@@ -1390,29 +1387,29 @@
 }
 
 .quickStatValue {
-  font-size: 20px;
-  font-weight: 700;
   color: var(--semantic-color-foreground-primary);
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .quickStatLabel {
-  font-size: 12px;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 12px;
 }
 
 /* Progress Card */
 .progressCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 
   h3 {
     margin: 0 0 var(--semantic-spacing-margin-section);
-    font-size: 18px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 18px;
   }
 }
 
@@ -1434,21 +1431,21 @@
 }
 
 .progressLabel {
-  font-size: 13px;
   color: var(--semantic-color-foreground-primary);
+  font-size: 13px;
 }
 
 .progressPercent {
-  font-size: 13px;
-  font-weight: var(--semantic-typography-heading-font-weight);
   color: var(--semantic-color-foreground-accent);
+  font-weight: var(--semantic-typography-heading-font-weight);
+  font-size: 13px;
 }
 
 .progressTrack {
+  overflow: hidden;
   height: 8px;
   background: var(--semantic-color-background-tertiary);
   border-radius: var(--semantic-shape-badge-radius, 9999px);
-  overflow: hidden;
 }
 
 .progressFill {
@@ -1460,17 +1457,17 @@
 
 /* Tags Card */
 .tagsCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 
   h3 {
     margin: 0 0 var(--semantic-spacing-margin-component);
-    font-size: 18px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 18px;
   }
 }
 
@@ -1487,8 +1484,8 @@
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-badge-radius, 16px);
-  font-size: 12px;
   color: var(--semantic-color-foreground-primary);
+  font-size: 12px;
 
   &.tagActive {
     background: var(--semantic-color-background-accent);
@@ -1501,23 +1498,23 @@
 .alertCard {
   display: flex;
   gap: var(--semantic-spacing-gap-grid);
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-feedback-warning-background);
   border: 1px solid var(--semantic-color-feedback-warning-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 }
 
 .alertIcon {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
   width: 40px;
   height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: var(--semantic-color-feedback-warning-default);
   border-radius: var(--semantic-shape-element-radius, 8px);
   color: var(--semantic-color-foreground-inverse);
-  flex-shrink: 0;
 }
 
 .alertContent {
@@ -1525,29 +1522,29 @@
 
   h4 {
     margin: 0 0 4px;
-    font-size: 14px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-feedback-warning-default);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 14px;
   }
 
   p {
     margin: 0;
-    font-size: 13px;
     color: var(--semantic-color-foreground-secondary);
+    font-size: 13px;
   }
 }
 
 .alertAction {
+  align-self: flex-start;
   padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
   background: var(--semantic-color-feedback-warning-default);
   border: none;
   border-radius: var(--semantic-shape-button-radius, 8px);
-  font-size: 13px;
-  font-weight: var(--semantic-typography-body-font-weight);
   color: var(--semantic-color-foreground-inverse);
-  cursor: pointer;
+  font-weight: var(--semantic-typography-body-font-weight);
+  font-size: 13px;
   transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
-  align-self: flex-start;
+  cursor: pointer;
 
   &:hover {
     filter: brightness(1.1);
@@ -1556,17 +1553,17 @@
 
 /* Slider Card */
 .sliderCard {
+  height: fit-content;
+  padding: var(--semantic-spacing-padding-section);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-card-radius, 12px);
-  padding: var(--semantic-spacing-padding-section);
-  height: fit-content;
 
   h3 {
     margin: 0 0 var(--semantic-spacing-margin-section);
-    font-size: 18px;
-    font-weight: var(--semantic-typography-heading-font-weight);
     color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-heading-font-weight);
+    font-size: 18px;
   }
 }
 
@@ -1581,16 +1578,16 @@
   }
 
   label {
-    font-size: 13px;
-    font-weight: var(--semantic-typography-body-font-weight);
     color: var(--semantic-color-foreground-secondary);
+    font-weight: var(--semantic-typography-body-font-weight);
+    font-size: 13px;
   }
 }
 
 .sliderContainer {
   display: flex;
-  align-items: center;
   gap: var(--semantic-spacing-gap-grid-medium);
+  align-items: center;
 }
 
 .slider {
@@ -1599,15 +1596,15 @@
   background: var(--semantic-color-background-tertiary);
   border-radius: var(--semantic-shape-badge-radius, 9999px);
   outline: none;
-  -webkit-appearance: none;
+  appearance: none;
 
   &::-webkit-slider-thumb {
-    -webkit-appearance: none;
     width: 18px;
     height: 18px;
     background: var(--semantic-color-background-accent);
     border-radius: 50%;
     cursor: pointer;
+    appearance: none;
   }
 
   &::-moz-range-thumb {
@@ -1622,9 +1619,9 @@
 
 .sliderValue {
   min-width: 40px;
-  font-size: 13px;
-  font-weight: var(--semantic-typography-heading-font-weight);
   color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-heading-font-weight);
+  font-size: 13px;
   text-align: right;
 }
 
@@ -1740,8 +1737,8 @@
   .sliderCard,
   .tagsCard {
     &:hover {
-      transform: translateY(-4px);
       box-shadow: 0 12px 40px hsl(from var(--semantic-color-background-accent) h s l / 15%);
+      transform: translateY(-4px);
     }
   }
 
@@ -1781,8 +1778,8 @@
   .progressCard,
   .sliderCard,
   .tagsCard {
-    box-shadow: 0 2px 12px hsl(from var(--semantic-color-foreground-primary) h s l / 20%);
     border-left: 3px solid var(--semantic-color-background-accent);
+    box-shadow: 0 2px 12px hsl(from var(--semantic-color-foreground-primary) h s l / 20%);
 
     &:hover {
       box-shadow: 0 8px 32px hsl(from var(--semantic-color-foreground-primary) h s l / 30%);
@@ -1828,20 +1825,20 @@
   .sliderCard,
   .tagsCard {
     background: hsl(from var(--semantic-color-background-primary) h s l / 80%);
-    backdrop-filter: blur(12px);
     border: 1px solid hsl(from var(--semantic-color-background-accent) h s l / 20%);
     border-top: 2px solid hsl(from var(--semantic-color-background-accent) h s l / 30%);
+    backdrop-filter: blur(12px);
 
     &:hover {
-      box-shadow: 0 8px 32px hsl(from var(--semantic-color-background-accent) h s l / 15%);
       border-color: hsl(from var(--semantic-color-background-accent) h s l / 40%);
+      box-shadow: 0 8px 32px hsl(from var(--semantic-color-background-accent) h s l / 15%);
     }
   }
 
   .alertCard {
     background: hsl(from var(--semantic-color-feedback-warning-background) h s l / 80%);
-    backdrop-filter: blur(12px);
     border-top: 2px solid hsl(from var(--semantic-color-feedback-warning-default) h s l / 40%);
+    backdrop-filter: blur(12px);
   }
 }
 
@@ -1868,8 +1865,8 @@
     box-shadow: 3px 3px 0 var(--semantic-color-border-default);
 
     &:hover {
-      transform: translate(-1px, -1px);
       box-shadow: 5px 5px 0 var(--semantic-color-border-default);
+      transform: translate(-1px, -1px);
     }
   }
 
@@ -1887,8 +1884,8 @@
     box-shadow: 2px 2px 0 var(--semantic-color-border-default);
 
     &:hover {
-      transform: translate(-1px, -1px);
       box-shadow: 3px 3px 0 var(--semantic-color-border-default);
+      transform: translate(-1px, -1px);
     }
   }
 
@@ -1913,13 +1910,13 @@
     color: var(--semantic-color-foreground-primary);
 
     &:hover {
-      transform: translate(-1px, -1px);
       box-shadow: 5px 5px 0 var(--semantic-color-foreground-primary);
+      transform: translate(-1px, -1px);
     }
 
     &:active {
-      transform: translate(1px, 1px);
       box-shadow: 0 0 0 var(--semantic-color-foreground-primary);
+      transform: translate(1px, 1px);
     }
   }
 }
@@ -1944,8 +1941,8 @@
   .sliderCard,
   .tagsCard {
     border: 1px solid var(--semantic-color-border-default);
-    box-shadow: none;
     border-radius: 0;
+    box-shadow: none;
 
     &:hover {
       border-color: var(--semantic-color-foreground-primary);
@@ -2005,10 +2002,10 @@
                 inset 0 0 0 1px hsl(from var(--semantic-color-background-accent) h s l / 20%);
 
     &:hover {
-      transform: none;
       box-shadow: 0 8px 30px hsl(from var(--semantic-color-background-accent) h s l / 12%),
                   inset 0 0 0 1px hsl(from var(--semantic-color-background-accent) h s l / 30%);
       opacity: 0.95;
+      transform: none;
     }
   }
 
@@ -2042,11 +2039,11 @@
       0 2px 4px hsl(from var(--semantic-color-foreground-primary) h s l / 5%);
 
     &:hover {
-      transform: translateY(-1px);
       box-shadow:
         inset 1px 1px 0 hsl(from var(--semantic-color-background-primary) h s l / 100%),
         inset -1px -1px 0 hsl(from var(--semantic-color-foreground-primary) h s l / 10%),
         0 4px 8px hsl(from var(--semantic-color-foreground-primary) h s l / 10%);
+      transform: translateY(-1px);
     }
   }
 

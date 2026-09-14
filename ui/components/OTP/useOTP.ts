@@ -56,31 +56,27 @@ export function useOTP(options: UseOTPOptions = {}): UseOTPResult {
     return Array.from({ length }, () => '');
   });
 
-  // Re-initialize internal when length changes (uncontrolled only)
-  React.useEffect(() => {
-    if (!isControlled) {
-      setInternal((prev) => {
-        const next = Array.from({ length }, (_, i) => prev[i] ?? '');
-        return next;
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [length]);
+  // Normalize to the current length during render. This was previously a
+  // setState inside an effect, which react-hooks/set-state-in-effect rejects;
+  // deriving it keeps the field correct when `length` changes without an extra
+  // render pass.
+  const normalizedInternal = React.useMemo(
+    () => Array.from({ length }, (_, i) => internal[i] ?? ''),
+    [internal, length]
+  );
 
   const refs = React.useRef<HTMLInputElement[]>([]);
 
-  const code = isControlled ? value! : internal.join('');
+  const code = isControlled ? value! : normalizedInternal.join('');
   const chars = React.useMemo(() => {
     if (!isControlled) {
       // Preserve positional empties (cleared mid-array) by reading state directly
-      const next = internal.slice(0, length);
-      while (next.length < length) next.push('');
-      return next;
+      return normalizedInternal;
     }
     const codeChars = code.slice(0, length).split('');
     while (codeChars.length < length) codeChars.push('');
     return codeChars;
-  }, [isControlled, internal, code, length]);
+  }, [isControlled, normalizedInternal, code, length]);
   const isComplete = React.useMemo(
     () => chars.every((c) => c && c.length === 1),
     [chars]

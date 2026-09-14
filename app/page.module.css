@@ -36,10 +36,10 @@
 
 /* First line styling - small red text */
 .headingHero h1 > span:first-of-type .firstLine {
+  gap: 0.15em;
   color: var(--semantic-color-foreground-accent);
   font-size: var(--semantic-typography-heading-06);
   letter-spacing: var(--core-typography-letter-spacing-normal);
-  gap: 0.15em;
 }
 
 /* Second line styling - normal spacing */

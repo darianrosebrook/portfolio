@@ -100,9 +100,7 @@ export function DocLayout({
     () =>
       typeof window !== 'undefined'
         ? (window.localStorage.getItem('docLayout.previewTheme') as
-            | 'system'
-            | 'light'
-            | 'dark') || 'system'
+            'system' | 'light' | 'dark') || 'system'
         : 'system'
   );
 

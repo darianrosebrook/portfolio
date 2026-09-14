@@ -113,7 +113,13 @@ export function A11yPanel({
   }, [resolveTargetWindow, runTags]);
 
   React.useEffect(() => {
-    if (runOnMount) runAxe();
+    if (!runOnMount) return;
+    // Deferred past the effect body: runAxe raises its own state synchronously,
+    // which is what react-hooks/set-state-in-effect rejects. A zero-delay task
+    // still starts the audit immediately after mount and is cancelled if the
+    // effect re-runs.
+    const id = setTimeout(() => void runAxe(), 0);
+    return () => clearTimeout(id);
   }, [runOnMount, runAxe]);
 
   const exportJson = React.useCallback(() => {

@@ -124,23 +124,20 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
 
   // Local draft so the user can type freely (e.g. "5000" via 5→50→500→5000)
   // without each keystroke being silently dropped or clamped. Commit on blur.
-  const [intervalDraft, setIntervalDraft] = useState<string>(
-    autoCycleInterval.toString()
-  );
-
-  useEffect(() => {
-    setIntervalDraft(autoCycleInterval.toString());
-  }, [autoCycleInterval]);
+  // `null` means "no uncommitted edit", so the field follows the live interval
+  // value and is derived during render instead of being synced by an effect.
+  const [intervalDraft, setIntervalDraft] = useState<string | null>(null);
+  const shownIntervalDraft = intervalDraft ?? autoCycleInterval.toString();
 
   const commitInterval = () => {
-    const parsed = parseInt(intervalDraft, 10);
+    const parsed = parseInt(shownIntervalDraft, 10);
     if (!isNaN(parsed)) {
       const clamped = Math.max(MIN_AUTO_CYCLE_INTERVAL_MS, parsed);
       setAutoCycleInterval(clamped);
-      setIntervalDraft(clamped.toString());
-    } else {
-      setIntervalDraft(autoCycleInterval.toString());
     }
+    // Either way the draft is released, so the field reflects the committed
+    // interval (or the previous one when the input was not a number).
+    setIntervalDraft(null);
   };
 
   const handleIntervalKeyDown = (
@@ -268,7 +265,7 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
                   type="number"
                   min={MIN_AUTO_CYCLE_INTERVAL_MS}
                   step={500}
-                  value={intervalDraft}
+                  value={shownIntervalDraft}
                   onChange={(e) => setIntervalDraft(e.target.value)}
                   onBlur={commitInterval}
                   onKeyDown={handleIntervalKeyDown}

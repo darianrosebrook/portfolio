@@ -31,6 +31,12 @@ minimumReleaseAgeExclude:
 # Keep floor overrides at the patched advisory minima — do not pin below them.
 overrides:
   '@babel/core@<=7.29.0': ^7.29.1
+  # FontAwesome 7: the private Pro kit @awesome.me/kit-0ba7f5fefb ships FA6-typed
+  # icon definitions and has no FA7 release. Upgrading svg-core to 7 therefore
+  # pulled a second copy of fontawesome-common-types (6.7.2) next to svg-core's
+  # 7.3.1, which makes the two IconDefinition types structurally incompatible.
+  # Collapsing the kit onto the FA7 types restores a single IconDefinition.
+  '@awesome.me/kit-0ba7f5fefb>@fortawesome/fontawesome-common-types': ^7.3.1
   '@isaacs/brace-expansion': ^5.0.1
   brace-expansion@<1.1.18: ^1.1.18
   brace-expansion@>=2.0.0 <2.1.4: ^2.1.4
@@ -41,15 +47,26 @@ overrides:
   glob: ^13.0.6
   happy-dom: ^20.8.9
   immutable: ^5.1.8
-  js-yaml: ^4.3.0
+  # Raised from ^4.3.0 to admit the js-yaml 5 line; still above the patched
+  # advisory floor this override exists to enforce.
+  js-yaml: ^5.4.2
   linkify-it: ^5.0.2
   markdown-it: ^14.1.2
   next: ^16.2.11
   picomatch: ^4.0.4
   postcss: ^8.5.23
+  # ProseMirror: @tiptap/pm@3.31 and its prosemirror-* peers resolved two copies
+  # of prosemirror-model (1.25.4 + 1.25.11) and two of prosemirror-view, which
+  # makes their Schema/Node/DOMOutputSpec types structurally incompatible at the
+  # Tiptap extension boundary. Collapse each to one semver-compatible copy.
+  prosemirror-model: ^1.25.11
+  prosemirror-view: ^1.42.3
   rollup: ^4.59.0
   sharp: ^0.35.0
-  vite: ^7.3.5
+  vite: ^8.3.0
   'ws@^7.0.0': ^7.5.11
   'ws@^8.0.0': ^8.21.0
   yaml: ^2.8.3
+
+patchedDependencies:
+  eslint-plugin-react@7.37.5: patches/eslint-plugin-react@7.37.5.patch

@@ -37,15 +37,7 @@ const EPSILON = 216 / 24389;
  * Supported color space identifiers
  */
 export type ColorSpace =
-  | 'rgb'
-  | 'hex'
-  | 'hsl'
-  | 'hsv'
-  | 'xyz'
-  | 'lab'
-  | 'lch'
-  | 'oklab'
-  | 'oklch';
+  'rgb' | 'hex' | 'hsl' | 'hsv' | 'xyz' | 'lab' | 'lch' | 'oklab' | 'oklch';
 
 /**
  * Color value union type

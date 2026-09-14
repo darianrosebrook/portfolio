@@ -59,8 +59,7 @@ function resolveNode(
   // Apply $extensions based on theme
   if (typeof node === 'object' && node) {
     const ext = (node as Record<string, unknown>)['$extensions'] as
-      | Record<string, unknown>
-      | undefined;
+      Record<string, unknown> | undefined;
     const themeKey = `design.paths.${opts.theme}`;
     if (ext && typeof ext === 'object' && themeKey in ext) {
       const themed = ext[themeKey];

@@ -148,8 +148,7 @@ export function extractFirstImage(content: JSONContent): string | null {
   }
 
   const src = (imageNode.attrs as Record<string, unknown>).src as
-    | string
-    | undefined;
+    string | undefined;
   return src ?? null;
 }
 

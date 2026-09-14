@@ -223,8 +223,8 @@
   border-radius: var(--core-shape-radius-medium);
 
   code {
-    font-family: var(--core-typography-font-family-mono);
     font-size: var(--semantic-typography-body-03);
+    font-family: var(--core-typography-font-family-mono);
     line-height: 1.6;
   }
 }
@@ -243,8 +243,8 @@
   }
 
   code {
-    font-family: var(--core-typography-font-family-mono);
     font-size: var(--semantic-typography-body-03);
+    font-family: var(--core-typography-font-family-mono);
     line-height: 1.8;
   }
 }

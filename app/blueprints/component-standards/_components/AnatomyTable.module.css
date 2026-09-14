@@ -1,9 +1,9 @@
 .tableWrapper {
   overflow-x: auto;
   width: 100%;
+  background-color: var(--semantic-color-background-primary, #ffffff);
   border: 1px solid var(--semantic-color-border-primary, #e5e7eb);
   border-radius: var(--semantic-border-radius-md, 8px);
-  background-color: var(--semantic-color-background-primary, #ffffff);
 }
 
 .table {
@@ -25,22 +25,22 @@
 
   th,
   td {
+    vertical-align: middle;
     padding: 12px 20px;
-    text-align: left;
     font-size: 14px;
     line-height: 1.5;
-    vertical-align: middle;
+    text-align: left;
   }
 
   thead th {
-    color: var(--semantic-color-foreground-primary, #111827);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
     background-color: var(
       --semantic-color-background-secondary,
       #f9fafb
     );
+    color: var(--semantic-color-foreground-primary, #111827);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
   }
 }
 
@@ -87,40 +87,40 @@
   border: 1px solid var(--semantic-color-border-subtle, transparent);
   border-radius: 999px;
   color: var(--semantic-color-foreground-secondary, #4b5563);
-  font-size: 13px;
   font-weight: 500;
+  font-size: 13px;
   line-height: 1.4;
   white-space: nowrap;
 }
 
 .tone-slot {
   background-color: var(--semantic-color-background-info-subtle, #eef2ff);
-  color: var(--semantic-color-foreground-info, #4f46e5);
   border-color: transparent;
+  color: var(--semantic-color-foreground-info, #4f46e5);
 }
 
 .tone-prop {
   background-color: var(--semantic-color-background-secondary, #f3f4f6);
-  color: var(--semantic-color-foreground-primary, #111827);
   border-color: var(--semantic-color-border-subtle, transparent);
-  font-family: var(--core-typography-font-family-mono, monospace);
+  color: var(--semantic-color-foreground-primary, #111827);
   font-size: 12px;
+  font-family: var(--core-typography-font-family-mono, monospace);
 }
 
 .tone-part {
   background-color: var(--semantic-color-background-tertiary, #e5e7eb);
-  color: var(--semantic-color-foreground-secondary, #6b7280);
   border-color: transparent;
+  color: var(--semantic-color-foreground-secondary, #6b7280);
 }
 
 .tone-root {
   background-color: var(--semantic-color-background-info-subtle, #eef2ff);
-  color: var(--semantic-color-foreground-info, #4f46e5);
   border-color: transparent;
+  color: var(--semantic-color-foreground-info, #4f46e5);
   font-weight: 600;
 }
 
-@media (max-width: 720px) {
+@media (width <= 720px) {
   .table {
     th,
     td {

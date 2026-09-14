@@ -30,9 +30,9 @@ export function useTabs(options: UseTabsOptions = {}): TabsContextValue {
   const [internalValue, setInternalValue] = React.useState<TabsValue | null>(
     isControlled ? value! : defaultValue
   );
-  React.useEffect(() => {
-    if (isControlled) setInternalValue(value!);
-  }, [isControlled, value]);
+  // A supplied `value` always wins, so the effective value is derived during
+  // render rather than mirrored into state from an effect.
+  const currentValue = isControlled ? value! : internalValue;
 
   const [tabs, setTabs] = React.useState<TabRegistration[]>([]);
   const [focusedIndex, setFocusedIndex] = React.useState(0);
@@ -105,7 +105,7 @@ export function useTabs(options: UseTabsOptions = {}): TabsContextValue {
   );
 
   return {
-    value: internalValue,
+    value: currentValue,
     focusedIndex,
     focusTick,
     tabs,

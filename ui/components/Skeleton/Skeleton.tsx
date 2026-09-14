@@ -4,12 +4,7 @@ import './Skeleton.css';
 import { SkeletonShape } from './SkeletonShape';
 
 export type SkeletonVariant =
-  | 'block'
-  | 'text'
-  | 'avatar'
-  | 'media'
-  | 'dataviz'
-  | 'actions';
+  'block' | 'text' | 'avatar' | 'media' | 'dataviz' | 'actions';
 
 export interface SkeletonProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,

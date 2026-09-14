@@ -245,11 +245,9 @@ function extractColorPairsFromTokens(tokens: unknown): Array<{
   if (semanticColors) {
     // Text on background patterns
     const foreground = semanticColors.foreground as
-      | Record<string, unknown>
-      | undefined;
+      Record<string, unknown> | undefined;
     const background = semanticColors.background as
-      | Record<string, unknown>
-      | undefined;
+      Record<string, unknown> | undefined;
 
     if (foreground && background) {
       const fgPrimary = colorValueToHex(foreground.primary);

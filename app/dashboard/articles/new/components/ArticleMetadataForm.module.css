@@ -5,10 +5,10 @@
 }
 
 .title {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0 0 24px 0;
+  margin: 0 0 24px;
   color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .field {
@@ -18,62 +18,62 @@
 
 .label {
   display: block;
-  font-size: 11px;
-  font-weight: 500;
   margin-bottom: 6px;
   color: var(--semantic-color-foreground-secondary);
-  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 11px;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .input {
   width: 100% !important;
   padding: 6px 8px !important;
-  font-size: 14px !important;
+  background: transparent !important;
   border: none !important;
   border-bottom: 1px solid var(--semantic-color-border-primary) !important;
   border-radius: 0 !important;
-  background: transparent !important;
-  color: var(--semantic-color-foreground-primary) !important;
-  transition: border-color 0.15s ease !important;
-  font-family: inherit !important;
   box-shadow: none !important;
+  color: var(--semantic-color-foreground-primary) !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+  transition: border-color 0.15s ease !important;
 
   &:focus {
-    outline: none !important;
     border-bottom-color: var(--semantic-color-border-accent) !important;
     box-shadow: none !important;
+    outline: none !important;
   }
 
   &::placeholder {
-    color: var(--semantic-color-foreground-tertiary) !important;
     opacity: 0.6 !important;
+    color: var(--semantic-color-foreground-tertiary) !important;
   }
 }
 
 .textarea {
   width: 100% !important;
   padding: 6px 8px !important;
-  font-size: 14px !important;
+  background: transparent !important;
   border: none !important;
   border-bottom: 1px solid var(--semantic-color-border-primary) !important;
   border-radius: 0 !important;
-  background: transparent !important;
-  color: var(--semantic-color-foreground-primary) !important;
-  transition: border-color 0.15s ease !important;
-  font-family: inherit !important;
-  resize: vertical !important;
   box-shadow: none !important;
+  color: var(--semantic-color-foreground-primary) !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+  transition: border-color 0.15s ease !important;
+  resize: vertical !important;
 
   &:focus {
-    outline: none !important;
     border-bottom-color: var(--semantic-color-border-accent) !important;
     box-shadow: none !important;
+    outline: none !important;
   }
 
   &::placeholder {
-    color: var(--semantic-color-foreground-tertiary) !important;
     opacity: 0.6 !important;
+    color: var(--semantic-color-foreground-tertiary) !important;
   }
 }
 
@@ -83,10 +83,10 @@
 
 .wordCount {
   padding: 8px 0;
-  font-size: 12px;
-  color: var(--semantic-color-foreground-secondary);
-  border-top: 1px solid var(--semantic-color-border-primary);
   padding-top: 16px;
+  border-top: 1px solid var(--semantic-color-border-primary);
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 12px;
 
   strong {
     font-weight: 500;

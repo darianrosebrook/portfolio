@@ -25,9 +25,7 @@ import type { GeometryCache } from '../types';
 export type DominantAxis = 'horizontal' | 'vertical';
 
 export type ThicknessFailureReason =
-  | 'no_hits'
-  | 'insufficient_pairs'
-  | 'ambiguous_pairs';
+  'no_hits' | 'insufficient_pairs' | 'ambiguous_pairs';
 
 export interface OrthogonalThicknessOptions {
   /** Point inside the candidate feature where thickness should be measured. */

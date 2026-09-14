@@ -35,7 +35,7 @@
     font-size: var(--ds-tooltip-typography-font-size);
     line-height: var(--ds-tooltip-typography-line-height);
     text-align: center;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
     animation: tooltip-enter 150ms var(--ds-tooltip-motion-easing-enter, ease-out)
       forwards;
     pointer-events: none;

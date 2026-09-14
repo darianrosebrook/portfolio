@@ -7,9 +7,9 @@
 
 .header {
   display: flex;
+  gap: var(--core-spacing-size-06);
   justify-content: space-between;
   align-items: center;
-  gap: var(--core-spacing-size-06);
 }
 
 .headerLeft {
@@ -20,16 +20,16 @@
 
 .title {
   margin: 0;
-  font-size: var(--semantic-typography-heading-01);
-  font-weight: var(--semantic-typography-font-weight-bold);
   color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-font-weight-bold);
+  font-size: var(--semantic-typography-heading-01);
   line-height: var(--semantic-typography-line-height-heading);
 }
 
 .subtitle {
   margin: 0;
-  font-size: var(--semantic-typography-body-03);
   color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-03);
 }
 
 .filters {
@@ -41,24 +41,24 @@
 
 .filterButton {
   padding: var(--core-spacing-size-03) var(--core-spacing-size-05);
-  font-size: var(--semantic-typography-body-03);
-  font-weight: var(--semantic-typography-font-weight-medium);
-  color: var(--semantic-color-foreground-secondary);
   background: transparent;
   border: none;
   border-radius: var(--core-shape-radius-full);
-  cursor: pointer;
+  color: var(--semantic-color-foreground-secondary);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-body-03);
   transition: all var(--core-motion-duration-short)
     var(--core-motion-easing-standard);
+  cursor: pointer;
 
   &:hover {
-    color: var(--semantic-color-foreground-primary);
     background: var(--semantic-color-background-secondary);
+    color: var(--semantic-color-foreground-primary);
   }
 
   &[data-active='true'] {
-    color: var(--semantic-color-foreground-primary);
     background: var(--semantic-color-background-secondary);
+    color: var(--semantic-color-foreground-primary);
   }
 }
 
@@ -94,16 +94,16 @@
 
 .articleHeader {
   display: flex;
-  align-items: center;
-  gap: var(--core-spacing-size-04);
   flex-wrap: wrap;
+  gap: var(--core-spacing-size-04);
+  align-items: center;
 }
 
 .articleTitle {
   margin: 0;
-  font-size: var(--semantic-typography-heading-04);
-  font-weight: var(--semantic-typography-font-weight-medium);
   color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-heading-04);
   line-height: var(--semantic-typography-line-height-tight);
 
   a {
@@ -118,28 +118,28 @@
 
 .statusBadge {
   display: inline-flex;
-  align-items: center;
   gap: var(--core-spacing-size-02);
+  align-items: center;
   padding: var(--core-spacing-size-02) var(--core-spacing-size-04);
-  font-size: var(--semantic-typography-caption-02);
-  font-weight: var(--semantic-typography-font-weight-medium);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
   border-radius: var(--core-shape-radius-full);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-caption-02);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 
   &[data-status='published'] {
-    color: var(--semantic-color-foreground-on-success-subtle);
     background: var(--semantic-color-background-success-subtle);
+    color: var(--semantic-color-foreground-on-success-subtle);
   }
 
   &[data-status='draft'] {
-    color: var(--semantic-color-foreground-on-warning-subtle);
     background: var(--semantic-color-background-warning-subtle);
+    color: var(--semantic-color-foreground-on-warning-subtle);
   }
 
   &[data-status='archived'] {
-    color: var(--semantic-color-foreground-tertiary);
     background: var(--semantic-color-background-secondary);
+    color: var(--semantic-color-foreground-tertiary);
   }
 }
 
@@ -166,7 +166,7 @@
   gap: var(--core-spacing-size-02);
   align-items: center;
   padding: var(--core-spacing-size-02) var(--core-spacing-size-04);
-  background: rgba(var(--semantic-color-foreground-accent-rgb), 0.12);
+  background: rgb(var(--semantic-color-foreground-accent-rgb), 0.12);
   border: 1px solid var(--semantic-color-border-accent);
   border-radius: var(--core-shape-radius-full);
   color: var(--semantic-color-foreground-accent);
@@ -178,16 +178,16 @@
 
 .articleMeta {
   display: flex;
-  align-items: center;
   gap: var(--core-spacing-size-06);
-  font-size: var(--semantic-typography-caption-01);
+  align-items: center;
   color: var(--semantic-color-foreground-tertiary);
+  font-size: var(--semantic-typography-caption-01);
 }
 
 .metaItem {
   display: flex;
-  align-items: center;
   gap: var(--core-spacing-size-02);
+  align-items: center;
 }
 
 .metaIcon {
@@ -197,26 +197,26 @@
 }
 
 .articleDescription {
-  margin: 0;
-  font-size: var(--semantic-typography-body-03);
-  color: var(--semantic-color-foreground-secondary);
-  line-height: var(--semantic-typography-line-height-normal);
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   overflow: hidden;
+  margin: 0;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-03);
+  line-height: var(--semantic-typography-line-height-normal);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .articleActions {
   display: flex;
-  align-items: flex-start;
   gap: var(--core-spacing-size-02);
+  align-items: flex-start;
 }
 
 .actionButton {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 36px;
   height: 36px;
   padding: 0;
@@ -224,20 +224,20 @@
   border: 1px solid transparent;
   border-radius: var(--core-shape-radius-02);
   color: var(--semantic-color-foreground-secondary);
-  cursor: pointer;
   transition: all var(--core-motion-duration-short)
     var(--core-motion-easing-standard);
+  cursor: pointer;
 
   &:hover {
     background: var(--semantic-color-background-secondary);
-    color: var(--semantic-color-foreground-primary);
     border-color: var(--semantic-color-border-subtle);
+    color: var(--semantic-color-foreground-primary);
   }
 
   &[data-variant='danger']:hover {
     background: var(--semantic-color-background-danger-subtle);
-    color: var(--semantic-color-foreground-danger);
     border-color: var(--semantic-color-border-danger);
+    color: var(--semantic-color-foreground-danger);
   }
 
   svg {
@@ -249,56 +249,56 @@
 .emptyState {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: var(--core-spacing-size-06);
+  justify-content: center;
+  align-items: center;
   padding: var(--core-spacing-size-10) var(--core-spacing-size-08);
-  text-align: center;
   background: var(--semantic-color-background-secondary);
-  border-radius: var(--core-shape-radius-medium);
   border: 2px dashed var(--semantic-color-border-subtle);
+  border-radius: var(--core-shape-radius-medium);
+  text-align: center;
 }
 
 .emptyIcon {
   width: 64px;
   height: 64px;
-  color: var(--semantic-color-foreground-tertiary);
   opacity: 0.5;
+  color: var(--semantic-color-foreground-tertiary);
 }
 
 .emptyTitle {
   margin: 0;
-  font-size: var(--semantic-typography-heading-03);
-  font-weight: var(--semantic-typography-font-weight-medium);
   color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-heading-03);
 }
 
 .emptyDescription {
-  margin: 0;
-  font-size: var(--semantic-typography-body-02);
-  color: var(--semantic-color-foreground-secondary);
   max-width: 320px;
+  margin: 0;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-02);
 }
 
 /* Delete confirmation dialog */
 .dialogOverlay {
   position: fixed;
   inset: 0;
-  background: var(--semantic-overlay-scrim-medium);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: var(--core-layer-modal);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--semantic-overlay-scrim-medium);
   animation: fadeIn var(--core-motion-duration-medium)
     var(--core-motion-easing-standard);
 }
 
 .dialogContent {
+  width: 90%;
+  max-width: 400px;
+  padding: var(--core-spacing-size-08);
   background: var(--semantic-color-background-elevated);
   border-radius: var(--core-shape-radius-large);
-  padding: var(--core-spacing-size-08);
-  max-width: 400px;
-  width: 90%;
   box-shadow: var(--semantic-elevation-surface-floating);
   animation: scaleIn var(--core-motion-duration-medium)
     var(--core-motion-easing-emphasized-out);
@@ -306,22 +306,22 @@
 
 .dialogTitle {
   margin: 0 0 var(--core-spacing-size-04);
-  font-size: var(--semantic-typography-heading-03);
-  font-weight: var(--semantic-typography-font-weight-bold);
   color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-font-weight-bold);
+  font-size: var(--semantic-typography-heading-03);
 }
 
 .dialogDescription {
   margin: 0 0 var(--core-spacing-size-07);
-  font-size: var(--semantic-typography-body-02);
   color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-02);
   line-height: var(--semantic-typography-line-height-normal);
 }
 
 .dialogActions {
   display: flex;
-  justify-content: flex-end;
   gap: var(--core-spacing-size-04);
+  justify-content: flex-end;
 }
 
 @keyframes fadeIn {

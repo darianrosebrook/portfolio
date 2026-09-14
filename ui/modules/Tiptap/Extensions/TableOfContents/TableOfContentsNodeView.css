@@ -10,10 +10,10 @@
 }
 
 [data-ds-component="TableOfContentsNodeView"] .tocContainer {
+  padding: var(--core-spacing-size-05);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-primary);
   border-radius: var(--core-shape-radius-medium);
-  padding: var(--core-spacing-size-05);
 }
 
 [data-ds-component="TableOfContentsNodeView"] .tocHeader {
@@ -26,28 +26,28 @@
 
   h3 {
     margin: 0;
-    font-size: var(--font-size-03);
-    font-weight: 600;
     color: var(--color-text-primary);
+    font-weight: 600;
+    font-size: var(--font-size-03);
   }
 }
 
 [data-ds-component="TableOfContentsNodeView"] .tocList {
-  max-height: 300px;
   overflow-y: auto;
+  max-height: 300px;
 }
 
 [data-ds-component="TableOfContentsNodeView"] .tocItem {
   display: block;
   width: 100%;
-  text-align: left;
-  cursor: pointer;
+  margin: 2px 0;
   padding: var(--core-spacing-size-02) var(--core-spacing-size-03);
+  background: transparent;
   border: none;
   border-radius: var(--core-shape-radius-medium);
-  background: transparent;
+  text-align: left;
   transition: background-color 0.2s ease;
-  margin: 2px 0;
+  cursor: pointer;
 
   &:hover {
     background: var(--semantic-color-background-tertiary);
@@ -60,14 +60,14 @@
 }
 
 [data-ds-component="TableOfContentsNodeView"] .tocText {
-  font-size: var(--font-size-02);
   color: var(--color-text-secondary);
+  font-size: var(--font-size-02);
   line-height: 1.4;
 }
 
 [data-ds-component="TableOfContentsNodeView"] .tocLevel1 .tocText {
-  font-weight: 600;
   color: var(--color-text-primary);
+  font-weight: 600;
 }
 
 [data-ds-component="TableOfContentsNodeView"] .tocLevel2 .tocText {
@@ -75,9 +75,9 @@
 }
 
 [data-ds-component="TableOfContentsNodeView"] .tocEmpty {
-  text-align: center;
   padding: var(--core-spacing-size-05);
   color: var(--color-text-secondary);
+  text-align: center;
 
   p {
     margin: 0;

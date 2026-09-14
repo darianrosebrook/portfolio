@@ -6,11 +6,7 @@
 export type LearningLevel = 'foundation' | 'intermediate' | 'advanced';
 
 export type RoleRelevance =
-  | 'design'
-  | 'engineering'
-  | 'a11y'
-  | 'governance'
-  | 'content';
+  'design' | 'engineering' | 'a11y' | 'governance' | 'content';
 
 export type AlignmentStatus = 'aligned' | 'needs-review' | 'deprecated';
 

@@ -112,6 +112,24 @@ const config = [
     },
   },
 
+  // Next.js 16.3.5 ships its own ESLint parser at `eslint-config-next/parser` —
+  // a vendored @babel/eslint-parser 7.24.6 — and applies it to every file.
+  // That vendored copy carries a scope manager which predates the
+  // `ScopeManager#addGlobals` contract ESLint 10's SourceCode.finalize requires,
+  // so linting any .js/.jsx file throws
+  // "scopeManager.addGlobals is not a function". Point plain JavaScript at
+  // typescript-eslint's parser instead, which implements the ESLint 10 contract
+  // and is already the parser used for the TypeScript block below.
+  {
+    files: ['**/*.js', '**/*.jsx', '**/*.mjs', '**/*.cjs'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+      },
+    },
+  },
+
   // Overrides for blueprint docs content to reduce noise during authoring
   {
     files: ['app/blueprints/**'],
