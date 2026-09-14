@@ -67,4 +67,8 @@
   --ds-toggleSwitch-typography-font-weight-medium: var(--semantic-typography-font-weight-medium, 500);
   --ds-toggleSwitch-typography-line-height-default: var(--semantic-typography-line-height-normal, 1.5);
   --ds-toggleSwitch-typography-line-height-tight: var(--semantic-typography-line-height-tight, 1.2);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-gap: 0.25rem;
+  --ds-box-model-max-height: 1.5rem;
 }

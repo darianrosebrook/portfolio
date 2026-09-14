@@ -1,15 +1,9 @@
 {
   "name": "ProfileFlag",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "profileFlag"
-  ],
+  "anatomy": ["root", "profileFlag"],
   "variants": {},
-  "states": [
-    "default",
-    "hover"
-  ],
+  "states": ["default", "hover"],
   "slots": {
     "root": {
       "required": true,
@@ -76,6 +70,16 @@
         "resolvesTo": "core.spacing.size.02",
         "fallback": "2px",
         "layer": "core"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "box-model.width": {
+        "literal": "fit-content",
+        "property": "width"
       }
     }
   },

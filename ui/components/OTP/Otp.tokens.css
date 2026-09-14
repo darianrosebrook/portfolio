@@ -18,4 +18,11 @@
 
   /* === Overlay Tokens === */
   --ds-otp-overlay-image-overlay: var(--semantic-color-background-image-overlay, rgba(0, 0, 0, 0.5));
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-padding-block-start: var(--core-spacing-size-07, 24px);
+  --ds-box-model-padding-block-end: var(--core-spacing-size-07, 24px);
+  --ds-box-model-padding-inline-start: var(--core-spacing-size-07, 24px);
+  --ds-box-model-padding-inline-end: var(--core-spacing-size-07, 24px);
+  --ds-box-model-gap: var(--core-spacing-size-07, 24px);
 }

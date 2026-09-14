@@ -1,7 +1,8 @@
+@import '../../primitives/boxModel.css';
 @import "./ToggleSwitch.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Renamed from toggleSwitch.module.scss to ToggleSwitch.css (Pascal).
  * Scoped to [data-ds-component="ToggleSwitch"] on the root element.
  * Intentionally unlayered — see Button.css for the cascade rationale.
@@ -10,10 +11,10 @@
   &.toggleSwitch {
     position: relative;
     display: inline-flex;
-    gap: 0.25rem;
+    gap: var(--ds-box-model-gap);
     align-content: center;
     align-items: center;
-    max-height: 1.5rem;
+    max-height: var(--ds-box-model-max-height);
     border-radius: var(--ds-toggleSwitch-size-radius-full);
     line-height: 1;
 

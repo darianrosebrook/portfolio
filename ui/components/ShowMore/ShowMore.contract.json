@@ -1,15 +1,9 @@
 {
   "name": "ShowMore",
   "layer": "composer",
-  "anatomy": [
-    "root",
-    "content",
-    "trigger"
-  ],
+  "anatomy": ["root", "content", "trigger"],
   "variants": {},
-  "states": [
-    "default"
-  ],
+  "states": ["default"],
   "slots": {
     "content": {
       "required": false
@@ -83,6 +77,30 @@
         "resolvesTo": "semantic.color.background.image.overlay",
         "fallback": "rgba(0, 0, 0, 0.5)",
         "layer": "semantic"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-inline-end",
+        "layer": "core"
       }
     }
   },
@@ -119,14 +137,12 @@
     "usageHints": [
       "Use when content could be long but brevity is preferred by default",
       "Configure maxLines to control how many lines are shown before truncation",
-      "Avoid if the full content is always needed — prefer Details instead"
+      "Avoid if the full content is always needed \u2014 prefer Details instead"
     ],
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "ReactNode"
-      ]
+      "accepts": ["ReactNode"]
     }
   }
 }

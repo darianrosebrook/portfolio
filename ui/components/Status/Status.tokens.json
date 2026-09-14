@@ -34,6 +34,13 @@
     },
     "typography": {
       "lineHeight": "{semantic.typography.lineHeight.collapse}"
+    },
+    "boxModel": {
+      "paddingBlockStart": "{core.spacing.size.04}",
+      "paddingBlockEnd": "{core.spacing.size.04}",
+      "paddingInlineStart": "{core.spacing.size.04}",
+      "paddingInlineEnd": "{core.spacing.size.04}",
+      "gap": "{core.spacing.size.04}"
     }
   }
 }

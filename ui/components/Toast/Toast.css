@@ -1,7 +1,8 @@
+@import '../../primitives/boxModel.css';
 @import "./Toast.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Toast"] on the root (viewport) element.
  * Intentionally unlayered — see Button.css for the cascade rationale.
  */
@@ -11,7 +12,7 @@
     z-index: 1000;
     display: flex;
     flex-direction: column-reverse;
-    gap: var(--ds-toast-spacing-stack-gap);
+    gap: var(--ds-box-model-gap);
     inset-block-end: 1rem;
     inset-inline-end: 1rem;
   }

@@ -27,6 +27,9 @@
     },
     "elevation": {
       "default": "{semantic.elevation.default}"
+    },
+    "boxModel": {
+      "gap": "{core.spacing.size.04}"
     }
   }
 }

@@ -42,6 +42,12 @@
         "enter": "{semantic.motion.interaction.enter.easing}",
         "exit": "{semantic.motion.interaction.exit.easing}"
       }
+    },
+    "boxModel": {
+      "paddingBlockStart": "{core.spacing.size.03}",
+      "paddingBlockEnd": "{core.spacing.size.03}",
+      "paddingInlineStart": "{core.spacing.size.04}",
+      "paddingInlineEnd": "{core.spacing.size.04}"
     }
   }
 }

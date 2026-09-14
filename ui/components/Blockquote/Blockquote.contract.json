@@ -1,24 +1,12 @@
 {
   "name": "Blockquote",
   "layer": "primitive",
-  "anatomy": [
-    "root"
-  ],
+  "anatomy": ["root"],
   "variants": {
-    "variant": [
-      "default",
-      "bordered",
-      "highlighted"
-    ],
-    "size": [
-      "sm",
-      "md",
-      "lg"
-    ]
+    "variant": ["default", "bordered", "highlighted"],
+    "size": ["sm", "md", "lg"]
   },
-  "states": [
-    "default"
-  ],
+  "states": ["default"],
   "slots": {
     "root": {
       "required": true,
@@ -116,6 +104,30 @@
         "resolvesTo": "core.shape.border.width.thick",
         "fallback": "2px",
         "layer": "core"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "padding-inline-end",
+        "layer": "core"
       }
     }
   },
@@ -168,10 +180,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "string",
-        "node-ref"
-      ]
+      "accepts": ["string", "node-ref"]
     }
   }
 }

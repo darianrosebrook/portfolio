@@ -39,6 +39,12 @@
       "border": {
         "thick": "{core.shape.border.width.thick}"
       }
+    },
+    "boxModel": {
+      "paddingBlockStart": "{core.spacing.size.05}",
+      "paddingBlockEnd": "{core.spacing.size.05}",
+      "paddingInlineStart": "{core.spacing.size.05}",
+      "paddingInlineEnd": "{core.spacing.size.05}"
     }
   }
 }

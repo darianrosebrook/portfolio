@@ -16,4 +16,8 @@
   --ds-profileFlag-spacing-padding-default: var(--core-spacing-size-04, 8px);
   --ds-profileFlag-spacing-padding-right: var(--core-spacing-size-06, 16px);
   --ds-profileFlag-spacing-margin-top: var(--core-spacing-size-02, 2px);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-gap: var(--core-spacing-size-03, 4px);
+  --ds-box-model-width: fit-content;
 }
