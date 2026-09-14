@@ -14,7 +14,15 @@ export * from './global';
 export * from './types';
 
 // Component-specific CSS generation
-export * from './generateCSSTokens.mjs';
+// Curated re-export: a blind `export *` here collides with core/index's
+// tokenPathToCSSVar in the designTokens barrel (TS2308). The generator's
+// public API surface excludes names owned by core.
+export {
+  refToCssVar,
+  buildFallbackResolver,
+  buildCssForComponent,
+  flattenTokens,
+} from './generateCSSTokens.mjs';
 
 // Schema generation
 export * from './generateSchema.mjs';

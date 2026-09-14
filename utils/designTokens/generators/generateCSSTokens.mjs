@@ -1,5 +1,15 @@
 #!/usr/bin/env node
 // Generate component-scoped CSS custom properties from component token JSON files
+//
+// Every `{semantic.*}` / `{core.*}` reference is emitted as
+// `var(--semantic-x, <literal>)` where the literal is the token's
+// default-theme value resolved from app/designTokens.scss (first assignment
+// wins; later theme/brand blocks are overrides, not defaults). Components
+// stay renderable even if the global token stylesheet fails to load, and
+// contract `fallback` values become observable at runtime.
+//
+// Ordering: run `npm run tokens:global` (or `tokens:build`) before this
+// script so fallback literals reflect the current token sources.
 // Usage: node utils/designTokens/generateCSSTokens.mjs
 
 import fs from 'fs';
@@ -12,6 +22,11 @@ const projectRoot = path.resolve(__dirname, '..', '..', '..');
 
 const COMPONENTS_DIR = path.join(projectRoot, 'ui');
 const SYSTEM_TOKENS_PATH = path.join(COMPONENTS_DIR, 'designTokens.json');
+const GLOBAL_TOKENS_SCSS_PATH = path.join(
+  projectRoot,
+  'app',
+  'designTokens.scss'
+);
 
 /**
  * Convert DTCG 1.0 structured color value to CSS string
@@ -146,7 +161,66 @@ function tokenPathToCSSVar(tokenPath, prefix = '--') {
  * into a CSS variable reference using the same naming convention as the global generator.
  * Also handles DTCG 1.0 structured values (color and dimension objects).
  */
-function refToCssVar(value) {
+/**
+ * Build a fallback resolver over generated global-token CSS
+ * (app/designTokens.scss).
+ *
+ * Resolution rule: the FIRST assignment of a custom property in file order is
+ * its default value. The file declares layers in cascade order
+ * (core, semantic, theme, brand), so first occurrence = default theme, while
+ * later occurrences are [data-theme] / [data-brand] overrides that must NOT
+ * leak into fallback literals.
+ *
+ * Returns a function (cssVarName) => literal | null. Chains of the form
+ * `--a: var(--b)` are chased; `--a: var(--b, <lit>)` falls back to <lit> when
+ * --b is absent. Garbage literals (`[object Object]`, `undefined`, `NaN`)
+ * resolve to null so they are never emitted.
+ */
+function buildFallbackResolver(scssContent) {
+  if (!scssContent || typeof scssContent !== 'string') {
+    return () => null;
+  }
+
+  const firstAssignment = new Map();
+  const assignmentRe = /--([a-zA-Z][a-zA-Z0-9-]+):\s*([^;]+);/g;
+  for (const [, name, raw] of scssContent.matchAll(assignmentRe)) {
+    if (!firstAssignment.has(name)) {
+      firstAssignment.set(name, raw.trim());
+    }
+  }
+
+  const GARBAGE_RE = /\[object Object\]|undefined|NaN/;
+  const VAR_RE = /^var\(\s*--([a-zA-Z][a-zA-Z0-9-]+)\s*(?:,\s*(.+))?\)$/;
+  const MAX_CHAIN_DEPTH = 12;
+
+  function resolve(varName, seen = new Set()) {
+    const name = String(varName).replace(/^--/, '');
+    if (seen.has(name) || seen.size >= MAX_CHAIN_DEPTH) return null;
+    seen.add(name);
+
+    const raw = firstAssignment.get(name);
+    if (raw === undefined) return null;
+
+    const varMatch = raw.match(VAR_RE);
+    if (varMatch) {
+      const chained = resolve(`--${varMatch[1]}`, seen);
+      if (chained !== null) return chained;
+      if (varMatch[2] !== undefined) {
+        const literal = varMatch[2].trim();
+        return GARBAGE_RE.test(literal) ? null : literal;
+      }
+      return null;
+    }
+
+    // Multi-var shorthands (e.g. `var(--a) var(--b)`) have no single literal.
+    if (raw.startsWith('var(')) return null;
+    return GARBAGE_RE.test(raw) ? null : raw;
+  }
+
+  return resolve;
+}
+
+function refToCssVar(value, resolveFallback = null) {
   // Handle DTCG 1.0 structured values
   if (isStructuredColorValue(value)) {
     return colorValueToCSS(value);
@@ -166,6 +240,13 @@ function refToCssVar(value) {
     // This now includes namespace prefixes (--semantic- or --core-)
     const cssVarName = tokenPathToCSSVar(tokenPath);
 
+    const fallbackLiteral =
+      typeof resolveFallback === 'function'
+        ? resolveFallback(cssVarName)
+        : null;
+    if (fallbackLiteral !== null && fallbackLiteral !== undefined) {
+      return `var(${cssVarName}, ${fallbackLiteral})`;
+    }
     return `var(${cssVarName})`;
   }
 
@@ -257,7 +338,12 @@ function flattenTokens(obj, prefixSegments) {
  *
  * Per docs/CSS-MIGRATION-PLAYBOOK.md.
  */
-function buildCssForComponent({ cssVarPrefix, pascalComponent, tokenData }) {
+function buildCssForComponent({
+  cssVarPrefix,
+  pascalComponent,
+  tokenData,
+  resolveFallback = null,
+}) {
   const { groups, flat } = tokenData;
   // Body lines live at column 2 (one level inside the selector).
   const body = [];
@@ -269,7 +355,9 @@ function buildCssForComponent({ cssVarPrefix, pascalComponent, tokenData }) {
       body.push(`  /* === ${groupTitle} Tokens === */`);
 
       Object.entries(groupData.tokens).forEach(([name, raw]) => {
-        body.push(`  --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
+        body.push(
+          `  --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw, resolveFallback)};`
+        );
       });
 
       body.push('');
@@ -296,11 +384,15 @@ function buildCssForComponent({ cssVarPrefix, pascalComponent, tokenData }) {
       body.push('  /* === Other Tokens === */');
     }
     Object.entries(topLevelTokens).forEach(([name, raw]) => {
-      body.push(`  --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
+      body.push(
+        `  --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw, resolveFallback)};`
+      );
     });
   } else if (Object.keys(groups).length === 0) {
     Object.entries(flat).forEach(([name, raw]) => {
-      body.push(`  --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
+      body.push(
+        `  --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw, resolveFallback)};`
+      );
     });
   }
 
@@ -345,6 +437,24 @@ function run() {
     );
   }
 
+  let resolveFallback = null;
+  if (fs.existsSync(GLOBAL_TOKENS_SCSS_PATH)) {
+    resolveFallback = buildFallbackResolver(
+      fs.readFileSync(GLOBAL_TOKENS_SCSS_PATH, 'utf8')
+    );
+  } else {
+    console.warn(
+      '[tokens] Warning: app/designTokens.scss not found — emitting without fallback literals. Run `npm run tokens:global` first.'
+    );
+  }
+  const unresolvedRefs = [];
+
+  const trackFallbacks = (prefix) => (cssVarName) => {
+    const literal = resolveFallback ? resolveFallback(cssVarName) : null;
+    if (literal === null) unresolvedRefs.push(`${prefix}: ${cssVarName}`);
+    return literal;
+  };
+
   const tokenFiles = findTokenJsonFiles(COMPONENTS_DIR);
   if (tokenFiles.length === 0) {
     console.log('[tokens] No component token files found.');
@@ -374,6 +484,7 @@ function run() {
         cssVarPrefix: prefix,
         pascalComponent,
         tokenData,
+        resolveFallback: trackFallbacks(prefix),
       });
 
       const filePrefix =
@@ -388,8 +499,28 @@ function run() {
     }
   }
 
+  if (unresolvedRefs.length > 0) {
+    console.warn(
+      `[tokens] Warning: ${unresolvedRefs.length} reference(s) had no resolvable default — emitted without fallback:`
+    );
+    for (const ref of unresolvedRefs.slice(0, 20)) {
+      console.warn(`[tokens]   ${ref}`);
+    }
+    if (unresolvedRefs.length > 20) {
+      console.warn(`[tokens]   … and ${unresolvedRefs.length - 20} more`);
+    }
+  }
+
   console.log(`[tokens] Completed. Generated ${generatedCount} file(s).`);
 }
+
+export {
+  refToCssVar,
+  tokenPathToCSSVar,
+  buildFallbackResolver,
+  buildCssForComponent,
+  flattenTokens,
+};
 
 function capitalize(str) {
   if (!str) return str;
