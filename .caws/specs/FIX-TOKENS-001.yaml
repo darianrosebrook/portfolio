@@ -5,7 +5,7 @@ mode: fix
 lifecycle_state: active
 worktree: fix-tokens-001
 created_at: '2026-09-14T03:52:46.775Z'
-updated_at: '2026-09-14T03:54:27.137Z'
+updated_at: '2026-09-14T03:59:41.562Z'
 created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
 blast_radius:
   modules:
@@ -27,6 +27,7 @@ scope:
     - package.json
     - ui/designTokens/semantic/components
     - ui/designTokens/semantic/_index.tokens.json
+    - ui/modules
   out: []
 invariants:
   - 'Generated <Component>.tokens.css stays derivable solely from <Component>.tokens.json + app/designTokens.scss; the AUTO-GENERATED banner is preserved and no hand edits are required.'
