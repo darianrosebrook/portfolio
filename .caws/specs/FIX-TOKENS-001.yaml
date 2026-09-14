@@ -83,3 +83,7 @@ evidence:
     status: pass
     evidence_ref: "node scripts/check-contract-tokens.mjs -> exit 0, 1486 structured tokens verified"
     recorded_at: "2026-09-14T04:28:26.444Z"
+  - criterion_id: A4
+    status: pass
+    evidence_ref: "grep -c 'semantic-component-[a-z]' app/designTokens.scss -> 0; npm test 169 files 1622 passed"
+    recorded_at: "2026-09-14T04:28:27.002Z"
