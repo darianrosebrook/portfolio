@@ -1,0 +1,32 @@
+id: FEAT-BOXMODEL-001
+title: 'Adopt the FSDS box-model slot pattern: shared layout override surface for components'
+risk_tier: 2
+mode: feature
+lifecycle_state: draft
+created_at: '2026-09-14T04:47:29.088Z'
+updated_at: '2026-09-14T04:47:29.088Z'
+created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'TODO: list the file(s) or directories this spec authorizes.'
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'TODO'
+    when: 'TODO'
+    then: 'TODO'
+non_functional: {}
+contracts:
+  - name: 'box-model-slot-api'
+    type: contract-test
+    path: 'test/unit/designTokens/generateCSSTokens.test.mjs'
+  - name: 'box-model-visual-noop'
+    type: contract-test
+    path: 'test/unit/designTokens/boxModel.artifacts.test.mjs'
