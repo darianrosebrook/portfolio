@@ -48,3 +48,7 @@ evidence:
     status: pass
     evidence_ref: "With the real 63 MB / 80-chunk .vercel/output copied in from the main checkout, npm run lint ==> exit 0 in real 28.5s (previously the same directory pegged a core for 30+ minutes without completing). Decoy files planted in .vercel/output, coverage, playwright-report, test-results and .next are reported 'File ignored because of a matching ignore pattern'."
     recorded_at: "2026-09-14T17:57:13.019Z"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "git push origin main ==> exit 0; pre-push hook printed 'Lint, typecheck, tests, and build all passed!'; pushed 16e78329..864a1562 main -> main in 1m20s wall (lint fast because of the new ignores). Post-push verification: pnpm audit ==> 'No known vulnerabilities found'; gh api dependabot/alerts shows 100 alerts all state=fixed and 0 open."
+    recorded_at: "2026-09-14T18:00:20.210Z"
