@@ -26,4 +26,10 @@
   --ds-tooltip-motion-duration-exit: var(--semantic-motion-interaction-exit-duration, 167ms);
   --ds-tooltip-motion-easing-enter: var(--semantic-motion-interaction-enter-easing, cubic-bezier(0, 0, 0.7, 1));
   --ds-tooltip-motion-easing-exit: var(--semantic-motion-interaction-exit-easing, cubic-bezier(1, 0, 1, 1));
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-padding-block-start: var(--core-spacing-size-03, 4px);
+  --ds-box-model-padding-block-end: var(--core-spacing-size-03, 4px);
+  --ds-box-model-padding-inline-start: var(--core-spacing-size-04, 8px);
+  --ds-box-model-padding-inline-end: var(--core-spacing-size-04, 8px);
 }

@@ -1,7 +1,8 @@
+@import '../../primitives/boxModel.css';
 @import "./Tabs.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Tabs"] on the root element.
  * @supports @scope block dropped — native nesting gives equivalent scoping.
  * Intentionally unlayered — see Button.css for the cascade rationale.
@@ -12,7 +13,7 @@
   .list {
     position: relative;
     display: inline-flex;
-    gap: var(--ds-tabs-spacing-gap);
+    gap: var(--ds-box-model-gap);
   }
 
   .indicator {

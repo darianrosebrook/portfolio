@@ -23,6 +23,9 @@
     },
     "motion": {
       "indicator": "{core.motion.duration.short}"
+    },
+    "boxModel": {
+      "gap": "{core.spacing.size.04}"
     }
   }
 }

@@ -1,9 +1,13 @@
+@import '../../primitives/boxModel.css';
 @import "./Blockquote.tokens.css";
 
 [data-ds-component="Blockquote"] {
   &.blockquote {
     margin: var(--ds-blockquote-size-padding-default) 0;
-    padding: var(--ds-blockquote-size-padding-default);
+    padding-inline: var(--ds-box-model-padding-inline-start)
+      var(--ds-box-model-padding-inline-end);
+    padding-block: var(--ds-box-model-padding-block-start)
+      var(--ds-box-model-padding-block-end);
     color: var(--ds-blockquote-color-foreground-primary);
     font-weight: var(--ds-blockquote-typography-font-weight);
     font-style: var(--ds-blockquote-typography-font-style);

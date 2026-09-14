@@ -1,7 +1,8 @@
+@import '../../primitives/boxModel.css';
 @import "./Links.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Links"] on the root element (the Link anchor).
  * Old --animated-link-* vars mapped to --ds-links-* equivalents.
  * Intentionally unlayered — see Button.css for the cascade rationale.
@@ -10,7 +11,7 @@
   &.root {
     display: inline-flex;
     vertical-align: baseline;
-    gap: var(--ds-links-spacing-gap-default);
+    gap: var(--ds-box-model-gap);
     align-items: center;
     color: var(--ds-links-color-foreground-default);
     font-weight: var(--ds-links-typography-font-weight-default);
@@ -39,7 +40,7 @@
     display: inline-block;
     vertical-align: baseline;
     overflow: hidden;
-    width: 100%;
+    width: var(--ds-box-model-width);
     line-height: var(--ds-links-typography-line-height-tight);
   }
 

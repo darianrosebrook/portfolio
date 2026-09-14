@@ -10,23 +10,10 @@
     "toggleSwitchGroup"
   ],
   "variants": {
-    "size": [
-      "small",
-      "medium",
-      "large"
-    ],
-    "orientation": [
-      "vertical",
-      "horizontal"
-    ]
+    "size": ["small", "medium", "large"],
+    "orientation": ["vertical", "horizontal"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "disabled",
-    "checked"
-  ],
+  "states": ["default", "hover", "focus", "disabled", "checked"],
   "slots": {
     "root": {
       "required": true,
@@ -43,11 +30,7 @@
   },
   "a11y": {
     "role": "switch",
-    "labeling": [
-      "aria-label",
-      "aria-checked",
-      "aria-describedby"
-    ],
+    "labeling": ["aria-label", "aria-checked", "aria-describedby"],
     "keyboard": [],
     "apgPattern": "switch"
   },
@@ -361,6 +344,14 @@
         "fallback": "1.2",
         "property": "line-height",
         "layer": "semantic"
+      },
+      "box-model.gap": {
+        "literal": "0.25rem",
+        "property": "gap"
+      },
+      "box-model.max-height": {
+        "literal": "1.5rem",
+        "property": "max-height"
       }
     }
   },
@@ -522,17 +513,12 @@
     },
     "validity": {
       "model": "native",
-      "ariaAttributes": [
-        "aria-disabled"
-      ]
+      "ariaAttributes": ["aria-disabled"]
     },
     "labeling": {
       "strategy": "associated-label",
       "required": true,
-      "via": [
-        "aria-labelledby",
-        "aria-label"
-      ]
+      "via": ["aria-labelledby", "aria-label"]
     }
   },
   "description": "Binary switch control rendered as input[role=switch] with an adjacent label.",

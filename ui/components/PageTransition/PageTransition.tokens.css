@@ -47,4 +47,8 @@
   --ds-pageTransition-z-index-overlay: var(--core-layer-dropdown, 1000);
   --ds-pageTransition-z-index-content: var(--core-layer-above-dropdown, 1001);
   --ds-pageTransition-z-index-max: var(--core-layer-max, 9999);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-width: 100%;
+  --ds-box-model-min-height: 0;
 }

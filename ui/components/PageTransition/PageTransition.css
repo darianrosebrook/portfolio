@@ -1,10 +1,12 @@
+@import '../../primitives/boxModel.css';
+
 [data-ds-component="PageTransition"] {
   --transition-duration: 300ms;
   --transition-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   position: relative;
-  width: 100%;
-  min-height: 0;
+  width: var(--ds-box-model-width);
+  min-height: var(--ds-box-model-min-height);
 
   &.enabled {
     view-transition-name: var(--view-transition-name, main-content);

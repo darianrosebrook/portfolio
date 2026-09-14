@@ -9,20 +9,9 @@
     "activeTrigger"
   ],
   "variants": {
-    "placement": [
-      "top",
-      "bottom",
-      "left",
-      "right",
-      "auto"
-    ]
+    "placement": ["top", "bottom", "left", "right", "auto"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "leaving"
-  ],
+  "states": ["default", "hover", "focus", "leaving"],
   "slots": {
     "root": {
       "required": true,
@@ -39,9 +28,7 @@
   },
   "a11y": {
     "role": "region",
-    "labeling": [
-      "aria-haspopup"
-    ],
+    "labeling": ["aria-haspopup"],
     "keyboard": [
       {
         "key": "KeyboardEvent",
@@ -98,6 +85,12 @@
         "resolvesTo": "semantic.elevation.default",
         "fallback": "0px 1px 3px #0000001f",
         "layer": "semantic"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
       }
     }
   },
@@ -170,23 +163,17 @@
     "transitions": [
       {
         "name": "open",
-        "trigger": "openness=closed→open",
+        "trigger": "openness=closed\u2192open",
         "phase": "enter",
-        "properties": [
-          "opacity",
-          "transform"
-        ],
+        "properties": ["opacity", "transform"],
         "duration": "core.motion.duration.short",
         "easing": "core.motion.easing.emphasizedOut"
       },
       {
         "name": "close",
-        "trigger": "openness=open→closed",
+        "trigger": "openness=open\u2192closed",
         "phase": "exit",
-        "properties": [
-          "opacity",
-          "transform"
-        ],
+        "properties": ["opacity", "transform"],
         "duration": "core.motion.duration.short",
         "easing": "core.motion.easing.emphasizedIn"
       }
@@ -252,10 +239,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "Popover.Trigger",
-        "Popover.Content"
-      ]
+      "accepts": ["Popover.Trigger", "Popover.Content"]
     }
   }
 }

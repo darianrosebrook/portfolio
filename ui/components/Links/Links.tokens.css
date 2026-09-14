@@ -57,4 +57,8 @@
   --ds-links-animation-duration-default: var(--core-motion-duration-long, 400ms);
   --ds-links-animation-duration-fast: var(--core-motion-duration-medium0, 300ms);
   --ds-links-animation-duration-slow: var(--core-motion-duration-long0, 600ms);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-gap: var(--core-spacing-size-02, 2px);
+  --ds-box-model-width: 100%;
 }

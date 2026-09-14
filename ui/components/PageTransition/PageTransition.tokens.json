@@ -63,6 +63,10 @@
       "overlay": "{core.layer.dropdown}",
       "content": "{core.layer.aboveDropdown}",
       "max": "{core.layer.max}"
+    },
+    "boxModel": {
+      "width": "100%",
+      "minHeight": "0"
     }
   }
 }

@@ -31,4 +31,7 @@
   /* === Motion Tokens === */
   --ds-toast-motion-enter: var(--core-motion-duration-short, 150ms);
   --ds-toast-motion-leave: var(--core-motion-duration-short, 150ms);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-gap: var(--core-spacing-size-04, 8px);
 }

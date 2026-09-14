@@ -12,25 +12,10 @@
     "row"
   ],
   "variants": {
-    "politeness": [
-      "polite",
-      "assertive"
-    ],
-    "variant": [
-      "info",
-      "success",
-      "warning",
-      "error"
-    ]
+    "politeness": ["polite", "assertive"],
+    "variant": ["info", "success", "warning", "error"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "entering",
-    "visible",
-    "leaving"
-  ],
+  "states": ["default", "hover", "focus", "entering", "visible", "leaving"],
   "slots": {
     "viewport": {
       "required": true,
@@ -63,13 +48,8 @@
   },
   "a11y": {
     "role": "alert",
-    "roles": [
-      "alert",
-      "status"
-    ],
-    "labeling": [
-      "aria-label"
-    ],
+    "roles": ["alert", "status"],
+    "labeling": ["aria-label"],
     "keyboard": [
       {
         "key": "Enter|Space",
@@ -173,6 +153,12 @@
         "resolvesTo": "core.motion.duration.short",
         "fallback": "150ms",
         "layer": "core"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
       }
     }
   },
@@ -213,20 +199,15 @@
   "a2ui": {
     "category": "overlay",
     "usageHints": [
-      "Trigger toasts via the useToast hook or ToastProvider API — do not render Toast directly",
+      "Trigger toasts via the useToast hook or ToastProvider API \u2014 do not render Toast directly",
       "Use variant to set the visual style (default, success, warning, error)",
-      "Toasts are live regions — screen readers announce them without requiring focus",
+      "Toasts are live regions \u2014 screen readers announce them without requiring focus",
       "Keep toast messages brief; use an action button only for critical reversible operations"
     ],
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "ToastTitle",
-        "ToastDescription",
-        "ToastAction",
-        "ToastClose"
-      ]
+      "accepts": ["ToastTitle", "ToastDescription", "ToastAction", "ToastClose"]
     }
   },
   "motion": {
@@ -235,23 +216,17 @@
     "transitions": [
       {
         "name": "open",
-        "trigger": "openness=hidden→visible",
+        "trigger": "openness=hidden\u2192visible",
         "phase": "enter",
-        "properties": [
-          "opacity",
-          "transform"
-        ],
+        "properties": ["opacity", "transform"],
         "duration": "core.motion.duration.short",
         "easing": "core.motion.easing.emphasizedDecelerate"
       },
       {
         "name": "close",
-        "trigger": "openness=visible→hidden",
+        "trigger": "openness=visible\u2192hidden",
         "phase": "exit",
-        "properties": [
-          "opacity",
-          "transform"
-        ],
+        "properties": ["opacity", "transform"],
         "duration": "core.motion.duration.short",
         "easing": "core.motion.easing.emphasizedAccelerate"
       }

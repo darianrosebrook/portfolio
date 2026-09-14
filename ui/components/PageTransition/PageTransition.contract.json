@@ -13,13 +13,7 @@
     "clone"
   ],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "loading"
-  ],
+  "states": ["default", "hover", "focus", "active", "loading"],
   "slots": {
     "root": {
       "required": true,
@@ -28,9 +22,7 @@
   },
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": null
   },
@@ -215,6 +207,14 @@
         "resolvesTo": "core.layer.max",
         "fallback": "9999",
         "layer": "core"
+      },
+      "box-model.width": {
+        "literal": "100%",
+        "property": "width"
+      },
+      "box-model.min-height": {
+        "literal": "0",
+        "property": "min-height"
       }
     }
   },
@@ -256,10 +256,7 @@
         "name": "exit",
         "trigger": "navigation=start",
         "phase": "exit",
-        "properties": [
-          "opacity",
-          "transform"
-        ],
+        "properties": ["opacity", "transform"],
         "duration": "pageTransition.duration.normal",
         "easing": "pageTransition.easing.accelerate"
       },
@@ -267,10 +264,7 @@
         "name": "enter",
         "trigger": "navigation=complete",
         "phase": "enter",
-        "properties": [
-          "opacity",
-          "transform"
-        ],
+        "properties": ["opacity", "transform"],
         "duration": "pageTransition.duration.normal",
         "easing": "pageTransition.easing.decelerate"
       }
@@ -288,9 +282,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "node-ref"
-      ]
+      "accepts": ["node-ref"]
     }
   }
 }

@@ -97,6 +97,12 @@
         "x": "{core.spacing.size.03}"
       },
       "radius": "{core.shape.radius.small}"
+    },
+    "boxModel": {
+      "paddingBlockStart": "{core.spacing.size.02}",
+      "paddingBlockEnd": "{core.spacing.size.02}",
+      "paddingInlineStart": "{core.spacing.size.03}",
+      "paddingInlineEnd": "{core.spacing.size.03}"
     }
   }
 }
