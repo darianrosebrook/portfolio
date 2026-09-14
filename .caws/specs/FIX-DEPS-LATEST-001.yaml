@@ -2,10 +2,11 @@ id: FIX-DEPS-LATEST-001
 title: 'Upgrade all pnpm dependencies to latest and migrate toolchain configs'
 risk_tier: 2
 mode: refactor
-lifecycle_state: active
-worktree: fix-deps-latest-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge fix-deps-latest-001 at 4e2b671994806a0a4ff0d92543154ab077b802f1'
 created_at: '2026-09-14T14:04:27.957Z'
-updated_at: '2026-09-14T16:38:16.875Z'
+updated_at: '2026-09-14T16:42:30.480Z'
 created_by_session: 'session-8b0983e6-1c23-4ac6-b881-ba2df50b396e'
 blast_radius:
   modules:
