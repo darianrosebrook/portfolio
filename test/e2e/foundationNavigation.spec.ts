@@ -31,6 +31,18 @@ const foundationPages = [
     prerequisites: ['tokens', 'accessibility'],
     nextUnits: [],
   },
+  {
+    slug: 'color',
+    title: 'Color Foundations',
+    prerequisites: ['tokens'],
+    nextUnits: ['typography', 'spacing'],
+  },
+  {
+    slug: 'motion',
+    title: 'Motion & Duration Foundations',
+    prerequisites: ['tokens'],
+    nextUnits: ['elevation', 'layout'],
+  },
 ];
 
 test.describe('Foundation Pages Navigation', () => {
@@ -49,8 +61,9 @@ test.describe('Foundation Pages Navigation', () => {
         await page.goto(`/blueprints/foundations/${pageData.slug}`);
         await page.waitForLoadState('networkidle');
 
-        // Verify page title is present
-        await expect(page.locator('h1')).toContainText(pageData.title, {
+        // Verify page title is present (scoped to main: the site header
+        // also renders an h1 for the logo)
+        await expect(page.locator('main h1')).toContainText(pageData.title, {
           timeout: 5000,
         });
 
@@ -199,12 +212,15 @@ test.describe('Foundation Pages Navigation', () => {
       }) => {
         await page.goto(`/blueprints/foundations/${pageData.slug}`);
 
-        // Check for JSON-LD script tags
+        // Check for JSON-LD script tags. The scripts stream with the page
+        // body (after the load event in dev), so poll rather than count once.
         const jsonLdScripts = page.locator(
           'script[type="application/ld+json"]'
         );
+        await expect
+          .poll(async () => await jsonLdScripts.count(), { timeout: 10000 })
+          .toBeGreaterThan(0);
         const count = await jsonLdScripts.count();
-        expect(count).toBeGreaterThan(0);
 
         // Verify at least one schema is valid JSON
         for (let i = 0; i < count; i++) {
@@ -224,6 +240,9 @@ test.describe('Foundation Pages Navigation', () => {
         const jsonLdScripts = page.locator(
           'script[type="application/ld+json"]'
         );
+        await expect
+          .poll(async () => await jsonLdScripts.count(), { timeout: 10000 })
+          .toBeGreaterThan(0);
         const count = await jsonLdScripts.count();
 
         let hasBreadcrumb = false;
