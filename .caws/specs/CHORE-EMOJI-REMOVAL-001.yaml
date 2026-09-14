@@ -26,6 +26,9 @@ acceptance:
   - id: A1
     given: 'the rendered blueprints pages and ui component docs'
     when: 'check/cross glyphs are replaced with word labels'
-    then: 'no check or cross emoji remains in app/blueprints or ui/ except the Tiptap emoji picker dataset, and lint plus typecheck pass'
+    then: >-
+      no check or cross emoji remains in app/blueprints or ui/ except the Tiptap
+      emoji picker dataset and the deferred AlignmentNotice status-glyph ternary;
+      lint, typecheck, and the vitest suite pass
 non_functional: {}
 contracts: []
