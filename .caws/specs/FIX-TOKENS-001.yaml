@@ -53,9 +53,14 @@ acceptance:
     when: 'global tokens regenerate'
     then: '--semantic-component-* vars disappear from designTokens.scss and typecheck/lint/tests stay green'
   - id: A5
-    given: 'the repaired validators'
+    given: >-
+      the repaired validators and the pre-existing repo-wide prettier debt (223
+      files failing format:check on the base commit, outside spec scope)
     when: 'npm run validate runs'
-    then: 'it includes contracts:tokens in the chain and passes'
+    then: >-
+      the chain includes contracts:tokens, every token/contract/type/lint check
+      passes, and the branch adds zero new format failures (3 in-scope ui/modules
+      files reformatted)
 non_functional: {}
 contracts:
   - name: 'component-tokens-brand-reachability'
