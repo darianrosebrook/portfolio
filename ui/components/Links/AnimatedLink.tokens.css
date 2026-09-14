@@ -3,17 +3,17 @@
  */
 [data-ds-component="AnimatedLink"] {
   /* === Color Tokens === */
-  --ds-animatedLink-color-default: var(--semantic-color-foreground-accent);
-  --ds-animatedLink-color-hover: var(--semantic-color-foreground-accent);
-  --ds-animatedLink-color-focus: var(--semantic-color-border-accent);
+  --ds-animatedLink-color-default: var(--semantic-color-foreground-accent, #d9292b);
+  --ds-animatedLink-color-hover: var(--semantic-color-foreground-accent, #d9292b);
+  --ds-animatedLink-color-focus: var(--semantic-color-border-accent, #d9292b);
 
   /* === Spacing Tokens === */
-  --ds-animatedLink-spacing-gap-default: var(--core-spacing-size-02);
+  --ds-animatedLink-spacing-gap-default: var(--core-spacing-size-02, 2px);
 
   /* === Shape Tokens === */
-  --ds-animatedLink-shape-radius: var(--core-shape-radius-small);
+  --ds-animatedLink-shape-radius: var(--core-shape-radius-small, 4px);
 
   /* === Typography Tokens === */
-  --ds-animatedLink-typography-font-weight-regular: var(--semantic-typography-font-weight-regular);
-  --ds-animatedLink-typography-line-height-collapse: var(--core-typography-line-height-collapse);
+  --ds-animatedLink-typography-font-weight-regular: var(--semantic-typography-font-weight-regular, 400);
+  --ds-animatedLink-typography-line-height-collapse: var(--semantic-typography-line-height-collapse, 1);
 }

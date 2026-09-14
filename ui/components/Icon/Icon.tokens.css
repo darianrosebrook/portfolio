@@ -3,8 +3,8 @@
  */
 [data-ds-component="Icon"] {
   /* === Color Tokens === */
-  --ds-icon-color-foreground-default: var(--semantic-color-foreground-primary);
+  --ds-icon-color-foreground-default: var(--semantic-color-foreground-primary, #141414);
 
   /* === Size Tokens === */
-  --ds-icon-size-padding-default: var(--core-spacing-size-01);
+  --ds-icon-size-padding-default: var(--core-spacing-size-01, 1px);
 }

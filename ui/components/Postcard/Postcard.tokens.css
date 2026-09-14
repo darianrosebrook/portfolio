@@ -3,32 +3,32 @@
  */
 [data-ds-component="Postcard"] {
   /* === Color Tokens === */
-  --ds-postcard-color-background-default: var(--semantic-color-background-primary);
-  --ds-postcard-color-background-hover: var(--semantic-color-background-secondary);
-  --ds-postcard-color-background-active: var(--semantic-color-background-active);
-  --ds-postcard-color-border-default: var(--semantic-color-border-light);
-  --ds-postcard-color-border-accent: var(--semantic-color-border-accent);
-  --ds-postcard-color-border-hover: var(--semantic-color-border-bold);
-  --ds-postcard-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --ds-postcard-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --ds-postcard-color-foreground-muted: var(--semantic-color-foreground-secondary);
+  --ds-postcard-color-background-default: var(--semantic-color-background-primary, #ffffff);
+  --ds-postcard-color-background-hover: var(--semantic-color-background-secondary, #efefef);
+  --ds-postcard-color-background-active: var(--semantic-color-background-active, #aeaeae);
+  --ds-postcard-color-border-default: var(--semantic-color-border-light, #fceaea);
+  --ds-postcard-color-border-accent: var(--semantic-color-border-accent, #d9292b);
+  --ds-postcard-color-border-hover: var(--semantic-color-border-bold, #8f8f8f);
+  --ds-postcard-color-foreground-primary: var(--semantic-color-foreground-primary, #141414);
+  --ds-postcard-color-foreground-secondary: var(--semantic-color-foreground-secondary, #555555);
+  --ds-postcard-color-foreground-muted: var(--semantic-color-foreground-secondary, #555555);
 
   /* === Size Tokens === */
-  --ds-postcard-size-padding-default: var(--core-spacing-size-06);
-  --ds-postcard-size-radius-default: var(--semantic-shape-control-radius-default);
-  --ds-postcard-size-radius-medium: var(--core-shape-radius-medium);
-  --ds-postcard-size-radius-full: var(--core-shape-radius-full);
-  --ds-postcard-size-margin-bottom: var(--core-spacing-size-06);
-  --ds-postcard-size-gap-default: var(--core-spacing-size-05);
-  --ds-postcard-size-gap-small: var(--core-spacing-size-03);
-  --ds-postcard-size-gap-large: var(--core-spacing-size-07);
-  --ds-postcard-size-border-default: var(--core-shape-border-width-hairline);
+  --ds-postcard-size-padding-default: var(--core-spacing-size-06, 16px);
+  --ds-postcard-size-radius-default: var(--semantic-shape-control-radius-default, 8px);
+  --ds-postcard-size-radius-medium: var(--core-shape-radius-medium, 8px);
+  --ds-postcard-size-radius-full: var(--core-shape-radius-full, 9999px);
+  --ds-postcard-size-margin-bottom: var(--core-spacing-size-06, 16px);
+  --ds-postcard-size-gap-default: var(--core-spacing-size-05, 12px);
+  --ds-postcard-size-gap-small: var(--core-spacing-size-03, 4px);
+  --ds-postcard-size-gap-large: var(--core-spacing-size-07, 24px);
+  --ds-postcard-size-border-default: var(--core-shape-border-width-hairline, 1px);
 
   /* === Typography Tokens === */
-  --ds-postcard-typography-display-name-font-size: var(--semantic-typography-body-02);
-  --ds-postcard-typography-display-name-font-weight: var(--semantic-typography-font-weight-medium);
-  --ds-postcard-typography-handle-font-size: var(--semantic-typography-body-03);
-  --ds-postcard-typography-content-font-size: var(--semantic-typography-body-02);
-  --ds-postcard-typography-content-line-height: var(--semantic-typography-line-height-body);
-  --ds-postcard-typography-footer-font-size: var(--semantic-typography-body-03);
+  --ds-postcard-typography-display-name-font-size: var(--semantic-typography-body-02, 16px);
+  --ds-postcard-typography-display-name-font-weight: var(--semantic-typography-font-weight-medium, 500);
+  --ds-postcard-typography-handle-font-size: var(--semantic-typography-body-03, 14px);
+  --ds-postcard-typography-content-font-size: var(--semantic-typography-body-02, 16px);
+  --ds-postcard-typography-content-line-height: var(--semantic-typography-line-height-body, 1.5);
+  --ds-postcard-typography-footer-font-size: var(--semantic-typography-body-03, 14px);
 }

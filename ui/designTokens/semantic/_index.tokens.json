@@ -20,7 +20,6 @@
       "13": "./content.tokens.json",
       "14": "./focus.tokens.json",
       "15": "./datavis.tokens.json",
-      "16": "./components/component.tokens.json",
       "17": "./overlay.tokens.json"
     }
   }

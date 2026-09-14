@@ -3,38 +3,38 @@
  */
 [data-ds-component="BrandSwitcher"] {
   /* === Color Tokens === */
-  --ds-brand-switcher-color-background-primary: var(--semantic-color-background-primary);
-  --ds-brand-switcher-color-background-secondary: var(--semantic-color-background-secondary);
-  --ds-brand-switcher-color-background-tertiary: var(--semantic-color-background-tertiary);
-  --ds-brand-switcher-color-background-accent: var(--semantic-color-background-accent);
-  --ds-brand-switcher-color-background-highlight: var(--semantic-color-background-highlight);
-  --ds-brand-switcher-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --ds-brand-switcher-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --ds-brand-switcher-color-foreground-tertiary: var(--semantic-color-foreground-tertiary);
-  --ds-brand-switcher-color-border-default: var(--semantic-color-border-default);
-  --ds-brand-switcher-color-border-hover: var(--semantic-color-border-hover);
-  --ds-brand-switcher-color-border-focus: var(--semantic-color-border-focus);
-  --ds-brand-switcher-color-border-accent: var(--semantic-color-border-accent);
+  --ds-brand-switcher-color-background-primary: var(--semantic-color-background-primary, #ffffff);
+  --ds-brand-switcher-color-background-secondary: var(--semantic-color-background-secondary, #efefef);
+  --ds-brand-switcher-color-background-tertiary: var(--semantic-color-background-tertiary, #cecece);
+  --ds-brand-switcher-color-background-accent: var(--semantic-color-background-accent, #d9292b);
+  --ds-brand-switcher-color-background-highlight: var(--semantic-color-background-highlight, #f7c1c2);
+  --ds-brand-switcher-color-foreground-primary: var(--semantic-color-foreground-primary, #141414);
+  --ds-brand-switcher-color-foreground-secondary: var(--semantic-color-foreground-secondary, #555555);
+  --ds-brand-switcher-color-foreground-tertiary: var(--semantic-color-foreground-tertiary, #717171);
+  --ds-brand-switcher-color-border-default: var(--semantic-color-border-default, #aeaeae);
+  --ds-brand-switcher-color-border-hover: var(--semantic-color-border-hover, #f29495);
+  --ds-brand-switcher-color-border-focus: var(--semantic-color-border-focus, #d9292b);
+  --ds-brand-switcher-color-border-accent: var(--semantic-color-border-accent, #d9292b);
 
   /* === Spacing Tokens === */
-  --ds-brand-switcher-spacing-gap-xs: var(--semantic-spacing-gap-component);
-  --ds-brand-switcher-spacing-gap-sm: var(--semantic-spacing-gap-grid);
-  --ds-brand-switcher-spacing-gap-md: var(--semantic-spacing-gap-grid-medium);
-  --ds-brand-switcher-spacing-padding-xs: var(--semantic-spacing-padding-component);
-  --ds-brand-switcher-spacing-padding-sm: var(--semantic-spacing-padding-card);
-  --ds-brand-switcher-spacing-padding-md: var(--semantic-spacing-padding-component);
-  --ds-brand-switcher-spacing-padding-lg: var(--semantic-spacing-padding-section);
+  --ds-brand-switcher-spacing-gap-xs: var(--semantic-spacing-gap-component, 8px);
+  --ds-brand-switcher-spacing-gap-sm: var(--semantic-spacing-gap-grid, 16px);
+  --ds-brand-switcher-spacing-gap-md: var(--semantic-spacing-gap-grid-medium, 24px);
+  --ds-brand-switcher-spacing-padding-xs: var(--semantic-spacing-padding-component, 16px);
+  --ds-brand-switcher-spacing-padding-sm: var(--semantic-spacing-padding-card, 16px);
+  --ds-brand-switcher-spacing-padding-md: var(--semantic-spacing-padding-component, 16px);
+  --ds-brand-switcher-spacing-padding-lg: var(--semantic-spacing-padding-section, 32px);
 
   /* === Size Tokens === */
-  --ds-brand-switcher-size-radius-01: var(--core-shape-radius-01);
-  --ds-brand-switcher-size-radius-02: var(--core-shape-radius-02);
-  --ds-brand-switcher-size-radius-03: var(--core-shape-radius-03);
+  --ds-brand-switcher-size-radius-01: var(--core-shape-radius-01, 2px);
+  --ds-brand-switcher-size-radius-02: var(--core-shape-radius-02, 4px);
+  --ds-brand-switcher-size-radius-03: var(--core-shape-radius-03, 8px);
 
   /* === Typography Tokens === */
-  --ds-brand-switcher-typography-font-size-xs: var(--semantic-typography-meta-caption-font-size);
-  --ds-brand-switcher-typography-font-size-sm: var(--semantic-typography-body-small-font-size);
-  --ds-brand-switcher-typography-font-size-default: var(--semantic-typography-body-default-font-size);
-  --ds-brand-switcher-typography-font-weight-default: var(--semantic-typography-font-weight-regular);
-  --ds-brand-switcher-typography-font-weight-strong: var(--semantic-typography-font-weight-bold);
-  --ds-brand-switcher-typography-line-height-default: var(--semantic-typography-body-default-line-height);
+  --ds-brand-switcher-typography-font-size-xs: var(--semantic-typography-meta-caption-font-size, 12px);
+  --ds-brand-switcher-typography-font-size-sm: var(--semantic-typography-body-small-font-size, 14px);
+  --ds-brand-switcher-typography-font-size-default: var(--semantic-typography-body-default-font-size, 16px);
+  --ds-brand-switcher-typography-font-weight-default: var(--semantic-typography-font-weight-regular, 400);
+  --ds-brand-switcher-typography-font-weight-strong: var(--semantic-typography-font-weight-bold, 700);
+  --ds-brand-switcher-typography-line-height-default: var(--semantic-typography-body-default-line-height, 1.5);
 }

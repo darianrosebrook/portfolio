@@ -3,42 +3,42 @@
  */
 [data-ds-component="Accordion"] {
   /* === Color Tokens === */
-  --ds-accordion-color-background-hover: var(--semantic-interaction-background-hover);
-  --ds-accordion-color-text: var(--semantic-color-foreground-primary);
-  --ds-accordion-color-text-hover: var(--semantic-interaction-text-hover);
-  --ds-accordion-color-text-secondary: var(--semantic-color-foreground-secondary);
-  --ds-accordion-color-icon: var(--semantic-color-foreground-tertiary);
+  --ds-accordion-color-background-hover: var(--semantic-interaction-background-hover, #efefef);
+  --ds-accordion-color-text: var(--semantic-color-foreground-primary, #141414);
+  --ds-accordion-color-text-hover: var(--semantic-interaction-text-hover, #555555);
+  --ds-accordion-color-text-secondary: var(--semantic-color-foreground-secondary, #555555);
+  --ds-accordion-color-icon: var(--semantic-color-foreground-tertiary, #717171);
 
   /* === Border Tokens === */
-  --ds-accordion-border-width: var(--core-shape-border-width-hairline);
-  --ds-accordion-border-color: var(--semantic-color-border-light);
-  --ds-accordion-border-radius: var(--core-shape-radius-small);
+  --ds-accordion-border-width: var(--core-shape-border-width-hairline, 1px);
+  --ds-accordion-border-color: var(--semantic-color-border-light, #fceaea);
+  --ds-accordion-border-radius: var(--core-shape-radius-small, 4px);
 
   /* === Spacing Tokens === */
-  --ds-accordion-spacing-gap: var(--core-spacing-size-07);
-  --ds-accordion-spacing-padding-x: var(--core-spacing-size-00);
-  --ds-accordion-spacing-padding-y: var(--core-spacing-size-04);
+  --ds-accordion-spacing-gap: var(--core-spacing-size-07, 24px);
+  --ds-accordion-spacing-padding-x: var(--core-spacing-size-00, 0px);
+  --ds-accordion-spacing-padding-y: var(--core-spacing-size-04, 8px);
 
   /* === Text Tokens === */
-  --ds-accordion-text-weight: var(--semantic-typography-font-weight-medium);
-  --ds-accordion-text-size: var(--semantic-typography-body-02);
-  --ds-accordion-text-line-height: var(--semantic-typography-line-height-normal);
-  --ds-accordion-text-size-content: var(--semantic-typography-body-03);
-  --ds-accordion-text-line-height-content: var(--semantic-typography-line-height-loose);
+  --ds-accordion-text-weight: var(--semantic-typography-font-weight-medium, 500);
+  --ds-accordion-text-size: var(--semantic-typography-body-02, 16px);
+  --ds-accordion-text-line-height: var(--semantic-typography-line-height-normal, 1.5);
+  --ds-accordion-text-size-content: var(--semantic-typography-body-03, 14px);
+  --ds-accordion-text-line-height-content: var(--semantic-typography-line-height-loose, 1.8);
 
   /* === Icon Tokens === */
-  --ds-accordion-icon-size: var(--core-spacing-size-04);
-  --ds-accordion-icon-offset: var(--core-spacing-size-01);
+  --ds-accordion-icon-size: var(--core-spacing-size-04, 8px);
+  --ds-accordion-icon-offset: var(--core-spacing-size-01, 1px);
 
   /* === Motion Tokens === */
-  --ds-accordion-motion-duration: var(--core-motion-duration-medium);
-  --ds-accordion-motion-easing: var(--core-motion-easing-standard);
+  --ds-accordion-motion-duration: var(--core-motion-duration-medium, 250ms);
+  --ds-accordion-motion-easing: var(--core-motion-easing-standard, cubic-bezier(0.4, 0, 0.2, 1));
 
   /* === Focus Tokens === */
-  --ds-accordion-focus-width: var(--core-shape-border-width-thick);
-  --ds-accordion-focus-color: var(--semantic-color-border-accent);
-  --ds-accordion-focus-offset: var(--core-spacing-size-01);
+  --ds-accordion-focus-width: var(--core-shape-border-width-thick, 2px);
+  --ds-accordion-focus-color: var(--semantic-color-border-accent, #d9292b);
+  --ds-accordion-focus-offset: var(--core-spacing-size-01, 1px);
 
   /* === Opacity Tokens === */
-  --ds-accordion-opacity-disabled: var(--semantic-interaction-disabled-opacity);
+  --ds-accordion-opacity-disabled: var(--semantic-interaction-disabled-opacity, 0.5);
 }

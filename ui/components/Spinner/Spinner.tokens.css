@@ -14,11 +14,11 @@
   --ds-spinner-thickness-bold: 4px;
 
   /* === Color Tokens === */
-  --ds-spinner-color-accent: var(--semantic-color-background-accent);
-  --ds-spinner-color-track: var(--semantic-color-border-subtle);
+  --ds-spinner-color-accent: var(--semantic-color-background-accent, #d9292b);
+  --ds-spinner-color-track: var(--semantic-color-border-subtle, #cecece);
 
   /* === Dots Tokens === */
-  --ds-spinner-dots-gap: var(--core-spacing-size-04);
+  --ds-spinner-dots-gap: var(--core-spacing-size-04, 8px);
 
   /* === Anim Tokens === */
   --ds-spinner-anim-duration: 800ms;

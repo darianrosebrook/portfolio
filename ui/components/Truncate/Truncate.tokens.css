@@ -3,13 +3,13 @@
  */
 [data-ds-component="Truncate"] {
   /* === Color Tokens === */
-  --ds-truncate-color-foreground-link: var(--semantic-color-foreground-link);
-  --ds-truncate-color-foreground-link-hover: var(--semantic-color-foreground-link-hover);
-  --ds-truncate-color-background-primary: var(--semantic-color-background-primary);
+  --ds-truncate-color-foreground-link: var(--semantic-color-foreground-link, #d9292b);
+  --ds-truncate-color-foreground-link-hover: var(--semantic-color-foreground-link-hover, #ae0001);
+  --ds-truncate-color-background-primary: var(--semantic-color-background-primary, #ffffff);
 
   /* === Typography Tokens === */
-  --ds-truncate-typography-font-weight: var(--semantic-typography-font-weight-medium);
+  --ds-truncate-typography-font-weight: var(--semantic-typography-font-weight-medium, 500);
 
   /* === Spacing Tokens === */
-  --ds-truncate-spacing-toggle: var(--core-spacing-size-02);
+  --ds-truncate-spacing-toggle: var(--core-spacing-size-02, 2px);
 }

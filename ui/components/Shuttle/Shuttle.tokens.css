@@ -3,19 +3,19 @@
  */
 [data-ds-component="Shuttle"] {
   /* === Color Tokens === */
-  --ds-shuttle-color-background-default: var(--semantic-color-background-secondary);
-  --ds-shuttle-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --ds-shuttle-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --ds-shuttle-color-border-default: var(--semantic-color-border-light);
-  --ds-shuttle-color-border-accent: var(--semantic-color-border-accent);
+  --ds-shuttle-color-background-default: var(--semantic-color-background-secondary, #efefef);
+  --ds-shuttle-color-foreground-primary: var(--semantic-color-foreground-primary, #141414);
+  --ds-shuttle-color-foreground-secondary: var(--semantic-color-foreground-secondary, #555555);
+  --ds-shuttle-color-border-default: var(--semantic-color-border-light, #fceaea);
+  --ds-shuttle-color-border-accent: var(--semantic-color-border-accent, #d9292b);
 
   /* === Size Tokens === */
-  --ds-shuttle-size-padding-default: var(--core-spacing-size-07);
-  --ds-shuttle-size-radius-default: var(--core-shape-radius-medium);
+  --ds-shuttle-size-padding-default: var(--core-spacing-size-07, 24px);
+  --ds-shuttle-size-radius-default: var(--core-shape-radius-medium, 8px);
 
   /* === Elevation Tokens === */
-  --ds-shuttle-elevation-default: var(--semantic-elevation-default);
+  --ds-shuttle-elevation-default: var(--semantic-elevation-default, 0px 1px 3px #0000001f);
 
   /* === Overlay Tokens === */
-  --ds-shuttle-overlay-image-overlay: var(--semantic-color-background-image-overlay);
+  --ds-shuttle-overlay-image-overlay: var(--semantic-color-background-image-overlay, rgba(0, 0, 0, 0.5));
 }

@@ -1542,7 +1542,7 @@
     "none": {
       "$type": "string",
       "$value": "none",
-      "$description": "No elevation — explicitly removes any box-shadow"
+      "$description": "No elevation \u2014 explicitly removes any box-shadow"
     },
     "default": {
       "$type": "shadow",
@@ -1617,7 +1617,10 @@
     "radius": {
       "full": {
         "$type": "dimension",
-        "$value": { "value": 9999, "unit": "px" }
+        "$value": {
+          "value": 9999,
+          "unit": "px"
+        }
       },
       "extraLarge": {
         "$type": "dimension",
@@ -1641,7 +1644,10 @@
       },
       "none": {
         "$type": "dimension",
-        "$value": { "value": 0, "unit": "px" }
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        }
       },
       "default": {
         "$type": "dimension",
@@ -1835,7 +1841,7 @@
         "identity": {
           "$type": "number",
           "$value": "{scale.100}",
-          "$description": "No-op scale — base / resting state"
+          "$description": "No-op scale \u2014 base / resting state"
         },
         "zoom": {
           "$type": "number",
@@ -2423,14 +2429,38 @@
     },
     "toggle": {
       "width": {
-        "sm": { "$type": "string", "$value": "calc(var(--semantic-control-size-sm-height) + var(--semantic-control-size-sm-paddingX) * 2)", "$description": "ToggleSwitch track width sm (= 32px)" },
-        "md": { "$type": "string", "$value": "calc(var(--semantic-control-size-md-height) + var(--semantic-control-size-md-paddingX) * 2)", "$description": "ToggleSwitch track width md (= 48px)" },
-        "lg": { "$type": "string", "$value": "calc(var(--semantic-control-size-lg-height) + var(--semantic-control-size-lg-paddingX) * 2)", "$description": "ToggleSwitch track width lg (= 80px)" }
+        "sm": {
+          "$type": "string",
+          "$value": "calc(var(--semantic-control-size-sm-height) + var(--semantic-control-size-sm-paddingX) * 2)",
+          "$description": "ToggleSwitch track width sm (= 32px)"
+        },
+        "md": {
+          "$type": "string",
+          "$value": "calc(var(--semantic-control-size-md-height) + var(--semantic-control-size-md-paddingX) * 2)",
+          "$description": "ToggleSwitch track width md (= 48px)"
+        },
+        "lg": {
+          "$type": "string",
+          "$value": "calc(var(--semantic-control-size-lg-height) + var(--semantic-control-size-lg-paddingX) * 2)",
+          "$description": "ToggleSwitch track width lg (= 80px)"
+        }
       },
       "thumb": {
-        "sm": { "$type": "string", "$value": "calc(var(--semantic-control-size-sm-height) - var(--semantic-control-size-sm-paddingY) * 2)", "$description": "ToggleSwitch thumb size sm (= 20px)" },
-        "md": { "$type": "string", "$value": "calc(var(--semantic-control-size-md-height) - var(--semantic-control-size-md-paddingY) * 2)", "$description": "ToggleSwitch thumb size md (= 24px)" },
-        "lg": { "$type": "string", "$value": "calc(var(--semantic-control-size-lg-height) - var(--semantic-control-size-lg-paddingY) * 2)", "$description": "ToggleSwitch thumb size lg (= 32px)" }
+        "sm": {
+          "$type": "string",
+          "$value": "calc(var(--semantic-control-size-sm-height) - var(--semantic-control-size-sm-paddingY) * 2)",
+          "$description": "ToggleSwitch thumb size sm (= 20px)"
+        },
+        "md": {
+          "$type": "string",
+          "$value": "calc(var(--semantic-control-size-md-height) - var(--semantic-control-size-md-paddingY) * 2)",
+          "$description": "ToggleSwitch thumb size md (= 24px)"
+        },
+        "lg": {
+          "$type": "string",
+          "$value": "calc(var(--semantic-control-size-lg-height) - var(--semantic-control-size-lg-paddingY) * 2)",
+          "$description": "ToggleSwitch thumb size lg (= 32px)"
+        }
       }
     }
   },
@@ -2701,120 +2731,6 @@
           "value": 1,
           "unit": "px"
         }
-      }
-    }
-  },
-  "component": {
-    "pagination": {
-      "gapX": {
-        "$type": "dimension",
-        "$value": "{spacing.size.02}"
-      },
-      "minSize": {
-        "$type": "dimension",
-        "$value": {
-          "value": 32,
-          "unit": "px"
-        }
-      }
-    },
-    "foreground": {
-      "$type": "color",
-      "$value": "{color.mode.dark}"
-    },
-    "typography": {
-      "variation": {
-        "wghtHeading": {
-          "$type": "number",
-          "$value": 700
-        },
-        "wdthResponsive": {
-          "$type": "number",
-          "$value": 100
-        }
-      }
-    },
-    "otp": {
-      "fieldGap": {
-        "$type": "dimension",
-        "$value": "{spacing.size.02}"
-      },
-      "fieldMinWidth": {
-        "$type": "dimension",
-        "$value": {
-          "value": 48,
-          "unit": "px"
-        }
-      },
-      "fieldHeight": {
-        "$type": "dimension",
-        "$value": {
-          "value": 48,
-          "unit": "px"
-        }
-      },
-      "fieldFontSize": {
-        "$type": "dimension",
-        "$value": "{typography.ramp.4}"
-      },
-      "fieldFontWeight": {
-        "$type": "fontWeight",
-        "$value": "{typography.weight.medium}"
-      },
-      "fieldRadius": {
-        "$type": "dimension",
-        "$value": "{shape.radius.02}"
-      },
-      "colorText": {
-        "$type": "color",
-        "$value": "{color.mode.dark}"
-      },
-      "colorBg": {
-        "$type": "color",
-        "$value": "{color.mode.light}"
-      },
-      "colorBorder": {
-        "$type": "color",
-        "$value": "{color.palette.neutral.200}"
-      },
-      "colorFocus": {
-        "$type": "color",
-        "$value": "{color.palette.red.500}"
-      }
-    },
-    "test": {
-      "dsSemanticColorBgPrimary": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [1, 1, 1]
-        }
-      },
-      "customSemanticColorBgPrimary": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [1, 1, 1]
-        }
-      },
-      "myCustomBg": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0, 0.4823529411764706, 1]
-        }
-      },
-      "path": {
-        "$type": "string",
-        "$value": "test-path"
-      },
-      "typeWghtHeading": {
-        "$type": "number",
-        "$value": 700
-      },
-      "typeWdthResponsive": {
-        "$type": "number",
-        "$value": 100
       }
     }
   },

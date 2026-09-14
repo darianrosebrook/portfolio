@@ -3,27 +3,27 @@
  */
 [data-ds-component="Tooltip"] {
   /* === Color Tokens === */
-  --ds-tooltip-color-background-default: var(--semantic-color-background-inverse);
-  --ds-tooltip-color-foreground-default: var(--semantic-color-foreground-inverse);
-  --ds-tooltip-color-border-default: var(--semantic-color-border-subtle);
+  --ds-tooltip-color-background-default: var(--semantic-color-background-inverse, #141414);
+  --ds-tooltip-color-foreground-default: var(--semantic-color-foreground-inverse, #fafafa);
+  --ds-tooltip-color-border-default: var(--semantic-color-border-subtle, #cecece);
 
   /* === Size Tokens === */
-  --ds-tooltip-size-padding-y: var(--core-spacing-size-03);
-  --ds-tooltip-size-padding-x: var(--core-spacing-size-04);
-  --ds-tooltip-size-radius-default: var(--core-shape-radius-small);
+  --ds-tooltip-size-padding-y: var(--core-spacing-size-03, 4px);
+  --ds-tooltip-size-padding-x: var(--core-spacing-size-04, 8px);
+  --ds-tooltip-size-radius-default: var(--core-shape-radius-small, 4px);
   --ds-tooltip-size-max-width: 200px;
 
   /* === Elevation Tokens === */
-  --ds-tooltip-elevation-default: var(--semantic-elevation-surface-floating);
+  --ds-tooltip-elevation-default: var(--semantic-elevation-surface-floating, 0px 3px 6px #00000024);
 
   /* === Typography Tokens === */
-  --ds-tooltip-typography-font-size: var(--semantic-typography-caption-01);
-  --ds-tooltip-typography-font-weight: var(--semantic-typography-font-weight-medium);
-  --ds-tooltip-typography-line-height: var(--semantic-typography-line-height-tight);
+  --ds-tooltip-typography-font-size: var(--semantic-typography-caption-01, 14px);
+  --ds-tooltip-typography-font-weight: var(--semantic-typography-font-weight-medium, 500);
+  --ds-tooltip-typography-line-height: var(--semantic-typography-line-height-tight, 1.2);
 
   /* === Motion Tokens === */
-  --ds-tooltip-motion-duration-enter: var(--semantic-motion-interaction-enter-duration);
-  --ds-tooltip-motion-duration-exit: var(--semantic-motion-interaction-exit-duration);
-  --ds-tooltip-motion-easing-enter: var(--semantic-motion-interaction-enter-easing);
-  --ds-tooltip-motion-easing-exit: var(--semantic-motion-interaction-exit-easing);
+  --ds-tooltip-motion-duration-enter: var(--semantic-motion-interaction-enter-duration, 250ms);
+  --ds-tooltip-motion-duration-exit: var(--semantic-motion-interaction-exit-duration, 167ms);
+  --ds-tooltip-motion-easing-enter: var(--semantic-motion-interaction-enter-easing, cubic-bezier(0, 0, 0.7, 1));
+  --ds-tooltip-motion-easing-exit: var(--semantic-motion-interaction-exit-easing, cubic-bezier(1, 0, 1, 1));
 }

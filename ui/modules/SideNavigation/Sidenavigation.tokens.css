@@ -3,16 +3,16 @@
  */
 [data-ds-component="Sidenavigation"] {
   /* === Color Tokens === */
-  --ds-sidenavigation-color-background-default: var(--semantic-color-background-secondary);
-  --ds-sidenavigation-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --ds-sidenavigation-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --ds-sidenavigation-color-border-default: var(--semantic-color-border-light);
-  --ds-sidenavigation-color-border-accent: var(--semantic-color-border-accent);
+  --ds-sidenavigation-color-background-default: var(--semantic-color-background-secondary, #efefef);
+  --ds-sidenavigation-color-foreground-primary: var(--semantic-color-foreground-primary, #141414);
+  --ds-sidenavigation-color-foreground-secondary: var(--semantic-color-foreground-secondary, #555555);
+  --ds-sidenavigation-color-border-default: var(--semantic-color-border-light, #fceaea);
+  --ds-sidenavigation-color-border-accent: var(--semantic-color-border-accent, #d9292b);
 
   /* === Size Tokens === */
-  --ds-sidenavigation-size-padding-default: var(--core-spacing-size-07);
-  --ds-sidenavigation-size-radius-default: var(--core-shape-radius-medium);
+  --ds-sidenavigation-size-padding-default: var(--core-spacing-size-07, 24px);
+  --ds-sidenavigation-size-radius-default: var(--core-shape-radius-medium, 8px);
 
   /* === Elevation Tokens === */
-  --ds-sidenavigation-elevation-default: var(--semantic-elevation-default);
+  --ds-sidenavigation-elevation-default: var(--semantic-elevation-default, 0px 1px 3px #0000001f);
 }

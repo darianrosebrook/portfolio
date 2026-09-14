@@ -3,14 +3,14 @@
  */
 [data-ds-component="Divider"] {
   /* === Color Tokens === */
-  --ds-divider-color-default: var(--semantic-color-border-light);
-  --ds-divider-color-subtle: var(--semantic-color-border-subtle);
-  --ds-divider-color-muted: var(--semantic-color-border-light);
+  --ds-divider-color-default: var(--semantic-color-border-light, #fceaea);
+  --ds-divider-color-subtle: var(--semantic-color-border-subtle, #cecece);
+  --ds-divider-color-muted: var(--semantic-color-border-light, #fceaea);
 
   /* === Size Tokens === */
-  --ds-divider-size-thickness: var(--core-shape-border-width-hairline);
-  --ds-divider-size-thickness-thick: var(--core-shape-border-width-hairline);
+  --ds-divider-size-thickness: var(--core-shape-border-width-hairline, 1px);
+  --ds-divider-size-thickness-thick: var(--core-shape-border-width-hairline, 1px);
 
   /* === Spacing Tokens === */
-  --ds-divider-spacing-margin: var(--core-spacing-size-04);
+  --ds-divider-spacing-margin: var(--core-spacing-size-04, 8px);
 }
