@@ -69,3 +69,7 @@ evidence:
     status: pass
     evidence_ref: test/unit/designTokens/boxModel.artifacts.test.mjs consumer/variant assertions + ui/primitives/boxModel.css reset; five components migrated
     recorded_at: "2026-09-14T05:02:43.822Z"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "node scripts/check-contract-tokens.mjs -> 1511 structured tokens verified, exit 0 (25 new box-model entries)"
+    recorded_at: "2026-09-14T05:02:44.352Z"
