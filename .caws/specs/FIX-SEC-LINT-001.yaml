@@ -2,11 +2,9 @@ id: FIX-SEC-LINT-001
 title: 'Clear the remaining browserslist advisories and stop ESLint scanning gitignored build outputs'
 risk_tier: 2
 mode: fix
-lifecycle_state: closed
-resolution: completed
-closure_notes: 'Auto-closed by caws worktree merge fix-sec-lint-001 at 98209c5430b0a1cdfaf9e59a8821603c357b9b86'
+lifecycle_state: active
 created_at: '2026-09-14T17:53:25.031Z'
-updated_at: '2026-09-14T17:57:45.241Z'
+updated_at: '2026-09-14T18:00:11.312Z'
 created_by_session: 'session-8b0983e6-1c23-4ac6-b881-ba2df50b396e'
 blast_radius:
   modules:
