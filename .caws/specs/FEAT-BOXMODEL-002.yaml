@@ -48,3 +48,7 @@ evidence:
     status: pass
     evidence_ref: "node scripts/check-contract-tokens.mjs -> Token fidelity: 1564 structured tokens verified, exit 0"
     recorded_at: "2026-09-14T05:26:31.019Z"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "npm test 172 files/1758 tests; typecheck+lint+contracts:validate 53/53+tokens:lint+styles:tokens all exit 0"
+    recorded_at: "2026-09-14T05:26:32.077Z"
