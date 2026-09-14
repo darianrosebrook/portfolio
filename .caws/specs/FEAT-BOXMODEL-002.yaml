@@ -2,10 +2,11 @@ id: FEAT-BOXMODEL-002
 title: 'Box-model adoption batch 1: twenty highest-layout components'
 risk_tier: 3
 mode: refactor
-lifecycle_state: active
-worktree: feat-boxmodel-002
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Batch 1 of the box-model rollout: eighteen components migrated to the shared --ds-box-model-* slot pool with verified no-op defaults (89 literal-pinning assertions), 53 new contract entries (token fidelity 1564, exit 0), and full battery green. Variant/state rules stay direct (higher specificity); descendants stay on component tokens. Collateral from wildcard lint/prettier runs was caught by the token-fidelity gate and reverted before commit — generated tokens.css must stay generator-authored bytes. Batch 2 (remaining 20 components) and the playbook removal follow in the next spec.'
 created_at: '2026-09-14T05:09:57.409Z'
-updated_at: '2026-09-14T05:09:59.327Z'
+updated_at: '2026-09-14T05:26:43.295Z'
 created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
 blast_radius:
   modules:
