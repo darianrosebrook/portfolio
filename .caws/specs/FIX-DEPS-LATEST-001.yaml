@@ -2,9 +2,10 @@ id: FIX-DEPS-LATEST-001
 title: 'Upgrade all pnpm dependencies to latest and migrate toolchain configs'
 risk_tier: 2
 mode: refactor
-lifecycle_state: draft
+lifecycle_state: active
+worktree: fix-deps-latest-001
 created_at: '2026-09-14T14:04:27.957Z'
-updated_at: '2026-09-14T14:04:27.957Z'
+updated_at: '2026-09-14T14:04:51.394Z'
 created_by_session: 'session-8b0983e6-1c23-4ac6-b881-ba2df50b396e'
 blast_radius:
   modules:
