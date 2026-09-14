@@ -432,6 +432,133 @@ style:  solid | dashed | dotted`}</code>
     ),
   },
   {
+    type: 'constraints-tradeoffs',
+    id: 'borders-health-metrics',
+    title: 'Border System Health Metrics',
+    order: 8.75,
+    content: (
+      <>
+        <h3>Signal 1: Vocabulary exclusivity</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> every border resolves through the semantic
+            width/style/color contracts; a grep for <code>border:</code>{' '}
+            literals in product CSS returns only fallbacks.
+          </li>
+          <li>
+            <strong>Warning:</strong> a 1.5px survivor—the &quot;between&quot;
+            width—circulates in one area, negotiating against the two-width
+            discipline.
+          </li>
+          <li>
+            <strong>Critical:</strong> arbitrary widths and hex borders are
+            common; emphasis no longer has a scale and mode resolution is luck.
+          </li>
+        </ul>
+
+        <h3>Signal 2: Contrast ledger completeness</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> every border-as-signal pair appears in the
+            3:1 ledger, checked per mode;
+            <code>subtle</code> appears only for divisions.
+          </li>
+          <li>
+            <strong>Warning:</strong> the ledger covers light mode; dark-mode
+            entries are &quot;assumed from the role mapping&quot;—assumed is the
+            warning word.
+          </li>
+          <li>
+            <strong>Critical:</strong> a signal border below 3:1 in any mode—an
+            invisible boundary shipping as a visible one.
+          </li>
+        </ul>
+
+        <h3>Signal 3: Style semantics</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> dashed appears exactly where things are
+            provisional (drop zones, placeholders); dotted where abbreviated.
+          </li>
+          <li>
+            <strong>Warning:</strong> one decorative dashed panel—style drifting
+            from meaning, and the next contributor cannot read the convention
+            from the code.
+          </li>
+          <li>
+            <strong>Critical:</strong> styles are aesthetic choices; the
+            semantics are gone and the vocabulary no longer says anything.
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    type: 'constraints-tradeoffs',
+    id: 'borders-migration',
+    title: 'Migration Strategy: Collecting the Lines',
+    order: 8.9,
+    content: (
+      <>
+        <ol>
+          <li>
+            <strong>Inventory the borders:</strong> every width, style, and
+            color literal with its surface. Dedupe; most products find dozens of
+            literal lines serving three roles.
+          </li>
+          <li>
+            <strong>Snap to the vocabulary:</strong> widths to hairline/thick,
+            styles to their semantics, colors to the role
+            ladder—nearest-tolerance snapping with literals surviving as scoped
+            fallbacks.
+          </li>
+          <li>
+            <strong>Reclassify the boundaries:</strong> each line answers
+            &quot;edge, division, or decoration?&quot;—whitespace replaces
+            decoration, <code>subtle</code> takes divisions,{' '}
+            <code>default</code>+ takes edges that carry meaning.
+          </li>
+          <li>
+            <strong>Complete the ledger:</strong> every signal-bearing border
+            enters the per-mode 3:1 check; the audit that follows is the point.
+          </li>
+        </ol>
+      </>
+    ),
+  },
+  {
+    type: 'applied-example',
+    id: 'borders-case-studies',
+    title: 'Real-World Case Studies',
+    order: 8.98,
+    content: (
+      <>
+        <h3>Case 1: The invisible input in dark mode</h3>
+        <p>
+          A tinted input edge cleared 3:1 on white and vanished on the dark
+          surface—users tapped guesswork. The ledger entry (input edge, both
+          modes) failed exactly where assumption had lived; the role remap to{' '}
+          <code>default</code> restored legibility with one reference.
+        </p>
+        <h3>Case 2: The 1.5px compromise</h3>
+        <p>
+          A designer wanted &quot;bolder than 1, subtler than 2&quot; and
+          shipped 1.5px on one component. Within a month three more surfaces
+          negotiated their own widths. The rollback to the emphasis scale—thick
+          width, <code>bold</code> color role—restored the binary that review
+          could actually police.
+        </p>
+        <h3>Case 3: The dashed everything</h3>
+        <p>
+          A prototype&apos;s drop-zone styling leaked into production panels
+          because it &quot;looked technical.&quot; The style-semantics audit
+          traced dashed to its three legitimate homes and reverted the rest—the
+          vocabulary saying what it means again.
+        </p>
+      </>
+    ),
+  },
+  {
     type: 'verification-checklist',
     id: 'verification-checklist',
     title: 'Verification Checklist',
