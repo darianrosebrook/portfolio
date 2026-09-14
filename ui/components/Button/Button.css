@@ -2,7 +2,7 @@
 @import './Button.tokens.css';
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern per CSS-MIGRATION-PLAYBOOK.md.
  * Scoped to [data-ds-component="Button"] on the root element. Class names
  * inside are plain semantic names (.button, .primary, .small, .spinner)
  * — no CSS Modules hashing. The data-attribute + class composite selector

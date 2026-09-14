@@ -2,7 +2,7 @@
 @import './Card.tokens.css';
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern per CSS-MIGRATION-PLAYBOOK.md.
  * Note: a handful of references (--font-weight-*, --font-size-*) are
  * global semantic typography tokens and intentionally not prefixed
  * with --ds-card-. Only component-local vars use the new prefix.
