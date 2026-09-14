@@ -25,15 +25,16 @@ invariants:
 acceptance:
   - id: A1
     given: 'the rendered blueprints pages and ui component docs'
-    when: 'check/cross glyphs are replaced with word labels'
+    when: >-
+      check/cross glyphs and the AlignmentNotice status-glyph block are removed in
+      favor of word labels and existing visual state
     then: >-
       no check or cross emoji remains in app/blueprints or ui/ except the Tiptap
-      emoji picker dataset and the deferred AlignmentNotice status-glyph ternary;
-      lint, typecheck, and the vitest suite pass
+      emoji picker dataset; AlignmentNotice renders with no icon block; lint,
+      typecheck, and the vitest suite pass
 non_functional: {}
 contracts: []
 evidence:
   - criterion_id: A1
-    status: pass
-    evidence_ref: "commit f19784ca on chore-emoji-removal-001; glyph audit: grep ✅/❌ over app/blueprints+ui returns only EmojiExtension.tsx:80-81 (scope.out dataset) and AlignmentNotice.tsx:34 (deferred per A1); tsc --noEmit exit 0; eslint app/blueprints ui exit 0; vitest run 201 files/2003 passed/13 expected fail/2 skipped exit 0; caws gates run Overall OK 5/5"
-    recorded_at: "2026-09-14T18:17:03.096Z"
+    status: unchecked
+    recorded_at: "2026-09-14T18:59:24.931Z"
