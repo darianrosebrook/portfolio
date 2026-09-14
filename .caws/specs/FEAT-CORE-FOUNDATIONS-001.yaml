@@ -1,0 +1,26 @@
+id: FEAT-CORE-FOUNDATIONS-001
+title: 'Fill core-foundations stub pages with education-template content'
+risk_tier: 3
+mode: feature
+lifecycle_state: draft
+created_at: '2026-09-14T05:06:10.391Z'
+updated_at: '2026-09-14T05:06:10.391Z'
+created_by_session: 'session-ee97c70e-5708-43ac-898e-efaca06c09be'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'TODO: list the file(s) or directories this spec authorizes.'
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'TODO'
+    when: 'TODO'
+    then: 'TODO'
+non_functional: {}
+contracts: []
