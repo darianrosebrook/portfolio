@@ -422,6 +422,149 @@ level.3:  0px  8px  16px   rgba(0,0,0,0.18)  // modal overlay`}</code>
     ),
   },
   {
+    type: 'constraints-tradeoffs',
+    id: 'elevation-health-metrics',
+    title: 'Elevation System Health Metrics',
+    order: 8.75,
+    content: (
+      <>
+        <h3>Signal 1: Ramp exclusivity</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> every <code>box-shadow</code> in product
+            CSS resolves through the ramp (via semantic surface roles or scoped
+            contracts); a grep for <code>box-shadow</code> literals returns only
+            fallbacks.
+          </li>
+          <li>
+            <strong>Warning:</strong> one or two hand-tuned shadows—each a fifth
+            level nobody calibrated, and a future dark-mode question with no
+            answer.
+          </li>
+          <li>
+            <strong>Critical:</strong> bespoke shadows outnumber ramp
+            references; elevation no longer means anything and users are back to
+            guessing what floats.
+          </li>
+        </ul>
+
+        <h3>Signal 2: Depth agreement</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> z-index values derive from the{' '}
+            <code>elevation.depth</code> scale and order with the shadow levels;
+            the overlay stack is reviewable as one table.
+          </li>
+          <li>
+            <strong>Warning:</strong> a few <code>z-index: 999</code>{' '}
+            escapes—archaeology waiting, each one hiding a disagreement between
+            what is above and what looks above.
+          </li>
+          <li>
+            <strong>Critical:</strong> stacking is managed by escalation (raise
+            the number until it works); the shadow story and the stacking story
+            are different products.
+          </li>
+        </ul>
+
+        <h3>Signal 3: Dark-mode cue coverage</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> every elevated surface has a per-mode
+            depth cue beyond shadow (surface step or border), auditable by
+            flipping modes on the overlay inventory.
+          </li>
+          <li>
+            <strong>Warning:</strong> new overlays ship with light-mode-only
+            cues—the debt is invisible until someone flips the theme with a
+            dialog open.
+          </li>
+          <li>
+            <strong>Critical:</strong> dark mode&apos;s overlays are
+            indistinguishable from the page—depth carrying meaning that has
+            silently vanished for a whole theme.
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    type: 'constraints-tradeoffs',
+    id: 'elevation-migration',
+    title: 'Migration Strategy: Taming the Shadow Stack',
+    order: 8.9,
+    content: (
+      <>
+        <ol>
+          <li>
+            <strong>Inventory shadows and stacking:</strong> every{' '}
+            <code>box-shadow</code>, every <code>z-index</code>, with the
+            surface it belongs to. The inventory usually reveals three clusters
+            of shadows pretending to be seven and a stacking story written by
+            escalation.
+          </li>
+          <li>
+            <strong>Map to the meaning table:</strong> each surface gets a
+            role—flat, raised, floating, modal— and the shadow snaps to the ramp
+            level that role names. Unmappable shadows were decoration; they
+            become borders or surface steps.
+          </li>
+          <li>
+            <strong>Re-derive stacking from depth tokens:</strong> replace raw
+            z-indexes with the depth scale, largest for the topmost role; the
+            table from step 1 becomes the review artifact that proves shadows
+            and stacking agree.
+          </li>
+          <li>
+            <strong>Add the dark-mode cue per overlay:</strong> migration is the
+            moment each surface gains its per-mode alternative—the work is cheap
+            once per surface and permanent.
+          </li>
+          <li>
+            <strong>Sweep for literals:</strong> the box-shadow grep joins the
+            per-directory lint as each area cleans, so the fifth shadow cannot
+            quietly return.
+          </li>
+        </ol>
+      </>
+    ),
+  },
+  {
+    type: 'applied-example',
+    id: 'elevation-case-studies',
+    title: 'Real-World Case Studies',
+    order: 8.98,
+    content: (
+      <>
+        <h3>Case 1: The modal under the navbar</h3>
+        <p>
+          A modal shadowed at level 3 rendered beneath the sticky nav&apos;s{' '}
+          <code>z-index: 100</code>. Sighted users saw the dimmed page above
+          their dialog&apos;s header—a depth lie in two channels at once. The
+          depth- token re-derivation ordered stacking with shadows, and the bug
+          class (overlay-under-chrome) stopped recurring because the review
+          checks one table.
+        </p>
+        <h3>Case 2: The card that wanted to pop</h3>
+        <p>
+          Marketing asked for &quot;more presence&quot; on a card and got a
+          hand-tuned shadow—then a second card got a different one. Six weeks
+          later the grid was a weather system. The meaning-table review returned
+          both cards to <code>surface.raised</code> and gave one of them a
+          border instead: presence via a channel that meant presence.
+        </p>
+        <h3>Case 3: The dark theme that lost its dialogs</h3>
+        <p>
+          Dark-mode QA filed &quot;dialog invisible&quot;—the level-2 shadow had
+          vanished against near-black, and nothing else distinguished the panel.
+          The surface-step plus hairline cure took one semantic addition; the
+          finding became the dark-mode cue coverage signal, auditable by
+          flipping themes across the overlay inventory.
+        </p>
+      </>
+    ),
+  },
+  {
     type: 'verification-checklist',
     id: 'verification-checklist',
     title: 'Verification Checklist',
@@ -514,6 +657,11 @@ content.assessmentPrompts = [
   {
     question:
       'A designer proposes a "level 2.5" shadow for a hero card that must pop more than cards but less than modals. What does the system already offer that answers this without a new shadow?',
+    type: 'reflection',
+  },
+  {
+    question:
+      'Flip to dark mode on a product you use and open its overlays. Which surfaces lose their depth, and which alternative cue would you give each?',
     type: 'reflection',
   },
 ];
