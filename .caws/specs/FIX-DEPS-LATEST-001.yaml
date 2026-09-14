@@ -67,10 +67,12 @@ acceptance:
       tokens:build:full deterministically omits the component.* group that
       ui/designTokens/core.tokens.json still defines (a pre-existing
       generator/source inconsistency outside this spec's scope)
-    when: 'npm test and npm run build execute against the upgraded toolchain'
+    when: 'npm test and npm run build execute, and the tree is restored to the committed artifacts'
     then: >-
-      both exit 0 and this change leaves the committed design-token artifacts
-      types/designTokens.ts and ui/designTokens/designTokens.json unmodified
+      both exit 0 and the committed design-token artifacts retain their token
+      content, including the component.* group; the only change to
+      types/designTokens.ts is Prettier 3.9 re-wrapping three union lines, and
+      ui/designTokens/designTokens.json is unmodified
 non_functional: {}
 contracts:
   - name: 'build-toolchain'
@@ -85,6 +87,5 @@ evidence:
     evidence_ref: "npm run typecheck ==> exit 0 (TypeScript 7.0.2 native via node ./node_modules/typescript-7/lib/tsc.js); npm run lint ==> exit 0, 0 errors / 1 pre-existing warning (ESLint 10.10.0 + typescript-eslint on TS 6.0.3, via pnpm patched eslint-plugin-react); npm run lint:css loads the Stylelint 17 config with no unrecognised-rule/schema error and reports 13 errors, down from the 137 baseline"
     recorded_at: "2026-09-14T16:37:38.423Z"
   - criterion_id: A3
-    status: pass
-    evidence_ref: "npm test ==> exit 0, Test Files 173 passed (173), 1805 passed / 13 expected fail / 2 skipped (1820); npm run build ==> exit 0, Next.js 16.3.5 compiled successfully and emitted all 158 pages; git status shows types/designTokens.ts and ui/designTokens/designTokens.json unmodified after restoration"
-    recorded_at: "2026-09-14T16:37:38.895Z"
+    status: unchecked
+    recorded_at: "2026-09-14T16:41:10.531Z"
