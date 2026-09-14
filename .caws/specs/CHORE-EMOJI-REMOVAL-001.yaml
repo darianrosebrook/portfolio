@@ -32,3 +32,8 @@ acceptance:
       lint, typecheck, and the vitest suite pass
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "commit f19784ca on chore-emoji-removal-001; glyph audit: grep ✅/❌ over app/blueprints+ui returns only EmojiExtension.tsx:80-81 (scope.out dataset) and AlignmentNotice.tsx:34 (deferred per A1); tsc --noEmit exit 0; eslint app/blueprints ui exit 0; vitest run 201 files/2003 passed/13 expected fail/2 skipped exit 0; caws gates run Overall OK 5/5"
+    recorded_at: "2026-09-14T18:17:03.096Z"
