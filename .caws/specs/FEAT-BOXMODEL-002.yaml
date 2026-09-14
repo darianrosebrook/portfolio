@@ -44,3 +44,7 @@ evidence:
     status: pass
     evidence_ref: "npx vitest run test/unit/designTokens/boxModel.batch1.test.mjs -> 89 passed (18 components x literal pinning + consumer + import guards)"
     recorded_at: "2026-09-14T05:26:30.050Z"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "node scripts/check-contract-tokens.mjs -> Token fidelity: 1564 structured tokens verified, exit 0"
+    recorded_at: "2026-09-14T05:26:31.019Z"
