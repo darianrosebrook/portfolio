@@ -79,3 +79,7 @@ evidence:
     status: pass
     evidence_ref: "npx vitest run test/unit/designTokens/generateCSSTokens.test.mjs (19 tests) + npm run tokens:components zero unresolved"
     recorded_at: "2026-09-14T04:28:25.922Z"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "node scripts/check-contract-tokens.mjs -> exit 0, 1486 structured tokens verified"
+    recorded_at: "2026-09-14T04:28:26.444Z"
