@@ -33,8 +33,12 @@ invariants:
   - 'Static export metadata (title, description, OG/Twitter) is preserved or improved via generateFoundationMetadata; every page stays a server component exporting metadata'
 acceptance:
   - id: A1
-    given: 'TODO'
-    when: 'TODO'
-    then: 'TODO'
+    given: >-
+      the nine core-foundations stub pages (color, spacing, layout, icons,
+      elevation, radius, motion, grid, borders)
+    when: 'a filled page is rendered'
+    then: >-
+      it renders via FoundationPage with all template sections, exports Next
+      metadata, and contains no 'coming soon' placeholder
 non_functional: {}
 contracts: []
