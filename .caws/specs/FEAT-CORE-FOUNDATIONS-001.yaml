@@ -2,10 +2,11 @@ id: FEAT-CORE-FOUNDATIONS-001
 title: 'Fill core-foundations stub pages with education-template content'
 risk_tier: 3
 mode: feature
-lifecycle_state: active
-worktree: feat-core-foundations-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge feat-core-foundations-001 at fe5a7f67339d0a97831f1a8b2b7f09e2e2d3528a'
 created_at: '2026-09-14T05:06:10.391Z'
-updated_at: '2026-09-14T15:22:43.570Z'
+updated_at: '2026-09-14T15:25:48.059Z'
 created_by_session: 'session-ee97c70e-5708-43ac-898e-efaca06c09be'
 blast_radius:
   modules:
