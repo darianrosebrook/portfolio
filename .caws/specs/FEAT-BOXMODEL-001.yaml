@@ -60,3 +60,8 @@ contracts:
   - name: 'box-model-visual-noop'
     type: contract-test
     path: 'test/unit/designTokens/boxModel.artifacts.test.mjs'
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "npx vitest run test/unit/designTokens/boxModel.emission.test.mjs (5 tests: shared names, no component prefix, whitelist rejection, eleven-slot pool)"
+    recorded_at: "2026-09-14T05:02:43.296Z"
