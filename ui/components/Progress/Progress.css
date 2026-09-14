@@ -1,14 +1,15 @@
+@import '../../primitives/boxModel.css';
 @import "./Progress.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Progress"] on the root element.
  * Intentionally unlayered — see Button.css for the cascade rationale.
  */
 [data-ds-component="Progress"] {
   &.progress {
     display: inline-flex;
-    gap: var(--ds-progress-spacing-gap);
+    gap: var(--ds-box-model-gap);
     align-items: center;
 
     /* Linear variant */

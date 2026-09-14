@@ -11,19 +11,9 @@
     "contentInner"
   ],
   "variants": {
-    "type": [
-      "single",
-      "multiple"
-    ]
+    "type": ["single", "multiple"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "disabled",
-    "open",
-    "closed"
-  ],
+  "states": ["default", "hover", "focus", "disabled", "open", "closed"],
   "slots": {
     "content": {
       "required": false,
@@ -193,6 +183,14 @@
         "fallback": "0.5",
         "property": "opacity",
         "layer": "semantic"
+      },
+      "box-model.gap": {
+        "literal": "0",
+        "property": "gap"
+      },
+      "box-model.width": {
+        "literal": "100%",
+        "property": "width"
       }
     }
   },
@@ -243,10 +241,7 @@
         "name": "expand",
         "trigger": "openness=collapsed\u2192expanded",
         "phase": "enter",
-        "properties": [
-          "height",
-          "opacity"
-        ],
+        "properties": ["height", "opacity"],
         "duration": "accordion.motion.duration",
         "easing": "accordion.motion.easing"
       },
@@ -254,10 +249,7 @@
         "name": "collapse",
         "trigger": "openness=expanded\u2192collapsed",
         "phase": "exit",
-        "properties": [
-          "height",
-          "opacity"
-        ],
+        "properties": ["height", "opacity"],
         "duration": "accordion.motion.duration",
         "easing": "accordion.motion.easing"
       }
@@ -317,11 +309,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "AccordionItem",
-        "AccordionTrigger",
-        "AccordionContent"
-      ]
+      "accepts": ["AccordionItem", "AccordionTrigger", "AccordionContent"]
     }
   }
 }

@@ -16,22 +16,10 @@
     "switchGroup"
   ],
   "variants": {
-    "size": [
-      "sm",
-      "md",
-      "lg"
-    ],
-    "orientation": [
-      "vertical",
-      "horizontal"
-    ]
+    "size": ["sm", "md", "lg"],
+    "orientation": ["vertical", "horizontal"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "disabled"],
   "slots": {
     "field": {
       "required": false,
@@ -44,10 +32,7 @@
   },
   "a11y": {
     "role": "switch",
-    "roles": [
-      "switch",
-      "group"
-    ],
+    "roles": ["switch", "group"],
     "labeling": [
       "aria-checked",
       "aria-label",
@@ -343,6 +328,24 @@
         "resolvesTo": "semantic.interaction.focus.ring.offset",
         "fallback": "2px",
         "layer": "semantic"
+      },
+      "box-model.width": {
+        "resolvesTo": "core.spacing.size.09",
+        "fallback": "48px",
+        "property": "width",
+        "layer": "core"
+      },
+      "box-model.height": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "height",
+        "layer": "core"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
       }
     },
     "track": {
@@ -666,11 +669,9 @@
     "transitions": [
       {
         "name": "toggle",
-        "trigger": "checked=false→true",
+        "trigger": "checked=false\u2192true",
         "phase": "enter",
-        "properties": [
-          "transform"
-        ],
+        "properties": ["transform"],
         "duration": "core.motion.duration.short",
         "easing": "core.motion.easing.standard"
       }
@@ -711,7 +712,7 @@
     "category": "form-field",
     "usageHints": [
       "Use for settings that take effect immediately on toggle (no save needed)",
-      "Pair with a visible label — the Switch has no intrinsic label text",
+      "Pair with a visible label \u2014 the Switch has no intrinsic label text",
       "Use a Checkbox instead when the toggle requires a form submit to take effect"
     ],
     "children": {

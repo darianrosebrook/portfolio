@@ -58,6 +58,15 @@
       "width": "{core.shape.border.width.thick}",
       "color": "{semantic.color.border.accent}",
       "offset": "{core.spacing.size.01}"
+    },
+    "boxModel": {
+      "gap": "{core.spacing.size.04}",
+      "paddingBlockStart": "{core.spacing.size.06}",
+      "paddingBlockEnd": "{core.spacing.size.06}",
+      "paddingInlineStart": "{core.spacing.size.06}",
+      "paddingInlineEnd": "{core.spacing.size.06}",
+      "maxWidth": "100vw",
+      "maxHeight": "100vh"
     }
   }
 }

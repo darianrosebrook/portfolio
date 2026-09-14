@@ -46,6 +46,9 @@
     },
     "elevation": {
       "raised": "{semantic.elevation.surface.raised}"
+    },
+    "boxModel": {
+      "width": "100%"
     }
   }
 }

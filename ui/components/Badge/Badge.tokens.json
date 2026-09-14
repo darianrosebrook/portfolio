@@ -59,6 +59,9 @@
     },
     "spacing": {
       "gap": "{core.spacing.size.02}"
+    },
+    "boxModel": {
+      "gap": "{core.spacing.size.02}"
     }
   }
 }

@@ -41,4 +41,8 @@
 
   /* === Opacity Tokens === */
   --ds-accordion-opacity-disabled: var(--semantic-interaction-disabled-opacity, 0.5);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-gap: 0;
+  --ds-box-model-width: 100%;
 }

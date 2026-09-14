@@ -1,3 +1,4 @@
+@import '../../primitives/boxModel.css';
 @import "./Checkbox.tokens.css";
 
 [data-ds-component="Checkbox"] {
@@ -24,7 +25,6 @@
         var(--ds-checkbox-color-background-default) 95%,
         var(--ds-checkbox-color-border-hover) 5%
       );
-
       border-color: color-mix(
         in srgb,
         var(--ds-checkbox-color-border-default) 80%,
@@ -36,7 +36,7 @@
   &.checkboxWrapper {
     position: relative;
     display: inline-flex;
-    gap: var(--ds-checkbox-spacing-gap);
+    gap: var(--ds-box-model-gap);
     align-items: center;
 
     &.sm .indicator {

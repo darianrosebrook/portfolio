@@ -66,6 +66,10 @@
     "shadow": "{semantic.elevation.surface.floating}",
     "opacity": {
       "disabled": "{interaction.disabled.opacity}"
+    },
+    "boxModel": {
+      "width": "100%",
+      "maxWidth": "640px"
     }
   }
 }

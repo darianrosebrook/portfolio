@@ -10,18 +10,9 @@
     "checkboxIndicator"
   ],
   "variants": {
-    "size": [
-      "sm",
-      "md",
-      "lg"
-    ]
+    "size": ["sm", "md", "lg"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "disabled"],
   "slots": {
     "root": {
       "required": true,
@@ -38,9 +29,7 @@
   },
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-checked"
-    ],
+    "labeling": ["aria-checked"],
     "keyboard": [],
     "apgPattern": null
   },
@@ -199,17 +188,49 @@
         "resolvesTo": "semantic.interaction.focus.ring.offset",
         "fallback": "2px",
         "layer": "semantic"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
       }
     }
   },
   "props": {
     "designed": {
       "members": [
-        { "name": "size", "type": "CheckboxSize | undefined", "description": "Visual size variant: sm, md (default), or lg. Scales the checkbox dimensions via design tokens.", "required": false, "default": "md" },
-        { "name": "checked", "type": "boolean | undefined", "description": "Controlled checked state. Pair with onChange for controlled mode.", "required": false },
-        { "name": "defaultChecked", "type": "boolean | undefined", "description": "Uncontrolled initial checked state.", "required": false },
-        { "name": "indeterminate", "type": "boolean | undefined", "description": "Renders the checkbox in an indeterminate state, typically used in select-all patterns where some but not all items are selected.", "required": false },
-        { "name": "disabled", "type": "boolean | undefined", "description": "Prevents interaction and applies disabled styling.", "required": false }
+        {
+          "name": "size",
+          "type": "CheckboxSize | undefined",
+          "description": "Visual size variant: sm, md (default), or lg. Scales the checkbox dimensions via design tokens.",
+          "required": false,
+          "default": "md"
+        },
+        {
+          "name": "checked",
+          "type": "boolean | undefined",
+          "description": "Controlled checked state. Pair with onChange for controlled mode.",
+          "required": false
+        },
+        {
+          "name": "defaultChecked",
+          "type": "boolean | undefined",
+          "description": "Uncontrolled initial checked state.",
+          "required": false
+        },
+        {
+          "name": "indeterminate",
+          "type": "boolean | undefined",
+          "description": "Renders the checkbox in an indeterminate state, typically used in select-all patterns where some but not all items are selected.",
+          "required": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "description": "Prevents interaction and applies disabled styling.",
+          "required": false
+        }
       ]
     },
     "passthrough": {
@@ -257,20 +278,12 @@
     },
     "validity": {
       "model": "native",
-      "ariaAttributes": [
-        "aria-invalid",
-        "aria-required",
-        "aria-describedby"
-      ]
+      "ariaAttributes": ["aria-invalid", "aria-required", "aria-describedby"]
     },
     "labeling": {
       "strategy": "associated-label",
       "required": true,
-      "via": [
-        "prop:label",
-        "aria-labelledby",
-        "aria-label"
-      ]
+      "via": ["prop:label", "aria-labelledby", "aria-label"]
     }
   },
   "description": "Binary or tri-state input for boolean selection. Supports indeterminate state for partial group selection.",
@@ -279,7 +292,7 @@
     "usageHints": [
       "Use checked and onChange for controlled mode; defaultChecked for uncontrolled",
       "Set indeterminate for parent checkboxes in a group where some children are checked",
-      "Always pair with a label — either via prop:label or a visible sibling Label component",
+      "Always pair with a label \u2014 either via prop:label or a visible sibling Label component",
       "Use name and value for native form submission"
     ],
     "children": {

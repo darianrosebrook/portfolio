@@ -1,38 +1,14 @@
 {
   "name": "Chip",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "icon",
-    "text"
-  ],
+  "anatomy": ["root", "icon", "text"],
   "variants": {
-    "variant": [
-      "default",
-      "selected",
-      "dismissible"
-    ],
-    "size": [
-      "small",
-      "medium",
-      "large"
-    ],
-    "as": [
-      "button"
-    ],
-    "type": [
-      "button",
-      "submit",
-      "reset"
-    ]
+    "variant": ["default", "selected", "dismissible"],
+    "size": ["small", "medium", "large"],
+    "as": ["button"],
+    "type": ["button", "submit", "reset"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {
     "root": {
       "required": true,
@@ -49,10 +25,7 @@
   },
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label",
-      "title"
-    ],
+    "labeling": ["aria-label", "title"],
     "keyboard": [
       {
         "key": "Enter|Space",
@@ -396,6 +369,36 @@
         "resolvesTo": "semantic.color.action.border.primary.focus",
         "fallback": "#ea6465",
         "layer": "semantic"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding-inline-end",
+        "layer": "core"
       }
     },
     "icon": {
@@ -548,9 +551,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "string"
-      ]
+      "accepts": ["string"]
     }
   }
 }

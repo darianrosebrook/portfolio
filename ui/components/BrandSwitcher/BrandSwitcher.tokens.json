@@ -54,6 +54,13 @@
       "lineHeight": {
         "default": "{semantic.typography.body.default.lineHeight}"
       }
+    },
+    "boxModel": {
+      "gap": "{semantic.spacing.gap.gridMedium}",
+      "paddingBlockStart": "0",
+      "paddingBlockEnd": "0",
+      "paddingInlineStart": "0",
+      "paddingInlineEnd": "0"
     }
   }
 }

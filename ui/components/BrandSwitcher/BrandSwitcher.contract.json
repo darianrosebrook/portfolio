@@ -28,13 +28,7 @@
     "kbd"
   ],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "selected"
-  ],
+  "states": ["default", "hover", "focus", "active", "selected"],
   "slots": {
     "root": {
       "required": true,
@@ -43,10 +37,7 @@
   },
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label",
-      "title"
-    ],
+    "labeling": ["aria-label", "title"],
     "keyboard": [
       {
         "key": "Enter|Space",
@@ -220,6 +211,28 @@
         "fallback": "1.5",
         "property": "line-height",
         "layer": "semantic"
+      },
+      "box-model.gap": {
+        "resolvesTo": "semantic.spacing.gap.gridMedium",
+        "fallback": "24px",
+        "property": "gap",
+        "layer": "semantic"
+      },
+      "box-model.padding-block-start": {
+        "literal": "0",
+        "property": "padding-block-start"
+      },
+      "box-model.padding-block-end": {
+        "literal": "0",
+        "property": "padding-block-end"
+      },
+      "box-model.padding-inline-start": {
+        "literal": "0",
+        "property": "padding-inline-start"
+      },
+      "box-model.padding-inline-end": {
+        "literal": "0",
+        "property": "padding-inline-end"
       }
     }
   },

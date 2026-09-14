@@ -61,4 +61,9 @@
   /* === Focus Tokens === */
   --ds-switch-focus-ring: var(--semantic-interaction-focus-ring-width, 2px);
   --ds-switch-focus-offset: var(--semantic-interaction-focus-ring-offset, 2px);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-width: var(--core-spacing-size-09, 48px);
+  --ds-box-model-height: var(--core-spacing-size-07, 24px);
+  --ds-box-model-gap: var(--core-spacing-size-04, 8px);
 }

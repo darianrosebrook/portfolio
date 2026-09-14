@@ -15,16 +15,9 @@
     "stat"
   ],
   "variants": {
-    "type": [
-      "image",
-      "video",
-      "audio"
-    ]
+    "type": ["image", "video", "audio"]
   },
-  "states": [
-    "default",
-    "hover"
-  ],
+  "states": ["default", "hover"],
   "slots": {
     "root": {
       "required": true,
@@ -217,6 +210,30 @@
         "resolvesTo": "semantic.typography.body.03",
         "fallback": "14px",
         "layer": "semantic"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding-inline-end",
+        "layer": "core"
       }
     },
     "displayName": {

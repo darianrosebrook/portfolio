@@ -12,25 +12,11 @@
     "value"
   ],
   "variants": {
-    "variant": [
-      "linear",
-      "circular"
-    ],
-    "size": [
-      "sm",
-      "md",
-      "lg"
-    ],
-    "intent": [
-      "info",
-      "success",
-      "warning",
-      "danger"
-    ]
+    "variant": ["linear", "circular"],
+    "size": ["sm", "md", "lg"],
+    "intent": ["info", "success", "warning", "danger"]
   },
-  "states": [
-    "default"
-  ],
+  "states": ["default"],
   "slots": {
     "root": {
       "required": true,
@@ -51,9 +37,7 @@
   },
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": null
   },
@@ -163,6 +147,12 @@
         "property": "transition-timing-function"
       },
       "progress.spacing.gap": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "box-model.gap": {
         "resolvesTo": "core.spacing.size.02",
         "fallback": "2px",
         "property": "gap",
