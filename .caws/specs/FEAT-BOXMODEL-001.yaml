@@ -4,7 +4,7 @@ risk_tier: 2
 mode: feature
 lifecycle_state: active
 created_at: '2026-09-14T04:47:29.088Z'
-updated_at: '2026-09-14T05:03:14.237Z'
+updated_at: '2026-09-14T05:03:14.945Z'
 created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
 blast_radius:
   modules:
@@ -23,6 +23,7 @@ scope:
     - scripts/check-contract-tokens.mjs
     - test/unit
     - docs/CSS-MIGRATION-PLAYBOOK.md
+    - CSS-MIGRATION-PLAYBOOK.md
   out: []
 invariants:
   - 'Default-theme rendered layout of migrated components is byte-equivalent at the computed-value level: every slot default chain terminates in the same final literal the component rendered before adoption.'
