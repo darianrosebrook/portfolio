@@ -1,0 +1,29 @@
+id: FEAT-BOXMODEL-003
+title: 'Box-model adoption batch 2: remaining twenty components'
+risk_tier: 3
+mode: refactor
+lifecycle_state: draft
+created_at: '2026-09-14T05:27:05.941Z'
+updated_at: '2026-09-14T05:27:05.941Z'
+created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'TODO: list the file(s) or directories this spec authorizes.'
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'TODO'
+    when: 'TODO'
+    then: 'TODO'
+non_functional: {}
+contracts:
+  - name: 'box-model-batch2-noop'
+    type: contract-test
+    path: 'test/unit/designTokens/boxModel.batch2.test.mjs'
