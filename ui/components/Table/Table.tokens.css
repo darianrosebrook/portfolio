@@ -45,4 +45,7 @@
 
   /* === Elevation Tokens === */
   --ds-table-elevation-raised: var(--semantic-elevation-surface-raised, 0px 1px 3px #0000001f);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-width: 100%;
 }

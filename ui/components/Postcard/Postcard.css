@@ -1,7 +1,8 @@
+@import '../../primitives/boxModel.css';
 @import "./Postcard.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Postcard"] on the root element (article.post).
  * Intentionally unlayered — see Button.css for the cascade rationale.
  */
@@ -13,7 +14,10 @@ a:has([data-ds-component="Postcard"]) {
 
 [data-ds-component="Postcard"] {
   &.post {
-    padding: var(--ds-postcard-size-padding-default);
+    padding-inline: var(--ds-box-model-padding-inline-start)
+      var(--ds-box-model-padding-inline-end);
+    padding-block: var(--ds-box-model-padding-block-start)
+      var(--ds-box-model-padding-block-end);
     background-color: var(--ds-postcard-color-background-default);
     border: var(--ds-postcard-size-border-default) solid
       var(--ds-postcard-color-border-default);

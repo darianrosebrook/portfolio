@@ -27,4 +27,8 @@
   /* === Typography Tokens === */
   --ds-avatar-typography-font-weight-medium: var(--core-typography-weight-medium, 500);
   --ds-avatar-typography-font-family-sans: var(--core-typography-font-family-sans, "Inter", sans-serif);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-width: var(--core-spacing-size-09, 48px);
+  --ds-box-model-height: var(--core-spacing-size-09, 48px);
 }

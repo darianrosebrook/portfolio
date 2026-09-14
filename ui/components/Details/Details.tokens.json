@@ -63,6 +63,9 @@
       "fontWeight": {
         "medium": "{semantic.typography.fontWeight.medium}"
       }
+    },
+    "boxModel": {
+      "width": "auto"
     }
   }
 }

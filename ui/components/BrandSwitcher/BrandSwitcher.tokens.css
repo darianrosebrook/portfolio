@@ -37,4 +37,11 @@
   --ds-brand-switcher-typography-font-weight-default: var(--semantic-typography-font-weight-regular, 400);
   --ds-brand-switcher-typography-font-weight-strong: var(--semantic-typography-font-weight-bold, 700);
   --ds-brand-switcher-typography-line-height-default: var(--semantic-typography-body-default-line-height, 1.5);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-gap: var(--semantic-spacing-gap-grid-medium, 24px);
+  --ds-box-model-padding-block-start: 0;
+  --ds-box-model-padding-block-end: 0;
+  --ds-box-model-padding-inline-start: 0;
+  --ds-box-model-padding-inline-end: 0;
 }

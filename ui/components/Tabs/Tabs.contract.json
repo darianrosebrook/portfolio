@@ -13,16 +13,9 @@
     "panelInactive"
   ],
   "variants": {
-    "orientation": [
-      "horizontal",
-      "vertical"
-    ]
+    "orientation": ["horizontal", "vertical"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus"
-  ],
+  "states": ["default", "hover", "focus"],
   "slots": {
     "root": {
       "required": true,
@@ -47,11 +40,7 @@
   },
   "a11y": {
     "role": "tablist",
-    "roles": [
-      "tablist",
-      "tab",
-      "tabpanel"
-    ],
+    "roles": ["tablist", "tab", "tabpanel"],
     "labeling": [],
     "keyboard": [
       {
@@ -142,6 +131,12 @@
         "resolvesTo": "core.motion.duration.short",
         "fallback": "150ms",
         "layer": "core"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
       }
     }
   },
@@ -210,10 +205,7 @@
         "name": "indicator",
         "trigger": "activeTab=changed",
         "phase": "enter",
-        "properties": [
-          "transform",
-          "width"
-        ],
+        "properties": ["transform", "width"],
         "duration": "tabs.motion.indicator",
         "easing": null
       }
@@ -273,11 +265,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "TabsList",
-        "TabsTrigger",
-        "TabsContent"
-      ]
+      "accepts": ["TabsList", "TabsTrigger", "TabsContent"]
     }
   }
 }

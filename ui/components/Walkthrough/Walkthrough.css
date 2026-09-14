@@ -1,14 +1,18 @@
+@import '../../primitives/boxModel.css';
 @import "./Walkthrough.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Walkthrough"] on the root element.
  * Intentionally unlayered — see Button.css for the cascade rationale.
  */
 [data-ds-component="Walkthrough"] {
   &.content {
     max-width: 28rem;
-    padding: var(--ds-walkthrough-surface-padding);
+    padding-inline: var(--ds-box-model-padding-inline-start)
+      var(--ds-box-model-padding-inline-end);
+    padding-block: var(--ds-box-model-padding-block-start)
+      var(--ds-box-model-padding-block-end);
     background: var(--ds-walkthrough-surface-bg);
     border: 1px solid var(--ds-walkthrough-surface-border);
     border-radius: var(--ds-walkthrough-surface-radius);

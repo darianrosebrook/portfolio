@@ -41,4 +41,7 @@
   --ds-checkbox-focus-ring-width: var(--semantic-interaction-focus-ring-width, 2px);
   --ds-checkbox-focus-ring-color: var(--semantic-color-border-focus, #d9292b);
   --ds-checkbox-focus-ring-offset: var(--semantic-interaction-focus-ring-offset, 2px);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-gap: var(--core-spacing-size-04, 8px);
 }

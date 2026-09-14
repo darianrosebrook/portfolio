@@ -1,0 +1,55 @@
+id: FEAT-BOXMODEL-002
+title: 'Box-model adoption batch 1: twenty highest-layout components'
+risk_tier: 3
+mode: refactor
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Batch 1 of the box-model rollout: eighteen components migrated to the shared --ds-box-model-* slot pool with verified no-op defaults (89 literal-pinning assertions), 53 new contract entries (token fidelity 1564, exit 0), and full battery green. Variant/state rules stay direct (higher specificity); descendants stay on component tokens. Collateral from wildcard lint/prettier runs was caught by the token-fidelity gate and reverted before commit — generated tokens.css must stay generator-authored bytes. Batch 2 (remaining 20 components) and the playbook removal follow in the next spec.'
+created_at: '2026-09-14T05:09:57.409Z'
+updated_at: '2026-09-14T05:26:43.295Z'
+created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'TODO: list the file(s) or directories this spec authorizes.'
+    - ui/components
+    - utils/designTokens
+    - test/unit
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'TODO'
+    when: 'TODO'
+    then: 'TODO'
+  - id: A2
+    given: 'contract box-model.* entries for the batch'
+    when: 'node scripts/check-contract-tokens.mjs runs'
+    then: 'token fidelity exits 0 with 1564 structured tokens verified'
+  - id: A3
+    given: 'the full battery'
+    when: 'npm test, typecheck, lint, contracts:validate, tokens:lint, styles:tokens run'
+    then: 'all exit 0 with no new failures'
+non_functional: {}
+contracts:
+  - name: 'box-model-batch1-noop'
+    type: contract-test
+    path: 'test/unit/designTokens/boxModel.batch1.test.mjs'
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "npx vitest run test/unit/designTokens/boxModel.batch1.test.mjs -> 89 passed (18 components x literal pinning + consumer + import guards)"
+    recorded_at: "2026-09-14T05:26:30.050Z"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "node scripts/check-contract-tokens.mjs -> Token fidelity: 1564 structured tokens verified, exit 0"
+    recorded_at: "2026-09-14T05:26:31.019Z"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "npm test 172 files/1758 tests; typecheck+lint+contracts:validate 53/53+tokens:lint+styles:tokens all exit 0"
+    recorded_at: "2026-09-14T05:26:32.077Z"

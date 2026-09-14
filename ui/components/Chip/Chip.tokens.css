@@ -69,4 +69,11 @@
   --ds-chip-focus-outline-width: var(--core-shape-border-width-thick, 2px);
   --ds-chip-focus-outline-offset: var(--core-spacing-size-02, 2px);
   --ds-chip-focus-outline-color: var(--semantic-color-action-border-primary-focus, #ea6465);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-gap: var(--core-spacing-size-02, 2px);
+  --ds-box-model-padding-block-start: var(--core-spacing-size-02, 2px);
+  --ds-box-model-padding-block-end: var(--core-spacing-size-02, 2px);
+  --ds-box-model-padding-inline-start: var(--core-spacing-size-04, 8px);
+  --ds-box-model-padding-inline-end: var(--core-spacing-size-04, 8px);
 }

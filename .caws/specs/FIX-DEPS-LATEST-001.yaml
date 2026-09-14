@@ -1,0 +1,65 @@
+id: FIX-DEPS-LATEST-001
+title: 'Upgrade all pnpm dependencies to latest and migrate toolchain configs'
+risk_tier: 2
+mode: refactor
+lifecycle_state: active
+worktree: fix-deps-latest-001
+created_at: '2026-09-14T14:04:27.957Z'
+updated_at: '2026-09-14T15:09:55.469Z'
+created_by_session: 'session-8b0983e6-1c23-4ac6-b881-ba2df50b396e'
+blast_radius:
+  modules:
+    - 'build-config'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'package.json'
+    - 'pnpm-lock.yaml'
+    - 'eslint.config.mjs'
+    - '.stylelintrc'
+    - 'vitest.config.mjs'
+    - 'tsconfig.json'
+    - 'next.config.mjs'
+    - 'test/'
+    - 'scripts/'
+    - 'utils/'
+    - 'ui/'
+    - 'app/'
+    - 'types/'
+    - 'hooks/'
+    - 'context/'
+    - pnpm-workspace.yaml
+    - ui/modules/
+  out: []
+invariants:
+  - 'No package-lock.json or yarn.lock is introduced; pnpm-lock.yaml remains the single lockfile authority'
+  - 'Every dependency version in package.json is an exact published release resolvable from the configured registries, with no git: or file: substitution'
+  - 'The design-token artifacts are produced by the build generator rather than hand-edited, so a fresh build reproduces the committed output'
+acceptance:
+  - id: A1
+    given: 'the project pins packageManager pnpm@11.20.0 and ships pnpm-lock.yaml as its only lockfile'
+    when: 'pnpm update --latest followed by a clean pnpm install completes'
+    then: >-
+      every direct dependency in package.json resolves to its latest published
+      version and no package-lock.json or yarn.lock exists in the tree
+  - id: A2
+    given: >-
+      the pre-upgrade baseline at 003a41ce was typecheck exit 0, eslint exit 0,
+      stylelint 137 errors / 446 warnings, and vitest 1 unhandled error from GSAP
+      ScrollTrigger calling requestAnimationFrame after teardown
+    when: 'npm run typecheck, npm run lint and npm run lint:css execute against the upgraded toolchain'
+    then: >-
+      typecheck and eslint still exit 0, and stylelint loads its upgraded config
+      with no unrecognised-rule or schema error and reports no more errors than the
+      baseline 137
+  - id: A3
+    given: 'the build script regenerates design tokens before next build'
+    when: 'npm test and npm run build execute'
+    then: >-
+      both exit 0 and types/designTokens.ts and ui/designTokens/designTokens.json
+      are byte-identical to the committed revision
+non_functional: {}
+contracts:
+  - name: 'build-toolchain'
+    type: behavior

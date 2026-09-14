@@ -11,11 +11,7 @@
     "popover"
   ],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus"
-  ],
+  "states": ["default", "hover", "focus"],
   "slots": {
     "root": {
       "required": true,
@@ -36,9 +32,7 @@
   },
   "a11y": {
     "role": "navigation",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": "breadcrumb"
   },
@@ -136,6 +130,32 @@
         "resolvesTo": "core.spacing.size.03",
         "fallback": "4px",
         "layer": "core"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "literal": "0",
+        "property": "padding-inline-start"
+      },
+      "box-model.padding-inline-end": {
+        "literal": "0",
+        "property": "padding-inline-end"
       }
     }
   },

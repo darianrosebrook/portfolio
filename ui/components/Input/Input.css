@@ -2,7 +2,7 @@
 @import './Input.tokens.css';
 
 /*
- * Migrated to the QDS-style pattern per CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Input"] on the root element.
  * Input is a single-element component; all modifier classes use &.foo.
  * Intentionally unlayered — see Button.css for the cascade rationale.

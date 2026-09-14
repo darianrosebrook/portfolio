@@ -21,4 +21,10 @@
   /* === Motion Tokens === */
   --ds-calendar-motion-duration: var(--core-motion-duration-short, 150ms);
   --ds-calendar-motion-easing: var(--core-motion-easing-standard, cubic-bezier(0.4, 0, 0.2, 1));
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-padding-block-start: var(--core-spacing-size-07, 24px);
+  --ds-box-model-padding-block-end: var(--core-spacing-size-07, 24px);
+  --ds-box-model-padding-inline-start: var(--core-spacing-size-07, 24px);
+  --ds-box-model-padding-inline-end: var(--core-spacing-size-07, 24px);
 }

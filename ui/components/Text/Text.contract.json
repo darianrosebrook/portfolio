@@ -28,41 +28,12 @@
     "transform-uppercase"
   ],
   "variants": {
-    "as": [
-      "p",
-      "span",
-      "div",
-      "h1",
-      "h2",
-      "h3",
-      "h4",
-      "h5",
-      "h6"
-    ],
-    "variant": [
-      "display"
-    ],
-    "size": [
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl",
-      "2xl",
-      "3xl"
-    ],
-    "align": [
-      "left",
-      "center",
-      "right",
-      "justify"
-    ]
+    "as": ["p", "span", "div", "h1", "h2", "h3", "h4", "h5", "h6"],
+    "variant": ["display"],
+    "size": ["xs", "sm", "md", "lg", "xl", "2xl", "3xl"],
+    "align": ["left", "center", "right", "justify"]
   },
-  "states": [
-    "default",
-    "error",
-    "success"
-  ],
+  "states": ["default", "error", "success"],
   "slots": {
     "root": {
       "required": true,
@@ -423,6 +394,30 @@
         "fallback": "4px",
         "property": "border-radius",
         "layer": "core"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding-inline-end",
+        "layer": "core"
       }
     },
     "headline": {
@@ -745,10 +740,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "string",
-        "node-ref"
-      ]
+      "accepts": ["string", "node-ref"]
     }
   }
 }

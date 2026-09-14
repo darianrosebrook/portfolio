@@ -22,4 +22,10 @@
   --ds-blockquote-size-padding-default: var(--core-spacing-size-05, 12px);
   --ds-blockquote-size-radius-default: var(--core-shape-radius-medium, 8px);
   --ds-blockquote-size-border-thick: var(--core-shape-border-width-thick, 2px);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-padding-block-start: var(--core-spacing-size-05, 12px);
+  --ds-box-model-padding-block-end: var(--core-spacing-size-05, 12px);
+  --ds-box-model-padding-inline-start: var(--core-spacing-size-05, 12px);
+  --ds-box-model-padding-inline-end: var(--core-spacing-size-05, 12px);
 }

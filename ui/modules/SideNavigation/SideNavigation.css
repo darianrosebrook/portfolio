@@ -1,7 +1,7 @@
 @import "./Sidenavigation.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Sidenavigation"] on the root element.
  * Note: tokens file uses "Sidenavigation" (lowercase 'n') — must match.
  * Intentionally unlayered — see Button.css for the cascade rationale.

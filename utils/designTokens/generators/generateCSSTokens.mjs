@@ -385,7 +385,6 @@ function cssVarNameFor(cssVarPrefix, name) {
  * rules in a layer would lose that specificity battle because layered
  * rules always lose to unlayered ones, regardless of selector weight.
  *
- * Per docs/CSS-MIGRATION-PLAYBOOK.md.
  */
 function buildCssForComponent({
   cssVarPrefix,

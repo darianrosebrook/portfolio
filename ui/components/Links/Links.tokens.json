@@ -85,6 +85,10 @@
         "fast": "{core.motion.duration.medium0}",
         "slow": "{core.motion.duration.long0}"
       }
+    },
+    "boxModel": {
+      "gap": "{core.spacing.size.02}",
+      "width": "100%"
     }
   }
 }

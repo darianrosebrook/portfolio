@@ -1,21 +1,11 @@
 {
   "name": "Status",
   "layer": "primitive",
-  "anatomy": [
-    "root"
-  ],
+  "anatomy": ["root"],
   "variants": {
-    "status": [
-      "info",
-      "success",
-      "warning",
-      "danger",
-      "error"
-    ]
+    "status": ["info", "success", "warning", "danger", "error"]
   },
-  "states": [
-    "default"
-  ],
+  "states": ["default"],
   "slots": {
     "root": {
       "required": true,
@@ -132,6 +122,36 @@
         "fallback": "1",
         "property": "line-height",
         "layer": "semantic"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding-inline-end",
+        "layer": "core"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
       }
     }
   },

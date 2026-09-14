@@ -1,0 +1,37 @@
+id: CHORE-BOXMODEL-CLEANUP-001
+title: 'Remove the CSS migration playbook and strip all citations'
+risk_tier: 3
+mode: chore
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Playbook removed per user direction; all citations stripped (including the generator docblock, hence the utils/designTokens scope addition); battery green, regen byte-stable.'
+created_at: '2026-09-14T05:33:24.254Z'
+updated_at: '2026-09-14T05:35:52.248Z'
+created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'TODO: list the file(s) or directories this spec authorizes.'
+    - ui
+    - CSS-MIGRATION-PLAYBOOK.md
+    - test
+    - utils/designTokens
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'TODO'
+    when: 'TODO'
+    then: 'TODO'
+non_functional: {}
+contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "grep -rln CSS-MIGRATION-PLAYBOOK -> 0 hits; npm test 173/1818 green; token fidelity 1609 exit 0; tokens.css regen diff 0"
+    recorded_at: "2026-09-14T05:35:18.249Z"

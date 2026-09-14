@@ -1,7 +1,8 @@
+@import '../../primitives/boxModel.css';
 @import "./Table.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Table"] on the root element.
  * @supports @scope block dropped — native nesting under the data-attribute
  * gives equivalent scoping. @container queries moved to top level.
@@ -10,7 +11,7 @@
 [data-ds-component="Table"] {
   &.container {
     position: relative;
-    width: 100%;
+    width: var(--ds-box-model-width);
     contain: layout style paint;
     container-type: inline-size;
 

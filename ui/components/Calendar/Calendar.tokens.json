@@ -30,6 +30,12 @@
     "motion": {
       "duration": "{core.motion.duration.short}",
       "easing": "{core.motion.easing.standard}"
+    },
+    "boxModel": {
+      "paddingBlockStart": "{core.spacing.size.07}",
+      "paddingBlockEnd": "{core.spacing.size.07}",
+      "paddingInlineStart": "{core.spacing.size.07}",
+      "paddingInlineEnd": "{core.spacing.size.07}"
     }
   }
 }

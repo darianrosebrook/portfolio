@@ -1,3 +1,4 @@
+@import '../../primitives/boxModel.css';
 @import "./Details.tokens.css";
 
 [data-ds-component="Details"] {
@@ -163,7 +164,7 @@
 
   &.inline {
     display: inline-block;
-    width: auto;
+    width: var(--ds-box-model-width);
   }
 
   &.disabled {

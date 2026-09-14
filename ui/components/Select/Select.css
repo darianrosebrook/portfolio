@@ -1,7 +1,8 @@
+@import '../../primitives/boxModel.css';
 @import "./Select.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Select"] on the root element.
  * NOTE: The TSX (Select.tsx) uses a newer slot-based class API (.root, .trigger,
  * .content, .options, .option, etc.) that diverged from the original SCSS
@@ -13,19 +14,34 @@
 
 /* Shared local vars for both root and portaled/floating elements */
 [data-ds-component="Select"] {
+  /* Container queries for responsive sizing */
+  @container (max-width: 20rem) {
+    .trigger {
+      padding: calc(var(--ds-select-size-padding-default, 8px) * 0.75);
+      font-size: calc(var(--ds-select-font-size-default, 1rem) * 0.9);
+    }
+  }
+
+  @container (max-width: 15rem) {
+    .trigger {
+      padding: calc(var(--ds-select-size-padding-default, 8px) * 0.5);
+      font-size: calc(var(--ds-select-font-size-default, 1rem) * 0.85);
+    }
+  }
+
   /* Root wrapper */
   &.root {
     position: relative;
     display: inline-block;
-    width: 100%;
+    width: var(--ds-box-model-width);
     container-type: inline-size;
   }
 
   /* Trigger button */
   .trigger {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     box-sizing: border-box;
     width: 100%;
     padding: var(--ds-select-size-padding-default, 8px);
@@ -92,18 +108,18 @@
 
   .text {
     flex: 1;
-    text-align: start;
     overflow: hidden;
+    text-align: start;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   .icons {
     display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    margin-inline-start: 0.5rem;
     flex-shrink: 0;
+    gap: 0.25rem;
+    align-items: center;
+    margin-inline-start: 0.5rem;
   }
 
   .chevronIcon {
@@ -114,8 +130,8 @@
 
   .clear {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     padding: 0.25rem;
     background: none;
     border: none;
@@ -196,31 +212,16 @@
   }
 
   .check {
+    flex-shrink: 0;
     width: 16px;
     height: 16px;
     color: var(--ds-select-color-foreground-selected, #0066cc);
-    flex-shrink: 0;
   }
 
   .emptyState {
     padding: var(--ds-select-size-padding-default);
     color: var(--ds-select-color-foreground-disabled, #aeaeae);
     text-align: center;
-  }
-
-  /* Container queries for responsive sizing */
-  @container (max-width: 20rem) {
-    .trigger {
-      padding: calc(var(--ds-select-size-padding-default, 8px) * 0.75);
-      font-size: calc(var(--ds-select-font-size-default, 1rem) * 0.9);
-    }
-  }
-
-  @container (max-width: 15rem) {
-    .trigger {
-      padding: calc(var(--ds-select-size-padding-default, 8px) * 0.5);
-      font-size: calc(var(--ds-select-font-size-default, 1rem) * 0.85);
-    }
   }
 }
 

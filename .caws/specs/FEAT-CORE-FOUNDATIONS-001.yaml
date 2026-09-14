@@ -2,9 +2,10 @@ id: FEAT-CORE-FOUNDATIONS-001
 title: 'Fill core-foundations stub pages with education-template content'
 risk_tier: 3
 mode: feature
-lifecycle_state: draft
+lifecycle_state: active
+worktree: feat-core-foundations-001
 created_at: '2026-09-14T05:06:10.391Z'
-updated_at: '2026-09-14T05:06:27.976Z'
+updated_at: '2026-09-14T14:38:30.906Z'
 created_by_session: 'session-ee97c70e-5708-43ac-898e-efaca06c09be'
 blast_radius:
   modules:
@@ -26,6 +27,10 @@ scope:
     - app/blueprints/foundations/_lib/**
     - app/blueprints/foundations/_components/**
     - types/foundationContent.ts
+    - test/blueprints/**
+    - test/e2e/foundationNavigation.spec.ts
+    - app/blueprints/ux-patterns/**
+    - app/blueprints/foundations/tokens/page.tsx
   out: []
 invariants:
   - 'Every filled page renders through the FoundationPage education template with complete FoundationPageContent (metadata, sections, crossReferences, verificationChecklist, assessmentPrompts) — no placeholder ''coming soon'' markup remains on any core-foundations page'
@@ -60,3 +65,20 @@ acceptance:
       assessment prompts + cross-references like the gold-standard pages
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "Color (b77a5724) + Motion (31b29e60) gold pages: npx tsc --noEmit exit 0; eslint clean; vitest test/blueprints 39/39 incl. 16 new assertions; e2e foundationNavigation color+motion all categories pass (32-passed run) incl. JSON-LD via server-rendered scripts (60d6fc6a); every template section type exercised incl. verification-checklist and additional-resources"
+    recorded_at: "2026-09-14T05:46:39.544Z"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Color+motion citations verified against ui/designTokens core+semantic sources and generated designTokens.scss by direct grep at authoring time (durations 50-1500ms, easings, stagger 17ms, ramp hexes, cascade-layer order); render tests assert exact token strings; WCAG pair ratios hand-computed and labeled approximate"
+    recorded_at: "2026-09-14T05:46:40.028Z"
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "All 9 core-foundations pages (color, motion, spacing, layout, icons, elevation, radius, grid, borders) render via FoundationPage with full template sections, exported metadata, and zero coming-soon markup: 9 render contracts (63 assertions) in test/blueprints pass; full vitest 1734 passed / 2 skipped exit 0; e2e foundationNavigation all 12 pages pass page-load/JSON-LD/nav/SEO/a11y categories"
+    recorded_at: "2026-09-14T07:04:12.362Z"
+  - criterion_id: A4
+    status: pass
+    evidence_ref: "Derived standard applied to 7 pages (spacing bcb27ed3, layout 41cc7775, icons b744501f, elevation 96a9be09, radius fec06fbc, grid 68bf7a56, borders f8ef6c86): each ships verificationChecklist + assessmentPrompts + crossReferences like the gold pages, tsc exit 0, eslint clean, prettier conforming, per-page render tests 7/7, gates Overall: OK"
+    recorded_at: "2026-09-14T07:04:13.017Z"

@@ -27,6 +27,12 @@
     },
     "overlay": {
       "imageOverlay": "{semantic.color.background.imageOverlay}"
+    },
+    "boxModel": {
+      "paddingBlockStart": "{core.spacing.size.07}",
+      "paddingBlockEnd": "{core.spacing.size.07}",
+      "paddingInlineStart": "{core.spacing.size.07}",
+      "paddingInlineEnd": "{core.spacing.size.07}"
     }
   }
 }

@@ -33,6 +33,9 @@
     "motion": {
       "enter": "{core.motion.duration.short}",
       "leave": "{core.motion.duration.short}"
+    },
+    "boxModel": {
+      "gap": "{core.spacing.size.04}"
     }
   }
 }

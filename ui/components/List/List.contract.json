@@ -16,27 +16,11 @@
     "spacing-lg"
   ],
   "variants": {
-    "as": [
-      "ul",
-      "ol",
-      "dl"
-    ],
-    "variant": [
-      "default",
-      "unstyled",
-      "inline",
-      "divided",
-      "spaced"
-    ],
-    "size": [
-      "sm",
-      "md",
-      "lg"
-    ]
+    "as": ["ul", "ol", "dl"],
+    "variant": ["default", "unstyled", "inline", "divided", "spaced"],
+    "size": ["sm", "md", "lg"]
   },
-  "states": [
-    "default"
-  ],
+  "states": ["default"],
   "slots": {
     "root": {
       "required": true,
@@ -164,6 +148,28 @@
         "fallback": "12px",
         "property": "gap",
         "layer": "core"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "box-model.padding-block-start": {
+        "literal": "0",
+        "property": "padding-block-start"
+      },
+      "box-model.padding-block-end": {
+        "literal": "0",
+        "property": "padding-block-end"
+      },
+      "box-model.padding-inline-start": {
+        "literal": "0",
+        "property": "padding-inline-start"
+      },
+      "box-model.padding-inline-end": {
+        "literal": "0",
+        "property": "padding-inline-end"
       }
     }
   },
@@ -229,10 +235,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "li",
-        "node-ref"
-      ]
+      "accepts": ["li", "node-ref"]
     }
   }
 }

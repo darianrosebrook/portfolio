@@ -1,0 +1,54 @@
+id: FEAT-BOXMODEL-003
+title: 'Box-model adoption batch 2: remaining twenty components'
+risk_tier: 3
+mode: refactor
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Batch 2 of the box-model rollout: fifteen components migrated with verified no-op defaults (60 literal-pinning assertions), 45 new contract entries (token fidelity 1609, exit 0), full battery green. Seven components documented as skips with per-component reasons (variant-only layout, runtime vars, existing override surface, or no tokens). The rollout now covers 38 of the 40 audited components; the playbook removal follows in a final chore spec.'
+created_at: '2026-09-14T05:27:05.941Z'
+updated_at: '2026-09-14T05:32:48.072Z'
+created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'TODO: list the file(s) or directories this spec authorizes.'
+    - ui/components
+    - test/unit
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'TODO'
+    when: 'TODO'
+    then: 'TODO'
+  - id: A2
+    given: 'contract box-model.* entries for the batch'
+    when: 'node scripts/check-contract-tokens.mjs runs'
+    then: 'token fidelity exits 0 with 1609 structured tokens verified'
+  - id: A3
+    given: 'the full battery'
+    when: 'npm test, typecheck, lint, contracts:validate, tokens:lint, styles:tokens run'
+    then: 'all exit 0 with no new failures'
+non_functional: {}
+contracts:
+  - name: 'box-model-batch2-noop'
+    type: contract-test
+    path: 'test/unit/designTokens/boxModel.batch2.test.mjs'
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "npx vitest run test/unit/designTokens/boxModel.batch2.test.mjs -> 60 passed"
+    recorded_at: "2026-09-14T05:32:38.566Z"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "node scripts/check-contract-tokens.mjs -> 1609 verified, exit 0"
+    recorded_at: "2026-09-14T05:32:39.093Z"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "npm test 173 files/1818 tests; typecheck+lint+contracts 53/53+tokens:lint+styles:tokens exit 0"
+    recorded_at: "2026-09-14T05:32:39.612Z"

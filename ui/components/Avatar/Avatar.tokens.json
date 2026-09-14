@@ -40,6 +40,10 @@
       "fontFamily": {
         "sans": "{core.typography.fontFamily.sans}"
       }
+    },
+    "boxModel": {
+      "width": "{core.spacing.size.09}",
+      "height": "{core.spacing.size.09}"
     }
   }
 }

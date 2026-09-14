@@ -1,10 +1,12 @@
+@import '../../primitives/boxModel.css';
 @import "./Tooltip.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Tooltip"] on the root element.
  * Intentionally unlayered — see Button.css for the cascade rationale.
  */
+
 /*
  * The trigger wrapper hosts the hover/focus handlers and the
  * aria-describedby relationship. It must have a measurable layout box for
@@ -20,7 +22,10 @@
   &.tooltip {
     z-index: 9999;
     max-width: var(--ds-tooltip-size-max-width);
-    padding: var(--ds-tooltip-size-padding-y) var(--ds-tooltip-size-padding-x);
+    padding-inline: var(--ds-box-model-padding-inline-start)
+      var(--ds-box-model-padding-inline-end);
+    padding-block: var(--ds-box-model-padding-block-start)
+      var(--ds-box-model-padding-block-end);
     background: var(--ds-tooltip-color-background-default);
     border: 1px solid var(--ds-tooltip-color-border-default);
     border-radius: var(--ds-tooltip-size-radius-default);

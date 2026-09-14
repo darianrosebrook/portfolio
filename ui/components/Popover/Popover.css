@@ -1,7 +1,8 @@
+@import '../../primitives/boxModel.css';
 @import "./Popover.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Popover"] on the root element.
  * NOTE: .popoverContent is portaled to document.body, so it cannot be
  * scoped under the root selector. It uses a top-level rule but inherits
@@ -42,6 +43,7 @@
   --ds-popover-color-background-content: var(--semantic-color-background-secondary);
   --ds-popover-color-border-accent: var(--semantic-color-border-accent);
   --ds-popover-elevation-default: var(--semantic-elevation-default);
+  --ds-box-model-gap: var(--ds-box-model-gap);
 
   z-index: 1000;
   display: flex;

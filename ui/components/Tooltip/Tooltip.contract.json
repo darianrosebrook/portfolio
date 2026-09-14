@@ -1,24 +1,11 @@
 {
   "name": "Tooltip",
   "layer": "primitive",
-  "anatomy": [
-    "root"
-  ],
+  "anatomy": ["root"],
   "variants": {
-    "placement": [
-      "top",
-      "bottom",
-      "left",
-      "right",
-      "auto"
-    ]
+    "placement": ["top", "bottom", "left", "right", "auto"]
   },
-  "states": [
-    "default",
-    "hover",
-    "entering",
-    "leaving"
-  ],
+  "states": ["default", "hover", "entering", "leaving"],
   "slots": {
     "root": {
       "required": true,
@@ -27,9 +14,7 @@
   },
   "a11y": {
     "role": "tooltip",
-    "labeling": [
-      "aria-describedby"
-    ],
+    "labeling": ["aria-describedby"],
     "keyboard": [],
     "apgPattern": "tooltip"
   },
@@ -118,6 +103,30 @@
         "fallback": "cubic-bezier(1, 0, 1, 1)",
         "property": "transition-timing-function",
         "layer": "semantic"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding-inline-end",
+        "layer": "core"
       }
     }
   },
@@ -169,21 +178,17 @@
     "transitions": [
       {
         "name": "show",
-        "trigger": "visibility=hidden→visible",
+        "trigger": "visibility=hidden\u2192visible",
         "phase": "enter",
-        "properties": [
-          "opacity"
-        ],
+        "properties": ["opacity"],
         "duration": "tooltip.motion.duration.enter",
         "easing": "tooltip.motion.easing.enter"
       },
       {
         "name": "hide",
-        "trigger": "visibility=visible→hidden",
+        "trigger": "visibility=visible\u2192hidden",
         "phase": "exit",
-        "properties": [
-          "opacity"
-        ],
+        "properties": ["opacity"],
         "duration": "tooltip.motion.duration.exit",
         "easing": "tooltip.motion.easing.exit"
       }
@@ -191,7 +196,7 @@
   },
   "focus": {
     "strategy": "none",
-    "description": "Tooltip never takes focus — it is non-interactive. The trigger element retains focus throughout the tooltip's lifecycle."
+    "description": "Tooltip never takes focus \u2014 it is non-interactive. The trigger element retains focus throughout the tooltip's lifecycle."
   },
   "portal": {
     "enabled": true,
@@ -205,7 +210,7 @@
       {
         "event": "escape",
         "defaultEnabled": true,
-        "description": "WCAG 2.1 SC 1.4.13 — Escape dismisses tooltip without moving focus from the trigger."
+        "description": "WCAG 2.1 SC 1.4.13 \u2014 Escape dismisses tooltip without moving focus from the trigger."
       },
       {
         "event": "blur",
@@ -228,16 +233,14 @@
     "category": "overlay",
     "usageHints": [
       "Wrap any focusable element as the Tooltip trigger child",
-      "Keep tooltip content to a single brief phrase — never include interactive elements",
+      "Keep tooltip content to a single brief phrase \u2014 never include interactive elements",
       "Use placement to control which side the tooltip appears on",
-      "Tooltip satisfies WCAG 2.1 SC 1.4.13 — it is dismissible via Escape"
+      "Tooltip satisfies WCAG 2.1 SC 1.4.13 \u2014 it is dismissible via Escape"
     ],
     "children": {
       "allowed": true,
       "slot": "trigger",
-      "accepts": [
-        "node-ref"
-      ]
+      "accepts": ["node-ref"]
     }
   },
   "channels": {

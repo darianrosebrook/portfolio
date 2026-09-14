@@ -34,4 +34,7 @@
 
   /* === Spacing Tokens === */
   --ds-progress-spacing-gap: var(--core-spacing-size-02, 2px);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-gap: var(--core-spacing-size-02, 2px);
 }

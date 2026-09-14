@@ -1,14 +1,9 @@
 {
   "name": "Shuttle",
   "layer": "compound",
-  "anatomy": [
-    "root",
-    "item"
-  ],
+  "anatomy": ["root", "item"],
   "variants": {},
-  "states": [
-    "default"
-  ],
+  "states": ["default"],
   "slots": {
     "item": {
       "required": false
@@ -73,6 +68,30 @@
         "resolvesTo": "semantic.color.background.image.overlay",
         "fallback": "rgba(0, 0, 0, 0.5)",
         "layer": "semantic"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-inline-end",
+        "layer": "core"
       }
     }
   },

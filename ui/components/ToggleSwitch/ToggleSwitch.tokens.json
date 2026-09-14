@@ -103,6 +103,10 @@
         "default": "{semantic.typography.lineHeight.normal}",
         "tight": "{semantic.typography.lineHeight.tight}"
       }
+    },
+    "boxModel": {
+      "gap": "0.25rem",
+      "maxHeight": "1.5rem"
     }
   }
 }

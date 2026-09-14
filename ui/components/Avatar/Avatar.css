@@ -1,3 +1,4 @@
+@import '../../primitives/boxModel.css';
 @import "./Avatar.tokens.css";
 
 [data-ds-component="Avatar"] {
@@ -5,9 +6,10 @@
     position: relative;
     display: inline-block;
     overflow: hidden;
+
     /* Defaults to medium when no size class is applied. */
-    width: var(--ds-avatar-size-medium);
-    height: var(--ds-avatar-size-medium);
+    width: var(--ds-box-model-width);
+    height: var(--ds-box-model-height);
     border: var(--ds-avatar-size-border-default) solid
       var(--ds-avatar-color-border-default);
     border-radius: var(--ds-avatar-size-radius-default);
@@ -61,10 +63,11 @@
     height: 100%;
     background: var(--ds-avatar-color-background-default);
     color: var(--ds-avatar-color-foreground-primary);
+    font-weight: var(--ds-avatar-typography-font-weight-medium);
+
     /* Initials scale with the avatar box. 40% of the height keeps the
        two-letter monogram visually centered without crowding the edges. */
     font-size: calc(var(--ds-avatar-size-medium) * 0.4);
-    font-weight: var(--ds-avatar-typography-font-weight-medium);
     font-family: var(--ds-avatar-typography-font-family-sans);
     line-height: 1;
     user-select: none;

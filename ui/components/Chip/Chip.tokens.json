@@ -87,6 +87,13 @@
       "outlineWidth": "{core.shape.border.width.thick}",
       "outlineOffset": "{core.spacing.size.02}",
       "outlineColor": "{semantic.color.action.border.primary.focus}"
+    },
+    "boxModel": {
+      "gap": "{core.spacing.size.02}",
+      "paddingBlockStart": "{core.spacing.size.02}",
+      "paddingBlockEnd": "{core.spacing.size.02}",
+      "paddingInlineStart": "{core.spacing.size.04}",
+      "paddingInlineEnd": "{core.spacing.size.04}"
     }
   }
 }

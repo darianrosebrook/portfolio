@@ -1,20 +1,14 @@
 {
   "name": "links",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "maskLine",
-    "text",
-    "clone"
-  ],
+  "anatomy": ["root", "maskLine", "text", "clone"],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus"
-  ],
+  "states": ["default", "hover", "focus"],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"links\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"links\"]"
+    }
   },
   "a11y": {
     "role": "generic",
@@ -268,6 +262,16 @@
         "fallback": "600ms",
         "property": "transition-duration",
         "layer": "core"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "box-model.width": {
+        "literal": "100%",
+        "property": "width"
       }
     }
   },
@@ -283,15 +287,12 @@
     "usageHints": [
       "Use for inline hyperlinks within body copy",
       "Use variant=standalone for a link that stands alone, not within a sentence",
-      "Prefer Button for actions — Links are for navigation"
+      "Prefer Button for actions \u2014 Links are for navigation"
     ],
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "string",
-        "ReactNode"
-      ]
+      "accepts": ["string", "ReactNode"]
     }
   }
 }

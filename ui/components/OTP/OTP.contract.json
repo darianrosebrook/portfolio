@@ -1,22 +1,11 @@
 {
   "name": "OTP",
   "layer": "composer",
-  "anatomy": [
-    "root",
-    "group",
-    "field"
-  ],
+  "anatomy": ["root", "group", "field"],
   "variants": {
-    "mode": [
-      "numeric",
-      "alphanumeric"
-    ]
+    "mode": ["numeric", "alphanumeric"]
   },
-  "states": [
-    "default",
-    "focus",
-    "disabled"
-  ],
+  "states": ["default", "focus", "disabled"],
   "slots": {
     "root": {
       "required": true,
@@ -45,15 +34,8 @@
   },
   "a11y": {
     "role": "group",
-    "roles": [
-      "group",
-      "alert"
-    ],
-    "labeling": [
-      "aria-describedby",
-      "aria-readonly",
-      "aria-label"
-    ],
+    "roles": ["group", "alert"],
+    "labeling": ["aria-describedby", "aria-readonly", "aria-label"],
     "keyboard": [
       {
         "key": "KeyboardEvent",
@@ -116,6 +98,36 @@
         "resolvesTo": "semantic.color.background.image.overlay",
         "fallback": "rgba(0, 0, 0, 0.5)",
         "layer": "semantic"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-inline-end",
+        "layer": "core"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "gap",
+        "layer": "core"
       }
     }
   },
@@ -216,12 +228,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "OTPInput",
-        "OTPLabel",
-        "OTPError",
-        "OTPSeparator"
-      ]
+      "accepts": ["OTPInput", "OTPLabel", "OTPError", "OTPSeparator"]
     }
   },
   "channels": {

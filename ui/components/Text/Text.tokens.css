@@ -74,4 +74,10 @@
   --ds-text-code-padding-y: var(--core-spacing-size-02, 2px);
   --ds-text-code-padding-x: var(--core-spacing-size-03, 4px);
   --ds-text-code-radius: var(--core-shape-radius-small, 4px);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-padding-block-start: var(--core-spacing-size-02, 2px);
+  --ds-box-model-padding-block-end: var(--core-spacing-size-02, 2px);
+  --ds-box-model-padding-inline-start: var(--core-spacing-size-03, 4px);
+  --ds-box-model-padding-inline-end: var(--core-spacing-size-03, 4px);
 }

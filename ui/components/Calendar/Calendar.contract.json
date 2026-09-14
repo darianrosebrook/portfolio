@@ -1,15 +1,9 @@
 {
   "name": "Calendar",
   "layer": "composer",
-  "anatomy": [
-    "root"
-  ],
+  "anatomy": ["root"],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus"
-  ],
+  "states": ["default", "hover", "focus"],
   "slots": {
     "root": {
       "required": true,
@@ -92,6 +86,30 @@
         "resolvesTo": "core.motion.easing.standard",
         "fallback": "cubic-bezier(0.4, 0, 0.2, 1)",
         "property": "transition-timing-function",
+        "layer": "core"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding-inline-end",
         "layer": "core"
       }
     }
