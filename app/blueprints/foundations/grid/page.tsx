@@ -393,6 +393,139 @@ wide desktop     12        layout.container.xl 1280 >= xl 1440`}</code>
     ),
   },
   {
+    type: 'constraints-tradeoffs',
+    id: 'grid-health-metrics',
+    title: 'Grid System Health Metrics',
+    order: 8.75,
+    content: (
+      <>
+        <h3>Signal 1: Token composition</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> grid declarations compose only tokenized
+            containers, breakpoints, and spacing-scale gutters; the 4/8/12
+            convention holds everywhere a grid exists.
+          </li>
+          <li>
+            <strong>Warning:</strong> one area runs its own column count (the
+            &quot;10-column marketing grid&quot;)—structure that no longer
+            shares language with the rest of the product.
+          </li>
+          <li>
+            <strong>Critical:</strong> grids are bespoke per screen; span
+            vocabulary is dead and every layout is a negotiation.
+          </li>
+        </ul>
+
+        <h3>Signal 2: Continuity between adaptation points</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> fluid columns between the tokenized
+            breakpoints; resizing between sizes never jumps structure.
+          </li>
+          <li>
+            <strong>Warning:</strong> discrete re-specification at each
+            query—each size is a layout nobody tests between its edges.
+          </li>
+          <li>
+            <strong>Critical:</strong> viewport sweeps break layouts visibly;
+            the grid exists only at the designed widths.
+          </li>
+        </ul>
+
+        <h3>Signal 3: Order fidelity</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> DOM order equals reading order everywhere;
+            placement achieves every visual arrangement.
+          </li>
+          <li>
+            <strong>Warning:</strong> one screen re-ordered its DOM for a
+            sketch—the divergence is invisible until an AT user or the e2e
+            reading check finds it.
+          </li>
+          <li>
+            <strong>Critical:</strong> visual and DOM order habitually disagree;
+            two audiences use different products.
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    type: 'constraints-tradeoffs',
+    id: 'grid-migration',
+    title: 'Migration Strategy: Retiring Legacy Scaffolds',
+    order: 8.9,
+    content: (
+      <>
+        <ol>
+          <li>
+            <strong>Inventory the scaffolds:</strong> float clearfixes,
+            percentage paddings posing as gutters, fixed-width wrappers,
+            per-framework grid classes— each tagged with the screens it holds
+            up.
+          </li>
+          <li>
+            <strong>Re-express in CSS Grid beside the original:</strong> same
+            breakpoints, same spans expressed as <code>span N</code>;
+            screenshot-diff at the tokenized steps—legacy scaffolds were
+            approximating this declaration all along.
+          </li>
+          <li>
+            <strong>
+              Adopt <code>auto-fill/minmax</code> for repeated items:
+            </strong>{' '}
+            card grids lose their per-breakpoint queries entirely; adaptation
+            becomes continuous inside discrete structure.
+          </li>
+          <li>
+            <strong>Add subgrid where alignment matters:</strong> equal-height
+            cards with aligned actions migrate from flex hacks to three-row
+            subgrid; delete the hacks with the migration.
+          </li>
+          <li>
+            <strong>Verify order and reflow per screen:</strong> reading order
+            preserved, 320px single-column—then delete the scaffold behind the
+            flag that proved it.
+          </li>
+        </ol>
+      </>
+    ),
+  },
+  {
+    type: 'applied-example',
+    id: 'grid-case-studies',
+    title: 'Real-World Case Studies',
+    order: 8.98,
+    content: (
+      <>
+        <h3>Case 1: The float graveyard</h3>
+        <p>
+          A legacy catalog page carried 40 float-clearfix scaffolds that broke
+          whenever content heights varied. The Grid re-expression produced the
+          same layout at the same breakpoints in a quarter of the CSS, and the
+          varying-height breakage class simply ceased to exist— not fixed,{' '}
+          <em>unreachable</em>.
+        </p>
+        <h3>Case 2: The six-query card grid</h3>
+        <p>
+          Card counts were re-specified at six breakpoints; every new viewport
+          width re-argued them. <code>auto-fill + minmax(280px, 1fr)</code>{' '}
+          replaced all six queries with continuous adaptation—the card count now
+          follows the available width without asking anyone.
+        </p>
+        <h3>Case 3: The subgrid alignment debt</h3>
+        <p>
+          Action buttons inside product cards were pinned with per-card flex
+          gymnastics that drifted every quarter. Three-row subgrid pinned them
+          structurally; the gymnastics were deleted, and the alignment promise
+          now costs zero lines per new card.
+        </p>
+      </>
+    ),
+  },
+  {
     type: 'verification-checklist',
     id: 'verification-checklist',
     title: 'Verification Checklist',
