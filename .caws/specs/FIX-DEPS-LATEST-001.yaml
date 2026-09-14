@@ -38,11 +38,17 @@ invariants:
   - 'The design-token artifacts are produced by the build generator rather than hand-edited, so a fresh build reproduces the committed output'
 acceptance:
   - id: A1
-    given: 'the project pins packageManager pnpm@11.20.0 and ships pnpm-lock.yaml as its only lockfile'
-    when: 'pnpm update --latest followed by a clean pnpm install completes'
+    given: >-
+      the project pins packageManager pnpm@11.20.0 and ships pnpm-lock.yaml as its
+      only lockfile, and TypeScript 7 removed the classic compiler API that
+      typescript-eslint requires (its peer range is >=4.8.4 <6.1.0)
+    when: 'pnpm outdated is run after the upgrade'
     then: >-
-      every direct dependency in package.json resolves to its latest published
-      version and no package-lock.json or yarn.lock exists in the tree
+      every direct dependency resolves to its latest published version except
+      typescript, which is the newest release typescript-eslint supports (6.0.3)
+      while the TS 7 native compiler is provided by the typescript-7 alias declared
+      as npm:typescript@7.0.2, and no package-lock.json, yarn.lock or
+      npm-shrinkwrap.json exists in the tree
   - id: A2
     given: >-
       the pre-upgrade baseline at 003a41ce was typecheck exit 0, eslint exit 0,
