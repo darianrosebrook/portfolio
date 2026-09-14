@@ -46,5 +46,11 @@ acceptance:
     then: >-
       every cited token name exists in the real token system and contrast claims
       match computed WCAG results
+  - id: A3
+    given: 'the color and motion gold-standard pages'
+    when: 'validated'
+    then: >-
+      typecheck, lint, and vitest pass with the pages included, and each page
+      exercises the full section vocabulary of the education template
 non_functional: {}
 contracts: []
