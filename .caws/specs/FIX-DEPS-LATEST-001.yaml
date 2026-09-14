@@ -73,3 +73,8 @@ non_functional: {}
 contracts:
   - name: 'build-toolchain'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "pnpm outdated: only 'typescript 6.0.3 -> 7.0.2' (the approved side-by-side hold; TS 7 native compiler supplied by the typescript-7 alias) and deprecated @types/hls.js stub remain; ls package-lock.json yarn.lock npm-shrinkwrap.json => No such file"
+    recorded_at: "2026-09-14T16:37:37.935Z"
