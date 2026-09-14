@@ -406,6 +406,133 @@ none: 0px     01: 2px     02: 4px     medium: 6px
     ),
   },
   {
+    type: 'constraints-tradeoffs',
+    id: 'radius-health-metrics',
+    title: 'Shape System Health Metrics',
+    order: 8.75,
+    content: (
+      <>
+        <h3>Signal 1: Role coverage</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> every <code>border-radius</code> in
+            product CSS resolves through a semantic role (or scoped contract);
+            the numbered steps appear only inside the token sources.
+          </li>
+          <li>
+            <strong>Warning:</strong> a handful of literal radii survive from a
+            pre-token era—each an orphan the next rebrand cannot reach.
+          </li>
+          <li>
+            <strong>Critical:</strong> literals are the norm; a shape rebrand
+            would be a find-and-replace across the codebase, which is the
+            failure the layering exists to prevent.
+          </li>
+        </ul>
+
+        <h3>Signal 2: Ladder integrity</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> nested corners step down one role from
+            their container everywhere; a spot check of any modal shows panel →
+            card → control in descending order.
+          </li>
+          <li>
+            <strong>Warning:</strong> equal or ascending inner corners appear on
+            one surface—reading as an alignment error users cannot name.
+          </li>
+          <li>
+            <strong>Critical:</strong> no ladder survives inspection; nesting
+            looks accidental product-wide.
+          </li>
+        </ul>
+
+        <h3>Signal 3: Control constancy</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> all controls resolve{' '}
+            <code>control.radius.default</code> (6px) or the deliberate pill, at
+            every size.
+          </li>
+          <li>
+            <strong>Warning:</strong> one control family picked its own
+            corner—sibling controls now disagree subtly on every screen they
+            share.
+          </li>
+          <li>
+            <strong>Critical:</strong> per-variant radii are common; the
+            &quot;one family&quot; promise is gone.
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    type: 'constraints-tradeoffs',
+    id: 'radius-migration',
+    title: 'Migration Strategy: Collecting the Corners',
+    order: 8.9,
+    content: (
+      <>
+        <ol>
+          <li>
+            <strong>Inventory the literals:</strong> every{' '}
+            <code>border-radius</code> value with its surface. Dedupe; most
+            products discover five or six distinct numbers serving three roles.
+          </li>
+          <li>
+            <strong>Assign roles top-down:</strong> each surface gets its
+            semantic role (container scale with size, controls constant, pills
+            deliberate); literals snap to the role&apos;s step with nearest-step
+            tolerance.
+          </li>
+          <li>
+            <strong>Fix the ladder violations:</strong> nesting that equalled or
+            ascended gets its step-down; the visual change is small and the
+            &quot;designed&quot; reading is immediate.
+          </li>
+          <li>
+            <strong>Sweep and lint:</strong> the border-radius literal pattern
+            joins the per-directory lint as areas clean, keeping the rebrand
+            cost at one mapping file.
+          </li>
+        </ol>
+      </>
+    ),
+  },
+  {
+    type: 'applied-example',
+    id: 'radius-case-studies',
+    title: 'Real-World Case Studies',
+    order: 8.98,
+    content: (
+      <>
+        <h3>Case 1: The rebrand that took an afternoon</h3>
+        <p>
+          A sharper brand direction moved three semantic mappings down-scale in
+          one file, rebuilt, and shipped—every surface, control, and pill moved
+          together because nothing consumed a literal. The team that had
+          resisted the layering became its advocates at the sight of a rebrand
+          reviewed as a generated diff.
+        </p>
+        <h3>Case 2: The almost-pill that fooled everyone</h3>
+        <p>
+          A 28px-tall chip with <code>border-radius: 14px</code> looked like a
+          pill until focus arrived—the ring inherited a true-radius sibling and
+          the mismatch exposed the fake. Committing to{' '}
+          <code>control.radius.pill</code> fixed shape and ring in one token.
+        </p>
+        <h3>Case 3: The card inside the card</h3>
+        <p>
+          A media card hosted an inner panel at the same 8px corner; users read
+          the inner edge as a rendering glitch. The step-down to small (4px)
+          made the nesting read as structure—the ladder rule earning its keep on
+          the least glamorous surface in the product.
+        </p>
+      </>
+    ),
+  },
+  {
     type: 'verification-checklist',
     id: 'verification-checklist',
     title: 'Verification Checklist',
