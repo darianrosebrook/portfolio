@@ -41,9 +41,9 @@ acceptance:
       every direct dependency in package.json resolves to its latest published
       version and no package-lock.json or yarn.lock exists in the tree
   - id: A2
-    given: 'The spec implementation is complete.'
-    when: 'The acceptance statement is evaluated.'
-    then: 'given TypeScript 7, ESLint 10, Stylelint 17 and Vitest 5 all change configuration surfaces; when npm run typecheck, npm run lint and npm run lint:css execute; then each exits 0 with no unrecognised-rule or config-schema error'
+    given: 'TypeScript 7, ESLint 10, Stylelint 17 and Vitest 5 each change their configuration surface'
+    when: 'npm run typecheck, npm run lint and npm run lint:css execute'
+    then: 'each command exits 0 with no unrecognised-rule, config-schema or unsupported-option error'
   - id: A3
     given: 'The spec implementation is complete.'
     when: 'The acceptance statement is evaluated.'
