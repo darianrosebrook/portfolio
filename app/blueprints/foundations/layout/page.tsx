@@ -435,6 +435,159 @@ xxl: 1536px  xxxl: 1920px`}</code>
     ),
   },
   {
+    type: 'constraints-tradeoffs',
+    id: 'layout-health-metrics',
+    title: 'Layout System Health Metrics',
+    order: 8.75,
+    content: (
+      <>
+        <p>
+          Layout health is auditable from the stylesheets alone—no rendering
+          required for the first two signals:
+        </p>
+
+        <h3>Signal 1: Breakpoint discipline</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> every <code>@media</code> width condition
+            references a tokenized breakpoint; a grep for <code>@media</code>{' '}
+            plus raw pixel values returns only the token fallbacks.
+          </li>
+          <li>
+            <strong>Warning:</strong> one or two magic numbers survive
+            (&quot;the 1180px hero&quot;), each an untested size that will
+            surprise a future viewport.
+          </li>
+          <li>
+            <strong>Critical:</strong> media queries outnumber token
+            references—the layout re-specifies itself per size, and each query
+            is a layout nobody reviews.
+          </li>
+        </ul>
+
+        <h3>Signal 2: Flow integrity</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> document content is positioned by flow and
+            grid only; absolute positioning appears exclusively in decorative
+            overlays and the hit-area pseudo-elements.
+          </li>
+          <li>
+            <strong>Warning:</strong> coordinate patches accumulate on one
+            screen—each an apology for a flow that almost worked.
+          </li>
+          <li>
+            <strong>Critical:</strong> content blocks with hard coordinates; the
+            reflow guarantee is already broken, and zoom mode is the next place
+            it will be discovered.
+          </li>
+        </ul>
+
+        <h3>Signal 3: Reflow proof</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> the e2e walk at 320px effective width
+            shows single-column, no horizontal scroll, on every template; the
+            WCAG 1.4.10 guarantee is a test, not a hope.
+          </li>
+          <li>
+            <strong>Warning:</strong> reflow holds on marketing pages but fails
+            in app surfaces (tables, toolbars)— exactly where density tempts
+            shortcuts.
+          </li>
+          <li>
+            <strong>Critical:</strong> any horizontally scrolling content at the
+            floor width—an immediate defect with a criterion number attached.
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    type: 'constraints-tradeoffs',
+    id: 'layout-migration',
+    title: 'Migration Strategy: From Positioning to Flow',
+    order: 8.9,
+    content: (
+      <>
+        <p>
+          Layout migrations change behavior more visibly than spacing ones, so
+          the strategy front-loads safety:
+        </p>
+        <ol>
+          <li>
+            <strong>Inventory the coordinates:</strong> every{' '}
+            <code>position: absolute/fixed</code> on content, every fixed width
+            on text containers, every magic media query. Tag each: decorative
+            (keep), hit-area (keep), content (migrate).
+          </li>
+          <li>
+            <strong>Rebuild in flow beside the original:</strong> for each
+            migrated screen, construct the flow/grid version behind a flag;
+            screenshot-diff against the original at the tokenized
+            breakpoints—rebuilding in place and &quot;fixing later&quot; is how
+            layouts regress silently.
+          </li>
+          <li>
+            <strong>Adopt the two-scale rule:</strong> containers by content
+            type (the named widths), structure changes only at tokenized
+            breakpoints; the audit from step 1 tells you which magic numbers
+            were secretly each of these.
+          </li>
+          <li>
+            <strong>Prove reflow before cutover:</strong> the 320px walk on the
+            new version is the exit criterion—a migration that ships without
+            reflow proof has traded visible drift for invisible exclusion.
+          </li>
+          <li>
+            <strong>Flip the flag per surface:</strong> each screen&apos;s
+            cutover is independently revertible; the coordinate version is
+            deleted only when its surface has been stable through a review
+            cycle.
+          </li>
+        </ol>
+      </>
+    ),
+  },
+  {
+    type: 'applied-example',
+    id: 'layout-case-studies',
+    title: 'Real-World Case Studies',
+    order: 8.98,
+    content: (
+      <>
+        <h3>Case 1: The landing page that couldn&apos;t zoom</h3>
+        <p>
+          A hero built on absolute coordinates looked flawless at 1440px and
+          shattered at 400% browser zoom—the three-column text became a
+          20px-wide strip. The rebuild was the flow version this page teaches:
+          grid with a measure-capped column, one structural breakpoint,
+          container queries for the reusable badge row. The visual result was
+          pixel-similar at every designed size and reflowed below them; the
+          accessibility finding closed with the commit.
+        </p>
+        <h3>Case 2: The two scales that got merged</h3>
+        <p>
+          A team &quot;simplified&quot; by pointing <code>container.xl</code> at
+          the breakpoint value (1440px) so one number ruled both. Within a
+          quarter, reading pages showed 90-character lines—the container was
+          following structure instead of measure, exactly the collapse the
+          two-scale rule exists to prevent. The restore was one value; the
+          lesson was the rule&apos;s rationale surviving contact with a real
+          codebase.
+        </p>
+        <h3>Case 3: The sidebar that hid from keyboards</h3>
+        <p>
+          A visually-ordered layout (sidebar first) was built by re-ordering the
+          DOM to match a sketch; screen reader users got navigation before
+          content on every page, and the e2e reading-order check flagged the
+          divergence. Grid placement restored the correct DOM order with the
+          same pixels—styling reclaimed its job from structure.
+        </p>
+      </>
+    ),
+  },
+  {
     type: 'verification-checklist',
     id: 'verification-checklist',
     title: 'Verification Checklist',
@@ -527,6 +680,11 @@ content.assessmentPrompts = [
   {
     question:
       'Your component works in the dashboard but breaks when reused in the article sidebar. Which layout mechanism was likely missing, and how would the tokenized system have prevented it?',
+    type: 'reflection',
+  },
+  {
+    question:
+      'Audit one screen against the three health signals. Which signal degrades first in your codebase, and what does that predict about the first zoom-mode complaint you will receive?',
     type: 'reflection',
   },
 ];
