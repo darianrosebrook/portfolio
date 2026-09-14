@@ -47,18 +47,13 @@
   "tokens": {
     "root": {
       "avatar.size.small": {
-        "resolvesTo": "core.spacing.size.05",
-        "fallback": "12px",
-        "layer": "core"
-      },
-      "avatar.size.default": {
-        "resolvesTo": "core.spacing.size.06",
-        "fallback": "16px",
+        "resolvesTo": "core.spacing.size.08",
+        "fallback": "32px",
         "layer": "core"
       },
       "avatar.size.medium": {
-        "resolvesTo": "core.spacing.size.08",
-        "fallback": "32px",
+        "resolvesTo": "core.spacing.size.09",
+        "fallback": "48px",
         "layer": "core"
       },
       "avatar.size.large": {

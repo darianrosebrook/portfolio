@@ -191,7 +191,7 @@
       },
       "alert.color.border.primary": {
         "resolvesTo": "semantic.color.border.primary",
-        "fallback": "#f29495",
+        "fallback": "#aeaeae",
         "property": "border-color",
         "layer": "semantic"
       },
@@ -272,7 +272,7 @@
       },
       "alert.shadow.default": {
         "resolvesTo": "semantic.elevation.surface.raised",
-        "fallback": "[object Object]",
+        "fallback": "0px 1px 3px #0000001f",
         "property": "box-shadow",
         "layer": "semantic"
       },
@@ -430,7 +430,7 @@
       "Use variant=error when a form submission or action failed",
       "Use variant=warning for recoverable issues that need attention",
       "Use variant=success after a positive outcome",
-      "Avoid using for transient notifications \u2014 use Toast instead"
+      "Avoid using for transient notifications — use Toast instead"
     ],
     "children": {
       "allowed": true,

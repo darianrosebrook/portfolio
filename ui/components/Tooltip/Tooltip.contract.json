@@ -76,7 +76,7 @@
       },
       "tooltip.elevation.default": {
         "resolvesTo": "semantic.elevation.surface.floating",
-        "fallback": "[object Object]",
+        "fallback": "0px 3px 6px #00000024",
         "layer": "semantic"
       },
       "tooltip.typography.fontSize": {

@@ -82,7 +82,7 @@
       },
       "textfield.color.input.borderHover": {
         "resolvesTo": "semantic.color.border.primary",
-        "fallback": "#f29495",
+        "fallback": "#aeaeae",
         "layer": "semantic"
       },
       "textfield.color.input.borderFocus": {

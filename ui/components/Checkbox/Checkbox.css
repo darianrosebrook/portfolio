@@ -6,29 +6,29 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--checkbox-color-background-default, #ffffff);
-    border: var(--checkbox-border-width) solid
-      var(--checkbox-color-border-default);
-    border-radius: var(--checkbox-border-radius);
+    background-color: var(--ds-checkbox-color-background-default, #ffffff);
+    border: var(--ds-checkbox-border-width) solid
+      var(--ds-checkbox-color-border-default);
+    border-radius: var(--ds-checkbox-border-radius);
     transition:
-      background-color var(--checkbox-transition-duration)
-        var(--checkbox-transition-easing),
-      border-color var(--checkbox-transition-duration)
-        var(--checkbox-transition-easing),
-      color var(--checkbox-transition-duration) var(--checkbox-transition-easing);
+      background-color var(--ds-checkbox-transition-duration)
+        var(--ds-checkbox-transition-easing),
+      border-color var(--ds-checkbox-transition-duration)
+        var(--ds-checkbox-transition-easing),
+      color var(--ds-checkbox-transition-duration) var(--ds-checkbox-transition-easing);
     cursor: pointer;
 
     &:hover {
       background-color: color-mix(
         in srgb,
-        var(--checkbox-color-background-default) 95%,
-        var(--checkbox-color-border-hover) 5%
+        var(--ds-checkbox-color-background-default) 95%,
+        var(--ds-checkbox-color-border-hover) 5%
       );
 
       border-color: color-mix(
         in srgb,
-        var(--checkbox-color-border-default) 80%,
-        var(--checkbox-color-border-hover) 20%
+        var(--ds-checkbox-color-border-default) 80%,
+        var(--ds-checkbox-color-border-hover) 20%
       );
     }
   }
@@ -36,39 +36,39 @@
   &.checkboxWrapper {
     position: relative;
     display: inline-flex;
-    gap: var(--checkbox-spacing-gap);
+    gap: var(--ds-checkbox-spacing-gap);
     align-items: center;
 
     &.sm .indicator {
-      width: var(--checkbox-size-sm-width);
-      height: var(--checkbox-size-sm-height);
+      width: var(--ds-checkbox-size-sm-width);
+      height: var(--ds-checkbox-size-sm-height);
 
       .checkIcon,
       .indeterminateIcon {
-        width: var(--checkbox-size-sm-icon-size);
-        height: var(--checkbox-size-sm-icon-size);
+        width: var(--ds-checkbox-size-sm-icon-size);
+        height: var(--ds-checkbox-size-sm-icon-size);
       }
     }
 
     &.md .indicator {
-      width: var(--checkbox-size-md-width);
-      height: var(--checkbox-size-md-height);
+      width: var(--ds-checkbox-size-md-width);
+      height: var(--ds-checkbox-size-md-height);
 
       .checkIcon,
       .indeterminateIcon {
-        width: var(--checkbox-size-md-icon-size);
-        height: var(--checkbox-size-md-icon-size);
+        width: var(--ds-checkbox-size-md-icon-size);
+        height: var(--ds-checkbox-size-md-icon-size);
       }
     }
 
     &.lg .indicator {
-      width: var(--checkbox-size-lg-width);
-      height: var(--checkbox-size-lg-height);
+      width: var(--ds-checkbox-size-lg-width);
+      height: var(--ds-checkbox-size-lg-height);
 
       .checkIcon,
       .indeterminateIcon {
-        width: var(--checkbox-size-lg-icon-size);
-        height: var(--checkbox-size-lg-icon-size);
+        width: var(--ds-checkbox-size-lg-icon-size);
+        height: var(--ds-checkbox-size-lg-icon-size);
       }
     }
   }
@@ -77,10 +77,10 @@
   .indeterminateIcon {
     opacity: 0;
     transition:
-      opacity var(--checkbox-transition-duration)
-        var(--checkbox-transition-easing),
-      transform var(--checkbox-transition-duration)
-        var(--checkbox-transition-easing);
+      opacity var(--ds-checkbox-transition-duration)
+        var(--ds-checkbox-transition-easing),
+      transform var(--ds-checkbox-transition-duration)
+        var(--ds-checkbox-transition-easing);
     transform: scale(0.8);
   }
 
@@ -94,23 +94,23 @@
     pointer-events: none;
 
     &:focus-visible + .indicator {
-      outline: var(--checkbox-focus-ring-width) solid
-        var(--checkbox-focus-ring-color);
-      outline-offset: var(--checkbox-focus-ring-offset);
+      outline: var(--ds-checkbox-focus-ring-width) solid
+        var(--ds-checkbox-focus-ring-color);
+      outline-offset: var(--ds-checkbox-focus-ring-offset);
     }
 
     &:checked + .indicator {
       background-color: color-mix(
         in srgb,
-        var(--checkbox-color-background-checked) 100%,
+        var(--ds-checkbox-color-background-checked) 100%,
         transparent
       );
       border-color: color-mix(
         in srgb,
-        var(--checkbox-color-border-checked) 100%,
+        var(--ds-checkbox-color-border-checked) 100%,
         transparent
       );
-      color: var(--checkbox-color-icon-default);
+      color: var(--ds-checkbox-color-icon-default);
 
       .checkIcon,
       .indeterminateIcon {
@@ -120,16 +120,16 @@
     }
 
     &:disabled + .indicator {
-      background-color: var(--checkbox-color-background-disabled);
-      border-color: var(--checkbox-color-border-disabled);
-      color: var(--checkbox-color-icon-disabled);
+      background-color: var(--ds-checkbox-color-background-disabled);
+      border-color: var(--ds-checkbox-color-border-disabled);
+      color: var(--ds-checkbox-color-icon-disabled);
       cursor: not-allowed;
     }
 
     &[data-indeterminate='true'] + .indicator {
-      background-color: var(--checkbox-color-background-indeterminate);
-      border-color: var(--checkbox-color-border-checked);
-      color: var(--checkbox-color-icon-default);
+      background-color: var(--ds-checkbox-color-background-indeterminate);
+      border-color: var(--ds-checkbox-color-border-checked);
+      color: var(--ds-checkbox-color-icon-default);
 
       .checkIcon,
       .indeterminateIcon {

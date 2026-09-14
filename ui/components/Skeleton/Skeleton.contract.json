@@ -71,7 +71,7 @@
       },
       "skeleton.color.contrast-base": {
         "resolvesTo": "semantic.color.border.primary",
-        "fallback": "#f29495",
+        "fallback": "#aeaeae",
         "layer": "semantic"
       },
       "skeleton.radius.sm": {

@@ -74,12 +74,12 @@
       },
       "calendar.elevation.default": {
         "resolvesTo": "semantic.elevation.default",
-        "fallback": "[object Object]",
+        "fallback": "0px 1px 3px #0000001f",
         "layer": "semantic"
       },
       "calendar.elevation.hover": {
         "resolvesTo": "semantic.elevation.surface.floating",
-        "fallback": "[object Object]",
+        "fallback": "0px 3px 6px #00000024",
         "layer": "semantic"
       },
       "calendar.motion.duration": {

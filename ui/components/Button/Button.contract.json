@@ -514,8 +514,8 @@
         "layer": "semantic"
       },
       "button.size.radius": {
-        "resolvesTo": "core.shape.radius.full",
-        "fallback": "9999px",
+        "resolvesTo": "semantic.shape.button.radius",
+        "fallback": "8px",
         "property": "border-radius",
         "layer": "core"
       },
@@ -564,8 +564,8 @@
         "layer": "semantic"
       },
       "button.text.size.medium": {
-        "resolvesTo": "semantic.typography.body.01",
-        "fallback": "18px",
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
         "property": "font-size",
         "layer": "semantic"
       },
@@ -658,18 +658,82 @@
   "props": {
     "designed": {
       "members": [
-        { "name": "as", "type": "\"button\" | \"a\"", "description": "Render as a native button or anchor element. Use \"a\" when the action navigates somewhere; use \"button\" (default) for in-page actions.", "required": false, "default": "button" },
-        { "name": "size", "type": "\"small\" | \"medium\" | \"large\"", "description": "Visual size variant, mapped to design tokens for height, padding, and font size.", "required": false, "default": "medium" },
-        { "name": "variant", "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"ghost\" | \"destructive\" | \"outline\"", "description": "Visual intent variant. Use destructive only for irreversible actions. Avoid multiple primary buttons in a single view.", "required": false, "default": "primary" },
-        { "name": "type", "type": "\"button\" | \"submit\" | \"reset\"", "description": "HTML button type. Defaults to \"button\" to prevent accidental form submission.", "required": false, "default": "button" },
-        { "name": "loading", "type": "boolean | undefined", "description": "When true, replaces button content with a spinner and sets aria-busy on the element.", "required": false },
-        { "name": "disabled", "type": "boolean | undefined", "description": "Prevents interaction and applies disabled styling. Prefer aria-disabled for buttons that should remain focusable.", "required": false },
-        { "name": "href", "type": "string | undefined", "description": "Navigation destination. Required when as=\"a\". Renders the button as an anchor tag.", "required": false },
-        { "name": "asChild", "type": "boolean | undefined", "description": "Merges Button props onto its single child element (Radix composition pattern). The child must accept a ref.", "required": false },
-        { "name": "ariaLabel", "type": "string | undefined", "description": "Accessible label for icon-only buttons where visible text is absent.", "required": false },
-        { "name": "ariaExpanded", "type": "boolean | undefined", "description": "Indicates whether a controlled disclosure widget is expanded. Set on buttons that toggle panels or menus.", "required": false },
-        { "name": "ariaPressed", "type": "boolean | undefined", "description": "Indicates the pressed state for toggle buttons (e.g. bold, mute).", "required": false },
-        { "name": "title", "type": "string | undefined", "description": "Supplementary tooltip text. Use alongside ariaLabel for icon-only buttons; not a replacement for ariaLabel.", "required": false }
+        {
+          "name": "as",
+          "type": "\"button\" | \"a\"",
+          "description": "Render as a native button or anchor element. Use \"a\" when the action navigates somewhere; use \"button\" (default) for in-page actions.",
+          "required": false,
+          "default": "button"
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"medium\" | \"large\"",
+          "description": "Visual size variant, mapped to design tokens for height, padding, and font size.",
+          "required": false,
+          "default": "medium"
+        },
+        {
+          "name": "variant",
+          "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"ghost\" | \"destructive\" | \"outline\"",
+          "description": "Visual intent variant. Use destructive only for irreversible actions. Avoid multiple primary buttons in a single view.",
+          "required": false,
+          "default": "primary"
+        },
+        {
+          "name": "type",
+          "type": "\"button\" | \"submit\" | \"reset\"",
+          "description": "HTML button type. Defaults to \"button\" to prevent accidental form submission.",
+          "required": false,
+          "default": "button"
+        },
+        {
+          "name": "loading",
+          "type": "boolean | undefined",
+          "description": "When true, replaces button content with a spinner and sets aria-busy on the element.",
+          "required": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "description": "Prevents interaction and applies disabled styling. Prefer aria-disabled for buttons that should remain focusable.",
+          "required": false
+        },
+        {
+          "name": "href",
+          "type": "string | undefined",
+          "description": "Navigation destination. Required when as=\"a\". Renders the button as an anchor tag.",
+          "required": false
+        },
+        {
+          "name": "asChild",
+          "type": "boolean | undefined",
+          "description": "Merges Button props onto its single child element (Radix composition pattern). The child must accept a ref.",
+          "required": false
+        },
+        {
+          "name": "ariaLabel",
+          "type": "string | undefined",
+          "description": "Accessible label for icon-only buttons where visible text is absent.",
+          "required": false
+        },
+        {
+          "name": "ariaExpanded",
+          "type": "boolean | undefined",
+          "description": "Indicates whether a controlled disclosure widget is expanded. Set on buttons that toggle panels or menus.",
+          "required": false
+        },
+        {
+          "name": "ariaPressed",
+          "type": "boolean | undefined",
+          "description": "Indicates the pressed state for toggle buttons (e.g. bold, mute).",
+          "required": false
+        },
+        {
+          "name": "title",
+          "type": "string | undefined",
+          "description": "Supplementary tooltip text. Use alongside ariaLabel for icon-only buttons; not a replacement for ariaLabel.",
+          "required": false
+        }
       ]
     },
     "passthrough": {

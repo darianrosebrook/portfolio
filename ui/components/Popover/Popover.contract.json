@@ -96,7 +96,7 @@
       },
       "popover.elevation.default": {
         "resolvesTo": "semantic.elevation.default",
-        "fallback": "[object Object]",
+        "fallback": "0px 1px 3px #0000001f",
         "layer": "semantic"
       }
     }
@@ -170,7 +170,7 @@
     "transitions": [
       {
         "name": "open",
-        "trigger": "openness=closed\u2192open",
+        "trigger": "openness=closed→open",
         "phase": "enter",
         "properties": [
           "opacity",
@@ -181,7 +181,7 @@
       },
       {
         "name": "close",
-        "trigger": "openness=open\u2192closed",
+        "trigger": "openness=open→closed",
         "phase": "exit",
         "properties": [
           "opacity",
