@@ -45,9 +45,11 @@ acceptance:
     when: 'npm run typecheck, npm run lint and npm run lint:css execute'
     then: 'each command exits 0 with no unrecognised-rule, config-schema or unsupported-option error'
   - id: A3
-    given: 'The spec implementation is complete.'
-    when: 'The acceptance statement is evaluated.'
-    then: 'given the build regenerates design tokens before next build; when npm test and npm run build execute; then both exit 0 and the tracked token artifacts types/designTokens.ts and ui/designTokens/designTokens.json are byte-identical to the committed revision'
+    given: 'the build script regenerates design tokens before next build'
+    when: 'npm test and npm run build execute'
+    then: >-
+      both exit 0 and types/designTokens.ts and ui/designTokens/designTokens.json
+      are byte-identical to the committed revision
 non_functional: {}
 contracts:
   - name: 'build-toolchain'
