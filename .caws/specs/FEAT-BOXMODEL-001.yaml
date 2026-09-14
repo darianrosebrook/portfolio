@@ -2,10 +2,11 @@ id: FEAT-BOXMODEL-001
 title: 'Adopt the FSDS box-model slot pattern: shared layout override surface for components'
 risk_tier: 2
 mode: feature
-lifecycle_state: active
-worktree: feat-boxmodel-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Adopted the FSDS box-model slot pattern portfolio-natively, without the codegen rail: a hand-authored eleven-slot primitive (ui/primitives/boxModel.css), a reserved tokens.json boxModel group that the generator emits as shared --ds-box-model-* declarations (whitelisted, fail-loud on unknown slots), contract box-model.* entries validated by the token-fidelity checker (1511 verified), and reference migrations of Button/Card/Input/Field/Dialog whose slot defaults are pinned to pre-adoption literals — a visual no-op by construction, asserted by artifact tests. Override contract documented in the new root-level CSS-MIGRATION-PLAYBOOK.md: consumers set slots on the component element; variants and container queries re-declare slots so consumer overrides stay supreme. All five ACs evidenced pass; gates OK (27 files, 895 insertions).'
 created_at: '2026-09-14T04:47:29.088Z'
-updated_at: '2026-09-14T04:48:17.456Z'
+updated_at: '2026-09-14T05:02:53.545Z'
 created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
 blast_radius:
   modules:
