@@ -398,10 +398,10 @@ xxl: 1536px  xxxl: 1920px`}</code>
       <>
         <h3>1. Magic viewport numbers</h3>
         <pre>
-          <code>{`/* ❌ A breakpoint nobody approved */
+          <code>{`/* Bad: A breakpoint nobody approved */
 @media (width >= 1180px) { ... }
 
-/* ✅ The tokenized scale */
+/* Good: The tokenized scale */
 @media (width >= var(--core-dimension-breakpoint-xl, 1440px)) { ... }`}</code>
         </pre>
         <p>
@@ -410,18 +410,18 @@ xxl: 1536px  xxxl: 1920px`}</code>
         </p>
         <h3>2. Container greed</h3>
         <pre>
-          <code>{`/* ❌ Everything stretches to the viewport */
+          <code>{`/* Bad: Everything stretches to the viewport */
 .article { max-width: 100%; }
 
-/* ✅ Content type picks the container */
+/* Good: Content type picks the container */
 .article { max-width: var(--core-layout-container-md, 768px); }`}</code>
         </pre>
         <h3>3. Positioning document content</h3>
         <pre>
-          <code>{`/* ❌ Coordinates for content */
+          <code>{`/* Bad: Coordinates for content */
 .heroTitle { position: absolute; top: 120px; left: 60px; }
 
-/* ✅ Flow + spacing; overlays stay decorative */
+/* Good: Flow + spacing; overlays stay decorative */
 .heroStack { display: grid; gap: var(--core-spacing-size-06); }`}</code>
         </pre>
         <h3>4. Re-specifying layouts per breakpoint</h3>

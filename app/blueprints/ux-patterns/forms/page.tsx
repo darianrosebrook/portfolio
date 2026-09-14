@@ -308,17 +308,17 @@ const sections: FoundationSection[] = [
       <>
         <h3>1. Placeholder as label</h3>
         <pre>
-          <code>{`// ❌ The question disappears on focus
+          <code>{`// Bad: The question disappears on focus
 <input placeholder="Email address" />
-// ✅
+// Good
 <Label htmlFor="e">Email address</Label>
 <input id="e" placeholder="you@example.com" />`}</code>
         </pre>
         <h3>2. Color-only errors</h3>
         <pre>
-          <code>{`/* ❌ A border nothing announces */
+          <code>{`/* Bad: A border nothing announces */
 .inputError { border-color: var(--semantic-color-feedback-border-error); }
-/* ✅ Border + role=alert message + icon — two channels minimum */`}</code>
+/* Good: Border + role=alert message + icon — two channels minimum */`}</code>
         </pre>
         <h3>3. Validating every keystroke</h3>
         <p>

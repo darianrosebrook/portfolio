@@ -11,7 +11,7 @@ export function DetailsExamples() {
     <div className="examples">
       <h2>Before: Boolean Prop Explosion</h2>
       <pre>{`
-// ❌ Old approach - 6 boolean props
+// Bad: Old approach - 6 boolean props
 <Details 
   summary="Old API"
   inline={true}
@@ -61,7 +61,7 @@ export function DetailsExamples() {
         style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}
       >
         <div>
-          <h4>❌ Before (6 boolean props)</h4>
+          <h4>Before (6 boolean props)</h4>
           <ul>
             <li>
               <code>inline?: boolean</code>
@@ -84,7 +84,7 @@ export function DetailsExamples() {
           </ul>
         </div>
         <div>
-          <h4>✅ After (Cleaner API)</h4>
+          <h4>After (Cleaner API)</h4>
           <ul>
             <li>
               <code>{`variant: 'default' | 'inline' | 'compact'`}</code>
@@ -106,12 +106,12 @@ export function DetailsExamples() {
 
       <h3>5. Styling Benefits</h3>
       <pre>{`
-/* ❌ Before: Class-based boolean props */
+/* Bad — Before: Class-based boolean props */
 .details.inline { /* styles */ }
 .details.disabled { /* styles */ }
 .details.showIcon { /* styles */ }
 
-/* ✅ After: Data attribute styling */
+/* Good — After: Data attribute styling */
 .details[data-variant="inline"] { /* styles */ }
 .details[data-disabled="true"] { /* styles */ }
 .details[data-icon="none"] .icon { display: none; }

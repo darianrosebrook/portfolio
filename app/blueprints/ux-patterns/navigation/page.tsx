@@ -312,10 +312,10 @@ const isActive = (href) => pathname.startsWith(href);
       <>
         <h3>1. The unwired triad</h3>
         <pre>
-          <code>{`<!-- ❌ Roles without the relationships -->
+          <code>{`<!-- Bad: Roles without the relationships -->
 <div role="tab">Overview</div>
 <div>…content…</div>
-<!-- ✅ aria-controls in, aria-labelledby back, aria-selected true -->`}</code>
+<!-- Good: aria-controls in, aria-labelledby back, aria-selected true -->`}</code>
         </pre>
         <h3>2. Current-location collisions</h3>
         <p>

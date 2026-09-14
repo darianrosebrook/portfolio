@@ -377,23 +377,23 @@ none: 0px     01: 2px     02: 4px     medium: 6px
       <>
         <h3>1. Literal radii</h3>
         <pre>
-          <code>{`/* ❌ */
+          <code>{`/* Bad */
 .input { border-radius: 4px; }
-/* ✅ */
+/* Good */
 .input { border-radius: var(--semantic-control-radius-default, 6px); }`}</code>
         </pre>
         <h3>2. Nesting without stepping</h3>
         <pre>
-          <code>{`/* ❌ Card 8px hosting an 8px panel */
+          <code>{`/* Bad: Card 8px hosting an 8px panel */
 .panel { border-radius: var(--semantic-shape-radius-medium); }
-/* ✅ Step down inside */
+/* Good: Step down inside */
 .panel { border-radius: var(--semantic-shape-radius-small); }`}</code>
         </pre>
         <h3>3. Almost-pills</h3>
         <pre>
-          <code>{`/* ❌ Hand-tuned fake pill */
+          <code>{`/* Bad: Hand-tuned fake pill */
 .tag { border-radius: 14px; }
-/* ✅ Commit or don't */
+/* Good: Commit or don't */
 .tag { border-radius: var(--semantic-control-radius-pill); }`}</code>
         </pre>
         <h3>4. Scaling radius with size</h3>

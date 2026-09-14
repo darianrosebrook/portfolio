@@ -53,13 +53,13 @@ export default function UsageStandardsPage() {
           <code>{`/**
  * Button Usage Guidelines
  * 
- * ✅ Use Button for:
+ * Do use Button for:
  * - Primary actions (Save, Submit, Confirm)
  * - Secondary actions (Cancel, Back)
  * - Destructive actions (Delete, Remove)
  * - Navigation actions (Learn More, View Details)
  * 
- * ❌ Don't use Button for:
+ * Don't use Button for:
  * - Text links (use Link component)
  * - Icon-only actions without labels (use IconButton)
  * - Toggle switches (use Switch component)
@@ -98,13 +98,13 @@ export default function UsageStandardsPage() {
           <code>{`/**
  * Button Do's and Don'ts
  * 
- * ✅ DO:
+ * DO:
  * - Use descriptive labels ("Save Changes" not "Click")
  * - Provide loading states for async actions
  * - Use appropriate variants for action priority
  * - Ensure sufficient touch target size (44x44px)
  * 
- * ❌ DON'T:
+ * DON'T:
  * - Use buttons for navigation (use Link)
  * - Override focus styles (breaks accessibility)
  * - Use multiple primary buttons on same screen
@@ -116,14 +116,14 @@ export default function UsageStandardsPage() {
 
         <h3>Buttons</h3>
         <div style={{ marginBottom: '2rem' }}>
-          <h4>✅ Do</h4>
+          <h4>Do</h4>
           <ul>
             <li>Use descriptive labels that indicate action outcome</li>
             <li>Use primary variant for main action on screen</li>
             <li>Provide loading states for async actions</li>
             <li>Use appropriate size for context</li>
           </ul>
-          <h4>❌ Don't</h4>
+          <h4>Don't</h4>
           <ul>
             <li>Use buttons for navigation (use Link component)</li>
             <li>Use multiple primary buttons on same screen</li>
@@ -134,14 +134,14 @@ export default function UsageStandardsPage() {
 
         <h3>Form Controls</h3>
         <div style={{ marginBottom: '2rem' }}>
-          <h4>✅ Do</h4>
+          <h4>Do</h4>
           <ul>
             <li>Always associate labels with inputs</li>
             <li>Provide helpful error messages</li>
             <li>Use appropriate input types (email, tel, url)</li>
             <li>Group related fields logically</li>
           </ul>
-          <h4>❌ Don't</h4>
+          <h4>Don't</h4>
           <ul>
             <li>Use placeholder text as label</li>
             <li>Hide validation errors until submit</li>
@@ -152,14 +152,14 @@ export default function UsageStandardsPage() {
 
         <h3>Modals/Dialogs</h3>
         <div style={{ marginBottom: '2rem' }}>
-          <h4>✅ Do</h4>
+          <h4>Do</h4>
           <ul>
             <li>Use for critical confirmations</li>
             <li>Provide clear title and description</li>
             <li>Include primary and secondary actions</li>
             <li>Trap focus and manage keyboard navigation</li>
           </ul>
-          <h4>❌ Don't</h4>
+          <h4>Don't</h4>
           <ul>
             <li>Use for non-critical information (use Toast)</li>
             <li>Nest modals within modals</li>
@@ -173,7 +173,7 @@ export default function UsageStandardsPage() {
         <h3>When to Compose</h3>
         <p>Use composition for complex use cases:</p>
         <pre>
-          <code>{`// ✅ Good: Compose for complex cases
+          <code>{`// Good: Compose for complex cases
 <Card>
   <Card.Header>
     <Card.Title>User Profile</Card.Title>
@@ -191,7 +191,7 @@ export default function UsageStandardsPage() {
   </Card.Footer>
 </Card>
 
-// ❌ Bad: Trying to handle everything with props
+// Bad: Trying to handle everything with props
 <Card 
   title="User Profile"
   hasEditButton
@@ -244,12 +244,12 @@ export default function UsageStandardsPage() {
 
         <h3>Labeling Best Practices</h3>
         <pre>
-          <code>{`// ✅ Good: Clear, descriptive labels
+          <code>{`// Good: Clear, descriptive labels
 <Button>Save Changes</Button>
 <Button variant="danger">Delete Account</Button>
 <Input label="Email Address" placeholder="you@example.com" />
 
-// ❌ Bad: Vague, unclear labels
+// Bad: Vague, unclear labels
 <Button>OK</Button>
 <Button variant="danger">Delete</Button>
 <Input placeholder="Enter text" />`}</code>
@@ -259,7 +259,7 @@ export default function UsageStandardsPage() {
 
         <h3>1. Over-Customization</h3>
         <pre>
-          <code>{`// ❌ Bad: Customizing too much
+          <code>{`// Bad: Customizing too much
 <Button 
   style={{
     borderRadius: '50px',
@@ -271,7 +271,7 @@ export default function UsageStandardsPage() {
   Click me
 </Button>
 
-// ✅ Good: Use system variants
+// Good: Use system variants
 <Button variant="primary" size="lg">
   Click me
 </Button>`}</code>
@@ -279,21 +279,21 @@ export default function UsageStandardsPage() {
 
         <h3>2. Ignoring Context</h3>
         <pre>
-          <code>{`// ❌ Bad: Wrong component for context
+          <code>{`// Bad: Wrong component for context
 <Button onClick={() => router.push('/about')}>
   Learn More
 </Button>
 
-// ✅ Good: Use appropriate component
+// Good: Use appropriate component
 <Link href="/about">Learn More</Link>`}</code>
         </pre>
 
         <h3>3. Missing Error Handling</h3>
         <pre>
-          <code>{`// ❌ Bad: No error state
+          <code>{`// Bad: No error state
 <TextField label="Email" />
 
-// ✅ Good: Proper error handling
+// Good: Proper error handling
 <TextField 
   label="Email"
   error={errors.email}

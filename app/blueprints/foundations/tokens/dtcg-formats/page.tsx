@@ -452,13 +452,13 @@ semantic.color.background.brand = "#0a65fe"`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Type/value mismatch
+          <code>{`// BAD: Type/value mismatch
 {
   "$type": "dimension",
   "$value": "#0a65fe"  // Color value with dimension type!
 }
 
-// ✅ GOOD: Matching type and value
+// GOOD: Matching type and value
 {
   "$type": "color",
   "$value": "#0a65fe"
@@ -472,19 +472,19 @@ semantic.color.background.brand = "#0a65fe"`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Dimension without unit
+          <code>{`// BAD: Dimension without unit
 {
   "$type": "dimension",
   "$value": "16"  // Missing unit!
 }
 
-// ✅ GOOD: Dimension with unit
+// GOOD: Dimension with unit
 {
   "$type": "dimension",
   "$value": "16px"
 }
 
-// ✅ GOOD: Zero doesn't need unit
+// GOOD: Zero doesn't need unit
 {
   "$type": "dimension",
   "$value": "0"
@@ -499,7 +499,7 @@ semantic.color.background.brand = "#0a65fe"`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Invalid units
+          <code>{`// BAD: Invalid units
 {
   "$type": "dimension",
   "$value": "1em"     // em not allowed
@@ -509,7 +509,7 @@ semantic.color.background.brand = "#0a65fe"`}</code>
   "$value": "100%"    // % not allowed
 }
 
-// ✅ GOOD: Valid units
+// GOOD: Valid units
 {
   "$type": "dimension",
   "$value": "16px"
@@ -527,13 +527,13 @@ semantic.color.background.brand = "#0a65fe"`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Circular reference
+          <code>{`// BAD: Circular reference
 {
   "primary": { "$value": "{semantic.color.secondary}" },
   "secondary": { "$value": "{semantic.color.primary}" }
 }
 
-// ✅ GOOD: Linear reference chain
+// GOOD: Linear reference chain
 {
   "primary": { "$value": "{core.color.palette.blue.500}" },
   "secondary": { "$value": "{core.color.palette.blue.400}" }
@@ -547,12 +547,12 @@ semantic.color.background.brand = "#0a65fe"`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Typo in reference
+          <code>{`// BAD: Typo in reference
 {
   "$value": "{core.color.pallete.blue.500}"  // "pallete" typo!
 }
 
-// ✅ GOOD: Correct path
+// GOOD: Correct path
 {
   "$value": "{core.color.palette.blue.500}"
 }`}</code>

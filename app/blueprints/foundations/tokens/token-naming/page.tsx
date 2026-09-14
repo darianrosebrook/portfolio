@@ -217,12 +217,12 @@ semantic.components.button.primary.background.disabled`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Describes implementation
+          <code>{`// BAD: Describes implementation
 semantic.color.blue500
 semantic.color.grayText
 semantic.spacing.16px
 
-// ✅ GOOD: Describes purpose
+// GOOD: Describes purpose
 semantic.color.foreground.link
 semantic.color.foreground.secondary
 semantic.spacing.gap.grid`}</code>
@@ -253,12 +253,12 @@ validateToken(tokenDefinition)`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Inconsistent depth
+          <code>{`// BAD: Inconsistent depth
 semantic.color.primary           // 3 levels
 semantic.color.foreground.primary // 4 levels
 semantic.color.background.surface.raised // 5 levels
 
-// ✅ GOOD: Consistent depth within category
+// GOOD: Consistent depth within category
 semantic.color.foreground.primary
 semantic.color.foreground.secondary
 semantic.color.foreground.tertiary
@@ -274,11 +274,11 @@ semantic.color.background.raised`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: British spelling
+          <code>{`// BAD: British spelling
 semantic.color.grey.500
 semantic.color.foreground.colour
 
-// ✅ GOOD: American spelling
+// GOOD: American spelling
 semantic.color.gray.500
 semantic.color.foreground.color`}</code>
         </pre>
@@ -290,12 +290,12 @@ semantic.color.foreground.color`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Abbreviated
+          <code>{`// BAD: Abbreviated
 semantic.clr.fg.prim
 semantic.typ.wt.bd
 semantic.spc.sz.04
 
-// ✅ GOOD: Explicit
+// GOOD: Explicit
 semantic.color.foreground.primary
 semantic.typography.weight.bold
 semantic.spacing.size.04`}</code>
@@ -412,12 +412,12 @@ semantic.spacing.size.04`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Color name in semantic token
+          <code>{`// BAD: Color name in semantic token
 semantic.color.blueButton
 semantic.color.redError
 semantic.color.greenSuccess
 
-// ✅ GOOD: Purpose-based names
+// GOOD: Purpose-based names
 semantic.color.background.brand
 semantic.color.status.danger
 semantic.color.status.success`}</code>
@@ -430,12 +430,12 @@ semantic.color.status.success`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Values in names
+          <code>{`// BAD: Values in names
 semantic.spacing.16px
 semantic.typography.fontSize14
 semantic.motion.duration200ms
 
-// ✅ GOOD: Relative or scale-based names
+// GOOD: Relative or scale-based names
 semantic.spacing.size.04
 semantic.typography.size.body
 semantic.motion.duration.short`}</code>
@@ -448,12 +448,12 @@ semantic.motion.duration.short`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Inconsistent pluralization
+          <code>{`// BAD: Inconsistent pluralization
 semantic.colors.foreground.primary
 semantic.color.backgrounds.primary
 semantic.component.button.primary
 
-// ✅ GOOD: Consistent (singular categories)
+// GOOD: Consistent (singular categories)
 semantic.color.foreground.primary
 semantic.color.background.primary
 semantic.components.button.primary`}</code>
@@ -466,12 +466,12 @@ semantic.components.button.primary`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Ambiguous names
+          <code>{`// BAD: Ambiguous names
 semantic.color.primary        // Primary what? Text? Background?
 semantic.spacing.default      // Default for what context?
 semantic.border.main          // Main border color? Width? Style?
 
-// ✅ GOOD: Specific names
+// GOOD: Specific names
 semantic.color.foreground.primary
 semantic.spacing.gap.grid
 semantic.color.border.default`}</code>
@@ -484,12 +484,12 @@ semantic.color.border.default`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Skipped levels
+          <code>{`// BAD: Skipped levels
 semantic.primary                    // Missing category
 semantic.color.primary              // Missing subcategory
 semantic.components.background      // Missing component name
 
-// ✅ GOOD: Complete hierarchy
+// GOOD: Complete hierarchy
 semantic.color.foreground.primary
 semantic.color.background.primary
 semantic.components.button.primary.background`}</code>

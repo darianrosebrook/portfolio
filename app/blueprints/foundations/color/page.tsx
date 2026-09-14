@@ -779,10 +779,10 @@ export const WCAG_LEVELS = {
 
         <h3>1. Hex values in component styles</h3>
         <pre>
-          <code>{`// ❌ The component now owns a theming decision
+          <code>{`// Bad: The component now owns a theming decision
 .card { border-color: #824500; }
 
-// ✅ The component owns an interface; the system owns the value
+// Good: The component owns an interface; the system owns the value
 .card { border-color: var(--ds-card-border-warning, #824500); }`}</code>
         </pre>
         <p>
@@ -793,10 +793,10 @@ export const WCAG_LEVELS = {
 
         <h3>2. Validating only the light theme</h3>
         <pre>
-          <code>{`// ❌ A pair checked once, shipped twice
+          <code>{`// Bad: A pair checked once, shipped twice
 validateColorPair(fg.secondary, bg.primary);        // light: 7.5:1 ✓
 
-// ✅ Every pair is a per-mode claim
+// Good: Every pair is a per-mode claim
 validateColorPair(fg.secondary, bg.primary, 'light'); // 7.5:1 ✓
 validateColorPair(fg.secondary, bg.primary, 'dark');  // 9.5:1 ✓`}</code>
         </pre>
@@ -807,10 +807,10 @@ validateColorPair(fg.secondary, bg.primary, 'dark');  // 9.5:1 ✓`}</code>
 
         <h3>3. Components reaching past their contract</h3>
         <pre>
-          <code>{`// ❌ The card is now coupled to global structure
+          <code>{`// Bad: The card is now coupled to global structure
 .card { background: var(--semantic-color-background-primary); }
 
-// ✅ Scoped indirection keeps the system refactorable
+// Good: Scoped indirection keeps the system refactorable
 .card { background: var(--ds-card-color-background-default); }`}</code>
         </pre>
         <p>
@@ -821,11 +821,11 @@ validateColorPair(fg.secondary, bg.primary, 'dark');  // 9.5:1 ✓`}</code>
 
         <h3>4. Borrowing a background ramp for text</h3>
         <pre>
-          <code>{`// ❌ red.500 passes AA on white (≈4.9:1) — as a BUTTON fill —
+          <code>{`// Bad: red.500 passes AA on white (≈4.9:1) — as a BUTTON fill —
 //    and fails as body text the day someone reads a paragraph
 .bodyAccent { color: var(--core-color-palette-red-500); }
 
-// ✅ Text needs a ramp position chosen for text
+// Good: Text needs a ramp position chosen for text
 .bodyAccent { color: var(--semantic-color-foreground-action); }`}</code>
         </pre>
         <p>
@@ -836,14 +836,14 @@ validateColorPair(fg.secondary, bg.primary, 'dark');  // 9.5:1 ✓`}</code>
 
         <h3>5. Alpha layered on tokens</h3>
         <pre>
-          <code>{`// ❌ Opacity over a resolved color: contrast is now
+          <code>{`// Bad — Opacity over a resolved color: contrast is now
 //    a function of whatever happens to be underneath
 .scrim {
   background: var(--semantic-color-overlay-scrim);
   opacity: 0.5;
 }
 
-// ✅ Bake alpha where it can be tracked — the core layer has
+// Good: Bake alpha where it can be tracked — the core layer has
 //    explicit alpha-carrying colors (color.mode.transparent,
 //    color.opacity.50) so the composited value is the token`}</code>
         </pre>
@@ -855,7 +855,7 @@ validateColorPair(fg.secondary, bg.primary, 'dark');  // 9.5:1 ✓`}</code>
 
         <h3>6. Treating the generated file as editable</h3>
         <pre>
-          <code>{`/* ❌ app/designTokens.scss says AUTO-GENERATED for a reason:
+          <code>{`/* Bad: app/designTokens.scss says AUTO-GENERATED for a reason:
    a hand edit is a change with no source, no diff review,
    and no survival of the next build */`}</code>
         </pre>

@@ -321,9 +321,9 @@ const sections: FoundationSection[] = [
         </p>
         <h3>2. Detached styles</h3>
         <pre>
-          <code>{`// ❌ A style whose fill is a literal
+          <code>{`// Bad: A style whose fill is a literal
 Fill: #717171
-// ✅ A style bound to the variable
+// Good: A style bound to the variable
 Fill: neutral/500  (variable)`}</code>
         </pre>
         <h3>3. Mode-painting dark themes</h3>

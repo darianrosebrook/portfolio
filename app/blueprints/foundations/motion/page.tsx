@@ -656,10 +656,10 @@ const reduceMotion =
 
         <h3>1. Literal durations in components</h3>
         <pre>
-          <code>{`// ❌ Twenty components, twenty opinions about "quick"
+          <code>{`// Bad: Twenty components, twenty opinions about "quick"
 .tooltip { transition: all 180ms ease-in-out; }
 
-// ✅ One opinion, at the tier that owns it: the tooltip composite
+// Good: One opinion, at the tier that owns it: the tooltip composite
 //    (short3 + quick.enter + delay.medium — see the semantic layer)
 .tooltip {
   transition-duration: var(--core-motion-duration-short3, 167ms);
@@ -678,11 +678,11 @@ const reduceMotion =
 
         <h3>2. One easing for enter and exit</h3>
         <pre>
-          <code>{`// ❌ Symmetric physics for asymmetric events
+          <code>{`// Bad: Symmetric physics for asymmetric events
 .menu { transition: transform 250ms var(--core-motion-easing-soft-enter); }
 .menu[data-state='closed'] { /* same curve runs backward */ }
 
-// ✅ Exit is its own decision
+// Good: Exit is its own decision
 .menu[data-state='open']   { transition-timing-function:
   var(--core-motion-easing-soft-enter); }
 .menu[data-state='closed'] { transition-timing-function:
@@ -695,10 +695,10 @@ const reduceMotion =
 
         <h3>3. Reduced motion bolted on at the end</h3>
         <pre>
-          <code>{`// ❌ Motion shipped, reduction "added later" — later never comes
+          <code>{`// Bad: Motion shipped, reduction "added later" — later never comes
 .hero { animation: parallax 30s linear infinite; }
 
-// ✅ The reduction ships in the same rule set
+// Good: The reduction ships in the same rule set
 @media (prefers-reduced-motion: reduce) {
   .hero { animation: none; }
 }`}</code>
@@ -712,10 +712,10 @@ const reduceMotion =
 
         <h3>4. Animating layout properties</h3>
         <pre>
-          <code>{`// ❌ Reflows every frame
+          <code>{`// Bad: Reflows every frame
 .accordion { transition: height 250ms; }
 
-// ✅ Transform, always transform
+// Good: Transform, always transform
 .accordionPanel {
   transform: scaleY(0);
   transform-origin: top;
@@ -731,10 +731,10 @@ const reduceMotion =
 
         <h3>5. Stagger as a loop index</h3>
         <pre>
-          <code>{`// ❌ Delay grows with list length; item 30 waits 900ms
+          <code>{`// Bad: Delay grows with list length; item 30 waits 900ms
 .items:nth-child(n) { transition-delay: calc(n * 30ms); }
 
-// ✅ Cap the sequence — choreography, not pagination
+// Good: Cap the sequence — choreography, not pagination
 .items:nth-child(1) { transition-delay: 0ms; }
 .items:nth-child(2) { transition-delay: var(--core-motion-stagger-sm); }
 .items:nth-child(3) { transition-delay: var(--core-motion-stagger-md); }
@@ -747,10 +747,10 @@ const reduceMotion =
 
         <h3>6. Scripted motion ignoring the shared signal</h3>
         <pre>
-          <code>{`// ❌ CSS respects the OS setting; the scroll reveal does not
+          <code>{`// Bad: CSS respects the OS setting; the scroll reveal does not
 useEffect(() => { animateOnScroll(element, { distance: 60 }); }, []);
 
-// ✅ One signal, both worlds
+// Good: One signal, both worlds
 const { prefersReducedMotion } = useReducedMotion();
 useEffect(() => {
   animateOnScroll(element,

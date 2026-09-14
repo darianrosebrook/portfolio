@@ -152,9 +152,9 @@ Validation checks:
 Example output:
 
 Validating Modal
-✅ Required file exists: Modal.tsx
-✅ Found useModal.ts (logic separation)
-✅ Found ModalProvider.tsx (context orchestration)
+PASS Required file exists: Modal.tsx
+PASS Found useModal.ts (logic separation)
+PASS Found ModalProvider.tsx (context orchestration)
 ⚠️ README missing accessibility notes
 
 ⸻
@@ -359,7 +359,7 @@ We are transitioning from BEM-style naming conventions to modern CSS nesting to 
 Use SCSS nesting to create visual hierarchy that matches component structure:
 
 ```scss
-// ✅ Modern approach
+// Good: Modern approach
 .switch {
   // Root styles
 
@@ -385,7 +385,7 @@ Use SCSS nesting to create visual hierarchy that matches component structure:
 Use semantic, readable class names that describe the element's purpose:
 
 ```scss
-// ✅ Good
+// Good
 .button {
   .icon {
   }
@@ -398,7 +398,7 @@ Use semantic, readable class names that describe the element's purpose:
   }
 }
 
-// ❌ Avoid
+// Avoid
 .button {
   .button__icon {
   }

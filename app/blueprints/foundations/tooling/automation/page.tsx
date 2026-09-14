@@ -340,8 +340,8 @@ git push                   # pre-push: contracts, whole-repo gates
       <>
         <h3>1. Gates slow enough to bypass</h3>
         <pre>
-          <code>{`# ❌ Whole-repo e2e on every commit — bypass culture incoming
-# ✅ Touched-file fixes at commit, chain at push, e2e at merge`}</code>
+          <code>{`# Bad: Whole-repo e2e on every commit — bypass culture incoming
+# Good: Touched-file fixes at commit, chain at push, e2e at merge`}</code>
         </pre>
         <h3>2. Manual steps with signposts</h3>
         <p>

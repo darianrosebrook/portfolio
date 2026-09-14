@@ -350,10 +350,10 @@ const sections: FoundationSection[] = [
       <>
         <h3>1. The permanent campaign fork</h3>
         <pre>
-          <code>{`// ❌ Ships fast, expires never
+          <code>{`// Bad: Ships fast, expires never
 <LaunchHero> /* bespoke styles, no tokens */ </LaunchHero>
 
-// ✅ Composition under style data
+// Good: Composition under style data
 <LaunchHero> /* system primitives + pinned brand ramp */ </LaunchHero>`}</code>
         </pre>
         <h3>2. Style decisions with contractual force</h3>

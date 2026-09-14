@@ -16,7 +16,7 @@ A composer for creating flexible select interfaces with provider-based orchestra
 
 ## Key Features
 
-### ✅ Composer Benefits
+### Composer Benefits
 
 - **Orchestration:** Coordinates trigger, content, search, and options through provider context
 - **Slotting:** Flexible composition with replaceable parts (trigger, search, options)
@@ -249,7 +249,7 @@ The component uses data attributes and CSS classes for styling:
 ### Before (Boolean Props)
 
 ```tsx
-// ❌ Old API with boolean explosion
+// Bad: Old API with boolean explosion
 <Select
   options={options}
   multiselect={true}
@@ -265,7 +265,7 @@ The component uses data attributes and CSS classes for styling:
 ### After (Composer Pattern)
 
 ```tsx
-// ✅ New composer API
+// Good: New composer API
 <SelectProvider
   options={options}
   multiple={true}
@@ -286,13 +286,13 @@ The component uses data attributes and CSS classes for styling:
 
 This component exemplifies the **Composer** layer:
 
-- ✅ **Orchestration:** Provider coordinates trigger, content, and options
-- ✅ **Context:** Shared state without prop drilling
-- ✅ **Slotting:** Replaceable parts (trigger, search, options, empty state)
-- ✅ **Headless Logic:** Separated via `useSelect` hook
-- ✅ **No Prop Explosion:** Slots handle specific concerns
-- ✅ **Accessibility:** Built-in ARIA and keyboard support
-- ✅ **Keyboard Navigation:** Arrow keys, selection, escape handling
+- **Orchestration:** Provider coordinates trigger, content, and options
+- **Context:** Shared state without prop drilling
+- **Slotting:** Replaceable parts (trigger, search, options, empty state)
+- **Headless Logic:** Separated via `useSelect` hook
+- **No Prop Explosion:** Slots handle specific concerns
+- **Accessibility:** Built-in ARIA and keyboard support
+- **Keyboard Navigation:** Arrow keys, selection, escape handling
 
 ## Examples
 

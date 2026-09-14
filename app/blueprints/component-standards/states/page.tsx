@@ -272,12 +272,12 @@ export default function StatesStandardsPage() {
         <h3>Consistent Variant Names</h3>
         <p>Use consistent variant names across components:</p>
         <pre>
-          <code>{`// ✅ Good: Consistent naming
+          <code>{`// Good: Consistent naming
 <Button variant="primary" />
 <Input variant="primary" />
 <Card variant="primary" />
 
-// ❌ Bad: Inconsistent naming
+// Bad: Inconsistent naming
 <Button variant="primary" />
 <Input appearance="primary" />
 <Card style="primary" />`}</code>
@@ -286,12 +286,12 @@ export default function StatesStandardsPage() {
         <h3>Semantic Variants</h3>
         <p>Variants should describe purpose, not appearance:</p>
         <pre>
-          <code>{`// ✅ Good: Semantic variants
+          <code>{`// Good: Semantic variants
 <Button variant="primary" /> // Main action
 <Button variant="secondary" /> // Secondary action
 <Button variant="danger" /> // Destructive action
 
-// ❌ Bad: Appearance-based variants
+// Bad: Appearance-based variants
 <Button variant="blue" />
 <Button variant="outlined" />
 <Button variant="solid" />`}</code>
@@ -351,7 +351,7 @@ export default function StatesStandardsPage() {
 
         <h3>1. Missing States</h3>
         <pre>
-          <code>{`// ❌ Bad: Missing focus state
+          <code>{`// Bad: Missing focus state
 .button {
   &:hover {
     background: blue;
@@ -359,7 +359,7 @@ export default function StatesStandardsPage() {
   // No focus state!
 }
 
-// ✅ Good: All states defined
+// Good: All states defined
 .button {
   &:hover {
     background: blue;
@@ -372,11 +372,11 @@ export default function StatesStandardsPage() {
 
         <h3>2. Inconsistent State Behavior</h3>
         <pre>
-          <code>{`// ❌ Bad: Different disabled behavior
+          <code>{`// Bad: Different disabled behavior
 .button.disabled { opacity: 0.5; }
 .input.disabled { opacity: 0.3; } // Inconsistent!
 
-// ✅ Good: Consistent disabled behavior
+// Good: Consistent disabled behavior
 .button:disabled,
 .input:disabled {
   opacity: 0.5;
@@ -386,7 +386,7 @@ export default function StatesStandardsPage() {
 
         <h3>3. State Conflicts</h3>
         <pre>
-          <code>{`// ❌ Bad: States conflict
+          <code>{`// Bad: States conflict
 .button {
   &:disabled {
     opacity: 0.5;
@@ -396,7 +396,7 @@ export default function StatesStandardsPage() {
   }
 }
 
-// ✅ Good: Disabled prevents hover
+// Good: Disabled prevents hover
 .button {
   &:disabled {
     opacity: 0.5;

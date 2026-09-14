@@ -388,9 +388,9 @@ spacious:  12  20  32  40  56  64`}</code>
       <>
         <h3>1. The one-off literal</h3>
         <pre>
-          <code>{`/* ❌ */
+          <code>{`/* Bad */
 .card { padding: 14px; }
-/* ✅ */
+/* Good */
 .card { padding: var(--ds-card-space-padding, 12px); }`}</code>
         </pre>
         <p>
@@ -399,16 +399,16 @@ spacious:  12  20  32  40  56  64`}</code>
         </p>
         <h3>2. Hardcoding density-mapped gaps</h3>
         <pre>
-          <code>{`/* ❌ Opted out of density silently */
+          <code>{`/* Bad: Opted out of density silently */
 .list { gap: var(--core-spacing-size-06); }
-/* ✅ Rides the density mode */
+/* Good: Rides the density mode */
 .list { gap: var(--semantic-spacing-stack); }`}</code>
         </pre>
         <h3>3. Shrinking targets to save space</h3>
         <pre>
-          <code>{`/* ❌ 28px target in a dense table row */
+          <code>{`/* Bad: 28px target in a dense table row */
 .rowAction { width: 28px; height: 28px; }
-/* ✅ Small visual, legal hit area */
+/* Good: Small visual, legal hit area */
 .rowAction { width: 28px; height: 28px; position: relative; }
 .rowAction::after { content:''; position:absolute;
   inset: calc((44px - 100%) / 2); }`}</code>

@@ -404,9 +404,9 @@ const sections: FoundationSection[] = [
       <>
         <h3>1. Semantic tokens wearing atomic names</h3>
         <pre>
-          <code>{`// ❌ A job word costume over a value
+          <code>{`// Bad: A job word costume over a value
 --semantic-color-blue-for-links: #0a65fe;
-// ✅ The role owns the job; the value resolves upward
+// Good: The role owns the job; the value resolves upward
 --semantic-color-foreground-link: var(--core-color-palette-brand-primary-600);`}</code>
         </pre>
         <h3>2. Derived values defended as taste</h3>
@@ -425,7 +425,7 @@ const sections: FoundationSection[] = [
         </p>
         <h3>4. Sub-perceptual vocabulary</h3>
         <pre>
-          <code>{`// ❌ +12.5% apart — two names, one answer
+          <code>{`// Bad: +12.5% apart — two names, one answer
 size.06: 16px   size.065: 18px   size.07: 24px`}</code>
         </pre>
         <h3>5. Menu leakage</h3>

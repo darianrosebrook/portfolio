@@ -388,23 +388,23 @@ level.3:  0px  8px  16px   rgba(0,0,0,0.18)  // modal overlay`}</code>
       <>
         <h3>1. Everything floats</h3>
         <pre>
-          <code>{`/* ❌ Depth as decoration: the page whispers constantly */
+          <code>{`/* Bad — Depth as decoration: the page whispers constantly */
 .card, .badge, .button { box-shadow: var(--core-elevation-level-1); }
-/* ✅ Elevation for overlays and detachment; borders for the rest */`}</code>
+/* Good: Elevation for overlays and detachment; borders for the rest */`}</code>
         </pre>
         <h3>2. Hand-tuned shadows</h3>
         <pre>
-          <code>{`/* ❌ A fifth shadow nobody calibrated */
+          <code>{`/* Bad: A fifth shadow nobody calibrated */
 .popover { box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-/* ✅ The ramp, through the semantic role */
+/* Good: The ramp, through the semantic role */
 .popover { box-shadow: var(--semantic-elevation-surface-floating); }`}</code>
         </pre>
         <h3>3. Shadows and stacking disagreeing</h3>
         <pre>
-          <code>{`/* ❌ Level-3 shadow pinned under a level-1 bar */
+          <code>{`/* Bad: Level-3 shadow pinned under a level-1 bar */
 .modal { box-shadow: var(--core-elevation-level-3); z-index: 10; }
 .nav   { z-index: 100; }
-/* ✅ Depth numbers order with shadow levels */`}</code>
+/* Good: Depth numbers order with shadow levels */`}</code>
         </pre>
         <h3>4. Depth as the only signal</h3>
         <p>
@@ -414,9 +414,9 @@ level.3:  0px  8px  16px   rgba(0,0,0,0.18)  // modal overlay`}</code>
         </p>
         <h3>5. Viewport-sized blur</h3>
         <pre>
-          <code>{`/* ❌ Full-screen frost behind every list row */
+          <code>{`/* Bad: Full-screen frost behind every list row */
 .row::backdrop { backdrop-filter: var(--core-effect-backdrop-blur-lg); }
-/* ✅ Blur scaled to the surface that needs it */`}</code>
+/* Good: Blur scaled to the surface that needs it */`}</code>
         </pre>
       </>
     ),

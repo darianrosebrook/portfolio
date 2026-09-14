@@ -15,7 +15,7 @@ A composer for creating collapsible content sections with provider-based orchest
 
 ## Key Features
 
-### ✅ Composer Benefits
+### Composer Benefits
 
 - **Orchestration:** Coordinates multiple details through provider context
 - **Slotting:** Flexible composition with variant slots and icon positioning
@@ -201,7 +201,7 @@ The component uses data attributes for styling variants:
 ### Before (Boolean Props)
 
 ```tsx
-// ❌ Old API with boolean explosion
+// Bad: Old API with boolean explosion
 <Details
   inline={true}
   showIcon={false}
@@ -218,7 +218,7 @@ The component uses data attributes for styling variants:
 ### After (Composer Pattern)
 
 ```tsx
-// ✅ New composer API
+// Good: New composer API
 <DetailsProvider allowMultiple={true}>
   <Details
     variant="inline"
@@ -236,12 +236,12 @@ The component uses data attributes for styling variants:
 
 This component exemplifies the **Composer** layer:
 
-- ✅ **Orchestration:** Provider coordinates multiple children
-- ✅ **Context:** Shared state without prop drilling
-- ✅ **Slotting:** Variant components for common patterns
-- ✅ **Headless Logic:** Separated via `useDetails` hook
-- ✅ **No Prop Explosion:** Variants instead of boolean flags
-- ✅ **Accessibility:** Built-in ARIA and keyboard support
+- **Orchestration:** Provider coordinates multiple children
+- **Context:** Shared state without prop drilling
+- **Slotting:** Variant components for common patterns
+- **Headless Logic:** Separated via `useDetails` hook
+- **No Prop Explosion:** Variants instead of boolean flags
+- **Accessibility:** Built-in ARIA and keyboard support
 
 ## Examples
 

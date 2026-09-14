@@ -151,7 +151,7 @@ Displays engagement buttons (like, reply, repost, share).
     avatar: '/avatars/bot.jpg',
   }}
   timestamp="2024-01-15T18:00:00Z"
-  content="System maintenance complete ✅"
+  content="System maintenance complete"
   stats={{ likes: 5, replies: 0, reposts: 1 }}
 >
   <Postcard.Header />

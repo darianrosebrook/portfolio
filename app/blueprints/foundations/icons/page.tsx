@@ -360,37 +360,37 @@ const hasLabel = typeof label === 'string' && label.length > 0;
       <>
         <h3>1. Arbitrary pixel sizes</h3>
         <pre>
-          <code>{`/* ❌ */
+          <code>{`/* Bad */
 <Icon icon={faStar} width={18} height={18} />
-/* ✅ */
+/* Good */
 <Icon icon={faStar} width={20} height={20} /> /* icon.size.md */`}</code>
         </pre>
         <h3>2. Labeling decorative icons</h3>
         <pre>
-          <code>{`/* ❌ Noise: announced twice */
+          <code>{`/* Bad — Noise: announced twice */
 <button><Icon icon={faStar} label="Favorite" /> Favorite</button>
-/* ✅ */
+/* Good */
 <button><Icon icon={faStar} /> Favorite</button>`}</code>
         </pre>
         <h3>3. Unlabeled meaningful icons</h3>
         <pre>
-          <code>{`/* ❌ A button with no accessible name */
+          <code>{`/* Bad: A button with no accessible name */
 <button><Icon icon={faXmark} /></button>
-/* ✅ */
+/* Good */
 <button><Icon icon={faXmark} label="Close" /></button>`}</code>
         </pre>
         <h3>4. Bypassing the component</h3>
         <pre>
-          <code>{`/* ❌ Raw SVG skips the ARIA contract and hydration care */
+          <code>{`/* Bad: Raw SVG skips the ARIA contract and hydration care */
 <svg width="20"><path d="…" /></svg>
-/* ✅ One component owns the rules */
+/* Good: One component owns the rules */
 <Icon icon={faCheck} width={20} height={20} />`}</code>
         </pre>
         <h3>5. Fixing alignment with margins</h3>
         <pre>
-          <code>{`/* ❌ Per-instance optical correction */
+          <code>{`/* Bad: Per-instance optical correction */
 .icon { margin-top: -2px; }
-/* ✅ Fix the glyph grid once; alignment comes free */`}</code>
+/* Good: Fix the glyph grid once; alignment comes free */`}</code>
         </pre>
       </>
     ),

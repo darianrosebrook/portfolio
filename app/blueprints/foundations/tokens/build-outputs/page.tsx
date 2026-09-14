@@ -448,11 +448,11 @@ npm run tokens:validate   # Run AJV + custom validation`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Editing generated file
+          <code>{`// BAD: Editing generated file
 // ui/components/Button/Button.tokens.generated.scss
 $button-primary-background: #0066cc; // Manual edit - will be lost!
 
-// ✅ GOOD: Edit the source token
+// GOOD: Edit the source token
 // semantic/components/component.tokens.json
 {
   "button": {
@@ -481,13 +481,13 @@ $button-primary-background: #0066cc; // Manual edit - will be lost!
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Circular reference (caught by validator)
+          <code>{`// BAD: Circular reference (caught by validator)
 :root {
   --color-a: var(--color-b);
   --color-b: var(--color-a); // Circular!
 }
 
-// ✅ GOOD: Linear reference chain
+// GOOD: Linear reference chain
 :root {
   --core-color-blue-500: #0066cc;
   --semantic-color-brand: var(--core-color-blue-500);

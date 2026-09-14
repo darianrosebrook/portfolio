@@ -84,7 +84,7 @@ export function AssessmentResults({ result, rubric }: AssessmentResultsProps) {
 
       <div className={styles.feedbackSection}>
         <div className={styles.strengths}>
-          <h3>✅ Strengths</h3>
+          <h3>Strengths</h3>
           <ul>
             {result.feedback.strengths.map((strength, index) => (
               <li key={index}>{strength}</li>

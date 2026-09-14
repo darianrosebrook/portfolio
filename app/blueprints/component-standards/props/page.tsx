@@ -54,10 +54,10 @@ export default function PropsStandardsPage() {
 
         <h3>1. Prop Names Should Describe Purpose, Not Implementation</h3>
         <pre>
-          <code>{`// ❌ Bad: Implementation detail
+          <code>{`// Bad: Implementation detail
 <Button variant="blue" />
 
-// ✅ Good: Purpose-driven
+// Good: Purpose-driven
 <Button variant="primary" />`}</code>
         </pre>
         <p>
@@ -84,18 +84,18 @@ export default function PropsStandardsPage() {
 
         <h3>3. Use Semantic Types</h3>
         <pre>
-          <code>{`// ❌ Bad: Generic types
+          <code>{`// Bad: Generic types
 size: 'small' | 'medium' | 'large'
 variant: '1' | '2' | '3'
 
-// ✅ Good: Semantic types
+// Good: Semantic types
 size: 'sm' | 'md' | 'lg'
 variant: 'primary' | 'secondary' | 'ghost'`}</code>
         </pre>
 
         <h3>4. Provide Sensible Defaults</h3>
         <pre>
-          <code>{`// ✅ Good: Defaults enable simple usage
+          <code>{`// Good: Defaults enable simple usage
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'ghost'; // defaults to 'primary'
   size?: 'sm' | 'md' | 'lg'; // defaults to 'md'
@@ -165,7 +165,7 @@ interface ButtonProps {
           and maintain.
         </p>
         <pre>
-          <code>{`// ❌ Bad: 15+ props
+          <code>{`// Bad: 15+ props
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg' | 'xl';
@@ -181,7 +181,7 @@ interface ButtonProps {
   // ... and more
 }
 
-// ✅ Good: Use composition instead
+// Good: Use composition instead
 <Button variant="primary" icon={<Icon />} iconPosition="left">
   Save
 </Button>
@@ -203,10 +203,10 @@ interface ButtonProps {
           errors.
         </p>
         <pre>
-          <code>{`// ❌ Bad: No type safety
+          <code>{`// Bad: No type safety
 <Button variant="primay" /> // Typo! No error
 
-// ✅ Good: TypeScript unions
+// Good: TypeScript unions
 type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 interface ButtonProps {
   variant?: ButtonVariant;
@@ -221,10 +221,10 @@ interface ButtonProps {
           creates confusion.
         </p>
         <pre>
-          <code>{`// ❌ Bad: One prop controls multiple things
+          <code>{`// Bad: One prop controls multiple things
 <Button mode="loading-primary-large" />
 
-// ✅ Good: Separate concerns
+// Good: Separate concerns
 <Button variant="primary" size="lg" loading />`}</code>
         </pre>
 
@@ -234,12 +234,12 @@ interface ButtonProps {
           for the same concept.
         </p>
         <pre>
-          <code>{`// ❌ Bad: Inconsistent naming
+          <code>{`// Bad: Inconsistent naming
 <Button size="sm" />
 <Input scale="sm" />
 <Avatar dimension="sm" />
 
-// ✅ Good: Consistent naming
+// Good: Consistent naming
 <Button size="sm" />
 <Input size="sm" />
 <Avatar size="sm" />`}</code>
@@ -263,7 +263,7 @@ interface ButtonProps {
           </li>
         </ul>
         <pre>
-          <code>{`// ✅ Good primitive: Minimal, stable props
+          <code>{`// Good primitive: Minimal, stable props
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
@@ -292,7 +292,7 @@ interface ButtonProps {
           </li>
         </ul>
         <pre>
-          <code>{`// ✅ Good compound: Coordinates without explosion
+          <code>{`// Good compound: Coordinates without explosion
 interface TextFieldProps {
   label?: string;
   error?: string;
@@ -325,7 +325,7 @@ interface TextFieldProps {
           </li>
         </ul>
         <pre>
-          <code>{`// ✅ Good composer: Uses composition
+          <code>{`// Good composer: Uses composition
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;

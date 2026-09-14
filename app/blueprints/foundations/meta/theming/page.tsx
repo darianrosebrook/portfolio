@@ -371,17 +371,17 @@ sunset:      { accent: "orange",  density: "default"  }`}</code>
       <>
         <h3>1. Theme conditionals in application code</h3>
         <pre>
-          <code>{`// ❌ Logic compensating for failed theming
+          <code>{`// Bad: Logic compensating for failed theming
 if (isDarkMode) iconColor = 'white';
 
-// ✅ The token already resolved; consume it
+// Good: The token already resolved; consume it
 color: var(--ds-card-color-foreground-default);`}</code>
         </pre>
         <h3>2. Hardcoded values that ignore themes</h3>
         <pre>
-          <code>{`/* ❌ Correct in exactly one theme */
+          <code>{`/* Correct in exactly one theme */
 .hero { background: #0a65fe; }
-/* ✅ Resolves per theme */
+/* Good: Resolves per theme */
 .hero { background:
   var(--semantic-color-action-background-primary-default); }`}</code>
         </pre>

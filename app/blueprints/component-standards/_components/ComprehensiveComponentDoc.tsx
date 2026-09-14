@@ -568,7 +568,7 @@ export function ComprehensiveComponentDoc({
         <div className={styles.usageContent}>
           <div className={styles.dosAndDonts}>
             <div className={styles.dos}>
-              <h3>✓ Do</h3>
+              <h3>Do</h3>
               <ul>
                 <li>Use consistent spacing and sizing</li>
                 <li>Follow established patterns</li>
@@ -577,7 +577,7 @@ export function ComprehensiveComponentDoc({
               </ul>
             </div>
             <div className={styles.donts}>
-              <h3>✗ Don't</h3>
+              <h3>Don't</h3>
               <ul>
                 <li>Override core functionality</li>
                 <li>Use without proper context</li>

@@ -120,12 +120,12 @@ export default function AnatomyStandardsPage() {
         <h3>Semantic Naming</h3>
         <p>Use semantic names that describe purpose, not appearance:</p>
         <pre>
-          <code>{`// ✅ Good: Semantic naming
+          <code>{`// Good: Semantic naming
 .card__header { }
 .card__body { }
 .card__footer { }
 
-// ❌ Bad: Appearance-based naming
+// Bad: Appearance-based naming
 .card__top { }
 .card__middle { }
 .card__bottom { }`}</code>
