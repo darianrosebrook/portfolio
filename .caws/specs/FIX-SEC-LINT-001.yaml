@@ -1,0 +1,41 @@
+id: FIX-SEC-LINT-001
+title: 'Clear the remaining browserslist advisories and stop ESLint scanning gitignored build outputs'
+risk_tier: 2
+mode: fix
+lifecycle_state: draft
+created_at: '2026-09-14T17:53:25.031Z'
+updated_at: '2026-09-14T17:53:25.031Z'
+created_by_session: 'session-8b0983e6-1c23-4ac6-b881-ba2df50b396e'
+blast_radius:
+  modules:
+    - 'build-config'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'eslint.config.mjs'
+    - 'pnpm-workspace.yaml'
+    - 'package.json'
+    - 'pnpm-lock.yaml'
+  out: []
+invariants:
+  - 'pnpm audit reports zero vulnerabilities for the resolved lockfile'
+  - 'ESLint never descends into gitignored build outputs, so lint cost is independent of local build state'
+  - 'No security override is set below the advisory patched floor'
+acceptance:
+  - id: A1
+    given: 'The spec implementation is complete.'
+    when: 'The acceptance statement is evaluated.'
+    then: 'given pnpm audit and GitHub Dependabot both reported browserslist@4.28.1 as vulnerable (GHSA-c83g-rgw3-j3cx and GHSA-73wf-gq98-2v4g, patched in >=4.28.7); when the browserslist floor override is applied and the lockfile is reinstalled; then pnpm audit reports 0 vulnerabilities and no browserslist copy below 4.28.7 remains in the tree'
+  - id: A2
+    given: 'The spec implementation is complete.'
+    when: 'The acceptance statement is evaluated.'
+    then: 'given eslint.config.mjs ignores .caws/worktrees and tmp but not the other gitignored build outputs; when .vercel/output, coverage, playwright-report and test-results are present in the checkout; then npm run lint exits 0 without scanning them, and its runtime is comparable to a checkout without those directories'
+  - id: A3
+    given: 'The spec implementation is complete.'
+    when: 'The acceptance statement is evaluated.'
+    then: 'given the change touches lint configuration and a dependency floor; when the pre-push gate runs; then contracts, lint, typecheck, tests and build all pass and main pushes to origin'
+non_functional: {}
+contracts:
+  - name: 'build-toolchain'
+    type: behavior
