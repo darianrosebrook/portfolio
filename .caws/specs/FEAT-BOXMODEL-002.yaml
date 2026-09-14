@@ -39,3 +39,8 @@ contracts:
   - name: 'box-model-batch1-noop'
     type: contract-test
     path: 'test/unit/designTokens/boxModel.batch1.test.mjs'
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "npx vitest run test/unit/designTokens/boxModel.batch1.test.mjs -> 89 passed (18 components x literal pinning + consumer + import guards)"
+    recorded_at: "2026-09-14T05:26:30.050Z"
