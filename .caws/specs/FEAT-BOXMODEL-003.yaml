@@ -38,3 +38,8 @@ contracts:
   - name: 'box-model-batch2-noop'
     type: contract-test
     path: 'test/unit/designTokens/boxModel.batch2.test.mjs'
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "npx vitest run test/unit/designTokens/boxModel.batch2.test.mjs -> 60 passed"
+    recorded_at: "2026-09-14T05:32:38.566Z"
