@@ -38,4 +38,7 @@
   --ds-details-typography-line-height-body: var(--semantic-typography-line-height-body, 1.5);
   --ds-details-typography-line-height-tight: var(--semantic-typography-line-height-tight, 1.2);
   --ds-details-typography-font-weight-medium: var(--semantic-typography-font-weight-medium, 500);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-width: auto;
 }

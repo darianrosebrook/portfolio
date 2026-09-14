@@ -116,6 +116,9 @@
       "easing": {
         "standard": "{core.motion.easing.standard}"
       }
+    },
+    "boxModel": {
+      "width": "100%"
     }
   }
 }

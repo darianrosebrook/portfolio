@@ -30,4 +30,11 @@
   --ds-list-spacing-dl-dd: var(--core-spacing-size-05, 12px);
   --ds-list-spacing-dl-gap: var(--core-spacing-size-03, 4px);
   --ds-list-spacing-dl-gap-x: var(--core-spacing-size-05, 12px);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-gap: var(--core-spacing-size-04, 8px);
+  --ds-box-model-padding-block-start: 0;
+  --ds-box-model-padding-block-end: 0;
+  --ds-box-model-padding-inline-start: 0;
+  --ds-box-model-padding-inline-end: 0;
 }

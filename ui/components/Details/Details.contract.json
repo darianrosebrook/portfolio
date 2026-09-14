@@ -12,20 +12,9 @@
     "content"
   ],
   "variants": {
-    "variant": [
-      "default",
-      "inline",
-      "compact"
-    ]
+    "variant": ["default", "inline", "compact"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "disabled",
-    "open",
-    "closed"
-  ],
+  "states": ["default", "hover", "focus", "disabled", "open", "closed"],
   "slots": {
     "compact": {
       "required": false
@@ -48,9 +37,7 @@
   },
   "a11y": {
     "role": "group",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [
       {
         "key": "KeyboardEvent",
@@ -203,6 +190,10 @@
         "resolvesTo": "semantic.typography.font.weight.medium",
         "fallback": "500",
         "layer": "semantic"
+      },
+      "box-model.width": {
+        "literal": "auto",
+        "property": "width"
       }
     }
   },
@@ -259,15 +250,13 @@
     "category": "content",
     "usageHints": [
       "Use for progressive disclosure of non-critical detail",
-      "Not for navigation — use Accordion for a multi-section expand/collapse list",
+      "Not for navigation \u2014 use Accordion for a multi-section expand/collapse list",
       "The summary is always visible; the content is hidden until expanded"
     ],
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "ReactNode"
-      ]
+      "accepts": ["ReactNode"]
     }
   }
 }

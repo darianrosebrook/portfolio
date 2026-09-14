@@ -41,4 +41,11 @@
   --ds-walkthrough-button-secondary-radius: var(--core-shape-radius-medium, 8px);
   --ds-walkthrough-button-secondary-padding-y: var(--core-spacing-size-04, 8px);
   --ds-walkthrough-button-secondary-padding-x: var(--core-spacing-size-06, 16px);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-max-width: 28rem;
+  --ds-box-model-padding-block-start: var(--core-spacing-size-08, 32px);
+  --ds-box-model-padding-block-end: var(--core-spacing-size-08, 32px);
+  --ds-box-model-padding-inline-start: var(--core-spacing-size-08, 32px);
+  --ds-box-model-padding-inline-end: var(--core-spacing-size-08, 32px);
 }

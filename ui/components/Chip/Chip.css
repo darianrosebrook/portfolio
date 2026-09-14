@@ -1,11 +1,15 @@
+@import '../../primitives/boxModel.css';
 @import "./Chip.tokens.css";
 
 [data-ds-component="Chip"] {
   &.chip {
     display: inline-flex;
-    gap: var(--ds-chip-size-gap);
+    gap: var(--ds-box-model-gap);
     align-items: center;
-    padding: var(--ds-chip-size-padding-vertical) var(--ds-chip-size-padding-horizontal);
+    padding-inline: var(--ds-box-model-padding-inline-start)
+      var(--ds-box-model-padding-inline-end);
+    padding-block: var(--ds-box-model-padding-block-start)
+      var(--ds-box-model-padding-block-end);
     background-color: var(--ds-chip-color-background-default);
     border: var(--ds-chip-size-border) solid var(--ds-chip-color-border-default);
     border-radius: var(--ds-chip-size-radius);

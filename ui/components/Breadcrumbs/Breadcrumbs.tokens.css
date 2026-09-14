@@ -27,4 +27,11 @@
   --ds-breadcrumbs-spacing-padding-default: var(--core-spacing-size-04, 8px);
   --ds-breadcrumbs-spacing-padding-small: var(--core-spacing-size-03, 4px);
   --ds-breadcrumbs-spacing-margin-top: var(--core-spacing-size-03, 4px);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-gap: var(--core-spacing-size-04, 8px);
+  --ds-box-model-padding-block-start: var(--core-spacing-size-04, 8px);
+  --ds-box-model-padding-block-end: var(--core-spacing-size-04, 8px);
+  --ds-box-model-padding-inline-start: 0;
+  --ds-box-model-padding-inline-end: 0;
 }

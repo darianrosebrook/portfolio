@@ -85,4 +85,7 @@
   /* === Motion Tokens === */
   --ds-select-motion-duration-fast: var(--core-motion-duration-short, 150ms);
   --ds-select-motion-easing-standard: var(--core-motion-easing-standard, cubic-bezier(0.4, 0, 0.2, 1));
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-width: 100%;
 }

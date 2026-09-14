@@ -17,20 +17,9 @@
     "errorText"
   ],
   "variants": {
-    "size": [
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl",
-      "full"
-    ]
+    "size": ["xs", "sm", "md", "lg", "xl", "full"]
   },
-  "states": [
-    "default",
-    "loading",
-    "error"
-  ],
+  "states": ["default", "loading", "error"],
   "slots": {
     "root": {
       "required": true,
@@ -43,9 +32,7 @@
   },
   "a11y": {
     "role": "img",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": "image"
   },
@@ -143,6 +130,14 @@
         "resolvesTo": "semantic.typography.body.04",
         "fallback": "12px",
         "layer": "semantic"
+      },
+      "box-model.width": {
+        "literal": "auto",
+        "property": "width"
+      },
+      "box-model.height": {
+        "literal": "auto",
+        "property": "height"
       }
     }
   },

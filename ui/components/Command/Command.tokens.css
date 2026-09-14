@@ -58,6 +58,10 @@
   /* === Opacity Tokens === */
   --ds-command-opacity-disabled: var(--semantic-interaction-disabled-opacity, 0.5);
 
+  /* === BoxModel Tokens === */
+  --ds-box-model-width: 100%;
+  --ds-box-model-max-width: 640px;
+
   /* === Other Tokens === */
   --ds-command-shadow: var(--semantic-elevation-surface-floating, 0px 3px 6px #00000024);
 }

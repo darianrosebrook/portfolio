@@ -16,20 +16,9 @@
     "modal"
   ],
   "variants": {
-    "side": [
-      "top",
-      "right",
-      "bottom",
-      "left"
-    ]
+    "side": ["top", "right", "bottom", "left"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "open",
-    "closed"
-  ],
+  "states": ["default", "hover", "focus", "open", "closed"],
   "slots": {
     "body": {
       "required": false,
@@ -77,9 +66,7 @@
   },
   "a11y": {
     "role": "dialog",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [
       {
         "key": "Enter|Space",
@@ -303,6 +290,44 @@
         "resolvesTo": "core.spacing.size.01",
         "fallback": "1px",
         "layer": "core"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding-inline-end",
+        "layer": "core"
+      },
+      "box-model.max-width": {
+        "literal": "100vw",
+        "property": "max-width"
+      },
+      "box-model.max-height": {
+        "literal": "100vh",
+        "property": "max-height"
       }
     }
   },
@@ -351,21 +376,17 @@
     "transitions": [
       {
         "name": "open",
-        "trigger": "openness=closed→opening",
+        "trigger": "openness=closed\u2192opening",
         "phase": "enter",
-        "properties": [
-          "transform"
-        ],
+        "properties": ["transform"],
         "duration": "sheet.motion.duration",
         "easing": "sheet.motion.easing"
       },
       {
         "name": "close",
-        "trigger": "openness=open→closing",
+        "trigger": "openness=open\u2192closing",
         "phase": "exit",
-        "properties": [
-          "transform"
-        ],
+        "properties": ["transform"],
         "duration": "sheet.motion.duration",
         "easing": "sheet.motion.easing"
       }
@@ -434,9 +455,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "node-ref"
-      ]
+      "accepts": ["node-ref"]
     }
   }
 }

@@ -53,6 +53,15 @@
   --ds-sheet-focus-color: var(--semantic-color-border-accent, #d9292b);
   --ds-sheet-focus-offset: var(--core-spacing-size-01, 1px);
 
+  /* === BoxModel Tokens === */
+  --ds-box-model-gap: var(--core-spacing-size-04, 8px);
+  --ds-box-model-padding-block-start: var(--core-spacing-size-06, 16px);
+  --ds-box-model-padding-block-end: var(--core-spacing-size-06, 16px);
+  --ds-box-model-padding-inline-start: var(--core-spacing-size-06, 16px);
+  --ds-box-model-padding-inline-end: var(--core-spacing-size-06, 16px);
+  --ds-box-model-max-width: 100vw;
+  --ds-box-model-max-height: 100vh;
+
   /* === Other Tokens === */
   --ds-sheet-shadow: var(--semantic-elevation-surface-floating, 0px 3px 6px #00000024);
 }

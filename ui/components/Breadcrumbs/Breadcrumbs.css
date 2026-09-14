@@ -1,11 +1,15 @@
+@import '../../primitives/boxModel.css';
 @import "./Breadcrumbs.tokens.css";
 
 [data-ds-component="Breadcrumbs"] {
   &.root {
     display: flex;
-    gap: var(--ds-breadcrumbs-spacing-gap-default);
+    gap: var(--ds-box-model-gap);
     align-items: center;
-    padding: var(--ds-breadcrumbs-spacing-padding-default) 0;
+    padding-inline: var(--ds-box-model-padding-inline-start)
+      var(--ds-box-model-padding-inline-end);
+    padding-block: var(--ds-box-model-padding-block-start)
+      var(--ds-box-model-padding-block-end);
     color: var(--ds-breadcrumbs-color-foreground-secondary);
   }
 

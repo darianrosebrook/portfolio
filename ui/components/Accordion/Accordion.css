@@ -1,7 +1,8 @@
+@import '../../primitives/boxModel.css';
 @import "./Accordion.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Accordion"] on the root; child elements
  * (item, header, trigger, content, etc.) use bare semantic class names
  * within native nesting.
@@ -11,8 +12,8 @@
 [data-ds-component="Accordion"] {
   display: flex;
   flex-direction: column;
-  gap: 0;
-  width: 100%;
+  gap: var(--ds-box-model-gap);
+  width: var(--ds-box-model-width);
   contain: layout;
 
   .item {

@@ -31,4 +31,10 @@
   --ds-postcard-typography-content-font-size: var(--semantic-typography-body-02, 16px);
   --ds-postcard-typography-content-line-height: var(--semantic-typography-line-height-body, 1.5);
   --ds-postcard-typography-footer-font-size: var(--semantic-typography-body-03, 14px);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-padding-block-start: var(--core-spacing-size-06, 16px);
+  --ds-box-model-padding-block-end: var(--core-spacing-size-06, 16px);
+  --ds-box-model-padding-inline-start: var(--core-spacing-size-06, 16px);
+  --ds-box-model-padding-inline-end: var(--core-spacing-size-06, 16px);
 }

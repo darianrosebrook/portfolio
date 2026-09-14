@@ -1,7 +1,8 @@
+@import '../../primitives/boxModel.css';
 @import "./Switch.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Switch"] on the root element.
  * Covers Switch primitive, SwitchField compound, and SwitchGroup.
  * Intentionally unlayered — see Button.css for the cascade rationale.
@@ -14,8 +15,8 @@
     display: inline-flex;
     vertical-align: middle;
     align-items: center;
-    width: var(--ds-switch-size-md-track-width, 3rem);
-    height: var(--ds-switch-size-md-track-height, 1.5rem);
+    width: var(--ds-box-model-width);
+    height: var(--ds-box-model-height);
   }
 
   /* Hidden native input */
@@ -240,7 +241,7 @@
   /* SwitchGroup */
   &.switchGroup {
     display: inline-flex;
-    gap: var(--ds-switch-size-md-gap, 1rem);
+    gap: var(--ds-box-model-gap);
   }
 
   &.vertical {

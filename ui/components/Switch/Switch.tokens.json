@@ -92,6 +92,11 @@
     "focus": {
       "ring": "{interaction.focus.ringWidth}",
       "offset": "{interaction.focus.ringOffset}"
+    },
+    "boxModel": {
+      "width": "{core.spacing.size.09}",
+      "height": "{core.spacing.size.07}",
+      "gap": "{core.spacing.size.04}"
     }
   }
 }

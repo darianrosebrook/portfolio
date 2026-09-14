@@ -26,4 +26,8 @@
 
   /* === Typography Tokens === */
   --ds-image-typography-error-font-size: var(--semantic-typography-body-04, 12px);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-width: auto;
+  --ds-box-model-height: auto;
 }

@@ -1,11 +1,13 @@
+@import '../../primitives/boxModel.css';
 @import "./Badge.tokens.css";
 
 [data-ds-component="Badge"] {
   &.badge {
     display: inline-flex;
     vertical-align: baseline;
-    gap: var(--ds-badge-spacing-gap);
+    gap: var(--ds-box-model-gap);
     align-items: center;
+
     /* Prevent the badge from stretching to its parent's cross axis when
        placed inside a flex container with default align-items: stretch.
        A badge is a labelled chip — it should always size to its content. */
@@ -13,6 +15,7 @@
     font-weight: 500;
     line-height: 1;
     white-space: nowrap;
+
     /* Note: a previous revision set `container-type: inline-size` here to
        drive @container queries below. That collapses the flex item's
        inline size to its minimum content size inside a flex parent,

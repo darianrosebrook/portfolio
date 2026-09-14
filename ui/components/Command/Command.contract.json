@@ -22,12 +22,7 @@
     "itemDescription"
   ],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "disabled",
-    "selected"
-  ],
+  "states": ["default", "hover", "disabled", "selected"],
   "slots": {
     "dialog": {
       "required": false,
@@ -64,13 +59,7 @@
   },
   "a11y": {
     "role": "dialog",
-    "roles": [
-      "dialog",
-      "listbox",
-      "option",
-      "presentation",
-      "separator"
-    ],
+    "roles": ["dialog", "listbox", "option", "presentation", "separator"],
     "labeling": [],
     "keyboard": [
       {
@@ -313,6 +302,14 @@
         "fallback": "0.5",
         "property": "opacity",
         "layer": "semantic"
+      },
+      "box-model.width": {
+        "literal": "100%",
+        "property": "width"
+      },
+      "box-model.max-width": {
+        "literal": "640px",
+        "property": "max-width"
       }
     }
   },
@@ -383,8 +380,8 @@
   "a2ui": {
     "category": "action",
     "usageHints": [
-      "Trigger with ⌘K or a toolbar button",
-      "Register commands with a label and handler — they appear in the search results",
+      "Trigger with \u2318K or a toolbar button",
+      "Register commands with a label and handler \u2014 they appear in the search results",
       "Group commands with Command.Group for visual separation"
     ],
     "children": {

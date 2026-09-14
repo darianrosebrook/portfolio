@@ -55,6 +55,9 @@
         "color": "{semantic.color.border.focus}",
         "offset": "{interaction.focus.ringOffset}"
       }
+    },
+    "boxModel": {
+      "gap": "{core.spacing.size.04}"
     }
   }
 }

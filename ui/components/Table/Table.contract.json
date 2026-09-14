@@ -21,12 +21,7 @@
     "data"
   ],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "selected"
-  ],
+  "states": ["default", "hover", "focus", "selected"],
   "slots": {
     "body": {
       "required": false,
@@ -70,9 +65,7 @@
   },
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-sort"
-    ],
+    "labeling": ["aria-sort"],
     "keyboard": [
       {
         "key": "KeyboardEvent",
@@ -241,6 +234,10 @@
         "resolvesTo": "semantic.elevation.surface.raised",
         "fallback": "0px 1px 3px #0000001f",
         "layer": "semantic"
+      },
+      "box-model.width": {
+        "literal": "100%",
+        "property": "width"
       }
     }
   },
@@ -283,7 +280,7 @@
     "usageHints": [
       "Use for structured data that benefits from sorting or comparison across rows",
       "Enable row selection for bulk actions; pair with a toolbar for the action bar",
-      "Keep column count to 6–8 max; use column visibility controls for wider datasets"
+      "Keep column count to 6\u20138 max; use column visibility controls for wider datasets"
     ],
     "children": {
       "allowed": false

@@ -45,6 +45,13 @@
         "gap": "{core.spacing.size.03}",
         "gapX": "{core.spacing.size.05}"
       }
+    },
+    "boxModel": {
+      "gap": "{core.spacing.size.04}",
+      "paddingBlockStart": "0",
+      "paddingBlockEnd": "0",
+      "paddingInlineStart": "0",
+      "paddingInlineEnd": "0"
     }
   }
 }

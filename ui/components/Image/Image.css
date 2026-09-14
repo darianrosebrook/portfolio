@@ -1,7 +1,8 @@
+@import '../../primitives/boxModel.css';
 @import "./Image.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Image"] on the root element.
  * Intentionally unlayered — see Button.css for the cascade rationale.
  */
@@ -9,6 +10,8 @@
   position: relative;
   display: inline-block;
   overflow: hidden;
+  block-size: var(--ds-box-model-height);
+  inline-size: var(--ds-box-model-width);
 
   /* Size variants — applied to root */
   &.xs {

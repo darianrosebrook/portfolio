@@ -16,19 +16,9 @@
     "counter"
   ],
   "variants": {
-    "placement": [
-      "top",
-      "bottom",
-      "left",
-      "right",
-      "auto"
-    ]
+    "placement": ["top", "bottom", "left", "right", "auto"]
   },
-  "states": [
-    "default",
-    "hover",
-    "disabled"
-  ],
+  "states": ["default", "hover", "disabled"],
   "slots": {
     "root": {
       "required": true,
@@ -73,9 +63,7 @@
   },
   "a11y": {
     "role": "status",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [
       {
         "key": "Enter|Space",
@@ -252,6 +240,34 @@
         "fallback": "16px",
         "property": "padding",
         "layer": "core"
+      },
+      "box-model.max-width": {
+        "literal": "28rem",
+        "property": "max-width"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.08",
+        "fallback": "32px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.08",
+        "fallback": "32px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.08",
+        "fallback": "32px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.08",
+        "fallback": "32px",
+        "property": "padding-inline-end",
+        "layer": "core"
       }
     },
     "title": {
@@ -390,15 +406,12 @@
       "WalkthroughAnchor wraps the element each step points to",
       "Use WalkthroughControls and WalkthroughProgress for navigation UI",
       "Keyboard: ArrowRight/ArrowLeft navigate steps; Escape closes the tour",
-      "The walkthrough is non-blocking — it does not trap focus to the panel"
+      "The walkthrough is non-blocking \u2014 it does not trap focus to the panel"
     ],
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "WalkthroughStep",
-        "WalkthroughAnchor"
-      ]
+      "accepts": ["WalkthroughStep", "WalkthroughAnchor"]
     }
   },
   "motion": {
@@ -406,22 +419,17 @@
     "transitions": [
       {
         "name": "open",
-        "trigger": "openness=hidden→visible",
+        "trigger": "openness=hidden\u2192visible",
         "phase": "enter",
-        "properties": [
-          "opacity",
-          "transform"
-        ],
+        "properties": ["opacity", "transform"],
         "duration": "core.motion.duration.short",
         "easing": "core.motion.easing.emphasizedDecelerate"
       },
       {
         "name": "close",
-        "trigger": "openness=visible→hidden",
+        "trigger": "openness=visible\u2192hidden",
         "phase": "exit",
-        "properties": [
-          "opacity"
-        ],
+        "properties": ["opacity"],
         "duration": "core.motion.duration.short",
         "easing": "core.motion.easing.emphasizedAccelerate"
       }
