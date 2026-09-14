@@ -134,23 +134,41 @@ const sections: FoundationSection[] = [
 "extraLong1": "1500ms" // ambient/loading loops`}</code>
         </pre>
         <p>
-          Two properties of this scale matter more than any individual value.
-          First, the steps are perceptual, not uniform: 50→83ms is a meaningful
-          difference at the threshold of perception while 833→1000ms is a change
-          in character, and a scale that respected arithmetic evenness would
-          waste slots where perception cannot tell the difference. Second, the
-          names encode <em>intent</em>: &quot;short2&quot; and
-          &quot;medium1&quot; transfer knowledge between screens. A component
-          author who knows hover is <code>short2</code> on one surface knows it
-          everywhere.
+          Two derivations shaped this scale, and they pull in different
+          directions. First, every value is a whole number of frames at 60fps—3
+          frames (50ms) through 90 (1500ms)—which keeps animations off mid-frame
+          boundaries. Second, perception: a duration change needs roughly a 15%
+          difference to be noticed at all, so useful scale steps sit at least
+          that far apart (the spacing scale&apos;s 33–100% jumps clear the floor
+          comfortably; so do the composites below, at 20–67%). Where the two
+          derivations collide, frame alignment loses—nobody perceives a frame
+          boundary.
         </p>
         <p>
-          The scale has one honest wart worth knowing: <code>instant</code>{' '}
-          (100ms) is slower than <code>short1</code> (50ms) and{' '}
-          <code>short2</code> (83ms). The name promises semantics the value does
-          not deliver—a press feedback token that outlasts a hover. Scales earn
-          trust when names predict values; when they do not, document it or fix
-          the value. Pretending the wart is intentional is how scales rot.
+          Auditing the scale against that floor finds four collisions: 150/167ms
+          (+11%), 300/333ms (+11%), 600/667ms (+11%), and <code>medium</code>/
+          <code>medium1</code>, which are both 250ms. Those are name-only
+          distinctions—two tokens for one perceptual answer—and they are the
+          classic seed of drift: two teams pick differently by name, no reviewer
+          can arbitrate because nothing looks different. The names themselves
+          have warts of the same kind: <code>instant</code> (100ms, 6 frames) is
+          slower than <code>short2</code> (83ms), and the base-versus-numbered
+          relation is inconsistent—<code>short</code> outlasts{' '}
+          <code>short1</code>, <code>medium</code> equals <code>medium1</code>,
+          and <code>long</code> (400ms) is shorter than <code>long1</code>{' '}
+          (667ms). Scales earn trust when names predict values; here the repair
+          is at the vocabulary layer— collapse or re-derive the sub-floor
+          pairs—because the frame values underneath are fine.
+        </p>
+        <p>
+          The deeper lesson is that{' '}
+          <strong>granularity and availability are separate decisions</strong>.
+          The raw scale can afford over-provision—sixteen names, roughly twelve
+          distinguishable answers—precisely because consumers are not offered
+          it: the interaction composites are the availability dial, and the
+          durations they expose (83, 100, 167, 250, 333ms) are all comfortably
+          above the perceptual floor. The menu problem is solved at the tier
+          that choosers actually see, not by pretending the raw scale is tight.
         </p>
 
         <h3>Easings: The Vocabulary of Feel</h3>
@@ -641,11 +659,16 @@ const reduceMotion =
           <code>{`// ❌ Twenty components, twenty opinions about "quick"
 .tooltip { transition: all 180ms ease-in-out; }
 
-// ✅ One opinion, referenced everywhere
+// ✅ One opinion, at the tier that owns it: the tooltip composite
+//    (short3 + quick.enter + delay.medium — see the semantic layer)
 .tooltip {
-  transition-duration: var(--core-motion-duration-short2, 83ms);
-  transition-timing-function: var(--core-motion-easing-quick-enter);
-}`}</code>
+  transition-duration: var(--core-motion-duration-short3, 167ms);
+  transition-timing-function:
+    var(--core-motion-easing-quick-enter, cubic-bezier(0, 0, 0.1, 1));
+  transition-delay: var(--core-motion-delay-medium, 100ms);
+}
+// Hand-picking from the raw scale re-opens the decision the composites
+// closed — and invites the sub-perceptual pairs nobody can arbitrate.`}</code>
         </pre>
         <p>
           The damage from literals is comparative: 180ms next to 167ms next to
