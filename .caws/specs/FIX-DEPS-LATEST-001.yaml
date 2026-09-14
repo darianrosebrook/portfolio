@@ -1,0 +1,50 @@
+id: FIX-DEPS-LATEST-001
+title: 'Upgrade all pnpm dependencies to latest and migrate toolchain configs'
+risk_tier: 2
+mode: refactor
+lifecycle_state: draft
+created_at: '2026-09-14T14:04:27.957Z'
+updated_at: '2026-09-14T14:04:27.957Z'
+created_by_session: 'session-8b0983e6-1c23-4ac6-b881-ba2df50b396e'
+blast_radius:
+  modules:
+    - 'build-config'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'package.json'
+    - 'pnpm-lock.yaml'
+    - 'eslint.config.mjs'
+    - '.stylelintrc'
+    - 'vitest.config.mjs'
+    - 'tsconfig.json'
+    - 'next.config.mjs'
+    - 'test/'
+    - 'scripts/'
+    - 'utils/'
+    - 'ui/'
+    - 'app/'
+    - 'types/'
+    - 'hooks/'
+    - 'context/'
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'The spec implementation is complete.'
+    when: 'The acceptance statement is evaluated.'
+    then: 'given the project pins packageManager pnpm@11.20.0 and ships pnpm-lock.yaml; when pnpm update --latest and a clean pnpm install complete; then every direct dependency in package.json resolves to its latest published version and no package-lock.json or yarn.lock is introduced'
+  - id: A2
+    given: 'The spec implementation is complete.'
+    when: 'The acceptance statement is evaluated.'
+    then: 'given TypeScript 7, ESLint 10, Stylelint 17 and Vitest 5 all change configuration surfaces; when npm run typecheck, npm run lint and npm run lint:css execute; then each exits 0 with no unrecognised-rule or config-schema error'
+  - id: A3
+    given: 'The spec implementation is complete.'
+    when: 'The acceptance statement is evaluated.'
+    then: 'given the build regenerates design tokens before next build; when npm test and npm run build execute; then both exit 0 and the tracked token artifacts types/designTokens.ts and ui/designTokens/designTokens.json are byte-identical to the committed revision'
+non_functional: {}
+contracts:
+  - name: 'build-toolchain'
+    type: behavior
