@@ -2,11 +2,9 @@ id: CHORE-BOXMODEL-CLEANUP-001
 title: 'Remove the CSS migration playbook and strip all citations'
 risk_tier: 3
 mode: chore
-lifecycle_state: closed
-resolution: completed
-closure_notes: 'Playbook removed per user direction; all citations stripped; battery green.'
+lifecycle_state: active
 created_at: '2026-09-14T05:33:24.254Z'
-updated_at: '2026-09-14T05:35:19.436Z'
+updated_at: '2026-09-14T05:35:51.051Z'
 created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
 blast_radius:
   modules:
