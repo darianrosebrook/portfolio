@@ -40,5 +40,11 @@ acceptance:
     then: >-
       it renders via FoundationPage with all template sections, exports Next
       metadata, and contains no 'coming soon' placeholder
+  - id: A2
+    given: 'page content citing token names, ramps, or contrast values'
+    when: 'a reader compares them to the generated tokens.css artifacts'
+    then: >-
+      every cited token name exists in the real token system and contrast claims
+      match computed WCAG results
 non_functional: {}
 contracts: []
