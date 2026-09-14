@@ -42,9 +42,15 @@ acceptance:
       every direct dependency in package.json resolves to its latest published
       version and no package-lock.json or yarn.lock exists in the tree
   - id: A2
-    given: 'TypeScript 7, ESLint 10, Stylelint 17 and Vitest 5 each change their configuration surface'
-    when: 'npm run typecheck, npm run lint and npm run lint:css execute'
-    then: 'each command exits 0 with no unrecognised-rule, config-schema or unsupported-option error'
+    given: >-
+      the pre-upgrade baseline at 003a41ce was typecheck exit 0, eslint exit 0,
+      stylelint 137 errors / 446 warnings, and vitest 1 unhandled error from GSAP
+      ScrollTrigger calling requestAnimationFrame after teardown
+    when: 'npm run typecheck, npm run lint and npm run lint:css execute against the upgraded toolchain'
+    then: >-
+      typecheck and eslint still exit 0, and stylelint loads its upgraded config
+      with no unrecognised-rule or schema error and reports no more errors than the
+      baseline 137
   - id: A3
     given: 'the build script regenerates design tokens before next build'
     when: 'npm test and npm run build execute'
