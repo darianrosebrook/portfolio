@@ -31,14 +31,28 @@ export const EditProductCard: React.FC = () => {
         <span className={styles.formLabel}>Media</span>
         <div className={styles.mediaGrid}>
           <div className={styles.mediaItem}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               <rect x="3" y="3" width="18" height="18" rx="2" />
               <circle cx="8.5" cy="8.5" r="1.5" />
               <path d="M21 15l-5-5L5 21" />
             </svg>
           </div>
           <div className={styles.mediaItem}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               <rect x="3" y="3" width="18" height="18" rx="2" />
               <circle cx="8.5" cy="8.5" r="1.5" />
               <path d="M21 15l-5-5L5 21" />
@@ -51,9 +65,15 @@ export const EditProductCard: React.FC = () => {
         <label htmlFor="edit-product-description">Description</label>
         <div className={styles.textEditor}>
           <div className={styles.editorToolbar}>
-            <button className={styles.toolButton}><strong>B</strong></button>
-            <button className={styles.toolButton}><em>I</em></button>
-            <button className={styles.toolButton}><u>U</u></button>
+            <button className={styles.toolButton}>
+              <strong>B</strong>
+            </button>
+            <button className={styles.toolButton}>
+              <em>I</em>
+            </button>
+            <button className={styles.toolButton}>
+              <u>U</u>
+            </button>
             <button className={styles.toolButton}>≡</button>
             <button className={styles.toolButton}>≣</button>
             <button className={styles.toolButton}>≢</button>
@@ -71,7 +91,9 @@ export const EditProductCard: React.FC = () => {
         <div className={styles.formGroup}>
           <span className={styles.formLabel}>Main material</span>
           <div className={styles.chipGroup}>
-            <button className={`${styles.chip} ${styles.chipActive}`}>Synthetic</button>
+            <button className={`${styles.chip} ${styles.chipActive}`}>
+              Synthetic
+            </button>
             <button className={styles.chip}>Wool</button>
             <button className={styles.chip}>Cotton</button>
             <button className={styles.chip}>Linen</button>

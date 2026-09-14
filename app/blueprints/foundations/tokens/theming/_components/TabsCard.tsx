@@ -6,7 +6,9 @@ export const TabsCard: React.FC = () => {
   return (
     <div className={styles.tabsCard}>
       <div className={styles.tabList}>
-        <button className={`${styles.tab} ${styles.tabActive}`}>Overview</button>
+        <button className={`${styles.tab} ${styles.tabActive}`}>
+          Overview
+        </button>
         <button className={styles.tab}>Analytics</button>
         <button className={styles.tab}>Reports</button>
         <button className={styles.tab}>Settings</button>

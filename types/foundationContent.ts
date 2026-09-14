@@ -78,6 +78,14 @@ export interface FoundationSection {
   title?: string;
   content: ReactNode;
   order: number;
+  /**
+   * Optional per-tab content for 'design-code-interplay' sections. When
+   * present, the Design tab renders designContent and the Code tab renders
+   * codeContent. Sections that supply only content render it in both tabs
+   * (the original behavior).
+   */
+  designContent?: ReactNode;
+  codeContent?: ReactNode;
 }
 
 export interface ConceptLink {

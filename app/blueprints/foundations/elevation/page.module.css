@@ -1,7 +1,0 @@
-.placeholder {
-  margin: 2rem 0;
-  padding: 2rem;
-  background: var(--semantic-color-background-info-subtle);
-  border-radius: var(--core-shape-radius-medium);
-  color: var(--semantic-color-foreground-on-info-subtle);
-}

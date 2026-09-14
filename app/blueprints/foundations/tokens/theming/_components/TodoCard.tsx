@@ -4,7 +4,9 @@ import React from 'react';
 import styles from './DashboardDemo.module.css';
 
 const accentSpan = (text: string) => (
-  <span style={{ color: 'var(--semantic-color-foreground-accent)' }}>{text}</span>
+  <span style={{ color: 'var(--semantic-color-foreground-accent)' }}>
+    {text}
+  </span>
 );
 
 const checkboxStyle = {
@@ -31,9 +33,20 @@ export const TodoCard: React.FC = () => {
 
       {/* Item 1 */}
       <div className={styles.settingItem}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--semantic-spacing-gap-grid-medium)' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--semantic-spacing-gap-grid-medium)',
+          }}
+        >
           <input type="checkbox" style={checkboxStyle} />
-          <span style={{ fontSize: 14, color: 'var(--semantic-color-foreground-primary)' }}>
+          <span
+            style={{
+              fontSize: 14,
+              color: 'var(--semantic-color-foreground-primary)',
+            }}
+          >
             Respond to comment {accentSpan('#384')} from Travis Ross
           </span>
         </div>
@@ -41,9 +54,20 @@ export const TodoCard: React.FC = () => {
 
       {/* Item 2 */}
       <div className={styles.settingItem}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--semantic-spacing-gap-grid-medium)' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--semantic-spacing-gap-grid-medium)',
+          }}
+        >
           <input type="checkbox" style={checkboxStyle} />
-          <span style={{ fontSize: 14, color: 'var(--semantic-color-foreground-primary)' }}>
+          <span
+            style={{
+              fontSize: 14,
+              color: 'var(--semantic-color-foreground-primary)',
+            }}
+          >
             Invite {accentSpan('Acme Co.')} team to Slack
           </span>
         </div>
@@ -51,9 +75,20 @@ export const TodoCard: React.FC = () => {
 
       {/* Item 3 */}
       <div className={styles.settingItem}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--semantic-spacing-gap-grid-medium)' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--semantic-spacing-gap-grid-medium)',
+          }}
+        >
           <input type="checkbox" style={checkboxStyle} />
-          <span style={{ fontSize: 14, color: 'var(--semantic-color-foreground-primary)' }}>
+          <span
+            style={{
+              fontSize: 14,
+              color: 'var(--semantic-color-foreground-primary)',
+            }}
+          >
             Create a report requested by Danilo Sousa
           </span>
         </div>
@@ -61,9 +96,20 @@ export const TodoCard: React.FC = () => {
 
       {/* Item 4 */}
       <div className={styles.settingItem}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--semantic-spacing-gap-grid-medium)' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--semantic-spacing-gap-grid-medium)',
+          }}
+        >
           <input type="checkbox" style={checkboxStyle} />
-          <span style={{ fontSize: 14, color: 'var(--semantic-color-foreground-primary)' }}>
+          <span
+            style={{
+              fontSize: 14,
+              color: 'var(--semantic-color-foreground-primary)',
+            }}
+          >
             Review support request {accentSpan('#85')}
           </span>
         </div>
@@ -71,7 +117,13 @@ export const TodoCard: React.FC = () => {
 
       {/* Item 5 - Checked */}
       <div className={styles.settingItem}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--semantic-spacing-gap-grid-medium)' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--semantic-spacing-gap-grid-medium)',
+          }}
+        >
           <input type="checkbox" defaultChecked style={checkboxStyle} />
           <span
             style={{

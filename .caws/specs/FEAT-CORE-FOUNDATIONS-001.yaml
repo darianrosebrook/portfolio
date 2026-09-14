@@ -2,10 +2,11 @@ id: FEAT-CORE-FOUNDATIONS-001
 title: 'Fill core-foundations stub pages with education-template content'
 risk_tier: 3
 mode: feature
-lifecycle_state: active
-worktree: feat-core-foundations-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge feat-core-foundations-001 at fe5a7f67339d0a97831f1a8b2b7f09e2e2d3528a'
 created_at: '2026-09-14T05:06:10.391Z'
-updated_at: '2026-09-14T05:13:18.181Z'
+updated_at: '2026-09-14T15:25:48.059Z'
 created_by_session: 'session-ee97c70e-5708-43ac-898e-efaca06c09be'
 blast_radius:
   modules:
@@ -29,6 +30,14 @@ scope:
     - types/foundationContent.ts
     - test/blueprints/**
     - test/e2e/foundationNavigation.spec.ts
+    - app/blueprints/ux-patterns/**
+    - app/blueprints/foundations/tokens/page.tsx
+    - app/blueprints/foundations/meta/**
+    - app/blueprints/foundations/tooling/**
+    - app/blueprints/foundations/accessibility/**
+    - app/blueprints/foundations/tokens/theming/**
+    - app/blueprints/foundations/tokens/page.module.css
+    - app/blueprints/foundations/tokens/resolver-module/page.tsx
   out: []
 invariants:
   - 'Every filled page renders through the FoundationPage education template with complete FoundationPageContent (metadata, sections, crossReferences, verificationChecklist, assessmentPrompts) — no placeholder ''coming soon'' markup remains on any core-foundations page'

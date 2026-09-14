@@ -19,7 +19,7 @@ export const foundationPages: FoundationPageInfo[] = [
   {
     slug: 'accessibility',
     title: 'Accessibility as System Infrastructure',
-    path: 'accessibility/philosophy',
+    path: 'accessibility',
   },
   { slug: 'spacing', title: 'Spacing & Layout Systems', path: 'spacing' },
   {

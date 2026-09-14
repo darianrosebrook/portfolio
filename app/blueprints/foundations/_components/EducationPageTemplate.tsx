@@ -26,7 +26,6 @@ import { TrackSelector } from './TrackSelector';
 
 interface EducationPageTemplateProps {
   content: FoundationPageContent;
-  jsonLd?: object | object[]; // Support single schema or array of schemas
 }
 
 const TRACK_PREFERENCE_KEY = 'foundation_selected_track';
@@ -46,10 +45,7 @@ function readStoredTrack(): TrackId | null {
   }
 }
 
-export function EducationPageTemplate({
-  content,
-  jsonLd,
-}: EducationPageTemplateProps) {
+export function EducationPageTemplate({ content }: EducationPageTemplateProps) {
   useReducedMotion(); // Respect reduced motion preferences
 
   const [selectedTrack, setSelectedTrack] = React.useState<TrackId | null>(
@@ -187,7 +183,7 @@ export function EducationPageTemplate({
                 <Tabs.Panel value="design">
                   <div className={styles.tabContent}>
                     {renderContentWithGlossary(
-                      section.content,
+                      section.designContent ?? section.content,
                       content.crossReferences.glossary || []
                     )}
                   </div>
@@ -195,7 +191,7 @@ export function EducationPageTemplate({
                 <Tabs.Panel value="code">
                   <div className={styles.tabContent}>
                     {renderContentWithGlossary(
-                      section.content,
+                      section.codeContent ?? section.content,
                       content.crossReferences.glossary || []
                     )}
                   </div>
@@ -372,26 +368,6 @@ export function EducationPageTemplate({
 
   return (
     <>
-      {jsonLd && (
-        <>
-          {Array.isArray(jsonLd) ? (
-            // Render multiple JSON-LD schemas
-            jsonLd.map((schema, index) => (
-              <script
-                key={index}
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-              />
-            ))
-          ) : (
-            // Render single JSON-LD schema
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
-          )}
-        </>
-      )}
       <article className={styles.template}>
         <a href="#main-content" className={styles.skipLink}>
           Skip to main content

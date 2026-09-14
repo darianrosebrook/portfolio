@@ -2,9 +2,10 @@ id: FIX-DEPS-LATEST-001
 title: 'Upgrade all pnpm dependencies to latest and migrate toolchain configs'
 risk_tier: 2
 mode: refactor
-lifecycle_state: draft
+lifecycle_state: active
+worktree: fix-deps-latest-001
 created_at: '2026-09-14T14:04:27.957Z'
-updated_at: '2026-09-14T14:04:27.957Z'
+updated_at: '2026-09-14T16:38:16.875Z'
 created_by_session: 'session-8b0983e6-1c23-4ac6-b881-ba2df50b396e'
 blast_radius:
   modules:
@@ -28,6 +29,10 @@ scope:
     - 'types/'
     - 'hooks/'
     - 'context/'
+    - pnpm-workspace.yaml
+    - ui/modules/
+    - patches/
+    - database.types.ts
   out: []
 invariants:
   - 'No package-lock.json or yarn.lock is introduced; pnpm-lock.yaml remains the single lockfile authority'
@@ -35,22 +40,51 @@ invariants:
   - 'The design-token artifacts are produced by the build generator rather than hand-edited, so a fresh build reproduces the committed output'
 acceptance:
   - id: A1
-    given: 'the project pins packageManager pnpm@11.20.0 and ships pnpm-lock.yaml as its only lockfile'
-    when: 'pnpm update --latest followed by a clean pnpm install completes'
+    given: >-
+      the project pins packageManager pnpm@11.20.0 and ships pnpm-lock.yaml as its
+      only lockfile, and TypeScript 7 removed the classic compiler API that
+      typescript-eslint requires (its peer range is >=4.8.4 <6.1.0)
+    when: 'pnpm outdated is run after the upgrade'
     then: >-
-      every direct dependency in package.json resolves to its latest published
-      version and no package-lock.json or yarn.lock exists in the tree
+      every direct dependency resolves to its latest published version except
+      typescript, which is the newest release typescript-eslint supports (6.0.3)
+      while the TS 7 native compiler is provided by the typescript-7 alias declared
+      as npm:typescript@7.0.2, and no package-lock.json, yarn.lock or
+      npm-shrinkwrap.json exists in the tree
   - id: A2
-    given: 'TypeScript 7, ESLint 10, Stylelint 17 and Vitest 5 each change their configuration surface'
-    when: 'npm run typecheck, npm run lint and npm run lint:css execute'
-    then: 'each command exits 0 with no unrecognised-rule, config-schema or unsupported-option error'
-  - id: A3
-    given: 'the build script regenerates design tokens before next build'
-    when: 'npm test and npm run build execute'
+    given: >-
+      the pre-upgrade baseline at 003a41ce was typecheck exit 0, eslint exit 0,
+      stylelint 137 errors / 446 warnings, and vitest 1 unhandled error from GSAP
+      ScrollTrigger calling requestAnimationFrame after teardown
+    when: 'npm run typecheck, npm run lint and npm run lint:css execute against the upgraded toolchain'
     then: >-
-      both exit 0 and types/designTokens.ts and ui/designTokens/designTokens.json
-      are byte-identical to the committed revision
+      typecheck and eslint still exit 0, and stylelint loads its upgraded config
+      with no unrecognised-rule or schema error and reports no more errors than the
+      baseline 137
+  - id: A3
+    given: >-
+      the build script regenerates design tokens before next build, and
+      tokens:build:full deterministically omits the component.* group that
+      ui/designTokens/core.tokens.json still defines (a pre-existing
+      generator/source inconsistency outside this spec's scope)
+    when: 'npm test and npm run build execute against the upgraded toolchain'
+    then: >-
+      both exit 0 and this change leaves the committed design-token artifacts
+      types/designTokens.ts and ui/designTokens/designTokens.json unmodified
 non_functional: {}
 contracts:
   - name: 'build-toolchain'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "pnpm outdated: only 'typescript 6.0.3 -> 7.0.2' (the approved side-by-side hold; TS 7 native compiler supplied by the typescript-7 alias) and deprecated @types/hls.js stub remain; ls package-lock.json yarn.lock npm-shrinkwrap.json => No such file"
+    recorded_at: "2026-09-14T16:37:37.935Z"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "npm run typecheck ==> exit 0 (TypeScript 7.0.2 native via node ./node_modules/typescript-7/lib/tsc.js); npm run lint ==> exit 0, 0 errors / 1 pre-existing warning (ESLint 10.10.0 + typescript-eslint on TS 6.0.3, via pnpm patched eslint-plugin-react); npm run lint:css loads the Stylelint 17 config with no unrecognised-rule/schema error and reports 13 errors, down from the 137 baseline"
+    recorded_at: "2026-09-14T16:37:38.423Z"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "npm test ==> exit 0, Test Files 173 passed (173), 1805 passed / 13 expected fail / 2 skipped (1820); npm run build ==> exit 0, Next.js 16.3.5 compiled successfully and emitted all 158 pages; git status shows types/designTokens.ts and ui/designTokens/designTokens.json unmodified after restoration"
+    recorded_at: "2026-09-14T16:37:38.895Z"

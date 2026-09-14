@@ -1,24 +1,70 @@
 import Link from 'next/link';
+import type { FoundationPageMetadata } from '@/types/foundationContent';
+import { generateFoundationLDJson } from '@/utils/ldjson';
 import styles from './page.module.css';
 
+const PAGE_TITLE = 'Design Tokens Foundations';
+const PAGE_DESCRIPTION =
+  'A two-tier token architecture following W3C DTCG 1.0: separating raw values from semantic purpose to build scalable, themeable design systems.';
+
 export const metadata = {
-  title: 'Design Tokens Philosophy | Darian Rosebrook',
-  description:
-    'A two-tier token architecture following W3C DTCG 1.0: separating raw values from semantic purpose to build scalable, themeable design systems.',
+  title: `${PAGE_TITLE} | Darian Rosebrook`,
+  description: PAGE_DESCRIPTION,
   openGraph: {
-    title: 'Design Tokens Philosophy | Darian Rosebrook',
-    description:
-      'A two-tier token architecture following W3C DTCG 1.0: separating raw values from semantic purpose to build scalable, themeable design systems.',
+    title: `${PAGE_TITLE} | Darian Rosebrook`,
+    description: PAGE_DESCRIPTION,
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Design Tokens Philosophy | Darian Rosebrook',
-    description:
-      'A two-tier token architecture following W3C DTCG 1.0: separating raw values from semantic purpose to build scalable, themeable design systems.',
+    title: `${PAGE_TITLE} | Darian Rosebrook`,
+    description: PAGE_DESCRIPTION,
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
   },
 };
+
+/**
+ * JSON-LD for the tokens track landing. This page is hand-rolled (a
+ * deliberate deep-dive format, not the education template), so the
+ * schemas are emitted here in the server tree — client-rendered inline
+ * scripts never insert into the DOM on hydration.
+ */
+const jsonLdMetadata: FoundationPageMetadata = {
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  slug: 'tokens',
+  canonicalUrl: 'https://darianrosebrook.com/blueprints/foundations/tokens',
+  published_at: new Date().toISOString(),
+  image: 'https://darianrosebrook.com/darianrosebrook.jpg',
+  learning: {
+    learning_level: 'foundation',
+    role_relevance: ['design', 'engineering'],
+    prerequisites: [],
+    next_units: [],
+    assessment_required: false,
+    estimated_reading_time: 15,
+  },
+  governance: {
+    canonical_version: 'System v1',
+    alignment_status: 'aligned',
+    last_review_date: new Date().toISOString(),
+    next_review_date: new Date(
+      Date.now() + 90 * 24 * 60 * 60 * 1000
+    ).toISOString(),
+  },
+  author: {
+    name: 'Darian Rosebrook',
+    role: 'Staff Design Technologist, Design Systems Architect',
+    expertise: ['Design Systems', 'Token Architecture'],
+    profileUrl: 'https://darianrosebrook.com',
+    imageUrl: 'https://darianrosebrook.com/darianrosebrook.jpg',
+  },
+};
+
+const jsonLdSchemas = generateFoundationLDJson({
+  metadata: jsonLdMetadata,
+  canonical: jsonLdMetadata.canonicalUrl,
+});
 
 const sections = [
   {
@@ -66,6 +112,13 @@ const sections = [
 export default function TokensFoundationPage() {
   return (
     <section className="content">
+      {jsonLdSchemas.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       <article>
         <h1>Design Tokens Philosophy</h1>
         <p className={styles.lead}>
@@ -435,6 +488,32 @@ export default function TokensFoundationPage() {
               <span className={styles.layerNavDesc}>Type-safe tokens</span>
             </div>
           </Link>
+        </nav>
+        {/*
+          Learning-graph navigation. The e2e suite and the page registry
+          both place this page in the foundations path (prerequisite:
+          philosophy; next: color and spacing). Rendered in the same
+          aria-labelled shape the education template uses so screen
+          reader rosters and the suite see one convention.
+        */}
+        <nav aria-label="Prerequisites">
+          <h2>Prerequisites</h2>
+          <ul>
+            <li>
+              <Link href="/blueprints/foundations/philosophy">philosophy</Link>
+            </li>
+          </ul>
+        </nav>
+        <nav aria-label="Next steps">
+          <h2>Continue Learning</h2>
+          <ul>
+            <li>
+              <Link href="/blueprints/foundations/color">color</Link>
+            </li>
+            <li>
+              <Link href="/blueprints/foundations/spacing">spacing</Link>
+            </li>
+          </ul>
         </nav>
       </article>
     </section>

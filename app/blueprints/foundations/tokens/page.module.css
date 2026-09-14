@@ -255,8 +255,8 @@
   padding: var(--core-spacing-size-05);
   background: var(--semantic-color-background-warning-subtle);
   border-left: 4px solid var(--semantic-color-border-warning);
-  border-radius: 0 var(--core-shape-radius-medium) var(--core-shape-radius-medium)
-    0;
+  border-radius: 0 var(--core-shape-radius-medium)
+    var(--core-shape-radius-medium) 0;
   color: var(--semantic-color-foreground-on-warning-subtle);
 }
 
