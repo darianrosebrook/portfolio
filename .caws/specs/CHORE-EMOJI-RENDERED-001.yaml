@@ -30,3 +30,8 @@ acceptance:
     then: 'no pictographic emoji remains in the touched files, lint typecheck and the vitest suite pass, and gates pass'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "commit 5ca14d3e on chore-emoji-rendered-001, 13 files; emoji audit over app/blueprints+ui shows no pictographic emoji outside the excluded toolbar glyphs (PerfPanel/VideoBubbleMenu/VideoNodeView/SaveStatus), typographic symbols, and the emoji picker dataset; tsc --noEmit exit 0; eslint app/blueprints ui exit 0; vitest run 2003 passed/13 expected fail/2 skipped exit 0; caws gates run Overall OK 5/5"
+    recorded_at: "2026-09-14T19:13:21.507Z"
