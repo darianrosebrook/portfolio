@@ -162,6 +162,29 @@ const sections: FoundationSection[] = [
           accent teal&quot;) without touching consumers.
         </p>
         <p>
+          The ramps are not curated swatches; they are <em>generated</em>, and
+          the generation is the most important provenance fact in the color
+          system. Each ramp is produced with the Adaptive-DS-Colors generator:
+          the first step is keyed at <strong>1.15:1</strong> contrast against
+          the background, steps are interpolated{' '}
+          <strong>uniformly in luminance</strong> up to a bounded top end near
+          18:1, and the same per-level contrast targets apply to every family.
+          Verify it against the shipped hexes: neutral and blue land within
+          ±0.07 of each other at every level—1.15, 1.57, 2.22, 3.23, 4.88, 7.46,
+          11.4, 16.1:1 against white.
+        </p>
+        <p>
+          Read that progression as a ladder of thresholds, because the anchors
+          put each level next to a job: <code>400</code> (≈3.2:1) brackets the
+          WCAG UI-graphics floor, <code>500</code> (≈4.9:1) sits just above the
+          4.5:1 body-text floor, <code>600</code> (≈7.5:1) clears AAA.
+          &quot;Which step for text?&quot; is therefore not a taste question—the
+          ramp answers it. What remains chosen is the family hue, the step
+          count, and the anchors themselves; everything between them is derived,
+          which is why a brand ramp can be regenerated under new anchors without
+          re-curating eight colors by hand.
+        </p>
+        <p>
           Alongside the ramps sit two smaller groups. <code>color.mode</code>{' '}
           holds the constants every theme needs—<code>black</code>,{' '}
           <code>white</code>, <code>light</code> (<code>#fafafa</code>),{' '}
@@ -717,12 +740,12 @@ export const WCAG_LEVELS = {
             the values.
           </li>
           <li>
-            <strong>Perceptual ramps vs brand fidelity:</strong> calibrated
-            steps make system rules possible but occasionally fight a brand
-            guideline that mandates a specific flagship hex. The escape hatch is
-            a core-layer override—pin <code>brand.primary.500</code> to the
-            brand&apos;s value and re-derive the neighbors—never a hex in a
-            component.
+            <strong>Perceptual ramps vs brand fidelity:</strong> the ramps are
+            contrast-anchored derivations, not hand-picked colors, but a brand
+            guideline can still mandate a specific flagship hex. The escape
+            hatch honors both: pin <code>brand.primary.500</code> to the
+            brand&apos;s value and re-derive the neighbors with the generator
+            under the same anchors—never a hex in a component.
           </li>
           <li>
             <strong>Fallbacks in component tokens:</strong> the literal in{' '}
@@ -1035,6 +1058,11 @@ for (const file of componentCssFiles) {
             <strong>DTCG design tokens format</strong> — the W3C community group
             format the token sources follow (
             <code>https://tr.designtokens.org/format/</code>).
+          </li>
+          <li>
+            <strong>Adaptive-DS-Colors</strong> — the generator behind the
+            ramps: contrast-keyed at 1.15:1, uniformly distributed in luminance,
+            shared per-level targets across families.
           </li>
           <li>
             <strong>The sources themselves</strong> —{' '}

@@ -80,6 +80,9 @@ describe('Color Foundations page', () => {
       '--core-color-palette-brand-primary-500',
       // Generated cascade-layer order from app/designTokens.scss
       '@layer core, semantic, theme, brand, density',
+      // Ramp derivation: generator + contrast anchors
+      'Adaptive-DS-Colors',
+      '1.15:1',
     ];
     for (const token of requiredTokens) {
       expect(text, `page must cite ${token}`).toContain(token);
