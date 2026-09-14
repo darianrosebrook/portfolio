@@ -5,7 +5,7 @@ mode: feature
 lifecycle_state: active
 worktree: feat-core-foundations-001
 created_at: '2026-09-14T05:06:10.391Z'
-updated_at: '2026-09-14T05:13:18.181Z'
+updated_at: '2026-09-14T14:07:22.339Z'
 created_by_session: 'session-ee97c70e-5708-43ac-898e-efaca06c09be'
 blast_radius:
   modules:
@@ -29,6 +29,7 @@ scope:
     - types/foundationContent.ts
     - test/blueprints/**
     - test/e2e/foundationNavigation.spec.ts
+    - app/blueprints/ux-patterns/**
   out: []
 invariants:
   - 'Every filled page renders through the FoundationPage education template with complete FoundationPageContent (metadata, sections, crossReferences, verificationChecklist, assessmentPrompts) — no placeholder ''coming soon'' markup remains on any core-foundations page'
