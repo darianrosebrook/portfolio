@@ -489,6 +489,32 @@ export default function TokensFoundationPage() {
             </div>
           </Link>
         </nav>
+        {/*
+          Learning-graph navigation. The e2e suite and the page registry
+          both place this page in the foundations path (prerequisite:
+          philosophy; next: color and spacing). Rendered in the same
+          aria-labelled shape the education template uses so screen
+          reader rosters and the suite see one convention.
+        */}
+        <nav aria-label="Prerequisites">
+          <h2>Prerequisites</h2>
+          <ul>
+            <li>
+              <Link href="/blueprints/foundations/philosophy">philosophy</Link>
+            </li>
+          </ul>
+        </nav>
+        <nav aria-label="Next steps">
+          <h2>Continue Learning</h2>
+          <ul>
+            <li>
+              <Link href="/blueprints/foundations/color">color</Link>
+            </li>
+            <li>
+              <Link href="/blueprints/foundations/spacing">spacing</Link>
+            </li>
+          </ul>
+        </nav>
       </article>
     </section>
   );
