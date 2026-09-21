@@ -2,6 +2,7 @@
 import type { Article, CaseStudy } from '@/types';
 import Button from '@/ui/components/Button';
 import Checkbox from '@/ui/components/Checkbox';
+import { Input } from '@/ui/components/Input';
 import { IconButton } from './IconButton';
 import { ConfirmDialog } from './ConfirmDialog';
 import { RelatedContentPicker } from './RelatedContentPicker';
@@ -673,7 +674,7 @@ function ContentEditorSession({
               <label className="small" htmlFor="slug">
                 Slug
               </label>
-              <input
+              <Input
                 name="slug"
                 value={record.slug}
                 onChange={handleField}
@@ -691,7 +692,7 @@ function ContentEditorSession({
               <label className="small" htmlFor="headline">
                 Headline
               </label>
-              <input
+              <Input
                 name="headline"
                 value={record.headline ?? ''}
                 onChange={handleField}
@@ -713,7 +714,7 @@ function ContentEditorSession({
               <label className="small" htmlFor="image">
                 Image
               </label>
-              <input
+              <Input
                 name="image"
                 value={record.image ?? ''}
                 onChange={handleField}
@@ -724,7 +725,7 @@ function ContentEditorSession({
               <label className="small" htmlFor="articleSection">
                 Section
               </label>
-              <input
+              <Input
                 name="articleSection"
                 value={record.articleSection ?? ''}
                 onChange={handleField}
@@ -735,7 +736,7 @@ function ContentEditorSession({
               <label className="small" htmlFor="keywords">
                 Keywords (comma-separated)
               </label>
-              <input
+              <Input
                 name="keywords"
                 value={record.keywords ?? ''}
                 onChange={handleField}
@@ -751,7 +752,7 @@ function ContentEditorSession({
               <label className="small" htmlFor="published_at">
                 Published at
               </label>
-              <input
+              <Input
                 type="datetime-local"
                 value={
                   record.published_at
@@ -775,7 +776,7 @@ function ContentEditorSession({
               <label className="small" htmlFor="scheduled_at">
                 Schedule for
               </label>
-              <input
+              <Input
                 type="datetime-local"
                 id="scheduled_at"
                 value={scheduledAt}
