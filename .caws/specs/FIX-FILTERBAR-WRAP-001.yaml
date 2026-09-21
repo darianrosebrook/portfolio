@@ -26,3 +26,10 @@ acceptance:
     then: 'the search submit label does not wrap (scrollWidth <= clientWidth) and the control keeps its intrinsic width'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Runtime measurement, same page and viewport before and after. Before (main ee3d42ed): the submit was 64x64 with line-height 27 (label wrapped to two lines), white-space normal, flex 0 1 auto. After (worktree): 75x37, no wrap, white-space nowrap, flex 0 0 auto, at both 1280 and 768, with no document overflow; the search row sets flex-wrap so the control drops below the field when narrow. No committed test asserts layout, so this measurement is the evidence."
+    recorded_at: "2026-09-21T05:38:56.578Z"
+    command: npx next dev --webpack -p 3100 (worktree) + browser measurement at 1280 and 768
+    commit_sha: "3ef10fe3face7d3a700d6dfe68df30b0b720d754"
