@@ -44,3 +44,9 @@ evidence:
     recorded_at: "2026-09-21T14:53:56.087Z"
     command: "browser: inspect all seven fields on the worktree build"
     commit_sha: "06ecea17b572fa0e8df201168b50ab7c43cdfccb"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "The same run shows each field rendering the stored record values (slug and headline from the Prime article, the Supabase image URL, \"Design Systems\", \"ux, systems, problem-solving\", the local published time, and an empty schedule), and typing into the slug field updated its value without saving — the controlled onChange wiring is live. Non-claim: the save/publish payload itself was not round-tripped; it is unchanged code (saveTransition passes the patch through) and was exercised for the schedule path in the FIX-UNSCHEDULE-COPY-001 round."
+    recorded_at: "2026-09-21T14:53:56.618Z"
+    command: "browser: type into the slug field and read the value"
+    commit_sha: "06ecea17b572fa0e8df201168b50ab7c43cdfccb"
