@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { Article } from '@/types';
 import Button from '@/ui/components/Button';
+import styles from './EditorActions.module.css';
 
 interface EditorActionsProps {
   article: Partial<Article>;
@@ -55,14 +56,7 @@ export function EditorActions({
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        gap: '0.5rem',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-      }}
-    >
+    <div className={styles.row}>
       <Button
         onClick={onPreview}
         disabled={!article.articleBody}
@@ -105,13 +99,7 @@ export function EditorActions({
         </Button>
       )}
       {publishError && (
-        <span
-          role="alert"
-          style={{
-            color: 'var(--semantic-color-foreground-destructive)',
-            fontSize: '13px',
-          }}
-        >
+        <span role="alert" className={styles.error}>
           {publishError}
         </span>
       )}

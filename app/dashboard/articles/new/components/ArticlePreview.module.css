@@ -1,0 +1,59 @@
+/*
+ * Full-screen preview overlay for the new-content flow.
+ *
+ * The article body itself deliberately keeps the public page's styles module
+ * (app/articles/[slug]/styles.module.css) so the preview shows the real thing;
+ * this module owns only the overlay chrome. The bar's <h2> is left unstyled on
+ * purpose: the original had no inline style on it either, so the global heading
+ * rules apply exactly as before.
+ */
+
+.empty {
+  padding: 2rem;
+  color: var(--semantic-color-foreground-secondary);
+  text-align: center;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: auto;
+  background: var(--semantic-color-background-primary);
+}
+
+.bar {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-block-end: 1px solid var(--semantic-color-border-primary);
+  background: var(--semantic-color-background-primary);
+}
+
+.barActions {
+  display: flex;
+  gap: var(--core-spacing-size-04);
+  align-items: center;
+}
+
+.hint {
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.closeButton {
+  padding: var(--core-spacing-size-04) var(--core-spacing-size-06);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--core-shape-radius-small);
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--semantic-color-border-accent);
+  outline-offset: var(--semantic-interaction-focus-ring-offset, 2px);
+}

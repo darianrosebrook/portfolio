@@ -1,6 +1,7 @@
 'use client';
 
 import styles from '@/app/articles/[slug]/styles.module.css';
+import chrome from './ArticlePreview.module.css';
 import type { Article } from '@/types';
 import { Image } from '@/ui/components/Image';
 import { processArticleContent } from '@/utils/tiptap/htmlGeneration';
@@ -12,66 +13,29 @@ interface ArticlePreviewProps {
 
 /**
  * Article preview component
- * Shows how the article will look on the live site
+ * Shows how the article will look on the live site.
+ *
+ * Two style modules on purpose: `styles` is the public article page's own module,
+ * borrowed so the preview matches the live site, and `chrome` is this overlay.
  */
 export function ArticlePreview({ article, onClose }: ArticlePreviewProps) {
   if (!article.articleBody) {
-    return (
-      <div
-        style={{
-          padding: '2rem',
-          textAlign: 'center',
-          color: 'var(--semantic-color-foreground-secondary)',
-        }}
-      >
-        No content to preview
-      </div>
-    );
+    return <div className={chrome.empty}>No content to preview</div>;
   }
 
   const contents = processArticleContent(article.articleBody);
   const { html, h1Text, imageSrc } = contents;
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'var(--semantic-color-background-primary)',
-        zIndex: 1000,
-        overflow: 'auto',
-      }}
-    >
-      <div
-        style={{
-          position: 'sticky',
-          top: 0,
-          background: 'var(--semantic-color-background-primary)',
-          borderBottom: '1px solid var(--semantic-color-border-primary)',
-          padding: '1rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          zIndex: 1001,
-        }}
-      >
+    <div className={chrome.overlay}>
+      <div className={chrome.bar}>
         <h2>Preview</h2>
-        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-          <small
-            style={{ color: 'var(--semantic-color-foreground-secondary)' }}
-          >
-            Press Esc to close
-          </small>
+        <div className={chrome.barActions}>
+          <small className={chrome.hint}>Press Esc to close</small>
           <button
+            type="button"
+            className={chrome.closeButton}
             onClick={onClose}
-            style={{
-              padding: '8px 16px',
-              border: '1px solid var(--semantic-color-border-primary)',
-              borderRadius: 'var(--core-shape-radius-small)',
-              background: 'var(--semantic-color-background-secondary)',
-              color: 'var(--semantic-color-foreground-primary)',
-              cursor: 'pointer',
-            }}
           >
             Close Preview
           </button>
@@ -124,6 +88,9 @@ export function ArticlePreview({ article, onClose }: ArticlePreviewProps) {
               <Image
                 src={article.image || imageSrc || ''}
                 alt={article.headline || 'Article cover'}
+                // Image forwards `style` to the inner <img> but `className` to its
+                // container, so this one stays a style prop rather than moving the
+                // sizing onto the wrong element.
                 style={{
                   width: '100%',
                   height: 'auto',
