@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import type { CaseStudy } from '@/types';
 import ContentEditor from '../../_components/ContentEditor';
+import Button from '@/ui/components/Button';
 
 export default function EditCaseStudyPage({
   params,
@@ -68,9 +69,13 @@ export default function EditCaseStudyPage({
     return (
       <div role="alert">
         <p>{error}</p>
-        <button type="button" onClick={() => setAttempt((value) => value + 1)}>
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={() => setAttempt((value) => value + 1)}
+        >
           Try again
-        </button>
+        </Button>
         <p>
           <Link href="/dashboard/case-studies">Back to Case Studies</Link>
         </p>
