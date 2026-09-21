@@ -2,10 +2,11 @@ id: FIX-PUBLISH-DATE-001
 title: 'Preserve the publish date the editor sends instead of stamping now'
 risk_tier: 2
 mode: fix
-lifecycle_state: active
-worktree: fix-publish-date-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge fix-publish-date-001 at d66ac0854bf1f95b76e46bd5eb3426af44ee9ab3'
 created_at: '2026-09-21T04:28:52.373Z'
-updated_at: '2026-09-21T04:28:53.571Z'
+updated_at: '2026-09-21T04:34:12.851Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
