@@ -44,3 +44,9 @@ evidence:
     recorded_at: "2026-09-21T07:12:41.301Z"
     command: "browser: read input.labels[0].textContent, the htmlFor/id pair, and whether clicking the label focuses the field"
     commit_sha: "45780b2edb471ead868105dcd963913a84618d38"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Runtime: from /dashboard/articles?status=draft the form carried hidden status=draft and submitting navigated to /dashboard/articles?status=draft&q=prime — the filter is preserved and the query added, with the field rendered by the Input primitive (data-ds-component=\"Input\") and the control rendered by the Button primitive (class \"button medium secondary\")."
+    recorded_at: "2026-09-21T07:12:41.888Z"
+    command: "browser: submit the filter form from a non-default filter and read the resulting URL"
+    commit_sha: "45780b2edb471ead868105dcd963913a84618d38"
