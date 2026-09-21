@@ -37,3 +37,12 @@ non_functional: {}
 contracts:
   - name: 'dashboard-editor'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "A new test renders ContentEditor with status scheduled, clicks Unschedule, and asserts the dialog confirm label is Unschedule, the title matches /unschedule/i, the text matches /schedule is cleared/i, and the text does NOT match /disappear from the public site/i. Against the unfixed component that test failed with \"expected Unpublish to be Unschedule\"; after the fix it passes. Full suite moved from 2070 to 2072 passing."
+    recorded_at: "2026-09-21T07:36:55.088Z"
+    test_nodeid: "test/dashboard/ContentEditor.test.tsx > confirm copy when returning content to draft > tells a scheduled item it returns to draft rather than that it disappears"
+    command: npx vitest run test/dashboard/ContentEditor.test.tsx
+    exit_code: 0
+    commit_sha: "6d2f391083be4ff375a9f5190f2c1b0df624bccb"
