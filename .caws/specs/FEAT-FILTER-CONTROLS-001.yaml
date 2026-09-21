@@ -2,10 +2,11 @@ id: FEAT-FILTER-CONTROLS-001
 title: 'Use the Button primitive for the search and retry submit controls'
 risk_tier: 2
 mode: refactor
-lifecycle_state: active
-worktree: filter-controls-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge filter-controls-001 at 146553db96646aa77005188a84a7d677c44ee8f7'
 created_at: '2026-09-21T07:05:47.088Z'
-updated_at: '2026-09-21T07:05:48.250Z'
+updated_at: '2026-09-21T07:09:00.744Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
