@@ -2,9 +2,10 @@ id: FEAT-EDITOR-FIELDS-001
 title: 'Move the editor properties fields onto the Input primitive'
 risk_tier: 2
 mode: refactor
-lifecycle_state: draft
+lifecycle_state: active
+worktree: editor-fields-001
 created_at: '2026-09-21T14:50:20.263Z'
-updated_at: '2026-09-21T14:50:20.263Z'
+updated_at: '2026-09-21T14:50:21.276Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
