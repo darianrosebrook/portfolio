@@ -2,10 +2,11 @@ id: FEAT-SCHEDULED-WRITE-001
 title: 'Let an update schedule content instead of publishing it'
 risk_tier: 2
 mode: feature
-lifecycle_state: active
-worktree: sched-write-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge sched-write-001 at 89b62a3f66b37e4855bfc1f788b5a5df8a3fd9d0'
 created_at: '2026-09-21T06:33:43.821Z'
-updated_at: '2026-09-21T06:33:44.980Z'
+updated_at: '2026-09-21T06:37:26.017Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
