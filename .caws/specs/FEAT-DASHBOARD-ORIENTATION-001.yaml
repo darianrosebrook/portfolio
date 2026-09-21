@@ -54,3 +54,11 @@ evidence:
     command: npx vitest run test/dashboard/contentPages.test.tsx
     exit_code: 0
     commit_sha: dc1d6dc492eadc7e85433d8971c0b9965ee4a064
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Needs attention renders drafts and unpublished changes through ContentCard/StatusPill (heading order asserted: Latest article revision, Case study draft, Saved article draft), each with a \"Continue writing <title>\" link to its editor, and excludes clean published work. Runtime at 1280: the region held 6 ContentCards with 0 inline style nodes and 6 status pills. A separate case covers the empty state when nothing needs attention."
+    recorded_at: "2026-09-21T05:27:28.176Z"
+    test_nodeid: "test/dashboard/contentPages.test.tsx > dashboard server content pages with a mocked database boundary > shows per-library counts and resume links across drafts and dirty published content"
+    command: npx vitest run test/dashboard/contentPages.test.tsx
+    exit_code: 0
+    commit_sha: dc1d6dc492eadc7e85433d8971c0b9965ee4a064
