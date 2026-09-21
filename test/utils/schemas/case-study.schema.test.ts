@@ -22,3 +22,27 @@ describe('patchCaseStudyDraftSchema', () => {
     );
   });
 });
+
+describe('updateCaseStudySchema — published_at survives parsing', () => {
+  it('keeps the date the editor sent', () => {
+    const publishedAt = '2026-05-18T08:37:00.000Z';
+    const result = updateCaseStudySchema.safeParse({
+      slug: 'fine-slug',
+      status: 'published',
+      published_at: publishedAt,
+    });
+    expect(result.success).toBe(true);
+    if (!result.success) return;
+    expect(result.data.published_at).toBe(publishedAt);
+  });
+
+  it('stays optional so a first publish still falls back to now() in the route', () => {
+    const result = updateCaseStudySchema.safeParse({
+      slug: 'fine-slug',
+      status: 'published',
+    });
+    expect(result.success).toBe(true);
+    if (!result.success) return;
+    expect(result.data.published_at).toBeUndefined();
+  });
+});

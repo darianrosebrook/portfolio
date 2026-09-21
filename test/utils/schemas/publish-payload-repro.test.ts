@@ -123,3 +123,33 @@ describe('updateArticleSchema — publish payload repro', () => {
     expect(result.success).toBe(false);
   });
 });
+
+/**
+ * The cases above only assert that parsing SUCCEEDS. Zod drops unknown keys
+ * silently, so a payload carrying published_at parsed fine while the field was
+ * discarded — and the publish route's `updateData.published_at ?? nowIso`
+ * fallback then re-stamped every publish with the current time.
+ */
+describe('updateArticleSchema — published_at survives parsing', () => {
+  it('keeps the date the editor sent', () => {
+    const publishedAt = '2026-05-18T08:37:00.000Z';
+    const result = updateArticleSchema.safeParse({
+      slug: 'fine-slug',
+      status: 'published',
+      published_at: publishedAt,
+    });
+    expect(result.success).toBe(true);
+    if (!result.success) return;
+    expect(result.data.published_at).toBe(publishedAt);
+  });
+
+  it('stays optional so a first publish still falls back to now() in the route', () => {
+    const result = updateArticleSchema.safeParse({
+      slug: 'fine-slug',
+      status: 'published',
+    });
+    expect(result.success).toBe(true);
+    if (!result.success) return;
+    expect(result.data.published_at).toBeUndefined();
+  });
+});

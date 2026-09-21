@@ -78,6 +78,11 @@ export const createCaseStudySchema = caseStudySchema
 export const updateCaseStudySchema = createCaseStudySchema.partial().extend({
   status: caseStudyStatusEnum.optional(),
   is_dirty: z.boolean().nullable().optional(),
+  // createCaseStudySchema omits published_at, so zod silently dropped the date
+  // the editor sent and the publish route's `?? nowIso` fallback re-stamped every
+  // publish with the current time. Optional and default-free: a first publish
+  // still sends no date, so the route's now() fallback stays reachable.
+  published_at: caseStudySchema.shape.published_at.optional(),
 });
 
 export const patchCaseStudyDraftSchema = z.object({
