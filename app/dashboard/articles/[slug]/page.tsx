@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Article } from '@/types';
 import ContentEditor from '../../_components/ContentEditor';
 import Button from '@/ui/components/Button';
+import styles from './page.module.css';
 
 export default function EditArticlePage({
   params,
@@ -44,52 +45,18 @@ export default function EditArticlePage({
 
   if (isLoading) {
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '400px',
-          gap: 'var(--core-spacing-size-04)',
-        }}
-      >
-        <div
-          style={{
-            width: '32px',
-            height: '32px',
-            border: '3px solid var(--semantic-color-border-subtle)',
-            borderTopColor: 'var(--semantic-color-foreground-accent)',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-          }}
-        />
-        <p style={{ color: 'var(--semantic-color-foreground-secondary)' }}>
-          Loading article...
-        </p>
-        <style>{`
-          @keyframes spin {
-            to { transform: rotate(360deg); }
-          }
-        `}</style>
+      <div className={styles.loading}>
+        <div className={styles.spinner} />
+        <p className={styles.loadingText}>Loading article...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '400px',
-          gap: 'var(--core-spacing-size-06)',
-          textAlign: 'center',
-        }}
-      >
+      <div className={styles.errorState}>
         <svg
+          className={styles.errorIcon}
           width="64"
           height="64"
           viewBox="0 0 24 24"
@@ -98,28 +65,14 @@ export default function EditArticlePage({
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
-          style={{ opacity: 0.5 }}
         >
           <circle cx="12" cy="12" r="10" />
           <line x1="12" y1="8" x2="12" y2="12" />
           <line x1="12" y1="16" x2="12.01" y2="16" />
         </svg>
         <div>
-          <h2
-            style={{
-              margin: '0 0 var(--core-spacing-size-02)',
-              fontSize: 'var(--semantic-typography-heading-03)',
-              color: 'var(--semantic-color-foreground-primary)',
-            }}
-          >
-            {error}
-          </h2>
-          <p
-            style={{
-              margin: 0,
-              color: 'var(--semantic-color-foreground-secondary)',
-            }}
-          >
+          <h2 className={styles.errorTitle}>{error}</h2>
+          <p className={styles.errorBody}>
             The article you&apos;re looking for doesn&apos;t exist or you
             don&apos;t have permission to edit it.
           </p>
@@ -135,30 +88,11 @@ export default function EditArticlePage({
 
   return (
     <div>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 'var(--core-spacing-size-04)',
-          marginBottom: 'var(--core-spacing-size-06)',
-        }}
-      >
+      <div className={styles.header}>
         <button
+          type="button"
+          className={styles.backButton}
           onClick={() => router.push('/dashboard/articles')}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '36px',
-            height: '36px',
-            padding: 0,
-            background: 'transparent',
-            border: '1px solid var(--semantic-color-border-subtle)',
-            borderRadius: 'var(--core-shape-radius-02)',
-            color: 'var(--semantic-color-foreground-secondary)',
-            cursor: 'pointer',
-            transition: 'all 150ms ease',
-          }}
           title="Back to articles"
           aria-label="Back to articles"
         >
@@ -177,25 +111,8 @@ export default function EditArticlePage({
           </svg>
         </button>
         <div>
-          <h1
-            style={{
-              margin: 0,
-              fontSize: 'var(--semantic-typography-heading-02)',
-              fontWeight: 'var(--semantic-typography-font-weight-bold)',
-              color: 'var(--semantic-color-foreground-primary)',
-            }}
-          >
-            {article.headline || article.slug}
-          </h1>
-          <p
-            style={{
-              margin: 0,
-              fontSize: 'var(--semantic-typography-body-03)',
-              color: 'var(--semantic-color-foreground-tertiary)',
-            }}
-          >
-            /{article.slug}
-          </p>
+          <h1 className={styles.title}>{article.headline || article.slug}</h1>
+          <p className={styles.slug}>/{article.slug}</p>
         </div>
       </div>
       <ContentEditor initial={article} entity="articles" />

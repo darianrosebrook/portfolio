@@ -1,0 +1,122 @@
+/*
+ * Article editor page shell: loading, error and loaded states.
+ *
+ * The values were inline styles, including an inline <style> tag that declared
+ * @keyframes spin. Both now live here. Absolute lengths stay absolute (this
+ * site's root font-size is not 16px, so a rem conversion changes the layout),
+ * and 1px/3px borders stay literal as they do in the other dashboard modules.
+ */
+
+/* Loading ---------------------------------------------------------------- */
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--core-spacing-size-04);
+  align-items: center;
+  justify-content: center;
+  min-block-size: 400px;
+}
+
+.spinner {
+  inline-size: 32px;
+  block-size: 32px;
+  border: 3px solid var(--semantic-color-border-subtle);
+  border-block-start-color: var(--semantic-color-foreground-accent);
+  border-radius: var(--core-shape-radius-full);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingText {
+  color: var(--semantic-color-foreground-secondary);
+}
+
+/* Error ------------------------------------------------------------------ */
+
+.errorState {
+  display: flex;
+  flex-direction: column;
+  gap: var(--core-spacing-size-06);
+  align-items: center;
+  justify-content: center;
+  min-block-size: 400px;
+  text-align: center;
+}
+
+.errorIcon {
+  opacity: 0.5;
+}
+
+.errorState .errorTitle {
+  margin: 0 0 var(--core-spacing-size-02);
+  color: var(--semantic-color-foreground-primary);
+  font-size: var(--semantic-typography-heading-03);
+}
+
+.errorBody {
+  margin: 0;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+/* Loaded ----------------------------------------------------------------- */
+
+.header {
+  display: flex;
+  gap: var(--core-spacing-size-04);
+  align-items: center;
+  margin-block-end: var(--core-spacing-size-06);
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 36px;
+  block-size: 36px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--core-shape-radius-02);
+  color: var(--semantic-color-foreground-secondary);
+  cursor: pointer;
+  transition:
+    background var(--core-motion-duration-short) var(--core-motion-easing-standard),
+    border-color var(--core-motion-duration-short) var(--core-motion-easing-standard),
+    color var(--core-motion-duration-short) var(--core-motion-easing-standard);
+}
+
+.backButton:hover {
+  background: var(--semantic-color-background-secondary);
+  border-color: var(--semantic-color-border-default);
+  color: var(--semantic-color-foreground-primary);
+}
+
+.backButton:focus-visible {
+  outline: 2px solid var(--semantic-color-border-accent);
+  outline-offset: var(--semantic-interaction-focus-ring-offset, 2px);
+}
+
+/*
+ * Scoped two levels deep deliberately: globals.scss styles bare h1/h2 (h1 gets
+ * heading-01 and every heading gets weight 300), and a single class did not
+ * outrank those — the header rendered 32px/300 instead of this token pair.
+ * The descendant form does.
+ */
+.header .title {
+  margin: 0;
+  color: var(--semantic-color-foreground-primary);
+  font-size: var(--semantic-typography-heading-02);
+  font-weight: var(--semantic-typography-font-weight-bold);
+}
+
+.slug {
+  margin: 0;
+  color: var(--semantic-color-foreground-tertiary);
+  font-size: var(--semantic-typography-body-03);
+}
