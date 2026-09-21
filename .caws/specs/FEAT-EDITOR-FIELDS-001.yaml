@@ -1,0 +1,38 @@
+id: FEAT-EDITOR-FIELDS-001
+title: 'Move the editor properties fields onto the Input primitive'
+risk_tier: 2
+mode: refactor
+lifecycle_state: draft
+created_at: '2026-09-21T14:50:20.263Z'
+updated_at: '2026-09-21T14:50:20.263Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard editor — properties fields'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/_components/ContentEditor.tsx'
+  out: []
+invariants:
+  - 'Each field keeps its accessible name from its explicit label and keeps rendering the record value'
+  - 'The description stays a native textarea: no Textarea primitive exists'
+  - 'Typing still updates the controlled state that feeds the save and publish payloads'
+acceptance:
+  - id: A1
+    given: 'the properties panel'
+    when: 'it renders'
+    then: 'all seven inputs are the design system Input with their accessible names intact (slug, headline, image, articleSection, keywords, published_at, scheduled_at)'
+  - id: A2
+    given: 'a field with a stored value'
+    when: 'it renders'
+    then: 'it shows the record value, and typing updates the field without saving'
+  - id: A3
+    given: 'the swap'
+    when: 'the fields are measured at the same viewport on both builds'
+    then: 'the appearance delta is the design system delta and no horizontal overflow appears'
+non_functional: {}
+contracts:
+  - name: 'dashboard-editor'
+    type: behavior
