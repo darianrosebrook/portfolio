@@ -2,9 +2,10 @@ id: FEAT-DASHBOARD-ORIENTATION-001
 title: 'Dashboard orientation: workspace overview with needs-attention, recent activity and compact counts'
 risk_tier: 2
 mode: refactor
-lifecycle_state: draft
+lifecycle_state: active
+worktree: dash-orientation-001
 created_at: '2026-09-21T05:22:14.828Z'
-updated_at: '2026-09-21T05:22:14.828Z'
+updated_at: '2026-09-21T05:22:16.775Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
