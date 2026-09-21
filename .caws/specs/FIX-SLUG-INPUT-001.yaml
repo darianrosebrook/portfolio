@@ -5,7 +5,7 @@ mode: fix
 lifecycle_state: active
 worktree: fix-slug-input-001
 created_at: '2026-09-21T03:35:08.097Z'
-updated_at: '2026-09-21T03:35:15.112Z'
+updated_at: '2026-09-21T03:35:56.143Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
@@ -18,6 +18,7 @@ scope:
     - 'app/dashboard/_components/NewContentEditor.tsx'
     - 'utils/slugify.ts'
     - 'utils/slugify.test.ts'
+    - app/dashboard/articles/new/components/ArticleMetadataForm.test.tsx
   out: []
 invariants:
   - 'Every hyphen an author types into the slug field survives in the field value'
