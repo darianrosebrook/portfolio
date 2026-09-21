@@ -55,3 +55,10 @@ evidence:
     recorded_at: "2026-09-21T07:08:59.180Z"
     command: "browser: compare the search control render before and after the swap"
     commit_sha: "2ffbc1634f294c1ace7a28d0d6b1ea529606ca75"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "grep for applyButton across app/dashboard returns nothing: the four raw buttons are gone from ArticleFilters, the articles page, the case-studies page and the overview. Its rules were removed from page.module.css — the shared form-control rule now covers only .filterFields input and select, and the .applyButton, .applyButton:hover and .applyButton:focus-visible rules are deleted. The CSS-usage checker, which covers that module, reports 0 unreferenced classes across 19 modules with exit 0, so nothing was orphaned. Full suite 2070 passed."
+    recorded_at: "2026-09-21T07:08:59.803Z"
+    command: grep -rn applyButton app/dashboard; node scripts/check-css-module-usage.mjs
+    exit_code: 0
+    commit_sha: "2ffbc1634f294c1ace7a28d0d6b1ea529606ca75"
