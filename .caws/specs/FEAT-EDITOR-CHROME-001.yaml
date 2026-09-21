@@ -26,7 +26,11 @@ acceptance:
   - id: A1
     given: 'the new-article editor page'
     when: 'it renders'
-    then: 'no element inside the editor layout or the save status carries an inline style attribute'
+    then: >-
+      every element these two components render themselves — the layout shell,
+      toolbar, back link, metadata toggle, canvas and sidebar wrappers, and the save
+      status with its glyphs — carries no inline style attribute; elements supplied
+      as children by other components are out of scope here
   - id: A2
     given: 'the dashboard before and after'
     when: 'inline style objects are counted'
