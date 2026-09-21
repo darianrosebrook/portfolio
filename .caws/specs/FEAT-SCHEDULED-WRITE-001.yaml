@@ -55,3 +55,9 @@ evidence:
     recorded_at: "2026-09-21T06:37:24.581Z"
     command: "browser: POST /api/articles then PUT /api/articles/<slug> against the worktree dev server"
     commit_sha: "20251bb62315a8f72cbe5b3ece4b96ee578126a4"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "Same run: GET /api/cron/publish-scheduled with Authorization: Bearer <CRON_SECRET> returned 200 {\"count\":1,\"published\":[{\"table\":\"articles\",\"slug\":\"schedule-probe-…\",\"published_at\":\"2026-09-01T09:00:00+00:00\"}],\"failures\":[]}, and the row then read back status \"published\" with published_at equal to the stored scheduled_at string. My own flag reported false only because it compared against the client-sent \".000Z\" form rather than the stored value — the same string-vs-instant trap as earlier in this work; the two stored strings are identical. The probe row was deleted afterwards (204)."
+    recorded_at: "2026-09-21T06:37:25.139Z"
+    command: "browser: GET /api/cron/publish-scheduled + GET /api/articles/<slug> + DELETE"
+    commit_sha: "20251bb62315a8f72cbe5b3ece4b96ee578126a4"
