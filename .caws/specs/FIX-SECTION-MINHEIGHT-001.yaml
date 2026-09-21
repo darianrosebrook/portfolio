@@ -34,3 +34,10 @@ acceptance:
     then: 'no horizontal overflow appears and no content is lost'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "At a 768x1400 viewport the library card reports min-height \"auto\" and renders 120px, which equals its content (h2 18 + counts 42 + link 18 = 78) plus the two 8px row gaps (16) plus 12px padding on both sides (24) plus the 1px borders (2) — measured as contentPlusGapsPadding 120 against a rendered 120. Before the change the same card reported min-height 280px, exactly 20vh of that viewport, and tracked the viewport rather than the content: it was 180px at a 900px-high viewport and 280px at 1400px, with 78px of content throughout. Every section inside the dashboard main column now reports min-height auto (Library status, both cards, needs-attention, scheduled-queue if present, recent-activity)."
+    recorded_at: "2026-09-21T07:27:43.884Z"
+    command: "browser: measure the card and every main section at a 1400px-high viewport, before and after"
+    commit_sha: "77be354b94abba157c477cfa933176f388c528e3"
