@@ -131,20 +131,7 @@
   text-transform: uppercase;
 }
 
-.closeProperties {
-  width: 30px;
-  height: 30px;
-  background: transparent;
-  border: 0;
-  border-radius: var(--core-shape-radius-small);
-  color: var(--semantic-color-foreground-secondary);
-  cursor: pointer;
-}
 
-.closeProperties:hover {
-  background: var(--semantic-color-background-primary);
-  color: var(--semantic-color-foreground-primary);
-}
 
 .field {
   display: grid;
