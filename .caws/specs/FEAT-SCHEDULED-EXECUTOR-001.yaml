@@ -1,0 +1,41 @@
+id: FEAT-SCHEDULED-EXECUTOR-001
+title: 'Publish scheduled content at its due date'
+risk_tier: 2
+mode: feature
+lifecycle_state: draft
+created_at: '2026-09-21T06:07:22.421Z'
+updated_at: '2026-09-21T06:07:22.421Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'publish scheduling executor'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/schedule/publish.ts'
+    - 'test/utils/schedule/publish.test.ts'
+    - 'app/api/cron/publish-scheduled/route.ts'
+    - 'vercel.json'
+  out: []
+invariants:
+  - 'Only a row whose status is scheduled and whose scheduled_at is at or before now is ever promoted'
+  - 'A promoted row takes published_at from its scheduled_at, not from the time the job ran'
+  - 'Running the executor twice for the same due row changes nothing the second time'
+acceptance:
+  - id: A1
+    given: 'rows in draft, published and scheduled states'
+    when: 'the due selection runs'
+    then: 'only scheduled rows at or before now are selected, in scheduled_at order'
+  - id: A2
+    given: 'a due scheduled row carrying a working draft'
+    when: 'the promotion payload is built'
+    then: 'the working fields become canonical, status is published, is_dirty is cleared, and published_at equals scheduled_at'
+  - id: A3
+    given: 'the cron route'
+    when: 'it is called without a valid cron token or admin session'
+    then: 'it responds 401 or 403 without touching content, and when scheduling is not yet enabled in the schema it fails closed with a typed 503 instead of a 500'
+non_functional: {}
+contracts:
+  - name: 'publish-scheduling'
+    type: behavior
