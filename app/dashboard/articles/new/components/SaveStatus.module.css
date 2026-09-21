@@ -1,0 +1,49 @@
+/*
+ * Save status. The colour used to come from a getStatusColor() switch feeding an
+ * inline style; it is now a data attribute on the container, so the state is in
+ * the markup and the colour is in the stylesheet like everything else.
+ */
+
+.status {
+  display: flex;
+  gap: var(--core-spacing-size-03);
+  align-items: center;
+  font-size: var(--semantic-typography-caption-01);
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.status[data-status='saved'] {
+  color: var(--semantic-color-foreground-success);
+}
+
+.status[data-status='local'] {
+  color: var(--semantic-color-foreground-warning);
+}
+
+.status[data-status='error'] {
+  color: var(--semantic-color-foreground-destructive);
+}
+
+.pulse {
+  inline-size: var(--core-spacing-size-04);
+  block-size: var(--core-spacing-size-04);
+  border-radius: var(--core-shape-radius-full);
+  background: var(--semantic-color-background-accent);
+  animation: pulse var(--core-motion-duration-long, 1.5s)
+    var(--core-motion-easing-standard) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.glyph {
+  color: inherit;
+}

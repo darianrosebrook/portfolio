@@ -1,0 +1,97 @@
+/*
+ * Editor chrome for the new-content flow. The values were inline styles; the
+ * spacing steps below are the exact token equivalents of the literals they
+ * replaced (size-05 = 12px, size-06 = 16px, size-07 = 24px, size-09 = 48px).
+ * 1px borders and the rem-based viewport calculations stay literal, matching the
+ * convention the other dashboard modules already use.
+ */
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-block-size: calc(100dvh - 12rem);
+  background: var(--semantic-color-background-primary);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--core-spacing-size-05);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--core-spacing-size-05) var(--core-spacing-size-07);
+  border-block-end: 1px solid var(--semantic-color-border-subtle);
+  background: var(--semantic-color-background-primary);
+}
+
+.group {
+  display: flex;
+  gap: var(--core-spacing-size-06);
+  align-items: center;
+  min-inline-size: 0;
+}
+
+.back {
+  display: inline-flex;
+  gap: var(--core-spacing-size-03);
+  align-items: center;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-03);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.back:hover {
+  color: var(--semantic-color-foreground-primary);
+}
+
+.metadataToggle {
+  /* 6px is the value the inline style used; the vertical step has no token that
+     equals it, so fidelity wins over tokenisation here. */
+  padding: 6px var(--core-spacing-size-05);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--core-shape-radius-02);
+  color: var(--semantic-color-foreground-primary);
+  font-size: var(--semantic-typography-caption-01);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.back:focus-visible,
+.metadataToggle:focus-visible {
+  outline: 2px solid var(--semantic-color-border-accent);
+  outline-offset: var(--semantic-interaction-focus-ring-offset, 2px);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.canvas {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  min-inline-size: 0;
+  padding: var(--core-spacing-size-09) var(--core-spacing-size-07);
+}
+
+.document {
+  inline-size: 100%;
+  max-inline-size: 900px;
+}
+
+.sidebar {
+  position: sticky;
+  inset-block-start: var(--core-spacing-size-04);
+  /* Absolute, not 20rem: the site root font-size is not 16px, so a rem here
+     rendered 360px and changed the layout the inline style had set. */
+  inline-size: 320px;
+  max-block-size: calc(100dvh - 7rem);
+  overflow: auto;
+  padding: var(--core-spacing-size-07);
+  border-inline-start: 1px solid var(--semantic-color-border-subtle);
+  background: var(--semantic-color-background-primary);
+}

@@ -1,6 +1,7 @@
 'use client';
 
 import type { SaveStatus } from '../hooks/useAutoSave';
+import styles from './SaveStatus.module.css';
 
 interface SaveStatusProps {
   status: SaveStatus;
@@ -10,7 +11,10 @@ interface SaveStatusProps {
 
 /**
  * Save status indicator component
- * Shows saving state, success, or error messages
+ * Shows saving state, success, or error messages.
+ *
+ * The state is carried as data-status so the colour comes from the stylesheet
+ * rather than from a switch that returned inline style values.
  */
 export function SaveStatus({ status, lastSaved, error }: SaveStatusProps) {
   const getStatusText = () => {
@@ -28,56 +32,21 @@ export function SaveStatus({ status, lastSaved, error }: SaveStatusProps) {
     }
   };
 
-  const getStatusColor = () => {
-    switch (status) {
-      case 'saving':
-        return 'var(--semantic-color-foreground-secondary)';
-      case 'saved':
-        return 'var(--semantic-color-foreground-success)';
-      case 'local':
-        return 'var(--semantic-color-foreground-warning, #f59e0b)';
-      case 'error':
-        return 'var(--semantic-color-foreground-destructive)';
-      default:
-        return 'var(--semantic-color-foreground-secondary)';
-    }
-  };
-
   return (
-    <div
-      style={{
-        fontSize: '12px',
-        color: getStatusColor(),
-        display: 'flex',
-        alignItems: 'center',
-        gap: '4px',
-      }}
-    >
-      {status === 'saving' && (
-        <div
-          style={{
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            background: 'var(--semantic-color-background-accent)',
-            animation: 'pulse 1.5s ease-in-out infinite',
-          }}
-        />
-      )}
+    <div className={styles.status} data-status={status}>
+      {status === 'saving' && <div className={styles.pulse} />}
       {status === 'saved' && (
-        <span style={{ color: 'var(--semantic-color-foreground-success)' }}>
+        <span className={styles.glyph} aria-hidden="true">
           ✓
         </span>
       )}
       {status === 'local' && (
-        <span
-          style={{ color: 'var(--semantic-color-foreground-warning, #f59e0b)' }}
-        >
+        <span className={styles.glyph} aria-hidden="true">
           ⚡
         </span>
       )}
       {status === 'error' && (
-        <span style={{ color: 'var(--semantic-color-foreground-destructive)' }}>
+        <span className={styles.glyph} aria-hidden="true">
           ✕
         </span>
       )}
