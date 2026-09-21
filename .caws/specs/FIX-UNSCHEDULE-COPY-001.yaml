@@ -54,3 +54,9 @@ evidence:
     command: npx vitest run test/dashboard/ContentEditor.test.tsx
     exit_code: 0
     commit_sha: "6d2f391083be4ff375a9f5190f2c1b0df624bccb"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "The guard was exercised against the unfixed component and failed for the right reason: AssertionError \"expected Unpublish to be Unschedule // Object.is equality\", with the published control passing in the same run. So the test detects exactly the defect and not a harness artifact. One instrument note: the first attempt at this guard timed out at five seconds because the file beforeEach installs vi.useFakeTimers(), under which findByText and waitFor never resolve; switching to synchronous queries, as the existing tests use, made it red for the real reason."
+    recorded_at: "2026-09-21T07:36:56.376Z"
+    command: npx vitest run test/dashboard/ContentEditor.test.tsx on the pre-fix and post-fix revisions
+    commit_sha: "6d2f391083be4ff375a9f5190f2c1b0df624bccb"
