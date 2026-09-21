@@ -580,7 +580,6 @@ function ContentEditorSession({
         <fieldset
           className={styles.commandActions}
           disabled={busy || Boolean(recovery)}
-          style={{ border: 0, margin: 0, padding: 0 }}
         >
           <Button variant="secondary" onClick={() => setPreview((p) => !p)}>
             {preview ? 'Edit' : 'Preview'}
@@ -684,12 +683,7 @@ function ContentEditorSession({
               />
               {record.status === 'published' &&
                 record.slug !== canonical.slug && (
-                  <small
-                    style={{
-                      color:
-                        'var(--semantic-color-foreground-warning, #92400e)',
-                    }}
-                  >
+                  <small className={styles.renameWarning}>
                     Renaming changes the public URL; /articles/{canonical.slug}{' '}
                     will 404.
                   </small>

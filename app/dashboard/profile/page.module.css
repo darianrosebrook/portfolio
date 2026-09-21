@@ -1,0 +1,16 @@
+/*
+ * Profile page layout. Two wrappers that used to be inline styles.
+ */
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-inline-size: 600px;
+}
+
+.identityRow {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}

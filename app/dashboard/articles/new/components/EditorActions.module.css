@@ -12,6 +12,6 @@
 }
 
 .error {
-  color: var(--semantic-color-foreground-destructive);
+  color: var(--semantic-color-foreground-danger);
   font-size: 13px;
 }

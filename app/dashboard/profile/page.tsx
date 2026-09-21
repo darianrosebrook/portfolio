@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation';
 import { getCurrentUserProfile } from '@/utils/supabase/profile';
 import { createClient } from '@/utils/supabase/server';
 import Avatar from '@/ui/components/Avatar';
+import styles from './page.module.css';
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -20,15 +21,8 @@ export default async function ProfilePage() {
       <h2>Profile</h2>
 
       {profile ? (
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            maxWidth: '600px',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div className={styles.profile}>
+          <div className={styles.identityRow}>
             <Avatar
               src={profile.avatar_url || undefined}
               name={profile.full_name}

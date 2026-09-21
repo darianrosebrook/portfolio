@@ -61,7 +61,7 @@ export function ArticleMetadataForm({
     <div>
       <h3 className={styles.title}>Settings</h3>
       {(onSave || onPublish || onPreview) && (
-        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '24px' }}>
+        <div className={styles.actionsRow}>
           <EditorActions
             article={article}
             onSave={onSave || (async () => {})}
