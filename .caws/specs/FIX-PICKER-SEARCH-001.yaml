@@ -23,8 +23,10 @@ invariants:
 acceptance:
   - id: A1
     given: 'the related-content picker'
-    when: 'the search field is inspected'
-    then: 'it exposes an accessible name rather than relying on its placeholder'
+    when: 'the search field is inspected after the swap'
+    then: >-
+      it still exposes its existing accessible name, which comes from an explicit
+      label rather than the placeholder
   - id: A2
     given: 'the field'
     when: 'two or more characters are typed'
