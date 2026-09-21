@@ -40,3 +40,9 @@ evidence:
     command: "grep -rn -- \"--semantic-color-foreground-destructive\" ui/ app/"
     exit_code: 1
     commit_sha: ebcf5e8c20b4bd6258912498826c5f0ff15ca263
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Runtime on the worktree build with the floating block menu mounted (empty cursor at a block start): before hover the control colour is rgb(250,250,250); on mouseover it computes to rgb(234,100,101) — the dark-theme danger colour — and on mouseout returns to rgb(250,250,250). Negative control from the same page: a probe coloured with the old token name resolves to rgb(250,250,250), i.e. the old declaration produced no colour of its own."
+    recorded_at: "2026-09-21T14:44:50.500Z"
+    command: "browser: focus a block start, hover the delete-block control, read computed colour before/during/after"
+    commit_sha: ebcf5e8c20b4bd6258912498826c5f0ff15ca263
