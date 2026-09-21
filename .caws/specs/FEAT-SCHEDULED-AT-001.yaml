@@ -40,3 +40,10 @@ evidence:
     recorded_at: "2026-09-21T06:04:33.378Z"
     command: grep-based shape check + REST schema read (GET /rest/v1/ with the service key)
     commit_sha: abea68f676fceef6b190bc717788e601e8880b3f
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "No application code reads the column yet: grep for scheduled_at across app/ and utils/ returns 0 hits at this revision, and the full suite passes unchanged (210 files, 2053 passed, 13 expected fail, 2 skipped, exit 0), so dashboard behaviour is identical to before the schema change until the UI slice lands."
+    recorded_at: "2026-09-21T06:04:34.072Z"
+    command: "grep -rn scheduled_at app utils | wc -l; npm test"
+    exit_code: 0
+    commit_sha: abea68f676fceef6b190bc717788e601e8880b3f
