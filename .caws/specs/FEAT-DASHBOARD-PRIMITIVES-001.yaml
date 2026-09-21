@@ -66,3 +66,11 @@ evidence:
     command: npx vitest run app/dashboard/_components app/dashboard/articles/_components/ArticleCard.test.tsx test/dashboard/contentPages.test.tsx
     exit_code: 0
     commit_sha: b91f819893592359abb6cf7f55b50d506e6a389a
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "ContentCard renders an <img> with the item source when image is set and the deterministic initials fallback (data-section keyed) when it is not; the cover link is aria-hidden with tabIndex -1 so it does not duplicate the title link. LIBRARY_SELECT now reads image and articleSection. Runtime: 5 article covers + 8 fallbacks, 3 case-study covers + 8 fallbacks, no broken images."
+    recorded_at: "2026-09-21T05:20:44.958Z"
+    test_nodeid: "app/dashboard/_components/ContentCard.test.tsx > ContentCard > falls back to title initials when there is no cover, with no broken image"
+    command: npx vitest run app/dashboard/_components app/dashboard/articles/_components/ArticleCard.test.tsx test/dashboard/contentPages.test.tsx
+    exit_code: 0
+    commit_sha: b91f819893592359abb6cf7f55b50d506e6a389a
