@@ -261,8 +261,7 @@
 }
 
 .filterFields input,
-.filterFields select,
-.applyButton {
+.filterFields select {
   min-width: 0;
   padding: var(--core-spacing-size-03) var(--core-spacing-size-04);
   background: var(--semantic-color-background-primary);
@@ -272,21 +271,8 @@
   font: inherit;
 }
 
-.applyButton {
-  cursor: pointer;
-  /* The flex row squeezed this below its content width and the label wrapped
-     ("Sear / ch"). Keep the intrinsic width and never break the label. */
-  flex: 0 0 auto;
-  white-space: nowrap;
-}
-
-.applyButton:hover {
-  background: var(--semantic-color-background-secondary);
-}
-
 .filterFields input:focus-visible,
 .filterFields select:focus-visible,
-.applyButton:focus-visible,
 .tabLink:focus-visible {
   outline: 2px solid currentcolor;
   outline-offset: 2px;
