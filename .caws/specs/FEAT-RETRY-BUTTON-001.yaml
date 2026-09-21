@@ -2,9 +2,10 @@ id: FEAT-RETRY-BUTTON-001
 title: 'Put the case study retry control on the Button primitive'
 risk_tier: 3
 mode: refactor
-lifecycle_state: draft
+lifecycle_state: active
+worktree: retry-button-001
 created_at: '2026-09-21T07:37:32.773Z'
-updated_at: '2026-09-21T07:37:32.773Z'
+updated_at: '2026-09-21T07:37:33.973Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
