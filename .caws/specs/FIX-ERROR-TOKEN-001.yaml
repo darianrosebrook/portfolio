@@ -59,3 +59,10 @@ evidence:
     recorded_at: "2026-09-21T07:03:15.496Z"
     command: "browser: resolve both tokens via getComputedStyle on the rendered dashboard"
     commit_sha: "04e600ff716d6c15c274dd877b98cbec2c9a692b"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "grep -rho \"style={{\" counted 7 before and 1 after; the single remainder is the cover Image style in ArticlePreview.tsx, kept deliberately. Runtime confirms the converted surfaces: the profile stack and identity row carry their module classes with no style attribute (display flex, gap 18px which is 1rem at this 18px root, max-width 600px, align center) and the new-content fieldset reports border 0, padding 0, margin 0. Also found and reported rather than fixed: EditorActions publishError is unreachable, since the Publish button is disabled exactly when canPublish is false, which is when the handler would set that error; clicking it produced no alert element."
+    recorded_at: "2026-09-21T07:03:16.077Z"
+    command: "grep -rc \"style={{\" app/dashboard --include=*.tsx; browser: inspect the profile wrappers and the fieldset"
+    exit_code: 0
+    commit_sha: "04e600ff716d6c15c274dd877b98cbec2c9a692b"
