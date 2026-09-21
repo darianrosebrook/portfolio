@@ -31,3 +31,10 @@ acceptance:
     then: 'the total drops from 26 to 15'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Runtime on the worktree build: the loaded state header reported 0 inline style nodes and no style attribute on the back button or the h1 (measured at 768, and the button also 36x36 at 1280 before the specificity fix). The error state, reached with a non-existent slug, reported 0 inline style nodes inside it, kept the errorIcon class on the svg, still rendered \"Article not found\" at 20px/300 (heading-03 with globals weight, matching main) and still offered Back to Articles."
+    recorded_at: "2026-09-21T06:54:39.214Z"
+    command: "browser: load an article editor and a non-existent slug on the worktree server, inspect for style attributes"
+    commit_sha: "1c89e3380f3fa1a57a6cf762d70818b6540cdd6b"
