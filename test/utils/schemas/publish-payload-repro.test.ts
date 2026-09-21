@@ -2,6 +2,33 @@ import { describe, it, expect } from 'vitest';
 import { updateArticleSchema } from '@/utils/schemas/article.schema';
 
 /**
+ * Scheduling is a third outcome alongside "keep as draft" and "publish now":
+ * the item keeps its working draft and waits for the clock. That only works if
+ * the schema carries both the status and the moment through to the route.
+ */
+describe('updateArticleSchema — scheduling', () => {
+  it('accepts the scheduled status and keeps the moment', () => {
+    const scheduledAt = '2026-11-01T09:00:00.000Z';
+    const result = updateArticleSchema.safeParse({
+      slug: 'fine-slug',
+      status: 'scheduled',
+      scheduled_at: scheduledAt,
+    });
+    expect(result.success).toBe(true);
+    if (!result.success) return;
+    expect(result.data.status).toBe('scheduled');
+    expect(result.data.scheduled_at).toBe(scheduledAt);
+  });
+
+  it('keeps scheduled_at optional so a plain update still parses', () => {
+    const result = updateArticleSchema.safeParse({ slug: 'fine-slug' });
+    expect(result.success).toBe(true);
+    if (!result.success) return;
+    expect(result.data.scheduled_at).toBeUndefined();
+  });
+});
+
+/**
  * Repro for the PUT /api/articles/<slug> -> 400 from the dev log.
  *
  * The publish payload is roughly `{ ...articleStateFromServer, status:

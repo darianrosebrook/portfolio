@@ -4,6 +4,28 @@ import {
   updateCaseStudySchema,
 } from '@/utils/schemas/case-study.schema';
 
+describe('updateCaseStudySchema — scheduling', () => {
+  it('accepts the scheduled status and keeps the moment', () => {
+    const scheduledAt = '2026-11-01T09:00:00.000Z';
+    const result = updateCaseStudySchema.safeParse({
+      slug: 'fine-slug',
+      status: 'scheduled',
+      scheduled_at: scheduledAt,
+    });
+    expect(result.success).toBe(true);
+    if (!result.success) return;
+    expect(result.data.status).toBe('scheduled');
+    expect(result.data.scheduled_at).toBe(scheduledAt);
+  });
+
+  it('keeps scheduled_at optional so a plain update still parses', () => {
+    const result = updateCaseStudySchema.safeParse({ slug: 'fine-slug' });
+    expect(result.success).toBe(true);
+    if (!result.success) return;
+    expect(result.data.scheduled_at).toBeUndefined();
+  });
+});
+
 describe('patchCaseStudyDraftSchema', () => {
   it('accepts the word count emitted by the shared content editor', () => {
     expect(
