@@ -1,0 +1,48 @@
+id: FEAT-DASHBOARD-SHELL-001
+title: 'Dashboard shell: workspace rail and dashboard header replace the marketing chrome'
+risk_tier: 2
+mode: refactor
+lifecycle_state: draft
+created_at: '2026-09-21T05:06:06.460Z'
+updated_at: '2026-09-21T05:06:06.460Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard shell and public chrome boundary'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/layout.tsx'
+    - 'app/_components/PublicChrome.tsx'
+    - 'app/_components/PublicChrome.test.tsx'
+    - 'app/dashboard/layout.tsx'
+    - 'app/dashboard/_components/DashboardHeader.tsx'
+    - 'app/dashboard/_components/DashboardHeader.module.css'
+    - 'app/dashboard/_components/WorkspaceRail.tsx'
+    - 'app/dashboard/_components/WorkspaceRail.module.css'
+    - 'app/dashboard/_components/WorkspaceRail.test.tsx'
+    - 'app/dashboard/_components/DashboardNav.tsx'
+    - 'app/dashboard/page.module.css'
+  out: []
+invariants:
+  - 'Public routes keep the marketing navbar and footer unchanged'
+  - 'Dashboard routes render no marketing chrome'
+  - 'The dashboard shell introduces no horizontal document overflow at 1024 or 390 CSS px'
+acceptance:
+  - id: A1
+    given: 'the public chrome wrapper wraps every route'
+    when: 'a /dashboard route renders'
+    then: 'the marketing navbar and footer are absent, while a public route still renders both'
+  - id: A2
+    given: 'the dashboard shell'
+    when: 'it renders'
+    then: 'a dashboard header with a View site link and a workspace rail listing Overview, Articles, Case Studies and Profile are present, and the rail marks the current section active'
+  - id: A3
+    given: 'the dashboard shell replaces the marketing chrome'
+    when: 'the overview, articles list, case-studies list and article editor render at 1024 and 390 CSS px'
+    then: 'document scrollWidth does not exceed the viewport'
+non_functional: {}
+contracts:
+  - name: 'dashboard-shell'
+    type: behavior
