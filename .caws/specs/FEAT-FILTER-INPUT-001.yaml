@@ -50,3 +50,10 @@ evidence:
     recorded_at: "2026-09-21T07:12:41.888Z"
     command: "browser: submit the filter form from a non-default filter and read the resulting URL"
     commit_sha: "45780b2edb471ead868105dcd963913a84618d38"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "Measured cleanly with no interaction first: the field reports data-ds-component=\"Input\", data-slot=\"input\", class \"input\", no style attribute, and a placeholder. Appearance delta from the swap: 308x37 -> 316x48 and radius 4px -> 8px, with border (1px rgb(85,85,85)), background and font-size unchanged. An earlier reading of a red border was my own measurement error — I had read a live CSSStyleDeclaration after focusing the field, so it showed the focus state; the clean re-measurement shows the same grey border as before. Full suite 2070 passed and the checker reports 0 orphans across 19 modules."
+    recorded_at: "2026-09-21T07:12:42.471Z"
+    command: "browser: measure the field with no interaction; node scripts/check-css-module-usage.mjs"
+    exit_code: 0
+    commit_sha: "45780b2edb471ead868105dcd963913a84618d38"
