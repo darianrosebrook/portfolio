@@ -45,3 +45,9 @@ evidence:
     recorded_at: "2026-09-21T06:42:36.059Z"
     command: "browser: POST /api/articles, open the editor, set #scheduled_at, click Schedule, read back via the API and the /dashboard HTML"
     commit_sha: "8a254aeaae2f2de61e3e10d9a8022bad6ac45e4e"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Same run: activating Unschedule opened the existing confirmation dialog (buttons Cancel and Unpublish), and confirming it returned the row to status \"draft\" with scheduled_at null — the schedule is cleared as well as the status. Known copy wart: that dialog still says Unpublish when the action was Unschedule."
+    recorded_at: "2026-09-21T06:42:36.642Z"
+    command: "browser: click Unschedule, confirm the dialog, read the row back"
+    commit_sha: "8a254aeaae2f2de61e3e10d9a8022bad6ac45e4e"
