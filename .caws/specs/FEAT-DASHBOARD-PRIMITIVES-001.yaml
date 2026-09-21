@@ -74,3 +74,11 @@ evidence:
     command: npx vitest run app/dashboard/_components app/dashboard/articles/_components/ArticleCard.test.tsx test/dashboard/contentPages.test.tsx
     exit_code: 0
     commit_sha: b91f819893592359abb6cf7f55b50d506e6a389a
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "ArticleCard keeps its behaviour behind the new card: duplicate calls POST /api/articles/<slug>/duplicate then router.refresh(); delete opens ConfirmDialog first (no fetch until confirmed), then DELETE /api/articles/<slug>, onDelete(slug) and refresh. The pre-existing contentPages integration test still asserts the case-studies filter behaviour and working-metadata selection."
+    recorded_at: "2026-09-21T05:20:45.511Z"
+    test_nodeid: "app/dashboard/articles/_components/ArticleCard.test.tsx > ArticleCard > confirms before deleting, then deletes and refreshes"
+    command: npx vitest run app/dashboard/_components app/dashboard/articles/_components/ArticleCard.test.tsx test/dashboard/contentPages.test.tsx
+    exit_code: 0
+    commit_sha: b91f819893592359abb6cf7f55b50d506e6a389a
