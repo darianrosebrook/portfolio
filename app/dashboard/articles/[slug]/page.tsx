@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Article } from '@/types';
 import ContentEditor from '../../_components/ContentEditor';
 import Button from '@/ui/components/Button';
+import { IconButton } from '@/app/dashboard/_components/IconButton';
 import styles from './page.module.css';
 
 export default function EditArticlePage({
@@ -89,27 +90,11 @@ export default function EditArticlePage({
   return (
     <div>
       <div className={styles.header}>
-        <button
-          type="button"
-          className={styles.backButton}
+        <IconButton
+          icon="arrow-left"
+          label="Back to articles"
           onClick={() => router.push('/dashboard/articles')}
-          title="Back to articles"
-          aria-label="Back to articles"
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="19" y1="12" x2="5" y2="12" />
-            <polyline points="12 19 5 12 12 5" />
-          </svg>
-        </button>
+        />
         <div>
           <h1 className={styles.title}>{article.headline || article.slug}</h1>
           <p className={styles.slug}>/{article.slug}</p>
