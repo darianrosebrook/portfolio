@@ -6,18 +6,30 @@
       "slug": "accordion",
       "layer": "composers",
       "alternativeNames": [],
-      "normalizedAliases": ["accordion"],
+      "normalizedAliases": [
+        "accordion"
+      ],
       "category": "Containers",
-      "description": "Expand/collapse grouped sections.",
+      "description": "Vertically stacked sections that expand/collapse to reveal content. Supports single or multi-panel open modes.",
       "a11y": {
         "pitfalls": [
           "No roving tabindex",
           "missing ARIA expanded/collapsed states."
-        ]
+        ],
+        "role": "region",
+        "labeling": [],
+        "keyboard": [
+          {
+            "key": "Enter|Space",
+            "when": "trigger",
+            "then": "toggle item"
+          }
+        ],
+        "apgPattern": null
       },
-      "status": "Planned",
+      "status": "Built",
       "paths": {
-        "docs": "app/blueprints/component-standards/accordion/page.tsx"
+        "component": "ui/components/Accordion"
       }
     },
     {
@@ -25,23 +37,171 @@
       "id": "actionbar",
       "slug": "action-bar",
       "layer": "composers",
-      "alternativeNames": ["Toolbar", "Action-Bar"],
-      "normalizedAliases": ["actionbar", "toolbar"],
+      "alternativeNames": [
+        "Toolbar",
+        "Action-Bar"
+      ],
+      "normalizedAliases": [
+        "actionbar",
+        "toolbar"
+      ],
       "category": "Actions",
       "description": "Groups actions with priority + overflow.",
       "a11y": {
-        "pitfalls": ["No overflow policy", "inconsistent grouping."]
+        "pitfalls": [
+          "No overflow policy",
+          "inconsistent grouping."
+        ]
       },
-      "status": "Planned",
+      "status": "Planned"
+    },
+    {
+      "component": "Alert",
+      "id": "alert",
+      "slug": "alert",
+      "layer": "compounds",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "alert"
+      ],
+      "category": "Display",
+      "description": "Inline notification banner for important messages. Does not require user interaction to dismiss.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "alert",
+        "labeling": [
+          "title"
+        ],
+        "keyboard": [],
+        "apgPattern": "alert"
+      },
+      "status": "Built",
       "paths": {
-        "docs": "app/blueprints/component-standards/action-bar/page.tsx"
+        "component": "ui/components/Alert"
+      }
+    },
+    {
+      "component": "AlertNotice",
+      "id": "alertnotice",
+      "slug": "alert-notice",
+      "layer": "compounds",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "alertnotice"
+      ],
+      "category": "Display",
+      "description": "Inline alert message communicating status, errors, warnings, or success. Always visible (not triggered by user interaction).",
+      "a11y": {
+        "pitfalls": [],
+        "role": "alert",
+        "labeling": [
+          "title"
+        ],
+        "keyboard": [],
+        "apgPattern": "alert"
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/AlertNotice"
+      }
+    },
+    {
+      "component": "AnimatedCard",
+      "id": "animatedcard",
+      "slug": "animated-card",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "animatedcard"
+      ],
+      "category": "Display",
+      "description": "A card component that animates into view when it enters the viewport.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/AnimatedCard"
+      }
+    },
+    {
+      "component": "AnimatedSection",
+      "id": "animatedsection",
+      "slug": "animated-section",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "animatedsection"
+      ],
+      "category": "Display",
+      "description": "A page section that fades and slides into view when it enters the viewport.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/AnimatedSection"
+      }
+    },
+    {
+      "component": "AnimatedText",
+      "id": "animatedtext",
+      "slug": "animated-text",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "animatedtext"
+      ],
+      "category": "Display",
+      "description": "Text that animates character-by-character or line-by-line into view on scroll.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/AnimatedText"
+      }
+    },
+    {
+      "component": "AspectRatio",
+      "id": "aspectratio",
+      "slug": "aspect-ratio",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "aspectratio"
+      ],
+      "category": "Containers",
+      "description": "Constrains its child to a fixed aspect ratio (e.g. 16:9) regardless of container width.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/AspectRatio"
       }
     },
     {
       "component": "Avatar",
       "id": "avatar",
       "slug": "avatar",
-      "layer": "compounds",
+      "layer": "primitives",
       "alternativeNames": [
         "Profile image",
         "User Icon",
@@ -51,23 +211,38 @@
         "Profile Avatar",
         "User Thumbnail"
       ],
-      "normalizedAliases": ["avatar"],
+      "normalizedAliases": [
+        "avatar",
+        "profileimage",
+        "usericon",
+        "userimage",
+        "profilepicture",
+        "useravatar",
+        "profileavatar",
+        "userthumbnail"
+      ],
       "category": "Display",
-      "description": "User representation (image/initials).",
+      "description": "Circular user or entity representation showing an image, initials, or icon fallback.",
       "a11y": {
-        "pitfalls": ["Missing alt/fallback", "low-contrast initials."]
+        "pitfalls": [
+          "Missing alt/fallback",
+          "low-contrast initials."
+        ],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Avatar",
-        "docs": "app/blueprints/component-standards/avatar/page.tsx"
+        "component": "ui/components/Avatar"
       }
     },
     {
       "component": "Badge",
       "id": "badge",
       "slug": "badge",
-      "layer": "compounds",
+      "layer": "primitives",
       "alternativeNames": [
         "Pill",
         "Badge count",
@@ -85,38 +260,129 @@
         "Count Badge",
         "Indicator Badge"
       ],
-      "normalizedAliases": ["badge"],
+      "normalizedAliases": [
+        "badge",
+        "pill",
+        "badgecount",
+        "bulletbadge",
+        "circlebadge",
+        "chip",
+        "compoundtag",
+        "lozenge",
+        "quantity",
+        "counterbadge",
+        "counterlabel",
+        "notificationbadge",
+        "statusbadge",
+        "labelbadge",
+        "countbadge",
+        "indicatorbadge"
+      ],
       "category": "Feedback",
-      "description": "Count/label indicator.",
+      "description": "Small label conveying status, category, or count. Typically paired with other content.",
       "a11y": {
-        "pitfalls": ["Too small for accessibility", "color-only distinction."]
+        "pitfalls": [
+          "Too small for accessibility",
+          "color-only distinction."
+        ],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Badge",
-        "docs": "app/blueprints/component-standards/badge/page.tsx"
+        "component": "ui/components/Badge"
+      }
+    },
+    {
+      "component": "Blockquote",
+      "id": "blockquote",
+      "slug": "blockquote",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "blockquote"
+      ],
+      "category": "Textual",
+      "description": "Styled blockquote for displaying cited passages or testimonials.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Blockquote"
+      }
+    },
+    {
+      "component": "BrandSwitcher",
+      "id": "brandswitcher",
+      "slug": "brand-switcher",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "brandswitcher"
+      ],
+      "category": "Navigation",
+      "description": "Navigation control for switching between Qualtrics brands or product lines.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [
+          "aria-label",
+          "title"
+        ],
+        "keyboard": [
+          {
+            "key": "Enter|Space",
+            "when": "trigger",
+            "then": "activate"
+          }
+        ],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/BrandSwitcher"
       }
     },
     {
       "component": "Breadcrumbs",
       "id": "breadcrumbs",
       "slug": "breadcrumbs",
-      "layer": "compounds",
+      "layer": "primitives",
       "alternativeNames": [
         "Breadcrumbs (simple)",
         "Breadcrumb",
         "Breadcrumbs (full)"
       ],
-      "normalizedAliases": ["breadcrumbs", "breadcrumbssimple", "breadcrumb"],
+      "normalizedAliases": [
+        "breadcrumbs",
+        "breadcrumbssimple",
+        "breadcrumb",
+        "breadcrumbsfull"
+      ],
       "category": "Navigation",
-      "description": "Parent-child navigation trail.",
+      "description": "Navigation landmark showing the current page location within a site hierarchy.",
       "a11y": {
-        "pitfalls": ["Not collapsed for long paths", "missing nav landmark."]
+        "pitfalls": [
+          "Not collapsed for long paths",
+          "missing nav landmark."
+        ],
+        "role": "navigation",
+        "labeling": [
+          "aria-label"
+        ],
+        "keyboard": [],
+        "apgPattern": "breadcrumb"
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Breadcrumbs",
-        "docs": "app/blueprints/component-standards/breadcrumbs/page.tsx"
+        "component": "ui/components/Breadcrumbs"
       }
     },
     {
@@ -148,19 +414,78 @@
         "Icon Button",
         "Text Button"
       ],
-      "normalizedAliases": ["button"],
+      "normalizedAliases": [
+        "button",
+        "actionbutton",
+        "actionlink",
+        "chunkybuttons",
+        "circularbutton",
+        "buttonlink",
+        "buttontile",
+        "buttontimed",
+        "calltoactionlink",
+        "closebutton",
+        "cardbutton",
+        "condensedbutton",
+        "copybutton",
+        "floatingactionbutton",
+        "floatbutton",
+        "formbuttons",
+        "linkbutton",
+        "primarybutton",
+        "secondarybutton",
+        "tertiarybutton",
+        "ghostbutton",
+        "iconbutton",
+        "textbutton"
+      ],
       "category": "Actions",
-      "description": "Clickable action element.",
+      "description": "Clickable element for triggering actions. Supports multiple visual variants and semantic intents.",
       "a11y": {
         "pitfalls": [
           "Overloaded with too many variants",
           "missing accessible name for icon-only."
-        ]
+        ],
+        "role": "button",
+        "labeling": [
+          "aria-label",
+          "title"
+        ],
+        "keyboard": [
+          {
+            "key": "Enter|Space",
+            "when": "trigger",
+            "then": "activate"
+          }
+        ],
+        "apgPattern": "button"
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Button",
-        "docs": "app/blueprints/component-standards/button/page.tsx"
+        "component": "ui/components/Button"
+      }
+    },
+    {
+      "component": "Calendar",
+      "id": "calendar",
+      "slug": "calendar",
+      "layer": "composers",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "calendar"
+      ],
+      "category": "Inputs",
+      "description": "Interactive calendar grid for selecting a single date or a date range.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "region",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Calendar"
       }
     },
     {
@@ -190,16 +515,44 @@
         "Info Card",
         "Feature Card"
       ],
-      "normalizedAliases": ["card"],
+      "normalizedAliases": [
+        "card",
+        "assetcard",
+        "cardcomposable",
+        "activationcard",
+        "servicecard",
+        "inlineentrycard",
+        "hovercard",
+        "contentcard",
+        "contextcard",
+        "box",
+        "group",
+        "cards",
+        "groupbox",
+        "productcard",
+        "tileproduct",
+        "switchcard",
+        "panel",
+        "tile",
+        "contentblock",
+        "infocard",
+        "featurecard"
+      ],
       "category": "Display",
-      "description": "Grouped container with header/body/footer.",
+      "description": "Surface container grouping related content with optional header, media, and action areas.",
       "a11y": {
-        "pitfalls": ["Too many layout permutations", "inconsistent spacing."]
+        "pitfalls": [
+          "Too many layout permutations",
+          "inconsistent spacing."
+        ],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Card",
-        "docs": "app/blueprints/component-standards/card/page.tsx"
+        "component": "ui/components/Card"
       }
     },
     {
@@ -207,8 +560,13 @@
       "id": "chartcontainer",
       "slug": "chart-container",
       "layer": "composers",
-      "alternativeNames": ["Chart Container", "Chart-Container"],
-      "normalizedAliases": ["chartcontainer"],
+      "alternativeNames": [
+        "Chart Container",
+        "Chart-Container"
+      ],
+      "normalizedAliases": [
+        "chartcontainer"
+      ],
       "category": "Data Visualization",
       "description": "Frame for charts (not chart itself).",
       "a11y": {
@@ -217,10 +575,7 @@
           "focus not managed for interactive charts."
         ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/chart-container/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Checkbox",
@@ -245,19 +600,43 @@
         "Option Selector",
         "Selection Control"
       ],
-      "normalizedAliases": ["checkbox"],
+      "normalizedAliases": [
+        "checkbox",
+        "checkboxgroup",
+        "checkboxcard",
+        "checkboxbutton",
+        "checkboxtoggle",
+        "checkboxwrapper",
+        "choicecard",
+        "choicegroup",
+        "optiongroup",
+        "checkboxes",
+        "choicebox",
+        "selectgroup",
+        "selectiongroup",
+        "selectpanel",
+        "multiselect",
+        "optionselector",
+        "selectioncontrol"
+      ],
       "category": "Inputs",
-      "description": "Binary toggle control.",
+      "description": "Binary or tri-state input for boolean selection. Supports indeterminate state for partial group selection.",
       "a11y": {
         "pitfalls": [
           "Missing indeterminate state",
           "small click target",
           "keyboard traps."
-        ]
+        ],
+        "role": "generic",
+        "labeling": [
+          "aria-checked"
+        ],
+        "keyboard": [],
+        "apgPattern": null
       },
-      "status": "Planned",
+      "status": "Built",
       "paths": {
-        "docs": "app/blueprints/component-standards/checkbox/page.tsx"
+        "component": "ui/components/Checkbox"
       }
     },
     {
@@ -272,32 +651,56 @@
         "Radio Group",
         "Radio-Group"
       ],
-      "normalizedAliases": ["checkboxgroup", "radiogroup"],
+      "normalizedAliases": [
+        "checkboxgroup",
+        "radiogroup"
+      ],
       "category": "Inputs",
       "description": "Grouped options with label.",
       "a11y": {
-        "pitfalls": ["Group unlabeled", "inconsistent error propagation."]
+        "pitfalls": [
+          "Group unlabeled",
+          "inconsistent error propagation."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/checkbox-group/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Chip",
       "id": "chip",
       "slug": "chip",
-      "layer": "compounds",
-      "alternativeNames": ["Tag"],
-      "normalizedAliases": ["chip", "tag"],
+      "layer": "primitives",
+      "alternativeNames": [
+        "Tag"
+      ],
+      "normalizedAliases": [
+        "chip",
+        "tag"
+      ],
       "category": "Display",
-      "description": "Label + optional dismiss.",
+      "description": "Compact interactive element for tags, filters, or multi-select choices.",
       "a11y": {
-        "pitfalls": ["Dismiss button unlabeled", "no keyboard removal."]
+        "pitfalls": [
+          "Dismiss button unlabeled",
+          "no keyboard removal."
+        ],
+        "role": "generic",
+        "labeling": [
+          "aria-label",
+          "title"
+        ],
+        "keyboard": [
+          {
+            "key": "Enter|Space",
+            "when": "trigger",
+            "then": "activate"
+          }
+        ],
+        "apgPattern": null
       },
-      "status": "Planned",
+      "status": "Built",
       "paths": {
-        "docs": "app/blueprints/component-standards/chip/page.tsx"
+        "component": "ui/components/Chip"
       }
     },
     {
@@ -305,16 +708,62 @@
       "id": "colorpicker",
       "slug": "color-picker",
       "layer": "compounds",
-      "alternativeNames": ["Color Picker", "Color-Picker"],
-      "normalizedAliases": ["colorpicker"],
+      "alternativeNames": [
+        "Color Picker",
+        "Color-Picker"
+      ],
+      "normalizedAliases": [
+        "colorpicker"
+      ],
       "category": "Inputs",
       "description": "Input + palette.",
       "a11y": {
-        "pitfalls": ["No contrast validation", "inaccessible sliders."]
+        "pitfalls": [
+          "No contrast validation",
+          "inaccessible sliders."
+        ]
       },
-      "status": "Planned",
+      "status": "Planned"
+    },
+    {
+      "component": "Command",
+      "id": "command",
+      "slug": "command",
+      "layer": "composers",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "command"
+      ],
+      "category": "Actions",
+      "description": "Command palette modal for keyboard-driven search and action execution.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "dialog",
+        "roles": [
+          "dialog",
+          "listbox",
+          "option",
+          "presentation",
+          "separator"
+        ],
+        "labeling": [],
+        "keyboard": [
+          {
+            "key": "Escape",
+            "when": "open",
+            "then": "close"
+          },
+          {
+            "key": "Tab",
+            "when": "open",
+            "then": "cycle focus within"
+          }
+        ],
+        "apgPattern": "dialog-modal"
+      },
+      "status": "Built",
       "paths": {
-        "docs": "app/blueprints/component-standards/color-picker/page.tsx"
+        "component": "ui/components/Command"
       }
     },
     {
@@ -344,16 +793,18 @@
         "Pop-up Menu",
         "Quick Actions"
       ],
-      "normalizedAliases": ["contextmenu"],
+      "normalizedAliases": [
+        "contextmenu"
+      ],
       "category": "Actions",
       "description": "Right-click menu.",
       "a11y": {
-        "pitfalls": ["Not reachable via keyboard", "dismissal handling."]
+        "pitfalls": [
+          "Not reachable via keyboard",
+          "dismissal handling."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/context-menu/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "DatePicker",
@@ -384,15 +835,47 @@
         "Calendar Picker",
         "Time Selector"
       ],
-      "normalizedAliases": ["datepicker"],
+      "normalizedAliases": [
+        "datepicker"
+      ],
       "category": "Inputs",
       "description": "Input + calendar popover.",
       "a11y": {
-        "pitfalls": ["Localization, keyboard nav, timezone handling."]
+        "pitfalls": [
+          "Localization, keyboard nav, timezone handling."
+        ]
       },
-      "status": "Planned",
+      "status": "Planned"
+    },
+    {
+      "component": "Details",
+      "id": "details",
+      "slug": "details",
+      "layer": "composers",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "details"
+      ],
+      "category": "Textual",
+      "description": "Disclosure widget revealing additional content on demand. Semantically equivalent to <details>/<summary>.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "group",
+        "labeling": [
+          "aria-label"
+        ],
+        "keyboard": [
+          {
+            "key": "KeyboardEvent",
+            "when": "root",
+            "then": "handled by component"
+          }
+        ],
+        "apgPattern": null
+      },
+      "status": "Built",
       "paths": {
-        "docs": "app/blueprints/component-standards/date-picker/page.tsx"
+        "component": "ui/components/Details"
       }
     },
     {
@@ -423,20 +906,64 @@
         "Alert Dialog",
         "Confirmation Dialog"
       ],
-      "normalizedAliases": ["dialog", "modal"],
+      "normalizedAliases": [
+        "dialog",
+        "modal",
+        "confirmdialog",
+        "feedback",
+        "inlinedialog",
+        "inlinemessage",
+        "callout",
+        "highlight",
+        "hint",
+        "note",
+        "calloutcard",
+        "dialogue",
+        "highlightbox",
+        "highlighter",
+        "inputdialog",
+        "notes",
+        "notice",
+        "userfeedback",
+        "modaldialog",
+        "popupdialog",
+        "alertdialog",
+        "confirmationdialog"
+      ],
       "category": "Containers",
-      "description": "Blocking and non-blocking overlay container.",
+      "description": "Modal overlay requiring user attention before returning to the page. Traps focus until dismissed.",
       "a11y": {
         "pitfalls": [
           "Not trapping focus",
           "poor mobile handling",
           "misuse for inline content."
-        ]
+        ],
+        "role": "dialog",
+        "labeling": [
+          "aria-label"
+        ],
+        "keyboard": [
+          {
+            "key": "Enter|Space",
+            "when": "trigger",
+            "then": "activate"
+          },
+          {
+            "key": "Escape",
+            "when": "open",
+            "then": "close"
+          },
+          {
+            "key": "Tab",
+            "when": "open",
+            "then": "cycle focus within"
+          }
+        ],
+        "apgPattern": "dialog-modal"
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Dialog",
-        "docs": "app/blueprints/component-standards/dialog/page.tsx"
+        "component": "ui/components/Dialog"
       }
     },
     {
@@ -444,17 +971,30 @@
       "id": "divider",
       "slug": "divider",
       "layer": "primitives",
-      "alternativeNames": ["Separator"],
-      "normalizedAliases": ["divider"],
+      "alternativeNames": [
+        "Separator"
+      ],
+      "normalizedAliases": [
+        "divider",
+        "separator"
+      ],
       "category": "Display",
-      "description": "Visual separator.",
+      "description": "Visual separator between content sections. Renders as an hr or div depending on orientation.",
       "a11y": {
-        "pitfalls": ["Misused as layout spacing", "poor contrast in dark mode."]
+        "pitfalls": [
+          "Misused as layout spacing",
+          "poor contrast in dark mode."
+        ],
+        "role": "generic",
+        "labeling": [
+          "aria-orientation"
+        ],
+        "keyboard": [],
+        "apgPattern": null
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Divider",
-        "docs": "app/blueprints/component-standards/divider/page.tsx"
+        "component": "ui/components/Divider"
       }
     },
     {
@@ -472,53 +1012,80 @@
         "Off-canvas Menu",
         "Slide-out Navigation"
       ],
-      "normalizedAliases": ["drawer", "sidebar"],
+      "normalizedAliases": [
+        "drawer",
+        "sidebar"
+      ],
       "category": "Containers",
       "description": "Sliding overlay.",
       "a11y": {
-        "pitfalls": ["Inconsistent screen-size behavior", "poor focus return."]
+        "pitfalls": [
+          "Inconsistent screen-size behavior",
+          "poor focus return."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/drawer/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Dropdown",
       "id": "dropdown",
       "slug": "dropdown",
       "layer": "compounds",
-      "alternativeNames": ["MenuButton", "Menu Button", "Menu-Button"],
-      "normalizedAliases": ["dropdown", "menubutton"],
+      "alternativeNames": [
+        "MenuButton",
+        "Menu Button",
+        "Menu-Button"
+      ],
+      "normalizedAliases": [
+        "dropdown",
+        "menubutton"
+      ],
       "category": "Actions",
       "description": "Triggered list of actions.",
       "a11y": {
-        "pitfalls": ["Keyboard/roving focus", "scrollable lists not announced."]
+        "pitfalls": [
+          "Keyboard/roving focus",
+          "scrollable lists not announced."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/dropdown/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Field",
       "id": "field",
       "slug": "field",
       "layer": "composers",
-      "alternativeNames": ["Field (Composer)"],
-      "normalizedAliases": ["field", "fieldcomposer"],
+      "alternativeNames": [
+        "Field (Composer)"
+      ],
+      "normalizedAliases": [
+        "field",
+        "fieldcomposer"
+      ],
       "category": "Forms",
-      "description": "Governs label/error associations for controls.",
+      "description": "Form field layout wrapper that pairs a label, input, and optional hint or error message.",
       "a11y": {
         "pitfalls": [
           "Duplicated logic in each input",
           "missing aria-describedby."
-        ]
+        ],
+        "role": "alert",
+        "roles": [
+          "alert",
+          "group",
+          "radiogroup"
+        ],
+        "labeling": [
+          "aria-labelledby",
+          "aria-describedby",
+          "aria-errormessage"
+        ],
+        "keyboard": [],
+        "apgPattern": "alert"
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Field",
-        "docs": "app/blueprints/component-standards/field/page.tsx"
+        "component": "ui/components/Field"
       }
     },
     {
@@ -526,25 +1093,35 @@
       "id": "fileinput",
       "slug": "file-input",
       "layer": "compounds",
-      "alternativeNames": ["File Input", "File-Input"],
-      "normalizedAliases": ["fileinput"],
+      "alternativeNames": [
+        "File Input",
+        "File-Input"
+      ],
+      "normalizedAliases": [
+        "fileinput"
+      ],
       "category": "Inputs",
       "description": "File picker + label.",
       "a11y": {
-        "pitfalls": ["Poor drag/drop support", "inaccessible custom buttons."]
+        "pitfalls": [
+          "Poor drag/drop support",
+          "inaccessible custom buttons."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/file-input/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "FilterBar",
       "id": "filterbar",
       "slug": "filter-bar",
       "layer": "composers",
-      "alternativeNames": ["Filter Bar", "Filter-Bar"],
-      "normalizedAliases": ["filterbar"],
+      "alternativeNames": [
+        "Filter Bar",
+        "Filter-Bar"
+      ],
+      "normalizedAliases": [
+        "filterbar"
+      ],
       "category": "Actions",
       "description": "Toolbar specialized for filters.",
       "a11y": {
@@ -553,27 +1130,29 @@
           "unclear scope persistence."
         ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/filter-bar/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Form",
       "id": "form",
       "slug": "form",
       "layer": "composers",
-      "alternativeNames": ["Form (Composer)"],
-      "normalizedAliases": ["form", "formcomposer"],
+      "alternativeNames": [
+        "Form (Composer)"
+      ],
+      "normalizedAliases": [
+        "form",
+        "formcomposer"
+      ],
       "category": "Forms",
       "description": "Orchestrates validation and submission.",
       "a11y": {
-        "pitfalls": ["Mixed validation strategies", "not announcing errors."]
+        "pitfalls": [
+          "Mixed validation strategies",
+          "not announcing errors."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/form/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Heading",
@@ -581,16 +1160,18 @@
       "slug": "heading",
       "layer": "primitives",
       "alternativeNames": [],
-      "normalizedAliases": ["heading"],
+      "normalizedAliases": [
+        "heading"
+      ],
       "category": "Textual",
       "description": "Section title.",
       "a11y": {
-        "pitfalls": ["Misusing heading levels", "skipping tokens."]
+        "pitfalls": [
+          "Misusing heading levels",
+          "skipping tokens."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/heading/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Icon",
@@ -607,16 +1188,32 @@
         "Graphic Symbol",
         "Visual Indicator"
       ],
-      "normalizedAliases": ["icon"],
+      "normalizedAliases": [
+        "icon",
+        "symbol",
+        "identicons",
+        "icontile",
+        "icons",
+        "glyph",
+        "pictogram",
+        "graphicsymbol",
+        "visualindicator"
+      ],
       "category": "Display",
-      "description": "Scalable glyph.",
+      "description": "Renders a named SVG icon from the design system icon set.",
       "a11y": {
-        "pitfalls": ["Not aria-hidden when decorative", "inconsistent sizing."]
+        "pitfalls": [
+          "Not aria-hidden when decorative",
+          "inconsistent sizing."
+        ],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Icon",
-        "docs": "app/blueprints/component-standards/icon/page.tsx"
+        "component": "ui/components/Icon"
       }
     },
     {
@@ -630,36 +1227,50 @@
         "Button Icon",
         "Icon button link"
       ],
-      "normalizedAliases": ["iconbutton"],
+      "normalizedAliases": [
+        "iconbutton"
+      ],
       "category": "Actions",
       "description": "Button containing only an icon.",
       "a11y": {
-        "pitfalls": ["No label/aria-label", "too small hit area."]
+        "pitfalls": [
+          "No label/aria-label",
+          "too small hit area."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/icon-button/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Image",
       "id": "image",
       "slug": "image",
       "layer": "primitives",
-      "alternativeNames": ["Image card", "Picture card"],
-      "normalizedAliases": ["image"],
+      "alternativeNames": [
+        "Image card",
+        "Picture card"
+      ],
+      "normalizedAliases": [
+        "image",
+        "imagecard",
+        "picturecard"
+      ],
       "category": "Display",
-      "description": "Displays media.",
+      "description": "Responsive image component wrapping Next.js Image with layout and aspect-ratio helpers.",
       "a11y": {
         "pitfalls": [
           "Missing alt text",
           "performance (lazy loading, responsive)."
-        ]
+        ],
+        "role": "img",
+        "labeling": [
+          "aria-label"
+        ],
+        "keyboard": [],
+        "apgPattern": "image"
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Image",
-        "docs": "app/blueprints/component-standards/image/page.tsx"
+        "component": "ui/components/Image"
       }
     },
     {
@@ -683,20 +1294,106 @@
         "Entry Field",
         "Data Entry"
       ],
-      "normalizedAliases": ["input", "inputtextnumberpassword"],
+      "normalizedAliases": [
+        "input",
+        "inputtextnumberpassword",
+        "textinput",
+        "inputfield",
+        "inputfieldwithbutton",
+        "inputtext",
+        "textinputfield",
+        "textfieldwrapper",
+        "textfield",
+        "forminput",
+        "textbox",
+        "entryfield",
+        "dataentry"
+      ],
       "category": "Inputs",
-      "description": "Single-line text entry.",
+      "description": "Native text input with portfolio-specific styling. Use inside TextField for label and error support.",
       "a11y": {
         "pitfalls": [
           "Mixing label/error inside",
           "missing aria-\\*",
           "inconsistent disabled/required."
-        ]
+        ],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Input",
-        "docs": "app/blueprints/component-standards/input/page.tsx"
+        "component": "ui/components/Input"
+      }
+    },
+    {
+      "component": "Label",
+      "id": "label",
+      "slug": "label",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "label"
+      ],
+      "category": "Inputs",
+      "description": "Accessible form label associated with a control via htmlFor.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Label"
+      }
+    },
+    {
+      "component": "Links",
+      "id": "links",
+      "slug": "links",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "links"
+      ],
+      "category": "Navigation",
+      "description": "Styled anchor links with design-system typography and color variants.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Links"
+      }
+    },
+    {
+      "component": "List",
+      "id": "list",
+      "slug": "list",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "list"
+      ],
+      "category": "Containers",
+      "description": "Semantic list element (ul, ol, or dl) with consistent spacing and marker styles.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/List"
       }
     },
     {
@@ -704,25 +1401,34 @@
       "id": "listitem",
       "slug": "list-item",
       "layer": "compounds",
-      "alternativeNames": ["List Item", "List-Item"],
-      "normalizedAliases": ["listitem"],
+      "alternativeNames": [
+        "List Item",
+        "List-Item"
+      ],
+      "normalizedAliases": [
+        "listitem"
+      ],
       "category": "Display",
       "description": "Item with primary/secondary text and optional icon.",
       "a11y": {
-        "pitfalls": ["No list semantics", "overloading with actions."]
+        "pitfalls": [
+          "No list semantics",
+          "overloading with actions."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/list-item/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Loading Overlay",
       "id": "loadingoverlay",
       "slug": "loading-overlay",
       "layer": "composers",
-      "alternativeNames": ["Loading-Overlay"],
-      "normalizedAliases": ["loadingoverlay"],
+      "alternativeNames": [
+        "Loading-Overlay"
+      ],
+      "normalizedAliases": [
+        "loadingoverlay"
+      ],
       "category": "Feedback",
       "description": "Full-screen blocking state.",
       "a11y": {
@@ -732,52 +1438,64 @@
           "inaccessible skeletons."
         ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/loading-overlay/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Mention Picker",
       "id": "mentionpicker",
       "slug": "mention-picker",
       "layer": "composers",
-      "alternativeNames": ["Mention-Picker"],
-      "normalizedAliases": ["mentionpicker"],
+      "alternativeNames": [
+        "Mention-Picker"
+      ],
+      "normalizedAliases": [
+        "mentionpicker"
+      ],
       "category": "Editing",
       "description": "Autocomplete list for @ mentions.",
       "a11y": {
-        "pitfalls": ["Not announcing results", "slow async search."]
+        "pitfalls": [
+          "Not announcing results",
+          "slow async search."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/mention-picker/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "MenuButton",
       "id": "menubutton",
       "slug": "menu-button",
       "layer": "compounds",
-      "alternativeNames": ["Dropdown", "Menu Button", "Menu-Button"],
-      "normalizedAliases": ["menubutton", "dropdown"],
+      "alternativeNames": [
+        "Dropdown",
+        "Menu Button",
+        "Menu-Button"
+      ],
+      "normalizedAliases": [
+        "menubutton",
+        "dropdown"
+      ],
       "category": "Actions",
       "description": "Triggered list of actions.",
       "a11y": {
-        "pitfalls": ["Keyboard/roving focus", "scrollable lists not announced."]
+        "pitfalls": [
+          "Keyboard/roving focus",
+          "scrollable lists not announced."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/menu-button/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Message Composer",
       "id": "messagecomposer",
       "slug": "message-composer",
       "layer": "composers",
-      "alternativeNames": ["Message-Composer"],
-      "normalizedAliases": ["messagecomposer"],
+      "alternativeNames": [
+        "Message-Composer"
+      ],
+      "normalizedAliases": [
+        "messagecomposer"
+      ],
       "category": "Editing",
       "description": "Text input + attachments + formatting.",
       "a11y": {
@@ -786,10 +1504,7 @@
           "unclear boundaries with product logic."
         ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/message-composer/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Modal",
@@ -808,7 +1523,10 @@
         "Centered Modal",
         "Dialog Box"
       ],
-      "normalizedAliases": ["modal", "dialog"],
+      "normalizedAliases": [
+        "modal",
+        "dialog"
+      ],
       "category": "Containers",
       "description": "Blocking and non-blocking overlay container.",
       "a11y": {
@@ -818,18 +1536,21 @@
           "misuse for inline content."
         ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/modal/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Multi-Step Form",
       "id": "multistepform",
       "slug": "multi-step-form",
       "layer": "composers",
-      "alternativeNames": ["Wizard", "Multi-Step-Form"],
-      "normalizedAliases": ["multistepform", "wizard"],
+      "alternativeNames": [
+        "Wizard",
+        "Multi-Step-Form"
+      ],
+      "normalizedAliases": [
+        "multistepform",
+        "wizard"
+      ],
       "category": "Forms",
       "description": "Multi-step field orchestration.",
       "a11y": {
@@ -838,10 +1559,7 @@
           "progress not communicated to SRs."
         ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/multi-step-form/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "NavigationRail",
@@ -854,7 +1572,10 @@
         "Navigation-Rail",
         "Sidebar-Nav"
       ],
-      "normalizedAliases": ["navigationrail", "sidebarnav"],
+      "normalizedAliases": [
+        "navigationrail",
+        "sidebarnav"
+      ],
       "category": "Navigation",
       "description": "App-wide nav structure.",
       "a11y": {
@@ -863,9 +1584,68 @@
           "collapsed vs expanded not communicated."
         ]
       },
-      "status": "Planned",
+      "status": "Planned"
+    },
+    {
+      "component": "OTP",
+      "id": "otp",
+      "slug": "otp",
+      "layer": "composers",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "otp"
+      ],
+      "category": "Inputs",
+      "description": "One-time password input composed of individual single-character digit fields.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "group",
+        "roles": [
+          "group",
+          "alert"
+        ],
+        "labeling": [
+          "aria-describedby",
+          "aria-readonly",
+          "aria-label"
+        ],
+        "keyboard": [
+          {
+            "key": "KeyboardEvent",
+            "when": "root",
+            "then": "handled by component"
+          }
+        ],
+        "apgPattern": null
+      },
+      "status": "Built",
       "paths": {
-        "docs": "app/blueprints/component-standards/navigation-rail/page.tsx"
+        "component": "ui/components/OTP"
+      }
+    },
+    {
+      "component": "PageTransition",
+      "id": "pagetransition",
+      "slug": "page-transition",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "pagetransition"
+      ],
+      "category": "Display",
+      "description": "Wraps page content to apply route-change fade/slide animations between Next.js pages.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [
+          "aria-label"
+        ],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/PageTransition"
       }
     },
     {
@@ -883,7 +1663,9 @@
         "Page Numbers",
         "Page Indicator"
       ],
-      "normalizedAliases": ["pagination"],
+      "normalizedAliases": [
+        "pagination"
+      ],
       "category": "Navigation",
       "description": "Controls item/page navigation.",
       "a11y": {
@@ -893,27 +1675,122 @@
           "poor ellipses logic."
         ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/pagination/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Popover",
       "id": "popover",
       "slug": "popover",
       "layer": "composers",
-      "alternativeNames": ["Anchor Popup", "PointerBox"],
-      "normalizedAliases": ["popover"],
+      "alternativeNames": [
+        "Anchor Popup",
+        "PointerBox"
+      ],
+      "normalizedAliases": [
+        "popover",
+        "anchorpopup",
+        "pointerbox"
+      ],
       "category": "Containers",
-      "description": "Anchored floating UI.",
+      "description": "Non-modal floating panel anchored to a trigger element. Does not trap focus.",
       "a11y": {
-        "pitfalls": ["Not keyboard dismissible", "hover/click confusion."]
+        "pitfalls": [
+          "Not keyboard dismissible",
+          "hover/click confusion."
+        ],
+        "role": "region",
+        "labeling": [
+          "aria-haspopup"
+        ],
+        "keyboard": [
+          {
+            "key": "KeyboardEvent",
+            "when": "root",
+            "then": "handled by component"
+          }
+        ],
+        "apgPattern": null
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Popover",
-        "docs": "app/blueprints/component-standards/popover/page.tsx"
+        "component": "ui/components/Popover"
+      }
+    },
+    {
+      "component": "Postcard",
+      "id": "postcard",
+      "slug": "postcard",
+      "layer": "composers",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "postcard"
+      ],
+      "category": "Textual",
+      "description": "Social-media-style post card with author, content, media embed, and engagement stat slots.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "region",
+        "labeling": [],
+        "keyboard": [
+          {
+            "key": "Enter|Space",
+            "when": "trigger",
+            "then": "activate"
+          }
+        ],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Postcard"
+      }
+    },
+    {
+      "component": "ProfileFlag",
+      "id": "profileflag",
+      "slug": "profile-flag",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "profileflag"
+      ],
+      "category": "Display",
+      "description": "Avatar-style display of a user or entity identity with name and optional status badge.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/ProfileFlag"
+      }
+    },
+    {
+      "component": "Progress",
+      "id": "progress",
+      "slug": "progress",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "progress"
+      ],
+      "category": "Display",
+      "description": "Visual indicator for task completion. Supports linear bar and circular ring variants.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [
+          "aria-label"
+        ],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Progress"
       }
     },
     {
@@ -921,8 +1798,13 @@
       "id": "progressbar",
       "slug": "progress-bar",
       "layer": "compounds",
-      "alternativeNames": ["Progress Bar", "Progress-Bar"],
-      "normalizedAliases": ["progressbar"],
+      "alternativeNames": [
+        "Progress Bar",
+        "Progress-Bar"
+      ],
+      "normalizedAliases": [
+        "progressbar"
+      ],
       "category": "Feedback",
       "description": "Linear visual progress.",
       "a11y": {
@@ -931,10 +1813,7 @@
           "not distinguishable without color."
         ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/progress-bar/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Radio",
@@ -960,16 +1839,18 @@
         "Selection Button",
         "Choice Button"
       ],
-      "normalizedAliases": ["radio"],
+      "normalizedAliases": [
+        "radio"
+      ],
       "category": "Inputs",
       "description": "Single-choice option.",
       "a11y": {
-        "pitfalls": ["No group orchestration", "missing aria-checked."]
+        "pitfalls": [
+          "No group orchestration",
+          "missing aria-checked."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/radio/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "RadioGroup",
@@ -983,16 +1864,19 @@
         "Radio Group",
         "Radio-Group"
       ],
-      "normalizedAliases": ["radiogroup", "checkboxgroup"],
+      "normalizedAliases": [
+        "radiogroup",
+        "checkboxgroup"
+      ],
       "category": "Inputs",
       "description": "Grouped options with label.",
       "a11y": {
-        "pitfalls": ["Group unlabeled", "inconsistent error propagation."]
+        "pitfalls": [
+          "Group unlabeled",
+          "inconsistent error propagation."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/radio-group/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Rich Text Editor",
@@ -1009,24 +1893,32 @@
         "Document Editor",
         "Formatting Toolbar"
       ],
-      "normalizedAliases": ["richtexteditor"],
+      "normalizedAliases": [
+        "richtexteditor"
+      ],
       "category": "Editing",
       "description": "Schema + plugins + toolbar orchestration.",
       "a11y": {
-        "pitfalls": ["Paste soup", "plugin drift", "shortcut inconsistency."]
+        "pitfalls": [
+          "Paste soup",
+          "plugin drift",
+          "shortcut inconsistency."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/rich-text-editor/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "SearchField",
       "id": "searchfield",
       "slug": "search-field",
       "layer": "compounds",
-      "alternativeNames": ["Search Field", "Search-Field"],
-      "normalizedAliases": ["searchfield"],
+      "alternativeNames": [
+        "Search Field",
+        "Search-Field"
+      ],
+      "normalizedAliases": [
+        "searchfield"
+      ],
       "category": "Inputs",
       "description": "Input + search icon + clear button.",
       "a11y": {
@@ -1035,10 +1927,7 @@
           "Enter/blur inconsistencies."
         ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/search-field/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "SegmentedControl",
@@ -1052,22 +1941,25 @@
         "Toggle Group",
         "Toggle-Group"
       ],
-      "normalizedAliases": ["segmentedcontrol", "togglegroup"],
+      "normalizedAliases": [
+        "segmentedcontrol",
+        "togglegroup"
+      ],
       "category": "Actions",
       "description": "Group of related toggle buttons.",
       "a11y": {
-        "pitfalls": ["Ambiguous single vs multi-select", "roving tabindex."]
+        "pitfalls": [
+          "Ambiguous single vs multi-select",
+          "roving tabindex."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/segmented-control/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Select",
       "id": "select",
       "slug": "select",
-      "layer": "compounds",
+      "layer": "composers",
       "alternativeNames": [
         "Dropdown",
         "Dropdown select",
@@ -1078,34 +1970,184 @@
         "Picklist",
         "Selection Menu"
       ],
-      "normalizedAliases": ["select"],
+      "normalizedAliases": [
+        "select",
+        "dropdown",
+        "dropdownselect",
+        "dropdownmenunav",
+        "combobox",
+        "choiceselect",
+        "optionselect",
+        "picklist",
+        "selectionmenu"
+      ],
       "category": "Inputs",
-      "description": "Dropdown (native/custom).",
+      "description": "Dropdown selector with optional search, single or multi-select, and keyboard navigation. Renders a floating listbox anchored to the trigger.",
       "a11y": {
-        "pitfalls": ["Custom menus often inaccessible", "no keyboard support."]
+        "pitfalls": [
+          "Custom menus often inaccessible",
+          "no keyboard support."
+        ],
+        "role": "combobox",
+        "roles": [
+          "combobox",
+          "listbox",
+          "option"
+        ],
+        "labeling": [
+          "aria-label"
+        ],
+        "keyboard": [
+          {
+            "key": "Enter|Space",
+            "when": "trigger",
+            "then": "activate"
+          },
+          {
+            "key": "ArrowDown|ArrowUp",
+            "when": "trigger",
+            "then": "navigate options"
+          },
+          {
+            "key": "Enter|Space",
+            "when": "option",
+            "then": "select option"
+          },
+          {
+            "key": "Escape",
+            "when": "listbox",
+            "then": "close"
+          }
+        ],
+        "apgPattern": "combobox"
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Select",
-        "docs": "app/blueprints/component-standards/select/page.tsx"
+        "component": "ui/components/Select"
+      }
+    },
+    {
+      "component": "Sheet",
+      "id": "sheet",
+      "slug": "sheet",
+      "layer": "composers",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "sheet"
+      ],
+      "category": "Feedback",
+      "description": "Slide-in panel (drawer) that overlays the page from an edge. Traps focus until dismissed.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "dialog",
+        "labeling": [
+          "aria-label"
+        ],
+        "keyboard": [
+          {
+            "key": "Enter|Space",
+            "when": "trigger",
+            "then": "activate"
+          },
+          {
+            "key": "Escape",
+            "when": "open",
+            "then": "close"
+          },
+          {
+            "key": "Tab",
+            "when": "open",
+            "then": "cycle focus within"
+          }
+        ],
+        "apgPattern": "dialog-modal"
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Sheet"
+      }
+    },
+    {
+      "component": "ShowMore",
+      "id": "showmore",
+      "slug": "show-more",
+      "layer": "composers",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "showmore"
+      ],
+      "category": "Textual",
+      "description": "Expandable container that truncates long content with a \"show more\" affordance.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "button",
+        "labeling": [],
+        "keyboard": [
+          {
+            "key": "Enter|Space",
+            "when": "trigger",
+            "then": "activate"
+          }
+        ],
+        "apgPattern": "button"
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/ShowMore"
+      }
+    },
+    {
+      "component": "Shuttle",
+      "id": "shuttle",
+      "slug": "shuttle",
+      "layer": "compounds",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "shuttle"
+      ],
+      "category": "Actions",
+      "description": "Dual-listbox transfer widget for moving items between two ordered collections.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Shuttle"
       }
     },
     {
       "component": "Sidebar",
       "id": "sidebar",
       "slug": "sidebar",
-      "layer": "composers",
-      "alternativeNames": ["Drawer"],
-      "normalizedAliases": ["sidebar", "drawer"],
+      "layer": "primitives",
+      "alternativeNames": [
+        "Drawer"
+      ],
+      "normalizedAliases": [
+        "sidebar",
+        "drawer"
+      ],
       "category": "Containers",
-      "description": "Sliding overlay.",
+      "description": "A layout component for creating collapsible sidebar navigation with support for different positions and responsive behavior.",
       "a11y": {
-        "pitfalls": ["Inconsistent screen-size behavior", "poor focus return."]
+        "pitfalls": [
+          "Inconsistent screen-size behavior",
+          "poor focus return."
+        ],
+        "role": "generic",
+        "labeling": [
+          "aria-label"
+        ],
+        "keyboard": [],
+        "apgPattern": null
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Sidebar",
-        "docs": "app/blueprints/component-standards/sidebar/page.tsx"
+        "component": "ui/modules/Sidebar"
       }
     },
     {
@@ -1119,7 +2161,10 @@
         "Navigation-Rail",
         "Sidebar-Nav"
       ],
-      "normalizedAliases": ["sidebarnav", "navigationrail"],
+      "normalizedAliases": [
+        "sidebarnav",
+        "navigationrail"
+      ],
       "category": "Navigation",
       "description": "App-wide nav structure.",
       "a11y": {
@@ -1128,9 +2173,57 @@
           "collapsed vs expanded not communicated."
         ]
       },
-      "status": "Planned",
+      "status": "Planned"
+    },
+    {
+      "component": "SideNavigation",
+      "id": "sidenavigation",
+      "slug": "side-navigation",
+      "layer": "compounds",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "sidenavigation"
+      ],
+      "category": "Display",
+      "description": "Headless navigation container that orchestrates expanded/collapsed state and provides context for nested navigation items.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "group",
+        "labeling": [
+          "aria-label",
+          "aria-labelledby"
+        ],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
       "paths": {
-        "docs": "app/blueprints/component-standards/sidebar-nav/page.tsx"
+        "component": "ui/modules/SideNavigation"
+      }
+    },
+    {
+      "component": "Skeleton",
+      "id": "skeleton",
+      "slug": "skeleton",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "skeleton"
+      ],
+      "category": "Display",
+      "description": "Loading placeholder that mimics the shape of content before data is available.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [
+          "aria-label"
+        ],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Skeleton"
       }
     },
     {
@@ -1139,7 +2232,9 @@
       "slug": "slider",
       "layer": "primitives",
       "alternativeNames": [],
-      "normalizedAliases": ["slider"],
+      "normalizedAliases": [
+        "slider"
+      ],
       "category": "Inputs",
       "description": "Continuous or stepped numeric input.",
       "a11y": {
@@ -1149,9 +2244,29 @@
           "poor focus visibility."
         ]
       },
-      "status": "Planned",
+      "status": "Planned"
+    },
+    {
+      "component": "SlinkyCursor",
+      "id": "slinkycursor",
+      "slug": "slinky-cursor",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "slinkycursor"
+      ],
+      "category": "Display",
+      "description": "Animated custom cursor indicator following the pointer with a spring-physics trail.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
       "paths": {
-        "docs": "app/blueprints/component-standards/slider/page.tsx"
+        "component": "ui/components/SlinkyCursor"
       }
     },
     {
@@ -1159,17 +2274,22 @@
       "id": "snackbar",
       "slug": "snackbar",
       "layer": "composers",
-      "alternativeNames": ["Toast"],
-      "normalizedAliases": ["snackbar", "toast"],
+      "alternativeNames": [
+        "Toast"
+      ],
+      "normalizedAliases": [
+        "snackbar",
+        "toast"
+      ],
       "category": "Feedback",
       "description": "Temporary notifications.",
       "a11y": {
-        "pitfalls": ["Not dismissible via keyboard", "poor timeout semantics."]
+        "pitfalls": [
+          "Not dismissible via keyboard",
+          "poor timeout semantics."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/snackbar/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Spacer",
@@ -1177,33 +2297,68 @@
       "slug": "spacer",
       "layer": "primitives",
       "alternativeNames": [],
-      "normalizedAliases": ["spacer"],
+      "normalizedAliases": [
+        "spacer"
+      ],
       "category": "Display",
       "description": "Non-semantic layout gap.",
       "a11y": {
-        "pitfalls": ["Overuse instead of flex/grid", "hidden clutter in DOM."]
+        "pitfalls": [
+          "Overuse instead of flex/grid",
+          "hidden clutter in DOM."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/spacer/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Spinner",
       "id": "spinner",
       "slug": "spinner",
-      "layer": "compounds",
+      "layer": "primitives",
       "alternativeNames": [],
-      "normalizedAliases": ["spinner"],
+      "normalizedAliases": [
+        "spinner"
+      ],
       "category": "Feedback",
-      "description": "Indeterminate loading indicator.",
+      "description": "Rotating indicator for indeterminate loading states.",
       "a11y": {
-        "pitfalls": ["Not announced", "poor contrast on dark backgrounds."]
+        "pitfalls": [
+          "Not announced",
+          "poor contrast on dark backgrounds."
+        ],
+        "role": "generic",
+        "labeling": [
+          "aria-label"
+        ],
+        "keyboard": [],
+        "apgPattern": null
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Spinner",
-        "docs": "app/blueprints/component-standards/spinner/page.tsx"
+        "component": "ui/components/Spinner"
+      }
+    },
+    {
+      "component": "Status",
+      "id": "status",
+      "slug": "status",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "status"
+      ],
+      "category": "Display",
+      "description": "Compact icon-and-label pair conveying a status condition (online, offline, busy, etc.).",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Status"
       }
     },
     {
@@ -1219,7 +2374,9 @@
         "Stepper horizontal",
         "Stepper indicator"
       ],
-      "normalizedAliases": ["stepper"],
+      "normalizedAliases": [
+        "stepper"
+      ],
       "category": "Navigation",
       "description": "Multi-step progress indicator.",
       "a11y": {
@@ -1228,10 +2385,7 @@
           "unclear “completed” states."
         ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/stepper/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Switch",
@@ -1247,16 +2401,70 @@
         "On/Off Switch",
         "State Toggle"
       ],
-      "normalizedAliases": ["switch"],
+      "normalizedAliases": [
+        "switch",
+        "slidetoggle",
+        "toggleswitch",
+        "togglebutton",
+        "binaryswitch",
+        "onoffswitch",
+        "statetoggle"
+      ],
       "category": "Inputs",
-      "description": "Binary toggle styled as a slider.",
+      "description": "Boolean toggle for enabling or disabling a setting. Semantically equivalent to a checkbox but with a sliding thumb affordance.",
       "a11y": {
-        "pitfalls": ["Misused as yes/no", "unclear semantics."]
+        "pitfalls": [
+          "Misused as yes/no",
+          "unclear semantics."
+        ],
+        "role": "switch",
+        "roles": [
+          "switch",
+          "group"
+        ],
+        "labeling": [
+          "aria-checked",
+          "aria-label",
+          "aria-labelledby",
+          "aria-describedby"
+        ],
+        "keyboard": [],
+        "apgPattern": "switch"
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Switch",
-        "docs": "app/blueprints/component-standards/switch/page.tsx"
+        "component": "ui/components/Switch"
+      }
+    },
+    {
+      "component": "Table",
+      "id": "table",
+      "slug": "table",
+      "layer": "compounds",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "table"
+      ],
+      "category": "Display",
+      "description": "Data table with sortable columns, row selection, and pagination support.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [
+          "aria-sort"
+        ],
+        "keyboard": [
+          {
+            "key": "KeyboardEvent",
+            "when": "root",
+            "then": "handled by component"
+          }
+        ],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Table"
       }
     },
     {
@@ -1264,34 +2472,71 @@
       "id": "tablerow",
       "slug": "table-row",
       "layer": "compounds",
-      "alternativeNames": ["Table Row", "Table-Row"],
-      "normalizedAliases": ["tablerow"],
+      "alternativeNames": [
+        "Table Row",
+        "Table-Row"
+      ],
+      "normalizedAliases": [
+        "tablerow"
+      ],
       "category": "Display",
       "description": "Standardized table row.",
       "a11y": {
-        "pitfalls": ["No scope for headers", "responsive overflow mishandling."]
+        "pitfalls": [
+          "No scope for headers",
+          "responsive overflow mishandling."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/table-row/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Tabs",
       "id": "tabs",
       "slug": "tabs",
       "layer": "composers",
-      "alternativeNames": ["Tab"],
-      "normalizedAliases": ["tabs", "tab"],
+      "alternativeNames": [
+        "Tab"
+      ],
+      "normalizedAliases": [
+        "tabs",
+        "tab"
+      ],
       "category": "Navigation",
-      "description": "Tablist + tabpanels orchestration.",
+      "description": "Tabbed navigation for switching between related content panels within the same page context.",
       "a11y": {
-        "pitfalls": ["Roving tabindex errors", "not linked to routing."]
+        "pitfalls": [
+          "Roving tabindex errors",
+          "not linked to routing."
+        ],
+        "role": "tablist",
+        "roles": [
+          "tablist",
+          "tab",
+          "tabpanel"
+        ],
+        "labeling": [],
+        "keyboard": [
+          {
+            "key": "Enter|Space",
+            "when": "trigger",
+            "then": "activate"
+          },
+          {
+            "key": "ArrowLeft|ArrowRight",
+            "when": "tablist",
+            "then": "move focus"
+          },
+          {
+            "key": "Enter|Space",
+            "when": "tab",
+            "then": "activate tab"
+          }
+        ],
+        "apgPattern": null
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Tabs",
-        "docs": "app/blueprints/component-standards/tabs/page.tsx"
+        "component": "ui/components/Tabs"
       }
     },
     {
@@ -1299,34 +2544,53 @@
       "id": "tag",
       "slug": "tag",
       "layer": "compounds",
-      "alternativeNames": ["Chip", "Token", "Tagbutton", "Tag dismissible"],
-      "normalizedAliases": ["tag", "chip"],
+      "alternativeNames": [
+        "Chip",
+        "Token",
+        "Tagbutton",
+        "Tag dismissible"
+      ],
+      "normalizedAliases": [
+        "tag",
+        "chip"
+      ],
       "category": "Display",
       "description": "Label + optional dismiss.",
       "a11y": {
-        "pitfalls": ["Dismiss button unlabeled", "no keyboard removal."]
+        "pitfalls": [
+          "Dismiss button unlabeled",
+          "no keyboard removal."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/tag/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "Text",
       "id": "text",
       "slug": "text",
       "layer": "primitives",
-      "alternativeNames": ["Specialized text"],
-      "normalizedAliases": ["text"],
+      "alternativeNames": [
+        "Specialized text"
+      ],
+      "normalizedAliases": [
+        "text",
+        "specializedtext"
+      ],
       "category": "Textual",
-      "description": "Styled body copy.",
+      "description": "Polymorphic text element with design-system typography variants and semantic element control.",
       "a11y": {
-        "pitfalls": ["Hardcoded typography", "no semantic mapping."]
+        "pitfalls": [
+          "Hardcoded typography",
+          "no semantic mapping."
+        ],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Text",
-        "docs": "app/blueprints/component-standards/text/page.tsx"
+        "component": "ui/components/Text"
       }
     },
     {
@@ -1334,38 +2598,53 @@
       "id": "textareafield",
       "slug": "textarea-field",
       "layer": "compounds",
-      "alternativeNames": ["Textarea Field", "Textarea-Field"],
-      "normalizedAliases": ["textareafield"],
+      "alternativeNames": [
+        "Textarea Field",
+        "Textarea-Field"
+      ],
+      "normalizedAliases": [
+        "textareafield"
+      ],
       "category": "Inputs",
       "description": "Multiline entry.",
       "a11y": {
-        "pitfalls": ["Missing resize handling", "poor ARIA."]
+        "pitfalls": [
+          "Missing resize handling",
+          "poor ARIA."
+        ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/textarea-field/page.tsx"
-      }
+      "status": "Planned"
     },
     {
       "component": "TextField",
       "id": "textfield",
       "slug": "text-field",
-      "layer": "compounds",
-      "alternativeNames": ["Text Field", "Text-Field"],
-      "normalizedAliases": ["textfield"],
+      "layer": "primitives",
+      "alternativeNames": [
+        "Text Field",
+        "Text-Field"
+      ],
+      "normalizedAliases": [
+        "textfield"
+      ],
       "category": "Inputs",
-      "description": "Input + Label + Error + Helper.",
+      "description": "Full-featured form field composing Label, Input, description, and error message with ARIA wiring.",
       "a11y": {
         "pitfalls": [
           "Label optionality",
           "missing aria-describedby",
           "bloated props."
-        ]
+        ],
+        "role": "alert",
+        "labeling": [
+          "aria-describedby"
+        ],
+        "keyboard": [],
+        "apgPattern": "alert"
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/TextField",
-        "docs": "app/blueprints/component-standards/text-field/page.tsx"
+        "component": "ui/components/TextField"
       }
     },
     {
@@ -1373,17 +2652,40 @@
       "id": "toast",
       "slug": "toast",
       "layer": "composers",
-      "alternativeNames": ["Snackbar"],
-      "normalizedAliases": ["toast", "snackbar"],
+      "alternativeNames": [
+        "Snackbar"
+      ],
+      "normalizedAliases": [
+        "toast",
+        "snackbar"
+      ],
       "category": "Feedback",
-      "description": "Temporary notifications.",
+      "description": "Transient notification message appearing briefly at the edge of the viewport.",
       "a11y": {
-        "pitfalls": ["Not dismissible via keyboard", "poor timeout semantics."]
+        "pitfalls": [
+          "Not dismissible via keyboard",
+          "poor timeout semantics."
+        ],
+        "role": "alert",
+        "roles": [
+          "alert",
+          "status"
+        ],
+        "labeling": [
+          "aria-label"
+        ],
+        "keyboard": [
+          {
+            "key": "Enter|Space",
+            "when": "trigger",
+            "then": "activate"
+          }
+        ],
+        "apgPattern": "alert"
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Toast",
-        "docs": "app/blueprints/component-standards/toast/page.tsx"
+        "component": "ui/components/Toast"
       }
     },
     {
@@ -1398,15 +2700,45 @@
         "Toggle Group",
         "Toggle-Group"
       ],
-      "normalizedAliases": ["togglegroup", "segmentedcontrol"],
+      "normalizedAliases": [
+        "togglegroup",
+        "segmentedcontrol"
+      ],
       "category": "Actions",
       "description": "Group of related toggle buttons.",
       "a11y": {
-        "pitfalls": ["Ambiguous single vs multi-select", "roving tabindex."]
+        "pitfalls": [
+          "Ambiguous single vs multi-select",
+          "roving tabindex."
+        ]
       },
-      "status": "Planned",
+      "status": "Planned"
+    },
+    {
+      "component": "ToggleSwitch",
+      "id": "toggleswitch",
+      "slug": "toggle-switch",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "toggleswitch"
+      ],
+      "category": "Inputs",
+      "description": "Binary switch control rendered as input[role=switch] with an adjacent label.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "switch",
+        "labeling": [
+          "aria-label",
+          "aria-checked",
+          "aria-describedby"
+        ],
+        "keyboard": [],
+        "apgPattern": "switch"
+      },
+      "status": "Built",
       "paths": {
-        "docs": "app/blueprints/component-standards/toggle-group/page.tsx"
+        "component": "ui/components/ToggleSwitch"
       }
     },
     {
@@ -1426,23 +2758,63 @@
         "Top app bar",
         "Top bar"
       ],
-      "normalizedAliases": ["toolbar", "actionbar"],
+      "normalizedAliases": [
+        "toolbar",
+        "actionbar",
+        "topbar",
+        "bar",
+        "commandbar",
+        "fullscreenbar",
+        "quickactions",
+        "pageactions",
+        "topappbar"
+      ],
       "category": "Actions",
-      "description": "Groups actions with priority + overflow.",
+      "description": "Editor command surface that groups formatting, alignment, color, insertion, and history actions for a TipTap editor instance.",
       "a11y": {
-        "pitfalls": ["No overflow policy", "inconsistent grouping."]
+        "pitfalls": [
+          "No overflow policy",
+          "inconsistent grouping."
+        ],
+        "role": "toolbar",
+        "roles": [
+          "toolbar",
+          "button",
+          "combobox"
+        ],
+        "labeling": [
+          "aria-label",
+          "title",
+          "aria-pressed"
+        ],
+        "keyboard": [
+          {
+            "key": "Tab",
+            "when": "moving through toolbar controls",
+            "then": "move focus to the next native control"
+          },
+          {
+            "key": "Enter|Space",
+            "when": "focused on an action button",
+            "then": "run the associated editor command"
+          }
+        ],
+        "apgPattern": "toolbar",
+        "screenReader": [
+          "Toolbar root is announced as Editor formatting tools",
+          "Toggle actions expose pressed state with aria-pressed"
+        ]
       },
       "status": "Built",
       "paths": {
-        "component": "ui/modules/Toolbar",
-        "docs": "app/blueprints/component-standards/toolbar/page.tsx"
+        "component": "ui/modules/Toolbar"
       }
     },
     {
       "component": "Tooltip",
       "id": "tooltip",
       "slug": "tooltip",
-      "layer": "compounds",
+      "layer": "primitives",
       "alternativeNames": [
         "Toggle tip",
         "Toggletip",
@@ -1454,20 +2826,132 @@
         "Hover Tip",
         "Popover Tip"
       ],
-      "normalizedAliases": ["tooltip"],
+      "normalizedAliases": [
+        "tooltip",
+        "toggletip",
+        "tooltiptoggletip",
+        "tooltiptabstop",
+        "infotip",
+        "helptip",
+        "hovertip",
+        "popovertip"
+      ],
       "category": "Feedback",
-      "description": "On-hover/focus info.",
+      "description": "Floating label providing supplemental information about a trigger element on hover or focus.",
       "a11y": {
         "pitfalls": [
           "Not dismissible",
           "used for essential info",
           "poor keyboard support."
-        ]
+        ],
+        "role": "tooltip",
+        "labeling": [
+          "aria-describedby"
+        ],
+        "keyboard": [],
+        "apgPattern": "tooltip"
       },
       "status": "Built",
       "paths": {
-        "component": "ui/components/Tooltip",
-        "docs": "app/blueprints/component-standards/tooltip/page.tsx"
+        "component": "ui/components/Tooltip"
+      }
+    },
+    {
+      "component": "Truncate",
+      "id": "truncate",
+      "slug": "truncate",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "truncate"
+      ],
+      "category": "Display",
+      "description": "Clamps multi-line text to a fixed number of lines with an expand/collapse toggle.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [
+          {
+            "key": "Enter|Space",
+            "when": "trigger",
+            "then": "activate"
+          }
+        ],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Truncate"
+      }
+    },
+    {
+      "component": "VisuallyHidden",
+      "id": "visuallyhidden",
+      "slug": "visually-hidden",
+      "layer": "primitives",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "visuallyhidden"
+      ],
+      "category": "Containers",
+      "description": "Renders children invisibly for sighted users but accessible to screen readers. Equivalent to .sr-only.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "generic",
+        "labeling": [],
+        "keyboard": [],
+        "apgPattern": null
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/VisuallyHidden"
+      }
+    },
+    {
+      "component": "Walkthrough",
+      "id": "walkthrough",
+      "slug": "walkthrough",
+      "layer": "composers",
+      "alternativeNames": [],
+      "normalizedAliases": [
+        "walkthrough"
+      ],
+      "category": "Feedback",
+      "description": "Step-by-step guided tour overlay anchored to page elements. Manages step progression and keyboard navigation.",
+      "a11y": {
+        "pitfalls": [],
+        "role": "status",
+        "labeling": [
+          "aria-label"
+        ],
+        "keyboard": [
+          {
+            "key": "Enter|Space",
+            "when": "trigger",
+            "then": "activate"
+          },
+          {
+            "key": "Escape",
+            "when": "open",
+            "then": "close"
+          },
+          {
+            "key": "ArrowLeft",
+            "when": "active",
+            "then": "prev"
+          },
+          {
+            "key": "ArrowRight",
+            "when": "active",
+            "then": "next"
+          }
+        ],
+        "apgPattern": "status"
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Walkthrough"
       }
     },
     {
@@ -1480,7 +2964,10 @@
         "Multi-Step-Form",
         "Multi-step Form"
       ],
-      "normalizedAliases": ["wizard", "multistepform"],
+      "normalizedAliases": [
+        "wizard",
+        "multistepform"
+      ],
       "category": "Forms",
       "description": "Multi-step field orchestration.",
       "a11y": {
@@ -1489,12 +2976,9 @@
           "progress not communicated to SRs."
         ]
       },
-      "status": "Planned",
-      "paths": {
-        "docs": "app/blueprints/component-standards/wizard/page.tsx"
-      }
+      "status": "Planned"
     }
   ],
-  "$source": "docs/design-taxonomy.md",
-  "$generatedAt": "2025-09-16T19:25:18.936Z"
+  "$source": "scripts/generateComponentsRegistry.mjs",
+  "$generatedAt": "2026-09-21T00:00:00.000Z"
 }
