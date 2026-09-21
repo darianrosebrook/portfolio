@@ -1,0 +1,41 @@
+id: FIX-PUBLISH-DATE-001
+title: 'Preserve the publish date the editor sends instead of stamping now'
+risk_tier: 2
+mode: fix
+lifecycle_state: draft
+created_at: '2026-09-21T04:28:52.373Z'
+updated_at: '2026-09-21T04:28:52.373Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'content publish path — article and case-study update schemas'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/schemas/article.schema.ts'
+    - 'utils/schemas/case-study.schema.ts'
+    - 'test/utils/schemas/publish-payload-repro.test.ts'
+    - 'test/utils/schemas/case-study.schema.test.ts'
+  out: []
+invariants:
+  - 'A PUT that carries published_at keeps that value through schema parsing'
+  - 'published_at stays optional, so a first publish still falls back to now in the route'
+  - 'Draft autosave (patchArticleDraftSchema / patchCaseStudyDraftSchema) still cannot write published_at'
+acceptance:
+  - id: A1
+    given: 'the publish PUT the editor sends for an article'
+    when: 'updateArticleSchema parses a payload carrying published_at'
+    then: 'the parsed output retains that exact timestamp'
+  - id: A2
+    given: 'the publish PUT the editor sends for a case study'
+    when: 'updateCaseStudySchema parses a payload carrying published_at'
+    then: 'the parsed output retains that exact timestamp'
+  - id: A3
+    given: 'a first publish with no date on the row'
+    when: 'the update schema parses a payload without published_at'
+    then: 'parsing still succeeds so the route keeps its now() fallback'
+non_functional: {}
+contracts:
+  - name: 'publish-date-preservation'
+    type: behavior
