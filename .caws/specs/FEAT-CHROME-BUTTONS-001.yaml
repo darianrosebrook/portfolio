@@ -1,0 +1,40 @@
+id: FEAT-CHROME-BUTTONS-001
+title: 'Use the Button primitive for the metadata toggle and the preview close'
+risk_tier: 2
+mode: refactor
+lifecycle_state: draft
+created_at: '2026-09-21T07:16:12.236Z'
+updated_at: '2026-09-21T07:16:12.236Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard new-content flow — toolbar and preview chrome'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/articles/new/components/EditorLayout.tsx'
+    - 'app/dashboard/articles/new/components/EditorLayout.module.css'
+    - 'app/dashboard/articles/new/components/ArticlePreview.tsx'
+    - 'app/dashboard/articles/new/components/ArticlePreview.module.css'
+  out: []
+invariants:
+  - 'Toggling still shows and hides the metadata sidebar and flips its label'
+  - 'Closing still dismisses the preview overlay'
+acceptance:
+  - id: A1
+    given: 'the editor toolbar'
+    when: 'the metadata toggle is activated'
+    then: 'the sidebar hides and the control reads Show Metadata, and activating it again restores both'
+  - id: A2
+    given: 'the open preview'
+    when: 'Close Preview is activated'
+    then: 'the overlay is dismissed'
+  - id: A3
+    given: 'both components'
+    when: 'the source is inspected'
+    then: 'neither renders a raw button element and neither module retains a class the primitive replaced'
+non_functional: {}
+contracts:
+  - name: 'dashboard-editor'
+    type: behavior
