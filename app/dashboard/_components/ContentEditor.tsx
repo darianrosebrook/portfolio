@@ -2,6 +2,7 @@
 import type { Article, CaseStudy } from '@/types';
 import Button from '@/ui/components/Button';
 import Checkbox from '@/ui/components/Checkbox';
+import { IconButton } from './IconButton';
 import { ConfirmDialog } from './ConfirmDialog';
 import { RelatedContentPicker } from './RelatedContentPicker';
 import { sanitizeCmsHtml } from '@/utils/helpers/sanitizeHtml';
@@ -662,14 +663,11 @@ function ContentEditorSession({
                 <p className={styles.eyebrow}>Document</p>
                 <h2>Properties</h2>
               </div>
-              <button
-                type="button"
-                className={styles.closeProperties}
+              <IconButton
+                icon="close"
+                label="Close properties"
                 onClick={() => setPropertiesOpen(false)}
-                aria-label="Close properties"
-              >
-                ×
-              </button>
+              />
             </div>
             <div className={styles.field}>
               <label className="small" htmlFor="slug">
