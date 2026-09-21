@@ -52,3 +52,11 @@ evidence:
     command: npx vitest run app/dashboard/articles/_components/ArticleFilters.test.tsx test/dashboard/ArticleFilters.test.tsx app/dashboard/_components/ContentCard.test.tsx
     exit_code: 0
     commit_sha: "9aeb570983d53fe14023e938df61e544135af142"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Status chips carry their counts and the active one is aria-current; a chip href preserves the active q and sort (test: q=prime&sort=title -> /dashboard/articles?q=prime&status=draft&sort=title). Runtime on the committed revision at ?q=truth&status=draft&sort=title: active chip \"Drafts 8\", counts All 13 / Drafts 8 / Unpublished changes 2 / Published 5 / Archived 0, and the Drafts chip href preserved q and sort."
+    recorded_at: "2026-09-21T05:35:47.627Z"
+    test_nodeid: "app/dashboard/articles/_components/ArticleFilters.test.tsx > ArticleFilters status chips > keeps the active search and sort when a status chip is followed"
+    command: npx vitest run app/dashboard/articles/_components/ArticleFilters.test.tsx test/dashboard/ArticleFilters.test.tsx app/dashboard/_components/ContentCard.test.tsx
+    exit_code: 0
+    commit_sha: "9aeb570983d53fe14023e938df61e544135af142"
