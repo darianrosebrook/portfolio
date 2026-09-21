@@ -85,3 +85,7 @@ evidence:
     status: pass
     evidence_ref: "test/blueprints/ComponentStandardsLayout.render.test.tsx + FoundationsLayout.render.test.tsx (7 pass); SSG HTML .next/server/app/blueprints/component-standards/select.html contains nav[aria-label=Breadcrumb]; foundations pages render breadcrumbs client-side only (pre-existing PageTransition-null-until-mounted pattern)"
     recorded_at: "2026-09-21T16:54:57.419Z"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "test/blueprints/componentsRegistry.test.ts 7/7 pass; regen with --generated-at 2026-09-21T00:00:00.000Z is byte-identical on re-run (diff -q); 94 entries: 56 Built + 38 carried; Sidebar -> ui/modules/Sidebar"
+    recorded_at: "2026-09-21T16:54:58.281Z"
