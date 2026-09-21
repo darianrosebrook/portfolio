@@ -1,0 +1,38 @@
+id: FIX-PICKER-SEARCH-001
+title: 'Give the related-content search field an accessible name on the Input primitive'
+risk_tier: 2
+mode: fix
+lifecycle_state: draft
+created_at: '2026-09-21T07:13:18.364Z'
+updated_at: '2026-09-21T07:13:18.364Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard editor — related content picker'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/_components/RelatedContentPicker.tsx'
+    - 'app/dashboard/_components/RelatedContentPicker.module.css'
+  out: []
+invariants:
+  - 'The field keeps its placeholder, its id and its search behaviour'
+  - 'The accessible name comes from the markup, not from the placeholder'
+acceptance:
+  - id: A1
+    given: 'the related-content picker'
+    when: 'the search field is inspected'
+    then: 'it exposes an accessible name rather than relying on its placeholder'
+  - id: A2
+    given: 'the field'
+    when: 'two or more characters are typed'
+    then: 'results are still listed and a result can still be added'
+  - id: A3
+    given: 'the field'
+    when: 'it renders'
+    then: 'it is the design system Input and carries no inline style'
+non_functional: {}
+contracts:
+  - name: 'dashboard-search'
+    type: behavior
