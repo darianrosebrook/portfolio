@@ -36,6 +36,12 @@ acceptance:
     given: 'the picker relationship select'
     when: 'it is considered for the Select primitive'
     then: 'it is kept native if that composer is a different control model, with the reason recorded'
+  - id: A4
+    given: 'the filter rule that styles both the input and the select'
+    when: 'the input is on the Input primitive'
+    then: >-
+      the rule no longer names the input, the input computed appearance is unchanged
+      because the primitive supplied it anyway, and the select keeps its styling
 non_functional: {}
 contracts:
   - name: 'dashboard-forms'
