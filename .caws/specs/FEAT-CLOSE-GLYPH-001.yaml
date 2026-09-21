@@ -2,9 +2,10 @@ id: FEAT-CLOSE-GLYPH-001
 title: 'Add the close glyph and put the properties close control on IconButton'
 risk_tier: 2
 mode: feature
-lifecycle_state: draft
+lifecycle_state: active
+worktree: close-glyph-001
 created_at: '2026-09-21T07:39:38.187Z'
-updated_at: '2026-09-21T07:39:38.187Z'
+updated_at: '2026-09-21T07:39:39.386Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
