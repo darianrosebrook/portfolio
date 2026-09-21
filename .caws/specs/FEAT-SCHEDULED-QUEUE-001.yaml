@@ -2,10 +2,11 @@ id: FEAT-SCHEDULED-QUEUE-001
 title: 'Show the scheduled queue on the overview'
 risk_tier: 3
 mode: feature
-lifecycle_state: active
-worktree: sched-queue-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge sched-queue-001 at 725ea3fbfe752f0b4f6a9c8ecb5c5201a02b710a'
 created_at: '2026-09-21T06:12:18.704Z'
-updated_at: '2026-09-21T06:12:32.380Z'
+updated_at: '2026-09-21T06:15:04.059Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
