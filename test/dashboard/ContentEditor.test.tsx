@@ -43,15 +43,27 @@ vi.mock('@/app/dashboard/_components/RelatedContentPicker', () => ({
 vi.mock('@/app/dashboard/_components/ConfirmDialog', () => ({
   ConfirmDialog: ({
     open,
+    title,
+    description,
+    confirmLabel,
     onConfirm,
     onCancel,
   }: {
     open: boolean;
+    title: string;
+    description: React.ReactNode;
+    confirmLabel: string;
     onConfirm: () => void;
     onCancel: () => void;
   }) =>
     open ? (
-      <div role="dialog">
+      // The copy is surfaced so a test can assert what the author is told. The
+      // button labels are unchanged so the existing tests keep working. Note
+      // this file runs on fake timers, so assertions must be synchronous --
+      // findBy*/waitFor never resolve here.
+      <div role="dialog" data-title={title} data-confirm-label={confirmLabel}>
+        <h2>{title}</h2>
+        <div data-testid="dialog-description">{description}</div>
         <button onClick={onConfirm}>Confirm transition</button>
         <button onClick={onCancel}>Cancel transition</button>
       </div>
@@ -337,5 +349,37 @@ describe('existing content draft lifecycle', () => {
     expect(recoveryKey('articles', initial())).not.toBe(
       recoveryKey('articles', initial({ author: 'other' }))
     );
+  });
+});
+
+describe('confirm copy when returning content to draft', () => {
+  it('tells a scheduled item it returns to draft rather than that it disappears', () => {
+    render(
+      <ContentEditor
+        initial={initial({
+          status: 'scheduled' as unknown as Article['status'],
+          published_at: null,
+        })}
+        entity="articles"
+      />
+    );
+
+    fireEvent.click(screen.getByText('Unschedule'));
+
+    const dialog = screen.getByRole('dialog');
+    expect(dialog.getAttribute('data-confirm-label')).toBe('Unschedule');
+    expect(dialog.getAttribute('data-title')).toMatch(/unschedule/i);
+    expect(dialog.textContent).not.toMatch(/disappear from the public site/i);
+    expect(dialog.textContent).toMatch(/schedule is cleared/i);
+  });
+
+  it('keeps the publish-specific copy for a published item', () => {
+    render(<ContentEditor initial={initial()} entity="articles" />);
+
+    fireEvent.click(screen.getByText('Unpublish'));
+
+    const dialog = screen.getByRole('dialog');
+    expect(dialog.getAttribute('data-confirm-label')).toBe('Unpublish');
+    expect(dialog.textContent).toMatch(/disappear from the public site/i);
   });
 });
