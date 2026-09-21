@@ -73,34 +73,8 @@
   margin-block-end: var(--core-spacing-size-06);
 }
 
-.backButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  inline-size: 36px;
-  block-size: 36px;
-  padding: 0;
-  background: transparent;
-  border: 1px solid var(--semantic-color-border-subtle);
-  border-radius: var(--core-shape-radius-02);
-  color: var(--semantic-color-foreground-secondary);
-  cursor: pointer;
-  transition:
-    background var(--core-motion-duration-short) var(--core-motion-easing-standard),
-    border-color var(--core-motion-duration-short) var(--core-motion-easing-standard),
-    color var(--core-motion-duration-short) var(--core-motion-easing-standard);
-}
 
-.backButton:hover {
-  background: var(--semantic-color-background-secondary);
-  border-color: var(--semantic-color-border-default);
-  color: var(--semantic-color-foreground-primary);
-}
 
-.backButton:focus-visible {
-  outline: 2px solid var(--semantic-color-border-accent);
-  outline-offset: var(--semantic-interaction-focus-ring-offset, 2px);
-}
 
 /*
  * Scoped two levels deep deliberately: globals.scss styles bare h1/h2 (h1 gets
