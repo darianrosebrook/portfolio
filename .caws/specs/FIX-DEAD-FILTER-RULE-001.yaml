@@ -2,9 +2,10 @@ id: FIX-DEAD-FILTER-RULE-001
 title: 'Remove the filter rule whose select matches nothing'
 risk_tier: 3
 mode: fix
-lifecycle_state: draft
+lifecycle_state: active
+worktree: dead-filter-rule-001
 created_at: '2026-09-21T07:29:57.377Z'
-updated_at: '2026-09-21T07:29:57.377Z'
+updated_at: '2026-09-21T07:29:58.588Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
