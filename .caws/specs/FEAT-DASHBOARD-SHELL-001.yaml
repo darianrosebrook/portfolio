@@ -65,3 +65,9 @@ evidence:
     command: npx vitest run app/_components/PublicChrome.test.tsx app/dashboard/_components/WorkspaceRail.test.tsx
     exit_code: 0
     commit_sha: e2bf37030b05faa9371f827ca77659c4d6f64924
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "Runtime measurement of document.documentElement.scrollWidth vs window.innerWidth in the browser on the worktree build: /dashboard 1009<=1024 and 390<=390; /dashboard/articles 1009<=1024 and 390<=390; /dashboard/case-studies 1009<=1024 and 390<=390; the article editor (document contains a table) 1009<=1024 and 390<=390. The rail switches to a horizontal strip at 390 and does not overflow. This is a runtime observation, not a committed test: the dashboard needs an authenticated session, so no e2e harness exists."
+    recorded_at: "2026-09-21T05:11:48.239Z"
+    command: npx next dev --webpack -p 3100 (worktree) + browser measurement across 4 routes x 2 viewports
+    commit_sha: e2bf37030b05faa9371f827ca77659c4d6f64924
