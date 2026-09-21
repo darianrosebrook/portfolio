@@ -338,7 +338,7 @@ export const FloatingBlockMenu: React.FC<FloatingBlockMenuProps> = ({
             e.currentTarget.style.background =
               'var(--semantic-color-background-secondary)';
             e.currentTarget.style.color =
-              'var(--semantic-color-foreground-destructive)';
+              'var(--semantic-color-foreground-danger)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = 'transparent';
