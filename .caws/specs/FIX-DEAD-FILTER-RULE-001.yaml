@@ -34,3 +34,10 @@ acceptance:
     then: 'they are clean'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Computed styles on the search field are identical before and after, measured at the same 768x1400 viewport on both builds: padding-inline 12px, padding-block 0px, background rgb(0,0,0), border 1px solid rgb(85,85,85), radius 8px, min-width 0px, colour rgb(250,250,250), font-family Inter fallback chain, font-size 18px, and the rendered box 316x48. The differing-properties list is empty and the rect is unchanged, so removing the rule is appearance-neutral: every declaration it carried is supplied by the Input primitive tokens or by the global reset and input/textarea rules."
+    recorded_at: "2026-09-21T07:31:43.655Z"
+    command: "browser: read the field computed styles on the pre-change and post-change builds at the same viewport"
+    commit_sha: d9f6a712654474f61402f8cc03d35066e8167b5a
