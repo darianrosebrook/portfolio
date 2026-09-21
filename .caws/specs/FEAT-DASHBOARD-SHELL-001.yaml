@@ -5,7 +5,7 @@ mode: refactor
 lifecycle_state: active
 worktree: dash-shell-001
 created_at: '2026-09-21T05:06:06.460Z'
-updated_at: '2026-09-21T05:06:07.574Z'
+updated_at: '2026-09-21T05:06:29.426Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
@@ -25,6 +25,7 @@ scope:
     - 'app/dashboard/_components/WorkspaceRail.test.tsx'
     - 'app/dashboard/_components/DashboardNav.tsx'
     - 'app/dashboard/page.module.css'
+    - app/dashboard/_components/DashboardShell.module.css
   out: []
 invariants:
   - 'Public routes keep the marketing navbar and footer unchanged'
