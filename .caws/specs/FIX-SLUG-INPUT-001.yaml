@@ -2,11 +2,9 @@ id: FIX-SLUG-INPUT-001
 title: 'Keep author-typed hyphens in the dashboard slug field'
 risk_tier: 2
 mode: fix
-lifecycle_state: closed
-resolution: completed
-closure_notes: 'Auto-closed by caws worktree merge fix-slug-input-001 at d794c6911b56defbc328fdc3f3f868303f4016a5'
+lifecycle_state: active
 created_at: '2026-09-21T03:35:08.097Z'
-updated_at: '2026-09-21T03:45:31.779Z'
+updated_at: '2026-09-21T03:45:47.054Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
