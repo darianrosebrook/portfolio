@@ -29,3 +29,10 @@ acceptance:
     then: 'the fetch is re-attempted and the alert remains, with no navigation away'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Reached by visiting /dashboard/case-studies/no-such-case-study-probe on the worktree build: the alert rendered and the retry control reports class \"button medium secondary\" with no style attribute, padding 4px 12px, radius 8px, background rgb(33,33,33) and a 1px rgb(123,0,0) border — the same secondary styling as the other converted retry controls. Before the change it was a bare <button> with no class, so this is the one error-state control that was completely unstyled."
+    recorded_at: "2026-09-21T07:39:11.746Z"
+    command: "browser: load a non-existent case study slug and inspect the retry control"
+    commit_sha: "5a8091b2aceee6329393a50b4e937d10807726b8"
