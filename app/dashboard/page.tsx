@@ -64,6 +64,15 @@ export default async function DashboardPage() {
     ),
     {}
   ).slice(0, 5);
+  // Queued work is its own question: scheduled items are not drafts waiting on
+  // the author, they are waiting on the clock. Soonest first.
+  const scheduledQueue = available
+    .filter((item) => item.status === 'scheduled')
+    .slice()
+    .sort(
+      (a, b) =>
+        Date.parse(a.scheduled_at ?? '') - Date.parse(b.scheduled_at ?? '')
+    );
 
   return (
     <>
@@ -195,6 +204,39 @@ export default async function DashboardPage() {
           </p>
         ) : null}
       </section>
+
+      {scheduledQueue.length > 0 && (
+        <section aria-labelledby="scheduled-queue">
+          <div>
+            <h2 id="scheduled-queue">Scheduled</h2>
+            <p className={styles.muted}>
+              Queued to publish on their own, soonest first.
+            </p>
+          </div>
+          <ul className={styles.contentList}>
+            {scheduledQueue.map((item) => (
+              <li key={`${item.kind}:${item.id}`} className={styles.contentRow}>
+                <div>
+                  <h3 className={styles.contentTitle}>
+                    <Link href={item.editHref}>
+                      {item.headline || item.slug}
+                    </Link>
+                  </h3>
+                  <p className={styles.itemMeta}>
+                    <span>{kindLabel(item.kind)}</span>
+                    <span>
+                      {item.scheduled_at
+                        ? `Publishes ${formatLibraryDate(item.scheduled_at)}`
+                        : 'No publish time set'}
+                    </span>
+                  </p>
+                </div>
+                <Link href={item.editHref}>Open</Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section aria-labelledby="recent-activity">
         <div>
