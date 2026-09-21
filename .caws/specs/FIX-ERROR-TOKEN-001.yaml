@@ -53,3 +53,9 @@ evidence:
     command: "grep -rc \"foreground-destructive\" app/dashboard --include=*.css; grep -oE \"--semantic-color-foreground-danger[a-z-]*: [^;]+\" app/designTokens.scss"
     exit_code: 0
     commit_sha: "04e600ff716d6c15c274dd877b98cbec2c9a692b"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Runtime on the worktree build: --semantic-color-foreground-danger resolved to #ea6465 on the rendered page (dark theme; #d9292b is the light definition). Negative control in the same page: a probe element coloured with the token the modules used before resolved to rgb(250, 250, 250) — the inherited text colour — confirming that reference produced no colour of its own and the declaration was invalid. Gap: the specific publish-error element was not measured, because the run showed it cannot be reached from the UI (see A3 note and the commit)."
+    recorded_at: "2026-09-21T07:03:15.496Z"
+    command: "browser: resolve both tokens via getComputedStyle on the rendered dashboard"
+    commit_sha: "04e600ff716d6c15c274dd877b98cbec2c9a692b"
