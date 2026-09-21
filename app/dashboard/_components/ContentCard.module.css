@@ -1,15 +1,25 @@
+/*
+ * Stacked content card: cover on top, body beneath, actions in a footer row.
+ * This is the shape the library grids use; it reads as a card at any column
+ * width, where the earlier thumbnail-left row only worked full width.
+ */
 .card {
   display: grid;
-  grid-template-columns: 4.5rem minmax(0, 1fr) auto;
-  gap: var(--core-spacing-size-05);
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: var(--core-spacing-size-04);
   padding: var(--core-spacing-size-05);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-subtle);
-  border-radius: var(--semantic-shape-control-radius-default, var(--core-shape-radius-03));
+  border-radius: var(
+    --semantic-shape-control-radius-default,
+    var(--core-shape-radius-03)
+  );
   transition:
-    border-color var(--core-motion-duration-short) var(--core-motion-easing-standard),
-    background var(--core-motion-duration-short) var(--core-motion-easing-standard);
+    border-color var(--core-motion-duration-short)
+      var(--core-motion-easing-standard),
+    background var(--core-motion-duration-short)
+      var(--core-motion-easing-standard);
 }
 
 .card:hover {
@@ -21,8 +31,8 @@
 
 .cover {
   display: block;
-  inline-size: 4.5rem;
-  block-size: 3.375rem;
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: var(--core-shape-radius-02);
   background: var(--semantic-color-background-secondary);
@@ -40,9 +50,9 @@
   inline-size: 100%;
   block-size: 100%;
   color: var(--semantic-color-foreground-secondary);
-  font-size: var(--semantic-typography-heading-04);
+  font-size: var(--semantic-typography-heading-02);
   font-weight: var(--semantic-typography-font-weight-medium);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 }
 
 .fallback[data-section='Artificial Intelligence'] {
@@ -61,8 +71,9 @@
 .head {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--core-spacing-size-04);
+  gap: var(--core-spacing-size-03);
   align-items: center;
+  justify-content: space-between;
 }
 
 .title {
@@ -84,6 +95,10 @@
   margin: 0;
   color: var(--semantic-color-foreground-secondary);
   font-size: var(--semantic-typography-body-03);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .meta {
@@ -115,23 +130,9 @@
   display: flex;
   gap: var(--core-spacing-size-02);
   align-items: center;
+  justify-content: flex-end;
 }
 
 .card:focus-within {
   border-color: var(--semantic-color-border-accent);
-}
-
-@media (width <= 40rem) {
-  .card {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .cover {
-    inline-size: 100%;
-    block-size: 6rem;
-  }
-
-  .actions {
-    justify-content: flex-end;
-  }
 }
