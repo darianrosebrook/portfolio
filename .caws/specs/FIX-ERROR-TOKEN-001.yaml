@@ -45,3 +45,11 @@ acceptance:
     then: 'the total drops from 7 to 1, the remainder being the deliberate cover Image style'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "grep for foreground-destructive returns nothing under app/dashboard in any .css file (three modules were converted). The replacement token is defined: --semantic-color-foreground-danger appears in app/designTokens.scss as #d9292b (light) and #ea6465 (dark). One reference to the undefined token remains in the repository outside this slice and outside the dashboard: ui/modules/Tiptap/FloatingBlockMenu.tsx."
+    recorded_at: "2026-09-21T07:03:14.928Z"
+    command: "grep -rc \"foreground-destructive\" app/dashboard --include=*.css; grep -oE \"--semantic-color-foreground-danger[a-z-]*: [^;]+\" app/designTokens.scss"
+    exit_code: 0
+    commit_sha: "04e600ff716d6c15c274dd877b98cbec2c9a692b"
