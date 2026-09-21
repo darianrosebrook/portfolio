@@ -1,0 +1,24 @@
+/*
+ * Two-column workspace: persistent rail beside the content. `minmax(0, 1fr)`
+ * on the content column is what keeps a wide child (a table, a long slug) from
+ * pushing the grid past the viewport.
+ */
+.body {
+  display: grid;
+  grid-template-columns: 14rem minmax(0, 1fr);
+  gap: var(--core-spacing-size-07);
+  align-items: start;
+}
+
+.main {
+  display: grid;
+  gap: var(--core-spacing-size-07);
+  min-width: 0;
+}
+
+@media (width <= 60rem) {
+  .body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--core-spacing-size-06);
+  }
+}

@@ -1,0 +1,84 @@
+.rail {
+  position: sticky;
+  top: var(--core-spacing-size-06);
+  display: grid;
+  gap: var(--core-spacing-size-04);
+}
+
+.label {
+  margin: 0;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-caption-01);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.list {
+  display: grid;
+  gap: var(--core-spacing-size-02);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: block;
+  padding: var(--core-spacing-size-03) var(--core-spacing-size-04);
+  border-inline-start: 2px solid transparent;
+  border-radius: var(--core-shape-radius-02);
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-03);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  text-decoration: none;
+  transition:
+    background var(--core-motion-duration-short) var(--core-motion-easing-standard),
+    color var(--core-motion-duration-short) var(--core-motion-easing-standard);
+}
+
+.link:hover {
+  background: var(--semantic-color-background-secondary);
+  color: var(--semantic-color-foreground-primary);
+}
+
+.link[data-active='true'] {
+  background: var(--semantic-color-background-secondary);
+  border-inline-start-color: var(--semantic-color-border-accent);
+  color: var(--semantic-color-foreground-primary);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--semantic-color-border-accent);
+  outline-offset: var(--semantic-interaction-focus-ring-offset, 2px);
+}
+
+/* Narrow screens: the rail becomes a horizontal strip above the content so the
+   workspace still reads as navigation without a drawer or hidden menu. */
+@media (width <= 60rem) {
+  .rail {
+    position: static;
+  }
+
+  .label {
+    display: none;
+  }
+
+  .list {
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: var(--core-spacing-size-03);
+    overflow-x: auto;
+    padding-block-end: var(--core-spacing-size-02);
+  }
+
+  .link {
+    border-inline-start: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+
+  .link[data-active='true'] {
+    border-inline-start-color: transparent;
+    border-bottom-color: var(--semantic-color-border-accent);
+  }
+}

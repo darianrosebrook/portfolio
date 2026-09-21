@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--core-spacing-size-04);
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--core-spacing-size-04);
+  border-bottom: 1px solid var(--semantic-color-border-subtle);
+}
+
+.brand {
+  display: inline-flex;
+  gap: var(--core-spacing-size-03);
+  align-items: center;
+  color: var(--semantic-color-foreground-primary);
+  font-size: var(--semantic-typography-body-03);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  text-decoration: none;
+}
+
+.mark {
+  inline-size: 0.6rem;
+  block-size: 0.6rem;
+  border-radius: var(--core-shape-radius-full);
+  background: var(--semantic-color-background-accent);
+}
+
+.viewSite {
+  display: inline-flex;
+  gap: var(--core-spacing-size-02);
+  align-items: center;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-03);
+  text-decoration: none;
+}
+
+.viewSite:hover {
+  color: var(--semantic-color-foreground-primary);
+}
+
+.brand:focus-visible,
+.viewSite:focus-visible {
+  outline: 2px solid var(--semantic-color-border-accent);
+  outline-offset: var(--semantic-interaction-focus-ring-offset, 2px);
+  border-radius: var(--core-shape-radius-02);
+}
