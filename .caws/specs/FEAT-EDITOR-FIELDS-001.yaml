@@ -37,3 +37,10 @@ non_functional: {}
 contracts:
   - name: 'dashboard-editor'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Runtime on the worktree build: all seven ids (slug, headline, image, articleSection, keywords, published_at, scheduled_at) report data-ds-component \"Input\", each with its label association intact — the measured label texts are Slug, Headline, Image, Section, Keywords (comma-separated), Published at and Schedule for. No style attribute on any field."
+    recorded_at: "2026-09-21T14:53:56.087Z"
+    command: "browser: inspect all seven fields on the worktree build"
+    commit_sha: "06ecea17b572fa0e8df201168b50ab7c43cdfccb"
