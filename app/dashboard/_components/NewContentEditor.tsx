@@ -24,6 +24,7 @@ import { SaveStatus } from '../articles/new/components/SaveStatus';
 import { useAutoSave } from '../articles/new/hooks/useAutoSave';
 import { useMetadataExtraction } from '../articles/new/hooks/useMetadataExtraction';
 import { RelatedContentPicker } from './RelatedContentPicker';
+import styles from './NewContentEditor.module.css';
 
 type Entity = 'articles' | 'case-studies';
 
@@ -477,10 +478,7 @@ function CreationSession({
       backLabel={entity === 'articles' ? 'Articles' : 'Case Studies'}
       sidebar={
         <>
-          <fieldset
-            disabled={busy}
-            style={{ border: 0, padding: 0, margin: 0 }}
-          >
+          <fieldset disabled={busy} className={styles.categoryFieldset}>
             <ArticleMetadataForm
               article={article}
               onChange={updateArticle}

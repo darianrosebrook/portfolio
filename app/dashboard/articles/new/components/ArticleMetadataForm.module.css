@@ -92,3 +92,9 @@
     font-weight: 500;
   }
 }
+
+.actionsRow {
+  display: flex;
+  gap: var(--core-spacing-size-04);
+  margin-block-end: var(--core-spacing-size-07);
+}

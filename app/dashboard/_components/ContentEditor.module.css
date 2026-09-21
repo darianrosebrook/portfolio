@@ -34,6 +34,9 @@
 }
 
 .commandActions {
+  border: 0;
+  margin: 0;
+  padding: 0;
   flex-wrap: wrap;
   justify-content: flex-end;
 }
@@ -68,7 +71,7 @@
 }
 
 .saveState[data-status='error'] {
-  color: var(--semantic-color-foreground-destructive);
+  color: var(--semantic-color-foreground-danger);
 }
 
 .workspace {
@@ -194,4 +197,9 @@
   .wordCount {
     display: none;
   }
+}
+
+/* Warning shown when a rename would change the public URL. */
+.renameWarning {
+  color: var(--semantic-color-foreground-warning, #92400e);
 }

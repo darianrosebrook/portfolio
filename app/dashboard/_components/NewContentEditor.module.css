@@ -1,0 +1,10 @@
+/*
+ * The category selector is a fieldset used only for grouping; the reset lives
+ * here rather than in an inline style.
+ */
+
+.categoryFieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
