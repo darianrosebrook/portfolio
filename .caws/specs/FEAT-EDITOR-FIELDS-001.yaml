@@ -50,3 +50,10 @@ evidence:
     recorded_at: "2026-09-21T14:53:56.618Z"
     command: "browser: type into the slug field and read the value"
     commit_sha: "06ecea17b572fa0e8df201168b50ab7c43cdfccb"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "Both builds measured at the same 768x1400 viewport: before, five fields at 540x37 and the two datetime fields at 540x39 with 4px 8px padding and min-height auto; after, all seven at 540x48 with the primitive height token. Document scrollWidth 753 against a 768 viewport, so no horizontal overflow. Full suite 2072 passed with 13 expected failures and 2 skips, exit 0."
+    recorded_at: "2026-09-21T14:53:57.083Z"
+    command: "browser: measure the fields on both builds; npm test"
+    exit_code: 0
+    commit_sha: "06ecea17b572fa0e8df201168b50ab7c43cdfccb"
