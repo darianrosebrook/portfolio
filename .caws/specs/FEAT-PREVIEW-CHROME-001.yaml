@@ -26,7 +26,11 @@ acceptance:
   - id: A1
     given: 'the preview overlay open and the action row visible'
     when: 'they render'
-    then: 'the elements these two components render directly carry no inline style attribute'
+    then: >-
+      every element these two components render directly carries no inline style
+      attribute, with one deliberate exception: the cover Image keeps its style
+      prop, because that component forwards style to its inner img but className to
+      its container, so a class would move the sizing onto the wrong element
   - id: A2
     given: 'the dashboard before and after'
     when: 'inline style objects are counted'
