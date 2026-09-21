@@ -2,10 +2,11 @@ id: FEAT-EDITOR-CHROME-001
 title: 'Move the editor chrome off inline styles onto token classes'
 risk_tier: 3
 mode: refactor
-lifecycle_state: active
-worktree: editor-chrome-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge editor-chrome-001 at 8fba2014324abfb52c25ac63c2d5c2cf0810d689'
 created_at: '2026-09-21T06:43:34.925Z'
-updated_at: '2026-09-21T06:43:36.024Z'
+updated_at: '2026-09-21T06:47:49.599Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
