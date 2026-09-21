@@ -38,3 +38,9 @@ evidence:
     command: node scripts/check-css-module-usage.mjs
     exit_code: 0
     commit_sha: "295171ff0b80bdba3de33eed7e3f2f02b9d99aef"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Positive control: appending an unreferenced .probeOrphanClass to a covered module (SaveStatus) made the checker print \"DEAD app/dashboard/articles/new/components/SaveStatus.module.css — 4 classes, 1 unreferenced\" followed by the class name, and exit 1. The injection was reverted in the same command and the re-run returned \"0 unreferenced class(es) across 19 modules\" with exit 0; git status afterwards showed only the checker modified, so no probe code is committed. So the coverage detects what it claims rather than merely naming the files."
+    recorded_at: "2026-09-21T07:05:04.458Z"
+    command: "inject an orphan class into a covered module, run the checker, revert, re-run"
+    commit_sha: "295171ff0b80bdba3de33eed7e3f2f02b9d99aef"
