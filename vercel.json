@@ -1,3 +1,9 @@
 {
-  "installCommand": "printf '//npm.fontawesome.com/:_authToken=%s\\n//registry.tiptap.dev/:_authToken=%s\\n' \"$FONTAWESOME_PACKAGE_TOKEN\" \"$TIPTAP_PRO_PACKAGE_TOKEN\" > \"$HOME/.npmrc\" && npx --yes pnpm@11.20.0 install --frozen-lockfile"
+  "installCommand": "printf '//npm.fontawesome.com/:_authToken=%s\\n//registry.tiptap.dev/:_authToken=%s\\n' \"$FONTAWESOME_PACKAGE_TOKEN\" \"$TIPTAP_PRO_PACKAGE_TOKEN\" > \"$HOME/.npmrc\" && npx --yes pnpm@11.20.0 install --frozen-lockfile",
+  "crons": [
+    {
+      "path": "/api/cron/publish-scheduled",
+      "schedule": "*/5 * * * *"
+    }
+  ]
 }
