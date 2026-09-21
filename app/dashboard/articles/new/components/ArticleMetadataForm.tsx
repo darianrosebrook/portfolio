@@ -1,7 +1,7 @@
 'use client';
 
 import type { Article } from '@/types';
-import { slugify } from '@/utils/slugify';
+import { slugify, slugifyInput } from '@/utils/slugify';
 import styles from './ArticleMetadataForm.module.css';
 import { EditorActions } from './EditorActions';
 
@@ -36,7 +36,14 @@ export function ArticleMetadataForm({
   isSaving = false,
 }: ArticleMetadataFormProps) {
   const handleSlugChange = (value: string) => {
-    onChange({ slug: slugify(value) });
+    // slugifyInput keeps one trailing hyphen so the next typed character can
+    // join it; slugify() would trim it mid-word and concatenate the words.
+    onChange({ slug: slugifyInput(value) });
+  };
+
+  const handleSlugBlur = () => {
+    const normalized = slugify(article.slug || '');
+    if (normalized !== (article.slug || '')) onChange({ slug: normalized });
   };
 
   const handleHeadlineChange = (value: string) => {
@@ -136,6 +143,7 @@ export function ArticleMetadataForm({
             type="text"
             value={article.slug || ''}
             onChange={(e) => handleSlugChange(e.target.value)}
+            onBlur={handleSlugBlur}
             placeholder="article-slug"
             className={`${styles.input} ${styles.monospace}`}
           />
