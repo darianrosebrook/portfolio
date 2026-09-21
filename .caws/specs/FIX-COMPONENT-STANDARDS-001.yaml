@@ -101,3 +101,7 @@ evidence:
     status: pass
     evidence_ref: "extractProps.test.ts: Toast end-to-end contains politeness; TextField end-to-end contains label/description/error + inherited invalid; SSG sidebar.html API table renders sections | SidebarSection[] | Yes (was empty before the registry path fix)"
     recorded_at: "2026-09-21T16:55:20.840Z"
+  - criterion_id: A6
+    status: pass
+    evidence_ref: "extractProps.test.ts pins Field -> [] (inline destructured type) and Button -> ButtonBaseProps subset without as/href union-arm members"
+    recorded_at: "2026-09-21T16:55:21.550Z"
