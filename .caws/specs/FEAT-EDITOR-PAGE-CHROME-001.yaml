@@ -2,9 +2,10 @@ id: FEAT-EDITOR-PAGE-CHROME-001
 title: 'Move the article editor page shell off inline styles'
 risk_tier: 3
 mode: refactor
-lifecycle_state: draft
+lifecycle_state: active
+worktree: editor-page-001
 created_at: '2026-09-21T06:48:18.073Z'
-updated_at: '2026-09-21T06:48:18.073Z'
+updated_at: '2026-09-21T06:48:19.203Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
