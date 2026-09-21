@@ -241,7 +241,7 @@ describe('dashboard server content pages with a mocked database boundary', () =>
       articles.getByRole('link', { name: /^2\s*Published$/ })
     ).toHaveAttribute('href', '/dashboard/articles?status=published');
     const resume = within(
-      screen.getByRole('region', { name: 'Continue writing' })
+      screen.getByRole('region', { name: 'Needs attention' })
     );
     expect(
       resume
@@ -262,6 +262,16 @@ describe('dashboard server content pages with a mocked database boundary', () =>
     ).toHaveAttribute('href', '/dashboard/case-studies/case-one');
     expect(
       resume.queryByText('Clean published article')
+    ).not.toBeInTheDocument();
+    // Recent activity answers the other question: what is live. It must carry
+    // clean published work and neither drafts nor items with working edits.
+    const activity = within(
+      screen.getByRole('region', { name: 'Recent activity' })
+    );
+    expect(activity.getByText('Clean published article')).toBeInTheDocument();
+    expect(activity.queryByText('Saved article draft')).not.toBeInTheDocument();
+    expect(
+      activity.queryByText('Latest article revision')
     ).not.toBeInTheDocument();
     expect(mocks.scopes).toEqual([
       ['articles', 'author', 'current-author'],

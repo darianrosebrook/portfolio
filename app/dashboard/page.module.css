@@ -53,15 +53,6 @@
   min-width: 0;
 }
 
-.pageHeader {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--core-spacing-size-05);
-  justify-content: space-between;
-  align-items: center;
-}
-
-.pageHeader h1,
 .workspace h2,
 .libraryCard p {
   margin: 0;
@@ -86,7 +77,20 @@
   gap: var(--core-spacing-size-06);
 }
 
-.libraryCard,
+.libraryCard {
+  display: grid;
+  gap: var(--core-spacing-size-04);
+  align-content: start;
+  padding: var(--core-spacing-size-05);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--core-shape-radius-medium);
+}
+
+.libraryCard h2 {
+  font-size: var(--semantic-typography-heading-04);
+}
+
 .notice {
   display: grid;
   gap: var(--core-spacing-size-05);
@@ -99,18 +103,24 @@
 .libraryCounts {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--core-spacing-size-06);
+  gap: var(--core-spacing-size-05);
 }
 
 .libraryCounts a {
   display: grid;
-  gap: var(--core-spacing-size-02);
+  gap: var(--core-spacing-size-01);
   color: var(--semantic-color-foreground-primary);
   text-decoration: none;
 }
 
 .libraryCounts strong {
-  font-size: var(--semantic-typography-heading-02);
+  font-size: var(--semantic-typography-heading-03);
+  line-height: 1;
+}
+
+.libraryCounts span {
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-caption-01);
 }
 
 .libraryCounts a:hover span {
