@@ -26,6 +26,18 @@ const TARGETS = [
   'app/dashboard/_components/DashboardShell.module.css',
   'app/dashboard/_components/WorkspaceRail.module.css',
   'app/dashboard/_components/DashboardHeader.module.css',
+  // Added when the editor chrome, the article editor page and the profile page
+  // moved off inline styles: a module the list does not name is a module whose
+  // orphaned rules nothing will catch. ArticleMetadataForm was already missing.
+  'app/dashboard/_components/ContentEditor.module.css',
+  'app/dashboard/_components/NewContentEditor.module.css',
+  'app/dashboard/articles/[slug]/page.module.css',
+  'app/dashboard/articles/new/components/ArticleMetadataForm.module.css',
+  'app/dashboard/articles/new/components/ArticlePreview.module.css',
+  'app/dashboard/articles/new/components/EditorActions.module.css',
+  'app/dashboard/articles/new/components/EditorLayout.module.css',
+  'app/dashboard/articles/new/components/SaveStatus.module.css',
+  'app/dashboard/profile/page.module.css',
 ];
 
 /** Every .tsx/.ts under the searched directories. */
