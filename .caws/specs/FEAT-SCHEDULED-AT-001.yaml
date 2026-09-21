@@ -2,10 +2,11 @@ id: FEAT-SCHEDULED-AT-001
 title: 'Author the scheduled_at migration that publish scheduling needs'
 risk_tier: 2
 mode: feature
-lifecycle_state: active
-worktree: sched-at-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge sched-at-001 at ba8624c8d9965267e0fd240f129dc96deab68189'
 created_at: '2026-09-21T06:02:26.650Z'
-updated_at: '2026-09-21T06:02:28.564Z'
+updated_at: '2026-09-21T06:04:35.517Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
