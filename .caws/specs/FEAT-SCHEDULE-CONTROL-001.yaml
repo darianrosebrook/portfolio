@@ -2,9 +2,10 @@ id: FEAT-SCHEDULE-CONTROL-001
 title: 'Let the editor schedule an item for a moment'
 risk_tier: 2
 mode: feature
-lifecycle_state: draft
+lifecycle_state: active
+worktree: sched-control-001
 created_at: '2026-09-21T06:37:56.913Z'
-updated_at: '2026-09-21T06:37:56.913Z'
+updated_at: '2026-09-21T06:37:57.985Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
