@@ -37,3 +37,10 @@ acceptance:
     then: 'the total drops from 41 to 26 because these two components account for fifteen of them'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Runtime on the worktree build at /dashboard/articles/new (viewport 768): the toolbar reported 0 inline styles among its own children; the back link and the metadata toggle each reported no style attribute; the save status reported 0 inline styles and still rendered \"Not saved\" with data-status idle. The shell as a whole still contains inline styles, but every one belongs to a component this slice does not own: 15 from the shared ui/components/Button icon spans, 3 from unclassed wrappers (EditorActions and friends), and 1 from the Tiptap drag handle — all named so the boundary is explicit rather than implied."
+    recorded_at: "2026-09-21T06:47:48.165Z"
+    command: "browser: load /dashboard/articles/new and inspect the chrome elements for style attributes"
+    commit_sha: ba031ce7142e0eb9ab66e3003e44f09d05324903
