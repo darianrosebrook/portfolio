@@ -6,6 +6,7 @@ import type {
   LibrarySort,
 } from '@/utils/editor/contentLibrary';
 import styles from '../../page.module.css';
+import Button from '@/ui/components/Button';
 
 interface ArticleFiltersProps {
   counts: LibraryCounts;
@@ -106,9 +107,9 @@ export function ArticleFilters({
                 placeholder="Title, description, or slug"
               />
             </label>
-            <button type="submit" className={styles.applyButton}>
+            <Button type="submit" variant="secondary">
               Search
-            </button>
+            </Button>
           </span>
 
           <div className={styles.sortLinks} aria-label="Sort by">

@@ -54,9 +54,9 @@ export default async function CaseStudiesPage({
         <div role="alert" className={styles.notice}>
           <p>Your case studies could not be loaded. Please try again.</p>
           <form action="/dashboard/case-studies" method="get">
-            <button type="submit" className={styles.applyButton}>
+            <Button type="submit" variant="secondary">
               Retry loading case studies
-            </button>
+            </Button>
           </form>
         </div>
       ) : (

@@ -46,9 +46,9 @@ export default async function ArticlesPage({
         <div role="alert" className={dashboardStyles.notice}>
           <p>Your articles could not be loaded. Please try again.</p>
           <form action="/dashboard/articles" method="get">
-            <button type="submit" className={dashboardStyles.applyButton}>
+            <Button type="submit" variant="secondary">
               Retry loading articles
-            </button>
+            </Button>
           </form>
         </div>
       ) : (

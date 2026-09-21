@@ -111,9 +111,9 @@ export default async function DashboardPage() {
                 <div role="alert">
                   <p>{title} could not be loaded.</p>
                   <form action="/dashboard" method="get">
-                    <button type="submit" className={styles.applyButton}>
+                    <Button type="submit" variant="secondary">
                       Retry loading dashboard
-                    </button>
+                    </Button>
                   </form>
                 </div>
               ) : (
