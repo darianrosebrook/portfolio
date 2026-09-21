@@ -42,3 +42,10 @@ non_functional: {}
 contracts:
   - name: 'dashboard-search'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Runtime on the worktree build: from /dashboard/articles?status=draft the form carried hidden status=draft, and activating the control (a Button rendered as type=submit) navigated to /dashboard/articles?status=draft&q=prime — the non-default filter rides along and the query is added. The default view submits as /dashboard/articles?q=prime, which is also what the pre-change build did, so the hidden-input behaviour is unchanged: those inputs render only for non-default filters."
+    recorded_at: "2026-09-21T07:08:58.564Z"
+    command: "browser: submit the filter form with and without a non-default filter and read the resulting URL"
+    commit_sha: "2ffbc1634f294c1ace7a28d0d6b1ea529606ca75"
