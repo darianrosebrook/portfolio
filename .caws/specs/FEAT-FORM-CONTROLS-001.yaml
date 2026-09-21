@@ -22,7 +22,8 @@ invariants:
   - 'A control moves only when the primitive preserves its behaviour and accessibility; a native element is kept where the design-system equivalent is a different control model'
   - 'A field keeps its accessible name and its save/publish payload semantics'
   - 'A field that moves onto the Input primitive stops being styled by its module: the primitive own class outranks the module descendant selector, so the module declarations for that element are dead and are removed, while the native select keeps its rule'
-  - 'The global input, textarea rule in globals.scss supplies width 100 percent, a 30em max-width, the tap-target min-height, padding, background, border and radius to every dashboard input; the primitives are what supersede it, not the modules'
+  - 'Measured: a field on the Input primitive is governed by the primitive own tokens (padding-inline 12px, padding-block 0, height 48px, radius 8px, width 100 percent), which override globals.scss input, textarea; what persists from that global rule on such a field is max-width 30em, computed 540px, and min-height computes to auto'
+  - 'A raw input that has not moved onto the primitive still receives the global input, textarea rule in full, which is what ArticleMetadataForm 33 !important declarations exist to fight'
 acceptance:
   - id: A1
     given: 'the seven inputs in ContentEditor'
