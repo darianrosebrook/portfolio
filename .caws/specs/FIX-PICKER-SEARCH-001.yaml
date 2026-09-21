@@ -39,3 +39,10 @@ non_functional: {}
 contracts:
   - name: 'dashboard-search'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Runtime after the swap: the field still reports input.labels[0].textContent \"Related content\" and the labels for attribute still equals the field id (related-search-article), so the accessible name it already had is preserved. Recorded as preservation, not as a fix: inspecting the pre-change build showed the same explicit label, so the gap this slice was opened for did not exist."
+    recorded_at: "2026-09-21T07:15:41.107Z"
+    command: "browser: read the field label association before and after the swap"
+    commit_sha: "5903b9f2c0c22a6ec014f4fba7b5c69cb9c1c713"
