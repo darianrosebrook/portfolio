@@ -40,3 +40,12 @@ non_functional: {}
 contracts:
   - name: 'publish-date-preservation'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "updateArticleSchema now carries published_at: the test asserts the parsed output equals the sent timestamp, and it failed before the change with \"expected undefined to be 2026-05-18T08:37:00.000Z\". Runtime control on the same slim publish PUT: the unfixed build stored 2026-09-21T04:33:03.229+00:00 (clobbered, +126 days) while the fixed build stored the requested 2026-05-18T08:37:00+00:00."
+    recorded_at: "2026-09-21T04:33:59.419Z"
+    test_nodeid: "test/utils/schemas/publish-payload-repro.test.ts > updateArticleSchema — published_at survives parsing > keeps the date the editor sent"
+    command: npx vitest run test/utils/schemas/publish-payload-repro.test.ts test/utils/schemas/case-study.schema.test.ts test/utils/schemas/article.schema.test.ts
+    exit_code: 0
+    commit_sha: b369144e5803cb996b3146486f53f01c0fe810cd
