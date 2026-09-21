@@ -1,0 +1,39 @@
+id: FEAT-ICON-BACK-001
+title: 'Add the missing arrow glyph and put the editor back control on IconButton'
+risk_tier: 2
+mode: feature
+lifecycle_state: draft
+created_at: '2026-09-21T07:19:03.098Z'
+updated_at: '2026-09-21T07:19:03.098Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard icon set and article editor chrome'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/_components/Icon.tsx'
+    - 'app/dashboard/articles/[slug]/page.tsx'
+    - 'app/dashboard/articles/[slug]/page.module.css'
+  out: []
+invariants:
+  - 'The icon set stays the single source of dashboard glyphs'
+  - 'The back control keeps its accessible name and its destination'
+acceptance:
+  - id: A1
+    given: 'the dashboard icon set'
+    when: 'its glyph union is read'
+    then: 'it can render a left arrow, which it previously had no glyph for'
+  - id: A2
+    given: 'the article editor'
+    when: 'the back control renders'
+    then: 'it is an IconButton named Back to articles'
+  - id: A3
+    given: 'the article editor'
+    when: 'the back control is activated'
+    then: 'it navigates to /dashboard/articles, and the page keeps no raw button or orphaned class'
+non_functional: {}
+contracts:
+  - name: 'dashboard-editor'
+    type: behavior
