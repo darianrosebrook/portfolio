@@ -57,3 +57,11 @@ evidence:
     command: npx vitest run test/utils/schemas/publish-payload-repro.test.ts test/utils/schemas/case-study.schema.test.ts test/utils/schemas/article.schema.test.ts
     exit_code: 0
     commit_sha: b369144e5803cb996b3146486f53f01c0fe810cd
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "published_at is added with .optional() and no default, so a payload without it still parses and the route keeps its now() fallback for a first publish. A companion case asserts result.data.published_at is undefined for that payload, which pins \"optional\" rather than \"defaulted\"."
+    recorded_at: "2026-09-21T04:34:00.620Z"
+    test_nodeid: "test/utils/schemas/publish-payload-repro.test.ts > updateArticleSchema — published_at survives parsing > stays optional so a first publish still falls back to now() in the route"
+    command: npx vitest run test/utils/schemas/publish-payload-repro.test.ts test/utils/schemas/case-study.schema.test.ts test/utils/schemas/article.schema.test.ts
+    exit_code: 0
+    commit_sha: b369144e5803cb996b3146486f53f01c0fe810cd
