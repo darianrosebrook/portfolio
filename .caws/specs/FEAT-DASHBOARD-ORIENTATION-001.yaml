@@ -62,3 +62,11 @@ evidence:
     command: npx vitest run test/dashboard/contentPages.test.tsx
     exit_code: 0
     commit_sha: dc1d6dc492eadc7e85433d8971c0b9965ee4a064
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "Recent activity carries only published items without working edits: the test asserts the clean published article appears there while the draft and the dirty published revision do not. Runtime at 1280: the region rendered 5 rows, disjoint from the 6 Needs attention cards."
+    recorded_at: "2026-09-21T05:27:28.992Z"
+    test_nodeid: "test/dashboard/contentPages.test.tsx > dashboard server content pages with a mocked database boundary > shows per-library counts and resume links across drafts and dirty published content"
+    command: npx vitest run test/dashboard/contentPages.test.tsx
+    exit_code: 0
+    commit_sha: dc1d6dc492eadc7e85433d8971c0b9965ee4a064
