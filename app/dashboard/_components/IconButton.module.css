@@ -1,0 +1,36 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--core-shape-radius-02);
+  color: var(--semantic-color-foreground-secondary);
+  cursor: pointer;
+  transition:
+    background var(--core-motion-duration-short) var(--core-motion-easing-standard),
+    color var(--core-motion-duration-short) var(--core-motion-easing-standard);
+}
+
+.button:hover {
+  background: var(--semantic-color-background-secondary);
+  color: var(--semantic-color-foreground-primary);
+}
+
+.button[data-variant='danger']:hover {
+  color: var(--semantic-color-foreground-danger, var(--semantic-color-border-danger));
+  border-color: var(--semantic-color-border-danger);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--semantic-color-border-accent);
+  outline-offset: var(--semantic-interaction-focus-ring-offset, 2px);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

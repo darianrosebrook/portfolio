@@ -1,0 +1,36 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--core-layer-modal, 100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--semantic-color-overlay-backdrop, rgb(0 0 0 / 0.6));
+}
+
+.dialog {
+  inline-size: calc(100% - var(--core-spacing-size-08));
+  max-inline-size: 28rem;
+  padding: var(--core-spacing-size-06);
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--core-shape-radius-03, var(--core-shape-radius-02));
+}
+
+.title {
+  margin: 0 0 var(--core-spacing-size-03);
+  color: var(--semantic-color-foreground-primary);
+  font-size: var(--semantic-typography-heading-04);
+}
+
+.description {
+  margin: 0 0 var(--core-spacing-size-05);
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-03);
+}
+
+.actions {
+  display: flex;
+  gap: var(--core-spacing-size-03);
+  justify-content: flex-end;
+}

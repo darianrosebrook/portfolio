@@ -1,0 +1,137 @@
+.card {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr) auto;
+  gap: var(--core-spacing-size-05);
+  align-items: start;
+  padding: var(--core-spacing-size-05);
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--semantic-shape-control-radius-default, var(--core-shape-radius-03));
+  transition:
+    border-color var(--core-motion-duration-short) var(--core-motion-easing-standard),
+    background var(--core-motion-duration-short) var(--core-motion-easing-standard);
+}
+
+.card:hover {
+  background: var(--semantic-color-background-secondary);
+  border-color: var(--semantic-color-border-default);
+}
+
+/* Cover ------------------------------------------------------------------ */
+
+.cover {
+  display: block;
+  inline-size: 4.5rem;
+  block-size: 3.375rem;
+  overflow: hidden;
+  border-radius: var(--core-shape-radius-02);
+  background: var(--semantic-color-background-secondary);
+}
+
+.image {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.fallback {
+  display: grid;
+  place-items: center;
+  inline-size: 100%;
+  block-size: 100%;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-heading-04);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  letter-spacing: 0.04em;
+}
+
+.fallback[data-section='Artificial Intelligence'] {
+  background: rgb(var(--semantic-color-foreground-accent-rgb), 0.14);
+  color: var(--semantic-color-foreground-accent);
+}
+
+/* Body ------------------------------------------------------------------- */
+
+.body {
+  display: grid;
+  gap: var(--core-spacing-size-03);
+  min-width: 0;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--core-spacing-size-04);
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--semantic-typography-heading-04);
+  overflow-wrap: anywhere;
+}
+
+.title a {
+  color: var(--semantic-color-foreground-primary);
+  text-decoration: none;
+}
+
+.title a:hover {
+  text-decoration: underline;
+}
+
+.description {
+  margin: 0;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-03);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--core-spacing-size-04);
+  align-items: center;
+  margin: 0;
+  color: var(--semantic-color-foreground-tertiary);
+  font-size: var(--semantic-typography-caption-01);
+}
+
+.kind {
+  padding: var(--core-spacing-size-01) var(--core-spacing-size-03);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--core-shape-radius-full);
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.metaItem {
+  display: inline-flex;
+  gap: var(--core-spacing-size-02);
+  align-items: center;
+}
+
+/* Actions ---------------------------------------------------------------- */
+
+.actions {
+  display: flex;
+  gap: var(--core-spacing-size-02);
+  align-items: center;
+}
+
+.card:focus-within {
+  border-color: var(--semantic-color-border-accent);
+}
+
+@media (width <= 40rem) {
+  .card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cover {
+    inline-size: 100%;
+    block-size: 6rem;
+  }
+
+  .actions {
+    justify-content: flex-end;
+  }
+}
