@@ -1,0 +1,46 @@
+id: FEAT-DASHBOARD-ORIENTATION-001
+title: 'Dashboard orientation: workspace overview with needs-attention, recent activity and compact counts'
+risk_tier: 2
+mode: refactor
+lifecycle_state: draft
+created_at: '2026-09-21T05:22:14.828Z'
+updated_at: '2026-09-21T05:22:14.828Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard overview and stylesheet hygiene'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/page.tsx'
+    - 'app/dashboard/page.module.css'
+    - 'app/dashboard/articles/articles.module.css'
+    - 'test/dashboard/contentPages.test.tsx'
+    - 'scripts/check-css-module-usage.mjs'
+  out: []
+invariants:
+  - 'Counts only render for a library that loaded; a failed library shows no invented zeros'
+  - 'Needs-attention lists only drafts and unpublished changes, newest first'
+  - 'Recent activity lists only published items without working changes'
+acceptance:
+  - id: A1
+    given: 'the overview with both libraries loaded'
+    when: 'it renders'
+    then: 'each library exposes Drafts, Unpublished changes and Published counts as links to the matching status filter, and a library that failed to load shows no counts at all'
+  - id: A2
+    given: 'drafts or unpublished changes exist'
+    when: 'the overview renders'
+    then: 'a Needs attention region lists them through the shared card primitives with a status pill and a cover-or-fallback, each linking to its editor, and an empty state renders when there are none'
+  - id: A3
+    given: 'published items exist'
+    when: 'the overview renders'
+    then: 'a Recent activity section lists the most recently modified published items newest first and never includes a draft or an item with unpublished changes'
+  - id: A4
+    given: 'the dashboard stylesheets'
+    when: 'scripts/check-css-module-usage.mjs runs'
+    then: 'every class defined in articles.module.css and page.module.css is referenced by a module that imports it, so no orphaned rule remains'
+non_functional: {}
+contracts:
+  - name: 'dashboard-orientation'
+    type: behavior
