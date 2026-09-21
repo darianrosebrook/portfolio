@@ -1,0 +1,35 @@
+id: FIX-SECTION-MINHEIGHT-001
+title: 'Stop dashboard sections inheriting the public site section height'
+risk_tier: 3
+mode: fix
+lifecycle_state: draft
+created_at: '2026-09-21T07:24:52.120Z'
+updated_at: '2026-09-21T07:24:52.120Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard shell — section sizing'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/_components/DashboardShell.module.css'
+  out: []
+invariants:
+  - 'The public site keeps its section minimum height; only the dashboard is exempt'
+  - 'Dashboard sections size to their content'
+acceptance:
+  - id: A1
+    given: 'the overview at a tall viewport'
+    when: 'the library cards and the three regions render'
+    then: 'their height is driven by their content rather than by 20vh'
+  - id: A2
+    given: 'a public page'
+    when: 'its sections render'
+    then: 'the global section minimum still applies'
+  - id: A3
+    given: 'the dashboard after the change'
+    when: 'it is measured'
+    then: 'no horizontal overflow appears and no content is lost'
+non_functional: {}
+contracts: []
