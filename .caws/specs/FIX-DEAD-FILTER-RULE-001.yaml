@@ -47,3 +47,10 @@ evidence:
     recorded_at: "2026-09-21T07:31:44.294Z"
     command: "grep -rn filterFields app/dashboard --include=*.tsx; browser: count selects inside the filter fields"
     commit_sha: d9f6a712654474f61402f8cc03d35066e8167b5a
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "The CSS-usage checker reports 0 unreferenced classes across 19 modules with exit 0, and the full suite passed at 2070 with 13 expected failures and 2 skips, exit 0. The input focus outline rule was deliberately left in place — the post-write check confirms .filterFields input:focus-visible is still declared and still reachable in the loaded stylesheets, so the focus indicator is untouched."
+    recorded_at: "2026-09-21T07:31:44.948Z"
+    command: node scripts/check-css-module-usage.mjs; npm test; grep for the retained focus selector
+    exit_code: 0
+    commit_sha: d9f6a712654474f61402f8cc03d35066e8167b5a
