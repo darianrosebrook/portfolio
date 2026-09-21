@@ -45,3 +45,12 @@ non_functional: {}
 contracts:
   - name: 'dashboard-orientation'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "The overview test still asserts each library exposes Drafts / Unpublished changes / Published as links (accessible names \"8 Drafts\" etc.) with hrefs to ?status=draft|changes|published, and a separate case asserts that a library which failed to load renders no counts at all rather than invented zeros. Runtime at 1280 confirmed both libraries render their counts and \"View all N\" links."
+    recorded_at: "2026-09-21T05:27:27.239Z"
+    test_nodeid: "test/dashboard/contentPages.test.tsx > dashboard server content pages with a mocked database boundary > shows per-library counts and resume links across drafts and dirty published content"
+    command: npx vitest run test/dashboard/contentPages.test.tsx
+    exit_code: 0
+    commit_sha: dc1d6dc492eadc7e85433d8971c0b9965ee4a064
