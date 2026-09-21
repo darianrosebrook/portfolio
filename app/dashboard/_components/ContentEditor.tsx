@@ -866,20 +866,27 @@ function ContentEditorSession({
       />
       <ConfirmDialog
         open={confirm === 'unpublish'}
-        title="Unpublish?"
+        title={recordStatus === 'scheduled' ? 'Unschedule?' : 'Unpublish?'}
         description={
-          <>
-            The article will immediately disappear from the public site.
-            {dirty && (
-              <>
-                {' '}
-                Unpublished changes stay pending and will go live the next time
-                you publish.
-              </>
-            )}
-          </>
+          recordStatus === 'scheduled' ? (
+            <>
+              The item returns to draft and its schedule is cleared. It was
+              never published, so the public site is unaffected.
+            </>
+          ) : (
+            <>
+              The article will immediately disappear from the public site.
+              {dirty && (
+                <>
+                  {' '}
+                  Unpublished changes stay pending and will go live the next
+                  time you publish.
+                </>
+              )}
+            </>
+          )
         }
-        confirmLabel="Unpublish"
+        confirmLabel={recordStatus === 'scheduled' ? 'Unschedule' : 'Unpublish'}
         danger
         onConfirm={handleUnpublish}
         onCancel={() => setConfirm(null)}
