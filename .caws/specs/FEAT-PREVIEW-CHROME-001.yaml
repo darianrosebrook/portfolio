@@ -39,3 +39,10 @@ acceptance:
       cover Image style is deliberately retained
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Runtime on the worktree build with the overlay opened from the new-content editor: the action row reported 0 inline styles and no style attribute of its own; the overlay reported no style attribute and 0 inline styles anywhere inside it, while keeping position fixed, z-index 1000, a sticky bar and the \"Preview\" heading, with neither the close button nor the hint carrying a style attribute. Not exercised: the retained cover-Image style, because the probe article had no cover image, so that branch did not render. For the same reason this is the only inline style left in the file, and the run also confirmed it is the only one: the file reports 1."
+    recorded_at: "2026-09-21T06:59:03.759Z"
+    command: "browser: open /dashboard/articles/new, type a body, activate Preview, inspect the overlay and the action row for style attributes"
+    commit_sha: "720452547e6dea1188faec1fcb3ce002c35486bc"
