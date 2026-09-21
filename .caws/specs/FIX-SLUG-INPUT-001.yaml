@@ -46,3 +46,10 @@ evidence:
     exit_code: 0
     artifact_path: /Users/darianrosebrook/Desktop/Projects/portfolio/tmp/evidence/FIX-SLUG-INPUT-001/focused-tests.txt
     commit_sha: e03671c3cb2abad710dc06991dd6e834effbf093
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Runtime observation on the fixed code: with the field focused and holding \"blur-normalization-probe-\" the autosave PATCH carried slug \"blur-normalization-probe\" and returned HTTP 200 (no error, no 400); a second pass with \"trailing-hyphen-probe-\" behaved identically; blur normalized the field. The save path builds the payload from slugify(snapshot.slug), so a partially typed trailing hyphen is never persisted or rejected."
+    recorded_at: "2026-09-21T03:45:11.104Z"
+    command: npx next dev --webpack -p 3100 (worktree) + dashboard autosave observed via browser network log
+    artifact_path: /Users/darianrosebrook/Desktop/Projects/portfolio/tmp/evidence/FIX-SLUG-INPUT-001/runtime-slug-verification.md
+    commit_sha: e03671c3cb2abad710dc06991dd6e834effbf093
