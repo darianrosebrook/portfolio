@@ -2,10 +2,11 @@ id: FIX-DESTRUCTIVE-TOKEN-001
 title: 'Use the semantic danger token for the delete-block hover'
 risk_tier: 3
 mode: fix
-lifecycle_state: active
-worktree: destructive-token-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge destructive-token-001 at 3060cbefbb2d62e2eefb99f5bc9ad124e7f78a42'
 created_at: '2026-09-21T14:40:34.919Z'
-updated_at: '2026-09-21T14:40:36.040Z'
+updated_at: '2026-09-21T14:44:51.312Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
