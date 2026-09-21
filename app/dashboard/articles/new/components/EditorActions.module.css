@@ -1,0 +1,17 @@
+/*
+ * The action row for the new-content flow. The buttons themselves are the
+ * shared Button component; this module carries only the row layout and the
+ * publish-error message.
+ */
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--core-spacing-size-04);
+  align-items: center;
+}
+
+.error {
+  color: var(--semantic-color-foreground-destructive);
+  font-size: 13px;
+}
