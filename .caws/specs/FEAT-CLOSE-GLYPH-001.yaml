@@ -38,3 +38,10 @@ non_functional: {}
 contracts:
   - name: 'dashboard-editor'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "The IconGlyph union includes close and the paths map has a matching entry, so the type requires a renderer. Runtime confirms it draws rather than rendering empty: the control contains an svg with 2 geometry elements (one line per stroke of the cross) at 16x16, aria-hidden. Before this slice the cross existed only as a literal character inside the button, and the set had no glyph for it."
+    recorded_at: "2026-09-21T07:41:53.487Z"
+    command: "grep for the glyph in Icon.tsx; browser: count geometry elements inside the rendered control"
+    commit_sha: "8235b6664703ad945985e962098e7f63da846b3e"
