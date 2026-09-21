@@ -19,17 +19,33 @@ describe('content filters', () => {
     }) as HTMLFormElement;
     expect(form).toHaveAttribute('action', '/dashboard/articles');
     expect(form).toHaveAttribute('method', 'get');
+    // The form still carries every active filter: search inline, status and
+    // sort as hidden fields so submitting the search does not drop them.
     expect(Object.fromEntries(new FormData(form))).toEqual({
       q: 'design',
       status: 'draft',
       sort: 'title',
     });
+    // Status is a link, not a select: it navigates with the other filters kept.
+    const publishedChip = screen.getByRole('link', {
+      name: 'Published 4',
+    });
+    expect(publishedChip).toHaveAttribute(
+      'href',
+      '/dashboard/articles?q=design&status=published&sort=title'
+    );
+    expect(screen.getByRole('link', { name: 'Drafts 2' })).toHaveAttribute(
+      'aria-current',
+      'true'
+    );
+    // No standalone apply control: the search field submits.
     expect(
-      screen.getByRole('option', { name: 'Unpublished changes (1)' })
-    ).toHaveValue('changes');
-    expect(
-      screen.getByRole('button', { name: 'Apply filters' })
-    ).toHaveAttribute('type', 'submit');
+      screen.queryByRole('button', { name: /apply filters/i })
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Search' })).toHaveAttribute(
+      'type',
+      'submit'
+    );
     expect(screen.getByRole('link', { name: 'Clear filters' })).toHaveAttribute(
       'href',
       '/dashboard/articles'
@@ -56,9 +72,19 @@ describe('content filters', () => {
       '/dashboard/case-studies'
     );
     expect(screen.getByRole('searchbox', { name: 'Search' })).toHaveValue('');
-    expect(screen.getByRole('combobox', { name: 'Status' })).toHaveValue('all');
-    expect(screen.getByRole('combobox', { name: 'Sort by' })).toHaveValue(
-      'recent'
+    // Reset state is visible in the controls that are now links.
+    expect(screen.getByRole('link', { name: 'All 7' })).toHaveAttribute(
+      'aria-current',
+      'true'
+    );
+    expect(screen.getByRole('link', { name: 'Recently edited' })).toHaveAttribute(
+      'aria-current',
+      'true'
+    );
+    // With no active filter the case-study chip hrefs carry no stale params.
+    expect(screen.getByRole('link', { name: 'Drafts 2' })).toHaveAttribute(
+      'href',
+      '/dashboard/case-studies?status=draft'
     );
     expect(
       screen.queryByRole('link', { name: 'Clear filters' })
