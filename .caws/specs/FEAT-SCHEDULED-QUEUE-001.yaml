@@ -41,3 +41,11 @@ evidence:
     command: npx vitest run test/dashboard/contentPages.test.tsx
     exit_code: 0
     commit_sha: c489c99a225ddfc95fd74e8c86f867f9034f85e6
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "With only a draft in the library, queryByRole(\"region\", { name: \"Scheduled\" }) is null: the region is absent rather than rendered empty."
+    recorded_at: "2026-09-21T06:15:03.009Z"
+    test_nodeid: "test/dashboard/contentPages.test.tsx > dashboard server content pages with a mocked database boundary > omits the scheduled region when nothing is queued"
+    command: npx vitest run test/dashboard/contentPages.test.tsx
+    exit_code: 0
+    commit_sha: c489c99a225ddfc95fd74e8c86f867f9034f85e6
