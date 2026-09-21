@@ -46,3 +46,10 @@ evidence:
     recorded_at: "2026-09-21T06:59:03.759Z"
     command: "browser: open /dashboard/articles/new, type a body, activate Preview, inspect the overlay and the action row for style attributes"
     commit_sha: "720452547e6dea1188faec1fcb3ce002c35486bc"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "grep -rho \"style={{\" counted 15 before and 7 after; per file, ArticlePreview reports 1 (the retained Image style) and EditorActions reports 0. Eight of the fifteen were removed."
+    recorded_at: "2026-09-21T06:59:04.378Z"
+    command: "grep -rc \"style={{\" app/dashboard --include=*.tsx"
+    exit_code: 0
+    commit_sha: "720452547e6dea1188faec1fcb3ce002c35486bc"
