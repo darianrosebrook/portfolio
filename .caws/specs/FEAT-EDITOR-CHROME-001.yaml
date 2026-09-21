@@ -1,0 +1,34 @@
+id: FEAT-EDITOR-CHROME-001
+title: 'Move the editor chrome off inline styles onto token classes'
+risk_tier: 3
+mode: refactor
+lifecycle_state: draft
+created_at: '2026-09-21T06:43:34.925Z'
+updated_at: '2026-09-21T06:43:34.925Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard editor chrome — layout shell and save status'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/articles/new/components/EditorLayout.tsx'
+    - 'app/dashboard/articles/new/components/EditorLayout.module.css'
+    - 'app/dashboard/articles/new/components/SaveStatus.tsx'
+    - 'app/dashboard/articles/new/components/SaveStatus.module.css'
+  out: []
+invariants:
+  - 'The rendered markup, accessible names and behaviour are unchanged'
+  - 'Every value comes from a design token, not a literal'
+acceptance:
+  - id: A1
+    given: 'the new-article editor page'
+    when: 'it renders'
+    then: 'no element inside the editor layout or the save status carries an inline style attribute'
+  - id: A2
+    given: 'the dashboard before and after'
+    when: 'inline style objects are counted'
+    then: 'the total drops from 41 to 26 because these two components account for fifteen of them'
+non_functional: {}
+contracts: []
