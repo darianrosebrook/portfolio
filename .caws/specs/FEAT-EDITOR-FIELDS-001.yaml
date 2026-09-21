@@ -2,10 +2,11 @@ id: FEAT-EDITOR-FIELDS-001
 title: 'Move the editor properties fields onto the Input primitive'
 risk_tier: 2
 mode: refactor
-lifecycle_state: active
-worktree: editor-fields-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge editor-fields-001 at 465413d2facf67760aea7839999d62fa65a113f1'
 created_at: '2026-09-21T14:50:20.263Z'
-updated_at: '2026-09-21T14:50:21.276Z'
+updated_at: '2026-09-21T14:53:57.831Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
