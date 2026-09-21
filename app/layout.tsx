@@ -13,6 +13,7 @@ import {
 } from '@/context';
 import Navbar from '@/ui/modules/Navbar';
 import Footer from '@/ui/modules/Footer';
+import { PublicChrome } from './_components/PublicChrome';
 import SlinkyCursor from '@/ui/components/SlinkyCursor';
 import PerformanceDashboard from '@/ui/modules/PerformanceDashboard/PerformanceDashboard';
 import { env } from '@/utils/env';
@@ -105,10 +106,13 @@ export default async function RootLayout({
           <ReducedMotionProvider>
             <InteractionProvider>
               <UserProvider>
-                <Navbar pages={pages} />
-                {children}
-                <Footer />
-                <SlinkyCursor />
+                <PublicChrome
+                  navbar={<Navbar pages={pages} />}
+                  footer={<Footer />}
+                  cursor={<SlinkyCursor />}
+                >
+                  {children}
+                </PublicChrome>
               </UserProvider>
             </InteractionProvider>
           </ReducedMotionProvider>
