@@ -298,7 +298,6 @@ export function StatusMatrix({
               <th>Status</th>
               <th>Playground</th>
               <th>Last Updated</th>
-              <th>Docs</th>
             </tr>
           </thead>
           <tbody>
@@ -361,17 +360,6 @@ export function StatusMatrix({
                       </time>
                     ) : (
                       <span className={styles.noData}>—</span>
-                    )}
-                  </td>
-                  <td>
-                    {component.paths?.docs ? (
-                      <span className={styles.checkmark} aria-label="Yes">
-                        ✓
-                      </span>
-                    ) : (
-                      <span className={styles.cross} aria-label="No">
-                        —
-                      </span>
                     )}
                   </td>
                 </tr>

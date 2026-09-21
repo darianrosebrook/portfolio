@@ -12,7 +12,7 @@ export type ComponentItem = {
   description: string;
   a11y: { pitfalls: string[] };
   status: 'Planned' | 'Built' | 'DocOnly';
-  paths?: { component?: string; docs?: string };
+  paths?: { component?: string };
   tags?: string[];
 };
 

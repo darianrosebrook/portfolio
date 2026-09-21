@@ -46,6 +46,7 @@
     "validate:component-visibility": "node scripts/validateComponentVisibility.mjs",
     "scaffold:component": "node scripts/scaffoldComponent.mjs",
     "generate:components-docs": "node scripts/generateComponentsAndDocs.mjs",
+    "generate:components-registry": "node scripts/generateComponentsRegistry.mjs",
     "generate:contracts": "node scripts/generateContracts.mjs",
     "contracts:tokens": "node scripts/check-contract-tokens.mjs",
     "components:setup": "npm run generate:contracts && npm run contracts:validate && npm run validate:components",

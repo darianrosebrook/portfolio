@@ -1,7 +1,7 @@
 'use client';
 // layout for foundations that contains breadcrumbs
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
-// import { Breadcrumbs } from '@/ui/components/Breadcrumbs/Breadcrumbs';
+import { Breadcrumbs } from '@/ui/components/Breadcrumbs/Breadcrumbs';
 import { PageTransition } from '@/ui/components/PageTransition';
 import React from 'react';
 
@@ -23,7 +23,7 @@ export default function FoundationsLayout({
     accessibility: 'Accessibility',
   };
 
-  const _crumbs = useBreadcrumbs({ base, labelMap });
+  const crumbs = useBreadcrumbs({ base, labelMap });
 
   // const sidebarSections = [
   //   {
@@ -62,7 +62,9 @@ export default function FoundationsLayout({
     <PageTransition transitionName="foundations-layout" duration={300}>
       <section className="content">
         <PageTransition transitionName="breadcrumb" duration={200}>
-          <div>{/* <Breadcrumbs base={base} crumbs={crumbs} /> */}</div>
+          <div>
+            <Breadcrumbs base={base} crumbs={crumbs} />
+          </div>
         </PageTransition>
         <PageTransition transitionName="doc-content" duration={250}>
           <div>
