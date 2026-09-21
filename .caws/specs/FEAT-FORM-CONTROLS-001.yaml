@@ -1,0 +1,40 @@
+id: FEAT-FORM-CONTROLS-001
+title: 'Move the remaining form controls onto primitives, per control'
+risk_tier: 2
+mode: feature
+lifecycle_state: draft
+created_at: '2026-09-21T07:22:03.942Z'
+updated_at: '2026-09-21T07:22:03.942Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard form controls'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/_components/ContentEditor.tsx'
+    - 'app/dashboard/articles/new/components/ArticleMetadataForm.tsx'
+    - 'app/dashboard/articles/new/components/ArticleMetadataForm.module.css'
+    - 'app/dashboard/_components/RelatedContentPicker.tsx'
+  out: []
+invariants:
+  - 'A control moves only when the primitive preserves its behaviour and accessibility; a native element is kept where the design-system equivalent is a different control model'
+  - 'A field keeps its accessible name and its save/publish payload semantics'
+acceptance:
+  - id: A1
+    given: 'the seven inputs in ContentEditor'
+    when: 'each is moved to the Input primitive'
+    then: 'the field keeps its accessible name and the value it contributes to the save and publish payloads'
+  - id: A2
+    given: 'the five fields in ArticleMetadataForm'
+    when: 'they move to the Input primitive'
+    then: 'the 33 !important declarations in its module that exist to beat the global input and textarea rules are resolved rather than carried over'
+  - id: A3
+    given: 'the picker relationship select'
+    when: 'it is considered for the Select primitive'
+    then: 'it is kept native if that composer is a different control model, with the reason recorded'
+non_functional: {}
+contracts:
+  - name: 'dashboard-forms'
+    type: behavior
