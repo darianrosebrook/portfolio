@@ -46,3 +46,9 @@ evidence:
     recorded_at: "2026-09-21T07:15:41.107Z"
     command: "browser: read the field label association before and after the swap"
     commit_sha: "5903b9f2c0c22a6ec014f4fba7b5c69cb9c1c713"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Runtime with a real query: typing \"prime\" completed the search and rendered the empty state (\"No matches\", because the current article is excluded), and typing \"the\" rendered five result buttons, all enabled, the first reading \"Custom Design Tooling: Crafting the Futu\" and carrying the components own resultButton class. So the search pipeline still works end to end through the swapped field. Not exercised: activating a result to add it, because that would mutate the real article the measurement ran against; the add path is unchanged by this slice and would need a throwaway item to exercise."
+    recorded_at: "2026-09-21T07:15:41.757Z"
+    command: "browser: type queries into the picker search field and inspect the rendered results region"
+    commit_sha: "5903b9f2c0c22a6ec014f4fba7b5c69cb9c1c713"
