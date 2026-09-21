@@ -7,6 +7,7 @@ import type {
 } from '@/utils/editor/contentLibrary';
 import styles from '../../page.module.css';
 import Button from '@/ui/components/Button';
+import { Input } from '@/ui/components/Input';
 
 interface ArticleFiltersProps {
   counts: LibraryCounts;
@@ -97,9 +98,10 @@ export function ArticleFilters({
           {/* The submit control sits outside the label: nesting it inside made
               the input's accessible name "Search Search". */}
           <span className={styles.searchRow}>
-            <label className={styles.searchField}>
+            <label className={styles.searchField} htmlFor="filter-search">
               Search
-              <input
+              <Input
+                id="filter-search"
                 key={filters.q}
                 type="search"
                 name="q"
