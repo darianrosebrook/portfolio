@@ -1,0 +1,27 @@
+id: FIX-FILTERBAR-WRAP-001
+title: 'Stop the filter search submit from wrapping its label'
+risk_tier: 3
+mode: fix
+lifecycle_state: draft
+created_at: '2026-09-21T05:36:54.921Z'
+updated_at: '2026-09-21T05:36:54.921Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard filter bar'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/page.module.css'
+  out: []
+invariants:
+  - 'The search submit keeps its label on one line and is not shrunk below its content'
+  - 'The shared .applyButton styling still works for the overview and case-study retry buttons'
+acceptance:
+  - id: A1
+    given: 'the dashboard filter bar'
+    when: 'it renders at 1280 and at 768 CSS px'
+    then: 'the search submit label does not wrap (scrollWidth <= clientWidth) and the control keeps its intrinsic width'
+non_functional: {}
+contracts: []
