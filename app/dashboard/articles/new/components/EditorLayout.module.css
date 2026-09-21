@@ -45,21 +45,8 @@
   color: var(--semantic-color-foreground-primary);
 }
 
-.metadataToggle {
-  /* 6px is the value the inline style used; the vertical step has no token that
-     equals it, so fidelity wins over tokenisation here. */
-  padding: 6px var(--core-spacing-size-05);
-  background: var(--semantic-color-background-secondary);
-  border: 1px solid var(--semantic-color-border-default);
-  border-radius: var(--core-shape-radius-02);
-  color: var(--semantic-color-foreground-primary);
-  font-size: var(--semantic-typography-caption-01);
-  cursor: pointer;
-  white-space: nowrap;
-}
 
-.back:focus-visible,
-.metadataToggle:focus-visible {
+.back:focus-visible {
   outline: 2px solid var(--semantic-color-border-accent);
   outline-offset: var(--semantic-interaction-focus-ring-offset, 2px);
 }

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import styles from './EditorLayout.module.css';
+import Button from '@/ui/components/Button';
 
 interface EditorLayoutProps {
   children: React.ReactNode;
@@ -41,13 +42,14 @@ export function EditorLayout({
         </div>
         <div className={styles.group}>
           {actions}
-          <button
+          <Button
             type="button"
-            className={styles.metadataToggle}
+            variant="secondary"
+            size="small"
             onClick={() => setSidebarOpen(!sidebarOpen)}
           >
             {sidebarOpen ? 'Hide' : 'Show'} Metadata
-          </button>
+          </Button>
         </div>
       </div>
 
