@@ -260,19 +260,8 @@
   flex: 1 1 16rem;
 }
 
-.filterFields input,
-.filterFields select {
-  min-width: 0;
-  padding: var(--core-spacing-size-03) var(--core-spacing-size-04);
-  background: var(--semantic-color-background-primary);
-  border: 1px solid var(--semantic-color-border-default);
-  border-radius: var(--core-shape-radius-02);
-  color: var(--semantic-color-foreground-primary);
-  font: inherit;
-}
 
 .filterFields input:focus-visible,
-.filterFields select:focus-visible,
 .tabLink:focus-visible {
   outline: 2px solid currentcolor;
   outline-offset: 2px;
