@@ -55,8 +55,7 @@
           "paths": {
             "type": "object",
             "properties": {
-              "component": { "type": "string" },
-              "docs": { "type": "string" }
+              "component": { "type": "string" }
             },
             "additionalProperties": false
           },

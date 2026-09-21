@@ -13,7 +13,7 @@ describe('components-transformed.json', () => {
     expect(fs.existsSync(file)).toBe(true);
     const json = JSON.parse(fs.readFileSync(file, 'utf8'));
     expect(Array.isArray(json.components)).toBe(true);
-    expect(json.$source).toBe('docs/design-taxonomy.md');
+    expect(json.$source).toBe('scripts/generateComponentsRegistry.mjs');
   });
 
   it('each item has required fields and normalized values', () => {
