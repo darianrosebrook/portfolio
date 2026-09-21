@@ -40,3 +40,12 @@ non_functional: {}
 contracts:
   - name: 'publish-scheduling'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Both update schemas accept status \"scheduled\" and retain scheduled_at. The tests failed before the change with \"expected false to be true\" (the parse rejected the status), and pass after: result.data.status is \"scheduled\" and result.data.scheduled_at equals the sent instant, while the second case pins that scheduled_at stays optional so an ordinary update still parses. 27 tests pass across the three schema suites."
+    recorded_at: "2026-09-21T06:37:24.032Z"
+    test_nodeid: "test/utils/schemas/publish-payload-repro.test.ts > updateArticleSchema — scheduling > accepts the scheduled status and keeps the moment"
+    command: npx vitest run test/utils/schemas/
+    exit_code: 0
+    commit_sha: "20251bb62315a8f72cbe5b3ece4b96ee578126a4"
