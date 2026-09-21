@@ -51,3 +51,9 @@ evidence:
     recorded_at: "2026-09-21T06:42:36.642Z"
     command: "browser: click Unschedule, confirm the dialog, read the row back"
     commit_sha: "8a254aeaae2f2de61e3e10d9a8022bad6ac45e4e"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "Same run: with no moment chosen the Schedule button reported disabled: true; after typing a moment it reported disabled: false. So the control refuses to send an empty schedule rather than relying on the handler to reject it."
+    recorded_at: "2026-09-21T06:42:37.199Z"
+    command: "browser: read the Schedule button disabled state before and after setting #scheduled_at"
+    commit_sha: "8a254aeaae2f2de61e3e10d9a8022bad6ac45e4e"
