@@ -34,6 +34,8 @@ acceptance:
   - id: A2
     given: 'the dashboard before and after'
     when: 'inline style objects are counted'
-    then: 'the total drops from 15 to 6'
+    then: >-
+      the total drops from 15 to 7, because eight of the fifteen are removed and the
+      cover Image style is deliberately retained
 non_functional: {}
 contracts: []
