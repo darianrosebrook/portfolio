@@ -36,3 +36,10 @@ evidence:
     recorded_at: "2026-09-21T07:39:11.746Z"
     command: "browser: load a non-existent case study slug and inspect the retry control"
     commit_sha: "5a8091b2aceee6329393a50b4e937d10807726b8"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Activating the control left the path unchanged at /dashboard/case-studies/no-such-case-study-probe, the alert still present with the same text (\"This case study could not be found.\"), and the Back to Case Studies link intact — so it re-attempted the fetch rather than navigating or failing. grep confirms the file now contains 0 raw button elements, the CSS-usage checker reports 0 unreferenced classes across 19 modules, and the full suite passed at 2072 with 13 expected failures and 2 skips."
+    recorded_at: "2026-09-21T07:39:12.369Z"
+    command: "browser: activate the retry control and compare the path and alert text; grep -c \"<button\"; node scripts/check-css-module-usage.mjs; npm test"
+    exit_code: 0
+    commit_sha: "5a8091b2aceee6329393a50b4e937d10807726b8"
