@@ -38,3 +38,10 @@ non_functional: {}
 contracts:
   - name: 'dashboard-editor'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "The IconGlyph union now includes arrow-left and the paths map has a matching entry, so the type requires a renderer for it. Runtime confirms it renders geometry rather than nothing: the controls svg contains 2 elements (one line, one polyline), is 16x16, and is aria-hidden. Before the change the same arrow existed only as inline svg markup inside the page."
+    recorded_at: "2026-09-21T07:21:14.496Z"
+    command: "grep for the glyph in Icon.tsx; browser: count geometry elements inside the rendered control"
+    commit_sha: "4f571e6df0a04356096c7ec1990e3130b75655fe"
