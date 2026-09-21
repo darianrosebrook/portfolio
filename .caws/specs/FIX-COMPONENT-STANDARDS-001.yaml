@@ -93,3 +93,7 @@ evidence:
     status: pass
     evidence_ref: "test/blueprints/StatusMatrix.render.test.tsx (no Docs column); grep -c '>Docs<' .next/server/app/blueprints/component-standards/status.html = 0"
     recorded_at: "2026-09-21T16:54:59.259Z"
+  - criterion_id: A4
+    status: pass
+    evidence_ref: "test/blueprints/extractProps.test.ts 16/16; SSG select.html API table renders exactly: children | React.ReactNode | Yes; SelectTriggerProps absent from page HTML"
+    recorded_at: "2026-09-21T16:55:20.026Z"
