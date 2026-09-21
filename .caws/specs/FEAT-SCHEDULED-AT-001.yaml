@@ -1,0 +1,34 @@
+id: FEAT-SCHEDULED-AT-001
+title: 'Author the scheduled_at migration that publish scheduling needs'
+risk_tier: 2
+mode: feature
+lifecycle_state: draft
+created_at: '2026-09-21T06:02:26.650Z'
+updated_at: '2026-09-21T06:02:26.650Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'supabase schema — articles and case_studies publish scheduling'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/supabase/migrations/add-scheduled-at.sql'
+  out: []
+invariants:
+  - 'The migration is additive and idempotent: every clause uses IF NOT EXISTS'
+  - 'No application code reads scheduled_at, so the dashboard behaves identically until the migration is applied'
+  - 'The file carries its own rollback so the change can be undone'
+acceptance:
+  - id: A1
+    given: 'the migration file'
+    when: 'it is inspected'
+    then: 'it adds a nullable scheduled_at timestamptz to articles and case_studies with ADD COLUMN IF NOT EXISTS, creates one partial index per table over non-null scheduled_at, and documents rollback statements in comments'
+  - id: A2
+    given: 'the application as it stands'
+    when: 'the dashboard renders with the migration unapplied'
+    then: 'no code path references scheduled_at and the full test suite still passes'
+non_functional: {}
+contracts:
+  - name: 'publish-scheduling'
+    type: schema
