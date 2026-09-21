@@ -30,3 +30,11 @@ acceptance:
     then: 'the checker names that class and exits 1'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "The checker now lists 19 modules where it listed 10: the eight added are ContentEditor, NewContentEditor, the article editor page, ArticleMetadataForm, ArticlePreview, EditorActions, EditorLayout, SaveStatus and the profile page (nine paths for eight-plus-one previously missing; the run prints nineteen lines). Every one reports 0 unreferenced and the summary reads \"0 unreferenced class(es) across 19 modules\" with exit 0. The 129 classes in the newly covered modules being clean is itself evidence that the style conversions left no dead CSS behind."
+    recorded_at: "2026-09-21T07:05:03.884Z"
+    command: node scripts/check-css-module-usage.mjs
+    exit_code: 0
+    commit_sha: "295171ff0b80bdba3de33eed7e3f2f02b9d99aef"
