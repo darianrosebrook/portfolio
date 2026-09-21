@@ -51,3 +51,10 @@ evidence:
     recorded_at: "2026-09-21T07:21:15.099Z"
     command: "browser: inspect the back control on the worktree editor"
     commit_sha: "4f571e6df0a04356096c7ec1990e3130b75655fe"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "Activating the control navigated from /dashboard/articles/the-prime-knows-where-it-is-because-it-knows-where-it-isnt to /dashboard/articles, which rendered its heading \"Articles\" and its card grid. grep -c \"<button\" returns 0 for the page and the name backButton appears nowhere in either the page or its module; the CSS-usage checker reports 0 unreferenced classes across 19 modules, so the removed rules left nothing dead. Full suite 2070 passed, and IconButtons own 4 tests pass. Appearance delta recorded as deliberate: 36x36 -> 34x36, 18px inline svg -> the primitives 16px glyph, hand-drawn 1px border -> the primitives transparent border."
+    recorded_at: "2026-09-21T07:21:15.657Z"
+    command: "browser: activate the control and read the resulting URL; grep -c \"<button\"; node scripts/check-css-module-usage.mjs"
+    exit_code: 0
+    commit_sha: "4f571e6df0a04356096c7ec1990e3130b75655fe"
