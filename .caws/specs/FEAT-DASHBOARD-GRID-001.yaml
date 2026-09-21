@@ -5,7 +5,7 @@ mode: refactor
 lifecycle_state: active
 worktree: dash-grid-001
 created_at: '2026-09-21T05:28:32.882Z'
-updated_at: '2026-09-21T05:28:33.827Z'
+updated_at: '2026-09-21T05:33:16.526Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
@@ -20,6 +20,7 @@ scope:
     - 'app/dashboard/_components/ContentCard.module.css'
     - 'app/dashboard/page.module.css'
     - 'test/dashboard/contentPages.test.tsx'
+    - test/dashboard/ArticleFilters.test.tsx
   out: []
 invariants:
   - 'Filters stay bookmarkable and usable without JavaScript'
