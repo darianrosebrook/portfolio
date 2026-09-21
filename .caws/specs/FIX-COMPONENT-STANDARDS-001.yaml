@@ -89,3 +89,7 @@ evidence:
     status: pass
     evidence_ref: "test/blueprints/componentsRegistry.test.ts 7/7 pass; regen with --generated-at 2026-09-21T00:00:00.000Z is byte-identical on re-run (diff -q); 94 entries: 56 Built + 38 carried; Sidebar -> ui/modules/Sidebar"
     recorded_at: "2026-09-21T16:54:58.281Z"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "test/blueprints/StatusMatrix.render.test.tsx (no Docs column); grep -c '>Docs<' .next/server/app/blueprints/component-standards/status.html = 0"
+    recorded_at: "2026-09-21T16:54:59.259Z"
