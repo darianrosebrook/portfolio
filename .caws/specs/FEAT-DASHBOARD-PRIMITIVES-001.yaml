@@ -57,3 +57,12 @@ non_functional: {}
 contracts:
   - name: 'dashboard-primitives'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Both libraries render through ContentCard with StatusPill. Unit tests assert a card carries no inline style attribute; ArticleCard has its own no-inline-style case. Runtime at 1280: 13 article cards and 11 case-study cards with 0 elements carrying a style attribute inside any card (previously 48 inline style objects across the dashboard), 24 status pills, and \"unpublished changes\" shown on exactly the 2 published-and-dirty articles."
+    recorded_at: "2026-09-21T05:20:44.381Z"
+    test_nodeid: "app/dashboard/_components/ContentCard.test.tsx > ContentCard > carries no inline style attributes anywhere in the card"
+    command: npx vitest run app/dashboard/_components app/dashboard/articles/_components/ArticleCard.test.tsx test/dashboard/contentPages.test.tsx
+    exit_code: 0
+    commit_sha: b91f819893592359abb6cf7f55b50d506e6a389a
