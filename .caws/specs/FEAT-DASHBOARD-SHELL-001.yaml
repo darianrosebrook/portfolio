@@ -2,10 +2,11 @@ id: FEAT-DASHBOARD-SHELL-001
 title: 'Dashboard shell: workspace rail and dashboard header replace the marketing chrome'
 risk_tier: 2
 mode: refactor
-lifecycle_state: active
-worktree: dash-shell-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge dash-shell-001 at 70467438e9d74ea8302626ad1795c7990d259c68'
 created_at: '2026-09-21T05:06:06.460Z'
-updated_at: '2026-09-21T05:06:29.426Z'
+updated_at: '2026-09-21T05:11:59.685Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
