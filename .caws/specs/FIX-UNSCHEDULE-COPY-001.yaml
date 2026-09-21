@@ -1,0 +1,38 @@
+id: FIX-UNSCHEDULE-COPY-001
+title: 'Give the scheduled item its own confirm copy instead of the unpublish copy'
+risk_tier: 2
+mode: fix
+lifecycle_state: draft
+created_at: '2026-09-21T07:33:14.892Z'
+updated_at: '2026-09-21T07:33:14.892Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard editor — confirm copy for returning an item to draft'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/_components/ContentEditor.tsx'
+    - 'test/dashboard/ContentEditor.test.tsx'
+  out: []
+invariants:
+  - 'A scheduled item is not described as disappearing from the public site, because it was never published'
+  - 'The published unpublish path keeps its existing copy'
+acceptance:
+  - id: A1
+    given: 'a scheduled item in the editor'
+    when: 'the author activates Unschedule'
+    then: 'the dialog says the item returns to draft and its schedule is cleared, and its confirm label reads Unschedule'
+  - id: A2
+    given: 'a published item'
+    when: 'the author activates Unpublish'
+    then: 'the dialog still says the article will immediately disappear from the public site and its confirm label is Unpublish'
+  - id: A3
+    given: 'the dialog copy'
+    when: 'the test runs against the unfixed component'
+    then: 'it fails, so the guard is real'
+non_functional: {}
+contracts:
+  - name: 'dashboard-editor'
+    type: behavior
