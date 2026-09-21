@@ -1,0 +1,51 @@
+.pill {
+  display: inline-flex;
+  gap: var(--core-spacing-size-02);
+  align-items: center;
+  padding: var(--core-spacing-size-02) var(--core-spacing-size-04);
+  border-radius: var(--core-shape-radius-full);
+  font-size: var(--semantic-typography-caption-02);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pill[data-status='published'] {
+  background: var(--semantic-color-background-success-subtle);
+  color: var(--semantic-color-foreground-on-success-subtle);
+}
+
+.pill[data-status='draft'] {
+  background: var(--semantic-color-background-warning-subtle);
+  color: var(--semantic-color-foreground-on-warning-subtle);
+}
+
+.pill[data-status='archived'] {
+  background: var(--semantic-color-background-secondary);
+  color: var(--semantic-color-foreground-tertiary);
+}
+
+.pill[data-status='scheduled'] {
+  background: var(--semantic-color-background-accent);
+  color: var(--semantic-color-foreground-on-brand);
+}
+
+.dot {
+  inline-size: 6px;
+  block-size: 6px;
+  border-radius: 50%;
+  background: currentcolor;
+}
+
+.changes {
+  display: inline-flex;
+  align-items: center;
+  margin-inline-start: var(--core-spacing-size-02);
+  padding-inline-start: var(--core-spacing-size-03);
+  border-inline-start: 1px solid currentcolor;
+  font-weight: var(--semantic-typography-font-weight-regular, 400);
+  opacity: 0.9;
+  text-transform: none;
+  letter-spacing: 0;
+}

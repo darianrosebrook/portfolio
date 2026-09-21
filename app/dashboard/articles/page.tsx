@@ -9,6 +9,7 @@ import {
   type LibrarySearchParams,
 } from '@/utils/editor/contentLibrary';
 import { ArticleCard, ArticleFilters, EmptyState } from './_components';
+import { PageHeader } from '../_components/PageHeader';
 import styles from './articles.module.css';
 import dashboardStyles from '../page.module.css';
 
@@ -32,17 +33,15 @@ export default async function ArticlesPage({
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <div className={styles.headerLeft}>
-          <h1 className={styles.title}>Articles</h1>
-          <p className={styles.subtitle}>
-            Pick up a draft or review changes before publishing.
-          </p>
-        </div>
-        <Button as="a" href="/dashboard/articles/new">
-          New Article
-        </Button>
-      </header>
+      <PageHeader
+        title="Articles"
+        description="Pick up a draft or review changes before publishing."
+        actions={
+          <Button as="a" href="/dashboard/articles/new">
+            New Article
+          </Button>
+        }
+      />
       {!library.ok ? (
         <div role="alert" className={dashboardStyles.notice}>
           <p>Your articles could not be loaded. Please try again.</p>

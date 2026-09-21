@@ -10,7 +10,18 @@ import {
   type LibrarySearchParams,
 } from '@/utils/editor/contentLibrary';
 import { ArticleFilters } from '../articles/_components/ArticleFilters';
+import { ContentCard } from '../_components/ContentCard';
+import { PageHeader } from '../_components/PageHeader';
 import styles from '../page.module.css';
+
+type PillStatus = 'draft' | 'published' | 'archived' | 'scheduled';
+
+/** Library rows carry a loose status string; the pill has a closed set. */
+function statusOf(value: string | null): PillStatus {
+  return value === 'published' || value === 'archived' || value === 'scheduled'
+    ? value
+    : 'draft';
+}
 
 export default async function CaseStudiesPage({
   searchParams,
@@ -30,17 +41,15 @@ export default async function CaseStudiesPage({
 
   return (
     <div className={styles.workspace}>
-      <header className={styles.pageHeader}>
-        <div>
-          <h1>Case Studies</h1>
-          <p className={styles.muted}>
-            Develop your project stories and review unpublished changes.
-          </p>
-        </div>
-        <Button as="a" href="/dashboard/case-studies/new">
-          New Case Study
-        </Button>
-      </header>
+      <PageHeader
+        title="Case Studies"
+        description="Develop your project stories and review unpublished changes."
+        actions={
+          <Button as="a" href="/dashboard/case-studies/new">
+            New Case Study
+          </Button>
+        }
+      />
       {!library.ok ? (
         <div role="alert" className={styles.notice}>
           <p>Your case studies could not be loaded. Please try again.</p>
@@ -87,35 +96,32 @@ export default async function CaseStudiesPage({
               </Link>
             </div>
           ) : (
-            <ul className={styles.contentList}>
+            <div className={styles.libraryGrid}>
               {items.map((item) => (
-                <li key={item.id} className={styles.contentRow}>
-                  <div>
-                    <h2 className={styles.contentTitle}>
-                      <Link href={item.editHref}>
-                        {item.headline || item.slug}
-                      </Link>
-                    </h2>
-                    {item.description && (
-                      <p className={styles.muted}>{item.description}</p>
-                    )}
-                    <p className={styles.itemMeta}>
-                      <span>{item.status ?? 'Unknown status'}</span>
-                      {item.hasUnpublishedChanges && (
-                        <span>Unpublished changes</span>
-                      )}
-                      <span>Edited {formatLibraryDate(item.modified_at)}</span>
-                    </p>
-                  </div>
-                  <Link
-                    href={item.editHref}
-                    aria-label={`Edit ${item.headline || item.slug}`}
-                  >
-                    Edit
-                  </Link>
-                </li>
+                <ContentCard
+                  key={item.id}
+                  href={item.editHref}
+                  title={item.headline || item.slug}
+                  description={item.description}
+                  status={statusOf(item.status)}
+                  changes={item.hasUnpublishedChanges}
+                  kind="Case study"
+                  section={item.articleSection ?? null}
+                  image={item.image ?? null}
+                  date={
+                    item.modified_at
+                      ? formatLibraryDate(item.modified_at)
+                      : null
+                  }
+                  wordCount={item.wordCount}
+                  actions={
+                    <Button as="a" href={item.editHref}>
+                      Edit
+                    </Button>
+                  }
+                />
               ))}
-            </ul>
+            </div>
           )}
         </>
       )}

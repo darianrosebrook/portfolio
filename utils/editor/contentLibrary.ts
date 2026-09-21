@@ -25,6 +25,8 @@ export interface ContentLibraryRow {
   workingheadline?: string | null;
   workingdescription?: string | null;
   working_modified_at?: string | null;
+  image?: string | null;
+  articleSection?: string | null;
 }
 
 export interface LibraryItem extends ContentLibraryRow {
@@ -41,7 +43,7 @@ export type LibraryCounts = Record<LibraryStatus, number>;
 
 // Author-only metadata. Bodies are intentionally excluded from library reads.
 const LIBRARY_SELECT =
-  'id, slug, headline, description, status, modified_at, created_at, published_at, wordCount, is_dirty, workingheadline, workingdescription, working_modified_at' as const;
+  'id, slug, headline, description, status, modified_at, created_at, published_at, wordCount, is_dirty, workingheadline, workingdescription, working_modified_at, image, articleSection' as const;
 
 function validDate(value: string | null | undefined): string | null {
   return value && Number.isFinite(Date.parse(value)) ? value : null;

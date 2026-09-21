@@ -189,8 +189,16 @@ describe('dashboard server content pages with a mocked database boundary', () =>
     expect(
       screen.getByRole('heading', { name: 'Current case study' })
     ).toBeInTheDocument();
-    expect(screen.getByText('Unpublished changes')).toBeInTheDocument();
-    expect(screen.getByText('Edited Aug 1, 2026')).toBeInTheDocument();
+    // The row markup became the shared ContentCard: the status and the
+    // unpublished-change indicator now live inside one StatusPill, and the meta
+    // line carries the bare date. Assert against the card, not the old spans.
+    const card = screen
+      .getByRole('heading', { name: 'Current case study' })
+      .closest('article');
+    expect(card).not.toBeNull();
+    expect(card?.querySelector('[data-status="published"]')).not.toBeNull();
+    expect(card?.textContent).toMatch(/unpublished changes/i);
+    expect(card?.textContent).toMatch(/Aug 1, 2026/);
     expect(
       screen.queryByRole('heading', { name: 'Other case study' })
     ).not.toBeInTheDocument();
