@@ -60,3 +60,11 @@ evidence:
     command: npx vitest run app/dashboard/articles/_components/ArticleFilters.test.tsx test/dashboard/ArticleFilters.test.tsx app/dashboard/_components/ContentCard.test.tsx
     exit_code: 0
     commit_sha: "9aeb570983d53fe14023e938df61e544135af142"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "The GET form still submits q, status and sort together (FormData assertion) with the search control submitting and no Apply filters button; runtime confirmed hidden inputs status=draft and sort=title alongside the search value, apply button absent, submit labelled \"Search\", and the searchbox accessible name exactly \"Search\" after moving the button out of the label."
+    recorded_at: "2026-09-21T05:35:48.138Z"
+    test_nodeid: "test/dashboard/ArticleFilters.test.tsx > content filters > submits search, status, and sorting together through a bookmarkable GET form"
+    command: npx vitest run app/dashboard/articles/_components/ArticleFilters.test.tsx test/dashboard/ArticleFilters.test.tsx app/dashboard/_components/ContentCard.test.tsx
+    exit_code: 0
+    commit_sha: "9aeb570983d53fe14023e938df61e544135af142"
