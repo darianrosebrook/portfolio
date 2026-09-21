@@ -30,7 +30,7 @@ acceptance:
   - id: A2
     given: 'the field'
     when: 'two or more characters are typed'
-    then: 'results are still listed and a result can still be added'
+    then: 'the results region still renders and lists actionable result buttons'
   - id: A3
     given: 'the field'
     when: 'it renders'
