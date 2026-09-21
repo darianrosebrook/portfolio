@@ -2,10 +2,11 @@ id: FEAT-FILTER-INPUT-001
 title: 'Use the Input primitive for the filter search field'
 risk_tier: 2
 mode: refactor
-lifecycle_state: active
-worktree: filter-input-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge filter-input-001 at b2e916ca2a103c3f4d9caa16d1bf7ab91b58af05'
 created_at: '2026-09-21T07:09:37.054Z'
-updated_at: '2026-09-21T07:09:38.200Z'
+updated_at: '2026-09-21T07:12:43.385Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
