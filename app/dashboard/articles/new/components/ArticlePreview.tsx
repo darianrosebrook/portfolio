@@ -5,6 +5,7 @@ import chrome from './ArticlePreview.module.css';
 import type { Article } from '@/types';
 import { Image } from '@/ui/components/Image';
 import { processArticleContent } from '@/utils/tiptap/htmlGeneration';
+import Button from '@/ui/components/Button';
 
 interface ArticlePreviewProps {
   article: Partial<Article>;
@@ -32,13 +33,9 @@ export function ArticlePreview({ article, onClose }: ArticlePreviewProps) {
         <h2>Preview</h2>
         <div className={chrome.barActions}>
           <small className={chrome.hint}>Press Esc to close</small>
-          <button
-            type="button"
-            className={chrome.closeButton}
-            onClick={onClose}
-          >
+          <Button type="button" variant="secondary" onClick={onClose}>
             Close Preview
-          </button>
+          </Button>
         </div>
       </div>
 
