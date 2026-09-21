@@ -48,3 +48,12 @@ non_functional: {}
 contracts:
   - name: 'dashboard-shell'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "PublicChrome returns only the page for /dashboard and /dashboard/*, and navbar+footer+cursor for public paths; the unit tests assert both directions including the /dashboard-notes edge case. Browser check on the running app: /dashboard, both lists and the editor render no marketing navbar or footer, while / (public) still renders both."
+    recorded_at: "2026-09-21T05:11:47.301Z"
+    test_nodeid: "app/_components/PublicChrome.test.tsx > PublicChrome > drops the marketing navbar, footer and cursor inside the dashboard"
+    command: npx vitest run app/_components/PublicChrome.test.tsx app/dashboard/_components/WorkspaceRail.test.tsx
+    exit_code: 0
+    commit_sha: e2bf37030b05faa9371f827ca77659c4d6f64924
