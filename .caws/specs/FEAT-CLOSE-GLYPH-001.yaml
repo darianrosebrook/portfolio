@@ -51,3 +51,10 @@ evidence:
     recorded_at: "2026-09-21T07:41:54.285Z"
     command: "browser: inspect the close control on the worktree editor"
     commit_sha: "8235b6664703ad945985e962098e7f63da846b3e"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "With the panel open the close control was activated: the properties panel was present before and absent after (panelActuallyClosed true), and the toolbar toggle label changed from \"Hide properties\" to \"Properties\" — so the panel closed and the toggle reflects it. The two .closeProperties rules were removed with the button and the CSS-usage checker reports 0 unreferenced classes across 19 modules, exit 0; the full suite passed at 2072 with 13 expected failures and 2 skips."
+    recorded_at: "2026-09-21T07:41:55.183Z"
+    command: "browser: activate the close control and read the panel and toggle; node scripts/check-css-module-usage.mjs; npm test"
+    exit_code: 0
+    commit_sha: "8235b6664703ad945985e962098e7f63da846b3e"
