@@ -77,10 +77,9 @@ describe('content filters', () => {
       'aria-current',
       'true'
     );
-    expect(screen.getByRole('link', { name: 'Recently edited' })).toHaveAttribute(
-      'aria-current',
-      'true'
-    );
+    expect(
+      screen.getByRole('link', { name: 'Recently edited' })
+    ).toHaveAttribute('aria-current', 'true');
     // With no active filter the case-study chip hrefs carry no stale params.
     expect(screen.getByRole('link', { name: 'Drafts 2' })).toHaveAttribute(
       'href',
