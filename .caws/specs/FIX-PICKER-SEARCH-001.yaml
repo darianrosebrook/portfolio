@@ -52,3 +52,10 @@ evidence:
     recorded_at: "2026-09-21T07:15:41.757Z"
     command: "browser: type queries into the picker search field and inspect the rendered results region"
     commit_sha: "5903b9f2c0c22a6ec014f4fba7b5c69cb9c1c713"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "Measured with no interaction before reading styles: the field reports data-ds-component=\"Input\" with class \"input RelatedContentPicker_searchInput__BBQgd\" (the primitive merging the module class), no style attribute, and its placeholder intact. Appearance delta: 420x27 -> 420x48, padding 2px 4px -> 0 12px, border 1px rgb(58,58,58) -> 1px rgb(85,85,85), background rgb(33,33,33) -> rgb(0,0,0), font-size unchanged at 14px. Full suite 2070 passed and the checker reports 0 unreferenced classes across 19 modules."
+    recorded_at: "2026-09-21T07:15:42.409Z"
+    command: "browser: measure the field before and after the swap; node scripts/check-css-module-usage.mjs"
+    exit_code: 0
+    commit_sha: "5903b9f2c0c22a6ec014f4fba7b5c69cb9c1c713"
