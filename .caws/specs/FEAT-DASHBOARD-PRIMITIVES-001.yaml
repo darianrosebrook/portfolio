@@ -5,7 +5,7 @@ mode: refactor
 lifecycle_state: active
 worktree: dash-primitives-001
 created_at: '2026-09-21T05:12:56.853Z'
-updated_at: '2026-09-21T05:15:31.423Z'
+updated_at: '2026-09-21T05:19:06.522Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
@@ -34,6 +34,7 @@ scope:
     - app/dashboard/_components/ConfirmDialog.tsx
     - app/dashboard/_components/ConfirmDialog.module.css
     - app/dashboard/articles/_components/ArticleCard.test.tsx
+    - test/dashboard/contentPages.test.tsx
   out: []
 invariants:
   - 'Both libraries render items through ContentCard and status through StatusPill'
