@@ -2,10 +2,11 @@ id: FIX-METADATA-IMPORTANTS-001
 title: 'Drop the unnecessary !important flags from the metadata form styles'
 risk_tier: 3
 mode: fix
-lifecycle_state: active
-worktree: metadata-importants-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge metadata-importants-001 at 8d2c04fd6c38c40db62dda8d6187f5de2a45e4be'
 created_at: '2026-09-21T15:18:03.410Z'
-updated_at: '2026-09-21T15:18:04.427Z'
+updated_at: '2026-09-21T15:24:28.938Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
