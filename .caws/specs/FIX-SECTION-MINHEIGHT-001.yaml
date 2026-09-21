@@ -47,3 +47,10 @@ evidence:
     recorded_at: "2026-09-21T07:27:44.520Z"
     command: "browser: measure sections on the public home page; git diff --stat for the slice"
     commit_sha: "77be354b94abba157c477cfa933176f388c528e3"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "No horizontal overflow: document scrollWidth 753 against a 768px viewport. Full suite 2070 passed with 13 expected failures and 2 skips, exit 0. The CSS-usage checker, which covers this module, reports 0 unreferenced classes across 19 modules with exit 0. The one eslint message against the CSS file is \"File ignored because no matching configuration was supplied\", which is identical on the pre-change checkout, so it is not introduced here."
+    recorded_at: "2026-09-21T07:27:45.156Z"
+    command: "browser: read scrollWidth; npm test; node scripts/check-css-module-usage.mjs; npx eslint <module> on both revisions"
+    exit_code: 0
+    commit_sha: "77be354b94abba157c477cfa933176f388c528e3"
