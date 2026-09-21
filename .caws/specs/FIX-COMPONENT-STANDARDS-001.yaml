@@ -97,3 +97,7 @@ evidence:
     status: pass
     evidence_ref: "test/blueprints/extractProps.test.ts 16/16; SSG select.html API table renders exactly: children | React.ReactNode | Yes; SelectTriggerProps absent from page HTML"
     recorded_at: "2026-09-21T16:55:20.026Z"
+  - criterion_id: A5
+    status: pass
+    evidence_ref: "extractProps.test.ts: Toast end-to-end contains politeness; TextField end-to-end contains label/description/error + inherited invalid; SSG sidebar.html API table renders sections | SidebarSection[] | Yes (was empty before the registry path fix)"
+    recorded_at: "2026-09-21T16:55:20.840Z"
