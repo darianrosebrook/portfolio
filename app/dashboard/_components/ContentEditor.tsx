@@ -86,6 +86,17 @@ function ContentEditorSession({
   const transitionRef = useRef(false);
   const [busy, setBusy] = useState(false);
   const [recovery, setRecovery] = useState<DraftSnapshot | null>(null);
+  // Local to the panel: choosing a moment must not mark the record dirty or
+  // save anything until the author activates Schedule.
+  const [scheduledAt, setScheduledAt] = useState('');
+  // Same staleness applies to the status union: the database now extends it with
+  // 'scheduled', the generated row type does not.
+  const recordStatus = record.status as string | null;
+  // The generated row type predates the scheduled_at column; read it through a
+  // cast until the types are regenerated against the migrated database.
+  const recordScheduledAt =
+    (record as RecordType & { scheduled_at?: string | null }).scheduled_at ??
+    null;
   const [recoveryError, setRecoveryError] = useState<string | null>(null);
   const storageKey = recoveryKey(entity, initial);
   const recoveryPendingRef = useRef(false);
@@ -423,10 +434,14 @@ function ContentEditorSession({
     transition(async () => {
       const snapshot = recordRef.current;
       await flushWorkingDraft(snapshot);
-      const saved = await saveTransition({
+      // Returning an item to draft also clears its schedule: a draft holding a
+      // stale moment would be a promise nothing is keeping.
+      const patch: Partial<RecordType> & { scheduled_at?: string | null } = {
         slug: snapshot.slug,
         status: 'draft' as RecordType['status'],
-      });
+        scheduled_at: null,
+      };
+      const saved = await saveTransition(patch);
       if (saved) applySavedRecord(saved);
     });
 
@@ -449,6 +464,26 @@ function ContentEditorSession({
             ? new Date().toISOString()
             : snapshot.published_at,
       });
+      if (saved) applySavedRecord(saved);
+    });
+
+  const handleSchedule = () =>
+    transition(async () => {
+      const snapshot = recordRef.current;
+      if (!snapshot.slug || !snapshot.headline?.trim())
+        throw new Error(
+          'A headline and permanent slug are required before scheduling.'
+        );
+      if (!scheduledAt) throw new Error('Choose the moment to publish at.');
+      await flushWorkingDraft(snapshot);
+      // Scheduling publishes nothing. The status and the moment go to the
+      // database; the executor publishes when the moment arrives.
+      const patch: Partial<RecordType> & { scheduled_at?: string | null } = {
+        slug: snapshot.slug,
+        status: 'scheduled' as RecordType['status'],
+        scheduled_at: new Date(scheduledAt).toISOString(),
+      };
+      const saved = await saveTransition(patch);
       if (saved) applySavedRecord(saved);
     });
 
@@ -573,6 +608,24 @@ function ContentEditorSession({
           >
             {record.status === 'published' ? 'Unpublish' : 'Publish'}
           </Button>
+          {recordStatus === 'scheduled' ? (
+            <Button variant="secondary" onClick={() => setConfirm('unpublish')}>
+              Unschedule
+            </Button>
+          ) : (
+            <Button
+              variant="secondary"
+              disabled={!scheduledAt || busy}
+              onClick={handleSchedule}
+              title={
+                scheduledAt
+                  ? `Publish automatically on ${new Date(scheduledAt).toLocaleString()}`
+                  : 'Choose a moment under Properties first'
+              }
+            >
+              Schedule
+            </Button>
+          )}
           <Button
             variant="secondary"
             aria-expanded={propertiesOpen}
@@ -725,6 +778,26 @@ function ContentEditorSession({
                 }
                 id="published_at"
               />
+            </div>
+            <div className={styles.field}>
+              <label className="small" htmlFor="scheduled_at">
+                Schedule for
+              </label>
+              <input
+                type="datetime-local"
+                id="scheduled_at"
+                value={scheduledAt}
+                onChange={(e) => setScheduledAt(e.target.value)}
+              />
+              {recordStatus === 'scheduled' && (
+                <p className="small" role="status">
+                  Scheduled — publishes on its own at{' '}
+                  {recordScheduledAt
+                    ? new Date(recordScheduledAt).toLocaleString()
+                    : 'the moment set here'}
+                  .
+                </p>
+              )}
             </div>
             <div className={styles.checkboxField}>
               <Checkbox
