@@ -40,3 +40,12 @@ non_functional: {}
 contracts:
   - name: 'publish-scheduling'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Pure selection is tested deterministically at a fixed NOW: a scheduled row at or before now is due (including exactly at the moment), a future one is not, and a draft, published or archived row with a date is never due; no date or an unparseable date is not due. selectDue returns only due rows, sorted soonest first (asserted on a mixed population of four rows). 11 tests in the file pass."
+    recorded_at: "2026-09-21T06:11:33.202Z"
+    test_nodeid: "test/utils/schedule/publish.test.ts > selectDue > returns only due rows, soonest first"
+    command: npx vitest run test/utils/schedule/publish.test.ts
+    exit_code: 0
+    commit_sha: beeeb3cb6ba3b228c759a9c1125b01a430e12def
