@@ -41,3 +41,9 @@ evidence:
     recorded_at: "2026-09-21T07:27:43.884Z"
     command: "browser: measure the card and every main section at a 1400px-high viewport, before and after"
     commit_sha: "77be354b94abba157c477cfa933176f388c528e3"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "The public home page on the unchanged build reports the floor intact: its \"home\" section and \"animatedSection\" both compute min-height 280px, which is 20vh of the 1400px viewport. Two further observations bound the exemption: the dashboards own outer container section, which sits outside the main column, still reports 280px, and globals.scss is unmodified by this slice (the change is one rule in app/dashboard/_components/DashboardShell.module.css)."
+    recorded_at: "2026-09-21T07:27:44.520Z"
+    command: "browser: measure sections on the public home page; git diff --stat for the slice"
+    commit_sha: "77be354b94abba157c477cfa933176f388c528e3"
