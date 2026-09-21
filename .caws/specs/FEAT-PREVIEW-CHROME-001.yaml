@@ -2,10 +2,11 @@ id: FEAT-PREVIEW-CHROME-001
 title: 'Move the preview overlay and editor actions off inline styles'
 risk_tier: 3
 mode: refactor
-lifecycle_state: active
-worktree: preview-chrome-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge preview-chrome-001 at 087f4cd11b7dc69539dc07fe7fbfba1fd093f0fc'
 created_at: '2026-09-21T06:55:34.058Z'
-updated_at: '2026-09-21T06:55:35.136Z'
+updated_at: '2026-09-21T06:59:05.291Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
