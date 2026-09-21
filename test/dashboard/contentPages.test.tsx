@@ -279,6 +279,60 @@ describe('dashboard server content pages with a mocked database boundary', () =>
     ]);
   });
 
+  it('queues scheduled content in its own region, soonest first', async () => {
+    mocks.tables.articles.data = [
+      row({
+        id: 1,
+        slug: 'later',
+        headline: 'Publishes later',
+        status: 'scheduled',
+        scheduled_at: '2026-11-01T09:00:00Z',
+      }),
+      row({
+        id: 2,
+        slug: 'sooner',
+        headline: 'Publishes sooner',
+        status: 'scheduled',
+        scheduled_at: '2026-10-20T09:00:00Z',
+      }),
+      row({
+        id: 3,
+        slug: 'plain-draft',
+        headline: 'A plain draft',
+        status: 'draft',
+      }),
+    ];
+    render(await DashboardPage());
+
+    const queue = within(screen.getByRole('region', { name: 'Scheduled' }));
+    expect(
+      queue.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)
+    ).toEqual(['Publishes sooner', 'Publishes later']);
+    expect(queue.queryByText('A plain draft')).not.toBeInTheDocument();
+
+    // Queued work is not work-in-progress and not live.
+    const attention = within(
+      screen.getByRole('region', { name: 'Needs attention' })
+    );
+    expect(attention.getByText('A plain draft')).toBeInTheDocument();
+    expect(attention.queryByText('Publishes sooner')).not.toBeInTheDocument();
+
+    const activity = within(
+      screen.getByRole('region', { name: 'Recent activity' })
+    );
+    expect(activity.queryByText('Publishes sooner')).not.toBeInTheDocument();
+  });
+
+  it('omits the scheduled region when nothing is queued', async () => {
+    mocks.tables.articles.data = [
+      row({ id: 1, headline: 'A draft', status: 'draft' }),
+    ];
+    render(await DashboardPage());
+    expect(
+      screen.queryByRole('region', { name: 'Scheduled' })
+    ).not.toBeInTheDocument();
+  });
+
   it('labels partial dashboard data and does not invent zero counts for the failed library', async () => {
     mocks.tables.articles = { data: null, error: { message: 'failed' } };
     mocks.tables.case_studies.data = [
