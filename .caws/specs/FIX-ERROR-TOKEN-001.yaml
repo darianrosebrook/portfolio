@@ -2,10 +2,11 @@ id: FIX-ERROR-TOKEN-001
 title: 'Use a defined danger token for error text and finish the remaining inline styles'
 risk_tier: 3
 mode: fix
-lifecycle_state: active
-worktree: error-token-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge error-token-001 at 5f819cc09b05be4b4da086eccf591c8f7c683674'
 created_at: '2026-09-21T06:59:57.605Z'
-updated_at: '2026-09-21T06:59:58.773Z'
+updated_at: '2026-09-21T07:03:16.982Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
