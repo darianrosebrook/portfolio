@@ -57,3 +57,11 @@ evidence:
     command: npx vitest run app/_components/PublicChrome.test.tsx app/dashboard/_components/WorkspaceRail.test.tsx
     exit_code: 0
     commit_sha: e2bf37030b05faa9371f827ca77659c4d6f64924
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "WorkspaceRail renders a nav labelled \"Workspace\" with Overview/Articles/Case Studies/Profile and sets aria-current=\"page\" on the matching section, with the overview excluded from prefix matching; DashboardHeader renders a View site link to \"/\". Observed live: /dashboard -> Overview, /dashboard/articles -> Articles, /dashboard/case-studies -> Case Studies, the article editor -> Articles."
+    recorded_at: "2026-09-21T05:11:47.767Z"
+    test_nodeid: "app/dashboard/_components/WorkspaceRail.test.tsx > WorkspaceRail > marks a nested section active and the overview inactive"
+    command: npx vitest run app/_components/PublicChrome.test.tsx app/dashboard/_components/WorkspaceRail.test.tsx
+    exit_code: 0
+    commit_sha: e2bf37030b05faa9371f827ca77659c4d6f64924
