@@ -49,3 +49,9 @@ evidence:
     recorded_at: "2026-09-21T07:08:58.564Z"
     command: "browser: submit the filter form with and without a non-default filter and read the resulting URL"
     commit_sha: "2ffbc1634f294c1ace7a28d0d6b1ea529606ca75"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Measured at a 768px viewport on both sides: 77x37 before, 79x34 after, and in neither case does the rendered height exceed 1.8 line-heights (37/19 after), so the label stays on one line. The earlier flex: 0 0 auto / white-space: nowrap guard is no longer needed on this control because the primitive does not shrink into a wrap."
+    recorded_at: "2026-09-21T07:08:59.180Z"
+    command: "browser: compare the search control render before and after the swap"
+    commit_sha: "2ffbc1634f294c1ace7a28d0d6b1ea529606ca75"
