@@ -49,3 +49,9 @@ evidence:
     command: npx vitest run test/utils/schemas/
     exit_code: 0
     commit_sha: "20251bb62315a8f72cbe5b3ece4b96ee578126a4"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Against the live database with a throwaway article: POST created it as a draft (201), then PUT {status: scheduled, scheduled_at: 2026-09-01T09:00:00.000Z} returned 200 and the stored row read back status \"scheduled\", scheduled_at \"2026-09-01T09:00:00+00:00\" and published_at null — nothing was published. Gap: the probe had no divergent working draft, so promotion of working fields over canonical was not exercised on this path; the observable that matters (published_at still null, status still scheduled) was checked."
+    recorded_at: "2026-09-21T06:37:24.581Z"
+    command: "browser: POST /api/articles then PUT /api/articles/<slug> against the worktree dev server"
+    commit_sha: "20251bb62315a8f72cbe5b3ece4b96ee578126a4"
