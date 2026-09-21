@@ -46,3 +46,9 @@ evidence:
     recorded_at: "2026-09-21T07:18:23.550Z"
     command: "browser: activate the metadata toggle twice and read the sidebar presence and label each time"
     commit_sha: "078f2d0e64bcff1f3be4f56a14a5525c37866620"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Runtime: typing into the editor enabled Preview; activating it opened the overlay and the close control rendered as class \"button medium secondary\" with the label Close Preview. Activating it removed the overlay element entirely. The open overlay still reported 0 inline styles, so the earlier conversion of the overlay chrome is intact."
+    recorded_at: "2026-09-21T07:18:24.140Z"
+    command: "browser: open the preview from the new-content editor and activate Close Preview"
+    commit_sha: "078f2d0e64bcff1f3be4f56a14a5525c37866620"
