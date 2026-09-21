@@ -2,9 +2,10 @@ id: FEAT-DASHBOARD-PRIMITIVES-001
 title: 'Shared dashboard primitives: one card, one status language, one icon set'
 risk_tier: 2
 mode: refactor
-lifecycle_state: draft
+lifecycle_state: active
+worktree: dash-primitives-001
 created_at: '2026-09-21T05:12:56.853Z'
-updated_at: '2026-09-21T05:12:56.853Z'
+updated_at: '2026-09-21T05:12:57.811Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
