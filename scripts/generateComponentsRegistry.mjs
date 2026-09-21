@@ -151,7 +151,8 @@ function legacySeed() {
   const byNorm = new Map();
   if (legacy && Array.isArray(legacy.components)) {
     for (const item of legacy.components) {
-      if (item && item.component) byNorm.set(normalizeName(item.component), item);
+      if (item && item.component)
+        byNorm.set(normalizeName(item.component), item);
     }
   }
   return { legacy, byNorm };
@@ -171,7 +172,9 @@ function buildBuiltEntry(member, legacyItem) {
   const description =
     (typeof contract.description === 'string' && contract.description) ||
     readDescriptionFromReadme(dir) ||
-    (typeof legacyItem?.description === 'string' ? legacyItem.description : '') ||
+    (typeof legacyItem?.description === 'string'
+      ? legacyItem.description
+      : '') ||
     '';
   const category =
     legacyItem?.category ||
@@ -282,7 +285,9 @@ function main() {
   if (atIdx !== -1) {
     const value = argv[atIdx + 1];
     if (!value || Number.isNaN(Date.parse(value))) {
-      console.error('generateComponentsRegistry: --generated-at needs an ISO timestamp');
+      console.error(
+        'generateComponentsRegistry: --generated-at needs an ISO timestamp'
+      );
       process.exit(1);
     }
     generatedAt = new Date(value).toISOString();

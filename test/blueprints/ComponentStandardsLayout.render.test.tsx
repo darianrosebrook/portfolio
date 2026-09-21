@@ -43,10 +43,7 @@ describe('component-standards section layout', () => {
   it('links the section base crumb to the section root', () => {
     renderLayout();
     const baseLink = screen.getByRole('link', { name: 'Component Standards' });
-    expect(baseLink).toHaveAttribute(
-      'href',
-      '/blueprints/component-standards'
-    );
+    expect(baseLink).toHaveAttribute('href', '/blueprints/component-standards');
   });
 
   it('labels and marks the current segment as the current page', () => {

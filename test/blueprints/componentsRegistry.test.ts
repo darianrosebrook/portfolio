@@ -61,12 +61,11 @@ describe('components-transformed.json registry', () => {
     for (const item of json.components) {
       expect(typeof item.component, item.component).toBe('string');
       expect(item.id, item.component).toMatch(/^[a-z0-9]+$/);
-      expect(item.slug, item.component).toMatch(
-        /^[a-z0-9]+(?:-[a-z0-9]+)*$/
-      );
-      expect(['primitives', 'compounds', 'composers'], item.component).toContain(
-        item.layer
-      );
+      expect(item.slug, item.component).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+      expect(
+        ['primitives', 'compounds', 'composers'],
+        item.component
+      ).toContain(item.layer);
       expect(typeof item.category, item.component).toBe('string');
       expect(item.category, item.component).not.toMatch(/\//);
       expect(typeof item.description, item.component).toBe('string');

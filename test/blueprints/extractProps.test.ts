@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import path from 'path';
 import {
   extractProps,
   parsePropsFromContent,
@@ -63,7 +64,7 @@ interface ButtonAsButton {
   type?: 'button' | 'submit';
 }
 
-export type ButtonProps = ButtonAsButton | ButtonAsButton & { href: string };
+export type ButtonProps = ButtonAsButton | ButtonAsAnchor;
 `;
     const props = parsePropsFromContent(content, 'Button');
     expect(props.map((p) => p.name)).toEqual(['size', 'loading']);
@@ -99,12 +100,14 @@ export interface ToastViewportProps extends React.HTMLAttributes<HTMLDivElement>
     expect(props.map((p) => p.name)).toContain('politeness');
   });
 
-  it('unwraps Omit extends and drops the omitted keys', () => {
+  it('unwraps Omit extends and drops the omitted inherited keys', () => {
     // TextField.tsx: `export interface TextFieldProps extends Omit<InputProps, 'id'>`
+    // with `id` re-declared in its own body. An omitted key is only absent
+    // from the result when the component does not re-declare it.
     const content = `
 import { Input, type InputProps } from '../Input';
 
-export interface TextFieldProps extends Omit<InputProps, 'id'> {
+export interface TextFieldProps extends Omit<InputProps, 'id' | 'invalid'> {
   id?: string;
   label?: React.ReactNode;
 }
@@ -120,8 +123,8 @@ export interface InputProps {
     });
     const names = props.map((p) => p.name);
     expect(names).toContain('label'); // own
-    expect(names).toContain('invalid'); // inherited
-    expect(names).not.toContain('id'); // inherited copy suppressed by Omit; own wins anyway
+    expect(names).toContain('id'); // own re-declaration survives the Omit
+    expect(names).not.toContain('invalid'); // omitted from inheritance, not re-declared
   });
 
   it('prefers own members over inherited ones on name collision', () => {
@@ -132,12 +135,16 @@ export interface WidgetProps extends BaseProps {
   tone: 'loud';
 }
 `;
-    const props = parsePropsFromContent(content, 'Widget', () => `
+    const props = parsePropsFromContent(
+      content,
+      'Widget',
+      () => `
 export interface BaseProps {
   tone: 'quiet';
   size?: string;
 }
-`);
+`
+    );
     const tone = props.find((p) => p.name === 'tone');
     expect(tone?.type).toBe("'loud'");
     expect(props.map((p) => p.name)).toContain('size');
@@ -200,10 +207,7 @@ export function Field({
 
 describe('extractProps end-to-end against real component sources', () => {
   it('documents Select own props, not SelectTrigger props', () => {
-    const props = extractProps(
-      path.join(UI_COMPONENTS, 'Select'),
-      'Select'
-    );
+    const props = extractProps(path.join(UI_COMPONENTS, 'Select'), 'Select');
     expect(props.map((p) => p.name)).toEqual(['children']);
   });
 
