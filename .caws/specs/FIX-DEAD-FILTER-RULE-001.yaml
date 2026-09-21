@@ -41,3 +41,9 @@ evidence:
     recorded_at: "2026-09-21T07:31:43.655Z"
     command: "browser: read the field computed styles on the pre-change and post-change builds at the same viewport"
     commit_sha: d9f6a712654474f61402f8cc03d35066e8167b5a
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "grep shows .filterFields is used in exactly one place, ArticleFilters.tsx, and that file contains zero select elements — the runtime check agrees, reporting 0 selects inside the filter fields and 0 selects on the page. So the rule select half matched no element. This is the class of dead CSS the usage checker cannot see: it tracks whether a class name is referenced, and .filterFields is referenced, so the unreachable selector stayed invisible to it."
+    recorded_at: "2026-09-21T07:31:44.294Z"
+    command: "grep -rn filterFields app/dashboard --include=*.tsx; browser: count selects inside the filter fields"
+    commit_sha: d9f6a712654474f61402f8cc03d35066e8167b5a
