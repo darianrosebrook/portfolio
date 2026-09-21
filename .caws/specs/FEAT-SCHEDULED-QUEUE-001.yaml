@@ -5,7 +5,7 @@ mode: feature
 lifecycle_state: active
 worktree: sched-queue-001
 created_at: '2026-09-21T06:12:18.704Z'
-updated_at: '2026-09-21T06:12:20.361Z'
+updated_at: '2026-09-21T06:12:32.380Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
@@ -16,6 +16,7 @@ scope:
   in:
     - 'app/dashboard/page.tsx'
     - 'test/dashboard/contentPages.test.tsx'
+    - utils/editor/contentLibrary.ts
   out: []
 invariants:
   - 'A scheduled row appears in the queue and nowhere else on the overview'
