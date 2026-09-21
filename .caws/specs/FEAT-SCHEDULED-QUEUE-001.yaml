@@ -1,0 +1,32 @@
+id: FEAT-SCHEDULED-QUEUE-001
+title: 'Show the scheduled queue on the overview'
+risk_tier: 3
+mode: feature
+lifecycle_state: draft
+created_at: '2026-09-21T06:12:18.704Z'
+updated_at: '2026-09-21T06:12:18.704Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard overview — scheduled queue'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/page.tsx'
+    - 'test/dashboard/contentPages.test.tsx'
+  out: []
+invariants:
+  - 'A scheduled row appears in the queue and nowhere else on the overview'
+  - 'The queue is ordered by scheduled_at, soonest first'
+acceptance:
+  - id: A1
+    given: 'an item with status scheduled and a scheduled_at'
+    when: 'the overview renders'
+    then: 'it appears in a Scheduled region showing its date, ordered soonest first, and it does not appear under Needs attention or Recent activity'
+  - id: A2
+    given: 'no scheduled items'
+    when: 'the overview renders'
+    then: 'the Scheduled region is absent rather than empty'
+non_functional: {}
+contracts: []
