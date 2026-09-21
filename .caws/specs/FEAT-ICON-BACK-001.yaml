@@ -45,3 +45,9 @@ evidence:
     recorded_at: "2026-09-21T07:21:14.496Z"
     command: "grep for the glyph in Icon.tsx; browser: count geometry elements inside the rendered control"
     commit_sha: "4f571e6df0a04356096c7ec1990e3130b75655fe"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Runtime on the article editor: the control is a button with class \"IconButton_button__H8AQr\", aria-label \"Back to articles\", title \"Back to articles\", data-variant \"default\", no style attribute, and it contains the icon svg. The label prop supplies both the accessible name and the tooltip, so they cannot drift apart."
+    recorded_at: "2026-09-21T07:21:15.099Z"
+    command: "browser: inspect the back control on the worktree editor"
+    commit_sha: "4f571e6df0a04356096c7ec1990e3130b75655fe"
