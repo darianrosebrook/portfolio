@@ -80,3 +80,8 @@ non_functional: {}
 contracts:
   - name: 'component-standards-docs'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "test/blueprints/ComponentStandardsLayout.render.test.tsx + FoundationsLayout.render.test.tsx (7 pass); SSG HTML .next/server/app/blueprints/component-standards/select.html contains nav[aria-label=Breadcrumb]; foundations pages render breadcrumbs client-side only (pre-existing PageTransition-null-until-mounted pattern)"
+    recorded_at: "2026-09-21T16:54:57.419Z"
