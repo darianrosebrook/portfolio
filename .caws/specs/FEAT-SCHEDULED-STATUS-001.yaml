@@ -2,9 +2,10 @@ id: FEAT-SCHEDULED-STATUS-001
 title: 'Add the scheduled member to the article_status enum'
 risk_tier: 2
 mode: feature
-lifecycle_state: draft
+lifecycle_state: active
+worktree: sched-status-001
 created_at: '2026-09-21T06:05:06.700Z'
-updated_at: '2026-09-21T06:05:06.700Z'
+updated_at: '2026-09-21T06:05:07.860Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
