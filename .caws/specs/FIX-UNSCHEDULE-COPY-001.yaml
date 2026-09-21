@@ -2,10 +2,11 @@ id: FIX-UNSCHEDULE-COPY-001
 title: 'Give the scheduled item its own confirm copy instead of the unpublish copy'
 risk_tier: 2
 mode: fix
-lifecycle_state: active
-worktree: unschedule-copy-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge unschedule-copy-001 at ff68cc56c7bfe80f34fcd58f8064ed05e345520f'
 created_at: '2026-09-21T07:33:14.892Z'
-updated_at: '2026-09-21T07:33:16.335Z'
+updated_at: '2026-09-21T07:36:57.382Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
