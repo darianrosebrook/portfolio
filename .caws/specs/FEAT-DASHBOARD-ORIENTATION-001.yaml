@@ -2,10 +2,11 @@ id: FEAT-DASHBOARD-ORIENTATION-001
 title: 'Dashboard orientation: workspace overview with needs-attention, recent activity and compact counts'
 risk_tier: 2
 mode: refactor
-lifecycle_state: active
-worktree: dash-orientation-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge dash-orientation-001 at 6cfb7f1c0e2d0623bf412d6bae3c0f6454aceaa5'
 created_at: '2026-09-21T05:22:14.828Z'
-updated_at: '2026-09-21T05:22:16.775Z'
+updated_at: '2026-09-21T05:27:41.889Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
