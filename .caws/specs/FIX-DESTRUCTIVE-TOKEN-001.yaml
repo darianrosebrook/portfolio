@@ -32,3 +32,11 @@ non_functional: {}
 contracts:
   - name: 'dashboard-editor'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "grep for --semantic-color-foreground-destructive across ui/ and app/ returns only this file before the change and 0 files after; the replacement names --semantic-color-foreground-danger, which app/designTokens.scss defines at line 661 (#d9292b light, #ea6465 dark)."
+    recorded_at: "2026-09-21T14:44:49.974Z"
+    command: "grep -rn -- \"--semantic-color-foreground-destructive\" ui/ app/"
+    exit_code: 1
+    commit_sha: ebcf5e8c20b4bd6258912498826c5f0ff15ca263
