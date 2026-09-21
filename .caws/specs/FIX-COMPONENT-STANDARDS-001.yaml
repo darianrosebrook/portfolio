@@ -4,7 +4,7 @@ risk_tier: 2
 mode: fix
 lifecycle_state: draft
 created_at: '2026-09-21T16:24:45.224Z'
-updated_at: '2026-09-21T16:25:32.396Z'
+updated_at: '2026-09-21T16:25:43.615Z'
 created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
 blast_radius:
   modules:
@@ -31,7 +31,15 @@ scope:
     - test/blueprints/FoundationsLayout.render.test.tsx
     - test/blueprints/StatusMatrix.render.test.tsx
     - test/components/transformed.test.ts
-  out: []
+  out:
+    - types/designTokens.ts
+    - ui/designTokens/designTokens.json
+    - scripts/generateComponentsAndDocs.mjs
+    - scripts/buildComponentsFromTaxonomy.mjs
+    - app/blueprints/component-standards/_lib/componentAPI.ts
+    - ui/components
+    - ui/modules
+    - app/blueprints/component-standards/_components/ComprehensiveComponentDoc.tsx
 invariants:
   - 'TODO: describe one invariant this spec guarantees.'
 acceptance:
