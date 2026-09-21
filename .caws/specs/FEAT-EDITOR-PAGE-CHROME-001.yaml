@@ -38,3 +38,10 @@ evidence:
     recorded_at: "2026-09-21T06:54:39.214Z"
     command: "browser: load an article editor and a non-existent slug on the worktree server, inspect for style attributes"
     commit_sha: "1c89e3380f3fa1a57a6cf762d70818b6540cdd6b"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "grep -rho \"style={{\" counted 26 before and 15 after; the file reports 0. The eleven accounted for are the loading container/spinner/text, the error container/icon/title/body and the header, back button, title and slug."
+    recorded_at: "2026-09-21T06:54:39.801Z"
+    command: "grep -rc \"style={{\" app/dashboard --include=*.tsx"
+    exit_code: 0
+    commit_sha: "1c89e3380f3fa1a57a6cf762d70818b6540cdd6b"
