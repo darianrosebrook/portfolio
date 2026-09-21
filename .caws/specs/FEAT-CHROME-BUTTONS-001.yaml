@@ -52,3 +52,10 @@ evidence:
     recorded_at: "2026-09-21T07:18:24.140Z"
     command: "browser: open the preview from the new-content editor and activate Close Preview"
     commit_sha: "078f2d0e64bcff1f3be4f56a14a5525c37866620"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "grep -c \"<button\" returns 0 for both EditorLayout.tsx and ArticlePreview.tsx, and the names closeButton and metadataToggle appear nowhere in either component or either module. The CSS-usage checker reports 0 unreferenced classes across 19 modules, so removing those rules left nothing dead, and the full suite passed at 2070. CORRECTION to the commit message: it claims the checker would have caught the first failed patch. It would not have — the checker reports classes defined but never referenced, whereas the broken state was a class referenced but no longer defined, which passes typecheck because CSS-module types are not per-class here. What actually surfaced the failure was the patch script printing \"anchor not found\" to stderr and the follow-up grep showing the raw button still present."
+    recorded_at: "2026-09-21T07:18:24.737Z"
+    command: "grep -c \"<button\" on both components; grep for the two class names; node scripts/check-css-module-usage.mjs"
+    exit_code: 0
+    commit_sha: "078f2d0e64bcff1f3be4f56a14a5525c37866620"
