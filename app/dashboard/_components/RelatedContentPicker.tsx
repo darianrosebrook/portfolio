@@ -11,6 +11,7 @@ import {
   type RelationshipType,
 } from '@/utils/supabase/contentRelations';
 import styles from './RelatedContentPicker.module.css';
+import { Input } from '@/ui/components/Input';
 
 type SyncStatus = 'idle' | 'saving' | 'saved' | 'error';
 
@@ -220,7 +221,7 @@ export function RelatedContentPicker({
       ) : (
         <>
           <div className={styles.searchWrap}>
-            <input
+            <Input
               id={`related-search-${contentType}`}
               className={styles.searchInput}
               type="search"
