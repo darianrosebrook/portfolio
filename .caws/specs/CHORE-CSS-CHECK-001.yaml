@@ -1,0 +1,31 @@
+id: CHORE-CSS-CHECK-001
+title: 'Cover the dashboard modules added by this work in the CSS usage checker'
+risk_tier: 3
+mode: chore
+lifecycle_state: draft
+created_at: '2026-09-21T07:04:14.732Z'
+updated_at: '2026-09-21T07:04:14.732Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'design-system hygiene tooling'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'scripts/check-css-module-usage.mjs'
+    - 'app/dashboard/articles/new/components/SaveStatus.module.css'
+  out: []
+invariants:
+  - 'The checker still reports only genuinely unreferenced classes'
+acceptance:
+  - id: A1
+    given: 'the checker'
+    when: 'it runs'
+    then: 'it lists every dashboard module added by this work and reports zero unreferenced classes across them'
+  - id: A2
+    given: 'a module the checker covers'
+    when: 'a class is defined but never referenced in it'
+    then: 'the checker names that class and exits 1'
+non_functional: {}
+contracts: []
