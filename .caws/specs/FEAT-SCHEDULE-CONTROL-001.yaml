@@ -38,3 +38,10 @@ non_functional: {}
 contracts:
   - name: 'publish-scheduling'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Browser run against the live database with a throwaway draft article open in the editor: typing a future moment into the Schedule for field and activating Schedule stored status \"scheduled\" with scheduled_at \"2026-09-24T06:41:00+00:00\" and published_at still null, so nothing was published; the editor swapped its action to Unschedule; and a server-rendered fetch of /dashboard contained both the scheduled-queue region and the probe headline, so the item appears in the overview queue. Probe deleted afterwards (204) and the overview no longer listed it. No committed test covers the editor: ContentEditor is a large client component needing fetch, localStorage and Tiptap mocks, so the runtime observation is the evidence."
+    recorded_at: "2026-09-21T06:42:36.059Z"
+    command: "browser: POST /api/articles, open the editor, set #scheduled_at, click Schedule, read back via the API and the /dashboard HTML"
+    commit_sha: "8a254aeaae2f2de61e3e10d9a8022bad6ac45e4e"
