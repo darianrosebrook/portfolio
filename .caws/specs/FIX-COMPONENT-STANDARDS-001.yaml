@@ -4,7 +4,7 @@ risk_tier: 2
 mode: fix
 lifecycle_state: draft
 created_at: '2026-09-21T16:24:45.224Z'
-updated_at: '2026-09-21T16:24:45.224Z'
+updated_at: '2026-09-21T16:25:32.396Z'
 created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
 blast_radius:
   modules:
@@ -13,7 +13,24 @@ blast_radius:
 operational_rollback_slo: 5m
 scope:
   in:
-    - 'TODO: list the file(s) or directories this spec authorizes.'
+    - app/blueprints/component-standards/layout.tsx
+    - app/blueprints/foundations/layout.tsx
+    - app/blueprints/component-standards/components-transformed.json
+    - app/blueprints/component-standards/components.schema.json
+    - app/blueprints/component-standards/_lib/componentsData.ts
+    - app/blueprints/component-standards/_lib/extractProps.ts
+    - app/blueprints/component-standards/_components/StatusMatrix.tsx
+    - app/blueprints/component-standards/_components/codesandbox-theming.scss
+    - app/blueprints/component-standards/_components/codesandbox-theming.css
+    - app/globals.scss
+    - scripts/generateComponentsRegistry.mjs
+    - package.json
+    - test/blueprints/componentsRegistry.test.ts
+    - test/blueprints/extractProps.test.ts
+    - test/blueprints/ComponentStandardsLayout.render.test.tsx
+    - test/blueprints/FoundationsLayout.render.test.tsx
+    - test/blueprints/StatusMatrix.render.test.tsx
+    - test/components/transformed.test.ts
   out: []
 invariants:
   - 'TODO: describe one invariant this spec guarantees.'
