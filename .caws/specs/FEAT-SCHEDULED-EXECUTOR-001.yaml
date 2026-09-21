@@ -57,3 +57,9 @@ evidence:
     command: npx vitest run test/utils/schedule/publish.test.ts
     exit_code: 0
     commit_sha: beeeb3cb6ba3b228c759a9c1125b01a430e12def
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "Runtime against the worktree build with CRON_SECRET set for the process only: no Authorization header -> 401 {\"error\":\"Unauthorized\"}; Authorization: Bearer wrong-secret -> 401; Authorization: Bearer local-test-secret -> 503 {\"error\":\"Scheduling is not enabled in this database: article_status has no scheduled member.\",\"code\":\"22P02\"}. So an unauthenticated caller never reaches content, and an authorised caller fails closed with a typed 503 while the enum migration is unapplied rather than a 500. No committed test covers the route: exercising it would need the whole supabase boundary mocked, so this measurement is the evidence. Separately confirmed no redirect interferes: proxy.ts only redirects paths starting with /dashboard."
+    recorded_at: "2026-09-21T06:11:34.593Z"
+    command: "CRON_SECRET=<test> npx next dev --webpack -p 3100 + three curl calls"
+    commit_sha: beeeb3cb6ba3b228c759a9c1125b01a430e12def
