@@ -28,3 +28,10 @@ non_functional: {}
 contracts:
   - name: 'publish-scheduling'
     type: schema
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Shape check on utils/supabase/migrations/add-scheduled-status.sql: exactly one ALTER TYPE public.article_status ADD VALUE IF NOT EXISTS 'scheduled' statement (idempotent), plus a documented rollback that explains Postgres cannot remove an enum member and gives the row-level retreat (set status back to draft and clear scheduled_at). The file also records that the statement must run outside a transaction that uses the new member. The member does not exist in the live database yet, so this is inspection evidence for an unapplied file."
+    recorded_at: "2026-09-21T06:06:32.823Z"
+    command: grep-based shape check on the migration file
+    commit_sha: "85be04e07a74937fb3c41a44bd39dc06639865e7"
