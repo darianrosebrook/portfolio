@@ -46,3 +46,11 @@ evidence:
     command: npx vitest run test/dashboard/ContentEditor.test.tsx
     exit_code: 0
     commit_sha: "6d2f391083be4ff375a9f5190f2c1b0df624bccb"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "The control case renders the default published record, clicks Unpublish, and asserts the confirm label is Unpublish and the copy still contains \"disappear from the public site\". It passed in the same run in which the scheduled case failed — so it discriminates between the paths rather than passing vacuously — and still passes after the change, which is the evidence that the published copy is untouched."
+    recorded_at: "2026-09-21T07:36:55.716Z"
+    test_nodeid: "test/dashboard/ContentEditor.test.tsx > confirm copy when returning content to draft > keeps the publish-specific copy for a published item"
+    command: npx vitest run test/dashboard/ContentEditor.test.tsx
+    exit_code: 0
+    commit_sha: "6d2f391083be4ff375a9f5190f2c1b0df624bccb"
