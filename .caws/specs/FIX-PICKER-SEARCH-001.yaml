@@ -2,10 +2,11 @@ id: FIX-PICKER-SEARCH-001
 title: 'Give the related-content search field an accessible name on the Input primitive'
 risk_tier: 2
 mode: fix
-lifecycle_state: active
-worktree: picker-search-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge picker-search-001 at b0fa0643acbcffb54dbdacb95660b91b9cf3fa34'
 created_at: '2026-09-21T07:13:18.364Z'
-updated_at: '2026-09-21T07:13:19.465Z'
+updated_at: '2026-09-21T07:15:43.394Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
