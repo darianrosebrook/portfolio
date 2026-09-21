@@ -2,9 +2,10 @@ id: FEAT-FILTER-INPUT-001
 title: 'Use the Input primitive for the filter search field'
 risk_tier: 2
 mode: refactor
-lifecycle_state: draft
+lifecycle_state: active
+worktree: filter-input-001
 created_at: '2026-09-21T07:09:37.054Z'
-updated_at: '2026-09-21T07:09:37.054Z'
+updated_at: '2026-09-21T07:09:38.200Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
