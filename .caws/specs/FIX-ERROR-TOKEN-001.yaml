@@ -1,0 +1,44 @@
+id: FIX-ERROR-TOKEN-001
+title: 'Use a defined danger token for error text and finish the remaining inline styles'
+risk_tier: 3
+mode: fix
+lifecycle_state: draft
+created_at: '2026-09-21T06:59:57.605Z'
+updated_at: '2026-09-21T06:59:57.605Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard error affordances and remaining inline styles'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/profile/page.tsx'
+    - 'app/dashboard/profile/page.module.css'
+    - 'app/dashboard/_components/ContentEditor.tsx'
+    - 'app/dashboard/_components/ContentEditor.module.css'
+    - 'app/dashboard/_components/NewContentEditor.tsx'
+    - 'app/dashboard/_components/NewContentEditor.module.css'
+    - 'app/dashboard/articles/new/components/ArticleMetadataForm.tsx'
+    - 'app/dashboard/articles/new/components/ArticleMetadataForm.module.css'
+    - 'app/dashboard/articles/new/components/SaveStatus.module.css'
+    - 'app/dashboard/articles/new/components/EditorActions.module.css'
+  out: []
+invariants:
+  - 'Error text resolves to a token that exists rather than one that is never defined'
+  - 'Layout and behaviour are otherwise unchanged'
+acceptance:
+  - id: A1
+    given: 'the dashboard modules'
+    when: 'they are inspected'
+    then: 'no reference to the undefined destructive foreground token remains and each error colour names a token that is defined'
+  - id: A2
+    given: 'the publish error rendered in the editor'
+    when: 'its computed colour is read'
+    then: 'it differs from the inherited text colour, so the error affordance is actually visible'
+  - id: A3
+    given: 'the dashboard before and after'
+    when: 'inline style objects are counted'
+    then: 'the total drops from 7 to 1, the remainder being the deliberate cover Image style'
+non_functional: {}
+contracts: []
