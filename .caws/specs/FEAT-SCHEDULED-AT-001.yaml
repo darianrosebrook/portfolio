@@ -2,9 +2,10 @@ id: FEAT-SCHEDULED-AT-001
 title: 'Author the scheduled_at migration that publish scheduling needs'
 risk_tier: 2
 mode: feature
-lifecycle_state: draft
+lifecycle_state: active
+worktree: sched-at-001
 created_at: '2026-09-21T06:02:26.650Z'
-updated_at: '2026-09-21T06:02:26.650Z'
+updated_at: '2026-09-21T06:02:28.564Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
