@@ -25,9 +25,11 @@ invariants:
   - 'The submit label never wraps, which is the regression this control was fixed for earlier'
 acceptance:
   - id: A1
-    given: 'the articles filter form'
-    when: 'a query is submitted'
-    then: 'the URL still carries q, status and sort and the results are filtered'
+    given: 'the articles filter view with a non-default filter applied'
+    when: 'a query is submitted with the new control'
+    then: >-
+      the resulting URL keeps the filter and adds the query, so submission through
+      the Button primitive still works
   - id: A2
     given: 'the search row at a narrow width'
     when: 'it renders'
