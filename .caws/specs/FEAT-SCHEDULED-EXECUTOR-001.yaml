@@ -49,3 +49,11 @@ evidence:
     command: npx vitest run test/utils/schedule/publish.test.ts
     exit_code: 0
     commit_sha: beeeb3cb6ba3b228c759a9c1125b01a430e12def
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "promotionPayload copies working fields over canonical (headline/body/description asserted), sets status published and is_dirty false, and takes published_at from scheduled_at: the test asserts published_at equals the scheduled instant, not the run time. A row with no working copy leaves the canonical field absent from the update rather than nulling it, and a null working value is not treated as an override."
+    recorded_at: "2026-09-21T06:11:33.954Z"
+    test_nodeid: "test/utils/schedule/publish.test.ts > promotionPayload > dates the piece from the scheduled moment, not from the run"
+    command: npx vitest run test/utils/schedule/publish.test.ts
+    exit_code: 0
+    commit_sha: beeeb3cb6ba3b228c759a9c1125b01a430e12def
