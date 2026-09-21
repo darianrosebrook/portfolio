@@ -43,3 +43,12 @@ non_functional: {}
 contracts:
   - name: 'dashboard-library-filters'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Both lists render an auto-fill grid: measured 2 computed grid columns at 1280 on /dashboard/articles (13 cards) and /dashboard/case-studies (11 cards), with the cover above the title in both (stacked ContentCard). The ContentCard test covers the cover and the typographic fallback; runtime showed 5 covers + 8 fallbacks on articles and 3 + 8 on case studies, with 0 inline style nodes inside any card."
+    recorded_at: "2026-09-21T05:35:47.124Z"
+    test_nodeid: "app/dashboard/_components/ContentCard.test.tsx > ContentCard > falls back to title initials when there is no cover, with no broken image"
+    command: npx vitest run app/dashboard/articles/_components/ArticleFilters.test.tsx test/dashboard/ArticleFilters.test.tsx app/dashboard/_components/ContentCard.test.tsx
+    exit_code: 0
+    commit_sha: "9aeb570983d53fe14023e938df61e544135af142"
