@@ -2,9 +2,11 @@ id: FIX-SLUG-INPUT-001
 title: 'Keep author-typed hyphens in the dashboard slug field'
 risk_tier: 2
 mode: fix
-lifecycle_state: active
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'slug field keeps typed hyphens; save and publish normalize the slug. A1 has a passing component+unit test (CAWS runner detection could not re-derive it in this repo layout, recorded self-reported); A2 is a runtime observation on the fixed dev server.'
 created_at: '2026-09-21T03:35:08.097Z'
-updated_at: '2026-09-21T03:45:47.054Z'
+updated_at: '2026-09-21T03:46:10.162Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
