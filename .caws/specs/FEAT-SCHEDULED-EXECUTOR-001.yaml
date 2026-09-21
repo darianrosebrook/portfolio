@@ -2,10 +2,11 @@ id: FEAT-SCHEDULED-EXECUTOR-001
 title: 'Publish scheduled content at its due date'
 risk_tier: 2
 mode: feature
-lifecycle_state: active
-worktree: sched-exec-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge sched-exec-001 at 13443172f9ac1e7f562a1a4a1e1caa45aeb8ce05'
 created_at: '2026-09-21T06:07:22.421Z'
-updated_at: '2026-09-21T06:07:23.921Z'
+updated_at: '2026-09-21T06:11:35.778Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
