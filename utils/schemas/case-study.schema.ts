@@ -1,12 +1,18 @@
 import { z } from 'zod';
 
-const caseStudyStatusEnum = z.enum(['draft', 'published', 'archived']);
+const caseStudyStatusEnum = z.enum([
+  'draft',
+  'published',
+  'archived',
+  'scheduled',
+]);
 
 export const caseStudySchema = z.object({
   id: z.number(),
   created_at: z.string().datetime().nullable(),
   modified_at: z.string().datetime().nullable(),
   published_at: z.string().datetime().nullable(),
+  scheduled_at: z.string().datetime().nullable(),
   status: caseStudyStatusEnum.default('draft'),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
     message: 'Slug must be url-safe and contain no spaces',
@@ -59,6 +65,7 @@ export const createCaseStudySchema = caseStudySchema
     created_at: true,
     modified_at: true,
     published_at: true,
+    scheduled_at: true,
   })
   .partial({
     author: true,
@@ -83,6 +90,9 @@ export const updateCaseStudySchema = createCaseStudySchema.partial().extend({
   // publish with the current time. Optional and default-free: a first publish
   // still sends no date, so the route's now() fallback stays reachable.
   published_at: caseStudySchema.shape.published_at.optional(),
+  // Scheduling carries the moment the executor will publish at; it has to be
+  // accepted here or zod strips it, exactly as published_at was.
+  scheduled_at: caseStudySchema.shape.scheduled_at.optional(),
 });
 
 export const patchCaseStudyDraftSchema = z.object({

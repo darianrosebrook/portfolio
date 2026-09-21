@@ -1,6 +1,11 @@
 import { z } from 'zod';
 
-const articleStatusEnum = z.enum(['draft', 'published', 'archived']);
+const articleStatusEnum = z.enum([
+  'draft',
+  'published',
+  'archived',
+  'scheduled',
+]);
 
 /**
  * Accepts a value as either a full URL, a relative path (starts with `/`),
@@ -50,6 +55,7 @@ export const articleSchema = z.object({
   created_at: timestampField,
   modified_at: timestampField,
   published_at: timestampField,
+  scheduled_at: timestampField,
   status: articleStatusEnum.default('draft'),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
     message: 'Slug must be url-safe and contain no spaces',
@@ -97,6 +103,7 @@ export const createArticleSchema = articleSchema
     created_at: true,
     modified_at: true,
     published_at: true,
+    scheduled_at: true,
   })
   .partial({
     // These fields are optional when creating - the server fills them in.
@@ -128,6 +135,9 @@ export const updateArticleSchema = createArticleSchema.partial().extend({
   // publish with the current time. Optional and default-free: a first publish
   // still sends no date, so the route's now() fallback stays reachable.
   published_at: timestampField.optional(),
+  // Scheduling carries the moment the executor will publish at. Like
+  // published_at it has to be accepted here or zod strips it.
+  scheduled_at: timestampField.optional(),
 });
 
 export const patchArticleDraftSchema = z.object({
