@@ -1,0 +1,43 @@
+id: FEAT-DASHBOARD-GRID-001
+title: 'Library grid and inline filter chips'
+risk_tier: 2
+mode: refactor
+lifecycle_state: draft
+created_at: '2026-09-21T05:28:32.882Z'
+updated_at: '2026-09-21T05:28:32.882Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard library lists and filter bar'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/articles/_components/ArticleFilters.tsx'
+    - 'app/dashboard/articles/_components/ArticleFilters.test.tsx'
+    - 'app/dashboard/articles/articles.module.css'
+    - 'app/dashboard/_components/ContentCard.module.css'
+    - 'app/dashboard/page.module.css'
+    - 'test/dashboard/contentPages.test.tsx'
+  out: []
+invariants:
+  - 'Filters stay bookmarkable and usable without JavaScript'
+  - 'A status chip link preserves the active search query and sort'
+  - 'Status counts still render only for a library that loaded'
+acceptance:
+  - id: A1
+    given: 'the articles and case-studies lists at 1024px or wider'
+    when: 'they render'
+    then: 'items lay out in a multi-column grid and each card shows its cover image or typographic fallback above its title'
+  - id: A2
+    given: 'a list with filters active'
+    when: 'the author follows a status chip'
+    then: 'the href carries that status while preserving the active search query and sort, the chip shows its count, and the active chip is marked aria-current'
+  - id: A3
+    given: 'the search field'
+    when: 'the author submits it'
+    then: 'the request carries the query with the current status and sort preserved as hidden inputs, and no standalone Apply filters control exists'
+non_functional: {}
+contracts:
+  - name: 'dashboard-library-filters'
+    type: behavior
