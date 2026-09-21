@@ -32,3 +32,12 @@ acceptance:
     then: 'the Scheduled region is absent rather than empty'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "With two scheduled fixtures (2026-10-20 and 2026-11-01) and a draft, the overview renders a Scheduled region whose level-3 headings are exactly [\"Publishes sooner\", \"Publishes later\"] — so it is ordered by scheduled_at ascending — and the draft is absent from it. The same test asserts the two scheduled items do not appear under Needs attention while the draft does, and that they do not appear under Recent activity."
+    recorded_at: "2026-09-21T06:15:02.441Z"
+    test_nodeid: "test/dashboard/contentPages.test.tsx > dashboard server content pages with a mocked database boundary > queues scheduled content in its own region, soonest first"
+    command: npx vitest run test/dashboard/contentPages.test.tsx
+    exit_code: 0
+    commit_sha: c489c99a225ddfc95fd74e8c86f867f9034f85e6
