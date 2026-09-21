@@ -70,3 +70,11 @@ evidence:
     command: npx vitest run test/dashboard/contentPages.test.tsx
     exit_code: 0
     commit_sha: dc1d6dc492eadc7e85433d8971c0b9965ee4a064
+  - criterion_id: A4
+    status: pass
+    evidence_ref: "scripts/check-css-module-usage.mjs resolves each stylesheet import binding, strips comments and keyframes, and reports any class no importing module references. Before the sweep it reported 24 orphans (all articles.module.css) plus page.module.css .pageHeader; after the sweep it reports 0 unreferenced classes across 10 modules with exit 0."
+    recorded_at: "2026-09-21T05:27:29.813Z"
+    command: node scripts/check-css-module-usage.mjs
+    exit_code: 0
+    artifact_path: scripts/check-css-module-usage.mjs
+    commit_sha: dc1d6dc492eadc7e85433d8971c0b9965ee4a064
