@@ -1,0 +1,35 @@
+id: FIX-METADATA-IMPORTANTS-001
+title: 'Drop the unnecessary !important flags from the metadata form styles'
+risk_tier: 3
+mode: fix
+lifecycle_state: draft
+created_at: '2026-09-21T15:18:03.410Z'
+updated_at: '2026-09-21T15:18:03.410Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard new-content metadata form — stylesheet'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/articles/new/components/ArticleMetadataForm.module.css'
+  out: []
+invariants:
+  - 'The underline field design is preserved; the Input primitive is a boxed control and is not a drop-in for it'
+  - 'Declarations are unchanged; only the !important flags are removed'
+acceptance:
+  - id: A1
+    given: 'the metadata form'
+    when: 'the !important flags are removed and the controls are measured at the same viewport'
+    then: 'all seven controls computed padding, background, border, radius, min-height, max-width, colour and font-size are unchanged'
+  - id: A2
+    given: 'a field hovered and focused'
+    when: 'its bottom border is read'
+    then: 'the accent border colour still applies, so the state rules keep working without the flags'
+  - id: A3
+    given: 'the module after the change'
+    when: 'it is inspected'
+    then: 'it contains zero !important declarations'
+non_functional: {}
+contracts: []
