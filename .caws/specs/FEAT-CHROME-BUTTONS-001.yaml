@@ -39,3 +39,10 @@ non_functional: {}
 contracts:
   - name: 'dashboard-editor'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Runtime on the new-content editor: the toggle renders with class \"button small secondary\" (the primitive) and the label Hide Metadata with the sidebar present. Activating it hid the sidebar and flipped the label to Show Metadata; activating it again restored the sidebar and the Hide Metadata label. So both the behaviour and the label flip survive the swap."
+    recorded_at: "2026-09-21T07:18:23.550Z"
+    command: "browser: activate the metadata toggle twice and read the sidebar presence and label each time"
+    commit_sha: "078f2d0e64bcff1f3be4f56a14a5525c37866620"
