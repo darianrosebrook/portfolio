@@ -44,3 +44,10 @@ evidence:
     recorded_at: "2026-09-21T06:47:48.165Z"
     command: "browser: load /dashboard/articles/new and inspect the chrome elements for style attributes"
     commit_sha: ba031ce7142e0eb9ab66e3003e44f09d05324903
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "grep -rho \"style={{\" app/dashboard --include=*.tsx counted 41 before and 26 after; the two files in this slice each report 0. The fifteen accounted for are the ten in EditorLayout and the five in SaveStatus."
+    recorded_at: "2026-09-21T06:47:48.707Z"
+    command: "grep -rc \"style={{\" app/dashboard --include=*.tsx"
+    exit_code: 0
+    commit_sha: ba031ce7142e0eb9ab66e3003e44f09d05324903
