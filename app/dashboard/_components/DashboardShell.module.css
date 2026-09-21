@@ -16,6 +16,23 @@
   min-width: 0;
 }
 
+/*
+ * globals.scss sets `section { min-height: 20vh }` for the public site. The
+ * dashboard's cards and regions are sections for their semantics, so they
+ * inherited a viewport-proportional floor: at a 900px-high viewport a card with
+ * 78px of content rendered 180px tall, and at 1400px it rendered 280px.
+ * Content decides the height here instead.
+ *
+ * The physical property is deliberate — it matches the global declaration
+ * exactly, leaving no logical/physical alias for the cascade to resolve — and
+ * the descendant selector outranks the bare element selector, so no !important
+ * is needed and the public site is untouched.
+ */
+.main section {
+  min-height: auto;
+}
+
+
 @media (width <= 60rem) {
   .body {
     grid-template-columns: minmax(0, 1fr);
