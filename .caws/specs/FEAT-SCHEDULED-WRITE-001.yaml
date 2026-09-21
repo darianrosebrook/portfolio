@@ -1,0 +1,41 @@
+id: FEAT-SCHEDULED-WRITE-001
+title: 'Let an update schedule content instead of publishing it'
+risk_tier: 2
+mode: feature
+lifecycle_state: draft
+created_at: '2026-09-21T06:33:43.821Z'
+updated_at: '2026-09-21T06:33:43.821Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'content update schemas and publish path'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/schemas/article.schema.ts'
+    - 'utils/schemas/case-study.schema.ts'
+    - 'test/utils/schemas/publish-payload-repro.test.ts'
+    - 'test/utils/schemas/case-study.schema.test.ts'
+  out: []
+invariants:
+  - 'A scheduled update stores the status and the moment, and publishes nothing'
+  - 'The working draft is promoted only on an actual publish, never on a schedule'
+  - 'The scheduled status is accepted only because the database enum carries it'
+acceptance:
+  - id: A1
+    given: 'an update payload carrying status scheduled and a scheduled_at'
+    when: 'the update schema parses it'
+    then: 'the status is accepted and the timestamp is retained rather than stripped'
+  - id: A2
+    given: 'a scheduled update through the route'
+    when: 'it is applied'
+    then: 'the row holds status scheduled and scheduled_at, the canonical body is left alone, and is_dirty stays as it was'
+  - id: A3
+    given: 'a draft scheduled in the past'
+    when: 'the executor runs with the cron token'
+    then: 'the row becomes published with published_at equal to the scheduled instant'
+non_functional: {}
+contracts:
+  - name: 'publish-scheduling'
+    type: behavior
