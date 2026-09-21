@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import styles from './EditorLayout.module.css';
 
 interface EditorLayoutProps {
   children: React.ReactNode;
@@ -14,7 +15,9 @@ interface EditorLayoutProps {
 
 /**
  * Editor layout component
- * Provides Notion-like layout with sidebar and top toolbar
+ * Provides Notion-like layout with sidebar and top toolbar.
+ * Styling lives in EditorLayout.module.css; the toolbar, canvas and sidebar are
+ * described here as classes so no value is written inline.
  */
 export function EditorLayout({
   children,
@@ -27,54 +30,21 @@ export function EditorLayout({
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: 'calc(100dvh - 12rem)',
-        background: 'var(--semantic-color-background-primary)',
-      }}
-    >
+    <div className={styles.shell}>
       {/* Top toolbar */}
-      <div
-        style={{
-          borderBottom: '1px solid var(--semantic-color-border-primary)',
-          padding: '12px 24px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          background: 'var(--semantic-color-background-primary)',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <Link
-            href={backHref}
-            style={{
-              color: 'var(--semantic-color-foreground-secondary)',
-              textDecoration: 'none',
-              fontSize: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-            }}
-          >
+      <div className={styles.toolbar}>
+        <div className={styles.group}>
+          <Link href={backHref} className={styles.back}>
             ← Back to {backLabel}
           </Link>
           {saveStatus}
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div className={styles.group}>
           {actions}
           <button
+            type="button"
+            className={styles.metadataToggle}
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            style={{
-              padding: '6px 12px',
-              border: '1px solid var(--semantic-color-border-primary)',
-              borderRadius: 'var(--core-shape-radius-small)',
-              background: 'var(--semantic-color-background-secondary)',
-              color: 'var(--semantic-color-foreground-primary)',
-              cursor: 'pointer',
-              fontSize: '12px',
-            }}
           >
             {sidebarOpen ? 'Hide' : 'Show'} Metadata
           </button>
@@ -82,50 +52,14 @@ export function EditorLayout({
       </div>
 
       {/* Main content area */}
-      <div
-        style={{
-          display: 'flex',
-          flex: 1,
-          alignItems: 'flex-start',
-        }}
-      >
+      <div className={styles.body}>
         {/* Editor */}
-        <div
-          style={{
-            flex: 1,
-            overflow: 'visible',
-            display: 'flex',
-            justifyContent: 'center',
-            padding: '48px 24px',
-          }}
-        >
-          <div
-            style={{
-              maxWidth: '900px',
-              width: '100%',
-            }}
-          >
-            {children}
-          </div>
+        <div className={styles.canvas}>
+          <div className={styles.document}>{children}</div>
         </div>
 
         {/* Sidebar */}
-        {sidebarOpen && (
-          <div
-            style={{
-              width: '320px',
-              borderLeft: '1px solid var(--semantic-color-border-primary)',
-              maxHeight: 'calc(100dvh - 7rem)',
-              overflow: 'auto',
-              position: 'sticky',
-              top: 'var(--core-spacing-size-04)',
-              background: 'var(--semantic-color-background-primary)',
-              padding: '24px',
-            }}
-          >
-            {sidebar}
-          </div>
-        )}
+        {sidebarOpen && <div className={styles.sidebar}>{sidebar}</div>}
       </div>
     </div>
   );
