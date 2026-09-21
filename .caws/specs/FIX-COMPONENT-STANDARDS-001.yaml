@@ -2,13 +2,16 @@ id: FIX-COMPONENT-STANDARDS-001
 title: 'Repair component-standards docs: breadcrumbs, registry pipeline, status matrix, props extraction, codesandbox css'
 risk_tier: 2
 mode: fix
-lifecycle_state: draft
+lifecycle_state: active
+worktree: component-standards-docs-001
 created_at: '2026-09-21T16:24:45.224Z'
-updated_at: '2026-09-21T16:25:43.615Z'
+updated_at: '2026-09-21T16:26:45.669Z'
 created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
 blast_radius:
   modules:
-    - 'TODO: list one or more modules this spec touches.'
+    - 'component-standards blueprint section (section layout, registry data + schema, StatusMatrix, _lib extraction)'
+    - 'foundations blueprint layout (breadcrumb re-enable only)'
+    - 'global styles (codesandbox theming asset rename)'
   data_migration: false
 operational_rollback_slo: 5m
 scope:
@@ -41,12 +44,38 @@ scope:
     - ui/modules
     - app/blueprints/component-standards/_components/ComprehensiveComponentDoc.tsx
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'Every registry Built entry resolves to an existing on-disk directory containing {Name}.tsx and {Name}.contract.json; the drift-guard test fails npm test otherwise.'
+  - 'The registry carries no paths.docs field; component doc pages are served exclusively by the [slug] route.'
+  - 'No edit touches types/designTokens.ts, ui/designTokens/designTokens.json, scripts/generateComponentsAndDocs.mjs, or scripts/buildComponentsFromTaxonomy.mjs.'
 acceptance:
   - id: A1
-    given: 'TODO'
-    when: 'TODO'
-    then: 'TODO'
+    given: 'a user browses any page under /blueprints/component-standards or /blueprints/foundations'
+    when: 'the section layout renders'
+    then: 'a breadcrumb navigation (nav aria-label="Breadcrumb") renders with the section base link and the current page marked aria-current="page"'
+  - id: A2
+    given: 'the regenerated components-transformed.json on disk'
+    when: 'the registry drift-guard test runs'
+    then: 'every Built entry resolves on disk to {Name}.tsx + {Name}.contract.json, every on-disk pair appears exactly once as Built, no entry has paths.docs, and Sidebar resolves to ui/modules/Sidebar'
+  - id: A3
+    given: 'the component status page'
+    when: 'StatusMatrix renders'
+    then: 'no Docs column and no docs-exist checkmark is rendered (the column was derived from fictional paths.docs data)'
+  - id: A4
+    given: 'the Select component doc page'
+    when: 'props are extracted from ui/components/Select'
+    then: 'the API table shows SelectProps own members (children), not SelectTriggerProps members'
+  - id: A5
+    given: 'the Toast and TextField component doc pages'
+    when: 'props are extracted through one-level local relative extends resolution'
+    then: 'Toast includes the inherited politeness prop and TextField includes Input inherited members minus id, alongside their own members'
+  - id: A6
+    given: 'the Field and Button components'
+    when: 'props are extracted'
+    then: 'Field returns [] (inline destructured param type, documented limitation) and Button returns the ButtonBaseProps subset (union alias unmatched), both pinned by tests'
+  - id: A7
+    given: 'codesandbox-theming renamed to plain css'
+    when: 'the app builds and renders a Sandpack-bearing page'
+    then: 'the build succeeds and the .sp-* theming styles still apply'
 non_functional: {}
 contracts:
   - name: 'component-standards-docs'
