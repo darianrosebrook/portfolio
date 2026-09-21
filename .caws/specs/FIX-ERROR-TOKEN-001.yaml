@@ -34,9 +34,11 @@ acceptance:
     when: 'they are inspected'
     then: 'no reference to the undefined destructive foreground token remains and each error colour names a token that is defined'
   - id: A2
-    given: 'the publish error rendered in the editor'
-    when: 'its computed colour is read'
-    then: 'it differs from the inherited text colour, so the error affordance is actually visible'
+    given: 'the dashboard modules that colour error text'
+    when: 'the token they name is resolved on a rendered page'
+    then: >-
+      it resolves to a concrete colour, where the token they used before resolves to
+      the inherited colour and so left the declaration invalid
   - id: A3
     given: 'the dashboard before and after'
     when: 'inline style objects are counted'
