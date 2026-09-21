@@ -123,6 +123,11 @@ export const updateArticleSchema = createArticleSchema.partial().extend({
   // is being renamed.
   status: articleStatusEnum.optional(),
   is_dirty: z.boolean().nullable().optional(),
+  // createArticleSchema omits published_at, so zod silently dropped the date the
+  // editor sent and the publish route's `?? nowIso` fallback re-stamped every
+  // publish with the current time. Optional and default-free: a first publish
+  // still sends no date, so the route's now() fallback stays reachable.
+  published_at: timestampField.optional(),
 });
 
 export const patchArticleDraftSchema = z.object({
