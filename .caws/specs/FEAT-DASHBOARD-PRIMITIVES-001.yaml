@@ -2,10 +2,11 @@ id: FEAT-DASHBOARD-PRIMITIVES-001
 title: 'Shared dashboard primitives: one card, one status language, one icon set'
 risk_tier: 2
 mode: refactor
-lifecycle_state: active
-worktree: dash-primitives-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge dash-primitives-001 at a27bb270db53a06f14ecc0655dbe279d9a501a9d'
 created_at: '2026-09-21T05:12:56.853Z'
-updated_at: '2026-09-21T05:19:06.522Z'
+updated_at: '2026-09-21T05:20:57.393Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
