@@ -33,3 +33,10 @@ non_functional: {}
 contracts:
   - name: 'publish-scheduling'
     type: schema
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Shape check on utils/supabase/migrations/add-scheduled-at.sql: 2 ADD COLUMN IF NOT EXISTS scheduled_at timestamptz (articles, case_studies), 2 CREATE INDEX IF NOT EXISTS, 2 partial WHERE scheduled_at IS NOT NULL clauses, and 4 commented rollback statements (2 index drops, 2 column drops). A line-based guard scan reported 2 statements without IF NOT EXISTS; both are the ALTER TABLE header lines whose guard sits on the continuation line, so the DDL is fully guarded. Separately verified against the live project through the REST schema: both tables now expose scheduled_at as timestamp with time zone (this file was applied by the user out of band, and the file records what was applied)."
+    recorded_at: "2026-09-21T06:04:33.378Z"
+    command: grep-based shape check + REST schema read (GET /rest/v1/ with the service key)
+    commit_sha: abea68f676fceef6b190bc717788e601e8880b3f
