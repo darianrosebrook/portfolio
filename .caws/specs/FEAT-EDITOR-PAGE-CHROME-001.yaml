@@ -1,0 +1,32 @@
+id: FEAT-EDITOR-PAGE-CHROME-001
+title: 'Move the article editor page shell off inline styles'
+risk_tier: 3
+mode: refactor
+lifecycle_state: draft
+created_at: '2026-09-21T06:48:18.073Z'
+updated_at: '2026-09-21T06:48:18.073Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard article editor page — loading, error and header chrome'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/articles/[slug]/page.tsx'
+    - 'app/dashboard/articles/[slug]/page.module.css'
+  out: []
+invariants:
+  - 'The page keeps its loading, error and loaded states, and its accessible names'
+  - 'Values use the token scale, with the same fidelity exception the chrome slice documented'
+acceptance:
+  - id: A1
+    given: 'an article editor page'
+    when: 'it renders in its loaded state'
+    then: 'the header chrome carries no inline style attribute'
+  - id: A2
+    given: 'the dashboard before and after'
+    when: 'inline style objects are counted'
+    then: 'the total drops from 26 to 15'
+non_functional: {}
+contracts: []
