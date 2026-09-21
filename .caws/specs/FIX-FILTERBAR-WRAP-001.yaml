@@ -2,9 +2,10 @@ id: FIX-FILTERBAR-WRAP-001
 title: 'Stop the filter search submit from wrapping its label'
 risk_tier: 3
 mode: fix
-lifecycle_state: draft
+lifecycle_state: active
+worktree: filterbar-wrap-001
 created_at: '2026-09-21T05:36:54.921Z'
-updated_at: '2026-09-21T05:36:54.921Z'
+updated_at: '2026-09-21T05:36:55.890Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
