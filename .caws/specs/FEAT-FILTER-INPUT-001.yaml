@@ -37,3 +37,10 @@ non_functional: {}
 contracts:
   - name: 'dashboard-search'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Runtime: the fields label text normalises to exactly \"Search\" (not \"Search Search\"), the labels for attribute equals the field id (filter-search), and clicking the label moved focus to the field, so the association works explicitly as well as by wrapping. Before the change the field was implicitly labelled and reported the same \"Search\"."
+    recorded_at: "2026-09-21T07:12:41.301Z"
+    command: "browser: read input.labels[0].textContent, the htmlFor/id pair, and whether clicking the label focuses the field"
+    commit_sha: "45780b2edb471ead868105dcd963913a84618d38"
