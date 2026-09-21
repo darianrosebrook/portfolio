@@ -1,8 +1,7 @@
 'use client';
 // layout for component-standards that contains breadcrumbs
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
-// import { Breadcrumbs } from '@/ui/components/Breadcrumbs/Breadcrumbs';
-// import { PageTransition } from '@/ui/components/PageTransition';
+import { Breadcrumbs } from '@/ui/components/Breadcrumbs/Breadcrumbs';
 import React from 'react';
 
 export default function ComponentStandardsLayout({
@@ -52,11 +51,14 @@ export default function ComponentStandardsLayout({
     toolbar: 'Toolbar',
   };
 
-  const _crumbs = useBreadcrumbs({ base, labelMap });
+  const crumbs = useBreadcrumbs({ base, labelMap });
 
-  // TEMP: disable PageTransition wrappers to isolate render loop on component pages
+  // PageTransition wrappers are intentionally not used in this section;
+  // re-wrapping these pages is a separate, unmeasured change. Breadcrumbs
+  // itself derives purely from the pathname and renders no effects.
   return (
     <section className="content">
+      <Breadcrumbs base={base} crumbs={crumbs} />
       <div>{children}</div>
     </section>
   );
