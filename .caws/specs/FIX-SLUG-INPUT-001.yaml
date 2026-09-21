@@ -38,12 +38,11 @@ contracts:
 evidence:
   - criterion_id: A1
     status: pass
-    evidence_ref: "Component test types \"domain-induced\" and \"a-b\" into the controlled slug field and asserts the value keeps every hyphen (fails on the unfixed code: field became \"ab\"); unit test covers a character-by-character sequence. Confirmed end-to-end on the fixed dev server through the dashboard: field held \"slug-fix-end-to-end-check\" and the PATCH persisted that slug with HTTP 200."
-    recorded_at: "2026-09-21T03:45:05.826Z"
+    evidence_ref: "Component test types \"domain-induced\" and \"a-b\" into the controlled slug field and asserts the value keeps every hyphen; it fails on the unfixed code (field became \"ab\"). The unit test covers the character-by-character sequence. Confirmed end-to-end on the fixed dev server through the dashboard: the field held \"slug-fix-end-to-end-check\" and the PATCH persisted that slug with HTTP 200. Raw run output is kept out of the repo at tmp/evidence/FIX-SLUG-INPUT-001/ (gitignored), so the citation is the test itself, not an artifact."
+    recorded_at: "2026-09-21T03:46:00.181Z"
     test_nodeid: "app/dashboard/articles/new/components/ArticleMetadataForm.test.tsx > ArticleMetadataForm slug field > does not collapse a typed hyphen when the next character arrives"
     command: npx vitest run utils/slugify.test.ts app/dashboard/articles/new/components/ArticleMetadataForm.test.tsx
     exit_code: 0
-    artifact_path: /Users/darianrosebrook/Desktop/Projects/portfolio/tmp/evidence/FIX-SLUG-INPUT-001/focused-tests.txt
     commit_sha: e03671c3cb2abad710dc06991dd6e834effbf093
   - criterion_id: A2
     status: pass
