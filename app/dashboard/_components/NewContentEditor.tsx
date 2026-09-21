@@ -281,15 +281,17 @@ function CreationSession({
             throw new Error(
               'This draft session has closed. Recover it before saving again.'
             );
-          if (
-            !snapshot.slug ||
-            !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(snapshot.slug)
-          )
+          // The slug field may hold a trailing hyphen while the author is typing
+          // (slugifyInput keeps it so the next character can join it). Persist
+          // only the normalized slug, so autosave never writes or rejects a
+          // partially typed value.
+          const normalizedSlug = slugify(snapshot.slug ?? '');
+          if (!normalizedSlug)
             throw new Error('Set a valid slug before saving.');
           const identity = controller.identity;
           const payload = identity
             ? {
-                slug: snapshot.slug,
+                slug: normalizedSlug,
                 workingbody: snapshot.articleBody ?? null,
                 workingheadline: snapshot.headline ?? null,
                 workingdescription: snapshot.description ?? null,
@@ -299,7 +301,7 @@ function CreationSession({
                 wordCount: snapshot.wordCount ?? null,
               }
             : {
-                slug: snapshot.slug,
+                slug: normalizedSlug,
                 headline: snapshot.headline ?? null,
                 description: snapshot.description ?? null,
                 articleBody: snapshot.articleBody ?? null,
@@ -320,7 +322,7 @@ function CreationSession({
           const saved = await readSavedRecord(response);
           // Identity is updated synchronously before another queued request starts.
           controller.identity = { id: saved.id, slug: saved.slug };
-          if (saved.slug !== snapshot.slug) {
+          if (saved.slug !== normalizedSlug) {
             persist();
             throw new Error(
               'The server did not confirm the requested slug. Your local draft is retained.'
@@ -402,7 +404,9 @@ function CreationSession({
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            slug: snapshot.slug,
+            // manualSave() above persists the normalized slug; normalize here too
+            // so a trailing hyphen typed just before publishing cannot 400.
+            slug: slugify(snapshot.slug ?? ''),
             status: 'published',
             published_at: new Date().toISOString(),
           }),
