@@ -47,3 +47,10 @@ evidence:
     recorded_at: "2026-09-22T01:48:19.383Z"
     command: "browser: hover and focus the headline field, read border-bottom-colour"
     commit_sha: "06783ac16e7ef67c8de5655e9c15fce23845c3a1"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "grep counts 0 !important occurrences in the module (was 33). Full suite 2104 passed with 13 expected failures and 2 skips, exit 0; typecheck and lint clean; the CSS-usage checker reports 0 unreferenced classes across 19 modules. Observed drift worth a look: the suite count rose from 2072 to 2104 between runs with no test files added — both runs are green, cause not yet identified."
+    recorded_at: "2026-09-22T01:48:20.058Z"
+    command: "grep -c \"!important\" on the module; npm test; node scripts/check-css-module-usage.mjs"
+    exit_code: 0
+    commit_sha: "06783ac16e7ef67c8de5655e9c15fce23845c3a1"
