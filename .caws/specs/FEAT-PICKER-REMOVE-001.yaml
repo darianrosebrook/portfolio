@@ -48,3 +48,10 @@ evidence:
     recorded_at: "2026-09-22T02:05:16.138Z"
     command: "browser: activate the remove control and verify the row is gone"
     commit_sha: f0142fd8ea0c14ef91c1a7d4650345a77a0aead9
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "grep counts 0 raw button elements for the remove control and 0 removeButton references in the component and module; the CSS-usage checker reports 0 unreferenced classes across 19 modules (the removed rules left nothing dead); the full suite passed at 2072 with 13 expected failures and 2 skips. The result-button remains a raw list-item control by judgement: the boxed Button would restyle its title and meta spans."
+    recorded_at: "2026-09-22T02:05:16.705Z"
+    command: "grep -c \"<button\" and removeButton refs; node scripts/check-css-module-usage.mjs; npm test"
+    exit_code: 0
+    commit_sha: f0142fd8ea0c14ef91c1a7d4650345a77a0aead9
