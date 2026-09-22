@@ -9,7 +9,9 @@ updated_at: '2026-09-22T02:09:21.982Z'
 created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
 blast_radius:
   modules:
-    - 'TODO: list one or more modules this spec touches.'
+    - 'design tokens build pipeline + committed artifacts (compose generator, monolithic core group, regenerated JSON/TS)'
+    - 'PageTransition SSR rendering (ui component + foundations layout output)'
+    - 'component visibility gate + dead docs code (scripts, _lib deletions, registry drift guard)'
   data_migration: false
 operational_rollback_slo: 5m
 scope:
@@ -35,12 +37,39 @@ scope:
     - scripts/migrate-missing-tokens.mjs
     - ui/designTokens/resolver.json
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'Server markup never hides content: no inline opacity:0 or null-gated children in SSR output (foUC rule).'
+  - 'View Transitions naming and the navigation fade behavior are unchanged by the PageTransition fix.'
+  - 'Token regeneration is deterministic: tokens:build:full run twice yields zero diff; tokens:inspect keeps working off the retained monolithic core.tokens.json.'
+  - 'Planned registry entries never affect the visibility verdict; exit is driven solely by Built Tier-1 failures.'
 acceptance:
   - id: A1
-    given: 'TODO'
-    when: 'TODO'
-    then: 'TODO'
+    given: 'the committed token artifacts'
+    when: 'tokens:build:full runs'
+    then: 'the regenerated designTokens.json and types/designTokens.ts contain no component.* group, are byte-stable across runs, and end with a trailing newline'
+  - id: A2
+    given: 'the drift-guard test (test/utils/designTokens/artifacts.test.ts)'
+    when: 'npm test runs'
+    then: 'resolver output paths, committed JSON leaf paths, and the TokenPath union are set-equal, and any future source/artifact drift fails the suite'
+  - id: A3
+    given: 'a foundations page rendered on the server'
+    when: 'PageTransition wraps section content'
+    then: 'static HTML contains the children and the PageTransition wrapper, with no enabled/fallback/transitioning classes before mount'
+  - id: A4
+    given: 'a client render after mount'
+    when: 'the component hydrates on initial load'
+    then: 'the enabled and fallback classes apply (jsdom has no View Transitions API) and transitioning does not (mount-run skip: no first-load blink)'
+  - id: A5
+    given: 'the visibility gate script'
+    when: 'validateComponentVisibility runs against the current registry'
+    then: 'it exits 0 with all Built entries passing Tier 1 under on-disk conventions (index.ts|tsx, {Name}.css|module.scss) and Planned entries reported informationally only'
+  - id: A6
+    given: 'the registry drift guard'
+    when: 'npm test runs'
+    then: 'every Built entry resolves to index.{ts,tsx} + {Name}.tsx + ({Name}.css|module.scss) on disk'
+  - id: A7
+    given: 'the dead modules componentAPI.ts and playgroundLoader.ts'
+    when: 'they are deleted'
+    then: 'zero imports break; npm test, lint, and typecheck stay green'
 non_functional: {}
 contracts:
   - name: 'drift-hygiene'
