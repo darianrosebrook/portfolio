@@ -74,3 +74,10 @@ non_functional: {}
 contracts:
   - name: 'drift-hygiene'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "tokens:build:full run twice produced zero delta on the second run (diff -q byte-identical); designTokens.json ends with 0x0a newline; 0 component.* leaf paths in either artifact"
+    recorded_at: "2026-09-22T03:04:58.833Z"
+    artifact_path: ui/designTokens/designTokens.json
+    commit_sha: "1e8f6ed6"
