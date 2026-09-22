@@ -225,7 +225,7 @@ export function composeTokens(incremental = true): boolean {
   const resolverTokens = tryResolverDocumentComposition();
   if (resolverTokens) {
     // Write resolved tokens directly (no banner for JSON files)
-    const content = JSON.stringify(resolverTokens, null, 2);
+    const content = JSON.stringify(resolverTokens, null, 2) + '\n';
 
     writeOutputFile(PATHS.tokens, content, 'composed design tokens');
     updateFileCache(PATHS.tokens);
