@@ -81,3 +81,8 @@ evidence:
     recorded_at: "2026-09-22T03:04:58.833Z"
     artifact_path: ui/designTokens/designTokens.json
     commit_sha: "1e8f6ed6"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "4 pins: resolver-derived paths == committed JSON leaves == TokenPath union; no component.* namespace; trailing newline. Red-proven: HEAD's stale artifact held 33 component.* leaf paths"
+    recorded_at: "2026-09-22T03:05:19.983Z"
+    test_nodeid: test/utils/designTokens/artifacts.test.ts
