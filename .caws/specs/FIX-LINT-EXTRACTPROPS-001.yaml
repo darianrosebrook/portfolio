@@ -8,7 +8,7 @@ updated_at: '2026-09-22T15:09:21.048Z'
 created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
 blast_radius:
   modules:
-    - 'TODO: list one or more modules this spec touches.'
+    - 'component-standards _lib props extraction (dead local variable only; no behavior change)'
   data_migration: false
 operational_rollback_slo: 5m
 scope:
@@ -16,11 +16,11 @@ scope:
     - app/blueprints/component-standards/_lib/extractProps.ts
   out: []
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'No behavior change: extractProps output is identical before and after; the extractProps test suite stays green.'
 acceptance:
   - id: A1
-    given: 'TODO'
-    when: 'TODO'
-    then: 'TODO'
+    given: 'the extractProps declaration scanner'
+    when: 'eslint runs over app/blueprints/component-standards/_lib/extractProps.ts'
+    then: 'the no-unused-vars warning for declStart is gone and the extractProps test suite passes unchanged'
 non_functional: {}
 contracts: []
