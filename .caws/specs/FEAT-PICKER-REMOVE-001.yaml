@@ -1,0 +1,36 @@
+id: FEAT-PICKER-REMOVE-001
+title: 'Put the picker remove control on the IconButton primitive'
+risk_tier: 3
+mode: refactor
+lifecycle_state: draft
+created_at: '2026-09-22T01:54:29.944Z'
+updated_at: '2026-09-22T01:54:29.944Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard editor — related content picker'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/_components/RelatedContentPicker.tsx'
+    - 'app/dashboard/_components/RelatedContentPicker.module.css'
+  out: []
+invariants:
+  - 'The remove control keeps its accessible name (Remove + item title) and its behaviour'
+  - 'Adding then removing a relation leaves the relations as they were'
+acceptance:
+  - id: A1
+    given: 'a relation added in the picker'
+    when: 'its row renders'
+    then: 'the remove control is an IconButton with the accessible name Remove <title> and the close glyph draws geometry'
+  - id: A2
+    given: 'a relation'
+    when: 'the remove control is activated'
+    then: 'the relation is removed from the list and the underlying relations end where they started'
+  - id: A3
+    given: 'the component after the change'
+    when: 'it is inspected'
+    then: 'no raw button remains for the remove control and the module retains no orphaned class'
+non_functional: {}
+contracts: []
