@@ -58,7 +58,6 @@ function findPropsDeclaration(
   let match: RegExpExecArray | null;
   while ((match = nameRegex.exec(content)) !== null) {
     const name = match[1];
-    const declStart = match.index;
     const afterName = match.index + match[0].length;
 
     // Scan for the first statement delimiter to classify the declaration.
