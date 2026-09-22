@@ -86,3 +86,8 @@ evidence:
     evidence_ref: "4 pins: resolver-derived paths == committed JSON leaves == TokenPath union; no component.* namespace; trailing newline. Red-proven: HEAD's stale artifact held 33 component.* leaf paths"
     recorded_at: "2026-09-22T03:05:19.983Z"
     test_nodeid: test/utils/designTokens/artifacts.test.ts
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "renderToStaticMarkup: children + wrapper in static HTML, no enabled/fallback/transitioning classes; SSG foundations/tokens.html now 14541 chars of main content (was 0), breadcrumb nav present, no inline opacity:0"
+    recorded_at: "2026-09-22T03:05:20.561Z"
+    test_nodeid: test/components/pageTransition.ssr.test.tsx
