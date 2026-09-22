@@ -101,3 +101,8 @@ evidence:
     evidence_ref: "8 unit pins + full script run: node scripts/validateComponentVisibility.mjs exits 0, 56/56 Built pass Tier 1 under index.ts|tsx + css|module.scss conventions, 38 Planned informational"
     recorded_at: "2026-09-22T03:05:50.326Z"
     test_nodeid: test/unit/scripts/validateComponentVisibility.test.mjs
+  - criterion_id: A6
+    status: pass
+    evidence_ref: "new Tier-1 file invariant (index.ts|tsx + {Name}.tsx + css|module.scss) green for all 56 Built entries as committed"
+    recorded_at: "2026-09-22T03:05:50.854Z"
+    test_nodeid: test/blueprints/componentsRegistry.test.ts
