@@ -41,3 +41,9 @@ evidence:
     recorded_at: "2026-09-22T01:48:18.670Z"
     command: "browser: read all six controls computed styles before and after the scoping change at the same viewport"
     commit_sha: "06783ac16e7ef67c8de5655e9c15fce23845c3a1"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "With the flags gone the state rules still win: hovering the headline leaves the bottom border at the neutral rgb(113,113,113) and focusing it applies the rgb(234,100,101) accent — identical to the flag-based baseline measured immediately before."
+    recorded_at: "2026-09-22T01:48:19.383Z"
+    command: "browser: hover and focus the headline field, read border-bottom-colour"
+    commit_sha: "06783ac16e7ef67c8de5655e9c15fce23845c3a1"
