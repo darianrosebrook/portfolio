@@ -4,7 +4,7 @@ risk_tier: 2
 mode: fix
 lifecycle_state: draft
 created_at: '2026-09-22T02:05:45.417Z'
-updated_at: '2026-09-22T02:05:45.417Z'
+updated_at: '2026-09-22T02:06:04.143Z'
 created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
 blast_radius:
   modules:
@@ -13,7 +13,21 @@ blast_radius:
 operational_rollback_slo: 5m
 scope:
   in:
-    - 'TODO: list the file(s) or directories this spec authorizes.'
+    - ui/designTokens/designTokens.json
+    - ui/designTokens/core.tokens.json
+    - types/designTokens.ts
+    - utils/designTokens/generators/compose.ts
+    - utils/designTokens/generators/generateTypes.mjs
+    - ui/designTokens/README.md
+    - ui/components/PageTransition/PageTransition.tsx
+    - scripts/validateComponentVisibility.mjs
+    - app/blueprints/component-standards/_lib/componentAPI.ts
+    - app/blueprints/component-standards/_lib/playgroundLoader.ts
+    - test/utils/designTokens
+    - test/components
+    - test/unit/scripts
+    - test/fixtures/component-visibility
+    - test/blueprints/componentsRegistry.test.ts
   out: []
 invariants:
   - 'TODO: describe one invariant this spec guarantees.'
