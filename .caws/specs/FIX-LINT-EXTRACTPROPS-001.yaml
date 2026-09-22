@@ -2,10 +2,11 @@ id: FIX-LINT-EXTRACTPROPS-001
 title: 'Remove unused declStart variable in extractProps declaration scan'
 risk_tier: 3
 mode: fix
-lifecycle_state: active
-worktree: lint-extractprops
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge lint-extractprops at dfb7c5eff6ded937400737dcd86af946d068a242'
 created_at: '2026-09-22T15:08:04.337Z'
-updated_at: '2026-09-22T15:11:54.272Z'
+updated_at: '2026-09-22T15:14:06.858Z'
 created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
 blast_radius:
   modules:
