@@ -1,0 +1,28 @@
+id: FIX-DRIFT-HYGIENE-001
+title: 'Regenerate stale token artifacts with drift guard, PageTransition SSR, visibility gate semantics, dead code removal'
+risk_tier: 2
+mode: fix
+lifecycle_state: draft
+created_at: '2026-09-22T02:05:45.417Z'
+updated_at: '2026-09-22T02:05:45.417Z'
+created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'TODO: list the file(s) or directories this spec authorizes.'
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'TODO'
+    when: 'TODO'
+    then: 'TODO'
+non_functional: {}
+contracts:
+  - name: 'drift-hygiene'
+    type: behavior
