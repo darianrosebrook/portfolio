@@ -1,2 +1,4 @@
-export function Widget() { return null; }
+export function Widget() {
+  return null;
+}
 export default Widget;

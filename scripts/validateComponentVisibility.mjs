@@ -104,7 +104,10 @@ export function checkTier1(component, root = PROJECT_ROOT) {
     pathExists &&
     componentName &&
     (fs.existsSync(
-      path.join(path.resolve(root, component.paths.component), `${componentName}.css`)
+      path.join(
+        path.resolve(root, component.paths.component),
+        `${componentName}.css`
+      )
     ) ||
       fs.existsSync(
         path.join(
@@ -114,14 +117,19 @@ export function checkTier1(component, root = PROJECT_ROOT) {
       ));
   checks.hasStylesheet = hasStylesheet;
   if (!hasStylesheet) {
-    issues.push(`Missing required file: ${componentName}.css (or .module.scss)`);
+    issues.push(
+      `Missing required file: ${componentName}.css (or .module.scss)`
+    );
   }
 
   const hasMainFile =
     pathExists &&
     componentName &&
     fs.existsSync(
-      path.join(path.resolve(root, component.paths.component), `${componentName}.tsx`)
+      path.join(
+        path.resolve(root, component.paths.component),
+        `${componentName}.tsx`
+      )
     );
   checks.hasMainFile = hasMainFile;
   if (!hasMainFile) {
@@ -594,7 +602,10 @@ function main() {
   log(colors.green, `   🟢 Fully Visible: ${byStatus.visible}`);
   log(colors.yellow, `   🟡 Partially Visible: ${byStatus.partial}`);
   log(colors.red, `   🔴 Not Visible (Built): ${byStatus['not-visible']}`);
-  log(colors.blue, `   🗺️  Planned (roadmap, informational): ${byStatus.planned}`);
+  log(
+    colors.blue,
+    `   🗺️  Planned (roadmap, informational): ${byStatus.planned}`
+  );
 
   const avgScore =
     reports.reduce((sum, r) => sum + r.score, 0) / reports.length;

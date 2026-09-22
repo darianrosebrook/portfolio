@@ -61,7 +61,9 @@ describe('PageTransition server rendering', () => {
         <p>foundations content</p>
       </PageTransition>
     );
-    const wrapper = document.querySelector('[data-ds-component="PageTransition"]');
+    const wrapper = document.querySelector(
+      '[data-ds-component="PageTransition"]'
+    );
     expect(wrapper).toBeTruthy();
     // jsdom has no View Transitions API → fallback convention applies;
     // matchMedia mock reports no reduced motion → shouldAnimate is true.

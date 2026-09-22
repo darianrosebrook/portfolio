@@ -155,9 +155,10 @@ describe('components-transformed.json registry', () => {
       const hasIndex =
         fs.existsSync(path.join(dir, 'index.ts')) ||
         fs.existsSync(path.join(dir, 'index.tsx'));
-      expect(hasIndex, `${item.paths.component}: missing index.ts|index.tsx`).toBe(
-        true
-      );
+      expect(
+        hasIndex,
+        `${item.paths.component}: missing index.ts|index.tsx`
+      ).toBe(true);
       expect(
         fs.existsSync(path.join(dir, `${name}.tsx`)),
         `${item.paths.component}: missing ${name}.tsx`

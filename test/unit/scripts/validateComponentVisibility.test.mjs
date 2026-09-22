@@ -17,7 +17,12 @@ import {
  * process.exit at module load).
  */
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', '..', '..');
+const ROOT = path.resolve(
+  path.dirname(new URL(import.meta.url).pathname),
+  '..',
+  '..',
+  '..'
+);
 const FIXTURES = 'test/fixtures/component-visibility';
 
 function builtEntry(fixture) {
@@ -51,9 +56,9 @@ describe('checkTier1 (on-disk file conventions)', () => {
   it('fails when the index has no default re-export', () => {
     const tier = checkTier1(builtEntry('bad-index'), ROOT);
     expect(tier.passed).toBe(false);
-    expect(tier.issues.some((i) => i.toLowerCase().includes('default export'))).toBe(
-      true
-    );
+    expect(
+      tier.issues.some((i) => i.toLowerCase().includes('default export'))
+    ).toBe(true);
   });
 
   it('fails when the component directory does not exist', () => {
@@ -62,7 +67,9 @@ describe('checkTier1 (on-disk file conventions)', () => {
         component: 'Ghost',
         slug: 'ghost',
         status: 'Built',
-        paths: { component: 'test/fixtures/component-visibility/does-not-exist/Ghost' },
+        paths: {
+          component: 'test/fixtures/component-visibility/does-not-exist/Ghost',
+        },
       },
       ROOT
     );

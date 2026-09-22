@@ -1,8 +1,11 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'fs';
 import path from 'path';
-import { Resolver, loadResolverDocument } from '@/utils/designTokens/utils/resolver-module';
-import { extractTokenPaths } from '@/utils/designTokens/core';
+import {
+  Resolver,
+  loadResolverDocument,
+} from '@/utils/designTokens/utils/resolver-module';
+import { extractTokenPaths, type TokenGroup } from '@/utils/designTokens/core';
 
 /**
  * Drift guard for the committed token artifacts. types/designTokens.ts and
@@ -24,14 +27,26 @@ import { extractTokenPaths } from '@/utils/designTokens/core';
 const ROOT = path.resolve(__dirname, '..', '..', '..');
 
 function rederiveFromResolver(): Set<string> {
-  const resolverDocPath = path.join(ROOT, 'ui', 'designTokens', 'resolver.json');
+  const resolverDocPath = path.join(
+    ROOT,
+    'ui',
+    'designTokens',
+    'resolver.json'
+  );
   const resolverDoc = loadResolverDocument(resolverDocPath);
-  const resolver = new Resolver(resolverDoc, {
-    basePath: path.dirname(resolverDocPath),
-  });
+  expect(
+    resolverDoc,
+    'failed to load ui/designTokens/resolver.json'
+  ).toBeTruthy();
+  const resolver = new Resolver(
+    resolverDoc as NonNullable<typeof resolverDoc>,
+    {
+      basePath: path.dirname(resolverDocPath),
+    }
+  );
   // Default context, same as the compose pipeline's resolver branch.
   const result = resolver.resolve({});
-  return new Set(extractTokenPaths(result.tokens as Record<string, unknown>));
+  return new Set(extractTokenPaths(result.tokens as TokenGroup));
 }
 
 function committedJsonPaths(): Set<string> {
@@ -41,20 +56,35 @@ function committedJsonPaths(): Set<string> {
 }
 
 function typesUnionPaths(): Set<string> {
-  const source = fs.readFileSync(path.join(ROOT, 'types', 'designTokens.ts'), 'utf8');
+  const source = fs.readFileSync(
+    path.join(ROOT, 'types', 'designTokens.ts'),
+    'utf8'
+  );
   const unionStart = source.indexOf('export type TokenPath');
-  expect(unionStart, 'TokenPath union not found in types/designTokens.ts').toBeGreaterThan(-1);
+  expect(
+    unionStart,
+    'TokenPath union not found in types/designTokens.ts'
+  ).toBeGreaterThan(-1);
   const matches = source
     .slice(unionStart)
     .matchAll(/^\s*\|\s*'([^']+)'\s*;?\s*$/gm);
   return new Set(Array.from(matches, (m) => m[1]));
 }
 
-function diffSets(expected: Set<string>, actual: Set<string>, cap = 10): string {
-  const missing = Array.from(expected).filter((p) => !actual.has(p)).slice(0, cap);
-  const extra = Array.from(actual).filter((p) => !expected.has(p)).slice(0, cap);
+function diffSets(
+  expected: Set<string>,
+  actual: Set<string>,
+  cap = 10
+): string {
+  const missing = Array.from(expected)
+    .filter((p) => !actual.has(p))
+    .slice(0, cap);
+  const extra = Array.from(actual)
+    .filter((p) => !expected.has(p))
+    .slice(0, cap);
   const parts: string[] = [];
-  if (missing.length > 0) parts.push(`missing from actual: ${missing.join(', ')}`);
+  if (missing.length > 0)
+    parts.push(`missing from actual: ${missing.join(', ')}`);
   if (extra.length > 0) parts.push(`unexpected in actual: ${extra.join(', ')}`);
   return parts.join(' | ') || 'sets equal';
 }
@@ -65,7 +95,9 @@ describe('committed token artifacts match the token sources', () => {
     const artifact = committedJsonPaths();
     expect(artifact.size, diffSets(source, artifact)).toBe(source.size);
     for (const p of source) {
-      expect(artifact.has(p), `resolver path absent from artifact: ${p}`).toBe(true);
+      expect(artifact.has(p), `resolver path absent from artifact: ${p}`).toBe(
+        true
+      );
     }
   });
 
@@ -74,14 +106,22 @@ describe('committed token artifacts match the token sources', () => {
     const union = typesUnionPaths();
     expect(union.size, diffSets(artifact, union)).toBe(artifact.size);
     for (const p of artifact) {
-      expect(union.has(p), `artifact path absent from TokenPath union: ${p}`).toBe(true);
+      expect(
+        union.has(p),
+        `artifact path absent from TokenPath union: ${p}`
+      ).toBe(true);
     }
   });
 
   it('no token path lives under a top-level component namespace', () => {
     const artifact = committedJsonPaths();
-    const offenders = Array.from(artifact).filter((p) => p.startsWith('component.'));
-    expect(offenders, 'component.* paths must come from modular sources or not at all').toEqual([]);
+    const offenders = Array.from(artifact).filter((p) =>
+      p.startsWith('component.')
+    );
+    expect(
+      offenders,
+      'component.* paths must come from modular sources or not at all'
+    ).toEqual([]);
   });
 
   it('the composed JSON ends with a trailing newline', () => {
