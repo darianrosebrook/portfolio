@@ -34,3 +34,10 @@ acceptance:
     then: 'it contains zero !important declarations'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Rendered measurement at a 1283x903 viewport on the same worktree build, before and after: slug, headline, keywords, articleSection and image inputs all 271x34, padding 6px 8px, background transparent, bottom border 1px solid rgb(113,113,113), radius 0, min-height auto, max-width 420px, font-size 14px, colour rgb(250,250,250), box-shadow none; the description textarea 271x76 with the same treatment. The differing-properties list between the flag-based baseline and the scoped-selector version is empty. Predicted identical before measuring; measured identical."
+    recorded_at: "2026-09-22T01:48:18.670Z"
+    command: "browser: read all six controls computed styles before and after the scoping change at the same viewport"
+    commit_sha: "06783ac16e7ef67c8de5655e9c15fce23845c3a1"
