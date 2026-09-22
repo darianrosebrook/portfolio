@@ -8,7 +8,7 @@ updated_at: '2026-09-22T15:15:28.196Z'
 created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
 blast_radius:
   modules:
-    - 'TODO: list one or more modules this spec touches.'
+    - 'PageTransition SSR test file (unused import only; no assertion change)'
   data_migration: false
 operational_rollback_slo: 5m
 scope:
@@ -16,11 +16,11 @@ scope:
     - test/components/pageTransition.ssr.test.tsx
   out: []
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'No behavior change: all SSR test assertions are unchanged and the suite stays green.'
 acceptance:
   - id: A1
-    given: 'TODO'
-    when: 'TODO'
-    then: 'TODO'
+    given: 'the PageTransition SSR test file'
+    when: 'eslint runs over test/components/pageTransition.ssr.test.tsx'
+    then: 'the no-unused-vars warning for screen is gone and the SSR test suite passes unchanged'
 non_functional: {}
 contracts: []
