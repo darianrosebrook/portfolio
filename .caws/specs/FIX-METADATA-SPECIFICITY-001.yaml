@@ -2,10 +2,11 @@ id: FIX-METADATA-SPECIFICITY-001
 title: 'Replace the metadata form !important flags with scoped selectors'
 risk_tier: 3
 mode: fix
-lifecycle_state: active
-worktree: metadata-specificity-001
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge metadata-specificity-001 at 82a1ce7493416d2798aad65db944261b7abe1c8e'
 created_at: '2026-09-22T01:42:14.665Z'
-updated_at: '2026-09-22T01:42:15.982Z'
+updated_at: '2026-09-22T01:48:21.178Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
