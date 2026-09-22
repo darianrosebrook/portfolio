@@ -2,9 +2,10 @@ id: FEAT-PICKER-REMOVE-001
 title: 'Put the picker remove control on the IconButton primitive'
 risk_tier: 3
 mode: refactor
-lifecycle_state: draft
+lifecycle_state: active
+worktree: picker-remove-001
 created_at: '2026-09-22T01:54:29.944Z'
-updated_at: '2026-09-22T01:54:29.944Z'
+updated_at: '2026-09-22T01:54:31.375Z'
 created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
 blast_radius:
   modules:
