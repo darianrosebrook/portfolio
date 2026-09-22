@@ -11,6 +11,7 @@ import {
   type RelationshipType,
 } from '@/utils/supabase/contentRelations';
 import styles from './RelatedContentPicker.module.css';
+import { IconButton } from './IconButton';
 import { Input } from '@/ui/components/Input';
 
 type SyncStatus = 'idle' | 'saving' | 'saved' | 'error';
@@ -315,14 +316,11 @@ export function RelatedContentPicker({
                         ))}
                       </select>
                     </label>
-                    <button
-                      type="button"
-                      className={styles.removeButton}
-                      aria-label={`Remove ${item.title}`}
+                    <IconButton
+                      icon="close"
+                      label={`Remove ${item.title}`}
                       onClick={() => removeItem(index)}
-                    >
-                      ×
-                    </button>
+                    />
                   </div>
                 </li>
               ))}

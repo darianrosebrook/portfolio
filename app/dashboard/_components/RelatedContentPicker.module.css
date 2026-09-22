@@ -164,18 +164,4 @@
   font-size: var(--semantic-typography-body-04);
 }
 
-.removeButton {
-  padding: var(--core-spacing-size-01) var(--core-spacing-size-02);
-  background: transparent;
-  border: none;
-  border-radius: var(--core-shape-radius-small);
-  color: var(--semantic-color-foreground-secondary);
-  font-size: var(--semantic-typography-body-02);
-  line-height: 1;
-  cursor: pointer;
-}
 
-.removeButton:hover {
-  background: var(--semantic-color-background-active);
-  color: var(--semantic-color-foreground-danger);
-}
