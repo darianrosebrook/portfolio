@@ -106,3 +106,8 @@ evidence:
     evidence_ref: "new Tier-1 file invariant (index.ts|tsx + {Name}.tsx + css|module.scss) green for all 56 Built entries as committed"
     recorded_at: "2026-09-22T03:05:50.854Z"
     test_nodeid: test/blueprints/componentsRegistry.test.ts
+  - criterion_id: A7
+    status: pass
+    evidence_ref: "componentAPI.ts + playgroundLoader.ts deleted (zero importers verified by repo grep); npm test 219 files/2121 tests pass, lint 0 errors, typecheck clean after removal"
+    recorded_at: "2026-09-22T03:05:51.376Z"
+    commit_sha: c1c7ea4d
