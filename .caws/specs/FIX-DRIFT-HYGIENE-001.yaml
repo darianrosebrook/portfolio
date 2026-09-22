@@ -91,3 +91,8 @@ evidence:
     evidence_ref: "renderToStaticMarkup: children + wrapper in static HTML, no enabled/fallback/transitioning classes; SSG foundations/tokens.html now 14541 chars of main content (was 0), breadcrumb nav present, no inline opacity:0"
     recorded_at: "2026-09-22T03:05:20.561Z"
     test_nodeid: test/components/pageTransition.ssr.test.tsx
+  - criterion_id: A4
+    status: pass
+    evidence_ref: "post-mount client render: enabled+fallback classes applied (jsdom lacks View Transitions API), transitioning absent — the route-change effect skips its mount run (prev-pathname ref); executed directly via npx vitest run this session (24/24 across the four new/extended suites)"
+    recorded_at: "2026-09-22T03:05:49.793Z"
+    test_nodeid: test/components/pageTransition.ssr.test.tsx
