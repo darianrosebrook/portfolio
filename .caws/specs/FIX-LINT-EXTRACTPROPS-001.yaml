@@ -25,3 +25,9 @@ acceptance:
     then: 'the no-unused-vars warning for declStart is gone and the extractProps test suite passes unchanged'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "eslint on extractProps.ts reports nothing (was: no-unused-vars declStart at 61:11); test/blueprints/extractProps.test.ts 16/16 pass unchanged"
+    recorded_at: "2026-09-22T15:14:05.926Z"
+    commit_sha: "754bc692"
