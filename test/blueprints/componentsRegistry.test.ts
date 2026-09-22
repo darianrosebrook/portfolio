@@ -142,6 +142,36 @@ describe('components-transformed.json registry', () => {
     }
   });
 
+  it('every Built entry resolves to a module entrypoint and stylesheet on disk', () => {
+    // Tier-1 file invariant (mirrors scripts/validateComponentVisibility.mjs):
+    // an index barrel (index.ts or index.tsx), the main {Name}.tsx, and a
+    // stylesheet ({Name}.css or {Name}.module.scss). This runs in npm test
+    // and pre-push — it is the enforced form of the visibility gate.
+    const json = readRegistry();
+    for (const item of json.components) {
+      if (item.status !== 'Built') continue;
+      const dir = path.join(root, item.paths?.component ?? '');
+      const name = item.component;
+      const hasIndex =
+        fs.existsSync(path.join(dir, 'index.ts')) ||
+        fs.existsSync(path.join(dir, 'index.tsx'));
+      expect(hasIndex, `${item.paths.component}: missing index.ts|index.tsx`).toBe(
+        true
+      );
+      expect(
+        fs.existsSync(path.join(dir, `${name}.tsx`)),
+        `${item.paths.component}: missing ${name}.tsx`
+      ).toBe(true);
+      const hasStylesheet =
+        fs.existsSync(path.join(dir, `${name}.css`)) ||
+        fs.existsSync(path.join(dir, `${name}.module.scss`));
+      expect(
+        hasStylesheet,
+        `${item.paths.component}: missing ${name}.css|.module.scss`
+      ).toBe(true);
+    }
+  });
+
   it('Sidebar resolves to its module implementation, not a component dir', () => {
     // Regression pin: Sidebar lived at ui/components/Sidebar in a stale
     // registry, so its doc page silently rendered an empty props table.
