@@ -96,3 +96,8 @@ evidence:
     evidence_ref: "post-mount client render: enabled+fallback classes applied (jsdom lacks View Transitions API), transitioning absent — the route-change effect skips its mount run (prev-pathname ref); executed directly via npx vitest run this session (24/24 across the four new/extended suites)"
     recorded_at: "2026-09-22T03:05:49.793Z"
     test_nodeid: test/components/pageTransition.ssr.test.tsx
+  - criterion_id: A5
+    status: pass
+    evidence_ref: "8 unit pins + full script run: node scripts/validateComponentVisibility.mjs exits 0, 56/56 Built pass Tier 1 under index.ts|tsx + css|module.scss conventions, 38 Planned informational"
+    recorded_at: "2026-09-22T03:05:50.326Z"
+    test_nodeid: test/unit/scripts/validateComponentVisibility.test.mjs
