@@ -35,3 +35,10 @@ acceptance:
     then: 'no raw button remains for the remove control and the module retains no orphaned class'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Runtime on the Prime article editor: after adding a relation through the picker search, its row rendered the remove control with class IconButton_button__H8AQr, aria-label and title \"Remove Custom Design Tooling: Crafting the Future of Design Workflows\", no style attribute, and the close glyph drawing 2 geometry elements at the primitive default size."
+    recorded_at: "2026-09-22T02:05:15.580Z"
+    command: "browser: add a relation via the picker search and inspect the row remove control"
+    commit_sha: f0142fd8ea0c14ef91c1a7d4650345a77a0aead9
