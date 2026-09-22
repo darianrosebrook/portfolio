@@ -1,0 +1,35 @@
+id: FIX-METADATA-SPECIFICITY-001
+title: 'Replace the metadata form !important flags with scoped selectors'
+risk_tier: 3
+mode: fix
+lifecycle_state: draft
+created_at: '2026-09-22T01:42:14.665Z'
+updated_at: '2026-09-22T01:42:14.665Z'
+created_by_session: 'session-103ffb94-b7a9-41b1-81cb-2f9d0e7a187b'
+blast_radius:
+  modules:
+    - 'dashboard new-content metadata form — stylesheet'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/dashboard/articles/new/components/ArticleMetadataForm.module.css'
+  out: []
+invariants:
+  - 'The underline field design is preserved exactly; declarations are unchanged'
+  - 'Scoping must outrank the global element rules that a bare module class loses to'
+acceptance:
+  - id: A1
+    given: 'the metadata form controls'
+    when: 'the flags are replaced by scoped selectors and the controls are measured at the same viewport on the same build'
+    then: 'all computed styles (padding, background, border, radius, min/max sizes, colour, font) are identical to the flag-based baseline'
+  - id: A2
+    given: 'a field hovered and focused'
+    when: 'its bottom border is read'
+    then: 'the accent border still applies as before'
+  - id: A3
+    given: 'the module after the change'
+    when: 'it is inspected'
+    then: 'it contains zero !important declarations'
+non_functional: {}
+contracts: []
