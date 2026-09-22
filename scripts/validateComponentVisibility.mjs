@@ -3,14 +3,19 @@
 /**
  * Component Visibility Validation Script
  *
- * Validates components against acceptance criteria defined in
- * COMPONENT_VISIBILITY_CRITERIA.md to determine if they are
- * visible in the documentation pages.
+ * Scores registry components across four tiers (basic visibility,
+ * documentation, interactive examples, best practices).
+ *
+ * Exit contract: Planned entries are roadmap and reported informationally —
+ * they never affect the verdict. The script exits 1 iff any Built entry
+ * fails Tier 1 (missing dir, main file, index entry point, stylesheet, or
+ * default re-export under the on-disk conventions: index.ts|index.tsx and
+ * {Name}.css|{Name}.module.scss). Tiers 2-4 are report-only.
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -54,16 +59,11 @@ function log(color, msg) {
   console.log(color + msg + colors.reset);
 }
 
-function checkTier1(component) {
+export function checkTier1(component, root = PROJECT_ROOT) {
   const issues = [];
   const checks = {};
 
-  // A1: Component Status & Path
-  checks.status = component.status === 'Built';
-  if (!checks.status) {
-    issues.push(`Status is "${component.status}" but should be "Built"`);
-  }
-
+  // A1: Component Path
   checks.hasPath = !!component.paths?.component;
   if (!checks.hasPath) {
     issues.push('Missing paths.component');
@@ -71,7 +71,7 @@ function checkTier1(component) {
 
   let pathExists = false;
   if (component.paths?.component) {
-    const componentPath = path.resolve(PROJECT_ROOT, component.paths.component);
+    const componentPath = path.resolve(root, component.paths.component);
     pathExists = fs.existsSync(componentPath);
     checks.pathExists = pathExists;
     if (!pathExists) {
@@ -83,40 +83,74 @@ function checkTier1(component) {
     checks.pathExists = false;
   }
 
-  // A2: Component File Structure
-  const requiredFiles = [];
-  if (pathExists && component.paths?.component) {
-    const componentPath = path.resolve(PROJECT_ROOT, component.paths.component);
-    const componentName = path.basename(componentPath);
-    requiredFiles.push('index.tsx');
-    requiredFiles.push(`${componentName}.tsx`);
-    requiredFiles.push(`${componentName}.module.scss`);
+  // A2: Component File Structure — accept both on-disk conventions
+  // (index.ts or index.tsx; {Name}.css or {Name}.module.scss)
+  const componentName = component.paths?.component
+    ? path.basename(component.paths.component)
+    : null;
+  const indexFile = ['index.ts', 'index.tsx'].find((f) => {
+    return (
+      pathExists &&
+      componentName &&
+      fs.existsSync(path.join(path.resolve(root, component.paths.component), f))
+    );
+  });
+  checks.hasIndex = !!indexFile;
+  if (!checks.hasIndex) {
+    issues.push('Missing required file: index.ts (or index.tsx)');
+  }
 
-    requiredFiles.forEach((file) => {
-      const filePath = path.join(componentPath, file);
-      const exists = fs.existsSync(filePath);
-      checks[`file_${file}`] = exists;
-      if (!exists) {
-        issues.push(`Missing required file: ${file}`);
-      }
-    });
+  const hasStylesheet =
+    pathExists &&
+    componentName &&
+    (fs.existsSync(
+      path.join(
+        path.resolve(root, component.paths.component),
+        `${componentName}.css`
+      )
+    ) ||
+      fs.existsSync(
+        path.join(
+          path.resolve(root, component.paths.component),
+          `${componentName}.module.scss`
+        )
+      ));
+  checks.hasStylesheet = hasStylesheet;
+  if (!hasStylesheet) {
+    issues.push(
+      `Missing required file: ${componentName}.css (or .module.scss)`
+    );
+  }
+
+  const hasMainFile =
+    pathExists &&
+    componentName &&
+    fs.existsSync(
+      path.join(
+        path.resolve(root, component.paths.component),
+        `${componentName}.tsx`
+      )
+    );
+  checks.hasMainFile = hasMainFile;
+  if (!hasMainFile) {
+    issues.push(`Missing required file: ${componentName}.tsx`);
   }
 
   // A3: Component Export
-  if (pathExists && component.paths?.component) {
-    const componentPath = path.resolve(PROJECT_ROOT, component.paths.component);
-    const indexPath = path.join(componentPath, 'index.tsx');
-    if (fs.existsSync(indexPath)) {
-      const indexContent = fs.readFileSync(indexPath, 'utf8');
-      const hasDefaultExport = /export\s+(default\s+)?.*from/.test(
-        indexContent
-      );
-      checks.hasDefaultExport = hasDefaultExport;
-      if (!hasDefaultExport) {
-        issues.push('index.tsx missing default export');
-      }
-    } else {
-      checks.hasDefaultExport = false;
+  if (pathExists && indexFile) {
+    const indexPath = path.join(
+      path.resolve(root, component.paths.component),
+      indexFile
+    );
+    const indexContent = fs.readFileSync(indexPath, 'utf8');
+    // A default re-export is `export default ...` or `default` inside the
+    // export brace group (`{ Widget, default }`, `{ default as Widget }`).
+    const hasDefaultExport =
+      /export\s+default\b/.test(indexContent) ||
+      /export\s*\{[^}]*\bdefault\b[^}]*\}/.test(indexContent);
+    checks.hasDefaultExport = hasDefaultExport;
+    if (!hasDefaultExport) {
+      issues.push(`${indexFile} missing default export`);
     }
   } else {
     checks.hasDefaultExport = false;
@@ -416,7 +450,7 @@ function checkTier4(component) {
   return { passed, issues, checks };
 }
 
-function calculateOverall(tier1, tier2, tier3, tier4) {
+export function calculateOverall(tier1, tier2, tier3, tier4) {
   // Scoring: Tier 1 = 40%, Tier 2 = 30%, Tier 3 = 20%, Tier 4 = 10%
   const tier1Score = tier1.passed ? 40 : 0;
   const tier2Score = tier2.passed ? 30 : tier2.checks.hasContract ? 15 : 0;
@@ -438,17 +472,18 @@ function calculateOverall(tier1, tier2, tier3, tier4) {
   return { overall, score, maxScore };
 }
 
-function validateComponent(component) {
+export function validateComponent(component) {
   const tier1 = checkTier1(component);
   const tier2 = checkTier2(component);
   const tier3 = checkTier3(component);
   const tier4 = checkTier4(component);
-  const { overall, score, maxScore } = calculateOverall(
-    tier1,
-    tier2,
-    tier3,
-    tier4
-  );
+  const { score, maxScore } = calculateOverall(tier1, tier2, tier3, tier4);
+
+  // Planned entries are roadmap: reported informationally, never gated.
+  const overall =
+    component.status !== 'Built'
+      ? 'planned'
+      : calculateOverall(tier1, tier2, tier3, tier4).overall;
 
   return {
     component: component.component,
@@ -469,12 +504,14 @@ function printReport(report) {
     visible: colors.green,
     partial: colors.yellow,
     'not-visible': colors.red,
+    planned: colors.blue,
   };
 
   const statusIcon = {
     visible: '🟢',
     partial: '🟡',
     'not-visible': '🔴',
+    planned: '🗺️ ',
   };
 
   log(
@@ -547,7 +584,7 @@ function main() {
   log(colors.cyan, `Found ${components.length} components\n`);
 
   const reports = [];
-  const byStatus = { visible: 0, partial: 0, 'not-visible': 0 };
+  const byStatus = { visible: 0, partial: 0, 'not-visible': 0, planned: 0 };
 
   for (const component of components) {
     const report = validateComponent(component);
@@ -564,15 +601,27 @@ function main() {
   log(colors.bold + colors.cyan, '\n📊 Summary');
   log(colors.green, `   🟢 Fully Visible: ${byStatus.visible}`);
   log(colors.yellow, `   🟡 Partially Visible: ${byStatus.partial}`);
-  log(colors.red, `   🔴 Not Visible: ${byStatus['not-visible']}`);
+  log(colors.red, `   🔴 Not Visible (Built): ${byStatus['not-visible']}`);
+  log(
+    colors.blue,
+    `   🗺️  Planned (roadmap, informational): ${byStatus.planned}`
+  );
 
   const avgScore =
     reports.reduce((sum, r) => sum + r.score, 0) / reports.length;
   log(colors.cyan, `   📈 Average Score: ${avgScore.toFixed(1)}/100`);
 
-  // Exit with error if any components are not visible
-  const hasNotVisible = byStatus['not-visible'] > 0;
-  process.exit(hasNotVisible ? 1 : 0);
+  // Exit with error only if a Built entry fails basic visibility. Planned
+  // entries are roadmap and never gate.
+  const hasFailingBuilt = reports.some(
+    (r) => r.status === 'Built' && r.overall === 'not-visible'
+  );
+  process.exit(hasFailingBuilt ? 1 : 0);
 }
 
-main();
+const isMain =
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
+if (isMain) {
+  main();
+}

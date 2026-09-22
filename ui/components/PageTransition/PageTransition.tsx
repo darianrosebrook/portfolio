@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useIsMounted } from '@/utils/hooks';
 import './PageTransition.css';
@@ -75,8 +75,14 @@ export function PageTransition({
   }, [transitionName, supportsViewTransitions, shouldAnimate]);
 
   // Handle route changes with transitions
+  const prevPathname = useRef(pathname);
+
   useEffect(() => {
     if (!mounted || !shouldAnimate) return;
+    // Skip the mount run: the initial load must not fade in, only real
+    // navigations.
+    if (prevPathname.current === pathname) return;
+    prevPathname.current = pathname;
 
     // External event (route change) -> state sync. The setIsTransitioning
     // is what we want to fire; deriving from pathname during render would
@@ -93,16 +99,15 @@ export function PageTransition({
     return () => clearTimeout(timer);
   }, [pathname, duration, shouldAnimate, mounted]);
 
-  if (!mounted) {
-    // Prevent hydration mismatch by not rendering on server
-    return null;
-  }
-
+  // Animation classes are mount-gated so server and first client render
+  // agree: the class list is the only hydration-mismatch hazard here
+  // (supportsViewTransitions and prefers-reduced-motion are client-only
+  // signals). Children always render, in static HTML included.
   const transitionClasses = [
     'pageTransition',
-    shouldAnimate && 'enabled',
-    isTransitioning && 'transitioning',
-    !supportsViewTransitions && shouldAnimate && 'fallback',
+    mounted && shouldAnimate && 'enabled',
+    mounted && isTransitioning && 'transitioning',
+    mounted && !supportsViewTransitions && shouldAnimate && 'fallback',
     className,
   ]
     .filter(Boolean)
