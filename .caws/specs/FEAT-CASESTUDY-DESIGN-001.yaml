@@ -1,9 +1,10 @@
 id: FEAT-CASESTUDY-DESIGN-001
 title: 'Case study reading layout: measure, rhythm, tables, header meta'
 mode: feature
-lifecycle_state: draft
+lifecycle_state: active
+worktree: casestudy-design
 created_at: '2026-10-04T19:32:46.845Z'
-updated_at: '2026-10-04T19:32:46.845Z'
+updated_at: '2026-10-04T19:32:54.378Z'
 created_by_session: 'ac717bed-0274-4e5a-af98-8af19ac95615'
 blast_radius:
   modules:
