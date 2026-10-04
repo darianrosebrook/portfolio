@@ -1,0 +1,44 @@
+id: FEAT-CASESTUDY-DESIGN-001
+title: 'Case study reading layout: measure, rhythm, tables, header meta'
+mode: feature
+lifecycle_state: draft
+created_at: '2026-10-04T19:32:46.845Z'
+updated_at: '2026-10-04T19:32:46.845Z'
+created_by_session: 'ac717bed-0274-4e5a-af98-8af19ac95615'
+blast_radius:
+  modules:
+    - 'app/work case study route (public reader)'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/work/_components/CaseStudyPage.tsx'
+    - 'app/work/_components/CaseStudyPage.module.css'
+    - 'app/work/_components/CaseStudyContent.tsx'
+    - 'test/app/work'
+  out: []
+invariants:
+  - 'Case study HTML is sanitized before any post-processing; inserted markup carries no content-derived attribute without escaping'
+acceptance:
+  - id: A1
+    given: 'a case study body with tables'
+    when: 'rendered at 390px'
+    then: 'each table sits in a labelled, keyboard-focusable horizontal scroll region and no cell text breaks mid-word'
+  - id: A2
+    given: 'a table header cell containing a double quote and markup-like text'
+    when: 'the region label is derived'
+    then: 'the label is attribute-escaped and no attribute or element is injected'
+  - id: A3
+    given: 'a case study page at 1440px'
+    when: 'rendered'
+    then: 'title, description and body share one left edge, prose is capped near 70 characters per line, and tables/code may run wider than prose'
+  - id: A4
+    given: 'a published case study'
+    when: 'rendered'
+    then: 'the header shows a case-study label, the publish date and an estimated reading time'
+rollback:
+  - 'Revert the merge commit; no data or schema changes'
+non_functional: {}
+contracts:
+  - name: 'case-study-render'
+    type: behavior
