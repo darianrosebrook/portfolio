@@ -223,17 +223,16 @@
   grid-column: wide;
 }
 
-/* images keep their own proportions: a tall screenshot is capped by the
-   viewport height and centred rather than stretched to the full width */
+/*
+ * Images fill the column, so their width/height attributes still reserve space
+ * before a lazy image loads. A tall screenshot is capped at the viewport height
+ * and shown whole inside that box rather than stretched.
+ */
 .page :global(.case-study-content) img {
-  width: auto;
-  max-width: 100%;
+  object-fit: contain;
+  width: 100%;
   height: auto;
   max-height: 90vh;
-}
-
-.page :global(.case-study-content) > img {
-  justify-self: center;
 }
 
 /* ---------- tables ---------- */
@@ -336,6 +335,12 @@
   font-weight: var(--semantic-typography-font-weight-medium);
   font-size: var(--semantic-typography-caption-01);
   letter-spacing: 0.02em;
+}
+
+/* row rules come from the cells; the global tr rule draws a full-strength line
+   above the header row, which the editor places in tbody rather than thead */
+.page :global(.case-study-content) tr {
+  border-top: 0;
 }
 
 .page :global(.case-study-content) tr + tr > td {
