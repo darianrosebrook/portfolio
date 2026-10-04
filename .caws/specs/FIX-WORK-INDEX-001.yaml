@@ -1,0 +1,28 @@
+id: FIX-WORK-INDEX-001
+title: 'Work index: replace the empty design-process link with the induction case study'
+mode: fix
+lifecycle_state: draft
+created_at: '2026-10-04T23:58:31.432Z'
+updated_at: '2026-10-04T23:58:31.432Z'
+created_by_session: 'ac717bed-0274-4e5a-af98-8af19ac95615'
+blast_radius:
+  modules:
+    - 'app/work index page (public reader)'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/work/WorkPageClient.tsx'
+    - 'test/app/work/WorkPageClient.test.tsx'
+  out: []
+invariants:
+  - 'The work index links only to published case studies'
+acceptance:
+  - id: A1
+    given: 'the work index'
+    when: 'rendered'
+    then: 'it links to /work/can-you-induce-a-domain-you-do-not-already-understand and has no link to /work/design-process'
+rollback:
+  - 'Revert the merge commit and republish design-process (status published) from tmp/drafts/rollback/case-studies-10-18-2026-10-04.json'
+non_functional: {}
+contracts: []
