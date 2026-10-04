@@ -1,9 +1,10 @@
 id: FIX-WORK-INDEX-001
 title: 'Work index: replace the empty design-process link with the induction case study'
 mode: fix
-lifecycle_state: draft
+lifecycle_state: active
+worktree: work-index
 created_at: '2026-10-04T23:58:31.432Z'
-updated_at: '2026-10-04T23:58:31.432Z'
+updated_at: '2026-10-04T23:58:35.678Z'
 created_by_session: 'ac717bed-0274-4e5a-af98-8af19ac95615'
 blast_radius:
   modules:
