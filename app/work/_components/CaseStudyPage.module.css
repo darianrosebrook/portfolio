@@ -1,0 +1,361 @@
+/*
+ * Case study reading layout.
+ *
+ * One column template is shared by the header and the body so the title,
+ * description and prose start on the same edge. Prose sits in `content`
+ * (about 70 characters per line at body size; this site's rem is 18px).
+ * Tables and media may use `wide`, which adds a bleed on each side; gutters
+ * keep both off the viewport edge.
+ */
+.page {
+  --cs-measure: 36rem;
+  --cs-wide: 60rem;
+  --cs-gutter: var(--core-spacing-size-06);
+  --cs-bleed: calc((var(--cs-wide) - var(--cs-measure)) / 2);
+  --cs-columns:
+    [full-start] minmax(var(--cs-gutter), 1fr)
+    [wide-start] minmax(0, var(--cs-bleed))
+    [content-start] min(var(--cs-measure), 100% - 2 * var(--cs-gutter))
+    [content-end] minmax(0, var(--cs-bleed))
+    [wide-end] minmax(var(--cs-gutter), 1fr)
+    [full-end];
+}
+
+/* ---------- header ---------- */
+
+.header {
+  display: grid;
+  grid-template-columns: var(--cs-columns);
+}
+
+.header > * {
+  grid-column: content;
+}
+
+/* a rule under the header, as wide as the prose */
+.header::after {
+  grid-column: content;
+  margin-top: var(--core-spacing-size-08);
+  border-top: 1px solid var(--semantic-color-border-subtle);
+  content: '';
+}
+
+.kicker {
+  color: var(--semantic-color-foreground-accent);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-caption-01);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.page .title {
+  margin-top: var(--core-spacing-size-05);
+  font-size: clamp(1.875rem, 1.25rem + 2vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* AnimatedText splits the title into word spans, and the reset gives every
+   element its own line-height, so the title's would not reach them */
+.page .title > * {
+  line-height: inherit;
+}
+
+.page .description {
+  max-width: none;
+  margin-top: var(--core-spacing-size-06);
+  color: var(--semantic-color-foreground-secondary);
+  font-size: clamp(1.0625rem, 0.95rem + 0.35vw, 1.1875rem);
+  line-height: 1.45;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--core-spacing-size-04);
+  margin-top: var(--core-spacing-size-07);
+  color: var(--semantic-color-foreground-tertiary);
+  font-size: var(--semantic-typography-caption-01);
+  font-variant-numeric: tabular-nums;
+}
+
+.separator {
+  color: var(--semantic-color-border-default);
+}
+
+/* ---------- body ---------- */
+
+.main {
+  margin-top: var(--core-spacing-size-09);
+  padding-bottom: var(--core-spacing-size-10);
+}
+
+/* the shared .content wrapper adds its own padding, gap and max-width */
+.page .content {
+  display: block;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main > aside {
+  width: min(var(--cs-measure), 100% - 2 * var(--cs-gutter));
+  margin-inline: auto;
+}
+
+.page .content :global(.case-study-content) {
+  display: grid;
+  grid-template-columns: var(--cs-columns);
+  font-size: var(--semantic-typography-body-01);
+  line-height: 1.7;
+}
+
+.page :global(.case-study-content) > * {
+  grid-column: content;
+}
+
+.page :global(.case-study-content) > * + * {
+  margin-top: var(--core-spacing-size-07);
+}
+
+.page :global(.case-study-content) p {
+  max-width: none;
+}
+
+/* the global strong rule points at an undefined weight token and renders 400 */
+.page :global(.case-study-content) :is(strong, b) {
+  font-weight: var(--semantic-typography-font-weight-bold);
+}
+
+/* headings open a section: space and a hairline above, a short gap below */
+.page :global(.case-study-content) > h2 {
+  margin-top: var(--core-spacing-size-10);
+  padding-top: var(--core-spacing-size-07);
+  border-top: 1px solid var(--semantic-color-border-subtle);
+  font-size: clamp(1.375rem, 1.2rem + 0.5vw, 1.625rem);
+  line-height: 1.2;
+}
+
+.page :global(.case-study-content) > h3 {
+  margin-top: var(--core-spacing-size-09);
+  font-weight: var(--semantic-typography-font-weight-regular);
+  font-size: var(--semantic-typography-heading-03);
+  line-height: 1.3;
+}
+
+.page :global(.case-study-content) > :is(h2, h3) + * {
+  margin-top: var(--core-spacing-size-06);
+}
+
+.page :global(.case-study-content) > :first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* lists: markers inside the column, a little air between items */
+.page :global(.case-study-content) :is(ul, ol) {
+  padding-left: 1.5em;
+}
+
+.page :global(.case-study-content) li + li,
+.page :global(.case-study-content) li > :is(ul, ol, p + p) {
+  margin-top: var(--core-spacing-size-04);
+}
+
+.page :global(.case-study-content) li::marker {
+  color: var(--semantic-color-foreground-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.page :global(.case-study-content) a:not([class~='content-link']) {
+  line-height: inherit;
+  text-decoration-color: color-mix(in srgb, currentcolor 40%, transparent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.page :global(.case-study-content) a:not([class~='content-link']):hover {
+  text-decoration-color: currentcolor;
+}
+
+.page :global(.case-study-content) blockquote {
+  padding-left: var(--core-spacing-size-07);
+  border-left: 2px solid var(--semantic-color-border-accent);
+  color: var(--semantic-color-foreground-secondary);
+}
+
+/* a blockquote that opens the body reads as an epigraph */
+.page :global(.case-study-content) > blockquote:first-child {
+  padding-left: var(--core-spacing-size-07);
+  border-left: 2px solid var(--semantic-color-border-accent);
+  color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-font-weight-light);
+  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.3125rem);
+  line-height: 1.45;
+}
+
+.page :global(.case-study-content) :not(pre) > code {
+  padding: 0.1em 0.35em;
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--core-shape-radius-small);
+  color: var(--semantic-color-foreground-primary);
+  font-size: 0.85em;
+  font-family: var(--semantic-typography-semantic-family-mono);
+}
+
+.page :global(.case-study-content) > pre {
+  margin-bottom: 0;
+  padding: var(--core-spacing-size-06) var(--core-spacing-size-07);
+  font-size: var(--semantic-typography-body-03);
+  font-family: var(--semantic-typography-semantic-family-mono);
+  line-height: 1.7;
+}
+
+.page :global(.case-study-content) > hr {
+  margin-block: var(--core-spacing-size-09);
+}
+
+/* media may use the wide column */
+.page :global(.case-study-content) > :is(img, figure, video, iframe) {
+  grid-column: wide;
+}
+
+/* images keep their own proportions: a tall screenshot is capped by the
+   viewport height and centred rather than stretched to the full width */
+.page :global(.case-study-content) img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 90vh;
+}
+
+.page :global(.case-study-content) > img {
+  justify-self: center;
+}
+
+/* ---------- tables ---------- */
+
+/* scroll region added around each table by CaseStudyContent */
+.page :global(.case-study-content) > :global(.table-scroll) {
+  grid-column: wide;
+  overflow-x: auto;
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--core-shape-radius-medium);
+  overscroll-behavior-x: contain;
+}
+
+/*
+ * Edge shadows that appear only while there is more table to scroll to: the
+ * page-coloured covers scroll with the content (local) and hide the shadows
+ * (scroll) once an edge is reached.
+ */
+.page :global(.case-study-content) > :global(.table-scroll) {
+  --cs-scroll-shadow: color-mix(
+    in srgb,
+    var(--semantic-color-foreground-primary) 22%,
+    transparent
+  );
+
+  background:
+    linear-gradient(
+        to right,
+        var(--semantic-color-background-primary) 40%,
+        transparent
+      )
+      left center / 2.5rem 100% no-repeat local,
+    linear-gradient(
+        to left,
+        var(--semantic-color-background-primary) 40%,
+        transparent
+      )
+      right center / 2.5rem 100% no-repeat local,
+    radial-gradient(
+        farthest-side at 0 50%,
+        var(--cs-scroll-shadow),
+        transparent
+      )
+      left center / 1rem 100% no-repeat scroll,
+    radial-gradient(
+        farthest-side at 100% 50%,
+        var(--cs-scroll-shadow),
+        transparent
+      )
+      right center / 1rem 100% no-repeat scroll;
+}
+
+.page :global(.case-study-content) > :global(.table-scroll):focus-visible {
+  outline: 2px solid var(--semantic-color-border-focus);
+  outline-offset: 2px;
+}
+
+.page :global(.case-study-content) table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--semantic-typography-body-02);
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+ * Below these widths the columns share out space by content, so the wordiest
+ * column is not squeezed to the same minimum as the shortest. Set as width
+ * because the editor writes an inline min-width on every table.
+ */
+.page :global(.case-study-content) table:has(tr > :nth-child(3)) {
+  width: max(100%, 34rem);
+}
+
+.page :global(.case-study-content) table:has(tr > :nth-child(4)) {
+  width: max(100%, 46rem);
+}
+
+/*
+ * The reset sets overflow-wrap: anywhere on every element, which lets a cell
+ * shrink below its longest word. Cells keep whole words; a table that no
+ * longer fits scrolls inside its region instead.
+ */
+.page :global(.case-study-content) :is(th, td),
+.page :global(.case-study-content) :is(th, td) * {
+  overflow-wrap: normal;
+}
+
+.page :global(.case-study-content) :is(th, td) {
+  vertical-align: top;
+  min-width: 7rem;
+  padding: var(--core-spacing-size-05) var(--core-spacing-size-06);
+  text-align: left;
+}
+
+.page :global(.case-study-content) th {
+  background: var(--semantic-color-background-secondary);
+  border-bottom: 1px solid var(--semantic-color-border-default);
+  color: var(--semantic-color-foreground-secondary);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-caption-01);
+  letter-spacing: 0.02em;
+}
+
+.page :global(.case-study-content) tr + tr > td {
+  border-top: 1px solid var(--semantic-color-border-subtle);
+}
+
+.page :global(.case-study-content) :is(th, td) p {
+  margin: 0;
+}
+
+.page :global(.case-study-content) :is(th, td) p + p {
+  margin-top: var(--core-spacing-size-04);
+}
+
+.page :global(.case-study-content) td code {
+  white-space: nowrap;
+}
+
+@media screen and (width >= 1000px) {
+  .page {
+    --cs-gutter: var(--core-spacing-size-08);
+  }
+}
