@@ -32,10 +32,12 @@ Before writing code, check the canonical spec for the current feature:
 
 ```bash
 # Create a feature spec for isolated work. Use --mode (not the removed
-# v10 --type). Tier 1/2 require at least one --contract; tier 3 / --mode
-# chore do not.
-caws specs create FEAT-001 --mode feature --risk-tier 2 \
-  --title "description" --contract "core-api:behavior"
+# v10 --type). Seed scope, blast radius and acceptance at creation; a
+# scaffold-only scope.in cannot be bound to a worktree. --contract is
+# optional and repeatable.
+caws specs create FEAT-001 --mode feature --title "description" \
+  --scope-in path/to/file.ts --module "affected module" \
+  --acceptance "given: ...; when: ...; then: ..."
 
 # If you're in a CAWS worktree, the created spec records it: worktree: <name>
 
@@ -53,10 +55,12 @@ caws specs show FEAT-201
 caws status
 ```
 
-There is no v11 replacement for `caws iterate`, `caws evaluate`,
-`caws verify-acs`, or `caws burnup`. Use the spec's acceptance criteria as
-guidance, `caws gates run` for policy gates, and encode AC-evidence assertions
-in the test suite directly.
+There is no v11 replacement for `caws iterate`, `caws evaluate`, or
+`caws burnup`. Acceptance evidence has one writer: record each criterion with
+`caws specs evidence <id> --ac A<n> --status pass --verify` (plus
+`--commit-sha`, `--artifact-path` or `--test-nodeid`), and re-derive it with
+`caws specs verify-acs <id>` before closing. Encode the assertions themselves
+in the test suite.
 
 ### Provenance & history (replaces `caws sidecar`)
 
@@ -68,18 +72,19 @@ instead of the removed `caws sidecar` / `caws provenance` commands:
 jq -r 'select(.event=="spec_closed" or .event=="spec_archived" or .event=="worktree_merged")
   | "\(.ts) \(.event) \(.spec_id // .data)"' .caws/events.jsonl
 
-# Record typed evidence (test | gate | ac)
+# Append a typed evidence event (test | gate | human_decision); AC evidence
+# goes through `caws specs evidence`, not this command
 caws evidence record --type gate --spec FEAT-201 --data '{...}'
 ```
 
 ### Working Spec
 
 Canonical feature specs live at `.caws/specs/<ID>.yaml` (create with
-`caws specs create <id> --mode <feature|refactor|fix|doc|chore> --risk-tier <1|2|3> --title "description"`).
+`caws specs create <id> --mode <feature|refactor|fix|doc|chore> --title "description"`).
 There is **no** `.caws/working-spec.yaml` singleton in v11 — every spec is
-per-feature. The active spec defines:
+per-feature. Specs created by the current CLI carry no `risk_tier`; older specs
+keep theirs. The active spec defines:
 
-- **Risk tier**: Quality requirements (T1: critical, T2: standard, T3: low risk)
 - **Mode**: The type of change (`feature`, `refactor`, `fix`, `doc`, `chore`) -- required
 - **Worktree**: The owning CAWS worktree name for this spec (`worktree`) -- recommended for all isolated work
 - **Blast radius**: Which modules are affected (`blast_radius.modules`) -- required
@@ -131,7 +136,7 @@ caws claim
 
 ### Agent Claims & Multi-Agent Coordination
 
-Each session gets registered as a lease file in `.caws/leases/<sessionId>.json`, written by `.caws/hooks/agent-register.sh` at SessionStart and refreshed by `caws agents heartbeat` at PreToolUse. Read leases with `caws agents list` / `caws agents show <id>`. Worktree session ownership is tracked in `.caws/worktrees.json:owner` as a session id.
+Each session gets registered as a lease file in `.caws/leases/<sessionId>.json`, written by the machine runtime's `agent-register.sh` handler at SessionStart and refreshed by its `agent-heartbeat.sh` handler at PreToolUse. Read leases with `caws agents list` / `caws agents show <id>`. Worktree session ownership is tracked in `.caws/worktrees.json:owner` as a session id.
 
 Leases are an operational cache and never authority. Authority lives in `.caws/worktrees.json` (ownership) and `.caws/specs/<id>.yaml` (scope).
 
@@ -169,9 +174,9 @@ the draft) rather than archive. Never use `mv`/`git rm` to relocate or remove sp
 that bypasses the comment-preserving patch, the `updated_at` bump, and the
 hash-chained audit record.
 
-> **Budget note**: `change_budget:` in a spec is informational documentation only. CAWS
-> derives the enforced budget from `policy.yaml` keyed on `risk_tier`. The field in the
-> spec is not used by `caws gates run` for enforcement.
+> **Budget note**: `change_budget:` in a spec is informational documentation only. The
+> risk-tier budgets in `policy.yaml` are an advisory sizing goal: `budget_limit` reports
+> an overage and never blocks, and no waiver raises a budget.
 
 ### Quality Gates
 
@@ -182,13 +187,13 @@ be enabled by configuration:
 
 | Gate | Mode | What it enforces |
 |------|------|------------------|
-| `budget_limit` | block | `max_files` / `max_loc` for the spec's `risk_tier` |
+| `budget_limit` | warn (advisory) | reports `max_files` / `max_loc` against the risk-tier sizing goal; never blocks |
 | `spec_completeness` | block | required spec fields are present |
 | `scope_boundary` | block | edits stay within `scope.in`, never `scope.out` |
 | `god_object` | warn | source files over 1750 / 2000 lines |
 | `todo_detection` | warn | `TODO` / `FIXME` / `HACK` / `XXX` markers |
 
-Only the change budget varies by tier:
+Only the sizing goal varies by tier (`caws gates list` prints the live values):
 
 | Risk tier | max_files | max_loc |
 |-----------|-----------|---------|
@@ -209,14 +214,14 @@ these as targets you verify yourself, not gates that will stop you:
   Kill mutants by hand when hardening safety-critical logic, and say so explicitly
   rather than implying a score.
 
-Contracts are enforced only at spec creation: `caws specs create` requires at least
-one `--contract` for tier 1/2, and none for tier 3 or `--mode chore`. Nothing
-re-checks contracts afterwards. Manual review is a team convention, not a gate.
+Contracts are optional: `caws specs create --contract "name:type[:path]"` records
+one (type `api|schema|contract-test|behavior`), and nothing checks contracts
+afterwards. Manual review is a team convention, not a gate.
 
 ### Key Rules
 
 1. **Stay in scope** -- only edit files listed in `scope.in`, never touch `scope.out`
-2. **Respect change budgets** -- stay within `max_files` and `max_loc` limits
+2. **Size changes to the budget** -- treat `max_files` and `max_loc` as the sizing goal; split work that overshoots rather than relying on the advisory gate
 3. **No shadow files** -- edit in place, never create `*-enhanced.*`, `*-new.*`, `*-v2.*`, `*-final.*` copies
 4. **Tests first** -- write failing tests before implementation
 5. **Deterministic code** -- inject time, random, and UUID generators for testability
@@ -230,13 +235,16 @@ re-checks contracts afterwards. Manual review is a team convention, not a gate.
 
 If you need to bypass a quality gate, create a waiver with justification.
 Note the v11 command is singular `caws waiver` (v10's plural `caws waivers`
-was renamed):
+was renamed). A waiver only suppresses matching violations in `caws gates run`;
+it never lifts a hook guard (hook blocks take a human-granted `caws reprieve`):
 
 ```bash
-caws waiver create --reason emergency_hotfix --gates coverage_threshold
+caws waiver create WV-001 --title "why this gate is waived" --gate scope_boundary \
+  --reason "justification" --approved-by "@approver" \
+  --expires-at 2026-12-31T00:00:00Z --spec FEAT-201
 ```
 
-Valid reasons: `emergency_hotfix`, `legacy_integration`, `experimental_feature`, `performance_critical`, `infrastructure_limitation`
+Add `--dry-run` to validate the waiver without writing `.caws/waivers/`.
 
 ## Project Structure
 
@@ -245,7 +253,7 @@ Valid reasons: `emergency_hotfix`, `legacy_integration`, `experimental_feature`,
   specs/              # Canonical feature specs (one YAML per feature; no singleton)
   policy.yaml         # Quality policy + tiers + gates
   waivers/            # Active waivers (one file per waiver)
-  hooks/              # Shared hook core: dispatch/ + guards (v11.9)
+  hooks/              # Retired v11.9 project hook copies (not executed; see Hooks)
   events.jsonl        # Hash-chained audit log (gitignored; local-runtime)
   state/              # Runtime working state (auto-managed; gitignored)
   worktrees.json      # Worktree registry -- ownership authority (gitignored)
@@ -259,21 +267,24 @@ Valid reasons: `emergency_hotfix`, `legacy_integration`, `experimental_feature`,
 
 ## Hooks
 
-CAWS v11.9 installs a **shared hook core** under `.caws/hooks/` (dispatchers +
-guards). Claude Code is a vendor adapter: `.claude/settings.json` injects
-`CAWS_AGENT_SURFACE=claude-code` and routes lifecycle events to
-`.caws/hooks/dispatch/<event>.sh`.
+CAWS guards run from the **machine runtime** in `~/.caws`, not from this repo.
+The user-level `~/.claude/settings.json` registers
+`python3 ~/.caws/bin/caws-hook claude-code <event> --system` for every
+lifecycle event; the runtime selects the stock handlers from the active
+snapshot (`~/.caws/state/adapter-runtime.json`) and applies this project's
+surface policy from `~/.caws/state/projects/<canonical-path-hash>.json`
+(empty: no disabled stock handlers, no local extensions).
 
-- **PreToolUse** → `dispatch/pre_tool_use.sh` (danger latch, worktree/scope guards, secrets scan, …)
-- **PostToolUse** → `dispatch/post_tool_use.sh` (naming / god-object / todo / loc-delta checks, …)
-- **SessionStart / Stop / PreCompact** → matching dispatchers (status, agent lease, transcripts)
+- **PreToolUse** → danger latch, worktree/scope/write guards, protected paths, secrets scan, …
+- **PostToolUse** → naming / god-object / todo / loc-delta checks, audit, transcripts
+- **SessionStart / Stop / PreCompact / SessionEnd** → status, agent lease, goal/AC gate, transcripts
 
-Update the pack with `caws init --agent-surface claude-code` (add
-`--overwrite --force` to take the upstream baseline for drifted managed files).
-Restart the agent session after install — hooks load only at session start.
+`.claude/settings.json` holds only the repo-local `doc-frontmatter-check.sh`
+PostToolUse hook and permissions. The files under `.caws/hooks/` are the
+pre-migration project copies; no harness executes them.
 
-Cursor loads the same Claude wiring via third-party hooks (see
-`.cursor/README.md`). Official `caws init --agent-surface cursor` is not
-implemented in CAWS 11.9.0 yet.
-
-See `.claude/README.md` and `.claude/hooks/CLAUDE.md` for details.
+Update every adopted project at once with `caws init adapters install` (it
+installs a new verified snapshot). `caws doctor` reports runtime integrity.
+Hook guards are lifted only by a human-granted `caws reprieve grant`. See
+`../caws/docs/guides/hook-packs.md` for the machine adapter model and
+`.claude/README.md` for what remains repo-local.
