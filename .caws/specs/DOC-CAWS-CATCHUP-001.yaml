@@ -1,0 +1,38 @@
+id: DOC-CAWS-CATCHUP-001
+title: 'Align agent docs with the system-runtime hook transport and current caws CLI'
+mode: doc
+lifecycle_state: draft
+created_at: '2026-10-05T07:14:21.263Z'
+updated_at: '2026-10-05T07:14:21.263Z'
+created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
+blast_radius:
+  modules:
+    - 'agent instruction docs (project CLAUDE.md, .claude/ README + rules, retired hook-pack docs)'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'CLAUDE.md'
+    - '.claude/README.md'
+    - '.claude/hooks/CLAUDE.md'
+    - '.claude/hooks/README.md'
+    - '.claude/settings.json.example'
+    - '.claude/rules/worktree-isolation.md'
+  out: []
+invariants:
+  - 'Doc-only: no hook script, settings.json, policy or source file changes.'
+acceptance:
+  - id: A1
+    given: 'the project CLAUDE.md'
+    when: 'each cited caws command and flag is checked against live caws --help'
+    then: 'no removed flag (--risk-tier, --gates), no claim that budget_limit blocks or that tier 1/2 require --contract, and the Hooks section describes the user-level caws-hook --system transport'
+  - id: A2
+    given: 'the .claude/ docs'
+    when: 'read after the system migration'
+    then: 'none claims .claude/settings.json routes CAWS events to .caws/hooks/dispatch or caws_dispatch, and the template-stale v22 pack docs plus settings.json.example are retired'
+  - id: A3
+    given: '.claude/rules/worktree-isolation.md'
+    when: 'each cited command is checked against live caws --help'
+    then: 'every cited command exists with the cited flags (no caws parallel; worktree create names --spec)'
+non_functional: {}
+contracts: []
