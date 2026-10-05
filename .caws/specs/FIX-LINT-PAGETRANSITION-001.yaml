@@ -1,0 +1,25 @@
+id: FIX-LINT-PAGETRANSITION-001
+title: 'Remove unused eslint-disable directive in PageTransition route-change effect'
+mode: fix
+lifecycle_state: draft
+created_at: '2026-10-05T05:01:40.353Z'
+updated_at: '2026-10-05T05:01:40.353Z'
+created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
+blast_radius:
+  modules:
+    - 'PageTransition route-change effect (lint directive and its rationale comment only; no behavior change)'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'ui/components/PageTransition/PageTransition.tsx'
+  out: []
+invariants:
+  - 'No behavior change: PageTransition client and SSR test suites pass unchanged, and removing the directive surfaces no set-state-in-effect warning.'
+acceptance:
+  - id: A1
+    given: 'the PageTransition route-change effect'
+    when: 'eslint runs over ui/components/PageTransition/PageTransition.tsx'
+    then: 'the unused eslint-disable directive warning is gone, no set-state-in-effect warning appears, and the PageTransition client and SSR suites pass unchanged'
+non_functional: {}
+contracts: []
