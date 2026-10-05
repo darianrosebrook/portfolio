@@ -24,3 +24,9 @@ acceptance:
     then: 'the unused eslint-disable directive warning is gone, no set-state-in-effect warning appears, and the PageTransition client and SSR suites pass unchanged'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "eslint on ui/components/PageTransition/PageTransition.tsx reports nothing (was: unused eslint-disable directive at 92:5; no set-state-in-effect warning surfaces after removal); PageTransition client + SSR + FoundationsLayout suites 12/12 pass unchanged"
+    recorded_at: "2026-10-05T05:03:24.098Z"
+    commit_sha: "17366c00"
