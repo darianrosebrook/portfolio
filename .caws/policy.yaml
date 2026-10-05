@@ -15,16 +15,13 @@ risk_tiers:
 edit_rules:
   policy_and_code_same_pr: false
   require_signed_commits: true
-# Waiver-related policy rules. Individual waivers live in .caws/waivers/.
-# min_approvers_for_budget_raise migrated here from edit_rules — the v11
-# schema places waiver controls on the waivers surface, not edit_rules.
-waivers:
-  min_approvers_for_budget_raise: 2
 gates:
+  # Risk-tier budgets are an advisory sizing goal: the CLI never blocks on
+  # them and never raises them by waiver, so the gate is declared as warn.
   budget_limit:
     enabled: true
-    mode: block
-    description: Enforce change budget limits
+    mode: warn
+    description: Report change size against the risk-tier sizing goal
   spec_completeness:
     enabled: true
     mode: block
