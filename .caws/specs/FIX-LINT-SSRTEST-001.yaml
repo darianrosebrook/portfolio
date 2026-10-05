@@ -25,3 +25,9 @@ acceptance:
     then: 'the no-unused-vars warning for screen is gone and the SSR test suite passes unchanged'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "eslint on test/components/pageTransition.ssr.test.tsx reports nothing (was: no-unused-vars screen at 4:18); SSR suite 4/4 pass with assertions unchanged"
+    recorded_at: "2026-10-05T04:59:22.575Z"
+    commit_sha: "6d97d1ca"
