@@ -63,3 +63,8 @@ evidence:
     recorded_at: "2026-10-05T00:22:49.933Z"
     test_nodeid: test/app/work/CaseStudyContent.test.tsx
     commit_sha: "79a4f2e3"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "runtime on dev build at 1440px: title, description and body all x=389 w=648; ~67-68 chars/line on long paragraphs (one at 77 by a coarse chars/lines estimate); table regions 1080px; no automated layout test; screenshot (main checkout, gitignored): tmp/design-review/real-cs19-1440-top.png"
+    recorded_at: "2026-10-05T00:22:52.596Z"
+    commit_sha: "79a4f2e3"
