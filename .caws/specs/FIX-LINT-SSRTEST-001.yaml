@@ -2,10 +2,11 @@ id: FIX-LINT-SSRTEST-001
 title: 'Remove unused screen import from PageTransition SSR test'
 risk_tier: 3
 mode: fix
-lifecycle_state: active
-worktree: lint-ssrtest
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge lint-ssrtest at 2ed66f87cf13ef896b40c8c5029a0eb77a2aead4'
 created_at: '2026-09-22T15:15:27.505Z'
-updated_at: '2026-09-22T15:16:08.080Z'
+updated_at: '2026-10-05T04:59:25.013Z'
 created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
 blast_radius:
   modules:
