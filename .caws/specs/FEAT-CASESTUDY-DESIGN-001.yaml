@@ -57,3 +57,9 @@ evidence:
     recorded_at: "2026-10-05T00:21:42.847Z"
     test_nodeid: test/app/work/CaseStudyPage.test.tsx
     commit_sha: "40b40389"
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "vitest: CaseStudyContent.test.tsx 'puts each table inside a focusable region labelled by its header row'; runtime on dev build at 390px: page scrollWidth 390, table regions scroll 612/828/612px inside 356px, cells overflow-wrap normal, Tab focus + ArrowRight scrolled 40px; screenshot (main checkout, gitignored): tmp/design-review/real-cs19-390-table2-keyboard.png"
+    recorded_at: "2026-10-05T00:22:49.933Z"
+    test_nodeid: test/app/work/CaseStudyContent.test.tsx
+    commit_sha: "79a4f2e3"
