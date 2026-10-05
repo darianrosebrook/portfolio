@@ -120,7 +120,7 @@ test-results
 .caws/events.jsonl.archive-*
 .caws/migrations/
 
-# >>> caws gitignore (managed, v2) >>>
+# >>> caws gitignore (managed, v3) >>>
 # Ephemeral CAWS runtime/local state — never tracked. Authority state
 # (.caws/specs/, .caws/policy.yaml, .caws/waivers/) is intentionally NOT
 # listed here so it stays versioned. Managed by `caws init`; edits inside
@@ -129,6 +129,7 @@ test-results
 .caws/worktrees.json
 .caws/agents.json
 .caws/leases/
+.caws/claims/
 .caws/cache/
 .caws/sessions/
 .caws/state/
