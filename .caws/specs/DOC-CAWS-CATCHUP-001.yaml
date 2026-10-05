@@ -43,3 +43,8 @@ evidence:
     evidence_ref: "grep over CLAUDE.md finds no --risk-tier, --gates, coverage_threshold, budget_limit block, tier-gated --contract, or .caws/hooks/dispatch; Hooks section names caws-hook claude-code <event> --system; every cited caws command resolves to its own Usage line (discriminating check: caws parallel rejected)"
     recorded_at: "2026-10-05T07:25:47.338Z"
     commit_sha: f0f8ace9
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "grep -rn caws_dispatch|.caws/hooks/dispatch over .claude/ returns nothing; .claude/hooks now holds only doc-frontmatter-check.sh (+ gitignored state); hooks/CLAUDE.md, hooks/README.md, settings.json.example deleted"
+    recorded_at: "2026-10-05T07:25:51.072Z"
+    commit_sha: f0f8ace9
