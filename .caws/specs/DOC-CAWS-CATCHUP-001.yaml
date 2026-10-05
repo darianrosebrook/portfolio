@@ -1,10 +1,11 @@
 id: DOC-CAWS-CATCHUP-001
 title: 'Align agent docs with the system-runtime hook transport and current caws CLI'
 mode: doc
-lifecycle_state: active
-worktree: doc-caws-catchup
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge doc-caws-catchup at 1611ce03956d4c0c589c147c34d565606ce3c55a'
 created_at: '2026-10-05T07:14:21.263Z'
-updated_at: '2026-10-05T07:14:49.098Z'
+updated_at: '2026-10-05T07:27:27.650Z'
 created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
 blast_radius:
   modules:
