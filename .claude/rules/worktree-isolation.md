@@ -13,7 +13,7 @@ When multiple agents are working on this project, each agent MUST work in its ow
 2. Check who's actually working: `caws agents list` shows registered sessions and their bound worktree/spec, formatted as `<sessionId>:<platform>`
 3. If you're inside a worktree, run `caws status` — the Claim panel shows the current owner, last heartbeat, and any session-log path under `tmp/<sessionId>/`
 4. If worktrees are active and you are on the base branch, switch to your assigned worktree
-5. If no worktree exists for you, create one with `caws worktree create <name>` or `caws parallel setup <plan-file>`
+5. If no worktree exists for you, create one bound to your spec with `caws worktree create <name> --spec <spec-id>` (binding activates a draft spec)
 6. **Never touch a worktree you did not create.** Do not destroy, prune, stash, or "clean up" another agent's worktree — even if it looks stale. Another agent may be actively working in it. If you think a worktree is abandoned, leave it alone and let the user decide.
 
 ## Foreign-claim soft-block

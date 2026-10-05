@@ -1,51 +1,41 @@
-# Claude Code Integration for CAWS (v11.9)
+# Claude Code Integration for CAWS
 
-Claude Code is a **vendor adapter** over the shared CAWS hook core.
+CAWS guards for this repo run from the machine runtime in `~/.caws`, wired
+once at user scope. Nothing in this directory executes a CAWS guard.
 
-## Layout (CAWS-HOOK-PACK-SHARED-CORE-001)
+## Layout
 
 ```
-.caws/hooks/                 # shared core (dispatchers + all guards/checks)
-  dispatch/                  # pre_tool_use, post_tool_use, session_start, stop, pre_compact
-  lib/                       # parse-input, run-handlers, emit, agent-surface, ...
-  <shared hooks>.sh          # scope-guard, block-dangerous, worktree-*, ...
-
 .claude/
-  settings.json              # wires Claude events -> .caws/hooks/dispatch/<event>.sh
-  settings.json.example      # canonical CAWS-only wiring reference
+  settings.json              # permissions + the repo-local PostToolUse hook below
   hooks/
-    CLAUDE.md                # agent doctrine for this surface
-    README.md                # hook inventory
-    doc-frontmatter-check.sh # repo-local advisory (not part of the CAWS pack)
+    doc-frontmatter-check.sh # repo-local advisory (not part of CAWS)
+  rules/                     # agent rules loaded into every session
   logs/                      # audit / strike state (gitignored)
-```
-
-Install / update the pack with:
-
-```bash
-caws init --agent-surface claude-code
-# if a managed file has drifted and you want the upstream baseline:
-caws init --agent-surface claude-code --overwrite --force
 ```
 
 ## Wiring
 
-`.claude/settings.json` injects `CAWS_AGENT_SURFACE=claude-code` and routes
-lifecycle events to `.caws/hooks/dispatch/`. Handlers self-filter inside the
-shared dispatchers — do not re-wire individual guards in `settings.json`
-unless you are adding a **repo-local** check (e.g. `doc-frontmatter-check.sh`).
+`~/.claude/settings.json` registers
+`python3 ~/.caws/bin/caws-hook claude-code <event> --system` for every
+lifecycle event (PreToolUse, PostToolUse, SessionStart, Stop, PreCompact,
+SessionEnd). The runtime picks the stock handlers from the active snapshot
+and applies this project's surface policy, stored at
+`~/.caws/state/projects/<canonical-path-hash>.json`. The policy is empty:
+no stock handler is disabled and no local handler is added.
 
-Mid-session installs do not activate until the Claude Code session is restarted.
+Do not register CAWS dispatchers in `.claude/settings.json`. A project
+registration takes precedence over the system transport and would pin this
+repo to whatever handler copies it points at. Add only **repo-local** checks
+here, as `doc-frontmatter-check.sh` is.
 
-## Cursor
+## Maintenance
 
-Cursor can load these same Claude Code hooks via third-party hook compatibility
-(see `.cursor/README.md`). Official `caws init --agent-surface cursor` is not
-implemented in CAWS 11.9.0 yet; the shared core already recognizes
-`CAWS_AGENT_SURFACE=cursor`.
+```bash
+caws doctor                  # runtime integrity and residual local registration
+caws init adapters install   # install a new verified runtime snapshot (all adopted projects)
+```
 
-## Further reading
-
-- `.claude/hooks/CLAUDE.md` — agent doctrine
-- `.claude/hooks/README.md` — handler inventory
-- `.caws/hooks/` — the shared core itself
+Native hooks load at session start; verify a fresh session after changing
+the user-level registration. See `../caws/docs/guides/hook-packs.md` for the
+machine adapter model.
