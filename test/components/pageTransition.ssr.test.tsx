@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
 import * as React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { PageTransition } from '@/ui/components/PageTransition/PageTransition';
 import FoundationsLayout from '@/app/blueprints/foundations/layout';
 
