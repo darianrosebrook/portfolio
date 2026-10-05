@@ -27,3 +27,10 @@ rollback:
   - 'Revert the merge commit and republish design-process (status published) from tmp/drafts/rollback/case-studies-10-18-2026-10-04.json'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "vitest: WorkPageClient.test.tsx 'links only to case studies that are published' (failed before the change: index linked /work/design-process and not the induction case study)"
+    recorded_at: "2026-10-05T00:22:55.062Z"
+    test_nodeid: test/app/work/WorkPageClient.test.tsx
+    commit_sha: c6b646a3
