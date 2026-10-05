@@ -86,7 +86,12 @@ export default function WorkPageClient() {
             These are just the favorites of some recent work. Full case studies
             available on request.
           </p>
-          <Link href="/work/design-process">Design Process</Link>
+          <p>
+            Latest case study:{' '}
+            <Link href="/work/can-you-induce-a-domain-you-do-not-already-understand">
+              Can You Induce a Domain You Do Not Already Understand?
+            </Link>
+          </p>
         </div>
       </section>
       <section data-print="true" className="projects content">
