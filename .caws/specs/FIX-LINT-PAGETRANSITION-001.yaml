@@ -1,10 +1,11 @@
 id: FIX-LINT-PAGETRANSITION-001
 title: 'Remove unused eslint-disable directive in PageTransition route-change effect'
 mode: fix
-lifecycle_state: active
-worktree: lint-pagetransition
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge lint-pagetransition at 8ad84c03a3d27890c422916edcea86081624f4d8'
 created_at: '2026-10-05T05:01:40.353Z'
-updated_at: '2026-10-05T05:01:53.793Z'
+updated_at: '2026-10-05T05:03:26.033Z'
 created_by_session: '180c98fc-c791-448d-8940-4c0937aa40df'
 blast_radius:
   modules:
