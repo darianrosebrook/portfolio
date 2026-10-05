@@ -4,7 +4,7 @@ mode: feature
 lifecycle_state: active
 worktree: casestudy-design
 created_at: '2026-10-04T19:32:46.845Z'
-updated_at: '2026-10-04T19:32:54.378Z'
+updated_at: '2026-10-05T00:00:22.545Z'
 created_by_session: 'ac717bed-0274-4e5a-af98-8af19ac95615'
 blast_radius:
   modules:
@@ -16,7 +16,8 @@ scope:
     - 'app/work/_components/CaseStudyPage.tsx'
     - 'app/work/_components/CaseStudyPage.module.css'
     - 'app/work/_components/CaseStudyContent.tsx'
-    - 'test/app/work'
+    - test/app/work/CaseStudyContent.test.tsx
+    - test/app/work/CaseStudyPage.test.tsx
   out: []
 invariants:
   - 'Case study HTML is sanitized before any post-processing; inserted markup carries no content-derived attribute without escaping'
