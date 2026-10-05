@@ -84,12 +84,7 @@ export function PageTransition({
     if (prevPathname.current === pathname) return;
     prevPathname.current = pathname;
 
-    // External event (route change) -> state sync. The setIsTransitioning
-    // is what we want to fire; deriving from pathname during render would
-    // require comparing previous-vs-current pathname via refs or external
-    // store, which is more complex than the warning is worth here. See
-    // FIX-SETSTATE-E-001 spec note.
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional event-to-state sync
+    // Route change (an external event) -> transition state.
     setIsTransitioning(true);
 
     const timer = setTimeout(() => {
