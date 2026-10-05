@@ -44,3 +44,10 @@ non_functional: {}
 contracts:
   - name: 'case-study-render'
     type: behavior
+evidence:
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "vitest: CaseStudyContent.test.tsx 'escapes header text so a quote in a cell cannot add attributes to the region' (killed by hand: removing the quote escape fails exactly this test)"
+    recorded_at: "2026-10-05T00:21:08.304Z"
+    test_nodeid: test/app/work/CaseStudyContent.test.tsx
+    commit_sha: "40b40389"
