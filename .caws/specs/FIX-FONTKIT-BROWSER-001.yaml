@@ -44,3 +44,9 @@ evidence:
     exit_code: 0
     artifact_path: test-results/fontkit-browser-test.log
     commit_sha: "395f838788922798999a326a01961e9b134d72fb"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Native CUA browser observation in session 01a12160-2ad6-7b13-87cc-f11cd6b323a6 at source 395f838788922798999a326a01961e9b134d72fb: reloaded localhost:3000/blueprints/foundations/typography on Next 16.4.0 webpack dev server, selected Nohemi, Inter, Neon and Newsreader, and inspected each saved screenshot for its rendered A glyph and U+41 controls. Screenshots: test-results/fontkit-browser/{nohemi,inter,neon,newsreader}.png. Console since reload contains only the pre-existing PerformanceDashboard hydration error, with no fontkit import/parse errors or No font or glyph warnings; raw console is test-results/fontkit-browser/console.json. This does not verify production builds or other browsers."
+    recorded_at: "2026-10-09T16:15:05.037Z"
+    artifact_path: test-results/fontkit-browser/console.json
+    commit_sha: "395f838788922798999a326a01961e9b134d72fb"
