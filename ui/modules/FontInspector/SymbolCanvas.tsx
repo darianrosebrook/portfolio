@@ -7,6 +7,7 @@ import {
 } from 'react';
 import { useInspector, AxisValues } from './FontInspector';
 import './FontInspector.css';
+import { glyphViewport, useViewportSize } from './viewport';
 import {
   drawAnatomyOverlay,
   drawAxisValues,
@@ -24,6 +25,7 @@ export const SymbolCanvas: React.FC = () => {
     fontInstance,
     glyph,
     axisValues,
+    supportedAxes,
     showDetails,
     setAxisValues,
     colors,
@@ -31,15 +33,15 @@ export const SymbolCanvas: React.FC = () => {
     detectedFeatures,
   } = useInspector();
 
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const viewportSize = useViewportSize(viewportRef);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pixelRatio = useRef(1);
-  const drawScheduled = useRef(false);
+  const drawFrame = useRef<number | null>(null);
+  const latestDraw = useRef<() => void>(() => {});
 
   const dragStartX = useRef(0);
   const dragStartAxis = useRef<AxisValues>(axisValues);
-  const canvasTopPadding = 128;
-  const canvasBottomPadding = 64;
-  const canvasHorizontalPadding = 128;
 
   const [cursor, setCursor] = useState<{
     x: number;
@@ -61,19 +63,9 @@ export const SymbolCanvas: React.FC = () => {
       if (!fontInstance || !glyph || !glyph.path) {
         return;
       }
-      const units = fontInstance.unitsPerEm;
-
-      const glyphBoundsW = w - canvasHorizontalPadding; // Usable width
-      const glyphBoundsH = h - canvasTopPadding - canvasBottomPadding; // Usable height
-
-      const fontHeight = fontInstance.ascent - fontInstance.descent || units;
-      const scale = Math.min(
-        glyphBoundsW / (glyph.advanceWidth * 1.1 || units * 0.6),
-        glyphBoundsH / fontHeight
-      );
-
-      const baseline =
-        h - (Math.abs(fontInstance.descent) * scale + canvasBottomPadding);
+      const viewport = glyphViewport(w, h, fontInstance, glyph);
+      if (!viewport) return;
+      const { scale, baseline, xOffset } = viewport;
 
       const metrics = {
         Baseline: baseline,
@@ -82,8 +74,6 @@ export const SymbolCanvas: React.FC = () => {
         Ascender: baseline - fontInstance.ascent * scale,
         Descender: baseline - fontInstance.descent * scale,
       };
-
-      const xOffset = Math.round((w - glyph.advanceWidth * scale) / 2);
 
       ctx.save();
 
@@ -106,11 +96,14 @@ export const SymbolCanvas: React.FC = () => {
         baseline,
         axisValues.wght,
         axisValues.opsz,
-        colors
+        colors,
+        axisValues,
+        supportedAxes
       );
 
       const selectedFeatures = Array.from(selectedAnatomy.values());
       selectedFeatures.forEach((feature) => {
+        if (feature.disabled || !(feature.label in metrics)) return;
         drawMetricLine(
           ctx,
           w,
@@ -121,7 +114,7 @@ export const SymbolCanvas: React.FC = () => {
         );
       });
 
-      if (cursor.active)
+      if (cursor.active && supportedAxes.wght)
         drawCursorLabel(ctx, cursor.x, cursor.y, axisValues.wght, colors);
 
       ctx.restore();
@@ -151,26 +144,28 @@ export const SymbolCanvas: React.FC = () => {
         } else {
           ctx.fillStyle = colors.boundsFill;
         }
-        ctx.fill();
+        ctx.fill('nonzero');
         ctx.strokeStyle = colors.boundsStroke;
         ctx.lineWidth = 1;
         ctx.stroke();
         drawPathDetails(ctx, glyph, scale, colors);
       } else {
         ctx.fillStyle = colors.pathFill;
-        ctx.fill();
+        ctx.fill('nonzero');
       }
 
-      drawAnatomyOverlay(
-        ctx,
-        w,
-        h,
-        glyph,
-        scale,
-        colors,
-        metrics,
-        selectedAnatomy
-      );
+      if (!showDetails)
+        drawAnatomyOverlay(
+          ctx,
+          w,
+          h,
+          glyph,
+          scale,
+          colors,
+          metrics,
+          selectedAnatomy,
+          detectedFeatures
+        );
 
       // Draw detected feature instances from the new unified detection system
       if (hasActiveFeatures) {
@@ -216,6 +211,7 @@ export const SymbolCanvas: React.FC = () => {
       selectedAnatomy,
       showDetails,
       detectedFeatures,
+      supportedAxes,
     ]
   );
 
@@ -223,7 +219,6 @@ export const SymbolCanvas: React.FC = () => {
 
   /*** Main draw ***/
   const draw = useCallback(() => {
-    drawScheduled.current = false;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -254,76 +249,41 @@ export const SymbolCanvas: React.FC = () => {
     colors.glyphBackground,
   ]);
 
-  const scheduleDraw = useCallback(() => {
-    if (!drawScheduled.current) {
-      drawScheduled.current = true;
-      requestAnimationFrame(draw);
-    }
-  }, [draw]);
-  useEffect(() => {
-    scheduleDraw();
-  }, [
-    glyph,
-    showDetails,
-    axisValues,
-    cursor.active,
-    cursor.dragging,
-    selectedAnatomy,
-    colors,
-    scheduleDraw,
-  ]);
-  /*** Resize ***/
   useLayoutEffect(() => {
-    const onResize = () => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      pixelRatio.current = window.devicePixelRatio || 1;
-      const parent = canvas.parentElement!;
-      const w = parent.clientWidth;
-      const h = parent.clientHeight;
-      canvas.width = w * pixelRatio.current;
-      canvas.height = h * pixelRatio.current;
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
-      scheduleDraw();
-    };
-    window.addEventListener('resize', onResize, { passive: true });
-    onResize();
-    return () => window.removeEventListener('resize', onResize);
-  }, [scheduleDraw]);
-
-  /*** Redraw on state-changes ***/
+    latestDraw.current = draw;
+  }, [draw]);
+  const scheduleDraw = useCallback(() => {
+    if (drawFrame.current === null) {
+      drawFrame.current = requestAnimationFrame(() => {
+        drawFrame.current = null;
+        latestDraw.current();
+      });
+    }
+  }, []);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    pixelRatio.current = viewportSize.pixelRatio;
+    canvas.width = Math.round(viewportSize.width * viewportSize.pixelRatio);
+    canvas.height = Math.round(viewportSize.height * viewportSize.pixelRatio);
+    scheduleDraw();
+  }, [viewportSize, scheduleDraw]);
   useEffect(() => {
     scheduleDraw();
-  }, [glyph, showDetails, axisValues, cursor, scheduleDraw, colors]);
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    pixelRatio.current = window.devicePixelRatio || 1;
-
-    const handleResize = () => {
-      const canvas = canvasRef.current!;
-      pixelRatio.current = window.devicePixelRatio || 1;
-      const parent = canvas.parentElement!;
-      canvas.width = parent.clientWidth * pixelRatio.current;
-      canvas.height = parent.clientHeight * pixelRatio.current;
-      canvas.style.width = `${parent.clientWidth}px`;
-      canvas.style.height = `${parent.clientHeight}px`;
-      scheduleDraw();
-    };
-
-    window.addEventListener('resize', handleResize, { passive: true });
-    handleResize();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [scheduleDraw]);
+  }, [draw, scheduleDraw]);
+  useEffect(
+    () => () => {
+      if (drawFrame.current !== null) cancelAnimationFrame(drawFrame.current);
+      drawFrame.current = null;
+    },
+    []
+  );
 
   /*** Pointer Events ***/
 
   const onDown = useCallback(
     (ev: PointerEvent) => {
+      if (!supportedAxes.wght) return;
       const c = canvasRef.current!;
       c.setPointerCapture(ev.pointerId);
       setCursor((s) => ({ ...s, dragging: true }));
@@ -331,26 +291,29 @@ export const SymbolCanvas: React.FC = () => {
       dragStartAxis.current = axisValues;
       scheduleDraw();
     },
-    [axisValues, scheduleDraw]
+    [axisValues, scheduleDraw, supportedAxes]
   );
 
   const onMove = useCallback(
     (ev: PointerEvent) => {
       setCursor((s) => ({ ...s, x: ev.offsetX, y: ev.offsetY }));
 
-      if (cursor.dragging) {
+      const weightAxis = supportedAxes.wght;
+      if (cursor.dragging && weightAxis) {
         const wPx = canvasRef.current!.width / pixelRatio.current / 2;
+        if (wPx <= 0) return;
         const dx = (ev.offsetX - dragStartX.current) / wPx;
-        let newW = dragStartAxis.current.wght + dx * 800;
+        let newW =
+          dragStartAxis.current.wght + dx * (weightAxis.max - weightAxis.min);
         if (ev.shiftKey) newW = Math.round(newW / 100) * 100;
-        newW = Math.max(100, Math.min(900, newW));
+        newW = Math.max(weightAxis.min, Math.min(weightAxis.max, newW));
 
         setAxisValues({ wght: newW });
       }
 
       scheduleDraw();
     },
-    [cursor.dragging, scheduleDraw, setAxisValues]
+    [cursor.dragging, scheduleDraw, setAxisValues, supportedAxes]
   );
 
   // pointerup
@@ -387,11 +350,13 @@ export const SymbolCanvas: React.FC = () => {
   }, [axisValues, setAxisValues, scheduleDraw, onDown, onMove, onUp]);
 
   return (
-    <canvas
-      className="canvas"
-      ref={canvasRef}
-      data-testid="symbol-canvas"
-      style={{ width: '100%', height: '50vh' }}
-    />
+    <div ref={viewportRef} style={{ width: '100%', height: '50vh' }}>
+      <canvas
+        className="canvas"
+        ref={canvasRef}
+        data-testid="symbol-canvas"
+        style={{ display: 'block', width: '100%', height: '100%' }}
+      />
+    </div>
   );
 };

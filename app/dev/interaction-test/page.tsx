@@ -22,7 +22,7 @@ import styles from './page.module.css';
 export const dynamic = 'force-dynamic';
 
 function InteractionTestContent() {
-  const { axisValues, showDetails } = useInspector();
+  const { axisValues, supportedAxes, showDetails } = useInspector();
   const [interactionLog, setInteractionLog] = useState<string[]>([]);
   const [hoverPos, setHoverPos] = useState<{ x: number; y: number } | null>(
     null
@@ -71,7 +71,7 @@ function InteractionTestContent() {
   }, [showDetails, addLog]);
 
   // Axis values are already shown live in the State Display panel below
-  // (Weight + Optical Size rows), so a separate change log would duplicate
+  // (supported axis rows), so a separate change log would duplicate
   // that information. Drag interactions are visible there in real time.
 
   return (
@@ -141,14 +141,14 @@ function InteractionTestContent() {
                 {showDetails ? 'Yes' : 'No'}
               </span>
             </div>
-            <div className={styles.stateItem}>
-              <span className={styles.stateLabel}>Weight:</span>
-              <span>{axisValues.wght.toFixed(2)}</span>
-            </div>
-            <div className={styles.stateItem}>
-              <span className={styles.stateLabel}>Optical Size:</span>
-              <span>{axisValues.opsz.toFixed(2)}</span>
-            </div>
+            {Object.entries(axisValues).map(([tag, value]) => (
+              <div key={tag} className={styles.stateItem}>
+                <span className={styles.stateLabel}>
+                  {supportedAxes[tag]?.name || tag}:
+                </span>
+                <span>{value.toFixed(2)}</span>
+              </div>
+            ))}
             <div className={styles.stateItem}>
               <span className={styles.stateLabel}>Hover Position:</span>
               <span>

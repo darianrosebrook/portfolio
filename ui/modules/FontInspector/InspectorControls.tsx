@@ -10,18 +10,10 @@ function toTitleCase(str: string) {
   Font Selector| Unicode | Name | Glyph Preview |
 */
 export const InspectorControls: React.FC = () => {
-  const {
-    font,
-    glyphUnicode,
-    axisValues,
-    fonts,
-    currentFontIndex,
-    setCurrentFont,
-  } = useInspector();
+  const { font, glyphUnicode, glyph, fonts, currentFontIndex, setCurrentFont } =
+    useInspector();
   if (!font) return null;
-  const instance = font.getVariation(axisValues);
-  const glyph = instance.glyphForCodePoint(glyphUnicode);
-  const name = toTitleCase(glyph?.name || '');
+  const name = glyph ? toTitleCase(glyph.name || '') : 'Glyph unavailable';
   const unicode = `U+${glyphUnicode.toString(16).toUpperCase()}`;
   const glyphPreview = `${String.fromCodePoint(glyphUnicode)}`;
   const handleCopy = (text: string) => {

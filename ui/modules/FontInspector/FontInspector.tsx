@@ -1,6 +1,7 @@
 'use client';
 
 import { DrawColors } from '@/utils/geometry/drawing';
+import type { Axis } from 'fontkit';
 import type { Font, Glyph } from './fontkit-types';
 import type { AnatomyFeature } from './types';
 import React, {
@@ -13,7 +14,6 @@ import React, {
 } from 'react';
 import { AnatomyControls } from './AnatomyControls';
 import { ANATOMY_FEATURES } from './anatomyToggles';
-import { isSerifFont } from './fontHeuristics';
 import './FontInspector.css';
 import { InspectorControls } from './InspectorControls';
 import { SymbolCanvas } from './SymbolCanvas';
@@ -41,8 +41,6 @@ import { toFeatureID } from '@/utils/typeAnatomy/types';
 
 export interface AxisValues {
   [key: string]: number;
-  wght: number;
-  opsz: number;
 }
 
 interface FontInfo {
@@ -61,6 +59,7 @@ interface InspectorContextType {
   font: Font | null;
   fontInstance: Font | null;
   axisValues: AxisValues;
+  supportedAxes: Record<string, Axis>;
   glyphUnicode: number;
   glyph: Glyph | null;
   showDetails: boolean;
@@ -99,7 +98,8 @@ export const useInspector = (): InspectorContextType => {
 
 export const InspectorProvider: React.FC<{
   children: React.ReactNode;
-}> = ({ children }) => {
+  initialGlyphUnicode?: number;
+}> = ({ children, initialGlyphUnicode = 0x0041 }) => {
   const [fonts, setFonts] = useState<FontInfo[]>([
     { name: 'Nohemi', url: '/fonts/Nohemi-VF.ttf', font: null },
     { name: 'Inter', url: '/fonts/InterVariable.ttf', font: null },
@@ -108,11 +108,11 @@ export const InspectorProvider: React.FC<{
   ]);
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [currentFontIndex, setCurrentFontIndex] = useState(0);
-  const [axisValues, setAxisValuesState] = useState<AxisValues>({
+  const [requestedAxisValues, setAxisValuesState] = useState<AxisValues>({
     wght: 400,
     opsz: 32,
   });
-  const [glyphUnicode, setGlyphUnicode] = useState<number>(0x0041);
+  const [glyphUnicode, setGlyphUnicode] = useState<number>(initialGlyphUnicode);
   const [showDetails, setShowDetails] = useState<boolean>(false);
   const [colorScheme, setColorScheme] = useState<'light' | 'dark'>('light');
   const [colors, setColors] = useState<DrawColors>({
@@ -448,54 +448,64 @@ export const InspectorProvider: React.FC<{
     [setCurrentFontIndex]
   );
 
-  const setAxisValues = useCallback(
-    (v: Partial<AxisValues>) => {
-      setAxisValuesState((prev) => ({ ...prev, ...v }) as AxisValues);
-    },
-    [setAxisValuesState]
-  );
-
-  // memoize everything for minimal re‑renders
   const font = useMemo(
     () => fonts[currentFontIndex]?.font || null,
     [fonts, currentFontIndex]
   );
+  const supportedAxes = useMemo(() => font?.variationAxes ?? {}, [font]);
+  // Only supported, effective values reach variation, detection and labels.
+  const axisValues = useMemo((): AxisValues => {
+    const effective: AxisValues = {};
+    for (const [tag, axis] of Object.entries(supportedAxes)) {
+      const requested = requestedAxisValues[tag];
+      effective[tag] = Math.max(
+        axis.min,
+        Math.min(
+          axis.max,
+          Number.isFinite(requested) ? requested : axis.default
+        )
+      );
+    }
+    return effective;
+  }, [supportedAxes, requestedAxisValues]);
+  const setAxisValues = useCallback(
+    (values: Partial<AxisValues>) => {
+      setAxisValuesState((prev) => {
+        const next = { ...prev };
+        for (const [tag, value] of Object.entries(values)) {
+          const axis = supportedAxes[tag];
+          if (axis && value !== undefined && Number.isFinite(value)) {
+            next[tag] = Math.max(axis.min, Math.min(axis.max, value));
+          }
+        }
+        return next;
+      });
+    },
+    [supportedAxes]
+  );
   const fontInstance = useMemo(
-    () => (font ? font.getVariation(axisValues) : null),
-    [font, axisValues]
+    () =>
+      font &&
+      (Object.keys(supportedAxes).length
+        ? font.getVariation(axisValues)
+        : font),
+    [font, supportedAxes, axisValues]
   );
   const glyph = useMemo(() => {
-    if (!fontInstance) return null;
+    if (
+      !fontInstance ||
+      !Number.isInteger(glyphUnicode) ||
+      glyphUnicode < 0 ||
+      glyphUnicode > 0x10ffff ||
+      (glyphUnicode >= 0xd800 && glyphUnicode <= 0xdfff) ||
+      !fontInstance.hasGlyphForCodePoint(glyphUnicode)
+    )
+      return null;
     const glyph = fontInstance.glyphForCodePoint(glyphUnicode);
 
     if (!glyph) return null;
     return glyph;
   }, [fontInstance, glyphUnicode]);
-
-  // Build detection context from font
-  const detectionContext = useMemo((): DetectionContext | null => {
-    if (!fontInstance) return null;
-
-    const fontAny = fontInstance as Font & {
-      post?: { italicAngle?: number; isFixedPitch?: boolean };
-      'OS/2'?: { usWeightClass?: number };
-    };
-
-    const isSerif = isSerifFont(
-      fontInstance.fullName || fontInstance.familyName || ''
-    );
-
-    const italicAngle = fontAny.post?.italicAngle || 0;
-
-    return {
-      isSerif,
-      isItalic: Math.abs(italicAngle) > 0.5,
-      italicAngle,
-      isMono: fontAny.post?.isFixedPitch || false,
-      weight: fontAny['OS/2']?.usWeightClass || 400,
-      unitsPerEm: fontInstance.unitsPerEm || 1000,
-    };
-  }, [fontInstance]);
 
   // Build geometry cache for current glyph
   const geometryCache = useMemo((): GeometryCache | null => {
@@ -509,23 +519,32 @@ export const InspectorProvider: React.FC<{
     }
   }, [glyph, fontInstance, axisValues]);
 
+  // Hints and detectors consume the same context for the current variation.
+  const detectionContext: DetectionContext | null =
+    geometryCache?.context ?? null;
+
   // Get current character for hints
   const currentChar = useMemo(() => {
-    return String.fromCodePoint(glyphUnicode);
+    return Number.isInteger(glyphUnicode) &&
+      glyphUnicode >= 0 &&
+      glyphUnicode <= 0x10ffff
+      ? String.fromCodePoint(glyphUnicode)
+      : '';
   }, [glyphUnicode]);
 
   // Get available feature IDs for this glyph based on hints
   const availableFeatureIds = useMemo((): FeatureID[] => {
-    if (!detectionContext) return [];
+    if (!detectionContext || !glyph) return [];
 
     const hints = getFeatureHints(currentChar, detectionContext);
     return hints.map((h) => h.id);
-  }, [currentChar, detectionContext]);
+  }, [currentChar, detectionContext, glyph]);
 
   // Get selected feature IDs from anatomy selection
   const selectedFeatureIds = useMemo((): FeatureID[] => {
     const ids: FeatureID[] = [];
-    for (const [name] of selectedAnatomy) {
+    for (const [name, feature] of selectedAnatomy) {
+      if (feature.disabled) continue;
       const id = toFeatureID(name);
       if (id) ids.push(id);
     }
@@ -540,53 +559,19 @@ export const InspectorProvider: React.FC<{
 
   // Run detection for selected features (filtered by glyph availability)
   const detectedFeatures = useMemo((): Map<FeatureID, FeatureInstance[]> => {
-    console.log('[FontInspector] detectedFeatures memo:', {
-      hasGeometryCache: !!geometryCache,
-      showDetails,
-      filteredSelectedFeatureIds,
-      selectedFeatureIds,
-      availableFeatureIds,
-      selectedAnatomy: Array.from(selectedAnatomy.entries()),
-    });
-
-    if (
-      !geometryCache ||
-      !showDetails ||
-      filteredSelectedFeatureIds.length === 0
-    ) {
-      console.log('[FontInspector] Returning empty map due to:', {
-        noCache: !geometryCache,
-        noDetails: !showDetails,
-        noFeatures: filteredSelectedFeatureIds.length === 0,
-      });
+    if (!geometryCache || filteredSelectedFeatureIds.length === 0)
       return new Map();
-    }
 
     try {
       const result = reconcileFeatures(
         detectGlyphFeatures(geometryCache, filteredSelectedFeatureIds)
       );
-      console.log('[FontInspector] Detection result:', {
-        size: result.size,
-        features: Array.from(result.entries()).map(([id, instances]) => ({
-          id,
-          count: instances.length,
-          instances,
-        })),
-      });
       return result;
     } catch (error) {
       console.warn('[FontInspector] Error detecting features:', error);
       return new Map();
     }
-  }, [
-    geometryCache,
-    showDetails,
-    filteredSelectedFeatureIds,
-    selectedFeatureIds,
-    availableFeatureIds,
-    selectedAnatomy,
-  ]);
+  }, [geometryCache, filteredSelectedFeatureIds]);
 
   const contextValue = useMemo(
     (): InspectorContextType => ({
@@ -595,6 +580,7 @@ export const InspectorProvider: React.FC<{
       font,
       fontInstance,
       axisValues,
+      supportedAxes,
       glyphUnicode,
       glyph,
       showDetails,
@@ -619,6 +605,7 @@ export const InspectorProvider: React.FC<{
       font,
       fontInstance,
       axisValues,
+      supportedAxes,
       glyphUnicode,
       glyph,
       showDetails,

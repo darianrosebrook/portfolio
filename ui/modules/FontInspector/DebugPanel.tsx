@@ -14,15 +14,14 @@ export function DebugPanel() {
     fontInstance,
     glyph,
     axisValues,
+    supportedAxes,
     showDetails,
     colors,
     selectedAnatomy,
   } = useInspector();
 
   const hasColors = Object.values(colors).some((c) => c && c.trim() !== '');
-  const selectedCount = Array.from(selectedAnatomy.values()).filter(
-    (f) => f.selected
-  ).length;
+  const selectedCount = selectedAnatomy.size;
 
   return (
     <div data-ds-component="DebugPanel">
@@ -53,7 +52,11 @@ export function DebugPanel() {
 
         <dt>Axis Values:</dt>
         <dd>
-          Weight: {axisValues.wght}, Opsz: {axisValues.opsz}
+          {Object.entries(axisValues)
+            .map(
+              ([tag, value]) => `${supportedAxes[tag]?.name || tag}: ${value}`
+            )
+            .join(', ')}
         </dd>
 
         {fontInstance && (

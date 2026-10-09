@@ -1,5 +1,6 @@
 import type { AnatomyFeature } from '@/ui/modules/FontInspector/types';
 import type { Glyph } from '@/ui/modules/FontInspector/fontkit-types';
+import { toFeatureID } from '@/utils/typeAnatomy/types';
 export interface DrawColors {
   anchorFill: string;
   anchorStroke: string;
@@ -327,9 +328,11 @@ export function drawAxisValues(
   ctx: CanvasRenderingContext2D,
   width: number,
   _baseline: number,
-  wght: number,
-  opsz: number,
-  colors: DrawColors
+  wght: number | undefined,
+  opsz: number | undefined,
+  colors: DrawColors,
+  axes?: Record<string, number>,
+  axisNames?: Record<string, { name: string }>
 ) {
   const topleft = { x: 8, y: 32 };
   const widthGrid = (width - 64) / 3;
@@ -337,12 +340,27 @@ export function drawAxisValues(
   ctx.fillStyle = colors.labelFill;
   ctx.font = '14px sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText(`Weight ${wght.toFixed(2)}`, topleft.x, topleft.y);
-  ctx.fillText(
-    `Optical size ${opsz.toFixed(2)}`,
-    topleft.x + widthGrid,
-    topleft.y
-  );
+  if (axes) {
+    ctx.fillText(
+      Object.entries(axes)
+        .map(
+          ([tag, value]) =>
+            `${axisNames?.[tag]?.name || tag} ${value.toFixed(2)}`
+        )
+        .join(' | '),
+      topleft.x,
+      topleft.y
+    );
+  } else {
+    if (wght !== undefined)
+      ctx.fillText(`Weight ${wght.toFixed(2)}`, topleft.x, topleft.y);
+    if (opsz !== undefined)
+      ctx.fillText(
+        `Optical size ${opsz.toFixed(2)}`,
+        topleft.x + widthGrid,
+        topleft.y
+      );
+  }
   ctx.restore();
 }
 
@@ -372,102 +390,62 @@ export function drawCursorLabel(
  * @param colors - DrawColors
  * @param metrics - Metrics object
  * @param selected - Map of selected AnatomyFeature
- * @param analysis - (Optional) geometry analysis result (Float64Array)
+ * @param detected - Authoritative current detected instances; absent evidence draws nothing
  */
 export function drawAnatomyOverlay(
   ctx: CanvasRenderingContext2D,
   _w: number,
   _h: number,
-  glyph: Glyph,
+  _glyph: Glyph,
   scale: number,
   colors: DrawColors,
   _metrics: {
     [key: string]: number;
   },
   selected: Map<string, AnatomyFeature>,
-  _analysis?: Float64Array
+  detected?: Map<string, FeatureInstance[]>
 ) {
-  // 'analysis' is intentionally unused for now; will be used for overlays in the future.
-  if (!selected || selected.size === 0) {
-    return;
-  }
-
-  ctx.save();
-  const commands = glyph.path?.commands;
-  if (commands && commands.length > 0) {
-    if (selected.has('Apex')) {
-      const [ax, ay] = findExtremePointOnPath(
-        commands,
-        scale,
-        /* top = */ true
+  // Selection alone carries no evidence of anatomy. Mark detected anchors only.
+  for (const [name, feature] of selected) {
+    if (feature.disabled) continue;
+    const id = toFeatureID(name);
+    const instance = id ? detected?.get(id)?.[0] : undefined;
+    const anchor = instance ? featureAnchor(instance) : null;
+    if (anchor)
+      drawMarker(
+        ctx,
+        anchor.x * scale,
+        -anchor.y * scale,
+        feature.label,
+        colors.anchorFill
       );
-      drawMarker(ctx, ax, ay, 'Apex', colors.anchorFill);
-    }
-    if (selected.has('Tail')) {
-      const [tx, ty] = findExtremePointOnPath(
-        commands,
-        scale,
-        /* top = */ false
-      );
-      drawMarker(ctx, tx, ty, 'Tail', colors.anchorFill);
-    }
-  } else {
-    if (selected.has('Apex') || selected.has('Tail')) {
-      console.warn('Glyph has no path commands; cannot draw Apex or Tail.');
-    }
   }
-
-  // TODO: Use analysis data for feature overlays in the future
-
-  ctx.restore();
 }
 
-function findExtremePointOnPath(
-  commands: { command: string; args: number[] }[],
-  scale: number,
-  top: boolean
-): [number, number] {
-  let extremeY = top ? Infinity : -Infinity;
-  let extremePoint: [number, number] = [0, 0];
-
-  const checkPoint = (x: number, y: number) => {
-    const scaledX = x * scale;
-    const scaledY = -y * scale;
-
-    const isMoreExtreme = top ? scaledY < extremeY : scaledY > extremeY;
-
-    if (isMoreExtreme) {
-      extremeY = scaledY;
-      extremePoint = [scaledX, scaledY];
-    }
-  };
-
-  // Iterate through the path commands
-  for (const { command, args } of commands) {
-    switch (command) {
-      case 'moveTo':
-      case 'lineTo':
-        checkPoint(args[0], args[1]);
-        break;
-      case 'quadraticCurveTo':
-        checkPoint(args[2], args[3]);
-        break;
-      case 'bezierCurveTo':
-        checkPoint(args[4], args[5]);
-        break;
-      case 'closePath':
-        break;
-    }
+/** Shared anchor for the simple presentation of an authoritative instance. */
+export function featureAnchor(instance: FeatureInstance): Point2D | null {
+  const anchors = instance.anchors;
+  const anchor =
+    anchors?.center ??
+    anchors?.tip ??
+    anchors?.position ??
+    (anchors ? Object.values(anchors)[0] : undefined);
+  if (anchor) return anchor;
+  const shape = instance.shape;
+  switch (shape.type) {
+    case 'point':
+      return { x: shape.x, y: shape.y };
+    case 'circle':
+      return { x: shape.cx, y: shape.cy };
+    case 'rect':
+      return { x: shape.x + shape.width / 2, y: shape.y + shape.height / 2 };
+    case 'line':
+      return { x: (shape.x1 + shape.x2) / 2, y: (shape.y1 + shape.y2) / 2 };
+    case 'polyline':
+      return shape.points[Math.floor(shape.points.length / 2)] ?? null;
+    case 'path':
+      return null;
   }
-
-  if (extremeY === Infinity || extremeY === -Infinity) {
-    console.warn(
-      'Could not find extreme point for glyph path. Returning origin.'
-    );
-    return [0, 0];
-  }
-
-  return extremePoint;
 }
 
 function drawMarker(
@@ -794,8 +772,7 @@ function drawRectShape(
  * within the feature bounds. This provides pixel-perfect precision by using the
  * glyph's actual path curves rather than simple rectangles.
  *
- * Uses 'evenodd' fill rule to properly handle glyphs with holes (like 'D', 'O', 'e').
- * This ensures only the solid stroke portions are filled, not the counter spaces.
+ * Uses the same nonzero winding rule as the base glyph and SVG renderer.
  *
  * @param ctx - Canvas context (already translated to glyph origin)
  * @param glyph - Fontkit glyph object
@@ -830,11 +807,10 @@ export function drawClippedGlyphFeature(
     );
   }
 
-  // Fill with highlight color using evenodd rule
-  // This properly handles holes in glyphs (like the counter in 'D', 'O', etc.)
+  // Preserve the font outline winding rule in the highlighted intersection.
   ctx.fillStyle = colors.highlightBackground;
   ctx.globalAlpha = 0.5;
-  ctx.fill('evenodd');
+  ctx.fill('nonzero');
 
   // Stroke the visible glyph outline within the clip
   ctx.globalAlpha = 1;
@@ -991,7 +967,7 @@ export function drawClippedGlyphRegion(
     );
   }
   ctx.fillStyle = colors.highlightBackground;
-  ctx.fill('evenodd');
+  ctx.fill('nonzero');
 
   ctx.restore();
 }

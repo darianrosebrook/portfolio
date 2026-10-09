@@ -19,6 +19,7 @@ import {
 } from '@/utils/geometry/pathValidation';
 import { SVGDefs } from '@/utils/geometry/svgDefs';
 import { createViewportTransform } from '@/utils/geometry/transforms';
+import { featureAnchor } from '@/utils/geometry/drawing';
 import type { UnifiedFeatureShape, Metrics } from '@/utils/typeAnatomy';
 // Use UnifiedFeatureShape which includes 'line' type
 type FeatureShape = UnifiedFeatureShape;
@@ -39,6 +40,7 @@ import { FeatureCoachmark } from './FeatureCoachmark';
 import type { AxisValues } from './FontInspector';
 import { useInspector } from './FontInspector';
 import './FontInspector.css';
+import { glyphViewport, useViewportSize } from './viewport';
 import { SVGGlyphBounds } from './SVGGlyphBounds';
 import { SVGPathDetails } from './SVGPathDetails';
 
@@ -55,6 +57,7 @@ export const SymbolCanvasSVG: React.FC = () => {
     fontInstance,
     glyph,
     axisValues,
+    supportedAxes,
     showDetails,
     setAxisValues,
     setShowDetails,
@@ -65,13 +68,27 @@ export const SymbolCanvasSVG: React.FC = () => {
 
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [metrics, setMetrics] = useState<SVGCanvasMetrics>({
-    scale: 1,
-    xOffset: 0,
-    baseline: 0,
-    width: 0,
-    height: 0,
-  });
+  const viewportSize = useViewportSize(containerRef);
+  const metrics: SVGCanvasMetrics = useMemo(() => {
+    const viewport =
+      fontInstance && glyph
+        ? glyphViewport(
+            viewportSize.width,
+            viewportSize.height,
+            fontInstance,
+            glyph
+          )
+        : null;
+    return (
+      viewport ?? {
+        scale: 0,
+        xOffset: 0,
+        baseline: 0,
+        width: viewportSize.width,
+        height: viewportSize.height,
+      }
+    );
+  }, [fontInstance, glyph, viewportSize]);
   const [svgRect, setSvgRect] = useState<DOMRect | null>(null);
   const [cursor, setCursor] = useState<{
     x: number;
@@ -81,70 +98,6 @@ export const SymbolCanvasSVG: React.FC = () => {
   const [showDebug, setShowDebug] = useState(false);
   const [pathErrors, setPathErrors] = useState<string[]>([]);
   const [exporting, setExporting] = useState(false);
-
-  const canvasTopPadding = 128;
-  const canvasBottomPadding = 64;
-  const canvasHorizontalPadding = 128;
-
-  // Calculate metrics when font/glyph changes
-  useEffect(() => {
-    if (!fontInstance || !glyph || !containerRef.current) return;
-
-    const container = containerRef.current;
-
-    // Ensure container has dimensions before calculating
-    if (container.clientWidth === 0 || container.clientHeight === 0) {
-      // Wait for next frame if container hasn't sized yet
-      requestAnimationFrame(() => {
-        if (!containerRef.current) return;
-        const rect = containerRef.current.getBoundingClientRect();
-        if (rect.width === 0 || rect.height === 0) return;
-        calculateMetrics();
-      });
-      return;
-    }
-
-    calculateMetrics();
-
-    function calculateMetrics() {
-      if (!containerRef.current || !fontInstance || !glyph) return;
-
-      const container = containerRef.current;
-      const containerWidth = container.clientWidth;
-      const containerHeight = container.clientHeight;
-
-      const glyphBoundsW = containerWidth - canvasHorizontalPadding * 2;
-      const glyphBoundsH =
-        containerHeight - canvasTopPadding - canvasBottomPadding;
-
-      const units = fontInstance.unitsPerEm;
-      const fontHeight = fontInstance.ascent - fontInstance.descent || units;
-      const scale = Math.min(
-        glyphBoundsW / (glyph.advanceWidth * 1.1 || units * 0.6),
-        glyphBoundsH / fontHeight
-      );
-
-      const baseline =
-        containerHeight -
-        (Math.abs(fontInstance.descent) * scale + canvasBottomPadding);
-      const xOffset = Math.round(
-        (containerWidth - glyph.advanceWidth * scale) / 2
-      );
-
-      setMetrics({
-        scale,
-        xOffset,
-        baseline,
-        width: containerWidth,
-        height: containerHeight,
-      });
-
-      // Update SVG rect for coachmark positioning
-      if (svgRef.current) {
-        setSvgRect(svgRef.current.getBoundingClientRect());
-      }
-    }
-  }, [fontInstance, glyph]);
 
   // Update SVG rect on resize/scroll
   useEffect(() => {
@@ -160,7 +113,7 @@ export const SymbolCanvasSVG: React.FC = () => {
       window.removeEventListener('resize', updateRect);
       window.removeEventListener('scroll', updateRect, true);
     };
-  }, [glyph, fontInstance]);
+  }, [glyph, fontInstance, metrics.width, metrics.height]);
 
   // Auto-detect features (if enabled)
   // Note: autoDetectFeatures is a boolean flag, not a function
@@ -259,7 +212,7 @@ export const SymbolCanvasSVG: React.FC = () => {
     const zones: FeatureZone[] = [];
 
     for (const [featureName, feature] of selectedAnatomy.entries()) {
-      if (!feature.selected || feature.disabled) continue;
+      if (feature.disabled) continue;
 
       // Metric lines (Baseline, Cap height, etc.) — these are font metrics,
       // not detected features. They short-circuit the detection path.
@@ -272,7 +225,6 @@ export const SymbolCanvasSVG: React.FC = () => {
               id={`metric-${featureName}`}
               className="metricLine"
               aria-label={feature.label}
-              aria-hidden={!feature.selected}
               vectorEffect="non-scaling-stroke"
               shapeRendering="crispEdges"
             >
@@ -360,7 +312,7 @@ export const SymbolCanvasSVG: React.FC = () => {
           // Simple markers when not showing details — pin to the first
           // instance's anchor (or shape origin) and add a coachmark zone.
           const inst = instances[0];
-          const loc = anchorPointFor(inst);
+          const loc = featureAnchor(inst);
           if (loc) {
             markerLoc = loc;
             plans.push({
@@ -398,8 +350,8 @@ export const SymbolCanvasSVG: React.FC = () => {
                   fill={colors.highlightBackground}
                   clipPath={`url(#${plan.clipPathId})`}
                   opacity={0.85}
+                  fillRule="nonzero"
                   aria-label={`${feature.label} highlight`}
-                  aria-hidden={!feature.selected}
                 />
               );
             }
@@ -412,18 +364,23 @@ export const SymbolCanvasSVG: React.FC = () => {
                 fill={colors.highlightBackground}
                 opacity={0.85}
                 aria-label={`${feature.label} highlight`}
-                aria-hidden={!feature.selected}
               />
             );
             break;
           case 'shape':
             elements.push(
-              <FeatureShapeRenderer
+              <g
                 key={`shape-${plan.idSuffix}`}
-                shape={plan.shape}
-                scale={metrics.scale}
-                colors={colors}
-              />
+                transform={`translate(${metrics.xOffset}, ${metrics.baseline})`}
+                aria-label={feature.label}
+              >
+                <FeatureShapeRenderer
+                  key={`shape-${plan.idSuffix}`}
+                  shape={plan.shape}
+                  scale={metrics.scale}
+                  colors={colors}
+                />
+              </g>
             );
             break;
           case 'marker':
@@ -437,7 +394,6 @@ export const SymbolCanvasSVG: React.FC = () => {
                 stroke={colors.anchorStroke}
                 strokeWidth={1}
                 aria-label={feature.label}
-                aria-hidden={!feature.selected}
               />
             );
             break;
@@ -479,30 +435,33 @@ export const SymbolCanvasSVG: React.FC = () => {
 
   const handlePointerDown = useCallback(
     (ev: React.PointerEvent<SVGSVGElement>) => {
+      if (!supportedAxes.wght) return;
       ev.currentTarget.setPointerCapture(ev.pointerId);
       setIsDragging(true);
       dragStartX.current = ev.clientX;
       dragStartAxis.current = axisValues;
       setCursor({ x: ev.clientX, y: ev.clientY, active: true });
     },
-    [axisValues]
+    [axisValues, supportedAxes]
   );
 
   const handlePointerMove = useCallback(
     (ev: React.PointerEvent<SVGSVGElement>) => {
       setCursor({ x: ev.clientX, y: ev.clientY, active: true });
 
-      if (!isDragging) return;
+      const weightAxis = supportedAxes.wght;
+      if (!isDragging || !weightAxis || metrics.width <= 0) return;
 
       const containerWidth = metrics.width / 2;
       const dx = (ev.clientX - dragStartX.current) / containerWidth;
-      let newW = dragStartAxis.current.wght + dx * 800;
+      let newW =
+        dragStartAxis.current.wght + dx * (weightAxis.max - weightAxis.min);
       if (ev.shiftKey) newW = Math.round(newW / 100) * 100;
-      newW = Math.max(100, Math.min(900, newW));
+      newW = Math.max(weightAxis.min, Math.min(weightAxis.max, newW));
 
       setAxisValues({ wght: newW });
     },
-    [isDragging, metrics.width, setAxisValues]
+    [isDragging, metrics.width, setAxisValues, supportedAxes]
   );
 
   const handlePointerUp = useCallback(() => {
@@ -712,7 +671,7 @@ export const SymbolCanvasSVG: React.FC = () => {
               fill="currentColor"
               fontSize={14}
             >
-              No glyph selected
+              This font does not contain the selected glyph
             </text>
           )}
           {!viewportTransform && glyph && fontInstance && (
@@ -803,6 +762,8 @@ export const SymbolCanvasSVG: React.FC = () => {
               containerHeight={metrics.height}
               colors={colors}
               idPrefix="fi"
+              ascent={fontInstance.ascent}
+              descent={fontInstance.descent}
             />
           )}
         </g>
@@ -838,11 +799,7 @@ export const SymbolCanvasSVG: React.FC = () => {
         </g>
 
         {/* Layer 5: Highlights */}
-        <g
-          id="highlights"
-          aria-label="Feature highlights"
-          aria-hidden={!showDetails}
-        >
+        <g id="highlights" aria-label="Feature highlights" aria-hidden={false}>
           {featureElements.filter(
             (el) =>
               el.key?.toString().startsWith('highlight-') ||
@@ -984,8 +941,12 @@ export const SymbolCanvasSVG: React.FC = () => {
           fontFamily="sans-serif"
           aria-label="Axis values"
         >
-          Weight {axisValues.wght.toFixed(2)} | Optical size{' '}
-          {axisValues.opsz.toFixed(2)}
+          {Object.entries(axisValues)
+            .map(
+              ([tag, value]) =>
+                `${supportedAxes[tag]?.name || tag} ${value.toFixed(2)}`
+            )
+            .join(' | ')}
         </text>
       </svg>
 
@@ -1065,44 +1026,6 @@ function polygonToScreenPoints(
 }
 
 /**
- * Pick a representative anchor point for a feature instance. Used by the
- * "no details" mode to position a small marker + coachmark zone.
- */
-function anchorPointFor(
-  inst: FeatureInstance
-): { x: number; y: number } | null {
-  if (inst.anchors) {
-    const a =
-      inst.anchors.center ??
-      inst.anchors.tip ??
-      inst.anchors.position ??
-      Object.values(inst.anchors)[0];
-    if (a) return a;
-  }
-  switch (inst.shape.type) {
-    case 'point':
-      return { x: inst.shape.x, y: inst.shape.y };
-    case 'circle':
-      return { x: inst.shape.cx, y: inst.shape.cy };
-    case 'rect':
-      return {
-        x: inst.shape.x + inst.shape.width / 2,
-        y: inst.shape.y + inst.shape.height / 2,
-      };
-    case 'line':
-      return {
-        x: (inst.shape.x1 + inst.shape.x2) / 2,
-        y: (inst.shape.y1 + inst.shape.y2) / 2,
-      };
-    case 'polyline':
-      if (inst.shape.points.length === 0) return null;
-      return inst.shape.points[Math.floor(inst.shape.points.length / 2)];
-    case 'path':
-      return null;
-  }
-}
-
-/**
  * Renders a feature shape (circle, polyline, path, line, etc.) as SVG elements.
  */
 function FeatureShapeRenderer({
@@ -1151,10 +1074,12 @@ function FeatureShapeRenderer({
       return (
         <path
           d={shape.d}
+          transform={`scale(${scale}, ${-scale})`}
+          fillRule="nonzero"
           fill={colors.anchorFill}
           fillOpacity={0.2}
           stroke={colors.anchorStroke}
-          strokeWidth={2}
+          strokeWidth={2 / scale}
         />
       );
 

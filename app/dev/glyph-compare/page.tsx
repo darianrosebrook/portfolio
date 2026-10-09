@@ -20,10 +20,20 @@ export const dynamic = 'force-dynamic';
 function GlyphCompareContent() {
   const searchParams = useSearchParams();
   const gidParam = searchParams.get('gid');
-  const gid = gidParam ? parseInt(gidParam, 16) : 0x0041; // Default to 'A'
+  const parsedGid =
+    gidParam && /^(?:0x)?[\da-f]+$/i.test(gidParam)
+      ? parseInt(gidParam, 16)
+      : 0x0041;
+  const gid =
+    Number.isInteger(parsedGid) &&
+    parsedGid >= 0 &&
+    parsedGid <= 0x10ffff &&
+    !(parsedGid >= 0xd800 && parsedGid <= 0xdfff)
+      ? parsedGid
+      : 0x0041;
 
   return (
-    <InspectorProvider>
+    <InspectorProvider key={gid} initialGlyphUnicode={gid}>
       <div className={styles.container}>
         <header className={styles.header}>
           <h1>Canvas vs SVG Comparison</h1>

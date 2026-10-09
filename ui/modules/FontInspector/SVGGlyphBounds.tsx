@@ -69,6 +69,8 @@ export interface SVGGlyphBoundsProps {
   };
   /** ID prefix for pattern references */
   idPrefix?: string;
+  ascent?: number;
+  descent?: number;
 }
 
 /**
@@ -81,6 +83,8 @@ export function SVGGlyphBounds({
   containerHeight: _containerHeight,
   colors,
   idPrefix = 'fi',
+  ascent = 800,
+  descent = -200,
 }: SVGGlyphBoundsProps) {
   const bounds = useMemo(() => calculateGlyphBounds(glyph), [glyph]);
   const defIds = getSVGDefIds(idPrefix);
@@ -96,8 +100,8 @@ export function SVGGlyphBounds({
   const rsbXScreen = bboxMaxScreen.x + rsb * transform.scale;
 
   // Calculate ascent/descent Y positions
-  const ascY = transform.toScreen({ x: 0, y: 800 }).y; // Typical ascent
-  const descY = transform.toScreen({ x: 0, y: -200 }).y; // Typical descent
+  const ascY = transform.toScreen({ x: 0, y: ascent }).y;
+  const descY = transform.toScreen({ x: 0, y: descent }).y;
 
   // Calculate marker positions (below descender)
   const markerY1 = descY + 4;
