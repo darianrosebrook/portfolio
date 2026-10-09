@@ -167,7 +167,8 @@ export function detectStem(geo: GeometryCache): FeatureInstance[] {
  * Long outline edges establish a stroke direction. Matching fill-span edges
  * then establish its opposite boundary. This keeps a connector's merged span
  * from widening the stem and avoids treating a moving diagonal as several
- * unrelated vertical strokes. Curved outlines retain the scanline fallback.
+ * unrelated vertical strokes. Glyphs without a validated line-backed track
+ * use the scanline fallback.
  */
 function traceBackbones(geo: GeometryCache): FeatureInstance[] {
   const { glyph, metrics, scale } = geo;
