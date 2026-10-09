@@ -1,221 +1,158 @@
-/**
- * Finial feature detector.
- *
- * A finial is a tapered or shaped terminal of a stroke (non-serif).
- * Found at stroke endings that don't have serif projections.
- *
- * v2 improvements:
- * - Uses scale-aware thresholds (geo.scale)
- * - Detects tapered terminals by width reduction at extremes
- * - Curvature analysis for improved confidence scoring
- */
+/** Non-serif, non-ball endings identified by their cap and opposing walls. */
+import {
+  containsFilledPoint,
+  getFilledGeometry,
+} from '@/utils/geometry/filledGeometry';
+import type {
+  FeatureInstance,
+  GeometryCache,
+  Point2D,
+  SegmentWithMeta,
+} from '../types';
 
-import { rayHits } from '@/utils/geometry/geometryCore';
-import { analyzeTerminalCurvature } from '../curvatureAnalysis';
-import { buildProjectionPolygon } from '../evidence/projectionRegion';
-import type { FeatureInstance, GeometryCache, Point2D } from '../types';
+function unit(a: Point2D, b: Point2D): Point2D {
+  const length = Math.hypot(b.x - a.x, b.y - a.y);
+  if (!length) return { x: 0, y: 0 };
+  return { x: (b.x - a.x) / length, y: (b.y - a.y) / length };
+}
+function tangent(segment: SegmentWithMeta, end: boolean): Point2D | null {
+  const p = segment.params;
+  if (p.length < 2) return null;
+  return end ? unit(p[p.length - 2], p[p.length - 1]) : unit(p[0], p[1]);
+}
+function walk(
+  points: Point2D[],
+  start: number,
+  direction: number,
+  budget: number
+): Point2D[] {
+  const result: Point2D[] = [points[start]];
+  let distance = 0,
+    current = start;
+  for (let step = 0; step < points.length - 1; step++) {
+    const next = (current + direction + points.length) % points.length;
+    const a = points[current],
+      b = points[next];
+    const length = Math.hypot(b.x - a.x, b.y - a.y);
+    if (distance + length > budget) {
+      const t = (budget - distance) / length;
+      result.push({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
+      break;
+    }
+    result.push(b);
+    distance += length;
+    current = next;
+  }
+  return result;
+}
 
-const FINIAL_ARC_BUDGET_FRACTION = 0.12;
-
-/**
- * Detects finial features on a glyph.
- * Returns point shapes at detected finial locations.
- */
 export function detectFinial(geo: GeometryCache): FeatureInstance[] {
-  const { glyph, metrics, svgShape, scale } = geo;
-
-  if (!glyph?.path?.commands || !glyph.bbox) {
-    return [];
-  }
-
-  const instances: FeatureInstance[] = [];
-  const { bboxH, stemWidth, overshoot } = scale;
-
-  // Finials are at terminal positions - check near baseline and cap/x-height
-  const terminals = [
-    { y: metrics.baseline, zone: 'baseline' },
-    { y: metrics.xHeight, zone: 'x-height' },
-    { y: metrics.capHeight, zone: 'cap-height' },
-  ];
-
-  for (const terminal of terminals) {
-    // Skip if outside glyph bounds
-    if (
-      terminal.y < glyph.bbox.minY - bboxH * 0.1 ||
-      terminal.y > glyph.bbox.maxY + bboxH * 0.1
-    ) {
-      continue;
-    }
-
-    const origin = { x: glyph.bbox.minX - overshoot * 0.1, y: terminal.y };
-    const { points } = rayHits(svgShape, origin, 0, overshoot);
-
-    if (points.length < 2) continue;
-
-    // For each filled span, check if terminals are finials
-    for (let j = 0; j < points.length - 1; j += 2) {
-      const leftEdge = points[j];
-      const rightEdge = points[j + 1];
-      const spanWidth = rightEdge.x - leftEdge.x;
-
-      // Only check thick spans (stems)
-      if (spanWidth < stemWidth * 0.5) continue;
-
-      // Check left terminal
-      const leftFinial = detectFinialAtEdge(
-        geo,
-        { x: leftEdge.x, y: terminal.y },
-        'left',
-        terminal.zone
-      );
-      if (leftFinial) instances.push(leftFinial);
-
-      // Check right terminal
-      const rightFinial = detectFinialAtEdge(
-        geo,
-        { x: rightEdge.x, y: terminal.y },
-        'right',
-        terminal.zone
-      );
-      if (rightFinial) instances.push(rightFinial);
-    }
-  }
-
-  // Deduplicate nearby finials
-  return deduplicateFinials(instances, stemWidth * 0.5);
-}
-
-/**
- * Detects a finial at a specific edge by checking for tapering.
- * A finial tapers away without serif projection.
- */
-function detectFinialAtEdge(
-  geo: GeometryCache,
-  edge: Point2D,
-  side: 'left' | 'right',
-  zone: string
-): FeatureInstance | null {
-  const { svgShape, scale } = geo;
-  const { stemWidth, bboxH } = scale;
-
-  // Check for tapering by probing slightly above/below
-  const probeOffsets = [bboxH * 0.03, -bboxH * 0.03];
-  const widths: number[] = [];
-
-  for (const offset of probeOffsets) {
-    const probeY = edge.y + offset;
-    const origin = { x: edge.x - stemWidth * 2, y: probeY };
-    const { points } = rayHits(svgShape, origin, 0, stemWidth * 4);
-
-    // Find the span containing our edge
-    for (let j = 0; j < points.length - 1; j += 2) {
-      const x1 = points[j].x;
-      const x2 = points[j + 1].x;
-
-      // Check if this span contains our edge position
-      if (x1 <= edge.x + stemWidth * 0.5 && x2 >= edge.x - stemWidth * 0.5) {
-        widths.push(x2 - x1);
-        break;
-      }
-    }
-  }
-
-  // Not enough data to determine finial
-  if (widths.length < 1) return null;
-
-  // Check for serif: probe horizontally outward
-  const serifAngle = side === 'left' ? Math.PI : 0;
-  const serifProbe = rayHits(svgShape, edge, serifAngle, stemWidth * 1.5);
-
-  // If we hit something close, it's likely a serif, not a finial
-  const hasSerif =
-    serifProbe.points.length > 0 &&
-    Math.abs(serifProbe.points[0].x - edge.x) < stemWidth * 0.8;
-
-  if (hasSerif) return null;
-
-  // Analyze curvature at this terminal for improved confidence
-  const curvatureResult = analyzeTerminalCurvature(geo, edge);
-
-  // Base confidence from probe-based detection
-  let confidence = 0.6;
-
-  // Boost confidence if curvature analysis confirms finial characteristics
-  if (curvatureResult) {
-    if (curvatureResult.classification === 'sharp') {
-      confidence = 0.85; // Ball terminal or teardrop finial
-    } else if (curvatureResult.classification === 'moderate') {
-      confidence = 0.75; // Tapered finial
-    } else if (curvatureResult.classification === 'gentle') {
-      confidence = 0.65; // Subtle finial
-    }
-    // Straight terminals are less likely to be true finials
-    if (curvatureResult.classification === 'straight') {
-      confidence = 0.5;
-    }
-  }
-
-  const budget = geo.metrics.capHeight * FINIAL_ARC_BUDGET_FRACTION;
-  const polygon = buildProjectionPolygon({
-    glyph: geo.glyph,
-    anchor: edge,
-    arcLengthBudget: budget,
-  });
-
-  // Finial: terminal without serif projection
-  return {
-    id: 'finial',
-    shape: {
-      type: 'point',
-      x: edge.x,
-      y: edge.y,
-      label: 'Finial',
-    },
-    region:
-      polygon.length >= 3 ? { kind: 'stroke', points: polygon } : undefined,
-    confidence,
-    anchors: {
-      position: edge,
-    },
-    debug: {
-      side,
-      zone,
-      curvature: curvatureResult?.classification,
-      curvatureValue: curvatureResult?.curvature,
-    },
-  };
-}
-
-/**
- * Removes duplicate finials that are too close together.
- */
-function deduplicateFinials(
-  instances: FeatureInstance[],
-  tolerance: number
-): FeatureInstance[] {
+  if (!geo.glyph?.path?.commands?.length || !geo.glyph.bbox) return [];
+  const filled = geo.filled ?? getFilledGeometry(geo.glyph);
   const result: FeatureInstance[] = [];
-
-  for (const inst of instances) {
-    if (inst.shape.type !== 'point') {
-      result.push(inst);
+  const stem = geo.scale.stemWidth;
+  for (let i = 1; i < geo.segments.length - 1; i++) {
+    const segment = geo.segments[i];
+    if (segment.type !== 'lineTo' || segment.params.length !== 2) continue;
+    const [a, b] = segment.params;
+    const width = Math.hypot(b.x - a.x, b.y - a.y);
+    if (width < filled.tolerance * 2 || width > stem * 1.8) continue;
+    const previous = geo.segments[i - 1],
+      next = geo.segments[i + 1];
+    const incoming = tangent(previous, true),
+      outgoing = tangent(next, false);
+    if (
+      !incoming ||
+      !outgoing ||
+      incoming.x * outgoing.x + incoming.y * outgoing.y > -0.6
+    )
       continue;
-    }
-
-    const instShape = inst.shape;
-    const isDuplicate = result.some((existing) => {
-      if (existing.shape.type !== 'point') return false;
-      const existingShape = existing.shape;
-      const dist = Math.hypot(
-        existingShape.x - instShape.x,
-        existingShape.y - instShape.y
-      );
-      return dist < tolerance;
+    const along = unit(a, b);
+    if (
+      Math.abs(incoming.x * along.x + incoming.y * along.y) > 0.5 ||
+      Math.abs(outgoing.x * along.x + outgoing.y * along.y) > 0.5
+    )
+      continue;
+    // A straight stem foot has parallel straight walls. Curved walls or
+    // a measurable taper establish the shaped ending after cap identity.
+    const adjoiningCurve = [-1, 1].some((direction) => {
+      let distance = 0;
+      for (
+        let j = i + direction;
+        j > 0 && j < geo.segments.length;
+        j += direction
+      ) {
+        const wall = geo.segments[j];
+        if (wall.type.includes('Curve')) return true;
+        if (wall.type !== 'lineTo' || wall.params.length !== 2) break;
+        distance += Math.hypot(
+          wall.params[1].x - wall.params[0].x,
+          wall.params[1].y - wall.params[0].y
+        );
+        if (distance > width * 2) break;
+      }
+      return false;
     });
-
-    if (!isDuplicate) {
-      result.push(inst);
+    const tapered = incoming.x * outgoing.x + incoming.y * outgoing.y > -0.98;
+    if (!adjoiningCurve && !tapered) continue;
+    const normal = { x: -along.y, y: along.x };
+    const anchor = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+    // Straight tapered projections on a serif face at a stem's metric
+    // extremity are serif feet. Identity came from opposing walls first;
+    // metric proximity only disambiguates that terminal classification.
+    if (
+      !adjoiningCurve &&
+      geo.context.isSerif &&
+      [geo.metrics.baseline, geo.metrics.capHeight, geo.metrics.xHeight].some(
+        (y) => Math.abs(anchor.y - y) < width * 2
+      )
+    )
+      continue;
+    const probe = Math.min(width, stem) * 0.15;
+    const positive = containsFilledPoint(filled, {
+      x: anchor.x + normal.x * probe,
+      y: anchor.y + normal.y * probe,
+    });
+    const negative = containsFilledPoint(filled, {
+      x: anchor.x - normal.x * probe,
+      y: anchor.y - normal.y * probe,
+    });
+    if (positive === negative) continue;
+    // Locate the cap on the canonical occupied boundary; internal seams
+    // from overlapping source contours never become visible terminals.
+    for (const body of filled.bodies) {
+      const start = body.points.findIndex(
+        (p) => Math.hypot(p.x - a.x, p.y - a.y) < 0.5
+      );
+      const end = body.points.findIndex(
+        (p) => Math.hypot(p.x - b.x, p.y - b.y) < 0.5
+      );
+      if (start < 0 || end < 0) continue;
+      const direction =
+        (start + 1) % body.points.length === end
+          ? 1
+          : (start - 1 + body.points.length) % body.points.length === end
+            ? -1
+            : 0;
+      if (!direction) continue;
+      const budget = Math.min(stem, width) * 0.65;
+      const firstWall = walk(body.points, start, -direction, budget);
+      const secondWall = walk(body.points, end, direction, budget);
+      const points = [...firstWall.reverse(), ...secondWall];
+      result.push({
+        id: 'finial',
+        shape: { type: 'point', ...anchor, label: 'Finial' },
+        region: { kind: 'stroke', points },
+        confidence: 0.9,
+        anchors: { position: anchor, capStart: a, capEnd: b },
+        debug: {
+          capWidth: width,
+          ending: 'flat-or-tapered',
+          boundary: 'occupied-outline',
+        },
+      });
+      break;
     }
   }
-
   return result;
 }

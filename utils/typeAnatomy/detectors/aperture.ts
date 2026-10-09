@@ -1,233 +1,118 @@
-/**
- * Aperture feature detector.
- *
- * An aperture is the opening between counter and outside space
- * (e.g., in 'c', 'e', 's', 'a').
- *
- * Fixed in v1:
- * - Uses filled spans (intersection pairs) instead of "last two points"
- * - Detects gaps between filled spans and glyph edge
- * - Tracks consistency across Y levels
- */
+/** Open counter regions bounded by the occupied outline and their mouth. */
+import { getFilledGeometry } from '@/utils/geometry/filledGeometry';
+import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 
-import { rayHits } from '@/utils/geometry/geometryCore';
-import type { FeatureInstance, GeometryCache } from '../types';
-
-/**
- * Represents a filled span on a scanline.
- */
-interface FilledSpan {
-  x1: number;
-  x2: number;
-  width: number;
+function cross(a: Point2D, b: Point2D, c: Point2D): number {
+  return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
 }
 
-/**
- * Represents an aperture candidate at a Y level.
- */
-interface ApertureCandidate {
-  y: number;
-  side: 'left' | 'right';
-  gapStart: number;
-  gapEnd: number;
-  gapWidth: number;
+/** Hull vertices retain outline indices so the recess follows the real wall. */
+function hullIndices(points: Point2D[]): number[] {
+  const sorted = points
+    .map((_, i) => i)
+    .sort((a, b) => points[a].x - points[b].x || points[a].y - points[b].y);
+  const half = (indices: number[]) => {
+    const result: number[] = [];
+    for (const i of indices) {
+      while (
+        result.length > 1 &&
+        cross(
+          points[result[result.length - 2]],
+          points[result[result.length - 1]],
+          points[i]
+        ) <= 0
+      )
+        result.pop();
+      result.push(i);
+    }
+    return result;
+  };
+  return [
+    ...half(sorted).slice(0, -1),
+    ...half([...sorted].reverse()).slice(0, -1),
+  ];
 }
 
-/**
- * Detects aperture features on a glyph.
- * Returns line or polyline shapes at detected aperture locations.
- */
 export function detectAperture(geo: GeometryCache): FeatureInstance[] {
-  const { glyph, metrics, svgShape, scale } = geo;
-
-  if (!glyph?.path?.commands || !glyph.bbox) {
-    return [];
-  }
-
+  if (!geo.glyph?.path?.commands?.length || !geo.glyph.bbox) return [];
+  const filled = geo.filled ?? getFilledGeometry(geo.glyph);
   const instances: FeatureInstance[] = [];
-  const { bboxW, stemWidth, overshoot } = scale;
-
-  // Minimum gap width to be considered an aperture
-  const minGapWidth = Math.max(stemWidth * 0.3, bboxW * 0.05);
-
-  // Scan Y levels between baseline and x-height
-  const levels = 7;
-  const candidates: ApertureCandidate[] = [];
-
-  for (let i = 1; i < levels; i++) {
-    const y =
-      metrics.baseline + (i * (metrics.xHeight - metrics.baseline)) / levels;
-    const origin = { x: glyph.bbox.minX - overshoot * 0.1, y };
-    const { points } = rayHits(svgShape, origin, 0, overshoot);
-
-    if (points.length < 2) continue;
-
-    // Convert to filled spans (pairs of intersections)
-    const spans: FilledSpan[] = [];
-    for (let j = 0; j < points.length - 1; j += 2) {
-      const x1 = points[j].x;
-      const x2 = points[j + 1].x;
-      spans.push({ x1, x2, width: x2 - x1 });
-    }
-
-    if (spans.length === 0) continue;
-
-    // Check for right-side aperture: gap between rightmost span and bbox edge
-    const rightmostSpan = spans[spans.length - 1];
-    const rightGapWidth = glyph.bbox.maxX - rightmostSpan.x2;
-
-    if (rightGapWidth > minGapWidth && rightGapWidth < bboxW * 0.5) {
-      candidates.push({
-        y,
-        side: 'right',
-        gapStart: rightmostSpan.x2,
-        gapEnd: glyph.bbox.maxX,
-        gapWidth: rightGapWidth,
-      });
-    }
-
-    // Check for left-side aperture: gap between leftmost span and bbox edge
-    const leftmostSpan = spans[0];
-    const leftGapWidth = leftmostSpan.x1 - glyph.bbox.minX;
-
-    if (leftGapWidth > minGapWidth && leftGapWidth < bboxW * 0.5) {
-      candidates.push({
-        y,
-        side: 'left',
-        gapStart: glyph.bbox.minX,
-        gapEnd: leftmostSpan.x1,
-        gapWidth: leftGapWidth,
-      });
-    }
-
-    // Check for interior apertures: gaps between spans
-    for (let j = 0; j < spans.length - 1; j++) {
-      const gapStart = spans[j].x2;
-      const gapEnd = spans[j + 1].x1;
-      const gapWidth = gapEnd - gapStart;
-
-      // Interior gap that's open to outside (near edge)
-      if (gapWidth > minGapWidth) {
-        const nearRightEdge = gapEnd > glyph.bbox.maxX - bboxW * 0.2;
-        const nearLeftEdge = gapStart < glyph.bbox.minX + bboxW * 0.2;
-
-        if (nearRightEdge) {
-          candidates.push({
-            y,
-            side: 'right',
-            gapStart,
-            gapEnd,
-            gapWidth,
-          });
-        } else if (nearLeftEdge) {
-          candidates.push({
-            y,
-            side: 'left',
-            gapStart,
-            gapEnd,
-            gapWidth,
-          });
+  for (const body of filled.bodies) {
+    const points = body.points;
+    const hull = hullIndices(points);
+    const hullSet = new Set(hull);
+    const width = body.bbox.maxX - body.bbox.minX;
+    const height = body.bbox.maxY - body.bbox.minY;
+    for (let h = 0; h < hull.length; h++) {
+      const start = hull[h],
+        end = hull[(h + 1) % hull.length];
+      let pocket: Point2D[] = [];
+      for (const direction of [1, -1]) {
+        const arc = [points[start]];
+        let i = (start + direction + points.length) % points.length;
+        while (i !== end && !hullSet.has(i) && arc.length <= points.length) {
+          arc.push(points[i]);
+          i = (i + direction + points.length) % points.length;
+        }
+        if (i === end) {
+          arc.push(points[end]);
+          if (arc.length > pocket.length) pocket = arc;
         }
       }
+      if (pocket.length < 6) continue;
+      const a = points[start],
+        b = points[end];
+      if (Math.min(a.y, b.y) < geo.metrics.baseline - geo.scale.eps) continue;
+      const mouthLength = Math.hypot(b.x - a.x, b.y - a.y);
+      // Counter mouths open sideways. Recesses at the crown, baseline,
+      // and shallow serif notches do not have an enclosing counter wall.
+      if (
+        Math.abs(b.y - a.y) < Math.abs(b.x - a.x) * 0.8 ||
+        mouthLength < height * 0.01
+      )
+        continue;
+      const depth = Math.max(
+        ...pocket.map((p) => Math.abs(cross(a, b, p)) / mouthLength)
+      );
+      // Counter-like recesses sit in the body. A descender hook or the
+      // whitespace beside p/q reaches its deepest point below the body.
+      if (
+        !pocket.some(
+          (p) =>
+            p.y >= geo.metrics.baseline + height * 0.08 &&
+            Math.abs(cross(a, b, p)) / mouthLength >= depth * 0.8
+        ) ||
+        mouthLength > depth * 3
+      )
+        continue;
+      let area = 0;
+      for (let i = 0; i < pocket.length; i++) {
+        const p = pocket[i],
+          q = pocket[(i + 1) % pocket.length];
+        area += p.x * q.y - q.x * p.y;
+      }
+      if (depth < width * 0.2 || Math.abs(area) / 2 < width * height * 0.005)
+        continue;
+      instances.push({
+        id: 'aperture',
+        shape: { type: 'polyline', points: pocket },
+        region: { kind: 'enclosed', points: pocket },
+        confidence: 0.9,
+        anchors: {
+          mouthTop: a.y > b.y ? a : b,
+          mouthBottom: a.y > b.y ? b : a,
+        },
+        debug: {
+          depth,
+          mouthLength,
+          side:
+            (a.x + b.x) / 2 > (body.bbox.minX + body.bbox.maxX) / 2
+              ? 'right'
+              : 'left',
+          boundary: 'occupied-outline',
+        },
+      });
     }
   }
-
-  // Group candidates by side and consistent position
-  const rightCandidates = candidates.filter((c) => c.side === 'right');
-  const leftCandidates = candidates.filter((c) => c.side === 'left');
-
-  // Emit right aperture if consistent across levels
-  if (rightCandidates.length >= 2) {
-    const avgGapStart =
-      rightCandidates.reduce((s, c) => s + c.gapStart, 0) /
-      rightCandidates.length;
-    const avgGapEnd =
-      rightCandidates.reduce((s, c) => s + c.gapEnd, 0) /
-      rightCandidates.length;
-    const sortedByY = rightCandidates.sort((a, b) => a.y - b.y);
-    const yTop = sortedByY[sortedByY.length - 1].y;
-    const yBottom = sortedByY[0].y;
-
-    instances.push({
-      id: 'aperture',
-      shape: {
-        type: 'line',
-        x1: avgGapStart,
-        y1: yBottom,
-        x2: avgGapStart,
-        y2: yTop,
-      },
-      region: {
-        // Aperture is the negative space between counter and exterior. We
-        // fill the polygon directly (no clip against glyph fill) so the
-        // gap itself reads red, matching the Coles diagram's treatment of
-        // open counters in `e`, `a`, `c`.
-        kind: 'enclosed',
-        points: [
-          { x: avgGapStart, y: yTop },
-          { x: avgGapEnd, y: yTop },
-          { x: avgGapEnd, y: yBottom },
-          { x: avgGapStart, y: yBottom },
-        ],
-      },
-      confidence: Math.min(0.9, 0.4 + rightCandidates.length * 0.1),
-      anchors: {
-        top: { x: avgGapStart, y: yTop },
-        bottom: { x: avgGapStart, y: yBottom },
-      },
-      debug: {
-        side: 'right',
-        sampleCount: rightCandidates.length,
-        avgGapWidth:
-          rightCandidates.reduce((s, c) => s + c.gapWidth, 0) /
-          rightCandidates.length,
-      },
-    });
-  }
-
-  // Emit left aperture if consistent across levels
-  if (leftCandidates.length >= 2) {
-    const avgGapStart =
-      leftCandidates.reduce((s, c) => s + c.gapStart, 0) /
-      leftCandidates.length;
-    const avgGapEnd =
-      leftCandidates.reduce((s, c) => s + c.gapEnd, 0) / leftCandidates.length;
-    const sortedByY = leftCandidates.sort((a, b) => a.y - b.y);
-    const yTop = sortedByY[sortedByY.length - 1].y;
-    const yBottom = sortedByY[0].y;
-
-    instances.push({
-      id: 'aperture',
-      shape: {
-        type: 'line',
-        x1: avgGapEnd,
-        y1: yBottom,
-        x2: avgGapEnd,
-        y2: yTop,
-      },
-      region: {
-        kind: 'enclosed',
-        points: [
-          { x: avgGapStart, y: yTop },
-          { x: avgGapEnd, y: yTop },
-          { x: avgGapEnd, y: yBottom },
-          { x: avgGapStart, y: yBottom },
-        ],
-      },
-      confidence: Math.min(0.85, 0.4 + leftCandidates.length * 0.1),
-      anchors: {
-        top: { x: avgGapEnd, y: yTop },
-        bottom: { x: avgGapEnd, y: yBottom },
-      },
-      debug: {
-        side: 'left',
-        sampleCount: leftCandidates.length,
-        avgGapWidth:
-          leftCandidates.reduce((s, c) => s + c.gapWidth, 0) /
-          leftCandidates.length,
-      },
-    });
-  }
-
   return instances;
 }
