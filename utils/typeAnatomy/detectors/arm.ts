@@ -1,7 +1,7 @@
 /**
  * Arm feature detector.
  *
- * An arm is a horizontal or angled stroke that is free on one end
+ * An arm is a horizontal or angled stroke that is free at one or both ends
  * (e.g., in 'E', 'F', 'K', 'L', 'T', 'Y').
  *
  * v2 improvements:
@@ -14,6 +14,7 @@
 import { rayHits } from '@/utils/geometry/geometryCore';
 import type { FeatureInstance, GeometryCache } from '../types';
 import { rectToPolygon } from '../evidence/regionFromShape';
+import { measureOrthogonalThickness } from '../evidence/measureOrthogonalThickness';
 
 /**
  * Represents an arm candidate from scanline analysis.
@@ -49,6 +50,14 @@ export function detectArm(geo: GeometryCache): FeatureInstance[] {
 
   const instances: FeatureInstance[] = [];
   const { bboxW, bboxH, stemWidth, overshoot } = scale;
+
+  if (bboxW <= 0 || bboxH <= 0) return [];
+
+  // A top stroke can be free on both ends. Discover it separately from
+  // one-sided extensions, whose width/attachment rules exclude a full-width
+  // stroke crossing a central stem.
+  const topArms = detectBilateralTopArms(geo);
+  if (topArms.length > 0) return topArms;
 
   // First, identify stem regions to exclude
   // Stems are consistent vertical strokes - scan multiple Y bands
@@ -211,6 +220,236 @@ export function detectArm(geo: GeometryCache): FeatureInstance[] {
   }
 
   return instances;
+}
+
+/**
+ * Detects two free top extensions attached to one persistent central stem.
+ * Body scanlines establish the stem's actual edges; perpendicular probes
+ * through the extensions establish their thickness away from the junction.
+ */
+function detectBilateralTopArms(geo: GeometryCache): FeatureInstance[] {
+  const { glyph, svgShape, scale } = geo;
+  const { bboxW, bboxH, overshoot } = scale;
+  const { bbox } = glyph;
+  const bodySpans: Array<{ x1: number; x2: number }> = [];
+
+  // Stay below the top quarter, where long cap serifs can add side spans.
+  for (const fraction of [0.2, 0.4, 0.6]) {
+    const y = bbox.minY + bboxH * fraction;
+    const { points } = rayHits(
+      svgShape,
+      { x: bbox.minX - overshoot * 0.1, y },
+      0,
+      overshoot
+    );
+    // Multiple body strokes or counters do not establish one central stem.
+    if (points.length !== 2) return [];
+    bodySpans.push({ x1: points[0].x, x2: points[1].x });
+  }
+
+  const median = (values: number[]) => [...values].sort((a, b) => a - b)[1];
+  const stemX1 = median(bodySpans.map((span) => span.x1));
+  const stemX2 = median(bodySpans.map((span) => span.x2));
+  const stemWidth = stemX2 - stemX1;
+  const stemMidX = (stemX1 + stemX2) / 2;
+  if (
+    stemWidth <= 0 ||
+    // The body scan establishes a vertically dominant stroke, including
+    // heavy designs whose stem occupies a large fraction of glyph width.
+    stemWidth >= bboxH * 0.4 ||
+    Math.abs(stemMidX - (bbox.minX + bboxW / 2)) > bboxW * 0.15 ||
+    bodySpans.some(
+      (span) =>
+        Math.abs(span.x1 - stemX1) > stemWidth * 0.25 ||
+        Math.abs(span.x2 - stemX2) > stemWidth * 0.25
+    )
+  ) {
+    return [];
+  }
+
+  // Probe just inside outline boundaries so a thin top stroke cannot fall
+  // between the regular scan bands. Serif caps can sit above the stroke;
+  // their internal horizontal edges also supply candidate scanlines.
+  const topZones = new Set<number>([bbox.maxY - scale.eps]);
+  for (const segment of geo.segments) {
+    if (segment.type !== 'lineTo' || segment.params.length < 2) continue;
+    const [start, end] = segment.params;
+    if (Math.abs(end.x - start.x) <= Math.abs(end.y - start.y) * 3) continue;
+    const edgeY = (start.y + end.y) / 2;
+    if (edgeY <= bbox.minY + bboxH * 0.6) continue;
+    topZones.add(edgeY - scale.eps);
+    topZones.add(edgeY + scale.eps);
+  }
+  for (let band = 1; band <= 8; band++) {
+    topZones.add(bbox.maxY - bboxH * band * 0.025);
+  }
+
+  for (const y of [...topZones].sort((a, b) => b - a)) {
+    if (y >= bbox.maxY || y <= bbox.minY + bboxH * 0.6) continue;
+    const { points } = rayHits(
+      svgShape,
+      { x: bbox.minX - overshoot * 0.1, y },
+      0,
+      overshoot
+    );
+    const spans: Array<{ x1: number; x2: number }> = [];
+    for (let i = 0; i + 1 < points.length; i += 2) {
+      spans.push({ x1: points[i].x, x2: points[i + 1].x });
+    }
+    // Overlapping contours can add or split intersections at the central
+    // stem. Only bridge these hits when every interior intersection lies
+    // inside its independently measured edges; both free extensions must
+    // subsequently demonstrate ink through perpendicular probes.
+    if (
+      points.length > 2 &&
+      points
+        .slice(1, -1)
+        .every(
+          (point) =>
+            point.x >= stemX1 - scale.eps && point.x <= stemX2 + scale.eps
+        )
+    ) {
+      spans.push({ x1: points[0].x, x2: points[points.length - 1].x });
+    }
+    for (const span of spans) {
+      const leftX = span.x1;
+      const rightX = span.x2;
+      // Both extensions must be substantial free strokes. Small cap serifs
+      // can also cross a central stem, but do not extend this far from it.
+      const minimumExtension = Math.max(stemWidth * 0.75, bboxH * 0.15);
+      if (
+        stemX1 - leftX < minimumExtension ||
+        rightX - stemX2 < minimumExtension
+      ) {
+        continue;
+      }
+
+      const extensions = [
+        { x1: leftX, x2: stemX1, side: 'left' as const },
+        { x1: stemX2, x2: rightX, side: 'right' as const },
+      ];
+      const arms: FeatureInstance[] = [];
+      for (const extension of extensions) {
+        const width = extension.x2 - extension.x1;
+        // Serif designs can taper the horizontal stroke. Measure across the
+        // extension instead of using one local thickness for its full extent.
+        // Probe the shaft near its attachment, while staying outside the
+        // measured stem. Farther toward the free end, vertical terminal
+        // serifs and overlapping contours can split the ray's ink pairs.
+        const probeFractions =
+          extension.side === 'left' ? [0.6, 0.7, 0.8] : [0.2, 0.3, 0.4];
+        const measurements = probeFractions.map((fraction) =>
+          measureOrthogonalThickness(geo, {
+            midpoint: { x: extension.x1 + width * fraction, y },
+            dominantAxis: 'horizontal',
+          })
+        );
+        if (
+          measurements.some(
+            (measurement) =>
+              !measurement.selectedPairContainsMidpoint ||
+              measurement.selectedPairCenterOnProbeAxis === undefined ||
+              measurement.thickness <= 0 ||
+              measurement.thickness >= rightX - leftX
+          )
+        ) {
+          break;
+        }
+        const lowerY = Math.min(
+          ...measurements.map(
+            (measurement) =>
+              measurement.selectedPairCenterOnProbeAxis! -
+              measurement.thickness / 2
+          )
+        );
+        const upperY = Math.max(
+          ...measurements.map(
+            (measurement) =>
+              measurement.selectedPairCenterOnProbeAxis! +
+              measurement.thickness / 2
+          )
+        );
+        // The top stroke must lie above the independently sampled body.
+        if (lowerY <= bbox.minY + bboxH * 0.6) break;
+        const centerY = (lowerY + upperY) / 2;
+        const rect = {
+          type: 'rect' as const,
+          x: extension.x1,
+          y: lowerY,
+          width,
+          height: upperY - lowerY,
+        };
+        arms.push({
+          id: 'arm',
+          shape: rect,
+          region: { kind: 'stroke', points: rectToPolygon(rect) },
+          confidence:
+            0.85 *
+            Math.min(
+              ...measurements.map((measurement) => measurement.confidence)
+            ),
+          anchors: {
+            free: {
+              x: extension.side === 'left' ? extension.x1 : extension.x2,
+              y: centerY,
+            },
+            attached: {
+              x: extension.side === 'left' ? extension.x2 : extension.x1,
+              y: centerY,
+            },
+          },
+          debug: {
+            source: 'bilateral-top-stroke',
+            side: extension.side,
+            measuredHeight: upperY - lowerY,
+            stemX1,
+            stemX2,
+          },
+        });
+      }
+      if (arms.length === 2) {
+        const shapes = arms.map(
+          (arm) =>
+            arm.shape as Extract<FeatureInstance['shape'], { type: 'rect' }>
+        );
+        const lowerY = Math.min(...shapes.map((rect) => rect.y));
+        const upperY = Math.max(...shapes.map((rect) => rect.y + rect.height));
+        if (upperY - lowerY >= rightX - leftX) continue;
+        // At heavy weights, the free extensions can be shorter than their
+        // thickness even though the complete top stroke is horizontal.
+        // Represent that stroke as one region, including its junction.
+        if (shapes.some((rect) => rect.height >= rect.width)) {
+          const rect = {
+            type: 'rect' as const,
+            x: leftX,
+            y: lowerY,
+            width: rightX - leftX,
+            height: upperY - lowerY,
+          };
+          return [
+            {
+              id: 'arm',
+              shape: rect,
+              region: { kind: 'stroke', points: rectToPolygon(rect) },
+              confidence: Math.min(...arms.map((arm) => arm.confidence)),
+              anchors: {
+                left: { x: leftX, y: (lowerY + upperY) / 2 },
+                right: { x: rightX, y: (lowerY + upperY) / 2 },
+              },
+              debug: {
+                source: 'bilateral-top-stroke',
+                measuredHeight: rect.height,
+                stemX1,
+                stemX2,
+              },
+            },
+          ];
+        }
+        return arms;
+      }
+    }
+  }
+  return [];
 }
 
 /**

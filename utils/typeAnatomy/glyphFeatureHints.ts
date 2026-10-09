@@ -273,7 +273,7 @@ const UPPERCASE_HINTS: Record<string, FeatureHint[]> = {
     { id: 'serif', gate: (ctx) => ctx.isSerif },
   ],
   T: [
-    { id: 'crossbar', defaultOn: true },
+    { id: 'arm', defaultOn: true },
     { id: 'stem', defaultOn: true },
     { id: 'serif', gate: (ctx) => ctx.isSerif },
   ],

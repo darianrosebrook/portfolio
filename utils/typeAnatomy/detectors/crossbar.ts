@@ -175,6 +175,13 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
 
     const measuredHeight = thicknessMeasurement.thickness;
 
+    // A reliable vertical probe can still measure the full height of a
+    // vertical stem. Crossbars require a horizontal extent greater than
+    // their measured perpendicular thickness.
+    if (measuredHeight <= 0 || measuredHeight >= avgX2 - avgX1) {
+      continue;
+    }
+
     // Check for consistent width across samples
     const widths = group.map((sp) => sp.width);
     const avgWidth = widths.reduce((a, b) => a + b, 0) / widths.length;
@@ -236,12 +243,32 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
   if (instances.length === 0) {
     const segmentBars = findHorizontalSegments(geo);
     for (const seg of segmentBars) {
-      // For fallback, use stemWidth as height estimate
-      const barHeight = stemWidth * 0.6;
+      // Outline edges establish the horizontal extent, but their Y is an
+      // edge rather than the centerline. Probe away from any attached stem
+      // and retain a containing pair with horizontal proportions.
+      const measurements = [0.25, 0.5, 0.75]
+        .map((fraction) =>
+          measureOrthogonalThickness(geo, {
+            midpoint: { x: seg.x1 + (seg.x2 - seg.x1) * fraction, y: seg.y },
+            dominantAxis: 'horizontal',
+          })
+        )
+        .filter(
+          (measurement) =>
+            measurement.selectedPairContainsMidpoint &&
+            measurement.selectedPairCenterOnProbeAxis !== undefined &&
+            measurement.thickness > 0 &&
+            measurement.thickness < seg.x2 - seg.x1
+        )
+        .sort((a, b) => a.thickness - b.thickness);
+      const measurement = measurements[0];
+      if (!measurement) continue;
+      const barHeight = measurement.thickness;
+      const centerY = measurement.selectedPairCenterOnProbeAxis!;
       const rect = {
         type: 'rect' as const,
         x: seg.x1,
-        y: seg.y - barHeight / 2,
+        y: centerY - barHeight / 2,
         width: seg.x2 - seg.x1,
         height: barHeight,
       };
@@ -251,10 +278,10 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
         region: { kind: 'stroke', points: rectToPolygon(rect) },
         confidence: 0.5,
         anchors: {
-          left: { x: seg.x1, y: seg.y },
-          right: { x: seg.x2, y: seg.y },
+          left: { x: seg.x1, y: centerY },
+          right: { x: seg.x2, y: centerY },
         },
-        debug: { source: 'segment-fallback' },
+        debug: { source: 'segment-fallback', measuredHeight: barHeight },
       });
     }
   }
@@ -426,7 +453,7 @@ function groupSpansByY(spans: FilledSpan[], tolerance: number): FilledSpan[][] {
 function findHorizontalSegments(
   geo: GeometryCache
 ): Array<{ x1: number; x2: number; y: number }> {
-  const { segments, metrics, scale } = geo;
+  const { glyph, segments, metrics, scale } = geo;
   const results: Array<{ x1: number; x2: number; y: number }> = [];
   const tolerance = scale.bboxH * 0.15;
 
@@ -435,6 +462,8 @@ function findHorizontalSegments(
     metrics.baseline + (metrics.xHeight - metrics.baseline) * 0.5;
   const uppercaseMidY =
     metrics.baseline + (metrics.capHeight - metrics.baseline) * 0.5;
+  const lowercaseTopY =
+    metrics.baseline + (metrics.xHeight - metrics.baseline) * 0.9;
 
   for (const seg of segments) {
     if (seg.type !== 'lineTo' || seg.params.length < 2) continue;
@@ -450,7 +479,9 @@ function findHorizontalSegments(
       // Check if near expected crossbar position
       if (
         Math.abs(midY - lowercaseMidY) < tolerance ||
-        Math.abs(midY - uppercaseMidY) < tolerance
+        Math.abs(midY - uppercaseMidY) < tolerance ||
+        (glyph.bbox.maxY < metrics.capHeight - scale.eps &&
+          Math.abs(midY - lowercaseTopY) < tolerance)
       ) {
         results.push({
           x1: Math.min(p0.x, p1.x),

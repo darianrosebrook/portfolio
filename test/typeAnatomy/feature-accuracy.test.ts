@@ -270,13 +270,18 @@ describe('known type anatomy accuracy gaps', () => {
     expectInRange(center.y, 0.75, 1);
   });
 
-  it.fails(
-    'detects the T arm — its horizontal stroke (currently 0 found)',
-    () => {
-      const arms = detect(nohemi, 'T', 'arm');
-      expect(arms.length).toBeGreaterThanOrEqual(1);
+  it('detects the T arms as the two free horizontal top extensions', () => {
+    const arms = detect(nohemi, 'T', 'arm');
+    expect(arms).toHaveLength(2);
+    const glyph = glyphFor(nohemi, 'T');
+    for (const arm of arms) {
+      const bounds = shapeBBox(arm.shape);
+      expect(bounds.minY).toBeGreaterThan(glyph.bbox.maxY * 0.8);
+      expect(bounds.maxX - bounds.minX).toBeGreaterThan(
+        bounds.maxY - bounds.minY
+      );
     }
-  );
+  });
 
   it.fails(
     'detects the three E arms — top, middle, bottom (currently 0 found)',
@@ -368,13 +373,19 @@ describe('known type anatomy accuracy gaps', () => {
     }
   );
 
-  it.fails(
-    'finds exactly one stem on Nohemi b (currently finds 2 — bowl edge counted as stem)',
-    () => {
-      const stems = detect(nohemi, 'b', 'stem');
-      expect(stems).toHaveLength(1);
-    }
-  );
+  it('finds one left backbone stem on Nohemi b without claiming its bowl edge', () => {
+    const glyph = glyphFor(nohemi, 'b');
+    const stems = detect(nohemi, 'b', 'stem');
+    expect(stems).toHaveLength(1);
+    const bounds = shapeBBox(stems[0].shape);
+    expect(bounds.minX).toBeCloseTo(glyph.bbox.minX, 5);
+    expect(bounds.maxX).toBeLessThan(
+      glyph.bbox.minX + (glyph.bbox.maxX - glyph.bbox.minX) * 0.3
+    );
+    expect(bounds.maxY - bounds.minY).toBeGreaterThan(
+      (glyph.bbox.maxY - glyph.bbox.minY) * 0.8
+    );
+  });
 
   it.fails(
     'finds exactly one eye on Newsreader g (currently finds 2 — ear region counted as eye)',

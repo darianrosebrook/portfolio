@@ -36,6 +36,9 @@ export function detectStem(geo: GeometryCache): FeatureInstance[] {
     return [];
   }
 
+  const backbones = traceBackbones(geo);
+  if (backbones.length > 0) return backbones;
+
   const instances: FeatureInstance[] = [];
   const { bboxW, bboxH, stemWidth, overshoot } = scale;
 
@@ -158,6 +161,207 @@ export function detectStem(geo: GeometryCache): FeatureInstance[] {
   }
 
   return instances;
+}
+
+/**
+ * Long outline edges establish a stroke direction. Matching fill-span edges
+ * then establish its opposite boundary. This keeps a connector's merged span
+ * from widening the stem and avoids treating a moving diagonal as several
+ * unrelated vertical strokes. Curved outlines retain the scanline fallback.
+ */
+function traceBackbones(geo: GeometryCache): FeatureInstance[] {
+  const { glyph, metrics, scale } = geo;
+  const bottom = Math.max(glyph.bbox.minY, metrics.baseline);
+  const top = Math.min(
+    glyph.bbox.maxY,
+    glyph.bbox.maxY > metrics.xHeight + scale.bboxH * 0.1
+      ? metrics.capHeight
+      : metrics.xHeight
+  );
+  const height = top - bottom;
+  if (height <= 0) return [];
+
+  let samples: StemCandidate[] = [];
+  const bands = 32;
+  for (let i = 1; i < bands; i++) {
+    const y = bottom + (i * height) / bands;
+    const { points } = rayHits(
+      geo.svgShape,
+      { x: glyph.bbox.minX - scale.overshoot * 0.1, y },
+      0,
+      scale.overshoot
+    );
+    for (let j = 0; j + 1 < points.length; j += 2) {
+      const x1 = points[j].x;
+      const x2 = points[j + 1].x;
+      const width = x2 - x1;
+      if (width > scale.eps) {
+        samples.push({ x1, x2, midX: (x1 + x2) / 2, width, y });
+      }
+    }
+  }
+  if (samples.length === 0) return [];
+  // The cache's mid-height stem estimate can be the whole connector span
+  // (e.g. a heavy H). Repeated bands supply a stroke-width estimate without
+  // letting that one merged scanline reject the actual upright boundaries.
+  const spanWidths = samples.map((s) => s.width).sort((a, b) => a - b);
+  const typicalWidth = spanWidths[Math.floor(spanWidths.length / 2)];
+  samples = samples.filter(
+    (s) => s.width >= Math.max(typicalWidth * 0.6, scale.bboxW * 0.03)
+  );
+
+  const tracks: Array<{
+    instance: FeatureInstance;
+    slope: number;
+    left: (y: number) => number;
+    right: (y: number) => number;
+  }> = [];
+  // GeometryCache's closePath marker has only its starting endpoint, so
+  // materialize closing edges as well (a stem boundary may close a contour).
+  const edges = [...geo.segments];
+  let contourStart: { x: number; y: number } | undefined;
+  for (const segment of geo.segments) {
+    if (segment.type === 'moveTo') contourStart = segment.params[0];
+    if (segment.type === 'closePath' && contourStart && segment.params[0]) {
+      edges.push({ type: 'lineTo', params: [segment.params[0], contourStart] });
+    }
+  }
+  for (const segment of edges) {
+    if (segment.type !== 'lineTo' || segment.params.length !== 2) continue;
+    const [a, b] = segment.params;
+    const dy = b.y - a.y;
+    if (Math.abs(dy) < height * 0.5) continue;
+    const slope = (b.x - a.x) / dy;
+    // Backbones run predominantly along the vertical axis.
+    if (Math.abs(slope) > 0.65) continue;
+    const edgeX = (y: number) => a.x + slope * (y - a.y);
+    const matching = samples.filter(
+      (s) =>
+        s.y >= Math.min(a.y, b.y) &&
+        s.y <= Math.max(a.y, b.y) &&
+        Math.min(Math.abs(s.x1 - edgeX(s.y)), Math.abs(s.x2 - edgeX(s.y))) <=
+          scale.eps
+    );
+    if (matching.length < bands * 0.4) continue;
+    const widths = matching.map((s) => s.width).sort((a, b) => a - b);
+    const medianWidth = widths[Math.floor(widths.length / 2)];
+    // At a join, a scanline includes unrelated ink. It is not evidence for
+    // widening this backbone; retain the consistent stroke spans instead.
+    let stable = matching.filter(
+      (s) => Math.abs(s.width - medianWidth) <= medianWidth * 0.35
+    );
+    if (
+      stable.length < bands * 0.4 ||
+      stable[stable.length - 1].y - stable[0].y < height * 0.55
+    )
+      continue;
+    const initialLeft = fitEdge(stable, 'x1');
+    const initialRight = fitEdge(stable, 'x2');
+    stable = stable.filter(
+      (s) =>
+        Math.max(
+          Math.abs(initialLeft(s.y) - s.x1),
+          Math.abs(initialRight(s.y) - s.x2)
+        ) <= scale.eps
+    );
+    if (
+      stable.length < bands * 0.4 ||
+      stable[stable.length - 1].y - stable[0].y < height * 0.55
+    )
+      continue;
+    const left = fitEdge(stable, 'x1');
+    const right = fitEdge(stable, 'x2');
+    const residual = Math.max(
+      ...stable.map((s) =>
+        Math.max(Math.abs(left(s.y) - s.x1), Math.abs(right(s.y) - s.x2))
+      )
+    );
+    if (residual > medianWidth * 0.1) continue;
+    // Two outline edges of the same stroke seed the same fitted corridor.
+    if (
+      tracks.some(
+        (t) =>
+          Math.abs(t.left(bottom) - left(bottom)) < scale.eps &&
+          Math.abs(t.right(top) - right(top)) < scale.eps
+      )
+    )
+      continue;
+    if (right(bottom) <= left(bottom) || right(top) <= left(top)) continue;
+
+    const points = [
+      { x: left(bottom), y: bottom },
+      { x: right(bottom), y: bottom },
+      { x: right(top), y: top },
+      { x: left(top), y: top },
+    ];
+    const straight =
+      Math.max(
+        Math.abs(left(top) - left(bottom)),
+        Math.abs(right(top) - right(bottom))
+      ) <= scale.eps;
+    tracks.push({
+      slope,
+      left,
+      right,
+      instance: {
+        id: 'stem',
+        shape: straight
+          ? {
+              type: 'rect',
+              x: left(bottom),
+              y: bottom,
+              width: right(bottom) - left(bottom),
+              height,
+            }
+          : { type: 'polyline', points },
+        region: { kind: 'stroke', points },
+        confidence: Math.min(0.9, 0.5 + (stable.length / bands) * 0.4),
+        anchors: {
+          top: { x: (left(top) + right(top)) / 2, y: top },
+          bottom: { x: (left(bottom) + right(bottom)) / 2, y: bottom },
+          center: {
+            x: (left((top + bottom) / 2) + right((top + bottom) / 2)) / 2,
+            y: (top + bottom) / 2,
+          },
+        },
+        debug: {
+          sampleCount: stable.length,
+          slope,
+          thickness: medianWidth,
+          residual,
+        },
+      },
+    });
+  }
+  // Where full-height upright backbones exist, subsidiary diagonals (such
+  // as the interior joins of M) are not the primary stems.
+  const upright = tracks.filter((t) => Math.abs(t.slope) * height <= scale.eps);
+  return (upright.length > 0 ? upright : tracks).map((t) => t.instance);
+}
+
+function fitEdge(
+  samples: StemCandidate[],
+  edge: 'x1' | 'x2'
+): (y: number) => number {
+  // Median pairwise slope resists the occasional joined/apex span. Least
+  // squares would tilt the whole mask toward one such outlier.
+  const slopes: number[] = [];
+  for (let i = 0; i < samples.length; i++) {
+    for (let j = i + 1; j < samples.length; j++) {
+      if (samples[i].y !== samples[j].y) {
+        slopes.push(
+          (samples[j][edge] - samples[i][edge]) / (samples[j].y - samples[i].y)
+        );
+      }
+    }
+  }
+  slopes.sort((a, b) => a - b);
+  const slope = slopes[Math.floor(slopes.length / 2)];
+  const intercepts = samples
+    .map((s) => s[edge] - slope * s.y)
+    .sort((a, b) => a - b);
+  const intercept = intercepts[Math.floor(intercepts.length / 2)];
+  return (y) => intercept + slope * y;
 }
 
 /**
