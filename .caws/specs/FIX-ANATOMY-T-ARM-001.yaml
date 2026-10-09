@@ -44,3 +44,10 @@ evidence:
     command: "pnpm exec vitest run test/typeAnatomy test/utils/typeAnatomy test/utils/geometry/geometryCore.test.ts test/fontkit-browser.test.mjs --reporter=verbose"
     exit_code: 0
     commit_sha: a9b65f8c17faffef9941cb81c13c3a228d9b5215
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Executed actual T Arm+Stem hint/reconciliation coverage at five weights in three fonts: Stem remains one, top-arm ink stays covered. Preserved A,H bars and heavy Nohemi H900 connector with geometry assertions; no new expected failures. Fresh browser at bb576bb0 confirms both selected and rendered; ignored capture test-results/anatomy-fix/T-arm-stem-final.png. Checked commit a9b65f8c; bb is comment-only."
+    recorded_at: "2026-10-09T19:37:47.241Z"
+    command: "pnpm exec vitest run test/typeAnatomy test/utils/typeAnatomy test/utils/geometry/geometryCore.test.ts test/fontkit-browser.test.mjs --reporter=verbose"
+    exit_code: 0
+    commit_sha: a9b65f8c17faffef9941cb81c13c3a228d9b5215
