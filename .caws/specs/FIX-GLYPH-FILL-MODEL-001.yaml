@@ -1,0 +1,45 @@
+id: FIX-GLYPH-FILL-MODEL-001
+title: 'Unify occupied glyph topology and stable ray boundaries'
+mode: fix
+lifecycle_state: active
+created_at: '2026-10-09T20:45:20.122Z'
+updated_at: '2026-10-09T20:45:20.122Z'
+created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
+blast_radius:
+  modules:
+    - 'Shared glyph fill topology and ray interpretation'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/geometry/geometryCore.ts'
+    - 'utils/geometry/filledGeometry.ts'
+    - 'utils/typeAnatomy/geometryCache.ts'
+    - 'utils/typeAnatomy/types.ts'
+    - 'utils/typeAnatomy/evidence/measureOrthogonalThickness.ts'
+    - 'test/utils/geometry/filledGeometry.test.ts'
+    - 'test/utils/geometry/geometryCore.test.ts'
+    - 'test/typeAnatomy/filled-topology.test.ts'
+    - 'test/typeAnatomy/rayhits-cache.test.ts'
+    - 'utils/typeAnatomy/evidence/measureOrthogonalThickness.test.ts'
+    - 'test/typeAnatomy/contour-bezier-sampling.test.ts'
+    - 'test/typeAnatomy/font-properties.test.ts'
+  out: []
+invariants:
+  - 'Geometry must describe occupied ink independently of absolute contour orientation and remain in current glyph design units'
+  - 'Public ray and cache behavior remains deterministic without merging distinct thin boundaries'
+acceptance:
+  - id: A1
+    given: 'reversed and overlapping contours and real bundled glyphs including i O and Aeacute'
+    when: 'shared geometry is constructed'
+    then: 'occupied bodies holes and disconnected marks agree with actual fill semantics'
+  - id: A2
+    given: 'short and long rays through thin ink and overlapping filled shapes'
+    when: 'containment and orthogonal thickness are queried'
+    then: 'occupied intervals and thickness are correct and valid boundaries are retained'
+observability:
+  - 'Independent semantic geometry probes and hostile synthetic regression assertions'
+rollback:
+  - 'Revert owned shared geometry changes'
+non_functional: {}
+contracts: []
