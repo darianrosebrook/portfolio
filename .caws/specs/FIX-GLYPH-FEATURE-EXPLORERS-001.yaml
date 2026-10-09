@@ -1,0 +1,69 @@
+id: FIX-GLYPH-FEATURE-EXPLORERS-001
+title: 'Highlight actual programmatic glyph anatomy in both explorers'
+mode: fix
+lifecycle_state: active
+created_at: '2026-10-09T20:44:58.453Z'
+updated_at: '2026-10-09T20:44:58.453Z'
+created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
+blast_radius:
+  modules:
+    - 'Glyph filled geometry topology and ray queries'
+    - 'Programmatic anatomy detectors and evidence regions'
+    - 'Canvas SVG explorers and verification oracles'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/typeAnatomy/**'
+    - 'utils/geometry/**'
+    - 'ui/modules/FontInspector/**'
+    - 'app/dev/glyph-compare/**'
+    - 'app/dev/interaction-test/**'
+    - 'app/blueprints/foundations/typography/fontfeatures/anatomy.json'
+    - 'test/typeAnatomy/**'
+    - 'test/utils/typeAnatomy/**'
+    - 'test/utils/geometry/**'
+    - 'test/utils/fixtures/**'
+    - 'test/e2e/feature-overlay.spec.ts'
+    - 'test/e2e/interaction-test.spec.ts'
+    - 'test/components/FontInspector*.test.tsx'
+  out: []
+invariants:
+  - 'Current glyph and effective font variation own all coordinates in design units without per-font baked highlight regions'
+  - 'A shared filled geometry model handles winding reversal containment disconnected marks and overlapping ink consistently'
+  - 'Selected features and rendered geometry use one authoritative detection result and selection contract'
+  - 'Independent positive ink or empty-space and negative samples define anatomy rather than empirical output counts'
+  - 'Unrelated dependency edits and foreign specifications remain untouched and no validation floors are lowered'
+acceptance:
+  - id: A1
+    given: 'bundled fonts and reversed nested overlapping and thin synthetic outlines'
+    when: 'occupied geometry contours containment thickness and rays are computed'
+    then: 'ink holes and marks follow fill semantics and distinct boundaries survive changes of probe length'
+  - id: A2
+    given: 'Nohemi Aeacute at weight400 and the user-confirmed anatomy targets'
+    when: 'offered features are selected and detected'
+    then: 'the e bar both bowls a counter e eye right aperture central upright and detached acute follow their own geometry while unrelated anatomy is absent'
+  - id: A3
+    given: 'registered detectors across representative bundled-font anatomy and actual supported axis ranges'
+    when: 'positive and hostile feature probes execute'
+    then: 'highlight regions cover the intended anatomical geometry and exclude unrelated ink marks and spaces including all discovered P1-P3 defects'
+  - id: A4
+    given: 'both explorers normal details selection glyph changes and responsive resizing'
+    when: 'features are toggled fonts or axes change and the comparison route selects a glyph'
+    then: 'both render the authoritative current glyph regions with consistent fill selection and transform semantics and accurate effective-axis labels'
+  - id: A5
+    given: 'corrected independent oracles and the integrated committed source'
+    when: 'focused unit integration browser checks static checks and CAWS gates run with independent peer inspection'
+    then: 'required geometry and UI behavior is verified without vacuous assertions inverted known-defect claims or weakened validation'
+observability:
+  - 'Raw geometry probes independent browser path-fill observations semantic regression assertions and rendered captures'
+rollback:
+  - 'Revert owned repair commits while preserving foreign dependency edits'
+non_functional: {}
+contracts:
+  - name: 'glyph-filled-geometry'
+    type: behavior
+  - name: 'detected-anatomy-regions'
+    type: behavior
+  - name: 'explorer-selection-and-rendering'
+    type: behavior
