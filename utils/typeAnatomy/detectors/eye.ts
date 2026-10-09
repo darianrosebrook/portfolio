@@ -3,7 +3,7 @@ import {
   type FilledBoundary,
 } from '@/utils/geometry/filledGeometry';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
-import { detectAperture } from './aperture';
+import { detectOpenCounterPockets } from './aperture';
 
 /** The long lower boundary of an eye is supplied by its horizontal bar. */
 export function eyeFloor(
@@ -13,7 +13,7 @@ export function eyeFloor(
   const width = hole.bbox.maxX - hole.bbox.minX;
   const height = hole.bbox.maxY - hole.bbox.minY;
   if (width <= 0 || height <= 0) return null;
-  const lowerOpening = detectAperture(geo).some((instance) => {
+  const lowerOpening = detectOpenCounterPockets(geo).some((instance) => {
     const bottom = instance.anchors?.mouthBottom;
     return (
       bottom &&

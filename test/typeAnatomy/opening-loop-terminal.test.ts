@@ -3,7 +3,10 @@ import * as fontkit from 'fontkit';
 import type { Font, Glyph } from 'fontkit';
 import { describe, expect, it } from 'vitest';
 import { buildGeometryCache } from '@/utils/typeAnatomy/geometryCache';
-import { detectAperture } from '@/utils/typeAnatomy/detectors/aperture';
+import {
+  detectAperture,
+  detectOpenCounterPockets,
+} from '@/utils/typeAnatomy/detectors/aperture';
 import { detectLoop } from '@/utils/typeAnatomy/detectors/loop';
 import { detectFinial } from '@/utils/typeAnatomy/detectors/finial';
 import { mockFont, mockGlyphFromPath } from '@/test/utils/fixtures/mockGlyph';
@@ -98,20 +101,133 @@ function sample(glyph: Glyph, x: number, y: number): Point2D {
 }
 
 /** A right-side negative interval bounded above/below by ink is an open counter mouth. */
-function mouthSeed(glyph: Glyph, contours: Point2D[][]): Point2D {
-  const x = glyph.bbox.minX + (glyph.bbox.maxX - glyph.bbox.minX) * 0.85;
+function gapAt(glyph: Glyph, contours: Point2D[][], x: number): Point2D[] {
+  const result: Point2D[] = [];
   const step = (glyph.bbox.maxY - glyph.bbox.minY) / 300;
   let bottom: number | undefined;
   for (let y = glyph.bbox.minY; y <= glyph.bbox.maxY; y += step) {
     if (ink(contours, { x, y })) {
       if (bottom !== undefined && y - bottom > step * 5) {
         const point = { x, y: (bottom + y) / 2 };
-        if (point.y > 0 && !ink(contours, point)) return point;
+        if (point.y > 0 && !ink(contours, point)) result.push(point);
       }
       bottom = y;
     }
   }
+  return result;
+}
+
+/** The rightmost column with ink on both sides of a gap locates its mouth,
+ * independently of either aperture regions or retained counter pockets. */
+function mouthSeed(glyph: Glyph, contours: Point2D[][]): Point2D {
+  const width = glyph.bbox.maxX - glyph.bbox.minX;
+  for (let column = 1; column < 150; column++) {
+    const points = gapAt(
+      glyph,
+      contours,
+      glyph.bbox.maxX - (width * column) / 300
+    );
+    for (const point of points) {
+      // A closed eye and the counter opening on the opposite side also have
+      // vertical ink brackets. This mouth must connect rightward to exterior.
+      let open = true;
+      for (let x = point.x; x <= glyph.bbox.maxX; x += width / 300) {
+        if (ink(contours, { x, y: point.y })) {
+          open = false;
+          break;
+        }
+      }
+      if (!open) continue;
+      let reach = 0;
+      for (let x = point.x; x >= glyph.bbox.minX; x -= width / 300) {
+        if (ink(contours, { x, y: point.y })) break;
+        reach = point.x - x;
+      }
+      // Side whitespace beside an E arm stops immediately at that arm; it
+      // does not lead inward to a partially enclosed counter.
+      if (reach >= width * 0.08) return point;
+    }
+  }
   throw new Error('No independent right-side counter mouth');
+}
+
+function interiorCounterSeed(glyph: Glyph, contours: Point2D[][]): Point2D {
+  for (const fraction of [0.5, 0.4, 0.6]) {
+    const point = gapAt(
+      glyph,
+      contours,
+      glyph.bbox.minX + (glyph.bbox.maxX - glyph.bbox.minX) * fraction
+    )[0];
+    if (point) return point;
+  }
+  throw new Error('No independent interior counter space');
+}
+
+/** Inspected source cap coordinates for the lower E counter of capital AE.
+ * Its middle arm separates two mouths, so a vertical whitespace midpoint
+ * beside that arm is not a positive aperture oracle.
+ */
+function compoundCapMouth(
+  file: string,
+  variationIndex: number,
+  contours: Point2D[][]
+): Point2D {
+  const pairs: Record<string, number[][][]> = {
+    'Nohemi-VF.ttf': [
+      [
+        [3614, 390],
+        [3454, 1234],
+      ],
+      [
+        [3464, 80],
+        [3304, 1387],
+      ],
+      [
+        [3674, 760],
+        [3534, 1084],
+      ],
+    ],
+    'InterVariable.ttf': [
+      [
+        [1901, 168],
+        [1844, 662],
+      ],
+      [
+        [1814, 46],
+        [1750, 722],
+      ],
+      [
+        [2107, 352],
+        [2050, 574],
+      ],
+    ],
+    'Newsreader-VF.ttf': [
+      [
+        [1803, 381],
+        [1563, 441],
+      ],
+      [
+        [2074, 380],
+        [1753, 477],
+      ],
+      [
+        [2246, 503],
+        [1873, 415],
+      ],
+    ],
+  };
+  const [a, b] = pairs[file][variationIndex].map(([x, y]) => ({ x, y }));
+  for (const point of [a, b])
+    expect(
+      contours.some((contour) =>
+        contour.some((vertex) => vertex.x === point.x && vertex.y === point.y)
+      )
+    ).toBe(true);
+  const length = Math.hypot(b.x - a.x, b.y - a.y);
+  return {
+    x: (a.x + b.x) / 2 - ((b.y - a.y) / length) * 10,
+    y: (a.y + b.y) / 2 + ((b.x - a.x) / length) * 10,
+  };
 }
 
 describe('opening, loop and terminal geometry', () => {
@@ -129,19 +245,34 @@ describe('opening, loop and terminal geometry', () => {
     ];
     for (const [variationIndex, variation] of variations.entries()) {
       const font = fontFor(file, variation);
-      for (const char of ['c', 'e', 'Ǽ']) {
-        it(`${file} variation ${variationIndex} ${char} keeps the open counter connected to the mouth without ink`, () => {
+      for (const char of ['c', 'e', 's', 'Ǽ']) {
+        it(`${file} variation ${variationIndex} ${char} localizes the empty mouth without interior counter space or ink`, () => {
           const glyph = glyphFor(font, char),
             contours = outline(glyph);
           const apertures = detectAperture(buildGeometryCache(glyph, font));
-          const mouth = mouthSeed(glyph, contours);
+          const mouth =
+            char === 'Ǽ'
+              ? compoundCapMouth(file, variationIndex, contours)
+              : mouthSeed(glyph, contours);
           expect(ink(contours, mouth), 'independent positive is empty').toBe(
             false
           );
           expect(
             selected(apertures, mouth),
-            'mouth belongs to the opening'
+            `mouth belongs to the opening at ${mouth.x},${mouth.y}`
           ).toBe(true);
+          const interior = interiorCounterSeed(glyph, contours);
+          expect(ink(contours, interior)).toBe(false);
+          expect(
+            selected(apertures, interior),
+            'interior counter is not the opening'
+          ).toBe(false);
+          expect(
+            selected(apertures, {
+              x: glyph.bbox.maxX + (glyph.bbox.maxX - glyph.bbox.minX) * 0.1,
+              y: mouth.y,
+            })
+          ).toBe(false);
           let emptyCoverage = 0;
           for (let y = 0; y < 41; y++)
             for (let x = 0; x < 41; x++) {
@@ -154,10 +285,7 @@ describe('opening, loop and terminal geometry', () => {
                 emptyCoverage++;
               }
             }
-          expect(
-            emptyCoverage,
-            'a visible cavity, not just a thin mouth marker'
-          ).toBeGreaterThan(35);
+          expect(emptyCoverage, 'a visible mouth channel').toBeGreaterThan(0);
         });
       }
       it(`${file} variation ${variationIndex} rejects closed bowls, stems, and hooks as apertures`, () => {
@@ -380,4 +508,80 @@ it('a ball terminal is excluded while the opposite flat shaft cap remains a fini
   expect(ink(outline(glyph), { x: 350, y: 650 })).toBe(true);
   expect(selected(finials, { x: 350, y: 650 })).toBe(false);
   expect(selected(finials, { x: 350, y: 785 })).toBe(false);
+});
+
+describe('independently adjudicated capital AE cap mouths', () => {
+  const cases: Array<{
+    file: string;
+    axes: Record<string, number>;
+    positive: Point2D;
+    oldSeed: Point2D;
+    walls: Point2D[];
+  }> = [
+    {
+      file: 'Nohemi-VF.ttf',
+      axes: { wght: 100 },
+      positive: { x: 3374, y: 734 },
+      oldSeed: { x: 3293.05, y: 735.8816666666673 },
+      walls: [
+        { x: 3456, y: 40 },
+        { x: 3290, y: 1427 },
+      ],
+    },
+    {
+      file: 'Newsreader-VF.ttf',
+      axes: { wght: 400, opsz: 18 },
+      positive: { x: 1680, y: 401 },
+      oldSeed: { x: 1812.8666666666666, y: 668.749999999999 },
+      walls: [
+        { x: 1822, y: 371 },
+        { x: 1526, y: 449 },
+      ],
+    },
+    {
+      file: 'Newsreader-VF.ttf',
+      axes: { wght: 800, opsz: 72 },
+      positive: { x: 2062, y: 449 },
+      oldSeed: { x: 2205.09, y: 704.7099999999992 },
+      walls: [
+        { x: 2267, y: 493 },
+        { x: 1857, y: 425 },
+      ],
+    },
+  ];
+  it.each(cases)(
+    '$file $axes separates the source-cap mouth from side whitespace and deep counter',
+    ({ file, axes, positive, oldSeed, walls }) => {
+      const font = fontFor(file, axes),
+        glyph = glyphFor(font, 'Ǽ'),
+        contours = outline(glyph);
+      const apertures = detectAperture(buildGeometryCache(glyph, font));
+      expect(ink(contours, positive)).toBe(false);
+      expect(selected(apertures, positive)).toBe(true);
+      expect(ink(contours, oldSeed)).toBe(false);
+      expect(selected(apertures, oldSeed)).toBe(false);
+      for (const point of walls) {
+        expect(ink(contours, point)).toBe(true);
+        expect(selected(apertures, point)).toBe(false);
+      }
+    }
+  );
+});
+
+it('retains the whole open-counter identity separately from its aperture channel', () => {
+  const font = fontFor('Nohemi-VF.ttf', { wght: 400 }),
+    glyph = glyphFor(font, 'c'),
+    contours = outline(glyph);
+  const geo = buildGeometryCache(glyph, font),
+    pockets = detectOpenCounterPockets(geo),
+    apertures = detectAperture(geo);
+  const counter = { x: 1000, y: 1100 },
+    mouth = { x: 2100, y: 1100 };
+  expect(ink(contours, counter)).toBe(false);
+  expect(selected(pockets, counter)).toBe(true);
+  expect(selected(apertures, counter)).toBe(false);
+  expect(ink(contours, mouth)).toBe(false);
+  expect(selected(pockets, mouth)).toBe(true);
+  expect(selected(apertures, mouth)).toBe(true);
+  expect(apertures[0].anchors).toEqual(pockets[0].anchors);
 });
