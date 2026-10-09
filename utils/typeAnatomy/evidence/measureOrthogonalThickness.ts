@@ -19,6 +19,7 @@
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
+import { occupiedRayIntervals } from '@/utils/geometry/filledGeometry';
 import type { Point2D } from '@/utils/geometry/geometry';
 import type { GeometryCache } from '../types';
 
@@ -127,7 +128,12 @@ export function measureOrthogonalThickness(
       ? { x: midpoint.x, y: midpoint.y - probeDistance }
       : { x: midpoint.x - probeDistance, y: midpoint.y };
 
-  const { points } = rayHits(geo.svgShape, origin, angle, probeDistance * 2);
+  const intervals = geo.filled
+    ? occupiedRayIntervals(geo.filled, origin, angle, probeDistance * 2)
+    : undefined;
+  const points = intervals
+    ? intervals.flatMap((interval) => [interval.near, interval.far])
+    : rayHits(geo.svgShape, origin, angle, probeDistance * 2).points;
 
   if (points.length === 0) {
     return {
@@ -150,6 +156,15 @@ export function measureOrthogonalThickness(
 
   const pairs: HitPair[] = [];
   for (let i = 0; i + 1 < points.length; i += 2) {
+    // A clipped occupied interval has no observed entry or exit boundary.
+    // Reporting its probe length as stroke thickness would create evidence
+    // from an intentionally short ray rather than from the actual outline.
+    if (
+      intervals &&
+      (intervals[i / 2].start === 0 ||
+        intervals[i / 2].end === probeDistance * 2)
+    )
+      continue;
     const a = points[i];
     const b = points[i + 1];
     const aCoord = probeAxisOf(a);

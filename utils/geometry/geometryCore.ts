@@ -9,64 +9,32 @@
  *   - safeIntersect
  *   - Point2D, SvgShape, etc.
  *
- * NOTE: shapeForV2 and IntersectionQuery must be provided by the consumer or imported from a caching module.
+ * Glyph-backed ray queries use the shared nonzero fill model.
  */
 import type { Glyph } from 'fontkit';
 import { intersect, shape } from 'svg-intersections';
 import { Logger } from '../helpers/logger';
 import type { Point2D } from './geometry';
 import './patch-kld';
+import {
+  getFilledGeometry,
+  getFilledShape,
+  registerFilledShape,
+  containsFilledPoint,
+  occupiedRayIntervals,
+} from './filledGeometry';
 
 export type SvgShape = ReturnType<typeof shape>;
 
-// IntersectionQuery is declared globally in patch-kld.ts
-// Used indirectly via pointInPathFn setter
-declare const _IntersectionQuery: unknown;
-
-/**
- * Optional point-in-path function for fast inside checks.
- * Set via setPointInPath() from patch-kld.ts when available.
- */
-let pointInPathFn: ((shape: SvgShape, pt: Point2D) => boolean) | null = null;
-
-/**
- * Registers a point-in-path function for fast inside checks.
- * Called from patch-kld.ts when IntersectionQuery is available.
- */
+/** Compatibility registration hook. Glyph containment uses source nonzero
+ * winding; the legacy generic even-odd point query does not own glyph fill. */
 export function setPointInPath(
-  fn: (shape: SvgShape, pt: Point2D) => boolean
-): void {
-  pointInPathFn = fn;
-}
+  _fn: (shape: SvgShape, pt: Point2D) => boolean
+): void {}
 
-/**
- * Default epsilon for deduplication (will be scaled by ray length)
- */
-const RAY_DEDUP_EPS = 0.5;
-
-/**
- * Intersection cache for `rayHits`.
- *
- * Keyed by SvgShape (weakly, so it frees with the glyph) → Map of quantized
- * ray-key → sorted/deduplicated intersection points. `rayHits` is the hot path
- * for every detector; re-running detection on a cached glyph (UI toggles,
- * re-renders, multi-feature sweeps) repeatedly casts the same scanlines, so
- * memoizing the expensive `safeIntersect` call is a pure win.
- *
- * Quantization: coordinates are in font design units (UPM ≈ 1000–2048). We
- * quantize origin/length to 0.1 units and angle to 1e-4 rad — well below the
- * dedup epsilon (0.5) and below any visually significant threshold, so rays
- * that differ only by float drift collapse to one cache entry.
- *
- * Returned point arrays are defensive shallow copies: callers may mutate their
- * own reference without corrupting the cached result. The expensive part (the
- * svg-intersections computation) is what the cache saves.
- */
-const rayHitCache = new WeakMap<object, Map<string, Point2D[]>>();
-const QUANT_POS = 10; // 0.1 design units
-const QUANT_ANGLE = 1e4; // 1e-4 rad
-const QUANT_LEN = 10; // 0.1 design units
-const QUANT_DEDUP = 100; // 0.01 design units
+/** Weak shape cache with exact ray keys and defensive point copies. Sub-unit
+ * rays can cross distinct thin boundaries, so key quantization is unsafe. */
+let rayHitCache = new WeakMap<object, Map<string, Point2D[]>>();
 
 function rayHitKey(
   origin: Point2D,
@@ -74,13 +42,7 @@ function rayHitKey(
   len: number,
   dedupEps: number | undefined
 ): string {
-  return [
-    Math.round(origin.x * QUANT_POS),
-    Math.round(origin.y * QUANT_POS),
-    Math.round(angle * QUANT_ANGLE),
-    Math.round(len * QUANT_LEN),
-    dedupEps === undefined ? 'd' : Math.round(dedupEps * QUANT_DEDUP),
-  ].join('|');
+  return JSON.stringify([origin.x, origin.y, angle, len, dedupEps ?? null]);
 }
 
 /**
@@ -88,11 +50,7 @@ function rayHitKey(
  * (the WeakMap self-cleans as shapes are GC'd).
  */
 export function clearRayHitCache(): void {
-  // WeakMap has no clear(); resetting is per-shape via the stats map. For tests
-  // we track shapes strongly in a side set so they can be enumerated.
-  for (const shape of trackedShapes) {
-    rayHitCache.delete(shape);
-  }
+  rayHitCache = new WeakMap();
   trackedShapes.clear();
 }
 
@@ -104,17 +62,24 @@ export function getRayHitCacheStats(): {
   shapes: number;
 } {
   let entries = 0;
-  for (const shape of trackedShapes) {
-    const m = rayHitCache.get(shape);
-    if (m) entries += m.size;
+  let shapes = 0;
+  for (const reference of trackedShapes) {
+    const target = reference.deref();
+    if (!target) {
+      trackedShapes.delete(reference);
+      continue;
+    }
+    const m = rayHitCache.get(target);
+    if (m) {
+      entries += m.size;
+      shapes++;
+    }
   }
-  return { entries, shapes: trackedShapes.size };
+  return { entries, shapes };
 }
 
-// Strong side-set of shapes that have cache entries, so tests can enumerate and
-// reset them. The cache itself stays weak; this only exists because WeakMap
-// has no iteration/clear.
-const trackedShapes = new Set<object>();
+// Diagnostics retain WeakRef wrappers, preserving weak glyph ownership.
+const trackedShapes = new Set<WeakRef<object>>();
 
 /**
  * Sorts points along a ray direction and deduplicates near-equal points.
@@ -159,14 +124,14 @@ function sortAndDedupeAlongRay(
  * Casts a ray (line probe) at a glyph shape and returns intersection points.
  * Points are sorted along the ray direction and deduplicated.
  *
- * Results are memoized per (shape, ray): repeated identical rays skip the
- * svg-intersections computation. Callers receive a defensive shallow copy of
- * the cached points and may mutate it freely.
+ * Glyph-backed shapes return occupied span endpoint pairs, clipped to the
+ * probe. Generic SVG shapes return raw outline intersections. Exact repeat
+ * queries are memoized; returned points can be mutated independently.
  * @param gs - SvgShape for the glyph
  * @param origin - Start point of the ray
  * @param angle - Angle in radians
  * @param len - Length of the ray
- * @param dedupEps - Optional deduplication epsilon (default: RAY_DEDUP_EPS)
+ * @param dedupEps - Optional raw SVG intersection deduplication tolerance
  * @returns { points: Point2D[] } Sorted, deduplicated intersection points
  */
 export function rayHits(
@@ -181,48 +146,52 @@ export function rayHits(
   if (shapeMap) {
     const cached = shapeMap.get(key);
     if (cached) {
-      return { points: cached.slice() };
+      return { points: cached.map((p) => ({ ...p })) };
     }
   }
 
-  const dx = Math.cos(angle) * len;
-  const dy = Math.sin(angle) * len;
-  const probe = shape('line', {
-    x1: origin.x,
-    y1: origin.y,
-    x2: origin.x + dx,
-    y2: origin.y + dy,
-  });
-  let result: { points?: Point2D[] } | null | undefined;
-  try {
-    result = safeIntersect(gs, probe);
-  } catch (err) {
-    Logger.error('[rayHits] Error during intersection:', {
-      origin,
-      angle,
-      len,
-      probe,
-      err,
+  const filled = getFilledShape(gs as object);
+  let sorted: Point2D[];
+  if (filled) {
+    // Internal crossings are not occupied boundaries. These spans also
+    // handle a probe beginning or ending inside occupied ink.
+    sorted = occupiedRayIntervals(filled, origin, angle, len).flatMap(
+      (interval) => [interval.near, interval.far]
+    );
+  } else {
+    const probe = shape('line', {
+      x1: origin.x,
+      y1: origin.y,
+      x2: origin.x + Math.cos(angle) * len,
+      y2: origin.y + Math.sin(angle) * len,
     });
-    return { points: [] };
+    const result = safeIntersect(gs, probe);
+    const numericalEpsilon =
+      Number.EPSILON *
+      Math.max(
+        1,
+        ...result.points.flatMap((p) => [Math.abs(p.x), Math.abs(p.y)])
+      ) *
+      16;
+    sorted = sortAndDedupeAlongRay(
+      result.points,
+      angle,
+      dedupEps ?? numericalEpsilon
+    );
   }
-  if (!result || !Array.isArray(result.points)) {
-    return { points: [] };
-  }
-
-  // Sort along ray direction and deduplicate
-  const eps = dedupEps ?? Math.max(RAY_DEDUP_EPS, len * 0.001);
-  const sorted = sortAndDedupeAlongRay(result.points, angle, eps);
 
   // Store in cache (the sorted/deduplicated canonical form).
   if (!shapeMap) {
     shapeMap = new Map();
     rayHitCache.set(gs as object, shapeMap);
-    trackedShapes.add(gs as object);
+    trackedShapes.add(new WeakRef(gs as object));
   }
-  shapeMap.set(key, sorted);
+  shapeMap.set(
+    key,
+    sorted.map((p) => ({ ...p }))
+  );
 
-  return { points: sorted.slice() };
+  return { points: sorted.map((p) => ({ ...p })) };
 }
 
 /**
@@ -253,138 +222,34 @@ export function windingNumber(
 
 /**
  * Checks if a point is inside the glyph outline using the fastest available method.
- * Uses registered pointInPath function if available, else falls back to ray/parity check.
+ * Applies the nonzero winding fill rule to the current glyph outline.
  * @param g - The fontkit Glyph object.
  * @param pt - The point to test.
  * @returns boolean
  */
 export function isInside(g: Glyph, pt: Point2D): boolean {
-  const gs = shapeForV2(g);
-  // Fast path: use registered pointInPath function
-  if (pointInPathFn) {
-    return pointInPathFn(gs, pt);
-  }
-
-  // Fallback: horizontal ray cast with parity check
-  // Use bbox-aware far-left position instead of fixed -1e6
-  const bboxLeft = g.bbox ? g.bbox.minX - (g.bbox.maxX - g.bbox.minX) : -1e6;
-  // Jitter Y slightly to avoid grazing vertices exactly
-  const EPS = 0.01;
-  const jitteredY = pt.y + EPS;
-  const probe = shape('line', {
-    x1: bboxLeft,
-    y1: jitteredY,
-    x2: pt.x,
-    y2: jitteredY,
-  });
-
-  // Parity check: odd number of crossings = inside
-  return Math.abs(windingNumber(gs, probe)) % 2 === 1;
+  return containsFilledPoint(getFilledGeometry(g), pt);
 }
 
-/**
- * Performs a robust intersection, falling back to poly-line tessellation if the result is unstable.
- * NOTE: Tessellation fallback is currently disabled until real implementation exists.
- * @param a - First SvgShape
- * @param b - Second SvgShape
- * @returns intersection result
- */
-const tessellationEnabled = false; // Set to true when tessellate() is implemented
-
+/** Validated raw SVG intersections. Invalid library results fail closed. */
 export function safeIntersect(
   a: SvgShape,
   b: SvgShape
 ): { status: string; points: Point2D[] } {
   try {
-    const res = intersect(a, b) as { status: string; points: Point2D[] };
-    if (!res || typeof res !== 'object' || !Array.isArray(res.points)) {
+    const result = intersect(a, b) as { status: string; points: Point2D[] };
+    if (
+      !result ||
+      !Array.isArray(result.points) ||
+      result.points.some((p) => !Number.isFinite(p.x) || !Number.isFinite(p.y))
+    ) {
       return { status: 'Error', points: [] };
     }
-    if (res.status !== 'Intersection') return res;
-
-    // Validate all points for NaN/infinity (not just first point)
-    const hasInvalidPoints = res.points.some(
-      (p) => !Number.isFinite(p.x) || !Number.isFinite(p.y)
-    );
-
-    if (hasInvalidPoints) {
-      if (tessellationEnabled) {
-        // Fallback: poly-line tessellation with caching
-        try {
-          const fallback = intersect(flatMemo(a, 0.25), flatMemo(b, 0.25)) as {
-            status: string;
-            points: Point2D[];
-          };
-          if (
-            !fallback ||
-            typeof fallback !== 'object' ||
-            !Array.isArray(fallback.points)
-          ) {
-            return { status: 'Error', points: [] };
-          }
-          return fallback;
-        } catch {
-          Logger.warn('[safeIntersect] Fallback tessellation failed', { a, b });
-          return { status: 'Error', points: [] };
-        }
-      } else {
-        // Tessellation not implemented - return error
-        Logger.warn(
-          '[safeIntersect] Invalid points detected but tessellation disabled',
-          { a, b }
-        );
-        return { status: 'Error', points: [] };
-      }
-    }
-    return res;
-  } catch (err) {
-    if (tessellationEnabled) {
-      // If intersect throws, fallback to tessellation
-      try {
-        const fallback = intersect(flatMemo(a, 0.25), flatMemo(b, 0.25)) as {
-          status: string;
-          points: Point2D[];
-        };
-        if (
-          !fallback ||
-          typeof fallback !== 'object' ||
-          !Array.isArray(fallback.points)
-        ) {
-          return { status: 'Error', points: [] };
-        }
-        return fallback;
-      } catch {
-        Logger.warn('[safeIntersect] Fallback tessellation failed', { a, b });
-        return { status: 'Error', points: [] };
-      }
-    }
-    Logger.error('[safeIntersect] Intersection failed:', err, { a, b });
+    return result;
+  } catch (error) {
+    Logger.error('[safeIntersect] Intersection failed:', error, { a, b });
     return { status: 'Error', points: [] };
   }
-}
-
-/**
- * Caches polyline tessellations for SvgShapes by tolerance.
- * Avoids redundant tessellation work in safeIntersect fallback.
- */
-const flatCache = new WeakMap<object, Map<number, SvgShape>>();
-function flatMemo(s: SvgShape, tol = 0.25): SvgShape {
-  let tmap = flatCache.get(s as object);
-  if (!tmap) flatCache.set(s as object, (tmap = new Map()));
-  if (!tmap.has(tol)) tmap.set(tol, tessellate(s, tol));
-  return tmap.get(tol)!;
-}
-
-/**
- * Tessellates a path shape into a polyline for robust intersection.
- * This is a simplified version - full tessellation with bezier flattening
- * is available in geometryHeuristics.ts for more complex cases.
- */
-function tessellate(s: SvgShape, _tol = 0.25): SvgShape {
-  // For now, return the shape as-is
-  // Full tessellation implementation exists in geometryHeuristics.ts
-  // but requires SegmentWithMeta types and bezier-js integration
-  return s;
 }
 
 /**
@@ -429,7 +294,11 @@ const glyphShapeCacheV2 = new WeakMap<Glyph, SvgShape>();
  * @returns svg-intersections path shape (unknown type)
  */
 export function shapeForV2(g: Glyph): SvgShape {
-  if (!glyphShapeCacheV2.has(g)) glyphShapeCacheV2.set(g, glyphToShape(g));
+  if (!glyphShapeCacheV2.has(g)) {
+    const result = glyphToShape(g);
+    registerFilledShape(result as object, getFilledGeometry(g));
+    glyphShapeCacheV2.set(g, result);
+  }
   return glyphShapeCacheV2.get(g)!;
 }
 

@@ -18,6 +18,7 @@ import {
 } from '@/utils/geometry/geometryCore';
 import { shapeForV2 } from '@/utils/geometry/geometryCore';
 import { glyphFor, loadFont } from '@/test/utils/fixtures/fontFixtures';
+import { shape as makeShape } from 'svg-intersections';
 
 describe('rayHits intersection cache', () => {
   let shape: ReturnType<typeof shapeForV2>;
@@ -64,12 +65,37 @@ describe('rayHits intersection cache', () => {
     const origin = { x: -100, y: 300 };
     const first = rayHits(shape, origin, 0, 2000).points;
 
-    // Caller mutates / clears their reference.
-    if (first.length > 0) {
-      first.length = 0;
-    }
+    expect(first.length).toBeGreaterThan(0);
+    const expected = first.map((p) => ({ ...p }));
+    first[0].x = -99999;
+    first.length = 0;
 
     const second = rayHits(shape, origin, 0, 2000).points;
-    expect(second.length).toBeGreaterThan(0);
+    expect(second).toEqual(expected);
+  });
+
+  it('does not alias sub-unit rays on opposite sides of a thin boundary', () => {
+    const thin = makeShape('path', { d: 'M0 0L10 0L10 0.03L0 0.03Z' });
+    const inside = rayHits(thin, { x: -1, y: 0.02 }, 0, 20).points;
+    const outside = rayHits(thin, { x: -1, y: 0.04 }, 0, 20).points;
+    expect(inside).toHaveLength(2);
+    expect(inside[0].x).toBeCloseTo(0, 12);
+    expect(inside[1].x).toBeCloseTo(10, 12);
+    expect(outside).toEqual([]);
+  });
+
+  it('does not alias close explicit deduplication tolerances', () => {
+    const thin = makeShape('path', { d: 'M0 0L0.002 0L0.002 10L0 10Z' });
+    expect(rayHits(thin, { x: -1, y: 5 }, 0, 20, 0.001).points).toHaveLength(2);
+    expect(rayHits(thin, { x: -1, y: 5 }, 0, 20, 0.004).points).toHaveLength(1);
+  });
+
+  it('retains thin raw SVG boundaries on long rays', () => {
+    const thin = makeShape('path', { d: 'M0 0L0.01 0L0.01 10L0 10Z' });
+    for (const length of [10, 1000, 1000000]) {
+      const hits = rayHits(thin, { x: -1, y: 5 }, 0, length).points;
+      expect(hits).toHaveLength(2);
+      expect(hits[1].x - hits[0].x).toBeCloseTo(0.01, 10);
+    }
   });
 });

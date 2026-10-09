@@ -2,7 +2,6 @@
  * Mock glyph and font factories for typographic feature detection tests.
  * Provides utilities to create test glyphs from SVG path strings.
  */
-import { shape } from 'svg-intersections';
 import type { Glyph, Font, Path } from 'fontkit';
 
 /**
@@ -36,9 +35,33 @@ export function mockGlyphFromPath(
     advanceWidth?: number;
   } = {}
 ): Glyph {
-  // Parse path commands using svg-intersections
-  const commandsShape = shape('path', { d }) as { params: unknown[] };
-  const commands = (commandsShape.params?.[0] as unknown[]) ?? [];
+  // Fixtures use absolute Fontkit-compatible M/L/Q/C/Z commands. KLD
+  // IntersectionParams are intersection shapes, not Fontkit path commands.
+  const tokens =
+    d.match(/[a-zA-Z]|[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:[eE][-+]?\d+)?/g) ?? [];
+  const commands: { command: string; args: number[] }[] = [];
+  const names: Record<string, string> = {
+    M: 'moveTo',
+    L: 'lineTo',
+    Q: 'quadraticCurveTo',
+    C: 'bezierCurveTo',
+    Z: 'closePath',
+  };
+  const counts: Record<string, number> = { M: 2, L: 2, Q: 4, C: 6, Z: 0 };
+  let current = '';
+  for (let index = 0; index < tokens.length;) {
+    if (/^[a-zA-Z]$/.test(tokens[index])) current = tokens[index++];
+    if (!(current in names))
+      throw new Error(`Unsupported fixture SVG command: ${current}`);
+    const count = counts[current];
+    const args = tokens.slice(index, index + count).map(Number);
+    if (args.length !== count || args.some((value) => !Number.isFinite(value)))
+      throw new Error(`Invalid fixture ${current} arguments`);
+    commands.push({ command: names[current], args });
+    index += count;
+    if (current === 'M') current = 'L';
+    if (current === 'Z') current = '';
+  }
 
   // Create a lightweight path object
   const path = {

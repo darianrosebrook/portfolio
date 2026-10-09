@@ -10,6 +10,7 @@
  */
 
 import type { Point2D } from '@/utils/geometry/geometry';
+import type { FilledGeometry } from '@/utils/geometry/filledGeometry';
 import type { Font, Glyph } from 'fontkit';
 
 // Re-export Point2D for convenience
@@ -20,6 +21,7 @@ export type { Point2D };
  * These are the atomic typographic anatomy features we can detect.
  */
 export type FeatureID =
+  | 'accent'
   | 'apex'
   | 'aperture'
   | 'arc'
@@ -138,9 +140,9 @@ export interface ContourClassification {
   type: 'base' | 'mark' | 'hole';
   /** Bounding box of the contour */
   bbox: BBox;
-  /** Signed area (positive = clockwise, negative = counter-clockwise) */
+  /** Unsigned geometric area of the source contour. */
   area: number;
-  /** Winding number for inside/outside determination */
+  /** Sign of source contour area; absolute sign does not identify anatomy. */
   winding: number;
   /** Start index in path commands array */
   startIndex: number;
@@ -237,6 +239,8 @@ export interface GeometryCache {
   metrics: Metrics;
   /** svg-intersections shape for ray casting */
   svgShape: SvgShape;
+  /** Canonical nonzero fill topology (always supplied by buildGeometryCache). */
+  filled?: FilledGeometry;
   /** Flattened path segments with metadata */
   segments: SegmentWithMeta[];
   /** Classified contours (base/mark/hole) */
@@ -283,6 +287,7 @@ export interface LegacyFeatureResult {
  * Used for backward compatibility with existing UI.
  */
 export const FEATURE_DISPLAY_NAMES: Record<string, FeatureID> = {
+  Accent: 'accent',
   Apex: 'apex',
   Aperture: 'aperture',
   Arc: 'arc',

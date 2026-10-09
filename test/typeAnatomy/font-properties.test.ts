@@ -48,13 +48,19 @@ describe('Font Property Detection', () => {
       expect(cache.context.isSerif).toBe(true);
     });
 
-    it.fails(
-      'should detect Monaspace as monospace (currently isMono=false; detector bug)',
-      () => {
-        const font = loadTestFont('MonaspaceNeonVF.ttf');
-        const glyph = getGlyph(font, 'A');
-        const cache = buildGeometryCache(glyph, font);
-        expect(cache.context.isMono).toBe(true);
+    it('detects Monaspace as monospace from current advance spacing despite its unset post flag', () => {
+      const font = loadTestFont('MonaspaceNeonVF.ttf');
+      const glyph = getGlyph(font, 'A');
+      const cache = buildGeometryCache(glyph, font);
+      expect(cache.context.isMono).toBe(true);
+    });
+    it.each(['InterVariable.ttf', 'Newsreader-VF.ttf'])(
+      'does not report proportional %s as fixed-cell spacing',
+      (filename) => {
+        const font = loadTestFont(filename);
+        expect(
+          buildGeometryCache(getGlyph(font, 'i'), font).context.isMono
+        ).toBe(false);
       }
     );
   });
@@ -66,6 +72,27 @@ describe('Font Property Detection', () => {
       const cache = buildGeometryCache(glyph, font);
       expect(cache.context.isItalic).toBe(false);
       expect(cache.context.italicAngle).toBe(0);
+    });
+    it('uses the effective slant coordinate and weight on a current Monaspace variation', () => {
+      const font = loadTestFont('MonaspaceNeonVF.ttf').getVariation({
+        wght: 650,
+        slnt: -9,
+      });
+      const cache = buildGeometryCache(getGlyph(font, 'A'), font);
+      expect(cache.context.weight).toBe(650);
+      expect(cache.context.italicAngle).toBe(-9);
+      expect(cache.italicAngle).toBe(-9);
+      expect(cache.context.isItalic).toBe(true);
+      expect(cache.context.isMono).toBe(true);
+    });
+    it('aligns Inter weight with its wght axis after the opsz axis', () => {
+      const font = loadTestFont('InterVariable.ttf').getVariation({
+        opsz: 27,
+        wght: 675,
+      });
+      const cache = buildGeometryCache(getGlyph(font, 'A'), font);
+      expect(cache.context.weight).toBe(675);
+      expect(cache.context.isItalic).toBe(false);
     });
   });
 
@@ -117,10 +144,7 @@ describe('Variable Font Cache Invalidation', () => {
     const variationAxes = (
       font as Font & { variationAxes?: Record<string, unknown> }
     ).variationAxes;
-    if (!variationAxes || Object.keys(variationAxes).length === 0) {
-      console.warn('Skipping test: Font does not support variations');
-      return;
-    }
+    expect(variationAxes).toHaveProperty('wght');
 
     const glyph = getGlyph(font, 'A');
     const cache1 = buildGeometryCache(glyph, font, { wght: 400 });
@@ -129,6 +153,14 @@ describe('Variable Font Cache Invalidation', () => {
 
     expect(cache1.variationKey).not.toBe(cache2.variationKey);
     expect(cache1.variationKey).toBe(cache3.variationKey);
+  });
+  it('does not alias distinct fractional variation settings in its cache key', () => {
+    const font = loadTestFont('Nohemi-VF.ttf');
+    const glyph = getGlyph(font, 'A');
+    const first = buildGeometryCache(glyph, font, { wght: 400.001 });
+    const second = buildGeometryCache(glyph, font, { wght: 400.002 });
+    expect(first).not.toBe(second);
+    expect(first.variationKey).not.toBe(second.variationKey);
   });
 
   it('should produce separate caches for each glyph', () => {

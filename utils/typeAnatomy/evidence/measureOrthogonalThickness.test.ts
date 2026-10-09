@@ -9,6 +9,8 @@
 
 import { describe, expect, it } from 'vitest';
 import { shape } from 'svg-intersections';
+import { buildFilledGeometry } from '@/utils/geometry/filledGeometry';
+import { mockGlyphFromPath } from '@/test/utils/fixtures/mockGlyph';
 import type { GeometryCache, ScalePrimitives, SvgShape } from '../types';
 import {
   measureOrthogonalThickness,
@@ -39,6 +41,55 @@ const HORIZONTAL: DominantAxis = 'horizontal';
 const VERTICAL: DominantAxis = 'vertical';
 
 describe('measureOrthogonalThickness', () => {
+  it('refuses a truncated probe as actual stroke thickness', () => {
+    const path = 'M0 0L10 0L10 10L0 10Z';
+    const geo = makeCache(path, 10, 10);
+    geo.filled = buildFilledGeometry(
+      mockGlyphFromPath(path, { minX: 0, minY: 0, maxX: 10, maxY: 10 })
+    );
+    const result = measureOrthogonalThickness(geo, {
+      midpoint: { x: 5, y: 5 },
+      dominantAxis: VERTICAL,
+      maxProbeDistance: 1,
+    });
+    expect(result.hits.map((p) => p.x)).toEqual([4, 6]);
+    expect(result.thickness).toBe(0);
+    expect(result.pairCount).toBe(0);
+    expect(result.failureReason).toBe('insufficient_pairs');
+    expect(result.selectedPairContainsMidpoint).toBe(false);
+    expect(result.confidence).toBe(0);
+  });
+  it('measures the occupied union of overlapping contours rather than pairing raw internal crossings', () => {
+    const path = 'M0 0L10 0L10 10L0 10Z M5 0L15 0L15 10L5 10Z';
+    const geo = makeCache(path, 15, 10);
+    geo.filled = buildFilledGeometry(
+      mockGlyphFromPath(path, { minX: 0, minY: 0, maxX: 15, maxY: 10 })
+    );
+    const result = measureOrthogonalThickness(geo, {
+      midpoint: { x: 7, y: 5 },
+      dominantAxis: VERTICAL,
+    });
+    expect(result.thickness).toBe(15);
+    expect(result.pairCount).toBe(1);
+    expect(result.selectedPairContainsMidpoint).toBe(true);
+    expect(result.selectedPairCenterOnProbeAxis).toBe(7.5);
+  });
+  it('preserves thin occupied strokes on long orthogonal probes', () => {
+    const path = 'M0 0L0.01 0L0.01 10L0 10Z';
+    const geo = makeCache(path, 0.01, 10);
+    geo.filled = buildFilledGeometry(
+      mockGlyphFromPath(path, { minX: 0, minY: 0, maxX: 0.01, maxY: 10 })
+    );
+    const result = measureOrthogonalThickness(geo, {
+      midpoint: { x: 0.005, y: 5 },
+      dominantAxis: VERTICAL,
+      maxProbeDistance: 10000,
+    });
+    expect(result.thickness).toBeCloseTo(0.01, 9);
+    expect(result.pairCount).toBe(1);
+    expect(result.selectedPairContainsMidpoint).toBe(true);
+    expect(result.selectedPairCenterOnProbeAxis).toBeCloseTo(0.005, 9);
+  });
   it('measures a wide-short rect vertically as its height (horizontal candidate)', () => {
     // A 200x40 rect at (100..300, 80..120) — a crossbar-like stroke.
     const path = 'M100 80 L300 80 L300 120 L100 120 Z';

@@ -11,6 +11,12 @@
  */
 
 import { rayHits as geometryRayHits } from '@/utils/geometry/geometryCore';
+import {
+  buildFilledGeometry,
+  getFilledGeometry,
+  registerFilledShape,
+  contourWinding,
+} from '@/utils/geometry/filledGeometry';
 import type { Font, Glyph } from '@/ui/modules/FontInspector/fontkit-types';
 import { shape } from 'svg-intersections';
 import type {
@@ -30,7 +36,7 @@ import { rejectsAsMainBodyFragment } from './evidence/topology';
  * Cache storage using WeakMap for automatic garbage collection.
  * Keyed by glyph object, then by variation key string.
  */
-const geometryCacheStorage = new WeakMap<Glyph, Map<string, GeometryCache>>();
+let geometryCacheStorage = new WeakMap<Glyph, Map<string, GeometryCache>>();
 
 /**
  * Per-font DetectionContext memo.
@@ -41,7 +47,7 @@ const geometryCacheStorage = new WeakMap<Glyph, Map<string, GeometryCache>>();
  * building a GeometryCache for every glyph in an alphabet re-runs the same
  * four-glyph probe ~26 times.
  */
-const detectionContextCache = new WeakMap<Font, DetectionContext>();
+let detectionContextCache = new WeakMap<Font, DetectionContext>();
 
 /**
  * Builds or retrieves a cached GeometryCache for a glyph.
@@ -61,7 +67,7 @@ export function buildGeometryCache(
     ? JSON.stringify(
         Object.entries(variationSettings)
           .sort(([a], [b]) => a.localeCompare(b))
-          .map(([k, v]) => `${k}:${v.toFixed(2)}`)
+          .map(([k, v]) => [k, v])
       )
     : 'default';
 
@@ -75,9 +81,11 @@ export function buildGeometryCache(
   const metrics = extractMetrics(font);
   const svgShape = glyphToShape(glyph);
   const segments = flattenToSegments(glyph);
-  const contours = classifyContours(glyph, segments, metrics);
+  const filled = getFilledGeometry(glyph);
+  registerFilledShape(svgShape as object, filled);
+  const contours = classifyContours(glyph, segments, metrics, filled);
   const context = buildDetectionContext(font);
-  const italicAngle = getItalicAngle(font);
+  const italicAngle = context.italicAngle;
   const scale = computeScalePrimitives(glyph, font, svgShape, metrics);
 
   const cache: GeometryCache = {
@@ -85,6 +93,7 @@ export function buildGeometryCache(
     font,
     metrics,
     svgShape,
+    filled,
     segments,
     contours,
     italicAngle,
@@ -198,10 +207,46 @@ function estimateStemWidth(
 /**
  * Gets the italic angle from the font (0 for upright).
  */
-function getItalicAngle(font: Font): number {
-  // fontkit stores italic angle in post table
-  const fontAny = font as Font & { post?: { italicAngle?: number } };
-  return fontAny.post?.italicAngle || 0;
+function variationCoordinate(font: Font, axis: string): number | undefined {
+  const variable = font as Font & {
+    variationCoords?: number[] | null;
+    variationAxes?: Record<string, { default: number }>;
+  };
+  const keys = Object.keys(variable.variationAxes ?? {});
+  const index = keys.indexOf(axis);
+  if (index < 0) return undefined;
+  return (
+    variable.variationCoords?.[index] ?? variable.variationAxes?.[axis]?.default
+  );
+}
+
+/** Advance spacing identifies fixed-cell fonts even when post.isFixedPitch is
+ * unset (texture-healing fonts can retain proportional-looking outlines). */
+function hasFixedAdvanceSpacing(font: Font): boolean {
+  const probes = ['I', 'i', 'W', 'M', '0', ' '];
+  try {
+    const glyphs = probes.map((char) =>
+      font.glyphForCodePoint(char.codePointAt(0)!)
+    );
+    if (
+      glyphs.some(
+        (glyph) =>
+          !glyph ||
+          glyph.id === 0 ||
+          !Number.isFinite(glyph.advanceWidth) ||
+          glyph.advanceWidth <= 0
+      )
+    )
+      return false;
+    const advance = glyphs[0].advanceWidth;
+    return glyphs.every(
+      (glyph) =>
+        Math.abs(glyph.advanceWidth - advance) <=
+        Number.EPSILON * Math.max(1, advance) * 32
+    );
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -221,10 +266,15 @@ function buildDetectionContext(font: Font): DetectionContext {
     'OS/2'?: { usWeightClass?: number };
   };
 
-  const italicAngle = fontAny.post?.italicAngle || 0;
-  const isItalic = Math.abs(italicAngle) > 0.5;
-  const isMono = fontAny.post?.isFixedPitch || false;
-  const weight = fontAny['OS/2']?.usWeightClass || 400;
+  const italicAngle =
+    variationCoordinate(font, 'slnt') ?? fontAny.post?.italicAngle ?? 0;
+  const isItalic =
+    Math.abs(italicAngle) > 0.5 ||
+    (variationCoordinate(font, 'ital') ?? 0) >= 0.5;
+  const isMono =
+    Boolean(fontAny.post?.isFixedPitch) || hasFixedAdvanceSpacing(font);
+  const weight =
+    variationCoordinate(font, 'wght') ?? fontAny['OS/2']?.usWeightClass ?? 400;
   const unitsPerEm = font.unitsPerEm || 1000;
 
   // Use geometry-based serif detection with fallback to name heuristics
@@ -502,7 +552,7 @@ export function flattenToSegments(glyph: Glyph): SegmentWithMeta[] {
  * Classifies contours as base, mark, or hole.
  *
  * Classification rules:
- * - Holes: Counter-clockwise winding (negative area)
+ * - Holes: Source contours whose bounded interior is void in nonzero fill
  * - Marks: Small disconnected contours above x-height (or below baseline)
  *   that do NOT overlap any other non-hole contour (negative-pressure
  *   invariant from TYPEANATOMY-001 — main-body classification first,
@@ -511,193 +561,65 @@ export function flattenToSegments(glyph: Glyph): SegmentWithMeta[] {
  * - Base: Everything else (main glyph shape, plus any non-hole contour
  *   that fails mark classification)
  *
- * Two-pass design: collect raw bbox/winding data first, then reclassify
- * with knowledge of every other non-hole contour's bbox. The single-pass
- * version that lived here before could not apply main-body-fragment
- * rejection because each contour was classified before its siblings were
- * known.
+ * The shared fill model supplies topology before mark-position checks.
+ * Compound self-touching body contours stay base; their derived voids live
+ * in filled.enclosedRegions rather than requiring separate source contours.
  */
 export function classifyContours(
   glyph: Glyph,
   segments: SegmentWithMeta[],
-  metrics: Metrics
+  metrics: Metrics,
+  filled?: import('@/utils/geometry/filledGeometry').FilledGeometry
 ): ContourClassification[] {
-  if (!glyph?.path?.commands) return [];
-
-  interface RawContour {
-    index: number;
-    bbox: BBox;
-    area: number;
-    winding: number;
-    startIndex: number;
-    endIndex: number;
-  }
-  const raw: RawContour[] = [];
-  let contourIndex = 0;
-  let contourStart = 0;
-  let currentContourPoints: Point2D[] = [];
-
-  for (let i = 0; i < segments.length; i++) {
-    const seg = segments[i];
-
-    // Collect points along each segment for area/bbox calculation.
-    // Lines contribute their endpoint; Bezier curves are sampled at several
-    // t-values so the polygon follows the curve rather than chord-cutting
-    // across control points. Endpoint-only sampling underestimates signed
-    // area (can flip winding on tight bowls) and clips the bbox.
-    if (seg.type === 'moveTo' && seg.params.length > 0) {
-      // Start of a new sub-path - add the starting point
-      currentContourPoints.push(seg.params[0]);
-    } else if (seg.type === 'lineTo' && seg.params.length >= 2) {
-      // For lines, params[1] is the endpoint
-      currentContourPoints.push(seg.params[1]);
-    } else if (seg.type === 'quadraticCurveTo' && seg.params.length >= 3) {
-      const [p0, c, p1] = seg.params;
-      for (const t of CURVE_SAMPLE_TS) {
-        currentContourPoints.push(evalQuadratic(p0, c, p1, t));
-      }
-    } else if (seg.type === 'bezierCurveTo' && seg.params.length >= 4) {
-      const [p0, c1, c2, p1] = seg.params;
-      for (const t of CURVE_SAMPLE_TS) {
-        currentContourPoints.push(evalCubic(p0, c1, c2, p1, t));
-      }
-    }
-
-    // End of contour
-    if (seg.type === 'closePath' || i === segments.length - 1) {
-      if (currentContourPoints.length >= 3) {
-        const area = calculateSignedArea(currentContourPoints);
-        const bbox = calculateBBox(currentContourPoints);
-        const winding = area >= 0 ? 1 : -1;
-
-        raw.push({
-          index: contourIndex,
-          bbox,
-          area: Math.abs(area),
-          winding,
-          startIndex: contourStart,
-          endIndex: i,
-        });
-      }
-
-      contourIndex++;
-      contourStart = i + 1;
-      currentContourPoints = [];
-    }
-  }
-
-  // Pass 2: classify with full knowledge of every non-hole contour's bbox
-  // so isMarkContour can apply main-body-fragment rejection.
-  const nonHoleBBoxes: BBox[] = raw
-    .filter((r) => r.winding > 0)
-    .map((r) => r.bbox);
-
-  return raw.map((r) => {
-    let type: 'base' | 'mark' | 'hole';
-    if (r.winding < 0) {
-      type = 'hole';
-    } else if (isMarkContour(r.bbox, metrics, glyph.bbox, nonHoleBBoxes)) {
-      type = 'mark';
-    } else {
-      type = 'base';
-    }
-    return {
-      index: r.index,
-      type,
-      bbox: r.bbox,
-      area: r.area,
-      winding: r.winding,
-      startIndex: r.startIndex,
-      endIndex: r.endIndex,
-    };
+  const model = filled ?? buildFilledGeometry(glyph, segments);
+  // A source contour is a hole only when its geometric interior is void in
+  // the complete fill. Absolute winding sign is arbitrary across fonts.
+  const raw = model.contours.map((contour) => {
+    const ownInterior = contour.points.find((a, i) => {
+      const b = contour.points[(i + 1) % contour.points.length];
+      const dx = b.x - a.x,
+        dy = b.y - a.y;
+      const length = Math.hypot(dx, dy);
+      if (!length) return false;
+      const sign = Math.sign(contour.signedArea) || 1;
+      const epsilon = Math.min(length * 1e-5, 1e-3);
+      const p = {
+        x: (a.x + b.x) / 2 - (dy / length) * epsilon * sign,
+        y: (a.y + b.y) / 2 + (dx / length) * epsilon * sign,
+      };
+      return (
+        contourWinding(contour.points, p) !== 0 &&
+        model.contours.reduce(
+          (sum, c) => sum + contourWinding(c.points, p),
+          0
+        ) === 0
+      );
+    });
+    // Separate simple source holes from a compound body contour that also
+    // encloses voids: the latter stays base; enclosedRegions carries its holes.
+    const hole =
+      !!ownInterior &&
+      !model.bodies.some((body) =>
+        body.points.some((p) =>
+          contour.points.some((q) => p.x === q.x && p.y === q.y)
+        )
+      );
+    return { contour, hole };
   });
-}
-
-/**
- * Sample t-values for curve polygon approximation in classifyContours.
- *
- * t=0 is intentionally excluded: the curve's start point is already present in
- * the contour point list (it is the previous segment's endpoint, or the
- * moveTo). These four samples cover the curve interior plus its endpoint,
- * which is enough for accurate shoelace area and bbox on typical font curves
- * without the cost of dense tessellation.
- */
-const CURVE_SAMPLE_TS = [0.25, 0.5, 0.75, 1];
-
-/** Evaluates a quadratic Bézier at t using the Bernstein form. */
-function evalQuadratic(
-  p0: Point2D,
-  c: Point2D,
-  p1: Point2D,
-  t: number
-): Point2D {
-  const u = 1 - t;
-  const a = u * u;
-  const b = 2 * u * t;
-  const cc = t * t;
-  return {
-    x: a * p0.x + b * c.x + cc * p1.x,
-    y: a * p0.y + b * c.y + cc * p1.y,
-  };
-}
-
-/** Evaluates a cubic Bézier at t using the Bernstein form. */
-function evalCubic(
-  p0: Point2D,
-  c1: Point2D,
-  c2: Point2D,
-  p1: Point2D,
-  t: number
-): Point2D {
-  const u = 1 - t;
-  const a = u * u * u;
-  const b = 3 * u * u * t;
-  const cc = 3 * u * t * t;
-  const d = t * t * t;
-  return {
-    x: a * p0.x + b * c1.x + cc * c2.x + d * p1.x,
-    y: a * p0.y + b * c1.y + cc * c2.y + d * p1.y,
-  };
-}
-
-/**
- * Calculates the signed area of a polygon using the shoelace formula.
- * Positive = clockwise, Negative = counter-clockwise
- */
-function calculateSignedArea(points: Point2D[]): number {
-  let area = 0;
-  const n = points.length;
-
-  for (let i = 0; i < n; i++) {
-    const j = (i + 1) % n;
-    area += points[i].x * points[j].y;
-    area -= points[j].x * points[i].y;
-  }
-
-  return area / 2;
-}
-
-/**
- * Calculates the bounding box of a set of points.
- */
-function calculateBBox(points: Point2D[]): BBox {
-  if (points.length === 0) {
-    return { minX: 0, minY: 0, maxX: 0, maxY: 0 };
-  }
-
-  let minX = Infinity;
-  let minY = Infinity;
-  let maxX = -Infinity;
-  let maxY = -Infinity;
-
-  for (const p of points) {
-    if (p.x < minX) minX = p.x;
-    if (p.y < minY) minY = p.y;
-    if (p.x > maxX) maxX = p.x;
-    if (p.y > maxY) maxY = p.y;
-  }
-
-  return { minX, minY, maxX, maxY };
+  const nonHoleBBoxes = raw.filter((r) => !r.hole).map((r) => r.contour.bbox);
+  return raw.map(({ contour, hole }) => ({
+    index: contour.index,
+    type: hole
+      ? 'hole'
+      : isMarkContour(contour.bbox, metrics, glyph.bbox, nonHoleBBoxes)
+        ? 'mark'
+        : 'base',
+    bbox: contour.bbox,
+    area: Math.abs(contour.signedArea),
+    winding: Math.sign(contour.signedArea),
+    startIndex: contour.startIndex,
+    endIndex: contour.endIndex,
+  }));
 }
 
 /**
@@ -751,8 +673,8 @@ export function invalidateGeometryCache(glyph: Glyph): void {
  * Use sparingly - mainly for testing or memory pressure.
  */
 export function clearAllGeometryCache(): void {
-  // WeakMap doesn't have a clear method, so we just let GC handle it
-  // by not holding any references
+  geometryCacheStorage = new WeakMap();
+  detectionContextCache = new WeakMap();
 }
 
 /**

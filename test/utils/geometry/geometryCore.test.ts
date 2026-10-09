@@ -91,9 +91,8 @@ describe('geometryCore', () => {
       // Cast ray from center of circle outward
       const result = rayHits(gs, { x: 0, y: 0 }, 0, 500);
 
-      // Should hit once (exit point)
-      expect(result.points.length).toBe(1);
-      expect(result.points[0].x).toBeCloseTo(300, 0);
+      // Occupied spans are clipped at the probe origin when it begins in ink.
+      expect(result.points.map((p) => p.x)).toEqual([0, 300]);
     });
 
     it('returns four intersection points for ray through donut (crossing both rings)', () => {
