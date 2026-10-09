@@ -42,3 +42,10 @@ evidence:
     command: "pnpm exec vitest run test/typeAnatomy test/utils/typeAnatomy test/utils/geometry/geometryCore.test.ts test/fontkit-browser.test.mjs --reporter=verbose"
     exit_code: 0
     commit_sha: a9b65f8c17faffef9941cb81c13c3a228d9b5215
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Executed and inspected straight H,T,E,M geometry, blank-glyph no-region control, b bowl exclusion and h,n,m transfer assertions across Nohemi,Inter,Newsreader. Integrated run at a9b65f8c: 21 files,397 passed,11 retained expected failures,exit0. Raw integrated-tests.log/status in ignored test-results/anatomy-fix. No general anatomy accuracy claim."
+    recorded_at: "2026-10-09T19:37:10.593Z"
+    command: "pnpm exec vitest run test/typeAnatomy test/utils/typeAnatomy test/utils/geometry/geometryCore.test.ts test/fontkit-browser.test.mjs --reporter=verbose"
+    exit_code: 0
+    commit_sha: a9b65f8c17faffef9941cb81c13c3a228d9b5215
