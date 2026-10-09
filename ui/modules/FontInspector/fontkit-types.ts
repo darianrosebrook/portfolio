@@ -1,3 +1,2 @@
-// Re-export fontkit types - webpack will mark fontkit as external for client bundles
-// so this won't trigger module resolution. We use dynamic import at runtime.
+// Type-only exports; the inspector loads fontkit's browser bundle dynamically.
 export type { Font, Glyph } from 'fontkit';

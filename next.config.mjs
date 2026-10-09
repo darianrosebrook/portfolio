@@ -91,24 +91,6 @@ const nextConfig = {
       };
     }
 
-    // Mark fontkit as external for client bundles to avoid webpack resolution issues
-    // We use dynamic import at runtime instead
-    if (!isServer) {
-      const originalExternals = config.externals || [];
-      config.externals = [
-        ...(Array.isArray(originalExternals)
-          ? originalExternals
-          : [originalExternals]),
-        ({ request }, callback) => {
-          // Mark fontkit as external for client - we'll use dynamic import
-          if (request === 'fontkit') {
-            return callback(null, 'commonjs ' + request);
-          }
-          callback();
-        },
-      ].filter(Boolean);
-    }
-
     // Handle Supabase in Edge Runtime
     if (isEdge) {
       config.resolve.alias = {

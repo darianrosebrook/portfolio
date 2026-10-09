@@ -244,8 +244,6 @@ export const SymbolCanvas: React.FC = () => {
 
     if (fontInstance && glyph) {
       drawGlyph(ctx, w, h);
-    } else {
-      console.warn('No font or glyph');
     }
   }, [
     glyph,

@@ -223,7 +223,7 @@ export const InspectorProvider: React.FC<{
     if (fontsLoaded) return;
 
     async function loadFonts() {
-      // Dynamically import fontkit to avoid bundling issues in client components
+      // Load fontkit's browser bundle lazily when the inspector mounts.
       let fontkit: typeof import('fontkit') | null = null;
       try {
         const fontkitModule = await import('fontkit');
