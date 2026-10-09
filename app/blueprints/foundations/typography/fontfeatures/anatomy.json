@@ -5,6 +5,15 @@
   "description": "Named parts of glyph construction and visible letterform structure.",
   "terms": [
     {
+      "id": "accent",
+      "term": "Accent",
+      "aliases": ["Diacritic", "Acute mark"],
+      "definition": "Detached diacritic mark, distinct from the structural tittle of i or j.",
+      "letterforms": ["á", "é", "ǽ"],
+      "otTags": [],
+      "sources": []
+    },
+    {
       "id": "ankle",
       "term": "Ankle",
       "aliases": [],
@@ -107,7 +116,7 @@
       "id": "bowl",
       "term": "Bowl",
       "aliases": [],
-      "definition": "Fully enclosed curved counter.",
+      "definition": "Curved stroke enclosing or nearly enclosing a counter.",
       "letterforms": ["o", "b", "d", "p", "q", "D", "B", "P", "R"],
       "otTags": [],
       "sources": ["Adobe Glossary"]

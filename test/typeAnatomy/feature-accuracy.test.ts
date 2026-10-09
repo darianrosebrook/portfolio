@@ -6,18 +6,7 @@
  * of the glyph. They are separate from API-contract tests that only prove
  * detectors return without throwing.
  *
- * Two describe blocks:
- *   1. "type anatomy geometry accuracy" — assertions that pass today; these
- *      protect detectors that already work and will catch regressions.
- *   2. "known type anatomy accuracy gaps" — assertions that *currently fail*,
- *      wrapped in `it.fails(...)`. They document detector bugs as a living
- *      spec. When a detector is fixed, the matching `it.fails` will start
- *      erroring (because the assertion no longer fails), forcing the engineer
- *      to flip it to a regular `it()` and lock in the fix.
- *
- * If you add a new accuracy assertion, prefer documenting reality (block 2)
- * over a guarded "if-found-then-check" pattern. Silent guards reintroduce
- * the green-when-broken failure mode this suite exists to prevent.
+ * Positive and hostile cases pin anatomical meaning and selected regions.
  */
 
 import { describe, expect, it, beforeAll } from 'vitest';
@@ -135,8 +124,6 @@ describe('type anatomy geometry accuracy', () => {
   });
 
   it('finds exactly one counter inside Newsreader o (curve commands)', () => {
-    // Exercises the new default-case branch in counter.ts:290 that returns
-    // null for unknown SVG path commands (arcs, cubics, etc).
     const counters = detect(newsreader, 'o', 'counter');
     expect(counters).toHaveLength(1);
   });
@@ -155,14 +142,8 @@ describe('type anatomy geometry accuracy', () => {
     expectInRange(eyeCenter.y, 0.5, 0.9);
   });
 
-  it('finds the eye inside Newsreader a (single-storey)', () => {
-    const glyph = glyphFor(newsreader, 'a');
-    const eyes = detect(newsreader, 'a', 'eye');
-
-    expect(eyes.length).toBeGreaterThanOrEqual(1);
-    const center = normalized(centerOf(eyes[0].shape), glyph.bbox);
-    expectInRange(center.x, 0.2, 0.6);
-    expectInRange(center.y, 0.1, 0.6);
+  it('does not rename the Newsreader a counter as an eye', () => {
+    expect(detect(newsreader, 'a', 'eye')).toEqual([]);
   });
 
   it('finds the loop on Newsreader g below the baseline', () => {
@@ -194,10 +175,10 @@ describe('type anatomy geometry accuracy', () => {
     expect(tails[0].shape.type).toBe('polyline');
 
     const tailBBox = shapeBBox(tails[0].shape);
-    const tailCenter = normalized(centerOf(tails[0].shape), glyph.bbox);
+    const tailEnd = normalized(tails[0].anchors!.end, glyph.bbox);
     expect(tailBBox.minY).toBeLessThan(0);
-    expectInRange(tailCenter.x, 0.75, 1);
-    expectInRange(tailCenter.y, 0, 0.25);
+    expectInRange(tailEnd.x, 0.75, 1);
+    expectInRange(tailEnd.y, 0, 0.25);
   });
 
   it('places the S spine through the vertical body of the glyph', () => {
@@ -220,16 +201,16 @@ describe('type anatomy geometry accuracy', () => {
     const apertures = detect(nohemi, 'e', 'aperture');
 
     expect(apertures.length).toBeGreaterThanOrEqual(1);
-    // The right-side aperture (where e opens) should be present.
-    const right = apertures.find((a) => {
-      const c = normalized(centerOf(a.shape), glyph.bbox);
-      return c.x > 0.7;
-    });
+    const right = apertures.find(
+      (instance) => (instance.debug as { side?: string })?.side === 'right'
+    );
     expect(right).toBeDefined();
+    const mouth = normalized(centerOf(right!.shape), glyph.bbox);
+    expect(mouth.x).toBeGreaterThan(0.7);
   });
 });
 
-describe('known type anatomy accuracy gaps', () => {
+describe('positive and hostile anatomy regression cases', () => {
   let nohemi: Font;
   let newsreader: Font;
 
@@ -283,13 +264,10 @@ describe('known type anatomy accuracy gaps', () => {
     }
   });
 
-  it.fails(
-    'detects the three E arms — top, middle, bottom (currently 0 found)',
-    () => {
-      const arms = detect(nohemi, 'E', 'arm');
-      expect(arms.length).toBeGreaterThanOrEqual(3);
-    }
-  );
+  it('detects the three E arms — top, middle, bottom', () => {
+    const arms = detect(nohemi, 'E', 'arm');
+    expect(arms.length).toBeGreaterThanOrEqual(3);
+  });
 
   it('detects the V crotch at the bottom-center sharp join', () => {
     const crotches = detect(nohemi, 'V', 'crotch');
@@ -307,42 +285,35 @@ describe('known type anatomy accuracy gaps', () => {
   });
 
   it('detects serifs on Newsreader I (foot + cap, both sides)', () => {
-    // Track 1.3 closed this gap. The widening-detection algorithm in
-    // detectSerif now picks up the two foot serifs and the two cap
-    // serifs of I as four separate FeatureInstances.
     const serifs = detect(newsreader, 'I', 'serif');
     expect(serifs.length).toBeGreaterThanOrEqual(2);
   });
 
-  it.fails('detects the spur on Nohemi G (currently 0 found)', () => {
+  it('detects the spur on Nohemi G', () => {
     const spurs = detect(nohemi, 'G', 'spur');
     expect(spurs).toHaveLength(1);
   });
 
-  it.fails('detects the finials on Nohemi c (currently 0 found)', () => {
+  it('detects the finials on Nohemi c', () => {
     const finials = detect(nohemi, 'c', 'finial');
     expect(finials.length).toBeGreaterThanOrEqual(1);
   });
 
-  it.fails('detects the finials on Newsreader c (currently 0 found)', () => {
+  it('detects the finials on Newsreader c', () => {
     const finials = detect(newsreader, 'c', 'finial');
     expect(finials.length).toBeGreaterThanOrEqual(1);
   });
 
-  it.fails('detects the ear on Newsreader a (currently 0 found)', () => {
-    const ears = detect(newsreader, 'a', 'ear');
-    expect(ears).toHaveLength(1);
+  it('does not invent an ear on Newsreader a', () => {
+    expect(detect(newsreader, 'a', 'ear')).toEqual([]);
   });
 
   // -- false positives: detector fires where the feature does not exist -----
 
-  it.fails(
-    'rejects spurious arms on Nohemi A — A has legs, not arms (currently finds 2)',
-    () => {
-      const arms = detect(nohemi, 'A', 'arm');
-      expect(arms).toHaveLength(0);
-    }
-  );
+  it('rejects spurious arms on Nohemi A — A has legs, not arms', () => {
+    const arms = detect(nohemi, 'A', 'arm');
+    expect(arms).toHaveLength(0);
+  });
 
   it('finds exactly one apex on Nohemi A as a point near the top center', () => {
     const apexes = detect(nohemi, 'A', 'apex');
@@ -358,20 +329,17 @@ describe('known type anatomy accuracy gaps', () => {
     expect(apexes).toHaveLength(0);
   });
 
-  it.fails(
-    'returns a bowl smaller than the full glyph for Nohemi b (currently spans entire bbox)',
-    () => {
-      const glyph = glyphFor(nohemi, 'b');
-      const bowls = detect(nohemi, 'b', 'bowl');
+  it('returns a bowl smaller than the full glyph for Nohemi b', () => {
+    const glyph = glyphFor(nohemi, 'b');
+    const bowls = detect(nohemi, 'b', 'bowl');
 
-      expect(bowls).toHaveLength(1);
-      const bbox = shapeBBox(bowls[0].shape);
-      const widthRatio =
-        (bbox.maxX - bbox.minX) / (glyph.bbox.maxX - glyph.bbox.minX);
-      // b's bowl is on the right side; it should not span the full glyph width.
-      expect(widthRatio).toBeLessThan(0.85);
-    }
-  );
+    expect(bowls).toHaveLength(1);
+    const bbox = shapeBBox(bowls[0].shape);
+    const widthRatio =
+      (bbox.maxX - bbox.minX) / (glyph.bbox.maxX - glyph.bbox.minX);
+    // b's bowl is on the right side; it should not span the full glyph width.
+    expect(widthRatio).toBeLessThan(0.85);
+  });
 
   it('finds one left backbone stem on Nohemi b without claiming its bowl edge', () => {
     const glyph = glyphFor(nohemi, 'b');
@@ -387,36 +355,18 @@ describe('known type anatomy accuracy gaps', () => {
     );
   });
 
-  it.fails(
-    'finds exactly one eye on Newsreader g (currently finds 2 — ear region counted as eye)',
-    () => {
-      const eyes = detect(newsreader, 'g', 'eye');
-      expect(eyes).toHaveLength(1);
-    }
-  );
+  it('does not rename the Newsreader g counters as eyes', () => {
+    expect(detect(newsreader, 'g', 'eye')).toEqual([]);
+  });
 
-  it.fails(
-    'does not classify the feet of Newsreader a as finials (currently finds 2 points at y=0)',
-    () => {
-      const glyph = glyphFor(newsreader, 'a');
-      const finials = detect(newsreader, 'a', 'finial');
+  it('does not classify Newsreader a serif feet as finials', () => {
+    expect(detect(newsreader, 'a', 'finial')).toEqual([]);
+  });
 
-      // If finial is detected, its center should not be on the baseline (y near 0)
-      // — those are feet, not finials.
-      for (const f of finials) {
-        const center = normalized(centerOf(f.shape), glyph.bbox);
-        expect(center.y).toBeGreaterThan(0.1);
-      }
-    }
-  );
-
-  it.fails(
-    'finds exactly one aperture on Nohemi c — c only opens on the right (currently finds 2)',
-    () => {
-      const apertures = detect(nohemi, 'c', 'aperture');
-      expect(apertures).toHaveLength(1);
-    }
-  );
+  it('finds exactly one aperture on Nohemi c — c only opens on the right', () => {
+    const apertures = detect(nohemi, 'c', 'aperture');
+    expect(apertures).toHaveLength(1);
+  });
 
   // -- crossbar geometry bugs (existing) -----------------------------------
 
@@ -659,15 +609,10 @@ describe('feature region polygons', () => {
   });
 
   it('emits stroke regions for Nohemi E arms', () => {
-    // Exercises hasArm's rect path and verifies it produces a region.
     const arms = detect(nohemi, 'E', 'arm');
-    if (arms.length > 0) {
-      // E arms detection is currently `it.fails` in the gaps block — when it
-      // starts producing instances, those instances must carry a region.
-      for (const arm of arms) {
-        expect(arm.region).toBeDefined();
-        expect(arm.region!.kind).toBe('stroke');
-      }
+    expect(arms).toHaveLength(3);
+    for (const arm of arms) {
+      expect(arm.region?.kind).toBe('stroke');
     }
   });
 });
@@ -745,26 +690,27 @@ describe('phase 4 + 5 region polygons (centerline corridors and projections)', (
     expectRegionInsideGlyph(loop.region!, glyph.bbox);
   });
 
-  it('emits an enclosed gap rectangle for the Nohemi e aperture', () => {
+  it('emits an empty mouth channel for the Nohemi e aperture', () => {
     const glyph = glyphFor(nohemiP, 'e');
     const apertures = detect(nohemiP, 'e', 'aperture');
-    expect(apertures.length).toBeGreaterThan(0);
-    const ap = apertures[0];
-    expect(ap.region?.kind).toBe('enclosed');
-    expect(ap.region!.points.length).toBe(4);
-    // Aperture is the negative space; the rectangle must align with one
-    // of the glyph's exterior edges (within 5% of glyph width). This
-    // catches a coordinate-space bug where the gap is centered in the
-    // middle of the glyph instead of attached to an edge.
-    const bbox = regionBBox(
-      ap.region! as unknown as Parameters<typeof regionBBox>[0]
-    );
-    const glyphW = glyph.bbox.maxX - glyph.bbox.minX;
-    const tol = glyphW * 0.05;
-    const touchesLeftOrRight =
-      Math.abs(bbox.minX - glyph.bbox.minX) < tol ||
-      Math.abs(bbox.maxX - glyph.bbox.maxX) < tol;
-    expect(touchesLeftOrRight).toBe(true);
+    expect(apertures).toHaveLength(1);
+    const aperture = apertures[0];
+    expect((aperture.debug as { side?: string })?.side).toBe('right');
+    expect(aperture.region?.kind).toBe('enclosed');
+    const bounds = regionBBox(aperture.region!);
+    const width = glyph.bbox.maxX - glyph.bbox.minX;
+    expect(bounds.minX).toBeGreaterThan(glyph.bbox.minX + width * 0.7);
+    expect(bounds.maxX).toBeGreaterThan(glyph.bbox.maxX - width * 0.05);
+    expect(bounds.maxY - bounds.minY).toBeGreaterThan(0);
+    expect(
+      pointInPolygon(
+        {
+          x: glyph.bbox.minX + width * 0.5,
+          y: glyph.bbox.minY + (glyph.bbox.maxY - glyph.bbox.minY) * 0.2,
+        },
+        aperture.region!.points
+      )
+    ).toBe(false);
   });
 
   it('emits a stroke projection region for the Newsreader g ear', () => {
@@ -796,21 +742,13 @@ describe('phase 4 + 5 region polygons (centerline corridors and projections)', (
     }
   });
 
-  it('attaches a polygon to every Newsreader L serif instance, when one fires', () => {
-    // L is the smallest serif example we observed: 1 instance fires but
-    // the polygon depends on the projectionRegion walker's "always step
-    // once" floor. If that floor regresses, withRegion drops to 0 even
-    // while count stays at 1 — exactly the bug we're guarding against.
+  it('attaches a polygon to each actual Newsreader L serif', () => {
     const serifs = detect(newsreader, 'L', 'serif');
-    if (serifs.length > 0) {
-      const withRegion = serifs.filter((s) => s.region);
-      expect(withRegion.length).toBe(serifs.length);
-      const glyph = glyphFor(newsreader, 'L');
-      for (const s of withRegion) {
-        expect(s.region?.kind).toBe('stroke');
-        expect(s.region!.points.length).toBeGreaterThanOrEqual(3);
-        expectRegionInsideGlyph(s.region!, glyph.bbox);
-      }
+    expect(serifs.length).toBeGreaterThan(0);
+    const glyph = glyphFor(newsreader, 'L');
+    for (const serif of serifs) {
+      expect(serif.region?.kind).toBe('stroke');
+      expectRegionInsideGlyph(serif.region!, glyph.bbox);
     }
   });
 });

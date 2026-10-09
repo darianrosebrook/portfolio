@@ -42,12 +42,9 @@ describe('counter features (synthetic geometry)', () => {
   });
 
   describe('hasBowl', () => {
-    // The legacy hasBowl heuristic is calibrated for real typefaces and does
-    // not fire on synthetic polygon-approximated donuts. Real bowl detection
-    // is verified in feature-accuracy.test.ts on Nohemi O.
-    it('rejects a polygon donut (legacy heuristic only fires on real bowls)', () => {
+    it('detects the curved occupied ring enclosing a polygon donut counter', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-      expect(hasBowl(glyph, metrics)).toBe(false);
+      expect(hasBowl(glyph, metrics)).toBe(true);
     });
 
     it('rejects a solid circle', () => {
@@ -92,16 +89,16 @@ describe('counter features (synthetic geometry)', () => {
       }
     });
 
-    it('finds a counter in a solid circle (single enclosed region)', () => {
+    it('rejects a solid circle because it has no enclosed empty space', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
       const result = getCounter(glyph, metrics);
-      expect(result.found).toBe(true);
+      expect(result).toEqual({ found: false });
     });
 
-    it('finds a counter in a rectangle (single enclosed region)', () => {
+    it('rejects a solid rectangle because it has no enclosed empty space', () => {
       const glyph = mockGlyphFromPath(RECTANGLE.d, RECTANGLE.bbox);
       const result = getCounter(glyph, metrics);
-      expect(result.found).toBe(true);
+      expect(result).toEqual({ found: false });
     });
 
     it('returns found: false for non-drawable glyph', () => {

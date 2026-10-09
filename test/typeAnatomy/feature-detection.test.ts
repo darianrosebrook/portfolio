@@ -299,14 +299,13 @@ describe('Golden Overlay Tests (Nohemi-VF)', () => {
     expect(detectFeature(cache, 'vertex')).toHaveLength(1);
   });
 
-  it('lowercase e: eye=1, counter=1, aperture=2', () => {
+  it('lowercase e: one eye counter and right aperture', () => {
     const cache = buildGeometryCache(getGlyph(font, 'e'), font);
     expect(detectFeature(cache, 'eye')).toHaveLength(1);
     expect(detectFeature(cache, 'counter')).toHaveLength(1);
-    // Nohemi e has two aperture detections (the counter-form opening on the
-    // right surfaces twice through the aperture detector). feature-accuracy
-    // pins the right-side opening's position.
-    expect(detectFeature(cache, 'aperture')).toHaveLength(2);
+    const apertures = detectFeature(cache, 'aperture');
+    expect(apertures).toHaveLength(1);
+    expect((apertures[0].debug as { side: string }).side).toBe('right');
   });
 
   it('lowercase i: tittle=1, stem=1', () => {

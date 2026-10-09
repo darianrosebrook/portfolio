@@ -29,6 +29,7 @@ const LOWERCASE_HINTS: Record<string, FeatureHint[]> = {
   ],
   c: [
     { id: 'aperture', defaultOn: true },
+    { id: 'finial' },
     { id: 'serif', gate: (ctx) => ctx.isSerif },
   ],
   d: [
@@ -42,6 +43,8 @@ const LOWERCASE_HINTS: Record<string, FeatureHint[]> = {
     { id: 'counter', defaultOn: true },
     { id: 'crossbar' },
     { id: 'aperture' },
+    { id: 'bowl' },
+    { id: 'finial' },
   ],
   f: [
     { id: 'crossbar', defaultOn: true },
@@ -318,6 +321,13 @@ export const GLYPH_FEATURE_HINTS: Record<string, FeatureHint[]> = {
   ...UPPERCASE_HINTS,
 };
 
+const LIGATURE_COMPONENTS: Record<string, string[]> = {
+  æ: ['a', 'e'],
+  Æ: ['A', 'E'],
+  œ: ['o', 'e'],
+  Œ: ['O', 'E'],
+};
+
 /**
  * Default hints to show for unknown glyphs.
  * Shows all major features without defaultOn.
@@ -345,13 +355,29 @@ export function getFeatureHints(
   char: string,
   ctx: DetectionContext
 ): FeatureHint[] {
-  const hints = GLYPH_FEATURE_HINTS[char] || DEFAULT_HINTS;
+  const decomposed = Array.from(char.normalize('NFKD'));
+  const base = decomposed.find((part) => !/\p{Mark}/u.test(part)) ?? char;
+  const components =
+    LIGATURE_COMPONENTS[base] ??
+    decomposed.filter((part) => !/\p{Mark}/u.test(part));
+  const known = components.flatMap((part) => GLYPH_FEATURE_HINTS[part] ?? []);
+  const hints =
+    GLYPH_FEATURE_HINTS[char] ?? (known.length ? known : DEFAULT_HINTS);
+  const hasAccent = decomposed.some((part) => /\p{Mark}/u.test(part));
+  const suggested = hasAccent ? [...hints, { id: 'accent' as const }] : hints;
+  const seen = new Set<FeatureID>();
 
   // Filter by gate functions
-  return hints.filter((hint) => {
-    if (!hint.gate) return true;
-    return hint.gate(ctx);
-  });
+  return suggested
+    .filter((hint) => {
+      if (!hint.gate) return true;
+      return hint.gate(ctx);
+    })
+    .filter((hint) => {
+      if (seen.has(hint.id)) return false;
+      seen.add(hint.id);
+      return true;
+    });
 }
 
 /**

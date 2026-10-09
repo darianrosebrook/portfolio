@@ -40,22 +40,17 @@ describe('buildProjectionPolygon', () => {
     ).toEqual([]);
   });
 
-  it('always advances at least one vertex per side when budget > 0', () => {
-    // From (100,0) with budget=30: the next forward vertex is (100,100) at
-    // 100 units — over budget. The walker still takes one step per side so
-    // anchors that land near sparse-Bézier contours (typical Roman serifs)
-    // produce a usable polygon. The arc-length cap kicks in on the SECOND
-    // step, not the first.
+  it('interpolates within a long edge without exceeding the arc budget', () => {
     const polygon = buildProjectionPolygon({
       glyph: stubGlyph(SQUARE),
       anchor: { x: 100, y: 0 },
       arcLengthBudget: 30,
     });
-    expect(polygon.length).toBe(3);
-    const set = new Set(polygon.map((p) => `${p.x},${p.y}`));
-    expect(set.has('100,0')).toBe(true);
-    expect(set.has('100,100')).toBe(true);
-    expect(set.has('0,0')).toBe(true);
+    expect(polygon).toEqual([
+      { x: 70, y: 0 },
+      { x: 100, y: 0 },
+      { x: 100, y: 30 },
+    ]);
   });
 
   it('captures both sides when budget covers a full edge', () => {
@@ -64,14 +59,13 @@ describe('buildProjectionPolygon', () => {
       anchor: { x: 100, y: 0 },
       arcLengthBudget: 150,
     });
-    // From (100,0): forward (100,100) [100u] then (0,100) [100u → over]. Stop after 1.
-    // Backward (0,0) [100u] then (0,100) [100u → over]. Stop after 1.
-    // Polygon: [(0,0), (100,0), (100,100)] — 3 vertices.
-    expect(polygon.length).toBe(3);
-    const set = new Set(polygon.map((p) => `${p.x},${p.y}`));
-    expect(set.has('100,0')).toBe(true);
-    expect(set.has('100,100')).toBe(true);
-    expect(set.has('0,0')).toBe(true);
+    expect(polygon).toEqual([
+      { x: 0, y: 50 },
+      { x: 0, y: 0 },
+      { x: 100, y: 0 },
+      { x: 100, y: 100 },
+      { x: 50, y: 100 },
+    ]);
   });
 
   it('respects contourIndex to avoid drift onto a closer foreign contour', () => {
@@ -94,9 +88,8 @@ describe('buildProjectionPolygon', () => {
       contourIndex: 0,
     });
     expect(polygon.length).toBeGreaterThanOrEqual(3);
-    // At least one polygon vertex should be on the outer square (i.e. at
-    // x in {0,100} or y in {0,100}). Inner-square vertices are inside (40-60).
-    const onOuter = polygon.some(
+    // Every boundary point belongs to the requested outer contour.
+    const onOuter = polygon.every(
       (p) =>
         Math.abs(p.x) < 1e-3 ||
         Math.abs(p.x - 100) < 1e-3 ||
@@ -117,8 +110,12 @@ describe('buildProjectionPolygon', () => {
       anchor: { x: 100, y: 0 },
       arcLengthBudget: 150,
     });
-    // The duplicate (0,0) is trimmed before walking, so the result is the
-    // same as the canonical SQUARE: 3 vertices.
-    expect(polygon.length).toBe(3);
+    expect(polygon).toEqual(
+      buildProjectionPolygon({
+        glyph: stubGlyph(SQUARE),
+        anchor: { x: 100, y: 0 },
+        arcLengthBudget: 150,
+      })
+    );
   });
 });

@@ -1,133 +1,82 @@
-/**
- * Tittle feature detector.
- *
- * A tittle is the dot above letters like 'i' and 'j'.
- *
- * This detector consumes the disconnected-mark topology evidence family
- * (utils/typeAnatomy/evidence/topology). It composes four predicates in
- * fixed order: main-body-fragment rejection (already applied at contour
- * classification time, see geometryCache.classifyContours), compactness,
- * above-main-body, and lower-stem alignment. Any candidate that fails any
- * predicate is rejected — there is no ray-based fallback.
- *
- * The previous implementation had a ray-fallback that scanned horizontal
- * bands above x-height looking for narrow strokes. That fallback fired on
- * any glyph whose upper region contained narrow ink — including the H,
- * whose stems happily registered as a "tittle" through the misnamed-by-
- * accident ray. With topology classification now reliable, the fallback
- * has no purpose: if no contour was classified as a mark, there is no
- * tittle. Period.
- */
-
-import type { FeatureInstance, GeometryCache } from '../types';
+import { getFilledGeometry } from '@/utils/geometry/filledGeometry';
 import { getMarkContours } from '../geometryCache';
-import {
-  circleToPolygon,
-  extractContourPolygon,
-} from '../evidence/regionFromShape';
-import {
-  type ContourGroup,
-  findMainBodyGroup,
-  getConnectedGroups,
-  isAboveMainBody,
-  isAlignedWithLowerStem,
-  isCompactContour,
-} from '../evidence/topology';
+import { isCompactContour } from '../evidence/topology';
+import { detectStem } from './stem';
+import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 
+/** Structural dots attach to their local i/j backbone, including ligatures. */
 export function detectTittle(geo: GeometryCache): FeatureInstance[] {
-  const { glyph, metrics, scale, contours } = geo;
-
-  if (!glyph?.path?.commands || !glyph.bbox) {
+  const { glyph, metrics, scale } = geo;
+  if (!glyph?.path?.commands?.length || !glyph.bbox) return [];
+  const characters = (glyph.codePoints ?? []).flatMap((cp) =>
+    Array.from(String.fromCodePoint(cp).normalize('NFKD'))
+  );
+  if (
+    characters.length &&
+    (characters.some((char) => /\p{Mark}/u.test(char)) ||
+      !characters.some((char) => char === 'i' || char === 'j'))
+  )
     return [];
-  }
-
-  const markContours = getMarkContours(geo);
-  if (markContours.length === 0) {
-    return [];
-  }
-
-  // Identify the main body. A glyph with a mark contour but no main body
-  // (theoretical: a path that's only a diacritic) is not a tittle context.
-  const groups = getConnectedGroups(contours, 0.5);
-  const mainBody = findMainBodyGroup(groups);
-  if (!mainBody) {
-    return [];
-  }
-
-  // Vertical-separation epsilon. Sub-design-unit drift is absorbed; anything
-  // larger means a real gap between the main body and the candidate. Scale
-  // off stemWidth so the threshold scales with glyph size.
-  const verticalEpsilon = Math.max(scale.eps * 5, scale.stemWidth * 0.2);
-
-  const instances: FeatureInstance[] = [];
-
-  for (const mark of markContours) {
-    // Wrap the mark contour as a one-element group so it satisfies the
-    // ContourGroup-shaped predicates without forcing every predicate to
-    // accept a raw ContourClassification.
-    const candidateGroup: ContourGroup = {
-      contours: [mark],
-      bbox: mark.bbox,
-      area: mark.area,
-    };
-
+  const marks = getMarkContours(geo);
+  if (marks.length !== 1) return [];
+  const filled = geo.filled ?? getFilledGeometry(glyph);
+  const stems = detectStem(geo);
+  return marks.flatMap((mark): FeatureInstance[] => {
     if (
       !isCompactContour(mark.bbox, {
         glyphBBox: glyph.bbox,
         metrics,
         stemWidth: scale.stemWidth,
       })
-    ) {
-      continue;
-    }
-
-    if (!isAboveMainBody(candidateGroup, mainBody, verticalEpsilon)) {
-      continue;
-    }
-
-    if (
-      !isAlignedWithLowerStem(candidateGroup, mainBody, {
-        stemWidth: scale.stemWidth,
-      })
-    ) {
-      continue;
-    }
-
+    )
+      return [];
+    const center = {
+      x: (mark.bbox.minX + mark.bbox.maxX) / 2,
+      y: (mark.bbox.minY + mark.bbox.maxY) / 2,
+    };
     const width = mark.bbox.maxX - mark.bbox.minX;
-    const height = mark.bbox.maxY - mark.bbox.minY;
-    const cx = (mark.bbox.minX + mark.bbox.maxX) / 2;
-    const cy = (mark.bbox.minY + mark.bbox.maxY) / 2;
-    const r = Math.max(width, height) / 2;
-
-    const circle = { type: 'circle' as const, cx, cy, r };
-    // Prefer the actual mark contour over a circle approximation: Nohemi's
-    // tittle is square, Inter's is round, Newsreader's is teardrop. Fall
-    // back to the circle approximation when extraction can't trace the
-    // contour (e.g., arc commands that the helper rejects).
-    const contourPolygon = extractContourPolygon(
-      geo.glyph,
-      mark.startIndex,
-      mark.endIndex
-    );
-    const regionPoints =
-      contourPolygon.length >= 3 ? contourPolygon : circleToPolygon(circle);
-
-    instances.push({
-      id: 'tittle',
-      shape: circle,
-      region: { kind: 'stroke', points: regionPoints },
-      confidence: 0.95,
-      anchors: {
-        center: { x: cx, y: cy },
-      },
-      debug: {
-        source: 'topology',
-        contourIndex: mark.index,
-        markBBox: mark.bbox,
-        mainBodyBBox: mainBody.bbox,
-      },
+    const supportingStem = stems.find((stem) => {
+      const points = stem.region?.points;
+      if (!points?.length) return false;
+      const topY = Math.max(...points.map((point) => point.y));
+      const topPoints = points.filter(
+        (point) => Math.abs(point.y - topY) < scale.eps
+      );
+      const top: Point2D = stem.anchors?.top ?? {
+        x: topPoints.reduce((sum, p) => sum + p.x, 0) / topPoints.length,
+        y: topY,
+      };
+      const stemWidth =
+        Math.max(...points.map((point) => point.x)) -
+        Math.min(...points.map((point) => point.x));
+      return (
+        mark.bbox.minY > top.y + scale.eps &&
+        Math.abs(center.x - top.x) < (width + stemWidth) / 2
+      );
     });
-  }
-
-  return instances;
+    if (!supportingStem) return [];
+    const contour = filled.contours.find(
+      (candidate) => candidate.index === mark.index
+    );
+    if (!contour) return [];
+    return [
+      {
+        id: 'tittle',
+        shape: {
+          type: 'circle',
+          cx: center.x,
+          cy: center.y,
+          r: Math.max(width, mark.bbox.maxY - mark.bbox.minY) / 2,
+        },
+        region: { kind: 'stroke', points: contour.points },
+        confidence: 0.95,
+        anchors: { center },
+        debug: {
+          source: 'local-backbone-dot',
+          contourIndex: mark.index,
+          markBBox: mark.bbox,
+        },
+      },
+    ];
+  });
 }
