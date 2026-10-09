@@ -1,9 +1,11 @@
 id: FIX-ANATOMY-STEMS-001
 title: 'Trace slanted anatomy stem regions from glyph geometry'
 mode: fix
-lifecycle_state: active
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Delivered and verified line-backed A stem masks and upright transfer controls. A1/A2 evidence recorded and read back. Source candidate a9b65f8c plus comment-only bb576bb0; independent completion peer concerns discharged using primary source and executed tests. Scoped completion does not establish general curved-glyph or Aeacute anatomy accuracy.'
 created_at: '2026-10-09T16:45:30.368Z'
-updated_at: '2026-10-09T16:45:30.368Z'
+updated_at: '2026-10-09T19:43:29.989Z'
 created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
 blast_radius:
   modules:
