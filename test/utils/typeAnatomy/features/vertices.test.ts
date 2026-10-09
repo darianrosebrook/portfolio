@@ -3,8 +3,7 @@
  *
  * Real-font correctness lives in test/typeAnatomy/feature-accuracy.test.ts
  * (Nohemi A apex, A/V crotch, A vertices). The legacy hasVertex heuristic
- * fires on any closed polygon with sharp corners — those over-fires are
- * pinned below as known behavior.
+ * rejects solid primitive outlines that do not contain stroke junctions.
  */
 import { describe, it, expect } from 'vitest';
 import { hasApex } from '@/utils/typeAnatomy/apex';
@@ -60,23 +59,19 @@ describe('vertex features (synthetic geometry)', () => {
   });
 
   describe('hasVertex', () => {
-    // hasVertex over-fires on any closed polygon with sharp corners. This
-    // is calibrated for real typefaces; the synthetic primitives all have
-    // 90° or polygon-approximated corners that match. Real vertex
-    // accuracy on Nohemi A is in feature-accuracy.test.ts.
-    it('over-fires on a polygon circle (corners at every polygon vertex)', () => {
+    it('rejects gentle polygon circle corners', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-      expect(hasVertex(glyph, metrics)).toBe(true);
+      expect(hasVertex(glyph, metrics)).toBe(false);
     });
 
-    it('over-fires on a rectangle (corners at four 90° vertices)', () => {
+    it('rejects right-angle rectangle corners', () => {
       const glyph = mockGlyphFromPath(RECTANGLE.d, RECTANGLE.bbox);
-      expect(hasVertex(glyph, metrics)).toBe(true);
+      expect(hasVertex(glyph, metrics)).toBe(false);
     });
 
-    it('over-fires on a vertical stem (corners at four 90° vertices)', () => {
+    it('rejects right-angle stem terminals', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-      expect(hasVertex(glyph, metrics)).toBe(true);
+      expect(hasVertex(glyph, metrics)).toBe(false);
     });
 
     it('returns false for non-drawable glyph', () => {

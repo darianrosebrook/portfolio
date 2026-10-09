@@ -146,9 +146,9 @@ describe('curve features (synthetic geometry)', () => {
   });
 
   describe('hasHook', () => {
-    it('rejects HOOK_SHAPE (synthetic polygon does not match real hook)', () => {
+    it('detects the bent free terminal of a polygon hook', () => {
       const glyph = mockGlyphFromPath(HOOK_SHAPE.d, HOOK_SHAPE.bbox);
-      expect(hasHook(glyph, metrics)).toBe(false);
+      expect(hasHook(glyph, metrics)).toBe(true);
     });
 
     it('rejects a vertical stem', () => {

@@ -1,42 +1,49 @@
-/**
- * Apex feature detection for typographic glyphs.
- * Extracted from geometryHeuristics.ts for modularity and testability.
- *
- * Exports:
- *   - hasApex
- */
 import type { Glyph } from 'fontkit';
-import { shapeForV2 } from '@/utils/caching/caching';
-import { rayHits } from '@/utils/geometry/geometryCore';
+import { getFilledGeometry } from '@/utils/geometry/filledGeometry';
+import {
+  findOutlineCorners,
+  interiorPointsDown,
+  isInTopBand,
+  isSharpExteriorCorner,
+} from './evidence/corners';
 import type { Metrics } from './index';
-import { FeatureDetectionConfig } from './featureConfig';
 
-/**
- * Detects if a glyph contains an apex (top meeting point, e.g. A, V).
- * Uses EPS from FeatureDetectionConfig.global.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @returns boolean
- */
-export function hasApex(g: Glyph, m: Metrics): boolean {
-  if (!isDrawable(g)) return false;
-  const gs = shapeForV2(g);
-  const EPS = FeatureDetectionConfig.global.defaultEps;
-  const cx = (g.bbox.minX + g.bbox.maxX) / 2;
-  const cy = m.capHeight;
-  const o = (g.bbox.maxY - g.bbox.minY) * 1.5;
-  const leftRay = rayHits(gs, { x: cx, y: cy }, (Math.PI * 3) / 4, o);
-  const rightRay = rayHits(gs, { x: cx, y: cy }, Math.PI / 4, o);
-  const ptsL = leftRay.points;
-  const ptsR = rightRay.points;
-  if (ptsL.length && ptsR.length) {
-    const topL = ptsL.reduce((a, b) => (a.y < b.y ? a : b));
-    const topR = ptsR.reduce((a, b) => (a.y < b.y ? a : b));
-    return Math.abs(topL.y - topR.y) < EPS && Math.abs(topL.x - topR.x) > EPS;
-  }
-  return false;
+/** Sharp upper meeting, measured on actual occupied outer boundaries. */
+export function hasApex(g: Glyph, _m: Metrics): boolean {
+  if (!g?.path?.commands?.length || !g.bbox) return false;
+  if (hasConvergingPlateau(g, true)) return true;
+  return getFilledGeometry(g).bodies.some((body) =>
+    findOutlineCorners(body.points).some(
+      (corner) =>
+        isSharpExteriorCorner(corner) &&
+        isInTopBand(corner, body.bbox) &&
+        interiorPointsDown(corner)
+    )
+  );
 }
 
-function isDrawable(g: Glyph): g is Glyph & { path: { commands: unknown[] } } {
-  return !!(g && g.path && g.path.commands && g.bbox);
+/** A flat tip also qualifies when the two adjoining legs converge from opposite sides. */
+export function hasConvergingPlateau(g: Glyph, upper: boolean): boolean {
+  return getFilledGeometry(g).bodies.some((body) =>
+    body.points.some((a, i, points) => {
+      const b = points[(i + 1) % points.length],
+        before = points[(i - 1 + points.length) % points.length],
+        after = points[(i + 2) % points.length];
+      const level = upper ? body.bbox.maxY : body.bbox.minY;
+      if (Math.abs(a.y - level) > 1e-6 || Math.abs(b.y - level) > 1e-6)
+        return false;
+      if (
+        upper
+          ? before.y >= level || after.y >= level
+          : before.y <= level || after.y <= level
+      )
+        return false;
+      const left = Math.min(a.x, b.x),
+        right = Math.max(a.x, b.x);
+      return (
+        (before.x < left && after.x > right) ||
+        (before.x > right && after.x < left)
+      );
+    })
+  );
 }

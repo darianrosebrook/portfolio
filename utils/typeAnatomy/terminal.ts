@@ -4,6 +4,10 @@
  * Includes ball terminals and teardrop terminals.
  */
 
+import {
+  containsFilledPoint,
+  getFilledGeometry,
+} from '@/utils/geometry/filledGeometry';
 import { getOvershoot, shapeForV2 } from '@/utils/caching/caching';
 import { isDrawable, rayHits } from '@/utils/geometry/geometryCore';
 import type { Glyph } from 'fontkit';
@@ -156,39 +160,57 @@ function detectTeardropTerminal(
  */
 function detectStraightTerminal(
   g: Glyph,
-  m: Metrics,
-  gs: ReturnType<typeof shapeForV2>,
-  overshoot: number,
-  bboxW: number,
+  _m: Metrics,
+  _gs: ReturnType<typeof shapeForV2>,
+  _overshoot: number,
+  _bboxW: number,
   _EPS: number
 ): boolean {
-  // Check edges for non-serif stroke endings
-  const edgeRegions = [
-    { x: g.bbox.minX, y: m.xHeight, angle: Math.PI }, // Left edge
-    { x: g.bbox.maxX, y: m.xHeight, angle: 0 }, // Right edge
-    { x: g.bbox.maxX - bboxW * 0.3, y: m.capHeight, angle: Math.PI / 4 }, // Top right
-  ];
-
-  for (const region of edgeRegions) {
-    const { points } = rayHits(gs, region, region.angle, bboxW * 0.1);
-
-    if (points.length > 0) {
-      // Check if this is a clean ending (not a serif)
-      // Serifs have projections; terminals are clean endings
-      const probe = rayHits(
-        gs,
-        { x: points[0].x, y: points[0].y },
-        region.angle + Math.PI / 2,
-        bboxW * 0.05
-      );
-
-      // Clean terminal has minimal perpendicular extension
-      if (probe.points.length <= 1) {
-        return true;
-      }
+  const model = getFilledGeometry(g);
+  for (const body of model.bodies) {
+    const points = body.points;
+    for (let i = 0; i < points.length; i++) {
+      const before = points[(i - 1 + points.length) % points.length],
+        a = points[i],
+        b = points[(i + 1) % points.length],
+        after = points[(i + 2) % points.length];
+      const width = Math.hypot(b.x - a.x, b.y - a.y);
+      const beforeLength = Math.hypot(a.x - before.x, a.y - before.y),
+        afterLength = Math.hypot(after.x - b.x, after.y - b.y);
+      if (
+        width <= model.tolerance ||
+        beforeLength < width * 1.5 ||
+        afterLength < width * 1.5
+      )
+        continue;
+      const incoming = {
+          x: (a.x - before.x) / beforeLength,
+          y: (a.y - before.y) / beforeLength,
+        },
+        outgoing = {
+          x: (after.x - b.x) / afterLength,
+          y: (after.y - b.y) / afterLength,
+        },
+        along = { x: (b.x - a.x) / width, y: (b.y - a.y) / width };
+      if (
+        incoming.x * outgoing.x + incoming.y * outgoing.y > -0.9 ||
+        Math.abs(incoming.x * along.x + incoming.y * along.y) > 0.3 ||
+        Math.abs(outgoing.x * along.x + outgoing.y * along.y) > 0.3
+      )
+        continue;
+      const normal = { x: -along.y, y: along.x },
+        anchor = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+      const positive = containsFilledPoint(model, {
+          x: anchor.x + normal.x * width * 0.15,
+          y: anchor.y + normal.y * width * 0.15,
+        }),
+        negative = containsFilledPoint(model, {
+          x: anchor.x - normal.x * width * 0.15,
+          y: anchor.y - normal.y * width * 0.15,
+        });
+      if (positive !== negative) return true;
     }
   }
-
   return false;
 }
 

@@ -1,94 +1,42 @@
-/**
- * Link feature detection for typographic glyphs.
- * Detects connection between upper and lower bowls (e.g., g).
- */
-
-import { getOvershoot, shapeForV2 } from '@/utils/caching/caching';
-import { isDrawable, isInside, rayHits } from '@/utils/geometry/geometryCore';
 import type { Glyph } from 'fontkit';
+import {
+  getFilledGeometry,
+  occupiedRayIntervals,
+} from '@/utils/geometry/filledGeometry';
 import type { Metrics } from './index';
 
-/**
- * Detects if a glyph contains a link (connection between upper and lower bowls).
- * Typically found in 'g' where the upper bowl connects to the lower bowl.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @returns boolean
- */
+/** A link joins separate upper/lower enclosures through a narrow ink band. */
 export function hasLink(g: Glyph, m: Metrics): boolean {
-  if (!isDrawable(g)) return false;
-
-  const gs = shapeForV2(g);
-  const overshoot = getOvershoot(g);
-  const bboxW = g.bbox.maxX - g.bbox.minX;
-  const bands = 5;
-
-  // Link is typically in the middle region, around baseline
-  // It connects upper bowl (around x-height) to lower bowl (below baseline)
-  const linkRegionStartY = m.baseline - (m.baseline - m.descent) * 0.2;
-  const linkRegionEndY = m.baseline + (m.xHeight - m.baseline) * 0.2;
-
-  // First, verify we have a lower bowl (loop) by checking below baseline
-  const lowerBowlY = m.baseline - (m.baseline - m.descent) * 0.5;
-  const lowerBowlOrigin = { x: -overshoot, y: lowerBowlY };
-  const lowerBowlHits = rayHits(gs, lowerBowlOrigin, 0, overshoot * 2);
-
-  // Need evidence of lower bowl (multiple intersections below baseline)
-  if (lowerBowlHits.points.length < 4) {
-    return false; // No lower bowl detected
-  }
-
-  // Now look for narrow vertical connection in the link region
-  const narrowThreshold = bboxW * 0.2; // Link is typically narrow
-  let narrowVerticalCount = 0;
-
-  // Scan horizontally across the glyph
-  for (let i = 1; i < bands; i++) {
-    const x = g.bbox.minX + (bboxW * i) / bands;
-
-    // Cast vertical ray through the link region
-    const origin = { x, y: linkRegionStartY };
-    const { points } = rayHits(
-      gs,
-      origin,
-      Math.PI / 2,
-      linkRegionEndY - linkRegionStartY
-    );
-
-    // Link should have a narrow vertical passage
-    if (points.length >= 2) {
-      // Check if this creates a narrow vertical connection
-      // Points come in pairs - check the span
-      const relevantPoints = points.filter(
-        (p) => p.y >= linkRegionStartY && p.y <= linkRegionEndY
+  if (!g?.path?.commands?.length || !g.bbox) return false;
+  const model = getFilledGeometry(g);
+  for (const lower of model.enclosedRegions.filter(
+    (hole) => hole.bbox.minY < m.baseline
+  )) {
+    for (const upper of model.enclosedRegions.filter(
+      (hole) => hole.bbox.minY > m.baseline
+    )) {
+      if (
+        lower.bodyIndex === undefined ||
+        lower.bodyIndex !== upper.bodyIndex ||
+        lower.bbox.maxY >= upper.bbox.minY
+      )
+        continue;
+      const body = model.bodies[lower.bodyIndex];
+      const y = (lower.bbox.maxY + upper.bbox.minY) / 2;
+      const spans = occupiedRayIntervals(
+        model,
+        { x: body.bbox.minX - 1, y },
+        0,
+        body.bbox.maxX - body.bbox.minX + 2
       );
-
-      if (relevantPoints.length >= 2) {
-        // Verify this is inside the glyph (part of the connection)
-        const midY = (linkRegionStartY + linkRegionEndY) / 2;
-        const testPt = { x, y: midY };
-
-        if (isInside(g, testPt)) {
-          // Check width of this connection
-          const widths: number[] = [];
-          for (let j = 0; j < relevantPoints.length - 1; j += 2) {
-            const width = Math.abs(
-              relevantPoints[j + 1].x - relevantPoints[j].x
-            );
-            widths.push(width);
-          }
-
-          const avgWidth = widths.reduce((a, b) => a + b, 0) / widths.length;
-
-          // Narrow vertical connection
-          if (avgWidth < narrowThreshold) {
-            narrowVerticalCount++;
-          }
-        }
-      }
+      const maximumWidth =
+        Math.min(
+          lower.bbox.maxX - lower.bbox.minX,
+          upper.bbox.maxX - upper.bbox.minX
+        ) * 0.9;
+      if (spans.some((span) => span.far.x - span.near.x < maximumWidth))
+        return true;
     }
   }
-
-  // Require evidence of narrow vertical connection
-  return narrowVerticalCount >= 2;
+  return false;
 }
