@@ -6,7 +6,7 @@
  * - Handles (from quadraticCurveTo, bezierCurveTo control points)
  *
  * Uses `<use>` elements referencing symbols from `<defs>` to reduce DOM nodes.
- * Adds invisible fat strokes for hit-testing tiny markers.
+ * Screen-space sizes bound markers and their invisible hit targets.
  */
 
 'use client';
@@ -207,7 +207,7 @@ export interface SVGPathDetailsProps {
 
 /**
  * Renders path details (anchors, handles, control lines) as SVG elements.
- * Uses `<use>` elements to reduce DOM nodes.
+ * Uses bounded symbol viewports centered on converted screen coordinates.
  */
 export function SVGPathDetails({
   glyph,
@@ -224,7 +224,7 @@ export function SVGPathDetails({
   const { anchors, handles } = details;
 
   return (
-    <g id="path-details" vectorEffect="non-scaling-stroke">
+    <g id="path-details">
       {/* Path outline (if requested) */}
       {showPath && glyph.path && (
         <path
@@ -232,7 +232,8 @@ export function SVGPathDetails({
           transform={transform.toSVGTransform()}
           fill="none"
           stroke={colors.handleStroke}
-          strokeWidth={1.5 / transform.scale}
+          strokeWidth={1.5}
+          vectorEffect="non-scaling-stroke"
         />
       )}
 
@@ -253,7 +254,7 @@ export function SVGPathDetails({
               x2={handleScreen.x}
               y2={handleScreen.y}
               stroke={colors.handleStroke}
-              strokeWidth={1 / transform.scale}
+              strokeWidth={1}
             />
             {/* Invisible fat stroke for hit-testing */}
             <line
@@ -262,7 +263,7 @@ export function SVGPathDetails({
               x2={handleScreen.x}
               y2={handleScreen.y}
               stroke="transparent"
-              strokeWidth={12 / transform.scale}
+              strokeWidth={12}
               pointerEvents="stroke"
             />
           </g>
@@ -278,8 +279,10 @@ export function SVGPathDetails({
             {/* Visible anchor */}
             <use
               href={`#${defIds.anchor}`}
-              x={screenPos.x}
-              y={screenPos.y}
+              x={screenPos.x - 2.5}
+              y={screenPos.y - 2.5}
+              width={5}
+              height={5}
               fill={anchor.isStart ? colors.anchorStroke : colors.anchorFill}
               stroke={colors.anchorStroke}
             />
@@ -287,19 +290,18 @@ export function SVGPathDetails({
             <circle
               cx={screenPos.x}
               cy={screenPos.y}
-              r={6 / transform.scale}
+              r={6}
               fill="transparent"
-              stroke="transparent"
-              strokeWidth={12 / transform.scale}
-              pointerEvents="stroke"
+              stroke="none"
+              pointerEvents="all"
             />
             {/* Start label */}
             {anchor.isStart && (
               <text
-                x={screenPos.x + 4 / transform.scale}
-                y={screenPos.y + 4 / transform.scale}
+                x={screenPos.x + 4}
+                y={screenPos.y + 4}
                 fill={colors.anchorStroke}
-                fontSize={12 / transform.scale}
+                fontSize={12}
                 fontFamily="sans-serif"
                 pointerEvents="none"
               >
@@ -319,21 +321,22 @@ export function SVGPathDetails({
             {/* Visible handle */}
             <use
               href={`#${defIds.handle}`}
-              x={screenPos.x}
-              y={screenPos.y}
+              x={screenPos.x - 2}
+              y={screenPos.y - 2}
+              width={4}
+              height={4}
               fill={colors.handleFill}
               stroke={colors.handleStroke}
             />
             {/* Invisible fat rect for hit-testing */}
             <rect
-              x={screenPos.x - 6 / transform.scale}
-              y={screenPos.y - 6 / transform.scale}
-              width={12 / transform.scale}
-              height={12 / transform.scale}
+              x={screenPos.x - 6}
+              y={screenPos.y - 6}
+              width={12}
+              height={12}
               fill="transparent"
-              stroke="transparent"
-              strokeWidth={12 / transform.scale}
-              pointerEvents="stroke"
+              stroke="none"
+              pointerEvents="all"
             />
           </g>
         );

@@ -25,6 +25,13 @@ import {
   drawClippedGlyphFeature,
 } from '@/utils/geometry/drawing';
 import GlyphComparePage from '@/app/dev/glyph-compare/page';
+import {
+  SVGPathDetails,
+  parsePathDetails,
+} from '@/ui/modules/FontInspector/SVGPathDetails';
+import { SVGDefs } from '@/utils/geometry/svgDefs';
+import { createViewportTransform } from '@/utils/geometry/transforms';
+import { glyphFor, loadFont } from '@/test/utils/fixtures/fontFixtures';
 
 const query = vi.hoisted(() => ({ value: '' }));
 vi.mock('next/navigation', () => ({
@@ -684,4 +691,125 @@ describe('FontInspector provider and renderer behavior with bundled fonts', () =
     );
     expect(screen.getByText(/Glyph: U\+0041/)).toBeVisible();
   });
+});
+
+describe('screen-space SVG path details', () => {
+  const colors = {
+    anchorFill: '#777777',
+    anchorStroke: '#0088ff',
+    handleFill: '#cccccc',
+    handleStroke: '#555555',
+  };
+  it.each([0.08, 0.14])(
+    'bounds and centers every marker and hit target at positive scale %s',
+    (scale) => {
+      const font = loadFont('Nohemi-VF.ttf').getVariation({ wght: 400 });
+      for (const char of ['I', 'c', 'ǽ']) {
+        const glyph = glyphFor(font, char),
+          details = parsePathDetails(glyph)!;
+        const transform = createViewportTransform(scale, 37, 440);
+        const view = render(
+          <svg width="640" height="480">
+            <SVGDefs idPrefix="bounded" />
+            <SVGPathDetails
+              glyph={glyph}
+              transform={transform}
+              colors={colors}
+              idPrefix="bounded"
+              showPath
+            />
+          </svg>
+        );
+        const group = view.container.querySelector('#path-details')!;
+        const anchorUses = group.querySelectorAll(
+          'use[href="#bounded-anchor"]'
+        );
+        const anchorHits = group.querySelectorAll(
+          'circle[pointer-events="all"]'
+        );
+        expect(anchorUses).toHaveLength(details.anchors.length);
+        expect(anchorHits).toHaveLength(details.anchors.length);
+        expect(anchorUses.length).toBeGreaterThan(0);
+        details.anchors.forEach((anchor, index) => {
+          const x = anchor.x * scale + 37,
+            y = 440 - anchor.y * scale;
+          const marker = anchorUses[index],
+            hit = anchorHits[index];
+          expect(Number(marker.getAttribute('width'))).toBe(5);
+          expect(Number(marker.getAttribute('height'))).toBe(5);
+          expect(Number(marker.getAttribute('x')) + 2.5).toBeCloseTo(x, 10);
+          expect(Number(marker.getAttribute('y')) + 2.5).toBeCloseTo(y, 10);
+          expect(marker).toHaveAttribute(
+            'fill',
+            anchor.isStart ? colors.anchorStroke : colors.anchorFill
+          );
+          expect(marker).toHaveAttribute('stroke', colors.anchorStroke);
+          expect(Number(hit.getAttribute('cx'))).toBeCloseTo(x, 10);
+          expect(Number(hit.getAttribute('cy'))).toBeCloseTo(y, 10);
+          expect(hit).toHaveAttribute('r', '6');
+          expect(hit).toHaveAttribute('stroke', 'none');
+        });
+        const handleUses = group.querySelectorAll(
+          'use[href="#bounded-handle"]'
+        );
+        const handleHits = group.querySelectorAll('rect[pointer-events="all"]');
+        expect(handleUses).toHaveLength(details.handles.length);
+        expect(handleHits).toHaveLength(details.handles.length);
+        if (char !== 'I') expect(handleUses.length).toBeGreaterThan(0);
+        details.handles.forEach((handle, index) => {
+          const x = handle.x * scale + 37,
+            y = 440 - handle.y * scale;
+          const marker = handleUses[index],
+            hit = handleHits[index];
+          expect(marker).toHaveAttribute('width', '4');
+          expect(marker).toHaveAttribute('height', '4');
+          expect(Number(marker.getAttribute('x')) + 2).toBeCloseTo(x, 10);
+          expect(Number(marker.getAttribute('y')) + 2).toBeCloseTo(y, 10);
+          expect(marker).toHaveAttribute('fill', colors.handleFill);
+          expect(marker).toHaveAttribute('stroke', colors.handleStroke);
+          expect(hit).toHaveAttribute('width', '12');
+          expect(hit).toHaveAttribute('height', '12');
+          expect(Number(hit.getAttribute('x')) + 6).toBeCloseTo(x, 10);
+          expect(Number(hit.getAttribute('y')) + 6).toBeCloseTo(y, 10);
+          expect(hit).toHaveAttribute('stroke', 'none');
+        });
+        for (const line of group.querySelectorAll('line')) {
+          expect(line).toHaveAttribute(
+            'stroke-width',
+            line.getAttribute('pointer-events') === 'stroke' ? '12' : '1'
+          );
+        }
+        const starts = details.anchors.filter((anchor) => anchor.isStart),
+          labels = group.querySelectorAll('text');
+        expect(labels).toHaveLength(starts.length);
+        starts.forEach((anchor, index) => {
+          expect(labels[index]).toHaveAttribute('font-size', '12');
+          expect(Number(labels[index].getAttribute('x'))).toBeCloseTo(
+            anchor.x * scale + 41,
+            10
+          );
+          expect(Number(labels[index].getAttribute('y'))).toBeCloseTo(
+            444 - anchor.y * scale,
+            10
+          );
+        });
+        const outline = group.querySelector('path')!;
+        expect(outline).toHaveAttribute('d', glyph.path.toSVG());
+        expect(outline).toHaveAttribute(
+          'transform',
+          `matrix(${scale} 0 0 ${-scale} 37 440)`
+        );
+        expect(outline).toHaveAttribute('stroke-width', '1.5');
+        expect(outline).toHaveAttribute('vector-effect', 'non-scaling-stroke');
+        for (const primitive of view.container.querySelectorAll(
+          'symbol circle,symbol rect'
+        )) {
+          expect(primitive).toHaveAttribute('fill', 'inherit');
+          expect(primitive).toHaveAttribute('stroke', 'inherit');
+        }
+        expectFiniteSVG(view.container);
+        view.unmount();
+      }
+    }
+  );
 });

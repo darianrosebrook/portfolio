@@ -61,12 +61,7 @@ export function SVGDefs({ idPrefix = 'fi' }: SVGDefsProps) {
 
       {/* Anchor symbol - circle marker for path anchors */}
       <symbol id={ids.anchor} viewBox="-2.5 -2.5 5 5" overflow="visible">
-        <circle
-          r="2.5"
-          fill="currentColor"
-          stroke="currentColor"
-          strokeWidth="0.5"
-        />
+        <circle r="2.5" fill="inherit" stroke="inherit" strokeWidth="0.5" />
       </symbol>
 
       {/* Handle symbol - square marker for bezier control points */}
@@ -76,8 +71,8 @@ export function SVGDefs({ idPrefix = 'fi' }: SVGDefsProps) {
           y="-2"
           width="4"
           height="4"
-          fill="currentColor"
-          stroke="currentColor"
+          fill="inherit"
+          stroke="inherit"
           strokeWidth="0.5"
         />
       </symbol>
