@@ -6,6 +6,7 @@ import { buildGeometryCache } from '@/utils/typeAnatomy/geometryCache';
 import { detectAperture } from '@/utils/typeAnatomy/detectors/aperture';
 import { detectLoop } from '@/utils/typeAnatomy/detectors/loop';
 import { detectFinial } from '@/utils/typeAnatomy/detectors/finial';
+import { mockFont, mockGlyphFromPath } from '@/test/utils/fixtures/mockGlyph';
 import type { FeatureInstance, Point2D } from '@/utils/typeAnatomy/types';
 
 const files = ['Nohemi-VF.ttf', 'InterVariable.ttf', 'Newsreader-VF.ttf'];
@@ -230,12 +231,53 @@ describe('opening, loop and terminal geometry', () => {
           expect(selected([finial], filled[0])).toBe(true);
           expect(selected([finial], sample(glyph, 0.5, 0.98))).toBe(false);
         }
-        for (const char of ['o', 'O', 'H'])
+        for (const char of ['o', 'O'])
           expect(
             detectFinial(buildGeometryCache(glyphFor(font, char), font)),
             char
           ).toEqual([]);
       });
+      if (file !== 'Newsreader-VF.ttf') {
+        for (const char of ['I', 'H']) {
+          it(`${file} variation ${variationIndex} ${char} selects flat cap bands without shaft ink`, () => {
+            const glyph = glyphFor(font, char),
+              contours = outline(glyph);
+            const geo = buildGeometryCache(glyph, font),
+              finials = detectFinial(geo);
+            expect(finials).toHaveLength(char === 'I' ? 2 : 4);
+            for (const finial of finials) {
+              const a = finial.anchors!.capStart,
+                b = finial.anchors!.capEnd;
+              const anchor = finial.anchors!.position;
+              expect(a.y).toBe(b.y);
+              const width = Math.abs(b.x - a.x);
+              const inward = anchor.y === glyph.bbox.maxY ? -1 : 1;
+              const cap = { x: anchor.x, y: anchor.y + inward * width * 0.15 };
+              expect(ink(contours, cap)).toBe(true);
+              expect(selected([finial], cap)).toBe(true);
+              const ys = finial.region!.points.map((point) => point.y);
+              expect(Math.max(...ys) - Math.min(...ys)).toBeLessThanOrEqual(
+                width * 0.7
+              );
+              const shaft = {
+                x: anchor.x,
+                y: (glyph.bbox.minY + glyph.bbox.maxY) / 2,
+              };
+              expect(ink(contours, shaft)).toBe(true);
+              expect(selected(finials, shaft)).toBe(false);
+            }
+          });
+        }
+      } else {
+        it(`${file} variation ${variationIndex} serif feet on I H a are excluded`, () => {
+          for (const char of ['I', 'H', 'a']) {
+            const finials = detectFinial(
+              buildGeometryCache(glyphFor(font, char), font)
+            );
+            expect(finials, char).toEqual([]);
+          }
+        });
+      }
       if (file !== 'Newsreader-VF.ttf') {
         it(`${file} variation ${variationIndex} s finials select its two terminal caps`, () => {
           const glyph = glyphFor(font, 's');
@@ -291,4 +333,51 @@ describe('opening, loop and terminal geometry', () => {
     expect(ink(contours, { x: 450, y: -265 })).toBe(false);
     expect(selected(loops, { x: 450, y: -265 })).toBe(false);
   });
+});
+
+it('implicit first and closing edges identify both flat straight-stem caps', () => {
+  const glyph = mockGlyphFromPath('M 100 0 L 200 0 L 200 700 L 100 700 Z', {
+    minX: 100,
+    minY: 0,
+    maxX: 200,
+    maxY: 700,
+  });
+  const finials = detectFinial(buildGeometryCache(glyph, mockFont()));
+  expect(finials).toHaveLength(2);
+  expect(
+    finials.map((finial) => finial.anchors!.position.y).sort((a, b) => a - b)
+  ).toEqual([0, 700]);
+  expect(selected(finials, { x: 150, y: 15 })).toBe(true);
+  expect(selected(finials, { x: 150, y: 685 })).toBe(true);
+  expect(selected(finials, { x: 150, y: 350 })).toBe(false);
+});
+
+it('overlapping source cap seams cannot become finials inside an occupied shaft', () => {
+  const glyph = mockGlyphFromPath(
+    'M 100 0 L 200 0 L 200 400 L 100 400 Z ' +
+      'M 100 300 L 200 300 L 200 700 L 100 700 Z',
+    { minX: 100, minY: 0, maxX: 200, maxY: 700 }
+  );
+  const finials = detectFinial(buildGeometryCache(glyph, mockFont()));
+  expect(finials).toHaveLength(2);
+  expect(selected(finials, { x: 150, y: 15 })).toBe(true);
+  expect(selected(finials, { x: 150, y: 685 })).toBe(true);
+  expect(ink(outline(glyph), { x: 150, y: 400 })).toBe(true);
+  expect(selected(finials, { x: 150, y: 400 })).toBe(false);
+  expect(selected(finials, { x: 150, y: 300 })).toBe(false);
+});
+
+it('a ball terminal is excluded while the opposite flat shaft cap remains a finial', () => {
+  const glyph = mockGlyphFromPath(
+    'M 300 0 L 400 0 L 400 550 L 300 550 Z ' +
+      'M 200 650 C 200 567 267 500 350 500 C 433 500 500 567 500 650 ' +
+      'C 500 733 433 800 350 800 C 267 800 200 733 200 650 Z',
+    { minX: 200, minY: 0, maxX: 500, maxY: 800 }
+  );
+  const finials = detectFinial(buildGeometryCache(glyph, mockFont()));
+  expect(finials).toHaveLength(1);
+  expect(selected(finials, { x: 350, y: 15 })).toBe(true);
+  expect(ink(outline(glyph), { x: 350, y: 650 })).toBe(true);
+  expect(selected(finials, { x: 350, y: 650 })).toBe(false);
+  expect(selected(finials, { x: 350, y: 785 })).toBe(false);
 });
