@@ -10,6 +10,7 @@ import * as path from 'path';
 import * as fontkit from 'fontkit';
 import type { Font, Glyph } from 'fontkit';
 import { buildGeometryCache } from '@/utils/typeAnatomy/geometryCache';
+import { mockFont, mockGlyphFromPath } from '@/test/utils/fixtures/mockGlyph';
 
 // Test font loading helper — throws on missing font so tests hard-fail instead of silently passing.
 function loadTestFont(fontName: string): Font {
@@ -97,6 +98,77 @@ describe('Font Property Detection', () => {
   });
 
   describe('Scale Primitives', () => {
+    it('uses repeated physical stroke spans rather than aeacute’s merged middle connector', () => {
+      const base = loadTestFont('Nohemi-VF.ttf');
+      const estimates = [100, 400, 900].map((weight) => {
+        const font = base.getVariation({ wght: weight });
+        return buildGeometryCache(getGlyph(font, 'ǽ'), font).scale.stemWidth;
+      });
+      // Native path stroke probes bound the light/regular/heavy physical widths;
+      // the connector's 3250..3559-unit width is outside every allowed range.
+      expect(estimates[0]).toBeGreaterThanOrEqual(50);
+      expect(estimates[0]).toBeLessThanOrEqual(150);
+      expect(estimates[1]).toBeGreaterThanOrEqual(100);
+      expect(estimates[1]).toBeLessThanOrEqual(900);
+      expect(estimates[2]).toBeGreaterThanOrEqual(300);
+      expect(estimates[2]).toBeLessThanOrEqual(1200);
+      expect(estimates[1]).toBeGreaterThan(estimates[0]);
+      expect(estimates[2]).toBeGreaterThan(estimates[1]);
+    });
+    it.each([
+      [100, 80, 84],
+      [400, 390, 420],
+      [900, 770, 950],
+    ])(
+      'preserves H physical stroke scale at weight %s',
+      (weight, minimum, maximum) => {
+        const font = loadTestFont('Nohemi-VF.ttf').getVariation({
+          wght: weight,
+        });
+        const estimate = buildGeometryCache(getGlyph(font, 'H'), font).scale
+          .stemWidth;
+        // These are the current outline's horizontal crossbar thickness and
+        // vertical stem width, independently read from native straight edges.
+        expect(estimate).toBeGreaterThanOrEqual(minimum);
+        expect(estimate).toBeLessThanOrEqual(maximum);
+      }
+    );
+    it.each([
+      [100, 80],
+      [400, 390],
+      [900, 720],
+    ])(
+      'measures a horizontal Nohemi bar at weight %s orthogonally',
+      (weight, expected) => {
+        const font = loadTestFont('Nohemi-VF.ttf').getVariation({
+          wght: weight,
+        });
+        const glyph = getGlyph(font, '-');
+        expect(glyph.bbox.maxY - glyph.bbox.minY).toBe(expected);
+        expect(buildGeometryCache(glyph, font).scale.stemWidth).toBe(expected);
+      }
+    );
+    it.each([
+      [
+        'M0 0L20 0L20 600L0 600Z',
+        { minX: 0, minY: 0, maxX: 20, maxY: 600 },
+        20,
+      ],
+      [
+        'M0 100L600 100L600 140L0 140Z',
+        { minX: 0, minY: 100, maxX: 600, maxY: 140 },
+        40,
+      ],
+      ['M0 0', { minX: 0, minY: 0, maxX: 0, maxY: 0 }, 0],
+    ] as const)(
+      'uses the physical thickness of a straight/empty control %s',
+      (d, bbox, expected) => {
+        expect(
+          buildGeometryCache(mockGlyphFromPath(d, bbox), mockFont()).scale
+            .stemWidth
+        ).toBe(expected);
+      }
+    );
     it('should compute reasonable stem width estimate', () => {
       const font = loadTestFont('Nohemi-VF.ttf');
       const glyph = getGlyph(font, 'H');
@@ -117,6 +189,41 @@ describe('Font Property Detection', () => {
 
       expect(cache.scale.eps).toBeGreaterThan(0);
       expect(cache.scale.eps).toBeLessThan(cache.scale.bboxW * 0.01);
+    });
+  });
+
+  describe('Current variation reference heights', () => {
+    it.each([
+      { wght: 200, opsz: 6 },
+      { wght: 800, opsz: 72 },
+    ])('derives Newsreader heights from current x/H outlines at %s', (axes) => {
+      const font = loadTestFont('Newsreader-VF.ttf').getVariation(axes);
+      const cache = buildGeometryCache(getGlyph(font, 'e'), font);
+      const actualX = getGlyph(font, 'x').bbox.maxY;
+      const actualH = getGlyph(font, 'H').bbox.maxY;
+      expect(cache.metrics.xHeight).toBe(actualX);
+      expect(cache.metrics.capHeight).toBe(actualH);
+      expect(cache.metrics.xHeight).not.toBe(font.xHeight);
+      expect(cache.metrics.ascent).toBe(font.ascent);
+      expect(cache.metrics.descent).toBe(font.descent);
+    });
+    it('preserves Nohemi ordinary reference heights', () => {
+      const font = loadTestFont('Nohemi-VF.ttf');
+      const metrics = buildGeometryCache(getGlyph(font, 'H'), font).metrics;
+      expect(metrics.xHeight).toBe(getGlyph(font, 'x').bbox.maxY);
+      expect(metrics.capHeight).toBe(getGlyph(font, 'H').bbox.maxY);
+    });
+    it('uses font metadata when reference characters are absent', () => {
+      const font = mockFont();
+      const glyph = mockGlyphFromPath('M0 0L20 0L20 600L0 600Z', {
+        minX: 0,
+        minY: 0,
+        maxX: 20,
+        maxY: 600,
+      });
+      const metrics = buildGeometryCache(glyph, font).metrics;
+      expect(metrics.xHeight).toBe(500);
+      expect(metrics.capHeight).toBe(700);
     });
   });
 

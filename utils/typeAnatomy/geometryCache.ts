@@ -16,6 +16,8 @@ import {
   getFilledGeometry,
   registerFilledShape,
   contourWinding,
+  occupiedRayIntervals,
+  type FilledGeometry,
 } from '@/utils/geometry/filledGeometry';
 import type { Font, Glyph } from '@/ui/modules/FontInspector/fontkit-types';
 import { shape } from 'svg-intersections';
@@ -86,7 +88,7 @@ export function buildGeometryCache(
   const contours = classifyContours(glyph, segments, metrics, filled);
   const context = buildDetectionContext(font);
   const italicAngle = context.italicAngle;
-  const scale = computeScalePrimitives(glyph, font, svgShape, metrics);
+  const scale = computeScalePrimitives(glyph, font, filled);
 
   const cache: GeometryCache = {
     glyph,
@@ -116,10 +118,26 @@ export function buildGeometryCache(
  * Extracts font metrics from a font object.
  */
 function extractMetrics(font: Font): Metrics {
+  const currentReferenceHeight = (
+    character: string,
+    metadata: number
+  ): number => {
+    try {
+      const codePoint = character.codePointAt(0)!;
+      if (!font.hasGlyphForCodePoint(codePoint)) return metadata;
+      const glyph = font.glyphForCodePoint(codePoint);
+      const height = glyph?.bbox?.maxY;
+      return glyph?.id !== 0 && Number.isFinite(height) && height > 0
+        ? height
+        : metadata;
+    } catch {
+      return metadata;
+    }
+  };
   return {
     baseline: 0,
-    xHeight: font.xHeight || 0,
-    capHeight: font.capHeight || 0,
+    xHeight: currentReferenceHeight('x', font.xHeight || 0),
+    capHeight: currentReferenceHeight('H', font.capHeight || 0),
     ascent: font.ascent || 0,
     descent: font.descent || 0,
   };
@@ -133,8 +151,7 @@ function extractMetrics(font: Font): Metrics {
 function computeScalePrimitives(
   glyph: Glyph,
   font: Font,
-  svgShape: SvgShape,
-  metrics: Metrics
+  filled: FilledGeometry
 ): ScalePrimitives {
   const bbox = glyph.bbox;
   const upm = font.unitsPerEm || 1000;
@@ -148,8 +165,7 @@ function computeScalePrimitives(
   // Overshoot for ray casting
   const overshoot = Math.max(bboxW, bboxH) * 2;
 
-  // Estimate stem width by sampling at mid-height
-  const stemWidth = estimateStemWidth(svgShape, metrics, bbox, overshoot);
+  const stemWidth = estimateStemWidth(filled);
 
   return {
     eps,
@@ -161,47 +177,55 @@ function computeScalePrimitives(
 }
 
 /**
- * Estimates stem width by measuring stroke thickness at mid-height.
- * Uses median of small spans to filter out bowls and counters.
+ * Estimates typical stroke width from repeated occupied spans in the largest
+ * body's interior. Rows and columns make horizontal bars and vertical stems
+ * comparable. Each line contributes only its narrowest span, so a multi-stem
+ * row cannot outweigh other rows; the lower quartile requires support beyond
+ * an isolated narrow tip and tolerates rows merging across a connector.
  */
-function estimateStemWidth(
-  svgShape: SvgShape,
-  metrics: Metrics,
-  bbox: { minX: number; maxX: number; minY: number; maxY: number },
-  overshoot: number
-): number {
-  const midY = (metrics.baseline + metrics.xHeight) / 2;
-  const origin = { x: bbox.minX - overshoot * 0.1, y: midY };
-
-  try {
-    const { points } = geometryRayHits(svgShape, origin, 0, overshoot);
-
-    if (points.length < 2) {
-      // Fallback: use 8% of bbox width as typical stem
-      return (bbox.maxX - bbox.minX) * 0.08;
-    }
-
-    // Collect all span widths
+function estimateStemWidth(filled: FilledGeometry): number {
+  const main = filled.bodies[0];
+  if (!main) return 0;
+  const bounds = main.bbox;
+  const width = bounds.maxX - bounds.minX;
+  const height = bounds.maxY - bounds.minY;
+  if (!(width > 0 && height > 0)) return 0;
+  const padding = Math.max(width, height) * 0.05;
+  const estimates: number[] = [];
+  for (const vertical of [false, true]) {
     const spans: number[] = [];
-    for (let i = 0; i < points.length - 1; i += 2) {
-      const w = points[i + 1].x - points[i].x;
-      if (w > 0) spans.push(w);
+    for (let row = 1; row <= 9; row++) {
+      const origin = vertical
+        ? { x: bounds.minX + (width * row) / 10, y: bounds.minY - padding }
+        : { x: bounds.minX - padding, y: bounds.minY + (height * row) / 10 };
+      const intervals = occupiedRayIntervals(
+        filled,
+        origin,
+        vertical ? Math.PI / 2 : 0,
+        (vertical ? height : width) + padding * 2
+      );
+      const widths = intervals
+        .filter((interval) => {
+          const midpoint = {
+            x: (interval.near.x + interval.far.x) / 2,
+            y: (interval.near.y + interval.far.y) / 2,
+          };
+          return (
+            contourWinding(main.points, midpoint) !== 0 &&
+            !filled.bodies
+              .slice(1)
+              .some((body) => contourWinding(body.points, midpoint) !== 0)
+          );
+        })
+        .map((interval) => interval.end - interval.start)
+        .filter((span) => span > 0);
+      if (widths.length) spans.push(Math.min(...widths));
     }
-
-    if (spans.length === 0) {
-      return (bbox.maxX - bbox.minX) * 0.08;
-    }
-
-    // Take median of smaller spans (filter out wide bowls)
+    if (spans.length < 3) continue;
     spans.sort((a, b) => a - b);
-
-    // Use 25th percentile or first span if few samples
-    const idx = Math.max(0, Math.floor(spans.length * 0.25));
-    return spans[idx];
-  } catch {
-    // Fallback on error
-    return (bbox.maxX - bbox.minX) * 0.08;
+    estimates.push(spans[Math.floor(spans.length / 4)]);
   }
+  return estimates.length ? Math.min(...estimates) : 0;
 }
 
 /**
