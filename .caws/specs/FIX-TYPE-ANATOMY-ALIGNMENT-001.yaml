@@ -68,3 +68,8 @@ evidence:
     command: "pnpm exec vitest run test/typeAnatomy test/utils/typeAnatomy test/utils/geometry/geometryCore.test.ts test/fontkit-browser.test.mjs --reporter=verbose"
     exit_code: 0
     commit_sha: bb576bb05fbc5c6f988c8cb14d87057563b7655a
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "Native browser used glyph controls and scrolled at CSS1600 desktop and487 narrow widths. Inspected computed root display:grid, columns640/767.988 desktop and436.758 single narrow; inspector sticky desktop/static narrow. Measured rectangles show horizontal desktop non-overlap and vertical narrow non-overlap. Raw layout-measurements.json plus layout-desktop.png/layout-narrow.png inspected under ignored test-results/anatomy-fix. Root CSS selector unchanged through checked bb576bb0; current fresh desktop UI also separates inspector and glyph grid."
+    recorded_at: "2026-10-09T19:41:52.582Z"
+    commit_sha: bb576bb05fbc5c6f988c8cb14d87057563b7655a
