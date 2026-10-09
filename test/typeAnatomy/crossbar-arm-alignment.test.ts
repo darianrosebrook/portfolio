@@ -120,6 +120,61 @@ describe('T horizontal arms and vertical stem', () => {
 });
 
 describe('horizontal crossbar and non-arm controls', () => {
+  for (const weight of [400, 617, 700, 900]) {
+    it(`retains the bounded Nohemi H ${weight} connector and both stems`, () => {
+      const geo = geometry('Nohemi-VF.ttf', 'H', weight);
+      const lowerY = geo.glyph.bbox.minY + geo.scale.bboxH * 0.2;
+      const bodyHits = rayHits(
+        geo.svgShape,
+        { x: geo.glyph.bbox.minX - geo.scale.overshoot * 0.1, y: lowerY },
+        0,
+        geo.scale.overshoot
+      ).points;
+      expect(bodyHits).toHaveLength(4);
+      const connectorLeft = bodyHits[1].x;
+      const connectorRight = bodyHits[2].x;
+      expect(connectorRight).toBeGreaterThan(connectorLeft);
+      const bars = detectFeature(geo, 'crossbar');
+      expect(bars).toHaveLength(1);
+      for (const fraction of [0.2, 0.5, 0.8]) {
+        const x = connectorLeft + (connectorRight - connectorLeft) * fraction;
+        const verticalHits = rayHits(
+          geo.svgShape,
+          { x, y: geo.glyph.bbox.minY - geo.scale.overshoot * 0.1 },
+          Math.PI / 2,
+          geo.scale.overshoot
+        ).points;
+        expect(verticalHits).toHaveLength(2);
+        expect(verticalHits[0].y).toBeGreaterThan(lowerY);
+        expect(verticalHits[1].y).toBeLessThan(geo.glyph.bbox.maxY);
+        for (const depth of [0.25, 0.5, 0.75]) {
+          const y =
+            verticalHits[0].y + (verticalHits[1].y - verticalHits[0].y) * depth;
+          expect(covered(bars, x, y)).toBe(true);
+        }
+      }
+      for (const index of [0, 2]) {
+        expect(
+          covered(bars, (bodyHits[index].x + bodyHits[index + 1].x) / 2, lowerY)
+        ).toBe(false);
+      }
+      const selected = getFeatureHints('H', geo.context)
+        .filter((hint) => hint.defaultOn)
+        .map((hint) => hint.id);
+      const combined = reconcileFeatures(detectGlyphFeatures(geo, selected));
+      expect(combined.get('crossbar')).toHaveLength(1);
+      expect(combined.get('stem')).toHaveLength(2);
+      const bounds = shapeBBox(bars[0].shape);
+      // The stroke can widen into its attached stems at the junction.
+      // Its mask must cover the free connector span without reaching the
+      // outside edges of those stems.
+      expect(bounds.minX).toBeLessThanOrEqual(connectorLeft);
+      expect(bounds.maxX).toBeGreaterThanOrEqual(connectorRight);
+      expect(bounds.minX).toBeGreaterThan(bodyHits[0].x);
+      expect(bounds.maxX).toBeLessThan(bodyHits[3].x);
+    });
+  }
+
   for (const character of ['A', 'H', 'e', 'f', 't']) {
     it(`preserves a horizontal Nohemi ${character} crossbar`, () => {
       const bars = detectFeature(

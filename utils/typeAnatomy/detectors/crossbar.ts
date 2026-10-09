@@ -16,7 +16,10 @@
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
-import { measureOrthogonalThickness } from '../evidence/measureOrthogonalThickness';
+import {
+  measureOrthogonalThickness,
+  type OrthogonalThicknessMeasurement,
+} from '../evidence/measureOrthogonalThickness';
 import { rectToPolygon } from '../evidence/regionFromShape';
 import type { FeatureInstance, FeatureShape, GeometryCache } from '../types';
 
@@ -175,10 +178,14 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
 
     const measuredHeight = thicknessMeasurement.thickness;
 
-    // A reliable vertical probe can still measure the full height of a
-    // vertical stem. Crossbars require a horizontal extent greater than
-    // their measured perpendicular thickness.
-    if (measuredHeight <= 0 || measuredHeight >= avgX2 - avgX1) {
+    // A vertical probe can measure the full height of a vertical stem.
+    // A thick connector's exposed mask can also be taller than it is wide;
+    // distinct side-stem support establishes that case independently.
+    if (
+      measuredHeight <= 0 ||
+      (measuredHeight >= avgX2 - avgX1 &&
+        !supportsBoundedConnector(geo, avgX1, avgX2, thicknessMeasurement))
+    ) {
       continue;
     }
 
@@ -245,7 +252,8 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
     for (const seg of segmentBars) {
       // Outline edges establish the horizontal extent, but their Y is an
       // edge rather than the centerline. Probe away from any attached stem
-      // and retain a containing pair with horizontal proportions.
+      // and retain a containing pair with horizontal proportions or bounded
+      // support from two distinct side stems.
       const measurements = [0.25, 0.5, 0.75]
         .map((fraction) =>
           measureOrthogonalThickness(geo, {
@@ -258,7 +266,8 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
             measurement.selectedPairContainsMidpoint &&
             measurement.selectedPairCenterOnProbeAxis !== undefined &&
             measurement.thickness > 0 &&
-            measurement.thickness < seg.x2 - seg.x1
+            (measurement.thickness < seg.x2 - seg.x1 ||
+              supportsBoundedConnector(geo, seg.x1, seg.x2, measurement))
         )
         .sort((a, b) => a.thickness - b.thickness);
       const measurement = measurements[0];
@@ -290,6 +299,65 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
   const mergedInstances = mergeCrossbarInstances(instances, bboxH * 0.12);
 
   return mergedInstances;
+}
+
+/**
+ * A connector can have a narrow exposed span between heavy stems. Require
+ * its measured Y interval to be bounded, with separate strokes attached to
+ * both ends above and below it. A vertical backbone supplies neither this
+ * bounded interval nor two independent side supports.
+ */
+function supportsBoundedConnector(
+  geo: GeometryCache,
+  x1: number,
+  x2: number,
+  measurement: OrthogonalThicknessMeasurement
+): boolean {
+  const { glyph, svgShape, scale } = geo;
+  const centerY = measurement.selectedPairCenterOnProbeAxis;
+  if (centerY === undefined || measurement.thickness <= 0 || x2 <= x1)
+    return false;
+  const lowerY = centerY - measurement.thickness / 2;
+  const upperY = centerY + measurement.thickness / 2;
+  if (
+    lowerY <= glyph.bbox.minY + scale.eps ||
+    upperY >= glyph.bbox.maxY - scale.eps
+  ) {
+    return false;
+  }
+
+  const midX = (x1 + x2) / 2;
+  for (const y of [
+    (glyph.bbox.minY + lowerY) / 2,
+    (upperY + glyph.bbox.maxY) / 2,
+  ]) {
+    const { points } = rayHits(
+      svgShape,
+      { x: glyph.bbox.minX - scale.overshoot * 0.1, y },
+      0,
+      scale.overshoot
+    );
+    const spans: Array<{ x1: number; x2: number }> = [];
+    for (let i = 0; i + 1 < points.length; i += 2) {
+      spans.push({ x1: points[i].x, x2: points[i + 1].x });
+    }
+    const leftSupport = spans.find(
+      (span) =>
+        span.x1 <= x1 + scale.eps && span.x2 >= x1 - scale.eps && span.x2 < midX
+    );
+    const rightSupport = spans.find(
+      (span) =>
+        span.x1 <= x2 + scale.eps && span.x2 >= x2 - scale.eps && span.x1 > midX
+    );
+    if (
+      !leftSupport ||
+      !rightSupport ||
+      leftSupport.x2 >= rightSupport.x1 - scale.eps
+    ) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**

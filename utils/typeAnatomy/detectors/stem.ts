@@ -226,33 +226,49 @@ function traceBackbones(geo: GeometryCache): FeatureInstance[] {
       edges.push({ type: 'lineTo', params: [segment.params[0], contourStart] });
     }
   }
+  // Validate the longest boundary first so a partial inner edge does not
+  // replace an already-supported full-height corridor for the same stroke.
+  edges.sort((a, b) => {
+    const extent = (s: (typeof edges)[number]) =>
+      s.type === 'lineTo' && s.params.length === 2
+        ? Math.abs(s.params[1].y - s.params[0].y)
+        : 0;
+    return extent(b) - extent(a);
+  });
   for (const segment of edges) {
     if (segment.type !== 'lineTo' || segment.params.length !== 2) continue;
     const [a, b] = segment.params;
     const dy = b.y - a.y;
-    if (Math.abs(dy) < height * 0.5) continue;
+    const edgeBottom = Math.max(bottom, Math.min(a.y, b.y));
+    const edgeTop = Math.min(top, Math.max(a.y, b.y));
+    const edgeHeight = edgeTop - edgeBottom;
+    if (edgeHeight <= scale.eps) continue;
     const slope = (b.x - a.x) / dy;
     // Backbones run predominantly along the vertical axis.
     if (Math.abs(slope) > 0.65) continue;
     const edgeX = (y: number) => a.x + slope * (y - a.y);
     const matching = samples.filter(
       (s) =>
-        s.y >= Math.min(a.y, b.y) &&
-        s.y <= Math.max(a.y, b.y) &&
+        s.y >= edgeBottom &&
+        s.y <= edgeTop &&
         Math.min(Math.abs(s.x1 - edgeX(s.y)), Math.abs(s.x2 - edgeX(s.y))) <=
           scale.eps
     );
-    if (matching.length < bands * 0.4) continue;
+    const requiredSamples = Math.max(3, (edgeHeight / height) * bands * 0.4);
+    if (matching.length < requiredSamples) continue;
     const widths = matching.map((s) => s.width).sort((a, b) => a - b);
     const medianWidth = widths[Math.floor(widths.length / 2)];
+    // A backbone is elongated along its measured outline edge. This excludes
+    // short serif/join edges without requiring every stem to reach cap height.
+    if (edgeHeight < medianWidth * 2) continue;
     // At a join, a scanline includes unrelated ink. It is not evidence for
     // widening this backbone; retain the consistent stroke spans instead.
     let stable = matching.filter(
       (s) => Math.abs(s.width - medianWidth) <= medianWidth * 0.35
     );
     if (
-      stable.length < bands * 0.4 ||
-      stable[stable.length - 1].y - stable[0].y < height * 0.55
+      stable.length < requiredSamples ||
+      stable[stable.length - 1].y - stable[0].y < edgeHeight * 0.55
     )
       continue;
     const initialLeft = fitEdge(stable, 'x1');
@@ -265,8 +281,8 @@ function traceBackbones(geo: GeometryCache): FeatureInstance[] {
         ) <= scale.eps
     );
     if (
-      stable.length < bands * 0.4 ||
-      stable[stable.length - 1].y - stable[0].y < height * 0.55
+      stable.length < requiredSamples ||
+      stable[stable.length - 1].y - stable[0].y < edgeHeight * 0.55
     )
       continue;
     const left = fitEdge(stable, 'x1');
@@ -288,16 +304,22 @@ function traceBackbones(geo: GeometryCache): FeatureInstance[] {
       continue;
     if (right(bottom) <= left(bottom) || right(top) <= left(top)) continue;
 
+    // Near-full-height boundaries continue through their terminal join, as
+    // before. A genuinely short upright is bounded by its own outline extent;
+    // it must not be stretched through the shoulder or upper empty space.
+    const trackBottom = edgeHeight >= height * 0.8 ? bottom : edgeBottom;
+    const trackTop = edgeHeight >= height * 0.8 ? top : edgeTop;
+    const trackHeight = trackTop - trackBottom;
     const points = [
-      { x: left(bottom), y: bottom },
-      { x: right(bottom), y: bottom },
-      { x: right(top), y: top },
-      { x: left(top), y: top },
+      { x: left(trackBottom), y: trackBottom },
+      { x: right(trackBottom), y: trackBottom },
+      { x: right(trackTop), y: trackTop },
+      { x: left(trackTop), y: trackTop },
     ];
     const straight =
       Math.max(
-        Math.abs(left(top) - left(bottom)),
-        Math.abs(right(top) - right(bottom))
+        Math.abs(left(trackTop) - left(trackBottom)),
+        Math.abs(right(trackTop) - right(trackBottom))
       ) <= scale.eps;
     tracks.push({
       slope,
@@ -308,20 +330,26 @@ function traceBackbones(geo: GeometryCache): FeatureInstance[] {
         shape: straight
           ? {
               type: 'rect',
-              x: left(bottom),
-              y: bottom,
-              width: right(bottom) - left(bottom),
-              height,
+              x: left(trackBottom),
+              y: trackBottom,
+              width: right(trackBottom) - left(trackBottom),
+              height: trackHeight,
             }
           : { type: 'polyline', points },
         region: { kind: 'stroke', points },
         confidence: Math.min(0.9, 0.5 + (stable.length / bands) * 0.4),
         anchors: {
-          top: { x: (left(top) + right(top)) / 2, y: top },
-          bottom: { x: (left(bottom) + right(bottom)) / 2, y: bottom },
+          top: { x: (left(trackTop) + right(trackTop)) / 2, y: trackTop },
+          bottom: {
+            x: (left(trackBottom) + right(trackBottom)) / 2,
+            y: trackBottom,
+          },
           center: {
-            x: (left((top + bottom) / 2) + right((top + bottom) / 2)) / 2,
-            y: (top + bottom) / 2,
+            x:
+              (left((trackTop + trackBottom) / 2) +
+                right((trackTop + trackBottom) / 2)) /
+              2,
+            y: (trackTop + trackBottom) / 2,
           },
         },
         debug: {
@@ -329,12 +357,14 @@ function traceBackbones(geo: GeometryCache): FeatureInstance[] {
           slope,
           thickness: medianWidth,
           residual,
+          edgeBottom,
+          edgeTop,
         },
       },
     });
   }
-  // Where full-height upright backbones exist, subsidiary diagonals (such
-  // as the interior joins of M) are not the primary stems.
+  // Upright backbones take precedence over subsidiary diagonal joins (such
+  // as the interior joins of M).
   const upright = tracks.filter((t) => Math.abs(t.slope) * height <= scale.eps);
   return (upright.length > 0 ? upright : tracks).map((t) => t.instance);
 }

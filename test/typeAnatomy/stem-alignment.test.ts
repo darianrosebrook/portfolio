@@ -165,4 +165,67 @@ describe('stem regions follow glyph backbones', () => {
       }
     }
   );
+
+  describe.each([
+    'Nohemi-VF.ttf',
+    'InterVariable.ttf',
+    'Newsreader-VF.ttf',
+  ] as const)('%s mixed outlines', (fontName) => {
+    it.each([
+      ['h', 2],
+      ['n', 2],
+      ['m', 3],
+    ] as const)('covers each %s upright at two body heights', (char, count) => {
+      const varied = loadFont(fontName).getVariation({ wght: 400, opsz: 32 });
+      const glyph = glyphFor(varied, char);
+      const geo = buildGeometryCache(glyph, varied);
+      const stems = detectFeature(geo, 'stem');
+      expect(stems).toHaveLength(count);
+      const ordered = [...stems].sort(
+        (a, b) => shapeBBox(a.shape).minX - shapeBBox(b.shape).minX
+      );
+      for (const bodyHeight of [0.2, 0.4]) {
+        const y =
+          geo.metrics.baseline +
+          bodyHeight * (geo.metrics.xHeight - geo.metrics.baseline);
+        const { points } = rayHits(
+          geo.svgShape,
+          { x: glyph.bbox.minX - geo.scale.overshoot * 0.1, y },
+          0,
+          geo.scale.overshoot
+        );
+        expect(points).toHaveLength(count * 2);
+        for (let side = 0; side < count; side++) {
+          for (const across of [0.1, 0.5, 0.9]) {
+            const point = {
+              x:
+                points[side * 2].x +
+                across * (points[side * 2 + 1].x - points[side * 2].x),
+              y,
+            };
+            expect(pointInPolygon(point, ordered[side].region!.points)).toBe(
+              true
+            );
+            expect(
+              stems.filter((s) => pointInPolygon(point, s.region!.points))
+            ).toHaveLength(1);
+          }
+        }
+      }
+      // Secondary uprights end before the shoulder; a recovered full-height
+      // rectangle would cover this upper body zone without outline support.
+      for (let side = 1; side < count; side++) {
+        const bounds = shapeBBox(ordered[side].shape);
+        const upperBody = {
+          x: (bounds.minX + bounds.maxX) / 2,
+          y:
+            geo.metrics.baseline +
+            0.95 * (geo.metrics.xHeight - geo.metrics.baseline),
+        };
+        expect(pointInPolygon(upperBody, ordered[side].region!.points)).toBe(
+          false
+        );
+      }
+    });
+  });
 });
