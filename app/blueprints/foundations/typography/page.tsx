@@ -2,6 +2,10 @@
 
 import dynamic from 'next/dynamic';
 import { InteractiveErrorBoundary } from '@/ui/modules/ErrorBoundary';
+// Route-owned styles are available before the client-only inspector resolves.
+import '@/ui/modules/FontInspector/FontInspector.css';
+import '@/ui/modules/FontInspector/DebugPanel.css';
+import '@/ui/components/Switch/Switch.css';
 
 // Dynamically import FontInspector for better performance
 const FontInspector = dynamic(

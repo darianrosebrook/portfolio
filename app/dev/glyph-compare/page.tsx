@@ -1,9 +1,9 @@
 /**
- * Side-by-side comparison route for Canvas vs SVG rendering.
+ * Shared-state comparison route for Canvas and SVG glyph rendering.
  *
  * Dev route: /dev/glyph-compare?gid=0x0041
  *
- * Renders both Canvas and SVG versions side-by-side for visual comparison.
+ * Both surfaces use the same font, glyph, axes, and anatomy selection.
  */
 
 'use client';
@@ -11,6 +11,8 @@
 import { InspectorProvider } from '@/ui/modules/FontInspector/FontInspector';
 import { SymbolCanvas } from '@/ui/modules/FontInspector/SymbolCanvas';
 import { SymbolCanvasSVG } from '@/ui/modules/FontInspector/SymbolCanvasSVG';
+import { InspectorControls } from '@/ui/modules/FontInspector/InspectorControls';
+import { AnatomyControls } from '@/ui/modules/FontInspector/AnatomyControls';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import styles from './page.module.css';
@@ -38,8 +40,8 @@ function GlyphCompareContent() {
         <header className={styles.header}>
           <h1>Canvas vs SVG Comparison</h1>
           <p>
-            Compare rendering between canvas-based and SVG-based
-            implementations.
+            Choose a font and anatomy features to compare both renderers. Drag
+            either view to adjust weight when the font supports it.
           </p>
           <p>
             Glyph: U+{gid.toString(16).toUpperCase().padStart(4, '0')} (
@@ -47,34 +49,39 @@ function GlyphCompareContent() {
           </p>
         </header>
 
+        <section
+          className={styles.controls}
+          data-ds-component="FontInspector"
+          aria-label="Shared inspector controls"
+        >
+          <h2>Shared controls</h2>
+          <div style={{ minWidth: 0, overflowX: 'auto' }}>
+            <InspectorControls />
+          </div>
+          <details className="accordion">
+            <summary>Select anatomy for both views</summary>
+            <AnatomyControls />
+          </details>
+        </section>
+
         <div className={styles.comparison}>
           <div className={styles.panel}>
-            <h2>Canvas (Legacy)</h2>
+            <h2>Canvas</h2>
             <div className={styles.canvasWrapper}>
               <SymbolCanvas />
             </div>
             <div className={styles.info}>
-              <p>Canvas-based rendering</p>
-              <ul>
-                <li>Full redraw on toggle</li>
-                <li>Manual coordinate management</li>
-                <li>Limited accessibility</li>
-              </ul>
+              <p>Glyph and selected anatomy drawn into a Canvas surface.</p>
             </div>
           </div>
 
           <div className={styles.panel}>
-            <h2>SVG (New)</h2>
+            <h2>SVG</h2>
             <div className={styles.canvasWrapper}>
               <SymbolCanvasSVG />
             </div>
             <div className={styles.info}>
-              <p>SVG-based rendering</p>
-              <ul>
-                <li>CSS show/hide (instant)</li>
-                <li>DOM-based updates</li>
-                <li>Full accessibility</li>
-              </ul>
+              <p>Glyph and selected anatomy drawn as SVG vector elements.</p>
             </div>
           </div>
         </div>
@@ -88,6 +95,24 @@ function GlyphCompareContent() {
             <a href="?gid=0x0061">a</a>
             <a href="?gid=0x0062">b</a>
             <a href="?gid=0x0063">c</a>
+            <a
+              href="?gid=0x01FD"
+              style={{
+                width: 'auto',
+                padding: '0 var(--core-spacing-size-04)',
+              }}
+            >
+              ǽ (U+01FD)
+            </a>
+            <a
+              href="?gid=0x0020"
+              style={{
+                width: 'auto',
+                padding: '0 var(--core-spacing-size-04)',
+              }}
+            >
+              Space (U+0020)
+            </a>
             <a href="?gid=0x0031">1</a>
             <a href="?gid=0x0032">2</a>
             <a href="?gid=0x0033">3</a>
