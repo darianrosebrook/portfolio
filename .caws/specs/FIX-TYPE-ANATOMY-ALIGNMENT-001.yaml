@@ -1,0 +1,55 @@
+id: FIX-TYPE-ANATOMY-ALIGNMENT-001
+title: 'Align anatomy regions and restore the inspector grid layout'
+mode: fix
+lifecycle_state: active
+created_at: '2026-10-09T16:40:42.203Z'
+updated_at: '2026-10-09T16:40:42.203Z'
+created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
+blast_radius:
+  modules:
+    - 'Type anatomy stem crossbar and arm detectors'
+    - 'FontInspector layout and feature hints'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/typeAnatomy/detectors/stem.ts'
+    - 'utils/typeAnatomy/detectors/crossbar.ts'
+    - 'utils/typeAnatomy/detectors/arm.ts'
+    - 'utils/typeAnatomy/glyphFeatureHints.ts'
+    - 'ui/modules/FontInspector/FontInspector.css'
+    - 'test/typeAnatomy/stem-alignment.test.ts'
+    - 'test/typeAnatomy/crossbar-arm-alignment.test.ts'
+    - 'test/typeAnatomy/feature-accuracy.test.ts'
+    - 'test/e2e/anatomy-alignment.spec.ts'
+  out: []
+invariants:
+  - 'Region coordinates remain in font design units and are derived from the current glyph'
+  - 'Feature hints follow the canonical anatomy glossary rather than manufacture detector truth'
+  - 'Existing vertical stems and A/H crossbars retain correct geometry'
+  - 'Unrelated dependency edits and known detector gaps are preserved'
+acceptance:
+  - id: A1
+    given: 'Nohemi A at weights 400 and approximately 617 with Bar Crotch and Stem selected'
+    when: 'regions are detected and rendered'
+    then: 'two slanted stem regions follow the legs without selecting the interior crossbar ink as stem'
+  - id: A2
+    given: 'T in the inspector and real font fixtures'
+    when: 'its horizontal stroke and Stem are selected'
+    then: 'the horizontal stroke is offered as Arm and highlights top-arm ink while Stem remains present and crossbar does not return the vertical stem'
+  - id: A3
+    given: 'the typography inspector at desktop and narrow widths'
+    when: 'glyph controls are used and the page is scrolled'
+    then: 'the root grid rule applies with desktop columns and a narrow single column without the glyph grid overlapping the inspector'
+  - id: A4
+    given: 'the integrated scoped source changes'
+    when: 'focused anatomy regressions typecheck lint formatting and CAWS scope gates run'
+    then: 'new regressions pass and existing validation is not weakened or bypassed'
+observability:
+  - 'Regression assertions inspect polygon coordinates and actual UI layout and rendered feature regions'
+rollback:
+  - 'Revert the scoped source commits to restore the previous detector and layout behavior'
+non_functional: {}
+contracts:
+  - name: 'anatomy-region-coordinates'
+    type: behavior
