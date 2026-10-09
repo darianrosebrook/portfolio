@@ -11,6 +11,7 @@ import * as fontkit from 'fontkit';
 import type { Font, Glyph } from 'fontkit';
 import { buildGeometryCache } from '@/utils/typeAnatomy/geometryCache';
 import { mockFont, mockGlyphFromPath } from '@/test/utils/fixtures/mockGlyph';
+import { detectAllFeatures } from '@/utils/typeAnatomy/detectorRegistry';
 
 // Test font loading helper — throws on missing font so tests hard-fail instead of silently passing.
 function loadTestFont(fontName: string): Font {
@@ -27,6 +28,117 @@ function getGlyph(font: Font, char: string): Glyph {
 }
 
 describe('Font Property Detection', () => {
+  describe('Empty occupied scale and feature evidence', () => {
+    it.each([
+      ['Nohemi-VF.ttf', 4],
+      ['InterVariable.ttf', 2.048],
+      ['MonaspaceNeonVF.ttf', 2],
+      ['Newsreader-VF.ttf', 2],
+    ] as const)(
+      'keeps %s spaces finite and produces no positive anatomy at all supported axis extremes',
+      (filename, eps) => {
+        const base = loadTestFont(filename);
+        const extremes = Object.entries(base.variationAxes).reduce<
+          Record<string, number>[]
+        >(
+          (settings, [axis, range]) =>
+            settings.flatMap((setting) => [
+              { ...setting, [axis]: range.min },
+              { ...setting, [axis]: range.max },
+            ]),
+          [{}]
+        );
+        for (const axes of [null, ...extremes]) {
+          const font = axes ? base.getVariation(axes) : base;
+          const glyph = getGlyph(font, ' ');
+          expect(glyph.path.commands).toHaveLength(0);
+          const cache = buildGeometryCache(glyph, font);
+          expect(cache.filled!.bodies).toEqual([]);
+          expect(cache.scale).toEqual({
+            eps,
+            bboxW: 0,
+            bboxH: 0,
+            stemWidth: 0,
+            overshoot: 0,
+          });
+          expect(Object.values(cache.scale).every(Number.isFinite)).toBe(true);
+          // The registry retains IDs mapped to []; map.size is not anatomy.
+          const positive = [...detectAllFeatures(cache)].filter(
+            ([, instances]) => instances.length > 0
+          );
+          expect(positive, `${filename} ${JSON.stringify(axes)}`).toEqual([]);
+        }
+      }
+    );
+    it.each([
+      { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity },
+      { minX: NaN, minY: NaN, maxX: NaN, maxY: NaN },
+      { minX: 0, minY: 0, maxX: 0, maxY: 0 },
+      { minX: 100, minY: 200, maxX: 200, maxY: 300 },
+      { minX: 5, minY: 5, maxX: 1, maxY: 1 },
+    ])('does not invent an ink box from empty source bbox %s', (bbox) => {
+      const cache = buildGeometryCache(
+        mockGlyphFromPath('M0 0', bbox),
+        mockFont()
+      );
+      expect(cache.scale).toEqual({
+        eps: 1,
+        bboxW: 0,
+        bboxH: 0,
+        stemWidth: 0,
+        overshoot: 0,
+      });
+    });
+    it('assigns zero ink size to a degenerate diagonal despite positive source bbox dimensions', () => {
+      const glyph = mockGlyphFromPath('M0 0L10 10L20 20Z', {
+        minX: 0,
+        minY: 0,
+        maxX: 20,
+        maxY: 20,
+      });
+      const cache = buildGeometryCache(glyph, mockFont());
+      expect(cache.filled!.bodies).toEqual([]);
+      expect(cache.scale).toEqual({
+        eps: 1,
+        bboxW: 0,
+        bboxH: 0,
+        stemWidth: 0,
+        overshoot: 0,
+      });
+    });
+    it('derives existing actual ink dimensions from fill when source bbox is invalid', () => {
+      const glyph = mockGlyphFromPath('M0 0L20 0L20 600L0 600Z', {
+        minX: Infinity,
+        minY: Infinity,
+        maxX: -Infinity,
+        maxY: -Infinity,
+      });
+      const scale = buildGeometryCache(glyph, mockFont()).scale;
+      expect(scale).toEqual({
+        eps: 1,
+        bboxW: 20,
+        bboxH: 600,
+        stemWidth: 20,
+        overshoot: 1200,
+      });
+    });
+    it.each([Infinity, NaN, 0])(
+      'retains finite empty-scale epsilon with invalid UPM %s',
+      (unitsPerEm) => {
+        const cache = buildGeometryCache(
+          mockGlyphFromPath('M0 0', { minX: 0, minY: 0, maxX: 0, maxY: 0 }),
+          mockFont({ unitsPerEm })
+        );
+        expect(cache.scale).toEqual({
+          eps: 1,
+          bboxW: 0,
+          bboxH: 0,
+          stemWidth: 0,
+          overshoot: 0,
+        });
+      }
+    );
+  });
   describe('Serif Detection', () => {
     it('should detect Nohemi as sans-serif', () => {
       const font = loadTestFont('Nohemi-VF.ttf');

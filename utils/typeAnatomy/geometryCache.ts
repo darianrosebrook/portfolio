@@ -153,11 +153,36 @@ function computeScalePrimitives(
   font: Font,
   filled: FilledGeometry
 ): ScalePrimitives {
-  const bbox = glyph.bbox;
-  const upm = font.unitsPerEm || 1000;
-
-  const bboxW = bbox.maxX - bbox.minX;
-  const bboxH = bbox.maxY - bbox.minY;
+  const upm =
+    Number.isFinite(font.unitsPerEm) && font.unitsPerEm > 0
+      ? font.unitsPerEm
+      : 1000;
+  // Fontkit represents an empty outline with +/-Infinity bbox sentinels.
+  // Source bounds alone also cannot establish ink for a degenerate or fully
+  // cancelled outline. Occupied bodies own presence; no body has zero size.
+  const sourceBounds = glyph.bbox;
+  const nativeBoundsValid =
+    sourceBounds &&
+    [
+      sourceBounds.minX,
+      sourceBounds.minY,
+      sourceBounds.maxX,
+      sourceBounds.maxY,
+    ].every(Number.isFinite) &&
+    sourceBounds.maxX >= sourceBounds.minX &&
+    sourceBounds.maxY >= sourceBounds.minY;
+  const occupiedBounds = filled.bodies.reduce(
+    (bounds, body) => ({
+      minX: Math.min(bounds.minX, body.bbox.minX),
+      minY: Math.min(bounds.minY, body.bbox.minY),
+      maxX: Math.max(bounds.maxX, body.bbox.maxX),
+      maxY: Math.max(bounds.maxY, body.bbox.maxY),
+    }),
+    { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity }
+  );
+  const bbox = nativeBoundsValid ? sourceBounds : occupiedBounds;
+  const bboxW = filled.bodies.length ? bbox.maxX - bbox.minX : 0;
+  const bboxH = filled.bodies.length ? bbox.maxY - bbox.minY : 0;
 
   // Base epsilon: max of UPM-based and bbox-based
   const eps = Math.max(upm * 0.001, Math.min(bboxW, bboxH) * 0.001);
