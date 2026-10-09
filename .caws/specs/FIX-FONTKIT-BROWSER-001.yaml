@@ -34,3 +34,13 @@ rollback:
   - 'Revert the scoped source commit to restore the previous bundling configuration'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "At 395f838788922798999a326a01961e9b134d72fb, the browser webpack regression executes without a Node require global, parses Inter Variable with 2048 units per em, and verifies distinct A outlines and advances at weights 100 and 900. It failed with require is not defined before removing the external. Installed fontkit 2.0.4 and Next 16.4.0; existing package and lockfile updates are outside this source commit."
+    recorded_at: "2026-10-09T16:14:43.378Z"
+    test_nodeid: "test/fontkit-browser.test.mjs::bundles the lazy fontkit import for a browser and preserves variable glyph outlines"
+    command: npx vitest run test/fontkit-browser.test.mjs
+    exit_code: 0
+    artifact_path: test-results/fontkit-browser-test.log
+    commit_sha: "395f838788922798999a326a01961e9b134d72fb"
