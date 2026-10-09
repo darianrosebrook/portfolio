@@ -61,3 +61,10 @@ evidence:
     command: "pnpm exec vitest run test/typeAnatomy test/utils/typeAnatomy test/utils/geometry/geometryCore.test.ts test/fontkit-browser.test.mjs --reporter=verbose"
     exit_code: 0
     commit_sha: a9b65f8c17faffef9941cb81c13c3a228d9b5215
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Actual Nohemi,Inter,Newsreader T wght100,400,617,700,900 opsz32: Arm top ink covered, mid-stem excluded, crossbar empty, Stem1 retained with Arm after reconciliation. Fresh localhost browser at bb576bb0 after dev-server restart visibly offers Arm and renders both selected strokes; capture test-results/anatomy-fix/T-arm-stem-final.png inspected. CLI citation is checked commit identity; behavioral proof is the inspected executed tests and UI."
+    recorded_at: "2026-10-09T19:41:37.561Z"
+    command: "pnpm exec vitest run test/typeAnatomy test/utils/typeAnatomy test/utils/geometry/geometryCore.test.ts test/fontkit-browser.test.mjs --reporter=verbose"
+    exit_code: 0
+    commit_sha: bb576bb05fbc5c6f988c8cb14d87057563b7655a
