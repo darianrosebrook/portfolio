@@ -1,0 +1,46 @@
+id: FIX-GLYPH-STROKE-FEATURES-001
+title: 'Resolve remaining stroke anatomy and legacy semantic defects'
+mode: fix
+lifecycle_state: active
+created_at: '2026-10-09T21:43:56.382Z'
+updated_at: '2026-10-09T21:43:56.382Z'
+created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
+blast_radius:
+  modules:
+    - 'Arm spur ear tail and compatible anatomy evidence APIs'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/typeAnatomy/detectors/arm.ts'
+    - 'utils/typeAnatomy/detectors/spur.ts'
+    - 'utils/typeAnatomy/detectors/ear.ts'
+    - 'utils/typeAnatomy/detectors/tail.ts'
+    - 'utils/typeAnatomy/apex.ts'
+    - 'utils/typeAnatomy/vertex.ts'
+    - 'utils/typeAnatomy/crotch.ts'
+    - 'utils/typeAnatomy/terminal.ts'
+    - 'utils/typeAnatomy/link.ts'
+    - 'test/typeAnatomy/stroke-features.test.ts'
+    - 'test/utils/typeAnatomy/features/vertices.test.ts'
+    - 'test/utils/typeAnatomy/features/curves.test.ts'
+    - 'test/utils/typeAnatomy/features/openings.test.ts'
+  out: []
+invariants:
+  - 'Feature identity must be supported by actual current occupied boundaries and independent semantic samples'
+  - 'No inverted known-defect tests or per-font baked regions replace actual detection'
+acceptance:
+  - id: A1
+    given: 'real E A G g r Q j y glyphs and their negative controls'
+    when: 'stroke features are detected'
+    then: 'true arms projections and tails are isolated without leg bowl serif or unrelated-ink false positives'
+  - id: A2
+    given: 'valid Fontkit synthetic commands and real geometric semantics'
+    when: 'legacy vertices hooks and links are exercised'
+    then: 'solid primitive negatives and real feature positives obey canonical anatomy rather than malformed-fixture or empirical-count behavior'
+observability:
+  - 'Current-outline semantic regressions and explicit original failure outputs'
+rollback:
+  - 'Revert bounded stroke feature changes'
+non_functional: {}
+contracts: []
