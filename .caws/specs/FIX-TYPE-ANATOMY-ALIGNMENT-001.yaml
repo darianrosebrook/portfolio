@@ -3,7 +3,7 @@ title: 'Align anatomy regions and restore the inspector grid layout'
 mode: fix
 lifecycle_state: active
 created_at: '2026-10-09T16:40:42.203Z'
-updated_at: '2026-10-09T16:40:42.203Z'
+updated_at: '2026-10-09T17:10:36.489Z'
 created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
 blast_radius:
   modules:
@@ -21,7 +21,6 @@ scope:
     - 'test/typeAnatomy/stem-alignment.test.ts'
     - 'test/typeAnatomy/crossbar-arm-alignment.test.ts'
     - 'test/typeAnatomy/feature-accuracy.test.ts'
-    - 'test/e2e/anatomy-alignment.spec.ts'
   out: []
 invariants:
   - 'Region coordinates remain in font design units and are derived from the current glyph'
