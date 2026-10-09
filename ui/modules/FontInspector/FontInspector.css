@@ -1,5 +1,5 @@
-[data-ds-component="FontInspector"] {
-  .symbolInspector {
+[data-ds-component='FontInspector'] {
+  &.symbolInspector {
     display: grid;
     grid-template-columns: 1fr;
     max-width: 100vw;
@@ -244,11 +244,11 @@
 }
 
 @media (width >= 768px) {
-  [data-ds-component="FontInspector"] .symbolInspector {
+  [data-ds-component='FontInspector'].symbolInspector {
     grid-template-columns: 10fr 12fr;
   }
 
-  [data-ds-component="FontInspector"] .inspectorContainer {
+  [data-ds-component='FontInspector'] .inspectorContainer {
     --header-height: 4rem;
 
     position: sticky;
@@ -259,7 +259,7 @@
 }
 
 @media (width <= 1000px) {
-  [data-ds-component="FontInspector"] .anatomyControls {
+  [data-ds-component='FontInspector'] .anatomyControls {
     gap: var(--core-spacing-size-08);
     padding: var(--core-spacing-size-08) var(--core-spacing-size-04);
 
@@ -276,7 +276,7 @@
 }
 
 @media screen and (width >= 1000px) {
-  [data-ds-component="FontInspector"] .articleContent aside {
+  [data-ds-component='FontInspector'] .articleContent aside {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--core-spacing-size-07);
