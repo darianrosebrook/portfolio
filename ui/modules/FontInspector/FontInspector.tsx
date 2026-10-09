@@ -10,6 +10,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { AnatomyControls } from './AnatomyControls';
@@ -47,7 +48,16 @@ interface FontInfo {
   name: string;
   url: string;
   font: Font | null;
+  loadState: 'loading' | 'loaded' | 'error';
+  loadError: string | null;
 }
+
+const FONT_SOURCES = [
+  { name: 'Nohemi', url: '/fonts/Nohemi-VF.ttf' },
+  { name: 'Inter', url: '/fonts/InterVariable.ttf' },
+  { name: 'Neon', url: '/fonts/MonaspaceNeonVF.ttf' },
+  { name: 'Newsreader', url: '/fonts/Newsreader-VF.ttf' },
+];
 
 // Re-export AnatomyFeature for external use
 export type { AnatomyFeature } from './types';
@@ -67,6 +77,7 @@ interface InspectorContextType {
   setAxisValues: (v: Partial<AxisValues>) => void;
   setGlyphUnicode: (u: number) => void;
   setCurrentFont: (index: number) => void;
+  retryCurrentFont: () => void;
   anatomyFeatures: AnatomyFeature[];
   selectedAnatomy: Map<string, AnatomyFeature>;
   toggleAnatomy: (feature: AnatomyFeature) => void;
@@ -100,13 +111,16 @@ export const InspectorProvider: React.FC<{
   children: React.ReactNode;
   initialGlyphUnicode?: number;
 }> = ({ children, initialGlyphUnicode = 0x0041 }) => {
-  const [fonts, setFonts] = useState<FontInfo[]>([
-    { name: 'Nohemi', url: '/fonts/Nohemi-VF.ttf', font: null },
-    { name: 'Inter', url: '/fonts/InterVariable.ttf', font: null },
-    { name: 'Neon', url: '/fonts/MonaspaceNeonVF.ttf', font: null },
-    { name: 'Newsreader', url: '/fonts/Newsreader-VF.ttf', font: null },
-  ]);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [fonts, setFonts] = useState<FontInfo[]>(() =>
+    FONT_SOURCES.map((source) => ({
+      ...source,
+      font: null,
+      loadState: 'loading',
+      loadError: null,
+    }))
+  );
+  const mounted = useRef(false);
+  const fontRequests = useRef(new Map<number, AbortController>());
   const [currentFontIndex, setCurrentFontIndex] = useState(0);
   const [requestedAxisValues, setAxisValuesState] = useState<AxisValues>({
     wght: 400,
@@ -218,45 +232,82 @@ export const InspectorProvider: React.FC<{
     });
   }, []);
 
-  // load fonts
-  useEffect(() => {
-    if (fontsLoaded) return;
-
-    async function loadFonts() {
-      // Load fontkit's browser bundle lazily when the inspector mounts.
-      let fontkit: typeof import('fontkit') | null = null;
-      try {
-        const fontkitModule = await import('fontkit');
-        fontkit = fontkitModule;
-      } catch (importError: unknown) {
-        console.error('Failed to import fontkit:', importError);
-        return;
-      }
-
-      if (!fontkit || !fontkit.create) {
-        console.error('fontkit.create is not available');
-        return;
-      }
-
-      const loadedFonts = await Promise.all(
-        fonts.map(async (fontInfo) => {
-          try {
-            const response = await fetch(fontInfo.url);
-            const arrayBuffer = await response.arrayBuffer();
-            // fontkit is guaranteed to be non-null here due to check above
-            const font = fontkit!.create(new Uint8Array(arrayBuffer)) as Font;
-            return { ...fontInfo, font };
-          } catch (error) {
-            console.error(`Error loading font ${fontInfo.name}:`, error);
-            return fontInfo;
-          }
-        })
+  const loadFont = useCallback(async (index: number) => {
+    const source = FONT_SOURCES[index];
+    if (!source || !mounted.current || fontRequests.current.has(index)) return;
+    const controller = new AbortController();
+    fontRequests.current.set(index, controller);
+    const isCurrent = () =>
+      mounted.current &&
+      !controller.signal.aborted &&
+      fontRequests.current.get(index) === controller;
+    setFonts((previous) =>
+      previous.map((entry, entryIndex) =>
+        entryIndex === index
+          ? { ...entry, font: null, loadState: 'loading', loadError: null }
+          : entry
+      )
+    );
+    try {
+      const fontkit = await import('fontkit');
+      if (!isCurrent()) return;
+      const response = await fetch(source.url, { signal: controller.signal });
+      if (!isCurrent()) return;
+      if (!response.ok)
+        throw new Error(`Request failed (HTTP ${response.status})`);
+      const arrayBuffer = await response.arrayBuffer();
+      if (!isCurrent()) return;
+      const font = fontkit.create(new Uint8Array(arrayBuffer));
+      if (!('glyphForCodePoint' in font))
+        throw new Error('The font file does not contain a single font');
+      if (!isCurrent()) return;
+      setFonts((previous) =>
+        previous.map((entry, entryIndex) =>
+          entryIndex === index
+            ? { ...entry, font, loadState: 'loaded', loadError: null }
+            : entry
+        )
       );
-      setFonts(loadedFonts);
-      setFontsLoaded(true);
+    } catch (error) {
+      if (!isCurrent()) return;
+      const loadError =
+        error instanceof Error ? error.message : 'The font could not be loaded';
+      setFonts((previous) =>
+        previous.map((entry, entryIndex) =>
+          entryIndex === index
+            ? { ...entry, font: null, loadState: 'error', loadError }
+            : entry
+        )
+      );
+    } finally {
+      if (fontRequests.current.get(index) === controller)
+        fontRequests.current.delete(index);
     }
-    loadFonts();
-  }, [fonts, fontsLoaded]);
+  }, []);
+
+  useEffect(() => {
+    mounted.current = true;
+    let cancelled = false;
+    const requests = fontRequests.current;
+    // The development effect replay cancels its first launch before any request.
+    queueMicrotask(() => {
+      if (!cancelled)
+        FONT_SOURCES.forEach((_, index) => {
+          void loadFont(index);
+        });
+    });
+    return () => {
+      cancelled = true;
+      mounted.current = false;
+      for (const controller of requests.values()) controller.abort();
+      requests.clear();
+    };
+  }, [loadFont]);
+
+  const retryCurrentFont = useCallback(() => {
+    if (fonts[currentFontIndex]?.loadState === 'error')
+      void loadFont(currentFontIndex);
+  }, [fonts, currentFontIndex, loadFont]);
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.matchMedia) return;
@@ -588,6 +639,7 @@ export const InspectorProvider: React.FC<{
       setAxisValues,
       setGlyphUnicode,
       setCurrentFont,
+      retryCurrentFont,
       anatomyFeatures,
       selectedAnatomy,
       toggleAnatomy,
@@ -616,6 +668,7 @@ export const InspectorProvider: React.FC<{
       selectedAnatomy,
       toggleAnatomy,
       setCurrentFont,
+      retryCurrentFont,
       geometryCache,
       detectionContext,
       detectedFeatures,

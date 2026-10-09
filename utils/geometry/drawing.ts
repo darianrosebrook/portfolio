@@ -33,6 +33,20 @@ export interface DrawColors {
   featureBackground: string;
 }
 
+/** Empty outlines have no ink bounds or ink-relative side bearings. */
+export function glyphInkBounds(glyph: Glyph): Glyph['bbox'] | null {
+  const bounds = glyph.bbox;
+  return glyph.path?.commands?.length &&
+    bounds &&
+    [bounds.minX, bounds.minY, bounds.maxX, bounds.maxY].every(
+      Number.isFinite
+    ) &&
+    bounds.maxX > bounds.minX &&
+    bounds.maxY > bounds.minY
+    ? bounds
+    : null;
+}
+
 export function drawMetricLine(
   ctx: CanvasRenderingContext2D,
   width: number,
@@ -41,6 +55,7 @@ export function drawMetricLine(
   labelPosition: string,
   colors: DrawColors
 ) {
+  if (!Number.isFinite(width) || width <= 0 || !Number.isFinite(y)) return;
   ctx.beginPath();
   ctx.moveTo(0, y);
   ctx.lineTo(width, y);
@@ -92,11 +107,39 @@ export function drawGlyphBounds(
   glyph: Glyph,
   colors: DrawColors
 ) {
+  if (
+    ![xMin, xMax, ascY, descY, scale, glyph.advanceWidth].every(
+      Number.isFinite
+    ) ||
+    scale <= 0
+  )
+    return;
+  const inkBounds = glyphInkBounds(glyph);
+  if (!inkBounds) {
+    ctx.beginPath();
+    ctx.moveTo(xMin, descY + 4);
+    ctx.lineTo(xMin, descY + 12);
+    ctx.moveTo(xMax, descY + 4);
+    ctx.lineTo(xMax, descY + 12);
+    ctx.moveTo(xMin, descY + 8);
+    ctx.lineTo(xMax, descY + 8);
+    ctx.strokeStyle = colors.boundsStroke;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.fillStyle = colors.labelFill;
+    ctx.textAlign = 'center';
+    ctx.fillText(
+      `Advance Width ${glyph.advanceWidth.toFixed(2)}`,
+      (xMin + xMax) / 2,
+      descY + 28
+    );
+    return;
+  }
   const pattern = getDotPattern(ctx, colors.checkerStroke);
 
   const adv = glyph.advanceWidth;
-  const lsb = glyph.bbox.minX;
-  const rsb = adv - (glyph.bbox.maxX - glyph.bbox.minX) - lsb;
+  const lsb = inkBounds.minX;
+  const rsb = adv - inkBounds.maxX;
 
   ctx.strokeStyle = colors.boundsStroke;
   ctx.fillStyle = colors.boundsFill;

@@ -31,6 +31,7 @@ export const SymbolCanvas: React.FC = () => {
     colors,
     selectedAnatomy,
     detectedFeatures,
+    geometryCache,
   } = useInspector();
 
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -67,17 +68,20 @@ export const SymbolCanvas: React.FC = () => {
       if (!viewport) return;
       const { scale, baseline, xOffset } = viewport;
 
-      const metrics = {
-        Baseline: baseline,
-        'Cap height': baseline - fontInstance.capHeight * scale,
-        'X-height': baseline - fontInstance.xHeight * scale,
-        Ascender: baseline - fontInstance.ascent * scale,
-        Descender: baseline - fontInstance.descent * scale,
-      };
+      const fontMetrics = geometryCache?.metrics;
+      const metrics = fontMetrics
+        ? {
+            Baseline: baseline - fontMetrics.baseline * scale,
+            'Cap height': baseline - fontMetrics.capHeight * scale,
+            'X-height': baseline - fontMetrics.xHeight * scale,
+            Ascender: baseline - fontMetrics.ascent * scale,
+            Descender: baseline - fontMetrics.descent * scale,
+          }
+        : null;
 
       ctx.save();
 
-      if (showDetails) {
+      if (showDetails && metrics) {
         drawGlyphBounds(
           ctx,
           xOffset,
@@ -103,11 +107,13 @@ export const SymbolCanvas: React.FC = () => {
 
       const selectedFeatures = Array.from(selectedAnatomy.values());
       selectedFeatures.forEach((feature) => {
-        if (feature.disabled || !(feature.label in metrics)) return;
+        if (!metrics || feature.disabled || !(feature.label in metrics)) return;
+        const metricY = metrics[feature.label as keyof typeof metrics];
+        if (!Number.isFinite(metricY)) return;
         drawMetricLine(
           ctx,
           w,
-          metrics[feature.label as keyof typeof metrics],
+          metricY,
           feature.label,
           feature.labelPosition,
           colors
@@ -162,7 +168,7 @@ export const SymbolCanvas: React.FC = () => {
           glyph,
           scale,
           colors,
-          metrics,
+          metrics ?? {},
           selectedAnatomy,
           detectedFeatures
         );
@@ -211,6 +217,7 @@ export const SymbolCanvas: React.FC = () => {
       selectedAnatomy,
       showDetails,
       detectedFeatures,
+      geometryCache,
       supportedAxes,
     ]
   );

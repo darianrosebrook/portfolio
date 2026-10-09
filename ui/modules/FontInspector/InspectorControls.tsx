@@ -1,8 +1,5 @@
 import { useInspector } from './FontInspector';
 import './FontInspector.css';
-function toTitleCase(str: string) {
-  return str.replace(/\b\w/g, (char) => char.toUpperCase());
-}
 
 /*
   InspectorControls
@@ -10,18 +7,25 @@ function toTitleCase(str: string) {
   Font Selector| Unicode | Name | Glyph Preview |
 */
 export const InspectorControls: React.FC = () => {
-  const { font, glyphUnicode, glyph, fonts, currentFontIndex, setCurrentFont } =
-    useInspector();
-  if (!font) return null;
-  const name = glyph ? toTitleCase(glyph.name || '') : 'Glyph unavailable';
+  const {
+    glyphUnicode,
+    glyph,
+    fonts,
+    currentFontIndex,
+    setCurrentFont,
+    retryCurrentFont,
+  } = useInspector();
+  const currentFont = fonts[currentFontIndex];
+  const name = glyph ? glyph.name || '' : 'Glyph unavailable';
   const unicode = `U+${glyphUnicode.toString(16).toUpperCase()}`;
-  const glyphPreview = `${String.fromCodePoint(glyphUnicode)}`;
+  const glyphPreview = glyph ? String.fromCodePoint(glyphUnicode) : '';
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
   };
   return (
     <div className="inspectorControls">
       <select
+        aria-label="Font"
         className="fontSelector"
         value={currentFontIndex}
         onChange={(e) => setCurrentFont(Number(e.target.value))}
@@ -29,6 +33,11 @@ export const InspectorControls: React.FC = () => {
         {fonts.map((fontInfo, index) => (
           <option key={fontInfo.name} value={index}>
             {fontInfo.name}
+            {fontInfo.loadState === 'loading'
+              ? ' (loading)'
+              : fontInfo.loadState === 'error'
+                ? ' (unavailable)'
+                : ''}
           </option>
         ))}
       </select>
@@ -41,6 +50,7 @@ export const InspectorControls: React.FC = () => {
       </button>
       <button
         className="idName"
+        disabled={!glyph}
         onClick={() => handleCopy(name)}
         title="Copy Name"
       >
@@ -48,11 +58,24 @@ export const InspectorControls: React.FC = () => {
       </button>
       <button
         className="preview"
+        disabled={!glyph}
         onClick={() => handleCopy(glyphPreview)}
         title="Copy Glyph"
       >
-        {glyphPreview}
+        {glyph ? glyphPreview : '—'}
       </button>
+      {currentFont && currentFont.loadState !== 'loaded' && (
+        <div role="status" style={{ gridColumn: '1 / -1' }}>
+          {currentFont.loadState === 'loading'
+            ? `Loading ${currentFont.name}…`
+            : `Unable to load ${currentFont.name}: ${currentFont.loadError}`}
+          {currentFont.loadState === 'error' && (
+            <button type="button" onClick={retryCurrentFont}>
+              Retry {currentFont.name}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

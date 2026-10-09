@@ -15,6 +15,9 @@ import {
 } from '@/ui/modules/FontInspector/FontInspector';
 import { SymbolCanvas } from '@/ui/modules/FontInspector/SymbolCanvas';
 import { SymbolCanvasSVG } from '@/ui/modules/FontInspector/SymbolCanvasSVG';
+import { InspectorControls } from '@/ui/modules/FontInspector/InspectorControls';
+import { calculateGlyphBounds } from '@/ui/modules/FontInspector/SVGGlyphBounds';
+import * as drawing from '@/utils/geometry/drawing';
 import { glyphViewport } from '@/ui/modules/FontInspector/viewport';
 import {
   featureAnchor,
@@ -45,6 +48,7 @@ function Harness() {
     <>
       <SymbolCanvas />
       <SymbolCanvasSVG />
+      <InspectorControls />
     </>
   );
 }
@@ -66,6 +70,11 @@ async function mountInspector() {
     </React.StrictMode>
   );
   await waitFor(() => expect(inspector.glyph?.name).toBe('A'));
+  await waitFor(() =>
+    expect(inspector.fonts.every((font) => font.loadState === 'loaded')).toBe(
+      true
+    )
+  );
   flushFrames();
   return view;
 }
@@ -77,6 +86,52 @@ function selectFeature(name: string) {
   expect(feature).toBeDefined();
   act(() => inspector.toggleAnatomy(feature!));
   flushFrames();
+}
+
+function expectFiniteCanvasCoordinates() {
+  const mocks = canvasContext as unknown as Record<
+    string,
+    ReturnType<typeof vi.fn>
+  >;
+  for (const method of [
+    'moveTo',
+    'lineTo',
+    'translate',
+    'scale',
+    'clearRect',
+    'fillRect',
+    'strokeRect',
+    'rect',
+    'arc',
+    'ellipse',
+    'quadraticCurveTo',
+    'bezierCurveTo',
+  ]) {
+    for (const args of mocks[method].mock.calls) {
+      const coordinates = args.filter((value) => typeof value !== 'boolean');
+      expect(
+        coordinates.every(
+          (value) => typeof value === 'number' && Number.isFinite(value)
+        ),
+        `${method}(${args.join(',')})`
+      ).toBe(true);
+    }
+  }
+  for (const method of ['fillText', 'strokeText']) {
+    for (const args of mocks[method].mock.calls)
+      expect(
+        args
+          .slice(1, 3)
+          .every((value) => typeof value === 'number' && Number.isFinite(value))
+      ).toBe(true);
+  }
+}
+
+function expectFiniteSVG(container: HTMLElement) {
+  for (const element of container.querySelectorAll('svg, svg *')) {
+    for (const attribute of element.attributes)
+      expect(attribute.value).not.toMatch(/NaN|Infinity|undefined/);
+  }
 }
 
 beforeEach(() => {
@@ -119,6 +174,8 @@ beforeEach(() => {
     vi.fn(async (url: string) => {
       const bytes = await readFile(`${process.cwd()}/public${url}`);
       return {
+        ok: true,
+        status: 200,
         arrayBuffer: async () =>
           bytes.buffer.slice(
             bytes.byteOffset,
@@ -160,6 +217,12 @@ beforeEach(() => {
     canvasContext
   );
   vi.stubGlobal('PointerEvent', MouseEvent);
+  vi.stubGlobal(
+    'navigator',
+    Object.create(navigator, {
+      clipboard: { value: { writeText: vi.fn() }, configurable: true },
+    })
+  );
   Object.defineProperty(SVGElement.prototype, 'setPointerCapture', {
     configurable: true,
     value: vi.fn(),
@@ -174,6 +237,149 @@ afterEach(() => {
 });
 
 describe('FontInspector provider and renderer behavior with bundled fonts', () => {
+  it.each([
+    [0, 900],
+    [1, 576],
+    [2, 1240],
+    [3, 444],
+  ])(
+    'renders real empty space at font index %s with spacing and finite guides in both renderers',
+    async (fontIndex, baseAdvanceWidth) => {
+      const view = await mountInspector();
+      selectFeature('Stem');
+      for (const mock of Object.values(canvasContext))
+        if (typeof mock === 'function' && 'mockClear' in mock) mock.mockClear();
+      act(() => {
+        inspector.setCurrentFont(fontIndex);
+        inspector.setGlyphUnicode(0x20);
+        inspector.setShowDetails(true);
+      });
+      flushFrames();
+      const glyph = inspector.glyph!;
+      expect(inspector.font!.glyphForCodePoint(0x20).advanceWidth).toBe(
+        baseAdvanceWidth
+      );
+      const advanceWidth = inspector
+        .font!.getVariation(inspector.axisValues)
+        .glyphForCodePoint(0x20).advanceWidth;
+      expect(glyph.name).toBe('space');
+      expect(glyph.path.commands).toHaveLength(0);
+      expect([
+        glyph.bbox.minX,
+        glyph.bbox.minY,
+        glyph.bbox.maxX,
+        glyph.bbox.maxY,
+      ]).toEqual([Infinity, Infinity, -Infinity, -Infinity]);
+      expect(glyph.advanceWidth).toBe(advanceWidth);
+      expect([...inspector.detectedFeatures.values()].flat()).toEqual([]);
+      expect(calculateGlyphBounds(glyph)).toBeNull();
+      const viewport = glyphViewport(
+        viewportWidth,
+        viewportHeight,
+        inspector.fontInstance!,
+        glyph
+      )!;
+      expect(viewport.scale).toBeGreaterThan(0);
+      expect(Object.values(viewport).every(Number.isFinite)).toBe(true);
+      expect(view.container.querySelector('#glyph path')).toBeNull();
+      expect(view.container.querySelector('#lsb-markers')).toBeNull();
+      expect(view.container.querySelector('#rsb-markers')).toBeNull();
+      expect(view.container.querySelector('#glyph-bounds')).toBeNull();
+      const advance = view.container.querySelector('#advance-width')!;
+      expect(advance.textContent).toBe(
+        `Advance Width ${advanceWidth.toFixed(2)}`
+      );
+      const expectedOrigin = viewport.xOffset;
+      const expectedEnd = viewport.xOffset + advanceWidth * viewport.scale;
+      const expectedY =
+        viewport.baseline -
+        inspector.geometryCache!.metrics.descent * viewport.scale;
+      expect(advance.querySelector('path')).toHaveAttribute(
+        'd',
+        `M${expectedOrigin} ${expectedY + 4}V${expectedY + 12}M${expectedEnd} ${expectedY + 4}V${expectedY + 12}M${expectedOrigin} ${expectedY + 8}H${expectedEnd}`
+      );
+      expect(canvasContext.fillText).toHaveBeenCalledWith(
+        `Advance Width ${advanceWidth.toFixed(2)}`,
+        (expectedOrigin + expectedEnd) / 2,
+        expectedY + 28
+      );
+      expect(
+        vi
+          .mocked(canvasContext.fillText)
+          .mock.calls.some(([label]) => String(label).includes('Side Bearing'))
+      ).toBe(false);
+      expect(
+        view.container.querySelector('[id="metric-Baseline"] line')
+      ).not.toBeNull();
+      expect(
+        view.container.querySelector('[id="metric-X-height"] line')
+      ).not.toBeNull();
+      expectFiniteSVG(view.container);
+      expectFiniteCanvasCoordinates();
+      expect(screen.getByTitle('Copy Name')).toHaveTextContent('space');
+      fireEvent.click(screen.getByTitle('Copy Glyph'));
+      expect(navigator.clipboard.writeText).toHaveBeenLastCalledWith(' ');
+    }
+  );
+
+  it('preserves actual lowercase glyph identifiers when displaying and copying names', async () => {
+    await mountInspector();
+    act(() => inspector.setGlyphUnicode(0x69));
+    flushFrames();
+    expect(inspector.glyph!.name).toBe('i');
+    expect(screen.getByTitle('Copy Name').textContent).toBe(
+      inspector.glyph!.name
+    );
+    fireEvent.click(screen.getByTitle('Copy Name'));
+    expect(navigator.clipboard.writeText).toHaveBeenLastCalledWith('i');
+  });
+
+  it('draws only finite metric coordinates after toggling a nonmetric feature and refuses invalid helper inputs', async () => {
+    const metric = vi.spyOn(drawing, 'drawMetricLine');
+    const view = await mountInspector();
+    metric.mockClear();
+    selectFeature('Stem');
+    expect(metric).toHaveBeenCalled();
+    for (const [, width, y, label] of metric.mock.calls) {
+      expect(Number.isFinite(width)).toBe(true);
+      expect(Number.isFinite(y)).toBe(true);
+      expect([
+        'Baseline',
+        'Cap height',
+        'X-height',
+        'Ascender',
+        'Descender',
+      ]).toContain(label);
+    }
+    expectFiniteSVG(view.container);
+    expectFiniteCanvasCoordinates();
+    const before = vi.mocked(canvasContext.moveTo).mock.calls.length;
+    drawing.drawMetricLine(
+      canvasContext,
+      viewportWidth,
+      NaN,
+      'Stem',
+      'top',
+      inspector.colors
+    );
+    drawing.drawMetricLine(
+      canvasContext,
+      Infinity,
+      0,
+      'Baseline',
+      'top',
+      inspector.colors
+    );
+    expect(vi.mocked(canvasContext.moveTo).mock.calls).toHaveLength(before);
+    expect(
+      glyphViewport(
+        Infinity,
+        viewportHeight,
+        inspector.fontInstance!,
+        inspector.glyph!
+      )
+    ).toBeNull();
+  });
   it('renders selected current stem geometry in both detail modes despite the registry selected flag', async () => {
     const view = await mountInspector();
     const stem = inspector.anatomyFeatures.find(
@@ -397,6 +603,65 @@ describe('FontInspector provider and renderer behavior with bundled fonts', () =
       configurable: true,
       value: 1,
     });
+  });
+
+  it('places Newsreader metric guides on current x and H outlines at both optical-size extremes', async () => {
+    const view = await mountInspector();
+    act(() => inspector.setCurrentFont(3));
+    const xHeights: number[] = [];
+    const capHeights: number[] = [];
+    for (const opsz of [6, 72]) {
+      vi.mocked(canvasContext.fillText).mockClear();
+      vi.mocked(canvasContext.lineTo).mockClear();
+      act(() => inspector.setAxisValues({ opsz }));
+      flushFrames();
+      const currentFont = inspector.font!.getVariation({
+        ...inspector.axisValues,
+        opsz,
+      });
+      const xHeight = currentFont.glyphForCodePoint(0x78).bbox.maxY;
+      const capHeight = currentFont.glyphForCodePoint(0x48).bbox.maxY;
+      xHeights.push(xHeight);
+      capHeights.push(capHeight);
+      expect(xHeight).not.toBe(currentFont.xHeight);
+      const matrix = view.container
+        .querySelector('#glyph path')!
+        .getAttribute('transform')!
+        .replace(/^matrix\(|\)$/g, '')
+        .split(/\s+/)
+        .map(Number);
+      const scale = matrix[0];
+      const baseline = matrix[5];
+      for (const [name, height] of [
+        ['X-height', xHeight],
+        ['Cap height', capHeight],
+      ] as const) {
+        const expectedY = baseline - height * scale;
+        const line = view.container.querySelector(
+          `[id="metric-${name}"] line`
+        )!;
+        expect(Number(line.getAttribute('y1'))).toBeCloseTo(expectedY, 10);
+        expect(Number(line.getAttribute('y2'))).toBeCloseTo(expectedY, 10);
+        expect(canvasContext.fillText).toHaveBeenCalledWith(
+          name,
+          16,
+          expectedY - 5
+        );
+        expect(canvasContext.lineTo).toHaveBeenCalledWith(
+          viewportWidth,
+          expectedY
+        );
+      }
+      expect(
+        Number(
+          view.container
+            .querySelector('[id="metric-X-height"] line')!
+            .getAttribute('y1')
+        )
+      ).not.toBeCloseTo(baseline - currentFont.xHeight * scale, 5);
+    }
+    expect(xHeights).toEqual([1024, 1024]);
+    expect(capHeights).toEqual([1414, 1430]);
   });
 
   it('selects the comparison URL glyph and rejects malformed scalar URLs', async () => {

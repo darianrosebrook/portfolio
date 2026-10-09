@@ -14,6 +14,7 @@ import { getSVGDefIds } from '@/utils/geometry/svgDefs';
 import type { ViewportTransform } from '@/utils/geometry/transforms';
 import type { Glyph } from './fontkit-types';
 import { useMemo } from 'react';
+import { glyphInkBounds } from '@/utils/geometry/drawing';
 
 export interface GlyphBoundsData {
   /** Left side bearing in font units (can be negative) */
@@ -31,18 +32,19 @@ export interface GlyphBoundsData {
 /**
  * Calculates glyph bounds data from a glyph.
  */
-export function calculateGlyphBounds(glyph: Glyph): GlyphBoundsData {
+export function calculateGlyphBounds(glyph: Glyph): GlyphBoundsData | null {
+  const bounds = glyphInkBounds(glyph);
+  if (!bounds || !Number.isFinite(glyph.advanceWidth)) return null;
   const advanceWidth = glyph.advanceWidth;
-  const lsb = glyph.bbox.minX;
-  const bboxWidth = glyph.bbox.maxX - glyph.bbox.minX;
-  const rsb = advanceWidth - bboxWidth - lsb;
+  const lsb = bounds.minX;
+  const rsb = advanceWidth - bounds.maxX;
 
   return {
     lsb,
     rsb,
     advanceWidth,
-    bboxMinX: glyph.bbox.minX,
-    bboxMaxX: glyph.bbox.maxX,
+    bboxMinX: bounds.minX,
+    bboxMaxX: bounds.maxX,
   };
 }
 
@@ -88,6 +90,43 @@ export function SVGGlyphBounds({
 }: SVGGlyphBoundsProps) {
   const bounds = useMemo(() => calculateGlyphBounds(glyph), [glyph]);
   const defIds = getSVGDefIds(idPrefix);
+  if (
+    ![
+      transform.scale,
+      transform.x,
+      transform.y,
+      containerWidth,
+      ascent,
+      descent,
+      glyph.advanceWidth,
+    ].every(Number.isFinite) ||
+    transform.scale <= 0
+  )
+    return null;
+  if (!bounds) {
+    const origin = transform.toScreen({ x: 0, y: descent });
+    const advance = transform.toScreen({ x: glyph.advanceWidth, y: descent });
+    return (
+      <g id="advance-width" aria-label="Advance width">
+        <path
+          d={`M${origin.x} ${origin.y + 4}V${origin.y + 12}M${advance.x} ${advance.y + 4}V${advance.y + 12}M${origin.x} ${origin.y + 8}H${advance.x}`}
+          fill="none"
+          stroke={colors.boundsStroke}
+          strokeWidth={1}
+        />
+        <text
+          x={(origin.x + advance.x) / 2}
+          y={origin.y + 28}
+          fill={colors.labelFill}
+          fontSize={12}
+          fontFamily="sans-serif"
+          textAnchor="middle"
+        >
+          Advance Width {glyph.advanceWidth.toFixed(2)}
+        </text>
+      </g>
+    );
+  }
 
   const { lsb, rsb, advanceWidth: _advanceWidth, bboxMinX, bboxMaxX } = bounds;
 

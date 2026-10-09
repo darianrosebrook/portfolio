@@ -55,6 +55,8 @@ interface SVGCanvasMetrics {
 export const SymbolCanvasSVG: React.FC = () => {
   const {
     fontInstance,
+    fonts,
+    currentFontIndex,
     glyph,
     axisValues,
     supportedAxes,
@@ -64,6 +66,7 @@ export const SymbolCanvasSVG: React.FC = () => {
     colors,
     selectedAnatomy,
     detectedFeatures,
+    geometryCache,
   } = useInspector();
 
   const svgRef = useRef<SVGSVGElement>(null);
@@ -129,29 +132,18 @@ export const SymbolCanvasSVG: React.FC = () => {
     );
   }, [metrics.scale, metrics.xOffset, metrics.baseline]);
 
-  // Calculate canvas metrics for drawing
+  // Guides and detector regions share the current variation's metric source.
+  const fontMetrics: Metrics | null = geometryCache?.metrics ?? null;
   const canvasMetrics = useMemo(() => {
-    if (!fontInstance) return null;
+    if (!fontMetrics) return null;
     return {
-      Baseline: metrics.baseline,
-      'Cap height': metrics.baseline - fontInstance.capHeight * metrics.scale,
-      'X-height': metrics.baseline - fontInstance.xHeight * metrics.scale,
-      Ascender: metrics.baseline - fontInstance.ascent * metrics.scale,
-      Descender: metrics.baseline - fontInstance.descent * metrics.scale,
+      Baseline: metrics.baseline - fontMetrics.baseline * metrics.scale,
+      'Cap height': metrics.baseline - fontMetrics.capHeight * metrics.scale,
+      'X-height': metrics.baseline - fontMetrics.xHeight * metrics.scale,
+      Ascender: metrics.baseline - fontMetrics.ascent * metrics.scale,
+      Descender: metrics.baseline - fontMetrics.descent * metrics.scale,
     };
-  }, [fontInstance, metrics]);
-
-  // Font metrics for feature detection
-  const fontMetrics: Metrics | null = useMemo(() => {
-    if (!fontInstance) return null;
-    return {
-      baseline: 0,
-      xHeight: fontInstance.xHeight || 0,
-      capHeight: fontInstance.capHeight || 0,
-      ascent: fontInstance.ascent || 0,
-      descent: fontInstance.descent || 0,
-    };
-  }, [fontInstance]);
+  }, [fontMetrics, metrics]);
 
   // Glyph path data (use original SVG path, not converted commands)
   const glyphPathData = useMemo(() => {
@@ -218,7 +210,7 @@ export const SymbolCanvasSVG: React.FC = () => {
       // not detected features. They short-circuit the detection path.
       if (metricFeatures.has(featureName)) {
         const y = canvasMetrics[featureName as keyof typeof canvasMetrics];
-        if (y !== undefined) {
+        if (Number.isFinite(y)) {
           elements.push(
             <g
               key={`metric-${featureName}`}
@@ -660,7 +652,9 @@ export const SymbolCanvasSVG: React.FC = () => {
               fill="currentColor"
               fontSize={14}
             >
-              Loading font...
+              {fonts[currentFontIndex]?.loadState === 'error'
+                ? `Unable to load ${fonts[currentFontIndex].name}. Choose another font or retry.`
+                : `Loading ${fonts[currentFontIndex]?.name || 'font'}…`}
             </text>
           )}
           {!glyph && fontInstance && (
@@ -754,7 +748,7 @@ export const SymbolCanvasSVG: React.FC = () => {
 
         {/* Layer 2: Side bearings */}
         <g id="side-bearings" aria-hidden="true">
-          {showDetails && (
+          {showDetails && fontMetrics && (
             <SVGGlyphBounds
               glyph={glyph}
               transform={viewportTransform}
@@ -762,8 +756,8 @@ export const SymbolCanvasSVG: React.FC = () => {
               containerHeight={metrics.height}
               colors={colors}
               idPrefix="fi"
-              ascent={fontInstance.ascent}
-              descent={fontInstance.descent}
+              ascent={fontMetrics.ascent}
+              descent={fontMetrics.descent}
             />
           )}
         </g>
