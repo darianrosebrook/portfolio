@@ -1,0 +1,37 @@
+id: FIX-GLYPH-EXPLORER-RENDERING-001
+title: 'Unify anatomy selection current glyph and rendering semantics'
+mode: fix
+lifecycle_state: active
+created_at: '2026-10-09T20:45:23.173Z'
+updated_at: '2026-10-09T20:45:23.173Z'
+created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
+blast_radius:
+  modules:
+    - 'Inspector provider Canvas SVG and comparison UI'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'ui/modules/FontInspector/**'
+    - 'utils/geometry/drawing.ts'
+    - 'app/dev/glyph-compare/**'
+    - 'app/dev/interaction-test/**'
+    - 'test/components/FontInspector*.test.tsx'
+  out: []
+invariants:
+  - 'Rendered anatomy uses authoritative current detector results and map membership rather than fabricated extrema or stale selection flags'
+acceptance:
+  - id: A1
+    given: 'both renderers selection transitions and detail visibility'
+    when: 'features glyph font and supported axes change'
+    then: 'actual current regions are rendered consistently without ghost markers or incorrect weight labels'
+  - id: A2
+    given: 'glyph comparison URL and desktop narrow resize transitions'
+    when: 'explorers initialize and resize'
+    then: 'the advertised glyph is selected and both views retain correct positive transforms and canvas sizing'
+observability:
+  - 'Component geometry assertions and native browser observations'
+rollback:
+  - 'Revert bounded explorer rendering changes'
+non_functional: {}
+contracts: []
