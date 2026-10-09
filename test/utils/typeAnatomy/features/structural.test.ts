@@ -32,6 +32,18 @@ import {
 describe('structural features (synthetic geometry)', () => {
   const metrics = standardMetrics;
   const font = mockFont();
+  // Keep SVG geometry consistent with the drawable commands in the H fixtures.
+  const hOutline =
+    'M -200 0 L -120 0 L -120 700 L -200 700 Z ' +
+    'M 120 0 L 200 0 L 200 700 L 120 700 Z ' +
+    'M -120 320 L 120 320 L 120 380 L -120 380 Z';
+  const expectedHBar = {
+    type: 'rect',
+    x: expect.closeTo(-120, 5),
+    y: expect.closeTo(320, 5),
+    width: expect.closeTo(240, 5),
+    height: expect.closeTo(60, 5),
+  };
 
   describe('hasStem', () => {
     it('detects a stem in a vertical-stem polygon', () => {
@@ -136,7 +148,7 @@ describe('structural features (synthetic geometry)', () => {
         name: 'H',
         codePoints: [72],
         path: {
-          toSVG: () => '',
+          toSVG: () => hOutline,
           commands: [
             { command: 'moveTo', args: [-200, 0] },
             { command: 'lineTo', args: [-120, 0] },
@@ -164,14 +176,11 @@ describe('structural features (synthetic geometry)', () => {
       const result = detectFeature('Crossbar', hGlyph, metrics, font);
 
       expect(result.found).toBe(true);
-      expect(result.shape?.type).toBe('rect');
-      if (result.shape?.type === 'rect') {
-        expect(result.shape.width).toBeGreaterThan(0);
-        expect(result.shape.height).toBeGreaterThan(0);
-      }
-      expect(result.location).toBeDefined();
-      expect(typeof result.location?.x).toBe('number');
-      expect(typeof result.location?.y).toBe('number');
+      expect(result.shape).toEqual(expectedHBar);
+      expect(result.location).toEqual({
+        x: expect.closeTo(0, 5),
+        y: expect.closeTo(350, 5),
+      });
     });
 
     it('detectCrossbar emits at least one rect-typed FeatureInstance for an H', async () => {
@@ -185,7 +194,7 @@ describe('structural features (synthetic geometry)', () => {
         name: 'H',
         codePoints: [72],
         path: {
-          toSVG: () => '',
+          toSVG: () => hOutline,
           commands: [
             { command: 'moveTo', args: [-200, 0] },
             { command: 'lineTo', args: [-120, 0] },
@@ -215,7 +224,7 @@ describe('structural features (synthetic geometry)', () => {
 
       expect(instances.length).toBeGreaterThan(0);
       for (const inst of instances) {
-        expect(inst.shape.type).toBe('rect');
+        expect(inst.shape).toEqual(expectedHBar);
       }
     });
   });
