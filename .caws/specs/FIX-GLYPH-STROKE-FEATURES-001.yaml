@@ -3,7 +3,7 @@ title: 'Resolve remaining stroke anatomy and legacy semantic defects'
 mode: fix
 lifecycle_state: active
 created_at: '2026-10-09T21:43:56.382Z'
-updated_at: '2026-10-09T21:48:16.400Z'
+updated_at: '2026-10-09T21:55:50.250Z'
 created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
 blast_radius:
   modules:
@@ -26,6 +26,7 @@ scope:
     - 'test/utils/typeAnatomy/features/curves.test.ts'
     - 'test/utils/typeAnatomy/features/openings.test.ts'
     - utils/typeAnatomy/detectors/serif.ts
+    - utils/typeAnatomy/hook.ts
   out: []
 invariants:
   - 'Feature identity must be supported by actual current occupied boundaries and independent semantic samples'
