@@ -1,9 +1,11 @@
 id: FIX-ANATOMY-T-ARM-001
 title: 'Separate T top arms from crossbar and stem detection'
 mode: fix
-lifecycle_state: active
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Delivered and verified T Arm hints and geometry, no vertical crossbar false positive, Arm+Stem coexistence, preserved A/H connectors. A1/A2 evidence recorded and read back against executed real-font tests and fresh local UI. No full-suite or general glyph-accuracy claim.'
 created_at: '2026-10-09T16:45:31.925Z'
-updated_at: '2026-10-09T16:45:31.925Z'
+updated_at: '2026-10-09T19:43:30.927Z'
 created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
 blast_radius:
   modules:
