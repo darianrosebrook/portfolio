@@ -37,12 +37,11 @@ contracts: []
 evidence:
   - criterion_id: A1
     status: pass
-    evidence_ref: "At 395f838788922798999a326a01961e9b134d72fb, the browser webpack regression executes without a Node require global, parses Inter Variable with 2048 units per em, and verifies distinct A outlines and advances at weights 100 and 900. It failed with require is not defined before removing the external. Installed fontkit 2.0.4 and Next 16.4.0; existing package and lockfile updates are outside this source commit."
-    recorded_at: "2026-10-09T16:14:43.378Z"
+    evidence_ref: "Tracked regression test/fontkit-browser.test.mjs compiles the client webpack configuration, executes the bundle without Node require, parses Inter Variable and checks A outlines and advance widths at weights 100 and 900. Original configuration failed with require is not defined. Prior raw execution retained in ignored test-results/fontkit-browser-test.log; generated logs are supporting runtime output, not tracked artifact citations. Installed fontkit 2.0.4 and Next 16.4.0 with separate existing dependency edits."
+    recorded_at: "2026-10-09T16:17:07.194Z"
     test_nodeid: "test/fontkit-browser.test.mjs::bundles the lazy fontkit import for a browser and preserves variable glyph outlines"
     command: npx vitest run test/fontkit-browser.test.mjs
     exit_code: 0
-    artifact_path: test-results/fontkit-browser-test.log
     commit_sha: "395f838788922798999a326a01961e9b134d72fb"
   - criterion_id: A2
     status: pass
