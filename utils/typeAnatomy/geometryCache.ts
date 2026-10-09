@@ -6,8 +6,8 @@
  * - classifyContours: Separates base/mark/hole contours
  * - flattenToSegments: Converts path to cubic segments with metadata
  *
- * The cache is keyed by (fontPostscriptName, glyphId, variationSettingsHash)
- * and invalidates when variation settings change.
+ * The cache is keyed by glyph identity, Font identity, and variation settings.
+ * Glyph invalidation removes every font context and variation for that glyph.
  */
 
 import { rayHits as geometryRayHits } from '@/utils/geometry/geometryCore';
@@ -36,9 +36,13 @@ import { rejectsAsMainBodyFragment } from './evidence/topology';
 
 /**
  * Cache storage using WeakMap for automatic garbage collection.
- * Keyed by glyph object, then by variation key string.
+ * Glyph and Font identities are both weak keys. Font-specific metrics/context
+ * cannot be reused merely because a caller supplies the same outline object.
  */
-let geometryCacheStorage = new WeakMap<Glyph, Map<string, GeometryCache>>();
+let geometryCacheStorage = new WeakMap<
+  Glyph,
+  WeakMap<Font, Map<string, GeometryCache>>
+>();
 
 /**
  * Per-font DetectionContext memo.
@@ -74,7 +78,8 @@ export function buildGeometryCache(
     : 'default';
 
   // Check cache
-  let glyphCache = geometryCacheStorage.get(glyph);
+  let fontCaches = geometryCacheStorage.get(glyph);
+  let glyphCache = fontCaches?.get(font);
   if (glyphCache?.has(variationKey)) {
     return glyphCache.get(variationKey)!;
   }
@@ -105,9 +110,13 @@ export function buildGeometryCache(
   };
 
   // Store in cache
+  if (!fontCaches) {
+    fontCaches = new WeakMap();
+    geometryCacheStorage.set(glyph, fontCaches);
+  }
   if (!glyphCache) {
     glyphCache = new Map();
-    geometryCacheStorage.set(glyph, glyphCache);
+    fontCaches.set(font, glyphCache);
   }
   glyphCache.set(variationKey, cache);
 

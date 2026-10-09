@@ -9,7 +9,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as fontkit from 'fontkit';
 import type { Font, Glyph } from 'fontkit';
-import { buildGeometryCache } from '@/utils/typeAnatomy/geometryCache';
+import {
+  buildGeometryCache,
+  invalidateGeometryCache,
+} from '@/utils/typeAnatomy/geometryCache';
 import { mockFont, mockGlyphFromPath } from '@/test/utils/fixtures/mockGlyph';
 import { detectAllFeatures } from '@/utils/typeAnatomy/detectorRegistry';
 
@@ -357,6 +360,101 @@ describe('Font Property Detection', () => {
 });
 
 describe('Variable Font Cache Invalidation', () => {
+  function sharedGlyphContexts() {
+    const glyph = mockGlyphFromPath(
+      'M0 0L20 0L20 600L0 600Z M0 800L20 800L20 820L0 820Z',
+      { minX: 0, minY: 0, maxX: 20, maxY: 820 }
+    );
+    const firstFont = Object.assign(mockFont({ unitsPerEm: 1000 }), {
+      xHeight: 500,
+      capHeight: 700,
+      ascent: 800,
+      descent: -200,
+      post: { italicAngle: 0, isFixedPitch: false },
+      'OS/2': { usWeightClass: 300 },
+    });
+    const secondFont = Object.assign(mockFont({ unitsPerEm: 2000 }), {
+      xHeight: 1000,
+      capHeight: 1400,
+      ascent: 1600,
+      descent: -400,
+      post: { italicAngle: -9, isFixedPitch: true },
+      'OS/2': { usWeightClass: 700 },
+    });
+    return { glyph, firstFont, secondFont };
+  }
+
+  it('does not inherit another Font’s metrics and context when glyph and variation identities match', () => {
+    const { glyph, firstFont, secondFont } = sharedGlyphContexts();
+    expect(firstFont.postscriptName).toBe(secondFont.postscriptName);
+    const first = buildGeometryCache(glyph, firstFont, { wght: 400 });
+    const second = buildGeometryCache(glyph, secondFont, { wght: 400 });
+    expect(second.metrics).toEqual({
+      baseline: 0,
+      xHeight: 1000,
+      capHeight: 1400,
+      ascent: 1600,
+      descent: -400,
+    });
+    expect(second.context).toEqual({
+      isSerif: false,
+      isItalic: true,
+      italicAngle: -9,
+      isMono: true,
+      weight: 700,
+      unitsPerEm: 2000,
+    });
+    expect(second.scale.eps).toBe(2);
+    expect(second.contours.map((contour) => contour.type)).toEqual([
+      'base',
+      'base',
+    ]);
+    expect(first.metrics.xHeight).toBe(500);
+    expect(first.contours.map((contour) => contour.type)).toEqual([
+      'base',
+      'mark',
+    ]);
+    expect(second.font).toBe(secondFont);
+    expect(second).not.toBe(first);
+    expect(second.filled).toBe(first.filled);
+  });
+
+  it('reuses each same-glyph same-font variation entry after visiting another font context', () => {
+    const { glyph, firstFont, secondFont } = sharedGlyphContexts();
+    const first = buildGeometryCache(glyph, firstFont, { wght: 400 });
+    const second = buildGeometryCache(glyph, secondFont, { wght: 400 });
+    expect(buildGeometryCache(glyph, firstFont, { wght: 400 })).toBe(first);
+    expect(buildGeometryCache(glyph, secondFont, { wght: 400 })).toBe(second);
+    expect(first.context.weight).toBe(300);
+    expect(second.context.weight).toBe(700);
+  });
+
+  it('invalidates every variation in every font context for a glyph while preserving unrelated glyph entries', () => {
+    const { glyph, firstFont, secondFont } = sharedGlyphContexts();
+    const entries = [firstFont, secondFont].flatMap((font) =>
+      [400, 700].map((wght) => ({
+        font,
+        wght,
+        cache: buildGeometryCache(glyph, font, { wght }),
+      }))
+    );
+    const unrelated = mockGlyphFromPath('M0 0L20 0L20 600L0 600Z', {
+      minX: 0,
+      minY: 0,
+      maxX: 20,
+      maxY: 600,
+    });
+    const unrelatedCache = buildGeometryCache(unrelated, firstFont);
+    invalidateGeometryCache(glyph);
+    for (const { font, wght, cache } of entries) {
+      const rebuilt = buildGeometryCache(glyph, font, { wght });
+      expect(rebuilt).not.toBe(cache);
+      expect(rebuilt.metrics.xHeight).toBe(font === firstFont ? 500 : 1000);
+      expect(rebuilt.context.weight).toBe(font === firstFont ? 300 : 700);
+      expect(buildGeometryCache(glyph, font, { wght })).toBe(rebuilt);
+    }
+    expect(buildGeometryCache(unrelated, firstFont)).toBe(unrelatedCache);
+  });
   it('should create different caches for different variation settings', () => {
     const font = loadTestFont('Nohemi-VF.ttf');
 
