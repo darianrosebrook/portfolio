@@ -1,0 +1,38 @@
+id: FIX-ANATOMY-T-ARM-001
+title: 'Separate T top arms from crossbar and stem detection'
+mode: fix
+lifecycle_state: active
+created_at: '2026-10-09T16:45:31.925Z'
+updated_at: '2026-10-09T16:45:31.925Z'
+created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
+blast_radius:
+  modules:
+    - 'Crossbar arm detectors and glyph hints'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/typeAnatomy/detectors/crossbar.ts'
+    - 'utils/typeAnatomy/detectors/arm.ts'
+    - 'utils/typeAnatomy/glyphFeatureHints.ts'
+    - 'test/typeAnatomy/crossbar-arm-alignment.test.ts'
+    - 'test/typeAnatomy/feature-accuracy.test.ts'
+  out: []
+invariants:
+  - 'T horizontal stroke follows the canonical Arm glossary definition'
+  - 'A and H crossbars retain correct horizontal geometry'
+acceptance:
+  - id: A1
+    given: 'T font fixtures and canonical hints'
+    when: 'features are detected'
+    then: 'Arm covers top horizontal ink and crossbar never emits the vertical stem'
+  - id: A2
+    given: 'Arm and Stem selected together'
+    when: 'reconciliation runs'
+    then: 'both anatomical regions remain present and focused regression checks pass'
+observability:
+  - 'Real-font arm coverage and orientation assertions plus hint selection checks'
+rollback:
+  - 'Revert the bounded T anatomy source commit'
+non_functional: {}
+contracts: []
