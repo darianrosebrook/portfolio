@@ -53,3 +53,11 @@ non_functional: {}
 contracts:
   - name: 'anatomy-region-coordinates'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Executed and inspected current Nohemi A at wght400 and617.41: two slanted masks contain each leg and exclude crossbar interior. Reconciliation preserves Stem,Bar,Crotch together. Native browser confirmed A400 and actual617.41 after drag with all three selected; inspected ignored captures A-400-stem-final.png and A-varied-selected-final.png under test-results/anatomy-fix. Tests checked at a9b65f8c; bb576bb0 is comment-only."
+    recorded_at: "2026-10-09T19:41:25.064Z"
+    command: "pnpm exec vitest run test/typeAnatomy test/utils/typeAnatomy test/utils/geometry/geometryCore.test.ts test/fontkit-browser.test.mjs --reporter=verbose"
+    exit_code: 0
+    commit_sha: a9b65f8c17faffef9941cb81c13c3a228d9b5215
