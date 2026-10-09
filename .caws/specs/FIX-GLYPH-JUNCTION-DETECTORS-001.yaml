@@ -1,0 +1,39 @@
+id: FIX-GLYPH-JUNCTION-DETECTORS-001
+title: 'Locate current exterior and interior diagonal junctions'
+mode: fix
+lifecycle_state: active
+created_at: '2026-10-09T23:26:14.762Z'
+updated_at: '2026-10-09T23:26:14.762Z'
+created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
+blast_radius:
+  modules:
+    - 'Registered apex vertex and crotch interpretation'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/typeAnatomy/detectors/apex.ts'
+    - 'utils/typeAnatomy/detectors/vertex.ts'
+    - 'utils/typeAnatomy/detectors/crotch.ts'
+    - 'test/typeAnatomy/junction-features.test.ts'
+  out: []
+invariants:
+  - 'Current effective slant informs source interpretation while output coordinates remain design units on actual occupied boundaries'
+  - 'Interior junctions remain distinct from exterior tips and free terminations cannot become meeting points'
+acceptance:
+  - id: A1
+    given: 'A V W M and hostile glyphs across bundled supported axis corners'
+    when: 'junction detectors execute'
+    then: 'exterior apex and vertex and interior crotch follow distinct actual boundaries without missing slanted or asymmetric meetings'
+  - id: A2
+    given: 'effective glyph-owned variation context and finite source outlines'
+    when: 'legacy and registered junction APIs are exercised'
+    then: 'current-source coordinates and hostile controls agree without fake fonts or altered geometry'
+observability:
+  - 'Raw source point probes semantic checks and native occupied-path observations'
+rollback:
+  - 'Revert owned junction repair commits preserving unrelated work'
+non_functional: {}
+contracts:
+  - name: 'actual-diagonal-junctions'
+    type: behavior
