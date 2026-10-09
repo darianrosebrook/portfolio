@@ -27,7 +27,7 @@ invariants:
   - 'Region coordinates remain in font design units and are derived from the current glyph'
   - 'Feature hints follow the canonical anatomy glossary rather than manufacture detector truth'
   - 'Existing vertical stems and A/H crossbars retain correct geometry'
-  - 'Unrelated dependency edits and known detector gaps are preserved'
+  - 'Unrelated dependency edits are preserved and validation is not weakened to retain or hide detector failures'
 acceptance:
   - id: A1
     given: 'Nohemi A at weights 400 and approximately 617 with Bar Crotch and Stem selected'
