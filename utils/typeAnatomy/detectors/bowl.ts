@@ -1,333 +1,266 @@
-/**
- * Bowl feature detector.
- *
- * A bowl is a fully enclosed curved stroke (e.g., in 'b', 'd', 'o', 'p', 'q').
- * Uses the same contour-based pattern as counter.
- *
- * Fixed in v1:
- * - Uses contour classification as primary detection
- * - Scale-aware step sizes for radial sweep fallback
- * - Properly distinguishes bowl from counter
- */
-
-import { getHoleContours } from '../geometryCache';
-import { rayHits, isInside } from '@/utils/geometry/geometryCore';
-import { polylineToPolygon, rectToPolygon } from '../evidence/regionFromShape';
+/** Curved occupied strokes enclosing a cavity, localized to their own part. */
+import {
+  getFilledGeometry,
+  occupiedRayIntervals,
+  contourWinding,
+  type FilledBoundary,
+  type FilledGeometry,
+} from '@/utils/geometry/filledGeometry';
+import { eyeFloor } from './eye';
+import { detectStem } from './stem';
+import { detectCrossbar } from './crossbar';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 
-/**
- * Detects bowl features on a glyph.
- * Returns circle or polyline shapes tracing the bowl regions.
- */
 export function detectBowl(geo: GeometryCache): FeatureInstance[] {
-  const { glyph, metrics, scale } = geo;
-
-  if (!glyph?.path?.commands || !glyph.bbox) {
-    return [];
-  }
-
-  const instances: FeatureInstance[] = [];
-  const { stemWidth } = scale;
-
-  // Primary method: detect bowls from base contours that are enclosed and curved
-  // A bowl is a curved outer contour, while a counter is a hole contour
-  const holeContours = getHoleContours(geo);
-
-  // If there are hole contours, the glyph likely has bowls
-  // The bowl is the outer curved stroke that encloses the counter
-  if (holeContours.length > 0) {
-    for (const hole of holeContours) {
-      // The bowl is the enclosing curved region around this hole
-      // Use the hole center to find the bowl's extent
-      const cx = (hole.bbox.minX + hole.bbox.maxX) / 2;
-      const cy = (hole.bbox.minY + hole.bbox.maxY) / 2;
-
-      // Trace outward from hole center to find bowl boundary
-      const bowlOutline = traceBowlFromHole(geo, { x: cx, y: cy });
-
-      if (bowlOutline && bowlOutline.length >= 8) {
-        // Calculate bounding rect from the outline points
-        const minX = Math.min(...bowlOutline.map((p) => p.x));
-        const maxX = Math.max(...bowlOutline.map((p) => p.x));
-        const minY = Math.min(...bowlOutline.map((p) => p.y));
-        const maxY = Math.max(...bowlOutline.map((p) => p.y));
-
-        // Region: prefer the traced bowl outline (tighter visual match to
-        // the actual bowl curve) over the bounding rect.
-        const rect = {
-          type: 'rect' as const,
-          x: minX,
-          y: minY,
-          width: maxX - minX,
-          height: maxY - minY,
-        };
-        instances.push({
-          id: 'bowl',
-          shape: rect,
-          region: {
-            kind: 'stroke',
-            points: polylineToPolygon({ points: bowlOutline }),
-          },
-          confidence: 0.85,
-          anchors: {
-            center: { x: cx, y: cy },
-            holeCenter: { x: cx, y: cy },
-          },
-          debug: {
-            source: 'hole-contour',
-            holeIndex: hole.index,
-            outlinePoints: bowlOutline.length,
-          },
-        });
-      } else {
-        // Use rect approximation based on hole bbox + stem width padding
-        const holeWidth = hole.bbox.maxX - hole.bbox.minX;
-        const holeHeight = hole.bbox.maxY - hole.bbox.minY;
-        const padding = stemWidth * 1.2;
-        const rect = {
-          type: 'rect' as const,
-          x: hole.bbox.minX - padding,
-          y: hole.bbox.minY - padding,
-          width: holeWidth + padding * 2,
-          height: holeHeight + padding * 2,
-        };
-
-        instances.push({
-          id: 'bowl',
-          shape: rect,
-          region: { kind: 'stroke', points: rectToPolygon(rect) },
-          confidence: 0.7,
-          anchors: {
-            center: { x: cx, y: cy },
-          },
-          debug: { source: 'hole-approximation' },
-        });
+  if (!geo.glyph?.path?.commands || !geo.glyph.bbox) return [];
+  const filled = geo.filled ?? getFilledGeometry(geo.glyph);
+  const stems = detectStem(geo);
+  const bars = detectCrossbar(geo);
+  return filled.enclosedRegions.flatMap((hole, index) => {
+    // Distributed turning distinguishes a curved enclosure from a straight
+    // counter, independent of how many vertices represent a straight edge.
+    if (!hasCurvedBoundary(hole.points) || hole.bodyIndex === undefined)
+      return [];
+    const body = filled.bodies[hole.bodyIndex];
+    const center = interiorCenter(hole);
+    if (!center) return [];
+    const floor = eyeFloor(hole, geo);
+    let outline: Point2D[];
+    if (floor) {
+      // The rounded body continues below an eye's horizontal floor. A radial
+      // probe there ends at the bar, so use the owning outer boundary instead.
+      // A neighboring same-body cavity identifies the compound's partition.
+      const neighbor = filled.enclosedRegions.find(
+        (other) =>
+          other !== hole &&
+          other.bodyIndex === hole.bodyIndex &&
+          other.bbox.maxX < hole.bbox.minX
+      );
+      outline = neighbor
+        ? clipRight(body.points, (neighbor.bbox.maxX + hole.bbox.minX) / 2)
+        : body.points;
+    } else {
+      outline = adjacentOutline(filled, hole, center, geo.scale.overshoot);
+    }
+    if (outline.length < 12) return [];
+    let cavity = hole.points;
+    for (const stem of stems) {
+      if (!stem.region) continue;
+      const stemXs = stem.region.points.map((p) => p.x);
+      const minX = Math.min(...stemXs),
+        maxX = Math.max(...stemXs);
+      // An attachment bounds this bowl on the cavity-facing stem edge.
+      if (maxX < center.x && minX < hole.bbox.minX) {
+        outline = clipRight(outline, maxX);
+        cavity = clipRight(cavity, maxX);
+      } else if (minX > center.x && maxX > hole.bbox.maxX) {
+        cavity = clipRight(
+          cavity.map((p) => ({ x: -p.x, y: p.y })),
+          -minX
+        ).map((p) => ({ x: -p.x, y: p.y }));
+        outline = clipRight(
+          outline.map((p) => ({ x: -p.x, y: p.y })),
+          -minX
+        ).map((p) => ({ x: -p.x, y: p.y }));
       }
     }
-    return instances;
-  }
-
-  // Fallback: scan-based detection for glyphs without hole contours
-  // (e.g., stylized fonts where hole detection fails)
-  if (!hasBowlCharacteristics(geo)) {
-    return instances;
-  }
-
-  // Try to find bowl seed in x-height zone first
-  let seed = findBowlSeed(geo, metrics.baseline, metrics.xHeight);
-
-  // If not found, try cap-height zone
-  if (!seed) {
-    seed = findBowlSeed(geo, metrics.xHeight, metrics.capHeight);
-  }
-
-  if (!seed) {
-    return instances;
-  }
-
-  const outline = traceBowlRegion(geo, seed);
-  if (outline && outline.length >= 8) {
-    // Calculate bounding rect from the outline points
-    const minX = Math.min(...outline.map((p) => p.x));
-    const maxX = Math.max(...outline.map((p) => p.x));
-    const minY = Math.min(...outline.map((p) => p.y));
-    const maxY = Math.max(...outline.map((p) => p.y));
-    const centroid = calculateCentroid(outline);
-
-    // Region: prefer the traced outline (tighter than the bounding rect).
+    let points = subtractLoop(outline, cavity);
+    if (floor) {
+      const bar = bars.find(
+        (bar) =>
+          bar.shape.type === 'rect' &&
+          Math.abs(
+            bar.shape.y + bar.shape.height - (floor[0].y + floor[1].y) / 2
+          ) <= geo.scale.eps
+      );
+      if (bar?.shape.type === 'rect') {
+        const above = clipAbove(outline, bar.shape.y + bar.shape.height);
+        const below = clipBelow(outline, bar.shape.y);
+        const left = clipRight(
+          outline.map((p) => ({ x: -p.x, y: p.y })),
+          -bar.shape.x
+        ).map((p) => ({ x: -p.x, y: p.y }));
+        points = joinLoops([
+          subtractLoop(
+            above,
+            clipAbove(cavity, bar.shape.y + bar.shape.height)
+          ),
+          below,
+          clipBelow(
+            clipAbove(left, bar.shape.y),
+            bar.shape.y + bar.shape.height
+          ),
+        ]);
+      }
+    }
+    const xs = outline.map((p) => p.x),
+      ys = outline.map((p) => p.y);
     const rect = {
       type: 'rect' as const,
-      x: minX,
-      y: minY,
-      width: maxX - minX,
-      height: maxY - minY,
+      x: Math.min(...xs),
+      y: Math.min(...ys),
+      width: Math.max(...xs) - Math.min(...xs),
+      height: Math.max(...ys) - Math.min(...ys),
     };
-    instances.push({
-      id: 'bowl',
-      shape: rect,
-      region: {
-        kind: 'stroke',
-        points: polylineToPolygon({ points: outline }),
+    return [
+      {
+        id: 'bowl' as const,
+        shape: rect,
+        region: { kind: 'stroke' as const, points },
+        confidence: 0.9,
+        anchors: { center, holeCenter: center },
+        debug: {
+          source: floor
+            ? 'eye-owning-curved-body'
+            : 'cavity-adjacent-occupied-boundary',
+          holeIndex: index,
+          bodyIndex: hole.bodyIndex,
+        },
       },
-      confidence: 0.65,
-      anchors: {
-        seed,
-        center: centroid,
+    ];
+  });
+}
+
+function interiorCenter(hole: FilledBoundary): Point2D | undefined {
+  const cx = (hole.bbox.minX + hole.bbox.maxX) / 2;
+  for (const fraction of [0.5, 0.4, 0.6]) {
+    const point = {
+      x: cx,
+      y: hole.bbox.minY + (hole.bbox.maxY - hole.bbox.minY) * fraction,
+    };
+    if (contourWinding(hole.points, point)) return point;
+  }
+}
+
+/** First ink adjacent to this cavity supplies its outer edge. Long joined
+ * strokes are bounded by the surrounding measured stroke thickness rather
+ * than followed into an ascender, another part, or a disconnected accent.
+ */
+function adjacentOutline(
+  filled: FilledGeometry,
+  hole: FilledBoundary,
+  center: Point2D,
+  length: number
+): Point2D[] {
+  const cavity: FilledGeometry = {
+    contours: [
+      {
+        index: 0,
+        points: hole.points,
+        bbox: hole.bbox,
+        signedArea: signedArea(hole.points),
+        startIndex: 0,
+        endIndex: hole.points.length - 1,
       },
-      debug: {
-        source: 'scanline-fallback',
-        outlinePoints: outline.length,
-      },
-    });
-  }
-
-  return instances;
-}
-
-/**
- * Traces bowl boundary by radiating outward from hole center.
- * Picks the OUTER boundary (furthest hit before leaving glyph).
- */
-function traceBowlFromHole(
-  geo: GeometryCache,
-  holeCenter: Point2D
-): Point2D[] | null {
-  const { svgShape, scale } = geo;
-  const { overshoot } = scale;
-
-  const angularStep = 12;
-  const outline: Point2D[] = [];
-
-  for (let angleDeg = 0; angleDeg < 360; angleDeg += angularStep) {
-    const rad = (angleDeg * Math.PI) / 180;
-    const { points } = rayHits(svgShape, holeCenter, rad, overshoot);
-
-    if (points.length >= 2) {
-      // Pick the OUTER intersection (furthest from center that's still part of bowl)
-      // For a bowl, we want the outer edge of the stroke, not the inner hole edge
-      const outerPt = points[points.length - 1];
-      outline.push(outerPt);
-    } else if (points.length === 1) {
-      outline.push(points[0]);
-    }
-  }
-
-  return outline.length >= 8 ? outline : null;
-}
-
-/**
- * Checks if glyph has bowl characteristics using vertical scanlines.
- */
-function hasBowlCharacteristics(geo: GeometryCache): boolean {
-  const { glyph, svgShape, scale } = geo;
-  const { bboxW, bboxH, overshoot } = scale;
-
-  const steps = 5;
-  let found = 0;
-
-  for (let i = 1; i < steps; i++) {
-    const x = glyph.bbox.minX + (bboxW * i) / steps;
-    const origin = { x, y: glyph.bbox.minY - overshoot * 0.1 };
-    const { points } = rayHits(svgShape, origin, Math.PI / 2, overshoot);
-
-    // Bowl should have multiple intersections (enclosed region)
-    if (points.length >= 4) {
-      const relevantPoints = points.filter(
-        (p) =>
-          p.y > glyph.bbox.minY + bboxH * 0.1 &&
-          p.y < glyph.bbox.maxY - bboxH * 0.1
-      );
-
-      if (relevantPoints.length >= 2) {
-        found++;
-      }
-    }
-  }
-
-  return found >= 2;
-}
-
-/**
- * Finds a seed point inside a bowl region within specified vertical range.
- */
-function findBowlSeed(
-  geo: GeometryCache,
-  yMin: number,
-  yMax: number
-): Point2D | null {
-  const { glyph, svgShape, scale } = geo;
-  const { bboxW, overshoot } = scale;
-
-  const bands = 5;
-  const delta = bboxW * 0.01;
-
-  for (let i = 1; i < bands; i++) {
-    const y = yMin + (i * (yMax - yMin)) / bands;
-    const origin = { x: glyph.bbox.minX - overshoot * 0.1, y };
-    const { points } = rayHits(svgShape, origin, 0, overshoot);
-
-    if (points.length >= 2) {
-      // Look for interior spans
-      for (let j = 0; j < points.length - 1; j += 2) {
-        const x1 = points[j].x;
-        const x2 = points[j + 1].x;
-        const testX = (x1 + x2) / 2;
-
-        for (const nudge of [0, -delta, delta]) {
-          const testPt = { x: testX + nudge, y };
-          try {
-            if (isInside(glyph, testPt)) {
-              return testPt;
-            }
-          } catch {
-            continue;
-          }
-        }
-      }
-    }
-  }
-
-  return null;
-}
-
-/**
- * Traces a bowl region by radial sweep from seed point.
- * Uses scale-aware step sizes.
- */
-function traceBowlRegion(geo: GeometryCache, seed: Point2D): Point2D[] | null {
-  const { glyph, scale } = geo;
-  const { eps, stemWidth, overshoot } = scale;
-
-  const angularStep = 12;
-  const radialStep = Math.max(eps * 4, stemWidth * 0.15);
-  const maxRadius = overshoot;
-
-  const outline: Point2D[] = [];
-
-  for (let angleDeg = 0; angleDeg < 360; angleDeg += angularStep) {
-    const rad = (angleDeg * Math.PI) / 180;
-    let len = radialStep;
-    let lastInside: Point2D | null = null;
-
-    while (len < maxRadius) {
-      const pt = {
-        x: seed.x + Math.cos(rad) * len,
-        y: seed.y + Math.sin(rad) * len,
-      };
-
-      try {
-        if (!isInside(glyph, pt)) {
-          break;
-        }
-        lastInside = pt;
-        len += radialStep;
-      } catch {
-        break;
-      }
-    }
-
-    if (lastInside) {
-      outline.push(lastInside);
-    }
-  }
-
-  return outline.length >= 8 ? outline : null;
-}
-
-/**
- * Calculates the centroid of a polygon.
- */
-function calculateCentroid(points: Point2D[]): Point2D {
-  let sumX = 0;
-  let sumY = 0;
-
-  for (const p of points) {
-    sumX += p.x;
-    sumY += p.y;
-  }
-
-  return {
-    x: sumX / points.length,
-    y: sumY / points.length,
+    ],
+    bodies: [],
+    enclosedRegions: [],
+    tolerance: filled.tolerance,
   };
+  const probes = Array.from({ length: 180 }, (_, index) => {
+    const angle = (index * Math.PI * 2) / 180;
+    const cavityEdge = occupiedRayIntervals(cavity, center, angle, length)[0]
+      ?.end;
+    if (cavityEdge === undefined) return undefined;
+    const interval = occupiedRayIntervals(filled, center, angle, length).find(
+      (span) =>
+        span.start >= cavityEdge - filled.tolerance * 2 && span.end > cavityEdge
+    );
+    return interval
+      ? { angle, interval, width: interval.end - interval.start }
+      : undefined;
+  }).filter((probe): probe is NonNullable<typeof probe> => probe !== undefined);
+  if (probes.length < 170) return [];
+  const widths = probes.map((probe) => probe.width).sort((a, b) => a - b);
+  const typical = widths[Math.floor(widths.length / 2)];
+  // Near a stem attachment the cavity-facing straight wall belongs to the
+  // backbone. Bounding the local ring also bounds its marker/selection box.
+  return probes.map(({ angle, interval }) => {
+    const distance = Math.min(interval.end, interval.start + typical * 1.8);
+    return {
+      x: center.x + Math.cos(angle) * distance,
+      y: center.y + Math.sin(angle) * distance,
+    };
+  });
+}
+
+/** Sutherland-Hodgman clipping preserves the exact outer curve vertices. */
+function clipRight(points: Point2D[], x: number): Point2D[] {
+  const result: Point2D[] = [];
+  for (let i = 0; i < points.length; i++) {
+    const a = points[i],
+      b = points[(i + 1) % points.length];
+    if (a.x >= x) result.push(a);
+    if (a.x < x !== b.x < x)
+      result.push({ x, y: a.y + ((b.y - a.y) * (x - a.x)) / (b.x - a.x) });
+  }
+  return result;
+}
+
+function signedArea(points: Point2D[]): number {
+  return (
+    points.reduce((sum, a, index) => {
+      const b = points[(index + 1) % points.length];
+      return sum + a.x * b.y - a.y * b.x;
+    }, 0) / 2
+  );
+}
+/** A doubled bridge preserves winding for the enclosed cavity. */
+function subtractLoop(outer: Point2D[], excluded: Point2D[]): Point2D[] {
+  if (outer.length < 3) return [];
+  if (excluded.length < 3) return outer;
+  let loop = excluded;
+  if (Math.sign(signedArea(loop)) === Math.sign(signedArea(outer)))
+    loop = loop.slice().reverse();
+  return [...outer, outer[0], loop[0], ...loop.slice(1), loop[0], outer[0]];
+}
+
+function clipAbove(points: Point2D[], y: number): Point2D[] {
+  return clipRight(
+    points.map((p) => ({ x: p.y, y: p.x })),
+    y
+  ).map((p) => ({ x: p.y, y: p.x }));
+}
+function clipBelow(points: Point2D[], y: number): Point2D[] {
+  return clipRight(
+    points.map((p) => ({ x: -p.y, y: p.x })),
+    -y
+  ).map((p) => ({ x: p.y, y: -p.x }));
+}
+function joinLoops(loops: Point2D[][]): Point2D[] {
+  const valid = loops.filter(
+    (loop) => loop.length >= 3 && Math.abs(signedArea(loop)) > 1e-6
+  );
+  if (!valid.length) return [];
+  const first = valid[0][0];
+  return valid.flatMap((loop) => [
+    first,
+    loop[0],
+    ...loop.slice(1),
+    loop[0],
+    first,
+  ]);
+}
+
+/** Rounded boundaries distribute turning over their perimeter. A subdivided
+ * polygon supplies long runs of zero turning and isolated angular corners.
+ */
+function hasCurvedBoundary(points: Point2D[]): boolean {
+  if (points.length < 12) return false;
+  let curved = 0,
+    perimeter = 0;
+  for (let i = 0; i < points.length; i++) {
+    const a = points[(i + points.length - 1) % points.length],
+      b = points[i],
+      c = points[(i + 1) % points.length];
+    const u = { x: b.x - a.x, y: b.y - a.y },
+      v = { x: c.x - b.x, y: c.y - b.y };
+    const length = Math.hypot(v.x, v.y);
+    const turn = Math.abs(
+      Math.atan2(u.x * v.y - u.y * v.x, u.x * v.x + u.y * v.y)
+    );
+    perimeter += length;
+    if (turn > 0.001 && turn < Math.PI / 4) curved += length;
+  }
+  return curved > perimeter * 0.25;
 }

@@ -11,8 +11,12 @@
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
-import type { FeatureInstance, GeometryCache } from '../types';
-import { rectToPolygon } from '../evidence/regionFromShape';
+import type { FeatureInstance, GeometryCache, Point2D } from '../types';
+import {
+  getFilledGeometry,
+  occupiedRayIntervals,
+  containsFilledPoint,
+} from '@/utils/geometry/filledGeometry';
 
 /**
  * Represents a stem candidate from scanline analysis.
@@ -30,145 +34,265 @@ interface StemCandidate {
  * Returns rectangle or line shapes at detected stem locations.
  */
 export function detectStem(geo: GeometryCache): FeatureInstance[] {
-  const { glyph, metrics, svgShape, scale, italicAngle } = geo;
+  const { glyph } = geo;
 
   if (!glyph?.path?.commands || !glyph.bbox) {
     return [];
   }
 
   const backbones = traceBackbones(geo);
-  if (backbones.length > 0) return backbones;
+  if (backbones.length) return backbones;
+  const opposed = traceOpposedBackbones(geo);
+  return opposed.length ? opposed : traceSharedBackbones(geo);
+}
 
-  const instances: FeatureInstance[] = [];
-  const { bboxW, bboxH, stemWidth, overshoot } = scale;
-
-  // Italic angle compensation (convert degrees to radians)
-  const italicRad = (italicAngle * Math.PI) / 180;
-  const italicTan = Math.tan(italicRad);
-
-  // Determine stem vertical extent based on glyph class
-  const isUppercase = glyph.bbox.maxY > metrics.xHeight + bboxH * 0.1;
-  const stemTop = isUppercase
-    ? Math.min(glyph.bbox.maxY, metrics.capHeight)
-    : Math.min(glyph.bbox.maxY, metrics.xHeight);
-  const stemBottom = Math.max(glyph.bbox.minY, metrics.baseline);
-
-  // Minimum thickness threshold: use stemWidth estimate or 3% of bbox
-  const THICK = Math.max(stemWidth * 0.6, bboxW * 0.03);
-
-  // Scan multiple bands between stem extent
-  const bands = 5;
-  const candidates: StemCandidate[] = [];
-
-  for (let i = 1; i < bands; i++) {
-    const y = stemBottom + (i * (stemTop - stemBottom)) / bands;
-    const origin = { x: glyph.bbox.minX - overshoot * 0.1, y };
-    const { points } = rayHits(svgShape, origin, 0, overshoot);
-
-    // Points are sorted left-to-right; pairs are filled spans
-    for (let j = 0; j < points.length - 1; j += 2) {
-      const x1 = points[j].x;
-      const x2 = points[j + 1].x;
-      const width = x2 - x1;
-
-      if (width >= THICK) {
-        // For italic fonts, compensate midX position based on y
-        // This accounts for the slant when checking vertical alignment
-        const adjustedMidX = (x1 + x2) / 2 - (y - stemBottom) * italicTan;
-
-        candidates.push({
-          x1,
-          x2,
-          midX: adjustedMidX,
-          y,
-          width,
-        });
-      }
-    }
+/** Opposed source walls establish a corridor even when attached arms occupy
+ * most horizontal sample rows. Independent filled probes through the entire
+ * corridor retain its width through joins and reject arm ends or empty gaps.
+ */
+function traceOpposedBackbones(geo: GeometryCache): FeatureInstance[] {
+  const filled = geo.filled ?? getFilledGeometry(geo.glyph);
+  const edges = [...geo.segments];
+  let start: Point2D | undefined;
+  for (const segment of geo.segments) {
+    if (segment.type === 'moveTo') start = segment.params[0];
+    if (segment.type === 'closePath' && start && segment.params[0])
+      edges.push({ type: 'lineTo', params: [segment.params[0], start] });
   }
-
-  // Group candidates by (slant-adjusted) midX position
-  const xTolerance = stemWidth * 0.5;
-  const groups = groupByMidX(candidates, xTolerance);
-
-  // For each group with enough samples, emit a stem
-  for (const group of groups) {
-    if (group.length < 2) continue;
-
-    // Calculate average position and dimensions
-    const avgX1 = group.reduce((s, c) => s + c.x1, 0) / group.length;
-    const avgX2 = group.reduce((s, c) => s + c.x2, 0) / group.length;
-    const avgMidX = group.reduce((s, c) => s + c.midX, 0) / group.length;
-    const avgWidth = avgX2 - avgX1;
-
-    // Check midX drift (stem should be aligned along slant axis)
-    const midXs = group.map((c) => c.midX);
-    const midXVariance =
-      midXs.reduce((s, x) => s + (x - avgMidX) ** 2, 0) / midXs.length;
-    const midXStdDev = Math.sqrt(midXVariance);
-
-    // Reject if midX drifts too much (not a true stem)
-    if (midXStdDev > stemWidth * 0.3) {
+  const walls: Array<{ x: number; bottom: number; top: number }> = [];
+  for (const edge of edges) {
+    if (edge.type !== 'lineTo' || edge.params.length !== 2) continue;
+    const [a, b] = edge.params;
+    if (
+      Math.abs(a.x - b.x) > geo.scale.eps ||
+      Math.abs(a.y - b.y) <= geo.scale.eps
+    )
       continue;
-    }
-
-    // Check width consistency
-    const widths = group.map((c) => c.width);
-    const avgWidthActual = widths.reduce((s, w) => s + w, 0) / widths.length;
-    const widthVariance =
-      widths.reduce((s, w) => s + (w - avgWidthActual) ** 2, 0) / widths.length;
-    const widthStdDev = Math.sqrt(widthVariance);
-
-    const isConsistent = widthStdDev < avgWidthActual * 0.4;
-    const confidence = isConsistent
-      ? Math.min(0.9, 0.5 + group.length * 0.1)
-      : 0.5;
-
-    // For italic fonts, emit a parallelogram-like shape
-    // For now, still use rect but note the slant in debug
-    const bottomMidX = avgMidX + (stemBottom - stemBottom) * italicTan;
-    const topMidX = avgMidX + (stemTop - stemBottom) * italicTan;
-
-    const rect = {
-      type: 'rect' as const,
-      x: avgX1,
-      y: stemBottom,
-      width: avgWidth,
-      height: stemTop - stemBottom,
-    };
-
-    instances.push({
-      id: 'stem',
-      shape: rect,
-      region: { kind: 'stroke', points: rectToPolygon(rect) },
-      confidence,
-      anchors: {
-        top: { x: topMidX + avgWidth / 2, y: stemTop },
-        bottom: { x: bottomMidX + avgWidth / 2, y: stemBottom },
-        center: {
-          x: (bottomMidX + topMidX) / 2 + avgWidth / 2,
-          y: (stemTop + stemBottom) / 2,
-        },
-      },
-      debug: {
-        sampleCount: group.length,
-        thickness: avgWidth,
-        midXStdDev,
-        widthStdDev,
-        italicCompensation: italicRad,
-      },
-    });
+    const x = (a.x + b.x) / 2;
+    const existing = walls.find(
+      (wall) => Math.abs(wall.x - x) <= geo.scale.eps
+    );
+    if (existing) {
+      existing.bottom = Math.min(existing.bottom, a.y, b.y);
+      existing.top = Math.max(existing.top, a.y, b.y);
+    } else
+      walls.push({ x, bottom: Math.min(a.y, b.y), top: Math.max(a.y, b.y) });
   }
+  const candidates: FeatureInstance[] = [];
+  walls.sort((a, b) => a.x - b.x);
+  for (let i = 0; i < walls.length; i++)
+    for (let j = i + 1; j < walls.length; j++) {
+      const left = walls[i],
+        right = walls[j];
+      const overlapBottom = Math.max(left.bottom, right.bottom),
+        overlapTop = Math.min(left.top, right.top);
+      if (overlapTop - overlapBottom <= geo.scale.eps) continue;
+      const width = right.x - left.x;
+      const longer =
+        left.top - left.bottom >= right.top - right.bottom ? left : right;
+      const bottom = Math.max(geo.metrics.baseline, longer.bottom),
+        top = longer.top;
+      const height = top - bottom;
+      // Opposed walls supply stronger evidence than a one-edge fit, including
+      // heavy shafts shorter than two widths. Small terminal faces supply
+      // neither a substantial body-height corridor nor continuous shaft ink.
+      if (
+        height < geo.scale.bboxH * 0.3 ||
+        height < width ||
+        width <= geo.scale.eps
+      )
+        continue;
+      if (height < width * 1.5) {
+        // A heavy backbone can be nearly as wide as its visible shaft. Its
+        // attachment beyond the opposed walls distinguishes it from a filled
+        // square or a broad horizontal terminal face.
+        const attached = [bottom - height * 0.05, top + height * 0.05].some(
+          (y) =>
+            occupiedRayIntervals(
+              filled,
+              { x: geo.glyph.bbox.minX - geo.scale.eps, y },
+              0,
+              geo.scale.overshoot
+            ).some(
+              (span) =>
+                span.near.x < right.x &&
+                span.far.x > left.x &&
+                (span.near.x < left.x - geo.scale.eps ||
+                  span.far.x > right.x + geo.scale.eps)
+            )
+        );
+        if (!attached) continue;
+      }
+      const wallY = (overlapBottom + overlapTop) / 2;
+      if (
+        !containsFilledPoint(filled, { x: left.x + geo.scale.eps, y: wallY }) ||
+        !containsFilledPoint(filled, { x: right.x - geo.scale.eps, y: wallY })
+      )
+        continue;
+      let occupied = true;
+      for (let band = 1; band < 32 && occupied; band++) {
+        const y = bottom + (height * band) / 32;
+        for (const depth of [0.1, 0.5, 0.9]) {
+          if (!containsFilledPoint(filled, { x: left.x + width * depth, y }))
+            occupied = false;
+        }
+      }
+      if (!occupied) continue;
+      const rect = {
+        type: 'rect' as const,
+        x: left.x,
+        y: bottom,
+        width,
+        height,
+      };
+      const points = [
+        { x: left.x, y: bottom },
+        { x: right.x, y: bottom },
+        { x: right.x, y: top },
+        { x: left.x, y: top },
+      ];
+      candidates.push({
+        id: 'stem',
+        shape: rect,
+        region: { kind: 'stroke', points },
+        confidence: 0.9,
+        anchors: {
+          bottom: { x: (left.x + right.x) / 2, y: bottom },
+          top: { x: (left.x + right.x) / 2, y: top },
+        },
+        debug: {
+          source: 'opposed-source-walls',
+          thickness: width,
+          edgeBottom: bottom,
+          edgeTop: top,
+          sampleCount: 31,
+        },
+      });
+    }
+  // Prefer the narrow shaft over wider corridors composed from several parts.
+  candidates.sort(
+    (a, b) =>
+      (a.shape as { width: number }).width -
+      (b.shape as { width: number }).width
+  );
+  const result: FeatureInstance[] = [];
+  for (const candidate of candidates) {
+    const rect = candidate.shape as Extract<
+      FeatureInstance['shape'],
+      { type: 'rect' }
+    >;
+    if (
+      result.some((instance) => {
+        const other = instance.shape as Extract<
+          FeatureInstance['shape'],
+          { type: 'rect' }
+        >;
+        return (
+          Math.min(rect.x + rect.width, other.x + other.width) >
+            Math.max(rect.x, other.x) &&
+          Math.min(rect.y + rect.height, other.y + other.height) >
+            Math.max(rect.y, other.y)
+        );
+      })
+    )
+      continue;
+    result.push(candidate);
+  }
+  return result;
+}
 
-  return instances;
+/** Facing cavities in the same occupied body support a shared upright.
+ * Its height comes from the actual vertical ink interval between the cavities;
+ * disconnected marks and moving curved outer walls provide no such attachment.
+ */
+function traceSharedBackbones(geo: GeometryCache): FeatureInstance[] {
+  const filled = geo.filled ?? getFilledGeometry(geo.glyph);
+  const result: FeatureInstance[] = [];
+  for (let i = 0; i < filled.enclosedRegions.length; i++) {
+    for (let j = i + 1; j < filled.enclosedRegions.length; j++) {
+      const [left, right] = [
+        filled.enclosedRegions[i],
+        filled.enclosedRegions[j],
+      ].sort((a, b) => a.bbox.minX - b.bbox.minX);
+      if (left.bodyIndex === undefined || left.bodyIndex !== right.bodyIndex)
+        continue;
+      const x1 = left.bbox.maxX,
+        x2 = right.bbox.minX;
+      const gap = x2 - x1;
+      if (
+        gap <= geo.scale.eps ||
+        filled.enclosedRegions.some(
+          (other) =>
+            other !== left &&
+            other !== right &&
+            other.bodyIndex === left.bodyIndex &&
+            other.bbox.minX > left.bbox.maxX &&
+            other.bbox.maxX < right.bbox.minX
+        )
+      )
+        continue;
+      const centerX = (x1 + x2) / 2;
+      const body = filled.bodies[left.bodyIndex];
+      const intervals = occupiedRayIntervals(
+        filled,
+        { x: centerX, y: body.bbox.minY - geo.scale.eps },
+        Math.PI / 2,
+        body.bbox.maxY - body.bbox.minY + geo.scale.eps * 2
+      );
+      const joinY =
+        (Math.max(left.bbox.minY, right.bbox.minY) +
+          Math.min(left.bbox.maxY, right.bbox.maxY)) /
+        2;
+      const interval = intervals.find(
+        (span) => span.near.y <= joinY && span.far.y >= joinY
+      );
+      if (!interval || interval.far.y - interval.near.y < gap * 2) continue;
+      const lower: Point2D[] = [],
+        upper: Point2D[] = [];
+      const bands = 64;
+      for (let band = 1; band < bands; band++) {
+        const y =
+          interval.near.y + ((interval.far.y - interval.near.y) * band) / bands;
+        const span = occupiedRayIntervals(
+          filled,
+          { x: body.bbox.minX - geo.scale.eps, y },
+          0,
+          body.bbox.maxX - body.bbox.minX + geo.scale.eps * 2
+        ).find(
+          (candidate) =>
+            candidate.near.x <= centerX && candidate.far.x >= centerX
+        );
+        if (!span) continue;
+        lower.push({ x: Math.max(x1, span.near.x), y });
+        upper.push({ x: Math.min(x2, span.far.x), y });
+      }
+      if (lower.length < bands * 0.9) continue;
+      const points = [...lower, ...upper.reverse()];
+      result.push({
+        id: 'stem',
+        shape: { type: 'polyline', points },
+        region: { kind: 'stroke', points },
+        confidence: 0.85,
+        anchors: { center: { x: centerX, y: joinY } },
+        debug: {
+          source: 'shared-cavity-backbone',
+          bodyIndex: left.bodyIndex,
+          leftCavity: i,
+          rightCavity: j,
+          sampleCount: lower.length,
+        },
+      });
+    }
+  }
+  return result;
 }
 
 /**
  * Long outline edges establish a stroke direction. Matching fill-span edges
  * then establish its opposite boundary. This keeps a connector's merged span
  * from widening the stem and avoids treating a moving diagonal as several
- * unrelated vertical strokes. Glyphs without a validated line-backed track
- * use the scanline fallback.
+ * unrelated vertical strokes. Opposed-wall and cavity attachments supply
+ * independent fallback support when merged scanlines obscure a track.
  */
 function traceBackbones(geo: GeometryCache): FeatureInstance[] {
   const { glyph, metrics, scale } = geo;
@@ -274,12 +398,15 @@ function traceBackbones(geo: GeometryCache): FeatureInstance[] {
       continue;
     const initialLeft = fitEdge(stable, 'x1');
     const initialRight = fitEdge(stable, 'x2');
+    // A line-backed stroke can taper slightly (heavy Inter b differs four
+    // units between foot and ascender). Admit that small measured width drift,
+    // while the straight source edge remains the required backbone support.
     stable = stable.filter(
       (s) =>
         Math.max(
           Math.abs(initialLeft(s.y) - s.x1),
           Math.abs(initialRight(s.y) - s.x2)
-        ) <= scale.eps
+        ) <= Math.max(scale.eps, medianWidth * 0.02)
     );
     if (
       stable.length < requiredSamples ||
@@ -393,31 +520,4 @@ function fitEdge(
     .sort((a, b) => a - b);
   const intercept = intercepts[Math.floor(intercepts.length / 2)];
   return (y) => intercept + slope * y;
-}
-
-/**
- * Groups candidates by similar midX position.
- */
-function groupByMidX(
-  candidates: StemCandidate[],
-  tolerance: number
-): StemCandidate[][] {
-  const groups: StemCandidate[][] = [];
-
-  for (const candidate of candidates) {
-    let foundGroup = false;
-    for (const group of groups) {
-      const groupMidX = group.reduce((s, c) => s + c.midX, 0) / group.length;
-      if (Math.abs(groupMidX - candidate.midX) < tolerance) {
-        group.push(candidate);
-        foundGroup = true;
-        break;
-      }
-    }
-    if (!foundGroup) {
-      groups.push([candidate]);
-    }
-  }
-
-  return groups;
 }

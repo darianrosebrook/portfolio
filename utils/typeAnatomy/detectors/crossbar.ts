@@ -15,6 +15,12 @@
  *   within the y-band window — see Nohemi A and H.)
  */
 
+import { eyeFloor } from './eye';
+import { detectStem } from './stem';
+import {
+  getFilledGeometry,
+  occupiedRayIntervals,
+} from '@/utils/geometry/filledGeometry';
 import { rayHits } from '@/utils/geometry/geometryCore';
 import {
   measureOrthogonalThickness,
@@ -44,6 +50,9 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
   if (!glyph?.path?.commands || !glyph.bbox) {
     return [];
   }
+
+  const eyeBars = traceEyeBars(geo);
+  if (eyeBars.length) return eyeBars;
 
   const instances: FeatureInstance[] = [];
   const { bboxW, bboxH, stemWidth, overshoot } = scale;
@@ -298,7 +307,7 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
   // Merge overlapping/adjacent crossbar instances at similar Y positions
   const mergedInstances = mergeCrossbarInstances(instances, bboxH * 0.12);
 
-  return mergedInstances;
+  return trimDiagonalJoins(geo, mergedInstances);
 }
 
 /**
@@ -561,4 +570,148 @@ function findHorizontalSegments(
   }
 
   return results;
+}
+
+/** An eye's floor identifies the bar even when another compound stroke joins
+ * its scanline. Its occupied lower boundary supplies the complete free extent.
+ */
+function traceEyeBars(geo: GeometryCache): FeatureInstance[] {
+  const filled = geo.filled ?? getFilledGeometry(geo.glyph);
+  return filled.enclosedRegions.flatMap((hole) => {
+    const floor = eyeFloor(hole, geo);
+    if (!floor) return [];
+    const midpoint = {
+      x: (floor[0].x + floor[1].x) / 2,
+      y: (floor[0].y + floor[1].y) / 2,
+    };
+    const measurement = measureOrthogonalThickness(geo, {
+      midpoint,
+      dominantAxis: 'horizontal',
+    });
+    if (
+      !measurement.selectedPairContainsMidpoint ||
+      measurement.thickness <= 0 ||
+      measurement.selectedPairCenterOnProbeAxis === undefined
+    )
+      return [];
+    const centerY = measurement.selectedPairCenterOnProbeAxis;
+    const bottomY = centerY - measurement.thickness / 2;
+    const topY = centerY + measurement.thickness / 2;
+    // Source edges on the same bar floor/bottom establish terminal extensions.
+    // Their y coordinate must agree with the measured boundaries; unrelated
+    // horizontals elsewhere in the compound cannot extend this bar.
+    const edges = geo.segments
+      .filter(
+        (segment) => segment.type === 'lineTo' && segment.params.length === 2
+      )
+      .map((segment) => segment.params)
+      .filter(
+        ([a, b]) =>
+          Math.abs(a.y - b.y) <= geo.scale.eps &&
+          (Math.abs(a.y - bottomY) <= geo.scale.eps ||
+            Math.abs(a.y - topY) <= geo.scale.eps) &&
+          Math.max(a.x, b.x) >= floor[0].x &&
+          Math.min(a.x, b.x) <= floor[1].x
+      );
+    const occupied = occupiedRayIntervals(
+      filled,
+      { x: midpoint.x, y: centerY },
+      0,
+      geo.scale.overshoot
+    )[0];
+    if (!occupied || occupied.start > geo.scale.eps) return [];
+    const endX = Math.max(
+      floor[1].x,
+      occupied.far.x,
+      ...edges.flatMap((edge) => edge.map((p) => p.x))
+    );
+    const rect = {
+      type: 'rect' as const,
+      x: floor[0].x,
+      y: bottomY,
+      width: endX - floor[0].x,
+      height: measurement.thickness,
+    };
+    if (rect.width <= rect.height) return [];
+    return [
+      {
+        id: 'crossbar' as const,
+        shape: rect,
+        region: { kind: 'stroke' as const, points: rectToPolygon(rect) },
+        confidence: 0.95,
+        anchors: {
+          left: { x: rect.x, y: centerY },
+          right: { x: endX, y: centerY },
+        },
+        debug: {
+          source: 'eye-floor-occupied-bar',
+          measuredHeight: rect.height,
+        },
+      },
+    ];
+  });
+}
+
+/** A slanted backbone's join occupies part of a horizontal scanline. Keep the
+ * free connector between its two measured corridors instead of assigning that
+ * leg ink to the crossbar through averaged scanline endpoints.
+ */
+function trimDiagonalJoins(
+  geo: GeometryCache,
+  bars: FeatureInstance[]
+): FeatureInstance[] {
+  const stems = detectStem(geo);
+  if (
+    stems.length !== 2 ||
+    stems.some(
+      (stem) =>
+        stem.shape.type !== 'polyline' ||
+        (stem.debug as { source?: string })?.source === 'shared-cavity-backbone'
+    )
+  )
+    return bars;
+  return bars.map((bar) => {
+    if (bar.shape.type !== 'rect') return bar;
+    const y = bar.shape.y + bar.shape.height / 2;
+    const rangesAt = (sampleY: number) =>
+      stems
+        .map((stem) => {
+          const points = stem.region!.points;
+          const xs: number[] = [];
+          for (let i = 0; i < points.length; i++) {
+            const a = points[i],
+              b = points[(i + 1) % points.length];
+            if (
+              (a.y <= sampleY && b.y > sampleY) ||
+              (b.y <= sampleY && a.y > sampleY)
+            )
+              xs.push(a.x + ((b.x - a.x) * (sampleY - a.y)) / (b.y - a.y));
+          }
+          return xs.sort((a, b) => a - b);
+        })
+        .sort((a, b) => a[0] - b[0]);
+    const ranges = rangesAt(y);
+    if (ranges.some((range) => range.length !== 2)) return bar;
+    const minX = Math.max(bar.shape.x, ranges[0][1]);
+    const maxX = Math.min(bar.shape.x + bar.shape.width, ranges[1][0]);
+    if (maxX <= minX) return bar;
+    const rect = { ...bar.shape, x: minX, width: maxX - minX };
+    const bottom = rangesAt(rect.y),
+      top = rangesAt(rect.y + rect.height);
+    if ([...bottom, ...top].some((range) => range.length !== 2)) return bar;
+    const points = [
+      { x: Math.max(bar.shape.x, bottom[0][1]), y: rect.y },
+      { x: Math.min(bar.shape.x + bar.shape.width, bottom[1][0]), y: rect.y },
+      {
+        x: Math.min(bar.shape.x + bar.shape.width, top[1][0]),
+        y: rect.y + rect.height,
+      },
+      { x: Math.max(bar.shape.x, top[0][1]), y: rect.y + rect.height },
+    ];
+    return {
+      ...bar,
+      shape: rect,
+      region: { kind: 'stroke', points },
+    };
+  });
 }
