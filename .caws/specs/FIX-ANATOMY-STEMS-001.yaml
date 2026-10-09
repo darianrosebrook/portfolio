@@ -33,3 +33,12 @@ rollback:
   - 'Revert the bounded stem source commit'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Inspected real-font Nohemi A polygons at weights 100,400,617.41,900: two slanted masks contain leg ink at three heights and exclude interior connector samples. Executed at a9b65f8c; bb576bb0 changes only a fallback comment. Raw output: test-results/anatomy-fix/integrated-tests.log and original status 0. No general curved-glyph accuracy claim."
+    recorded_at: "2026-10-09T19:36:25.434Z"
+    test_nodeid: "test/typeAnatomy/stem-alignment.test.ts::stem regions follow glyph backbones"
+    command: "pnpm exec vitest run test/typeAnatomy test/utils/typeAnatomy test/utils/geometry/geometryCore.test.ts test/fontkit-browser.test.mjs --reporter=verbose"
+    exit_code: 0
+    commit_sha: a9b65f8c17faffef9941cb81c13c3a228d9b5215
