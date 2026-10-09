@@ -1,11 +1,9 @@
 id: FIX-FONTKIT-BROWSER-001
 title: 'Bundle fontkit for the typography inspector browser runtime'
 mode: fix
-lifecycle_state: closed
-resolution: completed
-closure_notes: 'Implemented and verified on caws/fix-fontkit-browser at source 395f838788922798999a326a01961e9b134d72fb. Browser bundle regression reproduces the original require failure and passes after repair; all four inspector fonts render in the webpack dev browser. Typecheck, scoped lint/format and CAWS policy gates pass. Independent read-only peer feedback raised no material questions. Existing PerformanceDashboard hydration error, production builds, other browsers and deployment are outside this completion.'
+lifecycle_state: active
 created_at: '2026-10-09T15:59:55.112Z'
-updated_at: '2026-10-09T16:15:38.539Z'
+updated_at: '2026-10-09T16:17:04.991Z'
 created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
 blast_radius:
   modules:
