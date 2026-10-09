@@ -36,3 +36,11 @@ rollback:
   - 'Revert the bounded T anatomy source commit'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Inspected/executed crossbar-arm-alignment assertions: actual varied T at wght100,400,617,700,900 opsz32 in Nohemi,Inter,Newsreader. Arm covers both top extensions at three depths, excludes mid-stem; crossbar returns empty. T hints offer Arm. Raw integrated-tests.log/status at a9b65f8c. Fresh localhost browser at bb576bb0 shows Arm and top ink after server restart."
+    recorded_at: "2026-10-09T19:37:33.722Z"
+    command: "pnpm exec vitest run test/typeAnatomy test/utils/typeAnatomy test/utils/geometry/geometryCore.test.ts test/fontkit-browser.test.mjs --reporter=verbose"
+    exit_code: 0
+    commit_sha: a9b65f8c17faffef9941cb81c13c3a228d9b5215
