@@ -29,8 +29,8 @@
  * The evidence layer is anatomy-neutral: it produces neutral corner
  * candidates and exposes geometric predicates. Mapping a candidate to
  * an anatomy term (`apex`, `vertex`, `crotch`) is a detector decision.
- * The same geometric event can legitimately be reported by more than
- * one detector — V's bottom point is both its `vertex` and its `crotch`.
+ * Stroke junctions have distinct exterior and interior boundaries: V's
+ * outer bottom tip is its vertex, while its inner notch is its crotch.
  *
  * Per TYPEANATOMY-003 invariants: this family is independent of the
  * topology and measureOrthogonalThickness substrates and does not

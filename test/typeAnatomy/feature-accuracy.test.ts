@@ -279,9 +279,9 @@ describe('positive and hostile anatomy regression cases', () => {
     expect(crotches).toHaveLength(1);
   });
 
-  it('detects two vertices on Nohemi A at the leg-end region', () => {
+  it('rejects A free leg ends as vertices', () => {
     const vertices = detect(nohemi, 'A', 'vertex');
-    expect(vertices.length).toBeGreaterThanOrEqual(2);
+    expect(vertices).toEqual([]);
   });
 
   it('detects serifs on Newsreader I (foot + cap, both sides)', () => {

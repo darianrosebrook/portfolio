@@ -283,20 +283,26 @@ describe('Golden Overlay Tests (Nohemi-VF)', () => {
     font = loadTestFont('Nohemi-VF.ttf');
   });
 
-  it('uppercase A: apex=1, crotch=1, vertex=2', () => {
+  it('uppercase A: apex=1, interior crotch=1, no vertex at its free feet', () => {
     const cache = buildGeometryCache(getGlyph(font, 'A'), font);
     expect(detectFeature(cache, 'apex')).toHaveLength(1);
     expect(detectFeature(cache, 'crotch')).toHaveLength(1);
-    expect(detectFeature(cache, 'vertex')).toHaveLength(2);
+    expect(detectFeature(cache, 'vertex')).toEqual([]);
   });
 
   it('uppercase M: apex=0, crotch=1, vertex=1', () => {
-    // Nohemi M outer peaks are flat-cut (no apex); the inner V junction at
-    // the bottom registers as both vertex and crotch at the same point.
+    // The central diagonals have distinct exterior and interior boundaries.
     const cache = buildGeometryCache(getGlyph(font, 'M'), font);
     expect(detectFeature(cache, 'apex')).toHaveLength(0);
-    expect(detectFeature(cache, 'crotch')).toHaveLength(1);
-    expect(detectFeature(cache, 'vertex')).toHaveLength(1);
+    const crotches = detectFeature(cache, 'crotch');
+    const vertices = detectFeature(cache, 'vertex');
+    expect(crotches).toHaveLength(1);
+    expect(vertices).toHaveLength(1);
+    const interior = crotches[0].anchors!.position;
+    const exterior = vertices[0].anchors!.tip;
+    expect(
+      Math.hypot(interior.x - exterior.x, interior.y - exterior.y)
+    ).toBeGreaterThan(cache.scale.eps);
   });
 
   it('lowercase e: one eye counter and right aperture', () => {
