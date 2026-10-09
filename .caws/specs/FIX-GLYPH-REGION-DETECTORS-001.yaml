@@ -1,0 +1,32 @@
+id: FIX-GLYPH-REGION-DETECTORS-001
+title: 'Derive opening loop and terminal regions from actual glyph geometry'
+mode: fix
+lifecycle_state: active
+created_at: '2026-10-09T20:45:21.653Z'
+updated_at: '2026-10-09T20:45:21.653Z'
+created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
+blast_radius:
+  modules:
+    - 'Aperture loop and finial feature geometry'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/typeAnatomy/detectors/aperture.ts'
+    - 'utils/typeAnatomy/detectors/loop.ts'
+    - 'utils/typeAnatomy/detectors/finial.ts'
+    - 'test/typeAnatomy/opening-loop-terminal.test.ts'
+  out: []
+invariants:
+  - 'Feature identity and region geometry are derived from current glyph occupied contours without hand-authored per-glyph masks'
+acceptance:
+  - id: A1
+    given: 'c e g s and corresponding negative controls in real fonts'
+    when: 'aperture loop and finial are detected'
+    then: 'openings avoid ink loop masks cover the real loop band and finials attach to actual stroke endings'
+observability:
+  - 'Positive and negative design-space samples checked against independent glyph geometry'
+rollback:
+  - 'Revert bounded feature detector changes'
+non_functional: {}
+contracts: []
