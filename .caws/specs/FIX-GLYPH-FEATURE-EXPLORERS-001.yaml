@@ -69,3 +69,11 @@ contracts:
     type: behavior
   - name: 'explorer-selection-and-rendering'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Fill-model acceptance covers nonzero winding, nested/reversed/overlapping/disconnected outlines, exact analytic boundaries, thin raw rays, length-independent occupied spans and cache identity. filled-topology/filledGeometry/geometryCore/rayhits-cache tests run in the integrated source; fill-native-results-analytic.json and fill-crossing-native-source-targets.json independently ground native outline observations. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:38:03.379Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
