@@ -9,6 +9,7 @@ blast_radius:
   modules:
     - 'Repository dependency manifest and lockfile'
     - 'Next.js project agent guidance'
+    - 'Legacy geometry feature smoke contracts'
   data_migration: false
 operational_rollback_slo: 5m
 scope:
@@ -32,6 +33,12 @@ acceptance:
     given: 'the three uncommitted checkpoint files'
     when: 'a semantic checkpoint commit is created'
     then: 'all three file contents are recorded together without unrelated tracked changes'
+  - id: A3
+    given: 'valid Fontkit paths representing a bowl, unmarked outline, and lowercase e'
+    when: 'legacy geometry heuristics and the repository unit suite run'
+    then: >-
+      the smoke contracts exercise the Fontkit path format and return the expected
+      anatomical features without exceptions
 observability:
   - 'Git tree objects and check command exit statuses identify the checkpoint candidate'
 rollback:
