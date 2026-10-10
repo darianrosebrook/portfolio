@@ -1,9 +1,9 @@
 /**
- * Glyph feature hints for UI gating.
+ * Glyph feature hints for UI suggestions.
  *
  * These are UI suggestions, NOT expected anatomy truth.
- * Use for filtering which features to show in the UI for a given glyph,
- * but actual detection determines whether a feature is present.
+ * Use for suggested ordering and defaults for a given glyph; current
+ * geometry determines which features are present and available.
  */
 
 import type { DetectionContext, FeatureHint, FeatureID } from './types';

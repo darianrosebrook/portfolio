@@ -32,6 +32,7 @@ import {
 import { SVGDefs } from '@/utils/geometry/svgDefs';
 import { createViewportTransform } from '@/utils/geometry/transforms';
 import { glyphFor, loadFont } from '@/test/utils/fixtures/fontFixtures';
+import { detectFeature } from '@/utils/typeAnatomy/detectorRegistry';
 
 const query = vi.hoisted(() => ({ value: '' }));
 vi.mock('next/navigation', () => ({
@@ -244,6 +245,23 @@ afterEach(() => {
 });
 
 describe('FontInspector provider and renderer behavior with bundled fonts', () => {
+  it('offers actual open E counters beyond hints and withdraws anatomy for an empty space', async () => {
+    await mountInspector();
+    act(() => inspector.setGlyphUnicode(0x45));
+    expect(inspector.availableFeatureIds).toContain('counter');
+    selectFeature('Counter');
+    expect(inspector.detectedFeatures.get('counter')).toEqual(
+      detectFeature(inspector.geometryCache!, 'counter')
+    );
+    expect(inspector.detectedFeatures.get('counter')).toHaveLength(2);
+    act(() => inspector.setGlyphUnicode(0x20));
+    expect(inspector.glyph!.path.commands).toEqual([]);
+    expect(inspector.availableFeatureIds).toEqual([]);
+    expect(inspector.detectedFeatures.size).toBe(0);
+    act(() => inspector.setGlyphUnicode(0x45));
+    expect(inspector.availableFeatureIds).toContain('counter');
+    expect(inspector.detectedFeatures.get('counter')).toHaveLength(2);
+  });
   it.each([
     [0, 900],
     [1, 576],

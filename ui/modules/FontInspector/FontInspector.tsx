@@ -24,6 +24,7 @@ import { TypographyArticleContent } from './TypographyArticleContent';
 // New unified detection system imports
 import {
   detectGlyphFeatures,
+  getRegisteredFeatures,
   reconcileFeatures,
 } from '@/utils/typeAnatomy/detectorRegistry';
 import { buildGeometryCache } from '@/utils/typeAnatomy/geometryCache';
@@ -583,13 +584,22 @@ export const InspectorProvider: React.FC<{
       : '';
   }, [glyphUnicode]);
 
-  // Get available feature IDs for this glyph based on hints
+  // Current geometry establishes availability; hints order the suggested parts.
+  const rawDetectedFeatures = useMemo((): Map<FeatureID, FeatureInstance[]> => {
+    if (!geometryCache) return new Map();
+    return detectGlyphFeatures(geometryCache, getRegisteredFeatures());
+  }, [geometryCache]);
+
   const availableFeatureIds = useMemo((): FeatureID[] => {
     if (!detectionContext || !glyph) return [];
-
     const hints = getFeatureHints(currentChar, detectionContext);
-    return hints.map((h) => h.id);
-  }, [currentChar, detectionContext, glyph]);
+    const detected = [...rawDetectedFeatures]
+      .filter(([, instances]) => instances.length > 0)
+      .map(([id]) => id);
+    return [...new Set([...hints.map((hint) => hint.id), ...detected])].filter(
+      (id) => detected.includes(id)
+    );
+  }, [currentChar, detectionContext, glyph, rawDetectedFeatures]);
 
   // Get selected feature IDs from anatomy selection
   const selectedFeatureIds = useMemo((): FeatureID[] => {
@@ -608,21 +618,26 @@ export const InspectorProvider: React.FC<{
     return selectedFeatureIds.filter((id) => availableFeatureIds.includes(id));
   }, [selectedFeatureIds, availableFeatureIds]);
 
-  // Run detection for selected features (filtered by glyph availability)
+  // Both renderers select from the same current detection before reconciliation.
   const detectedFeatures = useMemo((): Map<FeatureID, FeatureInstance[]> => {
     if (!geometryCache || filteredSelectedFeatureIds.length === 0)
       return new Map();
 
     try {
       const result = reconcileFeatures(
-        detectGlyphFeatures(geometryCache, filteredSelectedFeatureIds)
+        new Map(
+          filteredSelectedFeatureIds.map((id) => [
+            id,
+            rawDetectedFeatures.get(id) ?? [],
+          ])
+        )
       );
       return result;
     } catch (error) {
       console.warn('[FontInspector] Error detecting features:', error);
       return new Map();
     }
-  }, [geometryCache, filteredSelectedFeatureIds]);
+  }, [geometryCache, filteredSelectedFeatureIds, rawDetectedFeatures]);
 
   const contextValue = useMemo(
     (): InspectorContextType => ({
