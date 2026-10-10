@@ -42,3 +42,10 @@ evidence:
     command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
     exit_code: 0
     commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Crossbar tests inspect actual opposed transverse source walls, inclined H connector extents and genuine f/t crossings; G curved roof/terminal-cap and lower-foot hostile cases reject false connectors. eye-regions.test.ts and compound/body tests verify shared Eye-floor consumers without per-font baked masks or success inferred only from counts. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:36:51.060Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
