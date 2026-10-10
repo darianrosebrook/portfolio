@@ -3,6 +3,7 @@ import {
   buildFilledGeometry,
   containsFilledPoint,
   occupiedRayIntervals,
+  contourWinding,
 } from '@/utils/geometry/filledGeometry';
 import { shapeForV2, isInside, rayHits } from '@/utils/geometry/geometryCore';
 import { mockGlyphFromPath } from '@/test/utils/fixtures/mockGlyph';
@@ -19,6 +20,44 @@ const spans = (d: string, y = 5) =>
   ]);
 
 describe('nonzero occupied fill', () => {
+  it('joins a shared crossing across neighboring numeric hash cells without losing its body or merging a mark', () => {
+    const shaft = 'M466 0L678 1089L799 1073L590 0Z';
+    const foot = 'M109 99L1125 99L1106 0L90 0Z';
+    const mark = 'M1600 100L1629 100L1629 120L1600 120Z';
+    for (const d of [shaft + foot + mark, foot + shaft + mark]) {
+      const model = buildFilledGeometry(
+        mockGlyphFromPath(d, { minX: 90, minY: 0, maxX: 1629, maxY: 1089 })
+      );
+      expect(model.bodies).toHaveLength(2);
+      expect(model.enclosedRegions).toEqual([]);
+      expect(model.tolerance).toBe(0.2);
+      const overlap = 124 * 99 + ((209 / 1073 - 212 / 1089) * 99 * 99) / 2;
+      expect(model.bodies[0].area).toBeCloseTo(134106.5 + 100584 - overlap, 6);
+      expect(model.bodies[1].area).toBe(580);
+      for (const point of [
+        { x: 630, y: 500 },
+        { x: 250, y: 50 },
+      ]) {
+        expect(containsFilledPoint(model, point)).toBe(true);
+        expect(contourWinding(model.bodies[0].points, point)).toBe(1);
+        expect(contourWinding(model.bodies[1].points, point)).toBe(0);
+      }
+      expect(contourWinding(model.bodies[0].points, { x: 1615, y: 110 })).toBe(
+        0
+      );
+      expect(contourWinding(model.bodies[1].points, { x: 1615, y: 110 })).toBe(
+        1
+      );
+      expect(containsFilledPoint(model, { x: 300, y: 500 })).toBe(false);
+      expect(contourWinding(model.bodies[0].points, { x: 300, y: 500 })).toBe(
+        0
+      );
+      const interval = occupiedRayIntervals(model, { x: 0, y: 500 }, 0, 1700);
+      expect(interval).toHaveLength(1);
+      expect(interval[0].near.x).toBeCloseTo(466 + (212 * 500) / 1089, 10);
+      expect(interval[0].far.x).toBeCloseTo(590 + (209 * 500) / 1073, 10);
+    }
+  });
   it('includes all actual occupied boundaries and preserves cap-parallel spans', () => {
     const model = modelFor(square + reversedHole);
     for (const point of [

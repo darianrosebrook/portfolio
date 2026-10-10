@@ -490,13 +490,30 @@ function deriveBoundaries(model: FilledGeometry): void {
           if (t > 0 && t < 1) f.cuts.push(t);
       }
     }
-  const key = (p: Point2D): string =>
-    `${Math.round(p.x / precision)},${Math.round(p.y / precision)}`;
   const vertices = new Map<string, Point2D>();
+  const buckets = new Map<string, string[]>();
   const vertex = (p: Point2D): string => {
-    const k = key(p);
-    if (!vertices.has(k)) vertices.set(k, p);
-    return k;
+    const x = Math.round(p.x / precision),
+      y = Math.round(p.y / precision);
+    // Independent edge interpolation can put the same intersection on
+    // opposite sides of a hash-cell boundary. Cells accelerate lookup;
+    // coordinate agreement, rather than the cell alone, owns vertex identity.
+    for (let dx = -1; dx <= 1; dx++) {
+      for (let dy = -1; dy <= 1; dy++) {
+        for (const id of buckets.get(`${x + dx},${y + dy}`) ?? []) {
+          const existing = vertices.get(id)!;
+          if (Math.hypot(existing.x - p.x, existing.y - p.y) <= precision)
+            return id;
+        }
+      }
+    }
+    const id = `v${vertices.size}`,
+      cell = `${x},${y}`;
+    vertices.set(id, p);
+    const entries = buckets.get(cell) ?? [];
+    entries.push(id);
+    buckets.set(cell, entries);
+    return id;
   };
   const boundary = new Map<string, { from: string; to: string }>();
   for (const edge of edges) {
