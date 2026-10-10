@@ -1,0 +1,40 @@
+id: CHORE-TYPOGRAPHY-CHECKPOINT-001
+title: 'Checkpoint dependency and agent guidance changes for typography publication'
+mode: chore
+lifecycle_state: active
+created_at: '2026-10-10T06:18:20.654Z'
+updated_at: '2026-10-10T06:18:20.654Z'
+created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
+blast_radius:
+  modules:
+    - 'Repository dependency manifest and lockfile'
+    - 'Next.js project agent guidance'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'package.json'
+    - 'pnpm-lock.yaml'
+    - 'AGENTS.md'
+    - 'test-results/feature-explorers/'
+  out: []
+invariants:
+  - 'Preserve the existing dependency update and completed typography commits without history rewriting'
+  - 'Preserve unrelated active specifications and local runtime state'
+acceptance:
+  - id: A1
+    given: 'the existing dependency manifest and lockfile updates'
+    when: 'frozen lockfile validation and TypeScript checking run'
+    then: 'the manifest resolves from its committed lockfile and TypeScript checking succeeds'
+  - id: A2
+    given: 'the three uncommitted checkpoint files'
+    when: 'a semantic checkpoint commit is created'
+    then: 'all three file contents are recorded together without unrelated tracked changes'
+observability:
+  - 'Git tree objects and check command exit statuses identify the checkpoint candidate'
+rollback:
+  - 'Revert a checkpoint commit in a new authorized branch if dependency regressions are established'
+non_functional: {}
+contracts:
+  - name: 'dependency-checkpoint'
+    type: behavior
