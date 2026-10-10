@@ -123,7 +123,7 @@ describe('reconcileFeatures preserves distinct anatomical claims', () => {
     ]);
     expect(reconcileFeatures(input)).toBe(input);
   });
-  it('retains the a counter separately from the e eye in Aeacute', () => {
+  it('retains the a counter and both open interiors separately from the e eye in Aeacute', () => {
     const font = loadFont('Nohemi-VF.ttf').getVariation({ wght: 400 });
     const result = reconcileFeatures(
       detectGlyphFeatures(buildGeometryCache(glyphFor(font, 'ǽ'), font), [
@@ -131,12 +131,24 @@ describe('reconcileFeatures preserves distinct anatomical claims', () => {
         'eye',
       ])
     );
-    expect(result.get('counter')).toHaveLength(1);
+    const counters = result.get('counter')!;
+    expect(
+      counters
+        .map((counter) => (counter.debug as { closure: string }).closure)
+        .sort()
+    ).toEqual(['closed', 'open', 'open']);
     expect(result.get('eye')).toHaveLength(1);
-    const counter = result.get('counter')![0].region!.points;
+    const coversCounter = (x: number, y: number) =>
+      counters.some((counter) =>
+        pointInPolygon({ x, y }, counter.region!.points)
+      );
     const eye = result.get('eye')![0].region!.points;
-    expect(pointInPolygon({ x: 1000, y: 600 }, counter)).toBe(true);
-    expect(pointInPolygon({ x: 2900, y: 1600 }, counter)).toBe(false);
+    expect(coversCounter(1000, 600)).toBe(true);
+    expect(coversCounter(1000, 1550)).toBe(true);
+    expect(coversCounter(2900, 600)).toBe(true);
+    expect(coversCounter(2900, 1600)).toBe(false);
+    expect(coversCounter(3000, 1120)).toBe(false);
+    expect(coversCounter(2230, 2600)).toBe(false);
     expect(pointInPolygon({ x: 2900, y: 1600 }, eye)).toBe(true);
     expect(pointInPolygon({ x: 1000, y: 600 }, eye)).toBe(false);
   });
