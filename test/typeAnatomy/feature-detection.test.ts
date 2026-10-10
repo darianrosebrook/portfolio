@@ -305,10 +305,15 @@ describe('Golden Overlay Tests (Nohemi-VF)', () => {
     ).toBeGreaterThan(cache.scale.eps);
   });
 
-  it('lowercase e: one eye counter and right aperture', () => {
+  it('lowercase e: closed eye, open lower counter and right aperture', () => {
     const cache = buildGeometryCache(getGlyph(font, 'e'), font);
     expect(detectFeature(cache, 'eye')).toHaveLength(1);
-    expect(detectFeature(cache, 'counter')).toHaveLength(1);
+    const counters = detectFeature(cache, 'counter');
+    expect(
+      counters
+        .map((counter) => (counter.debug as { closure: string }).closure)
+        .sort()
+    ).toEqual(['closed', 'open']);
     const apertures = detectFeature(cache, 'aperture');
     expect(apertures).toHaveLength(1);
     expect((apertures[0].debug as { side: string }).side).toBe('right');

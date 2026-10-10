@@ -217,7 +217,7 @@ test.describe('Feature highlight overlay (Nohemi)', () => {
     await screenshotCanvas(page, 'nohemi-e-eye.png');
   });
 
-  test('e + Counter: enclosed upper eye, excluding the open lower space', async ({
+  test('e + Counter: closed upper eye and open lower counter', async ({
     page,
   }) => {
     await loadInspector(page);

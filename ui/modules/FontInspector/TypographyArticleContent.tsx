@@ -85,7 +85,8 @@ export const TypographyArticleContent = (
         </dt>
 
         <dd>
-          <em>Counters</em> are the enclosed spaces (“o,” “p”);
+          <em>Counters</em> are spaces enclosed (“o,” “p”) or partly enclosed
+          (“c,” “n”) by a glyph;
           <em>apertures</em> are the openings (&ldquo;c,&rdquo; &ldquo;e,&rdquo;
           &ldquo;s&rdquo;).
           <strong>Why it matters:</strong> Open counters and wide apertures

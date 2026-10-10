@@ -600,12 +600,32 @@ describe('feature region polygons', () => {
     expectRegionInsideGlyph(eyes[0].region!, glyph.bbox);
   });
 
-  it('emits an enclosed region for the Nohemi e counter', () => {
+  it('covers both closed and open Nohemi e counter spaces while excluding ink', () => {
     const glyph = glyphFor(nohemi, 'e');
     const counters = detect(nohemi, 'e', 'counter');
-    expect(counters).toHaveLength(1);
-    expect(counters[0].region?.kind).toBe('enclosed');
-    expectRegionInsideGlyph(counters[0].region!, glyph.bbox);
+    const closed = counters.filter(
+      (counter) => (counter.debug as { closure: string }).closure === 'closed'
+    );
+    const open = counters.filter(
+      (counter) => (counter.debug as { closure: string }).closure === 'open'
+    );
+    expect(closed).toHaveLength(1);
+    expect(open).toHaveLength(1);
+    const covers = (instances: typeof counters, x: number, y: number) =>
+      instances.some(
+        (counter) =>
+          counter.region && pointInPolygon({ x, y }, counter.region.points)
+      );
+    expect(covers(closed, 1200, 1600)).toBe(true);
+    expect(covers(closed, 1200, 600)).toBe(false);
+    expect(covers(open, 1200, 600)).toBe(true);
+    expect(covers(open, 1200, 1600)).toBe(false);
+    expect(covers(counters, 1900, 1120)).toBe(false);
+    expect(covers(counters, 400, 1500)).toBe(false);
+    for (const counter of counters) {
+      expect(counter.region?.kind).toBe('enclosed');
+      expectRegionInsideGlyph(counter.region!, glyph.bbox);
+    }
   });
 
   it('emits stroke regions for Nohemi E arms', () => {
