@@ -329,6 +329,36 @@ describe('FontInspector provider and renderer behavior with bundled fonts', () =
     }
   );
 
+  it('shows real keyboard help for shifted question mark and preserves browser modifier shortcuts', async () => {
+    const view = await mountInspector();
+    const svg = view.container.querySelector('svg[aria-labelledby]')!;
+    expect(svg).not.toBeNull();
+    fireEvent.keyDown(svg, { key: 'd', ctrlKey: true });
+    expect(inspector.showDetails).toBe(false);
+    fireEvent.keyDown(svg, { key: '?', shiftKey: true });
+    const help = screen.getByRole('region', {
+      name: 'Font inspector shortcuts',
+    });
+    expect(help).toHaveTextContent('toggle glyph details');
+    expect(help).toHaveTextContent('adjust weight');
+    expect(help).not.toHaveTextContent('placeholder');
+    fireEvent.click(screen.getByRole('button', { name: 'Close help' }));
+    expect(
+      screen.queryByRole('region', { name: 'Font inspector shortcuts' })
+    ).toBeNull();
+    expect(document.activeElement).toBe(svg);
+    fireEvent.keyDown(svg, { key: '~', shiftKey: true });
+    expect(view.container.querySelector('#debug')).not.toBeNull();
+    const browserZoom = new KeyboardEvent('keydown', {
+      key: '=',
+      ctrlKey: true,
+      cancelable: true,
+      bubbles: true,
+    });
+    expect(svg.dispatchEvent(browserZoom)).toBe(true);
+    expect(browserZoom.defaultPrevented).toBe(false);
+  });
+
   it('preserves actual lowercase glyph identifiers when displaying and copying names', async () => {
     await mountInspector();
     act(() => inspector.setGlyphUnicode(0x69));

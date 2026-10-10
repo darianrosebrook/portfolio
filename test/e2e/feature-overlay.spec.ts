@@ -14,9 +14,9 @@ import { test, expect, type Page } from '@playwright/test';
  * catches coordinate-space bugs, defs-not-mounted bugs, and any other
  * "polygon was right but the renderer drew it wrong" failure mode.
  *
- * Browser scope: chromium only. The font rasterisation differs across
- * browsers in ways that aren't useful signal here; if cross-browser
- * coverage matters later, add the projects then.
+ * Browser projects and screenshot tolerances come from playwright.config.ts.
+ * Correct anatomy and effective axis labels are verified before regenerating
+ * a baseline; an image diff is not permission to retain a known wrong region.
  *
  * Baselines live next to this file under `feature-overlay.spec.ts-snapshots/`.
  * To regenerate after an intentional rendering change: `npm run test:e2e:update`.
@@ -25,17 +25,91 @@ import { test, expect, type Page } from '@playwright/test';
 const TYPOGRAPHY_PATH = '/blueprints/foundations/typography';
 const VIEWPORT = { width: 1280, height: 900 } as const;
 
+const inspector = (page: Page) =>
+  page.locator('[data-ds-component="FontInspector"]');
+const symbolCanvas = (page: Page) =>
+  inspector(page).getByTestId('symbol-canvas');
+const renderedAxes: Record<string, string> = {
+  Nohemi: 'Weight 400.00',
+  Newsreader: 'Weight 400.00 | Optical Size 32.00',
+};
+
+async function observeCanvasDraws(page: Page) {
+  // Observe the real drawing boundary. These test-only attributes do not
+  // alter drawing arguments, canvas pixels, or the production components.
+  await page.addInitScript(() => {
+    const clear = CanvasRenderingContext2D.prototype.clearRect;
+    const text = CanvasRenderingContext2D.prototype.fillText;
+    CanvasRenderingContext2D.prototype.clearRect = function (...args) {
+      if (this.canvas.dataset.testid === 'symbol-canvas') {
+        this.canvas.dataset.e2eFrame = String(
+          Number(this.canvas.dataset.e2eFrame ?? 0) + 1
+        );
+        this.canvas.dataset.e2eAxes = '';
+      }
+      return clear.apply(this, args);
+    };
+    CanvasRenderingContext2D.prototype.fillText = function (...args) {
+      if (
+        this.canvas.dataset.testid === 'symbol-canvas' &&
+        /^Weight /.test(args[0])
+      ) {
+        this.canvas.dataset.e2eAxes = args[0];
+      }
+      return text.apply(this, args);
+    };
+  });
+}
+
+async function frameNumber(page: Page) {
+  return Number((await symbolCanvas(page).getAttribute('data-e2e-frame')) ?? 0);
+}
+
+async function waitForFreshFrame(page: Page, previous: number) {
+  await expect.poll(() => frameNumber(page)).toBeGreaterThan(previous);
+}
+
+async function waitForInspector(page: Page, name?: string, char?: string) {
+  const scope = inspector(page),
+    font = scope.getByRole('combobox', { name: 'Font', exact: true });
+  const current =
+    name ??
+    (await font.locator('option:checked').textContent())?.replace(
+      / \(.*\)$/,
+      ''
+    );
+  expect(current).toBeDefined();
+  if (!current || !renderedAxes[current])
+    throw new Error(`Unexpected inspector font: ${current}`);
+  await expect(font.locator('option:checked')).toHaveText(current);
+  const preview = scope.locator('button[title="Copy Glyph"]');
+  await expect(preview).toBeEnabled();
+  await expect(preview).not.toHaveText('—');
+  if (char) {
+    await expect(preview).toHaveText(char);
+    await expect(scope.locator('.idUnicode')).toHaveText(
+      `U+${char.codePointAt(0)!.toString(16).toUpperCase()}`
+    );
+  }
+  const canvas = symbolCanvas(page);
+  await expect(canvas).toBeVisible();
+  await expect(canvas).toHaveAttribute('data-e2e-axes', renderedAxes[current]);
+  await expect
+    .poll(() =>
+      canvas.evaluate((element) => (element as HTMLCanvasElement).width)
+    )
+    .toBeGreaterThan(0);
+  await expect
+    .poll(() =>
+      canvas.evaluate((element) => (element as HTMLCanvasElement).height)
+    )
+    .toBeGreaterThan(0);
+}
+
 async function loadInspector(page: Page) {
+  await observeCanvasDraws(page);
   await page.setViewportSize(VIEWPORT);
   await page.goto(TYPOGRAPHY_PATH);
-  await page.waitForLoadState('networkidle');
-  // Wait for fonts so the glyph rendering is final.
-  await page.waitForFunction(() => document.fonts.ready);
-  // Disable animations / transitions to avoid mid-tween screenshots, AND
-  // hide the page-level header. The canvas has a transparent background;
-  // when Playwright scrolls the locator into view, the page nav (which has
-  // a continuously-animating decorative SVG) bleeds through and produces
-  // diffs unrelated to the highlight rendering.
   await page.addStyleTag({
     content: `*, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -47,75 +121,57 @@ async function loadInspector(page: Page) {
       visibility: hidden !important;
     }`,
   });
-  // Symbol canvas must be present and sized before we can sample it.
-  await page.waitForSelector('[data-testid="symbol-canvas"]', {
-    state: 'visible',
-  });
-  // Give the inspector a beat to compute the geometry cache and run
-  // detection. The canvas paints on a requestAnimationFrame cadence;
-  // 400ms covers the full pipeline at default speeds.
-  await page.waitForTimeout(400);
+  await waitForInspector(page, 'Nohemi', 'A');
 }
 
 async function pickGlyph(page: Page, char: string) {
-  // The symbol grid renders one button per Unicode glyph. Match by
-  // accessible name OR exact text — the symbol-selector buttons are
-  // `<button>{char}</button>` with a stable class. Filter on the class
-  // to avoid colliding with anatomy-control switch labels (e.g., "h" in
-  // "Cap height").
-  const button = page
+  const previous = await frameNumber(page);
+  const button = inspector(page)
     .locator('button[class*="symbolSelectorButton"]')
-    .filter({ hasText: new RegExp(`^${char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`) })
-    .first();
+    .filter({
+      hasText: new RegExp(`^${char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`),
+    });
   await button.click();
-  // Wait for the React state update + canvas re-render.
-  await page.waitForTimeout(300);
+  await waitForInspector(page, undefined, char);
+  await waitForFreshFrame(page, previous);
 }
 
-async function toggleSwitch(page: Page, name: string) {
-  // The Switch component renders `<input role="switch">` with the visible
-  // label as its accessible name. Use exact: true because Playwright's
-  // default substring match collides on toggle names that share a token
-  // (e.g. 'Tail' was matching both 'Tail' and 'Show Details' on at least
-  // one render path — likely an aria-describedby cross-reference).
-  const sw = page.getByRole('switch', { name, exact: true });
-  await sw.click();
-  await page.waitForTimeout(300);
+async function enableSwitch(page: Page, name: string) {
+  const sw = inspector(page).getByRole('switch', { name, exact: true });
+  const previous = await frameNumber(page),
+    wasChecked = await sw.isChecked();
+  await sw.setChecked(true);
+  await expect(sw).toBeChecked();
+  if (!wasChecked) await waitForFreshFrame(page, previous);
 }
 
 async function enableFeature(page: Page, char: string, feature: string) {
   await pickGlyph(page, char);
-  await toggleSwitch(page, 'Show Details');
-  await toggleSwitch(page, feature);
-  // Final settle before screenshot — the canvas paints on a
-  // requestAnimationFrame cadence, and the detection pipeline runs
-  // asynchronously when selectedAnatomy changes.
-  await page.waitForTimeout(500);
+  await enableSwitch(page, 'Show Details');
+  await enableSwitch(page, feature);
+  await waitForInspector(page, undefined, char);
 }
 
 async function selectFont(page: Page, name: string) {
-  // The font picker is a native `<select>` whose options are rendered
-  // from FontInspector's `fonts` state. Switching by visible text is
-  // robust against re-ordering. After the switch, fontkit reloads the
-  // glyph cache AND the per-glyph hint system recomputes available
-  // toggles; 1500ms is the empirically-stable wait in the trace viewer.
-  // Shorter waits race the toggle re-render and produce flaky
-  // "switch with name 'X' not found" errors.
-  const select = page.locator('select').first();
+  const select = inspector(page).getByRole('combobox', {
+    name: 'Font',
+    exact: true,
+  });
+  await expect
+    .poll(() => select.locator('option').allTextContents())
+    .toContain(name);
+  const previous = await frameNumber(page);
   await select.selectOption({ label: name });
-  await page.waitForTimeout(1500);
+  await waitForInspector(page, name);
+  await waitForFreshFrame(page, previous);
 }
 
 async function screenshotCanvas(page: Page, name: string) {
-  // Park the cursor at (0,0). The canvas draws a hover reticle that floats
-  // with the mouse position, which makes screenshots non-deterministic
-  // run-to-run if the cursor lingers over the canvas. Moving outside the
-  // viewport guarantees the reticle is suppressed.
   await page.mouse.move(0, 0);
-  await page.waitForTimeout(150);
-
-  const canvas = page.locator('[data-testid="symbol-canvas"]');
-  await expect(canvas).toHaveScreenshot(name, {
+  await waitForInspector(page);
+  // Playwright requires consecutive stable captures; no timing estimate is
+  // substituted for the current glyph and the actual supported axis labels.
+  await expect(symbolCanvas(page)).toHaveScreenshot(name, {
     animations: 'disabled',
     caret: 'hide',
   });
@@ -137,10 +193,7 @@ test.describe('Feature highlight overlay (Nohemi)', () => {
   });
 
   test('H + Bar: horizontal bar between stems', async ({ page }) => {
-    // Toggle label moved from 'Crossbar' to 'Bar' when the inspector
-    // switched to JSON-driven toggles (anatomy.json names the feature
-    // 'Bar'). Detector and rendered output are unchanged so the baseline
-    // filename stays nohemi-H-crossbar.png.
+    // The canonical toggle is Bar; the established baseline name is retained.
     await loadInspector(page);
     await enableFeature(page, 'H', 'Bar');
     await screenshotCanvas(page, 'nohemi-H-crossbar.png');
@@ -164,13 +217,17 @@ test.describe('Feature highlight overlay (Nohemi)', () => {
     await screenshotCanvas(page, 'nohemi-e-eye.png');
   });
 
-  test('e + Counter: lower counter region', async ({ page }) => {
+  test('e + Counter: enclosed upper eye, excluding the open lower space', async ({
+    page,
+  }) => {
     await loadInspector(page);
     await enableFeature(page, 'e', 'Counter');
     await screenshotCanvas(page, 'nohemi-e-counter.png');
   });
 
-  test('e + Aperture: enclosed gap rectangle', async ({ page }) => {
+  test('e + Aperture: local empty mouth between its actual lips', async ({
+    page,
+  }) => {
     await loadInspector(page);
     await enableFeature(page, 'e', 'Aperture');
     await screenshotCanvas(page, 'nohemi-e-aperture.png');
@@ -210,35 +267,17 @@ test.describe('Feature highlight overlay (Newsreader corridors and projections)'
   });
 });
 
-test.describe('Feature highlight overlay (Track 1: re-enabled UX gates)', () => {
-  // Track 1 closed two UX gates that previously hid working detector output:
-  //   1. isSerifFont() now allowlists Newsreader → Serif toggle visible.
-  //   2. glyphFeatureHints adds `finial` to common terminal-bearing glyphs.
-  // The third UX gate (spur on Inter b) was deferred: detection at the
-  // inspector's default axes (wght=400, opsz=32) returns count=0 across
-  // every loaded font, so adding a Playwright baseline would just lock in
-  // an empty render. The hint is still added so a user who tweaks the axes
-  // can see the toggle when detection fires.
-  //
-  // Detection firing is axis-dependent for Newsreader (variable opsz axis).
-  // Glyphs and instance counts here are verified at the inspector's
-  // default axis values; see preflight-track1.ts.
-
+test.describe('Feature highlight overlay (Newsreader terminal projections)', () => {
   test('Newsreader H + Serif: 4 foot + 4 cap projections', async ({ page }) => {
-    // After the Track 1.3 detector rewrite, serif fires 8 instances on
-    // Newsreader H — 4 foot serifs (one at each outer corner of the two
-    // stems at baseline) and 4 cap serifs (same at capHeight). H is the
-    // canonical regression case: any change to the widening-detection
-    // algorithm shows up clearly here.
     await loadInspector(page);
     await selectFont(page, 'Newsreader');
     await enableFeature(page, 'H', 'Serif');
     await screenshotCanvas(page, 'newsreader-H-serif.png');
   });
 
-  test('Newsreader s + Finial: terminal curl projection', async ({ page }) => {
-    // Finial fires 1 instance on Newsreader s at default axes (lower-left
-    // terminal). The projection polygon highlights the terminal curl.
+  test('Newsreader s + Finial: source-bound non-serif terminal regions', async ({
+    page,
+  }) => {
     await loadInspector(page);
     await selectFont(page, 'Newsreader');
     await enableFeature(page, 's', 'Finial');

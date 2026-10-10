@@ -99,6 +99,7 @@ export const SymbolCanvasSVG: React.FC = () => {
     active: boolean;
   }>({ x: 0, y: 0, active: false });
   const [showDebug, setShowDebug] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
   const [pathErrors, setPathErrors] = useState<string[]>([]);
   const [exporting, setExporting] = useState(false);
 
@@ -486,43 +487,17 @@ export const SymbolCanvasSVG: React.FC = () => {
           break;
 
         case '?':
-          if (!isModifier) {
+          if (!ev.ctrlKey && !ev.metaKey && !ev.altKey) {
             ev.preventDefault();
-            // Show help - could display a tooltip or modal
+            setShowHelp((visible) => !visible);
           }
           break;
 
         case '`':
         case '~':
-          if (!isModifier) {
+          if (!ev.ctrlKey && !ev.metaKey && !ev.altKey) {
             ev.preventDefault();
             setShowDebug((prev) => !prev);
-          }
-          break;
-
-        case '+':
-        case '=':
-          if (ev.ctrlKey || ev.metaKey) {
-            ev.preventDefault();
-            // Zoom in (could be implemented with viewBox)
-          }
-          break;
-
-        case '-':
-        case '_':
-          if (ev.ctrlKey || ev.metaKey) {
-            ev.preventDefault();
-            // Zoom out (could be implemented with viewBox)
-          }
-          break;
-
-        case 'ArrowLeft':
-        case 'ArrowRight':
-        case 'ArrowUp':
-        case 'ArrowDown':
-          if (ev.ctrlKey || ev.metaKey) {
-            ev.preventDefault();
-            // Pan (could be implemented with viewBox)
           }
           break;
       }
@@ -943,6 +918,28 @@ export const SymbolCanvasSVG: React.FC = () => {
             .join(' | ')}
         </text>
       </svg>
+
+      {showHelp && (
+        <aside role="region" aria-label="Font inspector shortcuts">
+          <h3>Keyboard shortcuts</h3>
+          <p>Focus the glyph view to use these shortcuts.</p>
+          <ul>
+            <li>D: toggle glyph details.</li>
+            <li>Backtick or tilde: toggle the debug overlay.</li>
+            <li>?: show or hide this help.</li>
+            {supportedAxes.wght && <li>Drag horizontally to adjust weight.</li>}
+          </ul>
+          <button
+            type="button"
+            onClick={() => {
+              setShowHelp(false);
+              svgRef.current?.focus();
+            }}
+          >
+            Close help
+          </button>
+        </aside>
+      )}
 
       {/* Export controls */}
       <div className="exportControls">

@@ -194,22 +194,7 @@ function InteractionTestContent() {
             <dt>
               <kbd>?</kbd>
             </dt>
-            <dd>Show help (console)</dd>
-
-            <dt>
-              <kbd>Ctrl/Cmd</kbd> + <kbd>+</kbd>
-            </dt>
-            <dd>Zoom in (placeholder)</dd>
-
-            <dt>
-              <kbd>Ctrl/Cmd</kbd> + <kbd>-</kbd>
-            </dt>
-            <dd>Zoom out (placeholder)</dd>
-
-            <dt>
-              <kbd>Ctrl/Cmd</kbd> + <kbd>Arrow Keys</kbd>
-            </dt>
-            <dd>Pan (placeholder)</dd>
+            <dd>Show or hide keyboard help</dd>
           </dl>
         </div>
 
