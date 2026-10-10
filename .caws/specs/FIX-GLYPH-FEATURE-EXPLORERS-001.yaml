@@ -91,3 +91,10 @@ evidence:
     command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
     exit_code: 0
     commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
+  - criterion_id: A4
+    status: pass
+    evidence_ref: "Provider/rendering/loading tests establish shared current detection/selection, glyph/font/axis transitions, normal/details, labels, URL scalar selection and responsive/DPR/zero-size updates. actual-svg-paint-current.json independently checks the actual SVG clip consumer and live Canvas at H/Aeacute positive/negative targets, including combined spaces. SVG clips retain design units under the one glyph matrix; enclosed spaces remain screen units. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:38:47.278Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
