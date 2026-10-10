@@ -1,21 +1,27 @@
-import { getFilledGeometry } from '@/utils/geometry/filledGeometry';
+import { counterSpaces } from '../evidence/counterSpaces';
 import type { FeatureInstance, GeometryCache } from '../types';
 
-/** Enclosed empty components of the current nonzero glyph fill. */
+/** Enclosed and partly enclosed negative space bounded by current glyph walls. */
 export function detectCounter(geo: GeometryCache): FeatureInstance[] {
-  if (!geo.glyph?.path?.commands || !geo.glyph.bbox) return [];
-  const filled = geo.filled ?? getFilledGeometry(geo.glyph);
-  return filled.enclosedRegions.map((hole, index) => ({
+  return counterSpaces(geo.glyph, geo.metrics, geo).map((space) => ({
     id: 'counter',
-    shape: { type: 'polyline', points: hole.points },
-    region: { kind: 'enclosed', points: hole.points },
+    shape: { type: 'polyline', points: space.points },
+    region: { kind: 'enclosed', points: space.points },
     confidence: 0.9,
     anchors: {
-      center: {
-        x: (hole.bbox.minX + hole.bbox.maxX) / 2,
-        y: (hole.bbox.minY + hole.bbox.maxY) / 2,
-      },
+      center: { ...space.seed },
+      ...(space.mouthStart && space.mouthEnd
+        ? { mouthStart: space.mouthStart, mouthEnd: space.mouthEnd }
+        : {}),
     },
-    debug: { source: 'enclosed-fill-component', holeIndex: index },
+    debug: {
+      source:
+        space.closure === 'closed'
+          ? 'closed-fill-component'
+          : 'opposed-open-counter-walls',
+      closure: space.closure,
+      bodyIndex: space.bodyIndex,
+      holeIndex: space.holeIndex,
+    },
   }));
 }

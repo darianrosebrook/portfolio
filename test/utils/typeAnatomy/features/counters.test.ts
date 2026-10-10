@@ -10,8 +10,13 @@
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { hasBowl } from '@/utils/typeAnatomy/bowl';
-import { getCounter } from '@/utils/typeAnatomy/counter';
+import {
+  counterSeed,
+  traceRegion,
+  getCounter,
+} from '@/utils/typeAnatomy/counter';
 import { hasEye } from '@/utils/typeAnatomy/eye';
+import { pointInPolygon } from '@/test/utils/fixtures/fontFixtures';
 import { Logger } from '@/utils/helpers/logger';
 import {
   mockGlyphFromPath,
@@ -89,13 +94,42 @@ describe('counter features (synthetic geometry)', () => {
       }
     });
 
-    it('rejects a solid circle because it has no enclosed empty space', () => {
+    it('finds and traces a partly enclosed raw glyph without constructing a Font', () => {
+      const glyph = mockGlyphFromPath(
+        'M 0 0 L 100 0 L 100 500 L 500 500 L 500 0 L 600 0 L 600 600 L 0 600 Z',
+        { minX: 0, minY: 0, maxX: 600, maxY: 600 }
+      );
+      const result = getCounter(glyph, metrics);
+      expect(result.found).toBe(true);
+      expect(result.shape?.type).toBe('polyline');
+      if (result.shape?.type !== 'polyline')
+        throw new Error('Missing open-counter polygon');
+      expect(pointInPolygon({ x: 300, y: 300 }, result.shape.points)).toBe(
+        true
+      );
+      expect(pointInPolygon({ x: 50, y: 300 }, result.shape.points)).toBe(
+        false
+      );
+      expect(pointInPolygon({ x: 300, y: -100 }, result.shape.points)).toBe(
+        false
+      );
+      const seed = counterSeed(glyph, metrics);
+      expect(seed).toEqual({ x: 300, y: 250 });
+      const traced = traceRegion(glyph, seed!);
+      expect(traced?.type).toBe('polyline');
+      if (traced?.type !== 'polyline')
+        throw new Error('Missing traced counter');
+      expect(pointInPolygon(seed!, traced.points)).toBe(true);
+      expect(traceRegion(glyph, { x: 50, y: 300 })).toBeNull();
+    });
+
+    it('rejects a solid circle because it has no enclosed or partly enclosed empty space', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
       const result = getCounter(glyph, metrics);
       expect(result).toEqual({ found: false });
     });
 
-    it('rejects a solid rectangle because it has no enclosed empty space', () => {
+    it('rejects a solid rectangle because it has no enclosed or partly enclosed empty space', () => {
       const glyph = mockGlyphFromPath(RECTANGLE.d, RECTANGLE.bbox);
       const result = getCounter(glyph, metrics);
       expect(result).toEqual({ found: false });

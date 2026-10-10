@@ -1,41 +1,19 @@
 /** Open-counter identity and its localized channel to the exterior. */
 import {
   getFilledGeometry,
-  containsFilledPoint,
   occupiedRayIntervals,
-  type FilledGeometry,
 } from '@/utils/geometry/filledGeometry';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 
+import {
+  outlineRecesses,
+  sourceTerminalCaps as terminalCaps,
+  clipCounterPolygon as clip,
+  counterPolygonModel as polygonModel,
+  counterWallAt as wallAt,
+} from '../evidence/counterSpaces';
 function cross(a: Point2D, b: Point2D, c: Point2D): number {
   return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
-}
-
-/** Hull vertices retain outline indices so the recess follows the real wall. */
-function hullIndices(points: Point2D[]): number[] {
-  const sorted = points
-    .map((_, i) => i)
-    .sort((a, b) => points[a].x - points[b].x || points[a].y - points[b].y);
-  const half = (indices: number[]) => {
-    const result: number[] = [];
-    for (const i of indices) {
-      while (
-        result.length > 1 &&
-        cross(
-          points[result[result.length - 2]],
-          points[result[result.length - 1]],
-          points[i]
-        ) <= 0
-      )
-        result.pop();
-      result.push(i);
-    }
-    return result;
-  };
-  return [
-    ...half(sorted).slice(0, -1),
-    ...half([...sorted].reverse()).slice(0, -1),
-  ];
 }
 
 export function detectOpenCounterPockets(
@@ -44,82 +22,69 @@ export function detectOpenCounterPockets(
   if (!geo.glyph?.path?.commands?.length || !geo.glyph.bbox) return [];
   const filled = geo.filled ?? getFilledGeometry(geo.glyph);
   const instances: FeatureInstance[] = [];
-  for (const body of filled.bodies) {
-    const points = body.points;
-    const hull = hullIndices(points);
-    const hullSet = new Set(hull);
-    const width = body.bbox.maxX - body.bbox.minX;
-    const height = body.bbox.maxY - body.bbox.minY;
-    for (let h = 0; h < hull.length; h++) {
-      const start = hull[h],
-        end = hull[(h + 1) % hull.length];
-      let pocket: Point2D[] = [];
-      for (const direction of [1, -1]) {
-        const arc = [points[start]];
-        let i = (start + direction + points.length) % points.length;
-        while (i !== end && !hullSet.has(i) && arc.length <= points.length) {
-          arc.push(points[i]);
-          i = (i + direction + points.length) % points.length;
-        }
-        if (i === end) {
-          arc.push(points[end]);
-          if (arc.length > pocket.length) pocket = arc;
-        }
-      }
-      if (pocket.length < 6) continue;
-      const a = points[start],
-        b = points[end];
-      if (Math.min(a.y, b.y) < geo.metrics.baseline - geo.scale.eps) continue;
-      const mouthLength = Math.hypot(b.x - a.x, b.y - a.y);
-      // Counter mouths open sideways. Recesses at the crown, baseline,
-      // and shallow serif notches do not have an enclosing counter wall.
-      if (
-        Math.abs(b.y - a.y) < Math.abs(b.x - a.x) * 0.8 ||
-        mouthLength < height * 0.01
-      )
-        continue;
-      const depth = Math.max(
-        ...pocket.map((p) => Math.abs(cross(a, b, p)) / mouthLength)
-      );
-      // Counter-like recesses sit in the body. A descender hook or the
-      // whitespace beside p/q reaches its deepest point below the body.
-      if (
-        !pocket.some(
-          (p) =>
-            p.y >= geo.metrics.baseline + height * 0.08 &&
-            Math.abs(cross(a, b, p)) / mouthLength >= depth * 0.8
-        ) ||
-        mouthLength > depth * 3
-      )
-        continue;
-      let area = 0;
-      for (let i = 0; i < pocket.length; i++) {
-        const p = pocket[i],
-          q = pocket[(i + 1) % pocket.length];
-        area += p.x * q.y - q.x * p.y;
-      }
-      if (depth < width * 0.2 || Math.abs(area) / 2 < width * height * 0.005)
-        continue;
-      instances.push({
-        id: 'aperture',
-        shape: { type: 'polyline', points: pocket },
-        region: { kind: 'enclosed', points: pocket },
-        confidence: 0.9,
-        anchors: {
-          mouthTop: a.y > b.y ? a : b,
-          mouthBottom: a.y > b.y ? b : a,
-        },
-        debug: {
-          depth,
-          mouthLength,
-          side:
-            (a.x + b.x) / 2 > (body.bbox.minX + body.bbox.maxX) / 2
-              ? 'right'
-              : 'left',
-          boundary: 'occupied-outline',
-        },
-      });
+  for (const recess of outlineRecesses(filled)) {
+    const {
+      points: pocket,
+      mouthStart: a,
+      mouthEnd: b,
+      width,
+      height,
+    } = recess;
+    if (pocket.length < 6) continue;
+    if (Math.min(a.y, b.y) < geo.metrics.baseline - geo.scale.eps) continue;
+    const mouthLength = Math.hypot(b.x - a.x, b.y - a.y);
+    // Counter mouths open sideways. Recesses at the crown, baseline,
+    // and shallow serif notches do not have an enclosing counter wall.
+    if (
+      Math.abs(b.y - a.y) < Math.abs(b.x - a.x) * 0.8 ||
+      mouthLength < height * 0.01
+    )
+      continue;
+    const depth = Math.max(
+      ...pocket.map((p) => Math.abs(cross(a, b, p)) / mouthLength)
+    );
+    // Counter-like recesses sit in the body. A descender hook or the
+    // whitespace beside p/q reaches its deepest point below the body.
+    if (
+      !pocket.some(
+        (p) =>
+          p.y >= geo.metrics.baseline + height * 0.08 &&
+          Math.abs(cross(a, b, p)) / mouthLength >= depth * 0.8
+      ) ||
+      mouthLength > depth * 3
+    )
+      continue;
+    let area = 0;
+    for (let i = 0; i < pocket.length; i++) {
+      const p = pocket[i],
+        q = pocket[(i + 1) % pocket.length];
+      area += p.x * q.y - q.x * p.y;
     }
+    if (depth < width * 0.2 || Math.abs(area) / 2 < width * height * 0.005)
+      continue;
+    instances.push({
+      id: 'aperture',
+      shape: { type: 'polyline', points: pocket },
+      region: { kind: 'enclosed', points: pocket },
+      confidence: 0.9,
+      anchors: {
+        mouthTop: a.y > b.y ? a : b,
+        mouthBottom: a.y > b.y ? b : a,
+      },
+      debug: {
+        bodyIndex: recess.bodyIndex,
+        depth,
+        mouthLength,
+        side:
+          (a.x + b.x) / 2 >
+          (filled.bodies[recess.bodyIndex].bbox.minX +
+            filled.bodies[recess.bodyIndex].bbox.maxX) /
+            2
+            ? 'right'
+            : 'left',
+        boundary: 'occupied-outline',
+      },
+    });
   }
   return instances;
 }
@@ -262,74 +227,6 @@ export function detectAperture(geo: GeometryCache): FeatureInstance[] {
   });
 }
 
-function clip(points: Point2D[], inside: (p: Point2D) => number): Point2D[] {
-  const result: Point2D[] = [];
-  for (let i = 0; i < points.length; i++) {
-    const a = points[i],
-      b = points[(i + 1) % points.length],
-      da = inside(a),
-      db = inside(b);
-    if (da >= 0) result.push(a);
-    if (da < 0 !== db < 0) {
-      const t = da / (da - db);
-      result.push({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
-    }
-  }
-  return result;
-}
-function polygonModel(points: Point2D[], tolerance: number): FilledGeometry {
-  const bbox = {
-    minX: Math.min(...points.map((p) => p.x)),
-    maxX: Math.max(...points.map((p) => p.x)),
-    minY: Math.min(...points.map((p) => p.y)),
-    maxY: Math.max(...points.map((p) => p.y)),
-  };
-  return {
-    contours: [
-      {
-        index: 0,
-        points,
-        bbox,
-        signedArea: 0,
-        startIndex: 0,
-        endIndex: points.length - 1,
-      },
-    ],
-    bodies: [],
-    enclosedRegions: [],
-    tolerance,
-  };
-}
-
-function wallAt(points: Point2D[], intersection: Point2D): [Point2D, Point2D] {
-  let best: [Point2D, Point2D] = [points[0], points[1]],
-    distance = Infinity;
-  for (let i = 0; i < points.length; i++) {
-    const a = points[i],
-      b = points[(i + 1) % points.length];
-    const dx = b.x - a.x,
-      dy = b.y - a.y,
-      length = dx * dx + dy * dy;
-    if (!length) continue;
-    const t = Math.max(
-      0,
-      Math.min(
-        1,
-        ((intersection.x - a.x) * dx + (intersection.y - a.y) * dy) / length
-      )
-    );
-    const measured = Math.hypot(
-      intersection.x - a.x - dx * t,
-      intersection.y - a.y - dy * t
-    );
-    if (measured < distance) {
-      best = [a, b];
-      distance = measured;
-    }
-  }
-  return best;
-}
-
 /** Visible source cap edges close to the mouth supply the adjacent stroke
  * thickness. Long bar walls remain walls; buried seams and short curve chords
  * do not become cap-width evidence.
@@ -372,92 +269,5 @@ function visibleCapWidths(
     });
     if (visible) result.push(width);
   }
-  return result;
-}
-
-/** Cap geometry includes serif ends: aperture identity uses exposed stroke
- * ends regardless of their terminal classification. Cyclic source walls and
- * nonzero fill exclude buried seams and connecting-bar edges.
- */
-function terminalCaps(
-  geo: GeometryCache
-): Array<{ capStart: Point2D; capEnd: Point2D; position: Point2D }> {
-  const result: Array<{
-    capStart: Point2D;
-    capEnd: Point2D;
-    position: Point2D;
-  }> = [];
-  const filled = geo.filled ?? getFilledGeometry(geo.glyph);
-  const contours: (typeof geo.segments)[] = [];
-  let edges: typeof geo.segments = [],
-    start: Point2D | undefined;
-  for (const segment of geo.segments) {
-    if (segment.type === 'moveTo') {
-      edges = [];
-      start = segment.params[0];
-    } else if (segment.type === 'closePath') {
-      const end = edges.at(-1)?.params.at(-1);
-      if (start && end && (start.x !== end.x || start.y !== end.y))
-        edges.push({ type: 'lineTo', params: [end, start] });
-      if (edges.length >= 3) contours.push(edges);
-      edges = [];
-      start = undefined;
-    } else if (start) edges.push(segment);
-  }
-  const unit = (a: Point2D, b: Point2D) => {
-    const length = Math.hypot(b.x - a.x, b.y - a.y);
-    if (!length) return { x: 0, y: 0 };
-    return { x: (b.x - a.x) / length, y: (b.y - a.y) / length };
-  };
-  for (const contour of contours)
-    for (let i = 0; i < contour.length; i++) {
-      const segment = contour[i];
-      if (segment.type !== 'lineTo' || segment.params.length !== 2) continue;
-      const [a, b] = segment.params,
-        width = Math.hypot(b.x - a.x, b.y - a.y);
-      if (width < filled.tolerance * 2 || width > geo.scale.stemWidth * 1.8)
-        continue;
-      const previous =
-          contour[(i - 1 + contour.length) % contour.length].params,
-        next = contour[(i + 1) % contour.length].params;
-      if (previous.length < 2 || next.length < 2) continue;
-      const incoming = unit(
-          previous[previous.length - 2],
-          previous[previous.length - 1]
-        ),
-        outgoing = unit(next[0], next[1]),
-        along = unit(a, b);
-      if (
-        incoming.x * outgoing.x + incoming.y * outgoing.y > -0.6 ||
-        Math.abs(incoming.x * along.x + incoming.y * along.y) > 0.5 ||
-        Math.abs(outgoing.x * along.x + outgoing.y * along.y) > 0.5
-      )
-        continue;
-      const position = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
-      const normal = { x: -along.y, y: along.x },
-        probe = Math.min(width, geo.scale.stemWidth) * 0.15;
-      const positive = containsFilledPoint(filled, {
-          x: position.x + normal.x * probe,
-          y: position.y + normal.y * probe,
-        }),
-        negative = containsFilledPoint(filled, {
-          x: position.x - normal.x * probe,
-          y: position.y - normal.y * probe,
-        });
-      if (positive === negative) continue;
-      const inward = {
-          x: position.x + normal.x * probe * (positive ? 1 : -1),
-          y: position.y + normal.y * probe * (positive ? 1 : -1),
-        },
-        offset = geo.scale.overshoot / 2;
-      const occupied = occupiedRayIntervals(
-        filled,
-        { x: inward.x - along.x * offset, y: inward.y - along.y * offset },
-        Math.atan2(along.y, along.x),
-        geo.scale.overshoot
-      ).find((span) => span.start <= offset && span.end >= offset);
-      if (!occupied || occupied.end - occupied.start > width * 1.8) continue;
-      result.push({ capStart: a, capEnd: b, position });
-    }
   return result;
 }

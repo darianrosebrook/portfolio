@@ -28,6 +28,7 @@ const LOWERCASE_HINTS: Record<string, FeatureHint[]> = {
     { id: 'serif', gate: (ctx) => ctx.isSerif },
   ],
   c: [
+    { id: 'counter', defaultOn: true },
     { id: 'aperture', defaultOn: true },
     { id: 'finial' },
     { id: 'serif', gate: (ctx) => ctx.isSerif },
@@ -88,11 +89,13 @@ const LOWERCASE_HINTS: Record<string, FeatureHint[]> = {
     { id: 'serif', gate: (ctx) => ctx.isSerif },
   ],
   m: [
+    { id: 'counter', defaultOn: true },
     { id: 'stem', defaultOn: true },
     { id: 'shoulder' },
     { id: 'serif', gate: (ctx) => ctx.isSerif },
   ],
   n: [
+    { id: 'counter', defaultOn: true },
     { id: 'stem', defaultOn: true },
     { id: 'shoulder' },
     { id: 'serif', gate: (ctx) => ctx.isSerif },
@@ -116,6 +119,7 @@ const LOWERCASE_HINTS: Record<string, FeatureHint[]> = {
   ],
   r: [
     { id: 'stem', defaultOn: true },
+    { id: 'arm' },
     { id: 'ear' },
     { id: 'finial' },
     { id: 'serif', gate: (ctx) => ctx.isSerif },
@@ -181,6 +185,7 @@ const UPPERCASE_HINTS: Record<string, FeatureHint[]> = {
     { id: 'serif', gate: (ctx) => ctx.isSerif },
   ],
   C: [
+    { id: 'counter', defaultOn: true },
     { id: 'aperture', defaultOn: true },
     { id: 'finial' },
     { id: 'serif', gate: (ctx) => ctx.isSerif },
@@ -192,6 +197,7 @@ const UPPERCASE_HINTS: Record<string, FeatureHint[]> = {
     { id: 'serif', gate: (ctx) => ctx.isSerif },
   ],
   E: [
+    { id: 'counter', defaultOn: true },
     { id: 'arm', defaultOn: true },
     { id: 'crossbar', defaultOn: true },
     { id: 'stem' },
@@ -204,6 +210,7 @@ const UPPERCASE_HINTS: Record<string, FeatureHint[]> = {
     { id: 'serif', gate: (ctx) => ctx.isSerif },
   ],
   G: [
+    { id: 'counter', defaultOn: true },
     { id: 'aperture', defaultOn: true },
     { id: 'finial' },
     { id: 'crossbar' },

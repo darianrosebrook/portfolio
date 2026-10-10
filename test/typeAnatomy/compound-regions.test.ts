@@ -13,6 +13,11 @@ import {
 } from '@/test/utils/fixtures/fontFixtures';
 import type { FeatureInstance } from '@/utils/typeAnatomy/types';
 
+const closed = (instances: FeatureInstance[]) =>
+  instances.filter(
+    (instance) => (instance.debug as { closure?: string }).closure === 'closed'
+  );
+
 function covers(instances: FeatureInstance[], x: number, y: number) {
   return instances.some(
     (instance) =>
@@ -24,9 +29,11 @@ describe('compound anatomy follows the Nohemi Aeacute geometry', () => {
   const font = loadFont('Nohemi-VF.ttf').getVariation({ wght: 400 });
   const geo = buildGeometryCache(glyphFor(font, 'ǽ'), font);
 
-  it('keeps both enclosed spaces and never treats the acute ink as a counter', () => {
+  it('keeps closed and open spaces without treating acute or body ink as a counter', () => {
     const counters = detectFeature(geo, 'counter');
-    expect(counters).toHaveLength(2);
+    expect(closed(counters)).toHaveLength(2);
+    expect(covers(counters, 2900, 600)).toBe(true);
+    expect(covers(counters, 1000, 1550)).toBe(true);
     expect(covers(counters, 1000, 600)).toBe(true);
     expect(covers(counters, 2900, 1600)).toBe(true);
     expect(covers(counters, 2230, 2600)).toBe(false);
@@ -34,14 +41,16 @@ describe('compound anatomy follows the Nohemi Aeacute geometry', () => {
     expect(covers(counters, 250, 550)).toBe(false);
   });
 
-  it('locates the e eye above its bar and retains the separate a counter', () => {
+  it('locates the e eye while retaining the separate closed a and open counter spaces', () => {
     const result = reconcileFeatures(
       detectGlyphFeatures(geo, ['counter', 'eye'])
     );
     const eyes = result.get('eye') ?? [];
     const counters = result.get('counter') ?? [];
     expect(eyes).toHaveLength(1);
-    expect(counters).toHaveLength(1);
+    expect(closed(counters)).toHaveLength(1);
+    expect(covers(counters, 2900, 600)).toBe(true);
+    expect(covers(counters, 1000, 1550)).toBe(true);
     expect(covers(eyes, 2900, 1600)).toBe(true);
     expect(covers(eyes, 1000, 600)).toBe(false);
     expect(covers(counters, 1000, 600)).toBe(true);
