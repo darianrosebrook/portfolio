@@ -39,3 +39,11 @@ rollback:
   - 'Revert bounded explorer rendering changes'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "FontInspector rendering/loading tests execute selected current detection-map reuse, font/glyph/axis transitions, selection withdrawal, details, accurate effective-axis labels and abort/retry/failure paths. Native actual-svg-paint-current.json confirms H Stem/Bar and all seven Aeacute contracts in live Canvas and actual clipped SVG painting. svg-stem-before-pixels.json proves the corrected double-transform defect; new coordinate test fails old code in svg-clip-red.log and passes repaired code. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:37:33.050Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
