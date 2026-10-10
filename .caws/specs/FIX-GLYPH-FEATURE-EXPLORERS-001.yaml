@@ -84,3 +84,10 @@ evidence:
     command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
     exit_code: 0
     commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "All registered detector families are exercised by semantic, hostile synthetic and real bundled-font representative suites including dynamically enumerated actual supported-axis Cartesian extrema. Dedicated body/stroke/junction/spine/counter/eye/opening/terminal tests cover discovered P1-P3 mechanisms; native source target probes and current actual renderer pixels ground representative masks. This is bounded representative coverage, not a universal claim for every glyph/font. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:38:34.761Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
