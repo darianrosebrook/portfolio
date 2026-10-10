@@ -59,3 +59,10 @@ evidence:
     command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
     exit_code: 0
     commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Legacy structural/projection/vertex/terminal/curve/opening tests and stroke-features.test.ts exercise valid Fontkit commands, genuine junction/link/hook positives, solid-primitive negatives, non-serif terminal caps and excluded serif/ball endings. The suite preserves canonical open Counter identity and separates its aperture rather than adopting obsolete closed-only or malformed fixture expectations. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:35:20.554Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
