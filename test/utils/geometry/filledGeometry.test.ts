@@ -19,6 +19,49 @@ const spans = (d: string, y = 5) =>
   ]);
 
 describe('nonzero occupied fill', () => {
+  it('includes all actual occupied boundaries and preserves cap-parallel spans', () => {
+    const model = modelFor(square + reversedHole);
+    for (const point of [
+      { x: 0, y: 5 },
+      { x: 10, y: 5 },
+      { x: 5, y: 10 },
+      { x: 5, y: 0 },
+      { x: 2, y: 5 },
+      { x: 8, y: 5 },
+      { x: 5, y: 8 },
+      { x: 5, y: 2 },
+    ]) {
+      expect(containsFilledPoint(model, point), JSON.stringify(point)).toBe(
+        true
+      );
+      expect(
+        containsFilledPoint({ ...model, sourceCurves: undefined }, point)
+      ).toBe(true);
+    }
+    expect(spans(square, 10)).toEqual([[0, 10]]);
+    expect(containsFilledPoint(model, { x: 10.0001, y: 5 })).toBe(false);
+    expect(containsFilledPoint(model, { x: 5, y: 10.0001 })).toBe(false);
+  });
+  it('includes analytic quadratic and cubic boundary points without promoting cancelled source edges', () => {
+    expect(
+      containsFilledPoint(modelFor('M0 0Q5 10 10 0L0 0Z'), { x: 5, y: 5 })
+    ).toBe(true);
+    expect(
+      containsFilledPoint(modelFor('M0 0C0 300 100 300 100 0L0 0Z'), {
+        x: 50,
+        y: 225,
+      })
+    ).toBe(true);
+    const cancelled = modelFor(square + reversedSquare);
+    for (const point of [
+      { x: 0, y: 5 },
+      { x: 10, y: 5 },
+      { x: 5, y: 0 },
+      { x: 5, y: 10 },
+    ]) {
+      expect(containsFilledPoint(cancelled, point)).toBe(false);
+    }
+  });
   it('is invariant to reversing every contour, including a hole and a disconnected negative accent', () => {
     const normal = modelFor(
       square + reversedHole + 'M12 12L15 12L15 15L12 15Z'

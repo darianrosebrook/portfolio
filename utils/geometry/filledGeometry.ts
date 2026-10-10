@@ -127,6 +127,75 @@ export function containsFilledPoint(
   model: FilledGeometry,
   point: Point2D
 ): boolean {
+  if (!Number.isFinite(point.x) || !Number.isFinite(point.y)) return false;
+  if (strictFilledPoint(model, point)) return true;
+  // Half-open winding crossings describe interiors. A rendered occupied
+  // boundary also belongs to the fill, provided an adjacent side has ink;
+  // cancelled contours and degenerate source edges cannot create ink.
+  const normals: Point2D[] = [];
+  const epsilon =
+    Number.EPSILON * Math.max(1, Math.abs(point.x), Math.abs(point.y)) * 256;
+  if (model.sourceCurves) {
+    for (const curve of model.sourceCurves) {
+      const xs = curve.coefficients.map((p) => p.x),
+        ys = curve.coefficients.map((p) => p.y);
+      const xRange = xs
+        .slice(1)
+        .reduce((sum, value) => sum + Math.abs(value), 0);
+      const yRange = ys
+        .slice(1)
+        .reduce((sum, value) => sum + Math.abs(value), 0);
+      const equation = (xRange >= yRange ? xs : ys).slice();
+      equation[0] -= xRange >= yRange ? point.x : point.y;
+      for (const t of polynomialRoots(equation)) {
+        if (
+          Math.abs(evaluate(xs, t) - point.x) > epsilon ||
+          Math.abs(evaluate(ys, t) - point.y) > epsilon
+        )
+          continue;
+        const dx = evaluate(
+          xs.slice(1).map((v, i) => v * (i + 1)),
+          t
+        );
+        const dy = evaluate(
+          ys.slice(1).map((v, i) => v * (i + 1)),
+          t
+        );
+        const length = Math.hypot(dx, dy);
+        if (length > 0) normals.push({ x: -dy / length, y: dx / length });
+      }
+    }
+  } else {
+    for (const contour of model.contours)
+      for (let i = 0; i < contour.points.length; i++) {
+        const a = contour.points[i],
+          b = contour.points[(i + 1) % contour.points.length];
+        const dx = b.x - a.x,
+          dy = b.y - a.y,
+          length = Math.hypot(dx, dy);
+        if (!length) continue;
+        const t =
+          ((point.x - a.x) * dx + (point.y - a.y) * dy) / (length * length);
+        if (
+          t < 0 ||
+          t > 1 ||
+          Math.hypot(a.x + t * dx - point.x, a.y + t * dy - point.y) > epsilon
+        )
+          continue;
+        normals.push({ x: -dy / length, y: dx / length });
+      }
+  }
+  const probe = epsilon * 32;
+  return normals.some((normal) =>
+    [-1, 1].some((side) =>
+      strictFilledPoint(model, {
+        x: point.x + normal.x * probe * side,
+        y: point.y + normal.y * probe * side,
+      })
+    )
+  );
+}
+function strictFilledPoint(model: FilledGeometry, point: Point2D): boolean {
   if (model.sourceCurves) {
     let winding = 0;
     for (const curve of model.sourceCurves) {
