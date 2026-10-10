@@ -13,6 +13,7 @@ import {
   loadFont,
   pointInPolygon,
   shapeBBox,
+  bundledVariationExtremes,
   type FontName,
 } from '@/test/utils/fixtures/fontFixtures';
 
@@ -118,6 +119,197 @@ describe('T horizontal arms and vertical stem', () => {
     }
   }
 });
+
+describe.each(bundledVariationExtremes())(
+  '$name $axes opposed crossbar walls',
+  ({ name, axes }) => {
+    it.each(['c', 'C', '´'])(
+      'does not promote %s curved caps or detached marks to bars',
+      (char) => {
+        const font = loadFont(name).getVariation(axes);
+        expect(font.hasGlyphForCodePoint(char.codePointAt(0)!)).toBe(true);
+        expect(
+          detectFeature(
+            buildGeometryCache(glyphFor(font, char), font),
+            'crossbar'
+          )
+        ).toEqual([]);
+      }
+    );
+    it.each(['A', 'H'])(
+      'retains the actual %s connector between its backbones',
+      (char) => {
+        const font = loadFont(name).getVariation(axes);
+        const geo = buildGeometryCache(glyphFor(font, char), font);
+        const bars = detectFeature(geo, 'crossbar');
+        const lower = [0.05, 0.1, 0.15, 0.2]
+          .map(
+            (fraction) =>
+              rayHits(
+                geo.svgShape,
+                {
+                  x: geo.glyph.bbox.minX - 10,
+                  y: geo.metrics.capHeight * fraction,
+                },
+                0,
+                geo.scale.overshoot
+              ).points
+          )
+          .find((points) => points.length === 4)!;
+        expect(lower).toBeDefined();
+        expect(lower).toHaveLength(4);
+        const x = (lower[1].x + lower[2].x) / 2;
+        const vertical = rayHits(
+          geo.svgShape,
+          { x, y: geo.glyph.bbox.minY - 10 },
+          Math.PI / 2,
+          geo.scale.overshoot
+        ).points;
+        expect(vertical.length).toBeGreaterThanOrEqual(2);
+        expect(bars).toHaveLength(1);
+        const pairs = [];
+        for (let i = 0; i + 1 < vertical.length; i += 2)
+          pairs.push([vertical[i].y, vertical[i + 1].y]);
+        pairs.sort(
+          (a, b) =>
+            Math.abs((a[0] + a[1]) / 2 - geo.metrics.capHeight * 0.45) -
+            Math.abs((b[0] + b[1]) / 2 - geo.metrics.capHeight * 0.45)
+        );
+        for (const depth of [0.25, 0.5, 0.75])
+          expect(
+            covered(bars, x, pairs[0][0] + (pairs[0][1] - pairs[0][0]) * depth)
+          ).toBe(true);
+        expect(covered(bars, x, lower[0].y)).toBe(false);
+      }
+    );
+    it.each(['f', 't'])(
+      'retains the %s cross-stroke through its ascender body',
+      (char) => {
+        const font = loadFont(name).getVariation(axes);
+        const geo = buildGeometryCache(glyphFor(font, char), font);
+        const bars = detectFeature(geo, 'crossbar');
+        const wall = geo.segments
+          .filter((segment) => segment.type === 'lineTo')
+          .map((segment) => segment.params)
+          .filter(
+            ([a, b]) =>
+              b &&
+              Math.abs(a.y - b.y) < geo.scale.eps * 0.001 &&
+              a.y > geo.metrics.xHeight * 0.65 &&
+              a.y < geo.metrics.xHeight * 1.15
+          )
+          .sort(
+            ([a, b], [c, d]) => Math.abs(d.x - c.x) - Math.abs(b.x - a.x)
+          )[0];
+        expect(wall).toBeDefined();
+        expect(bars).toHaveLength(1);
+        for (const fraction of [0.8, 0.9]) {
+          const x =
+            Math.min(wall[0].x, wall[1].x) +
+            Math.abs(wall[1].x - wall[0].x) * fraction;
+          const hits = rayHits(
+            geo.svgShape,
+            { x, y: geo.glyph.bbox.minY - 10 },
+            Math.PI / 2,
+            geo.scale.overshoot
+          ).points;
+          const pairs = [];
+          for (let i = 0; i + 1 < hits.length; i += 2)
+            if (
+              hits[i].y <= wall[0].y + geo.scale.eps &&
+              hits[i + 1].y >= wall[0].y - geo.scale.eps
+            )
+              pairs.push([hits[i].y, hits[i + 1].y]);
+          expect(pairs).toHaveLength(1);
+          for (const depth of [0.25, 0.5, 0.75])
+            expect(
+              covered(
+                bars,
+                x,
+                pairs[0][0] + (pairs[0][1] - pairs[0][0]) * depth
+              )
+            ).toBe(true);
+        }
+        const y = geo.metrics.xHeight * 0.15;
+        const shaft = rayHits(
+          geo.svgShape,
+          { x: geo.glyph.bbox.minX - 10, y },
+          0,
+          geo.scale.overshoot
+        ).points;
+        expect(shaft.length).toBeGreaterThanOrEqual(2);
+        for (let i = 0; i + 1 < shaft.length; i += 2)
+          expect(covered(bars, (shaft[i].x + shaft[i + 1].x) / 2, y)).toBe(
+            false
+          );
+      }
+    );
+    it('selects the transverse source stroke and excludes its upper curve and lower foot', () => {
+      const font = loadFont(name).getVariation(axes);
+      const geo = buildGeometryCache(glyphFor(font, 'G'), font);
+      const bars = detectFeature(geo, 'crossbar');
+      // The longest flat native edge in the middle zone is the actual G
+      // stroke wall. Its exposed inward wing supplies independent ink probes.
+      const wall = geo.segments
+        .filter((segment) => segment.type === 'lineTo')
+        .map((segment) => segment.params)
+        .filter(
+          ([a, b]) =>
+            b &&
+            Math.abs(a.y - b.y) < geo.scale.eps * 0.001 &&
+            a.y > geo.metrics.capHeight * 0.2 &&
+            a.y < geo.metrics.capHeight * 0.65
+        )
+        .sort(([a, b], [c, d]) => Math.abs(d.x - c.x) - Math.abs(b.x - a.x))[0];
+      expect(wall).toBeDefined();
+      const x =
+        Math.min(wall[0].x, wall[1].x) + Math.abs(wall[1].x - wall[0].x) * 0.1;
+      const hits = rayHits(
+        geo.svgShape,
+        { x, y: geo.glyph.bbox.minY - 10 },
+        Math.PI / 2,
+        geo.scale.overshoot
+      ).points;
+      const pairs = [];
+      for (let i = 0; i + 1 < hits.length; i += 2)
+        if (
+          hits[i].y <= wall[0].y + geo.scale.eps &&
+          hits[i + 1].y >= wall[0].y - geo.scale.eps
+        )
+          pairs.push([hits[i].y, hits[i + 1].y]);
+      expect(pairs).toHaveLength(1);
+      expect(bars).toHaveLength(1);
+      for (const depth of [0.25, 0.5, 0.75])
+        expect(
+          covered(bars, x, pairs[0][0] + (pairs[0][1] - pairs[0][0]) * depth)
+        ).toBe(true);
+      for (const fraction of [0.1, 0.75]) {
+        const y = geo.metrics.capHeight * fraction;
+        const points = rayHits(
+          geo.svgShape,
+          { x: geo.glyph.bbox.minX - 10, y },
+          0,
+          geo.scale.overshoot
+        ).points;
+        expect(points.length).toBeGreaterThanOrEqual(2);
+        expect(
+          covered(bars, (points.at(-2)!.x + points.at(-1)!.x) / 2, y)
+        ).toBe(false);
+      }
+      const cavityY = geo.metrics.capHeight * 0.55;
+      const cavityHits = rayHits(
+        geo.svgShape,
+        { x: geo.glyph.bbox.minX - 10, y: cavityY },
+        0,
+        geo.scale.overshoot
+      ).points;
+      expect(cavityHits.length).toBeGreaterThanOrEqual(2);
+      const cavityX =
+        (cavityHits[1].x + (cavityHits[2]?.x ?? geo.glyph.bbox.maxX)) / 2;
+      expect(covered(bars, cavityX, cavityY)).toBe(false);
+    });
+  }
+);
 
 describe('horizontal crossbar and non-arm controls', () => {
   for (const weight of [400, 617, 700, 900]) {

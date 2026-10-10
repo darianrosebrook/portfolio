@@ -187,6 +187,11 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
 
     const measuredHeight = thicknessMeasurement.thickness;
 
+    // Width and one flat cap do not establish a transverse stroke: a
+    // perpendicular ray may continue through a curved bowl or its foot.
+    const wallExtent = opposedTransverseWallExtent(geo, thicknessMeasurement);
+    if (!wallExtent) continue;
+
     // A vertical probe can measure the full height of a vertical stem.
     // A thick connector's exposed mask can also be taller than it is wide;
     // distinct side-stem support establishes that case independently.
@@ -229,9 +234,9 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
 
     const rect = {
       type: 'rect' as const,
-      x: avgX1,
+      x: wallExtent.x1,
       y: centerY - measuredHeight / 2,
-      width: avgX2 - avgX1,
+      width: wallExtent.x2 - wallExtent.x1,
       height: measuredHeight,
     };
     instances.push({
@@ -240,8 +245,8 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
       region: { kind: 'stroke', points: rectToPolygon(rect) },
       confidence,
       anchors: {
-        left: { x: avgX1, y: centerY },
-        right: { x: avgX2, y: centerY },
+        left: { x: wallExtent.x1, y: centerY },
+        right: { x: wallExtent.x2, y: centerY },
       },
       debug: {
         sampleCount: group.length,
@@ -263,7 +268,7 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
       // edge rather than the centerline. Probe away from any attached stem
       // and retain a containing pair with horizontal proportions or bounded
       // support from two distinct side stems.
-      const measurements = [0.25, 0.5, 0.75]
+      const measurements = [0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95]
         .map((fraction) =>
           measureOrthogonalThickness(geo, {
             midpoint: { x: seg.x1 + (seg.x2 - seg.x1) * fraction, y: seg.y },
@@ -275,6 +280,7 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
             measurement.selectedPairContainsMidpoint &&
             measurement.selectedPairCenterOnProbeAxis !== undefined &&
             measurement.thickness > 0 &&
+            opposedTransverseWallExtent(geo, measurement) &&
             (measurement.thickness < seg.x2 - seg.x1 ||
               supportsBoundedConnector(geo, seg.x1, seg.x2, measurement))
         )
@@ -283,6 +289,17 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
       if (!measurement) continue;
       const barHeight = measurement.thickness;
       const centerY = measurement.selectedPairCenterOnProbeAxis!;
+      if (
+        seg.requiresAscender &&
+        !(geo.filled ?? getFilledGeometry(glyph)).bodies.some(
+          (body) =>
+            body.bbox.minX <= seg.x1 + scale.eps &&
+            body.bbox.maxX >= seg.x2 - scale.eps &&
+            body.bbox.minY < centerY - barHeight / 2 - scale.eps &&
+            body.bbox.maxY > centerY + barHeight / 2 + scale.eps
+        )
+      )
+        continue;
       const rect = {
         type: 'rect' as const,
         x: seg.x1,
@@ -308,6 +325,50 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
   const mergedInstances = mergeCrossbarInstances(instances, bboxH * 0.12);
 
   return trimDiagonalJoins(geo, mergedInstances);
+}
+
+/** Both occupied boundaries must be actual transverse source walls. The
+ * exposed wing of a cap can have an inclined underside; the shaft underneath
+ * its junction cannot supply a fabricated bar thickness. */
+function opposedTransverseWallExtent(
+  geo: GeometryCache,
+  measurement: OrthogonalThicknessMeasurement
+): { x1: number; x2: number } | undefined {
+  const center = measurement.selectedPairCenterOnProbeAxis;
+  if (center === undefined || !measurement.hits.length) return undefined;
+  const lower = center - measurement.thickness / 2,
+    upper = center + measurement.thickness / 2,
+    x = measurement.hits[0].x,
+    tolerance = geo.scale.eps * 0.001;
+  const walls = [...geo.segments];
+  let start;
+  for (const segment of geo.segments) {
+    if (segment.type === 'moveTo') start = segment.params[0];
+    if (segment.type === 'closePath' && start && segment.params[0])
+      walls.push({ type: 'lineTo', params: [segment.params[0], start] });
+  }
+  const owns = (y: number) =>
+    walls.filter((wall) => {
+      if (wall.type !== 'lineTo' || wall.params.length !== 2) return false;
+      const [a, b] = wall.params,
+        dx = b.x - a.x,
+        dy = b.y - a.y;
+      if (
+        Math.abs(dx) <= Math.max(geo.scale.eps, Math.abs(dy) * 1.5) ||
+        x < Math.min(a.x, b.x) - tolerance ||
+        x > Math.max(a.x, b.x) + tolerance
+      )
+        return false;
+      return Math.abs(a.y + ((x - a.x) * dy) / dx - y) <= tolerance;
+    });
+  const lowerWalls = owns(lower),
+    upperWalls = owns(upper);
+  if (!lowerWalls.length || !upperWalls.length) return undefined;
+  const points = [...lowerWalls, ...upperWalls].flatMap((wall) => wall.params);
+  return {
+    x1: Math.min(...points.map((point) => point.x)),
+    x2: Math.max(...points.map((point) => point.x)),
+  };
 }
 
 /**
@@ -529,9 +590,14 @@ function groupSpansByY(spans: FilledSpan[], tolerance: number): FilledSpan[][] {
  */
 function findHorizontalSegments(
   geo: GeometryCache
-): Array<{ x1: number; x2: number; y: number }> {
-  const { glyph, segments, metrics, scale } = geo;
-  const results: Array<{ x1: number; x2: number; y: number }> = [];
+): Array<{ x1: number; x2: number; y: number; requiresAscender: boolean }> {
+  const { segments, metrics, scale } = geo;
+  const results: Array<{
+    x1: number;
+    x2: number;
+    y: number;
+    requiresAscender: boolean;
+  }> = [];
   const tolerance = scale.bboxH * 0.15;
 
   // Target Y positions
@@ -554,16 +620,22 @@ function findHorizontalSegments(
       const midY = (p0.y + p1.y) / 2;
 
       // Check if near expected crossbar position
-      if (
+      const inMidZone =
         Math.abs(midY - lowercaseMidY) < tolerance ||
-        Math.abs(midY - uppercaseMidY) < tolerance ||
-        (glyph.bbox.maxY < metrics.capHeight - scale.eps &&
-          Math.abs(midY - lowercaseTopY) < tolerance)
+        Math.abs(midY - uppercaseMidY) < tolerance;
+      if (
+        inMidZone ||
+        // Ascenders can carry a cross-stroke near x-height. Its actual
+        // opposed walls establish identity, independently of the hook's top.
+        Math.abs(midY - lowercaseTopY) < tolerance
       ) {
         results.push({
           x1: Math.min(p0.x, p1.x),
           x2: Math.max(p0.x, p1.x),
           y: midY,
+          // A body's top slab is an Arm. An ascender cross-stroke has
+          // connected body both above and below its actual occupied walls.
+          requiresAscender: !inMidZone,
         });
       }
     }
