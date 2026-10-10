@@ -1,0 +1,36 @@
+id: FIX-GLYPH-G-CROSSBARS-001
+title: 'Bound actual crossbars with opposed stroke walls'
+mode: fix
+lifecycle_state: active
+created_at: '2026-10-10T01:17:52.503Z'
+updated_at: '2026-10-10T01:17:52.503Z'
+created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
+blast_radius:
+  modules:
+    - 'Crossbar source wall evidence and curved-body exclusions'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/typeAnatomy/detectors/crossbar.ts'
+    - 'test/typeAnatomy/crossbar-arm-alignment.test.ts'
+  out: []
+invariants:
+  - 'Bar masks follow current occupied transverse walls and do not classify terminal caps backed by curved bowls as bars'
+acceptance:
+  - id: A1
+    given: 'bundled G and existing A H e compound and cross-stroke exemplars across supported axes'
+    when: 'Crossbar is detected'
+    then: 'genuine bars cover source ink and curved bowls feet cavities and detached marks remain outside the masks'
+  - id: A2
+    given: 'hostile terminal caps curved roofs and shared Eye consumers'
+    when: 'focused geometry tests run'
+    then: 'opposed source walls and semantic positive and negative probes establish detection without false counts or font masks'
+observability:
+  - 'Raw source wall probes and integrated anatomy masks'
+rollback:
+  - 'Revert owned crossbar repair commits preserving foreign edits'
+non_functional: {}
+contracts:
+  - name: 'actual-crossbars'
+    type: behavior
