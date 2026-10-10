@@ -4,73 +4,404 @@
  * An arm is a horizontal or angled stroke that is free at one or both ends
  * (e.g., in 'E', 'F', 'K', 'L', 'T', 'Y').
  *
- * v2 improvements:
- * - Detects horizontal extensions from the stem, not the stem itself
- * - Returns rect shapes for consistent closed-shape rendering
- * - Filters out spans that are part of the main vertical stem
- * - Scale-aware thresholds
+ * Current backbone sections establish attachment edges; occupied free bands
+ * establish stroke regions. Inclined shafts remain inclined through each band.
  */
 
 import { detectStem } from './stem';
 import { rayHits } from '@/utils/geometry/geometryCore';
-import type { FeatureInstance, GeometryCache } from '../types';
+import {
+  getFilledGeometry,
+  occupiedRayIntervals,
+} from '@/utils/geometry/filledGeometry';
+import { detectEar } from './ear';
+import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 import { rectToPolygon } from '../evidence/regionFromShape';
 import { measureOrthogonalThickness } from '../evidence/measureOrthogonalThickness';
 
-/**
- * Detects arm features on a glyph.
- * Returns rect shapes at detected arm locations.
- */
-export function detectArm(geo: GeometryCache): FeatureInstance[] {
-  if (!geo.glyph?.path?.commands?.length || !geo.glyph.bbox) return [];
-  const bilateral = detectBilateralTopArms(geo);
-  if (bilateral.length) return bilateral;
-  const stems = detectStem(geo).filter((stem) => stem.shape.type === 'rect');
-  const instances: FeatureInstance[] = [];
-  const { bbox } = geo.glyph;
-  for (const stem of stems) {
-    if (stem.shape.type !== 'rect') continue;
-    const shaft = stem.shape;
-    const levels = new Set<number>();
-    for (let i = 1; i < 96; i++)
-      levels.add(bbox.minY + (geo.scale.bboxH * i) / 96);
-    for (const segment of geo.segments) {
-      if (segment.type !== 'lineTo' || segment.params.length !== 2) continue;
-      const [a, b] = segment.params;
-      if (Math.abs(a.y - b.y) <= geo.scale.eps) {
-        levels.add(a.y + geo.scale.eps);
-        levels.add(a.y - geo.scale.eps);
+/** A current backbone contributes its actual horizontal section, including
+ * inclined boundaries. A rectangle enclosing the entire shaft is not evidence
+ * of the attachment edge at any particular height. */
+function backboneAtY(stem: FeatureInstance, y: number, eps: number) {
+  const points =
+    stem.region?.points ??
+    (stem.shape.type === 'rect' ? rectToPolygon(stem.shape) : []);
+  if (points.length < 3) return undefined;
+  const minY = Math.min(...points.map((point) => point.y));
+  const maxY = Math.max(...points.map((point) => point.y));
+  if (y < minY - eps * 1e-6 || y > maxY + eps * 1e-6) return undefined;
+  const rowY = Math.max(minY, Math.min(maxY, y));
+  const intersections: number[] = [];
+  for (let i = 0; i < points.length; i++) {
+    const a = points[i],
+      b = points[(i + 1) % points.length];
+    if (a.y === b.y || rowY < Math.min(a.y, b.y) || rowY > Math.max(a.y, b.y))
+      continue;
+    intersections.push(a.x + ((b.x - a.x) * (rowY - a.y)) / (b.y - a.y));
+  }
+  intersections.sort((a, b) => a - b);
+  const coordinates = intersections.filter(
+    (x, i) => i === 0 || Math.abs(x - intersections[i - 1]) > eps * 1e-6
+  );
+  if (coordinates.length !== 2 || coordinates[1] <= coordinates[0])
+    return undefined;
+  return {
+    x1: coordinates[0],
+    x2: coordinates[1],
+    width: coordinates[1] - coordinates[0],
+  };
+}
+
+interface BranchRow {
+  y: number;
+  left: number;
+  right: number;
+  attached: boolean;
+}
+interface BranchTrack {
+  rows: BranchRow[];
+  side: 'left' | 'right';
+  stem: FeatureInstance;
+}
+
+/** Occupied walls outside an actual shaft. Beyond its evidenced endpoint its
+ * center divides a fork; it does not supply an invented shaft rectangle. */
+function freeTracks(
+  geo: GeometryCache,
+  stems: FeatureInstance[]
+): BranchTrack[] {
+  const filled = geo.filled ?? getFilledGeometry(geo.glyph);
+  const bbox = geo.glyph.bbox,
+    step = geo.scale.bboxH / 160;
+  const levels = new Set<number>();
+  for (let row = 0; row <= 160; row++) levels.add(bbox.minY + row * step);
+  for (const segment of geo.segments)
+    for (const point of segment.params) {
+      if (point.y >= bbox.minY && point.y <= bbox.maxY) {
+        levels.add(point.y - geo.scale.eps * 0.01);
+        levels.add(point.y + geo.scale.eps * 0.01);
       }
     }
-    for (const y of levels) {
-      if (y < shaft.y || y > shaft.y + shaft.height) continue;
-      const spans = rayHits(
-        geo.svgShape,
+  const ys = [...levels]
+    .filter((y) => y >= bbox.minY && y <= bbox.maxY)
+    .sort((a, b) => a - b);
+  const tracks: BranchTrack[] = [];
+  for (const stem of stems) {
+    const points = stem.region!.points;
+    const bottom = Math.min(...points.map((p) => p.y)),
+      top = Math.max(...points.map((p) => p.y));
+    const lower = backboneAtY(stem, bottom, geo.scale.eps)!,
+      upper = backboneAtY(stem, top, geo.scale.eps)!;
+    const centerSlope =
+      (upper.x1 + upper.x2 - lower.x1 - lower.x2) / (2 * (top - bottom));
+    let previous: BranchTrack[] = [];
+    for (const y of ys) {
+      const incoming = previous.map((track) => ({
+        track,
+        last: track.rows.at(-1)!,
+      }));
+      const shaft = backboneAtY(stem, y, geo.scale.eps);
+      const reference =
+        shaft ??
+        backboneAtY(stem, Math.max(bottom, Math.min(top, y)), geo.scale.eps)!;
+      const shift = shaft
+        ? 0
+        : centerSlope * (y - Math.max(bottom, Math.min(top, y)));
+      const center = (reference.x1 + reference.x2) / 2 + shift;
+      const spans = occupiedRayIntervals(
+        filled,
         { x: bbox.minX - geo.scale.eps, y },
         0,
         geo.scale.overshoot
-      ).points;
-      for (let i = 0; i + 1 < spans.length; i += 2) {
+      );
+      const current: BranchTrack[] = [];
+      for (const span of spans)
+        for (const side of ['left', 'right'] as const) {
+          const left =
+            side === 'right'
+              ? Math.max(span.near.x, shaft ? reference.x2 : center)
+              : span.near.x;
+          const right =
+            side === 'left'
+              ? Math.min(span.far.x, shaft ? reference.x1 : center)
+              : span.far.x;
+          if (right - left <= geo.scale.eps) continue;
+          const gap =
+            side === 'right'
+              ? Math.max(0, left - reference.x2)
+              : Math.max(0, reference.x1 - right);
+          const attached =
+            gap <= geo.scale.eps * 2 &&
+            y >= bottom - step * 1.5 &&
+            y <= top + step * 1.5;
+          const row: BranchRow = { y, left, right, attached };
+          const linked = incoming
+            .filter(({ track }) => track.side === side)
+            .filter(({ last }) => {
+              return (
+                y - last.y <= step * 1.6 &&
+                Math.max(left, last.left) <=
+                  Math.min(right, last.right) + (y - last.y) * 2
+              );
+            })
+            .sort(
+              (a, b) =>
+                Math.min(right, b.last.right) -
+                Math.max(left, b.last.left) -
+                (Math.min(right, a.last.right) - Math.max(left, a.last.left))
+            );
+          const predecessor = linked[0]?.track;
+          if (predecessor) {
+            const rooted = linked.some(({ track }) =>
+              track.rows.some((r) => r.attached)
+            );
+            if (rooted && linked.length > 1) {
+              row.attached = true;
+              for (const { track, last } of linked)
+                if (
+                  track !== predecessor &&
+                  !track.rows.some((r) => r.attached)
+                ) {
+                  last.attached = true;
+                  track.rows.push({ ...row });
+                }
+            }
+            if (current.includes(predecessor)) {
+              const track = {
+                rows: [...predecessor.rows.filter((r) => r.y < y), row],
+                side,
+                stem,
+              };
+              tracks.push(track);
+              current.push(track);
+            } else {
+              predecessor.rows.push(row);
+              current.push(predecessor);
+            }
+          } else {
+            const track = { rows: [row], side, stem };
+            tracks.push(track);
+            current.push(track);
+          }
+        }
+      previous = current;
+    }
+  }
+  return tracks;
+}
+function branchRegion(rows: BranchRow[]): Point2D[] {
+  return [
+    ...rows.map((row) => ({ x: row.left, y: row.y })),
+    ...rows
+      .slice()
+      .reverse()
+      .map((row) => ({ x: row.right, y: row.y })),
+  ];
+}
+function branchInstance(
+  track: BranchTrack,
+  rows: BranchRow[],
+  source: string
+): FeatureInstance {
+  const points = branchRegion(rows),
+    attach = rows.find((row) => row.attached) ?? rows[0],
+    free = rows.at(-1)!;
+  return {
+    id: 'arm',
+    shape: { type: 'polyline', points },
+    region: { kind: 'stroke', points },
+    confidence: 0.85,
+    anchors: {
+      attached: {
+        x: track.side === 'right' ? attach.left : attach.right,
+        y: attach.y,
+      },
+      free: { x: (free.left + free.right) / 2, y: free.y },
+    },
+    debug: { source, side: track.side },
+  };
+}
+function traceFreeBranches(
+  geo: GeometryCache,
+  stems: FeatureInstance[]
+): FeatureInstance[] {
+  const filled = geo.filled ?? getFilledGeometry(geo.glyph);
+  if (filled.enclosedRegions.length) return [];
+  const slope = -Math.tan((geo.italicAngle * Math.PI) / 180);
+  const diagonalWalls = geo.segments.filter((segment) => {
+    if (segment.type !== 'lineTo' || segment.params.length !== 2) return false;
+    const [a, b] = segment.params,
+      dy = b.y - a.y,
+      dx = b.x - a.x;
+    return (
+      Math.abs(dy) > geo.scale.bboxH * 0.18 &&
+      Math.abs(dx - slope * dy) > Math.abs(dy) * 0.15
+    );
+  });
+  const code = geo.glyph.codePoints?.[0];
+  const role = code === undefined ? undefined : String.fromCodePoint(code);
+  const hasDiagonalRole = role === undefined || ['K', 'k', 'Y'].includes(role);
+  const ear = detectEar(geo)[0],
+    tip = ear?.anchors?.position;
+  if ((diagonalWalls.length < 2 || !hasDiagonalRole) && !tip) return [];
+  const tracks = freeTracks(geo, stems);
+  const diagonal: FeatureInstance[] = [];
+  const caps = [...geo.segments];
+  let contourStart: Point2D | undefined;
+  for (const segment of geo.segments) {
+    if (segment.type === 'moveTo') contourStart = segment.params[0];
+    if (segment.type === 'closePath' && contourStart && segment.params[0])
+      caps.push({ type: 'lineTo', params: [segment.params[0], contourStart] });
+  }
+  const hasSourceCap = (row: BranchRow) =>
+    caps.some((segment) => {
+      if (segment.type !== 'lineTo' || segment.params.length !== 2)
+        return false;
+      const [a, b] = segment.params;
+      return (
+        Math.abs(a.y - b.y) <= geo.scale.eps &&
+        Math.abs(row.y - (a.y + b.y) / 2) <= geo.scale.eps * 2 &&
+        (row.left + row.right) / 2 >= Math.min(a.x, b.x) - geo.scale.eps &&
+        (row.left + row.right) / 2 <= Math.max(a.x, b.x) + geo.scale.eps
+      );
+    });
+  if (diagonalWalls.length >= 2 && hasDiagonalRole)
+    for (const track of tracks) {
+      const attached = track.rows.filter(
+        (row) =>
+          row.attached &&
+          row.y > geo.glyph.bbox.minY + geo.scale.stemWidth * 0.3
+      );
+      if (!attached.length) continue;
+      const first = attached[0].y,
+        last = attached.at(-1)!.y,
+        pivot = (first + last) / 2;
+      const threshold = Math.max(
+        geo.scale.stemWidth * 0.8,
+        geo.scale.bboxH * 0.15
+      );
+      if (first - track.rows[0].y > threshold && hasSourceCap(track.rows[0])) {
+        const rows = track.rows.filter((row) => row.y <= pivot);
+        if (rows.length > 2)
+          diagonal.push(
+            branchInstance(track, rows.reverse(), 'source-diagonal-free-walls')
+          );
+      }
+      if (
+        track.rows.at(-1)!.y - last > threshold &&
+        hasSourceCap(track.rows.at(-1)!)
+      ) {
+        const rows = track.rows.filter((row) => row.y >= pivot);
+        if (rows.length > 2)
+          diagonal.push(
+            branchInstance(track, rows, 'source-diagonal-free-walls')
+          );
+      }
+    }
+  if (diagonal.length) return diagonal;
+  if (!tip) return [];
+  const candidates = tracks.filter(
+    (track) =>
+      track.side === 'right' &&
+      track.rows.some((row) => row.attached) &&
+      track.rows.some(
+        (row) =>
+          Math.abs(row.y - tip.y) <= geo.scale.bboxH / 80 &&
+          row.right >= tip.x - geo.scale.eps * 2
+      )
+  );
+  candidates.sort((a, b) => b.rows.length - a.rows.length);
+  return candidates[0]
+    ? [
+        branchInstance(
+          candidates[0],
+          candidates[0].rows,
+          'source-free-head-walls'
+        ),
+      ]
+    : [];
+}
+
+/** Isolate a free occupied band outside its current backbone attachment. */
+export function detectArm(geo: GeometryCache): FeatureInstance[] {
+  if (!geo.glyph?.path?.commands?.length || !geo.glyph.bbox) return [];
+  const body = (geo.filled ?? getFilledGeometry(geo.glyph)).bodies[0];
+  if (!body) return [];
+  const bilateral = detectBilateralTopArms(geo);
+  if (bilateral.length) return bilateral;
+  const writingSlope = -Math.tan((geo.italicAngle * Math.PI) / 180);
+  const stems = detectStem(geo).filter((stem) => {
+    const points =
+      stem.region?.points ??
+      (stem.shape.type === 'rect' ? rectToPolygon(stem.shape) : []);
+    if (points.length < 3) return false;
+    const bottom = Math.min(...points.map((point) => point.y)),
+      top = Math.max(...points.map((point) => point.y));
+    const lower = backboneAtY(stem, bottom, geo.scale.eps),
+      upper = backboneAtY(stem, top, geo.scale.eps);
+    if (!lower || !upper || top <= bottom) return false;
+    const displacement = (upper.x1 + upper.x2 - lower.x1 - lower.x2) / 2;
+    // A diagonal leg can support a connector, but does not establish a writing
+    // backbone. Retain the actual sheared shaft, not every tilted Stem region.
+    return (
+      Math.abs(displacement - writingSlope * (top - bottom)) <=
+      Math.max(geo.scale.eps * 2, Math.min(lower.width, upper.width) * 0.1)
+    );
+  });
+  const freeBranches = traceFreeBranches(geo, stems);
+  if (freeBranches.length) return freeBranches;
+  const instances: FeatureInstance[] = [];
+  const { bbox } = geo.glyph;
+  const levels = new Set<number>();
+  for (let i = 1; i < 96; i++)
+    levels.add(bbox.minY + (geo.scale.bboxH * i) / 96);
+  for (const segment of geo.segments) {
+    if (segment.type !== 'lineTo' || segment.params.length !== 2) continue;
+    const [a, b] = segment.params;
+    if (Math.abs(a.y - b.y) <= geo.scale.eps) {
+      levels.add(a.y + geo.scale.eps);
+      levels.add(a.y - geo.scale.eps);
+    }
+  }
+  const spansAt = (y: number) => {
+    const points = rayHits(
+      geo.svgShape,
+      { x: bbox.minX - geo.scale.eps, y },
+      0,
+      geo.scale.overshoot
+    ).points;
+    const spans: Array<{ x1: number; x2: number }> = [];
+    for (let i = 0; i + 1 < points.length; i += 2)
+      spans.push({ x1: points[i].x, x2: points[i + 1].x });
+    return spans;
+  };
+  for (const stem of stems)
+    for (const y of levels) {
+      const shaft = backboneAtY(stem, y, geo.scale.eps);
+      if (!shaft) continue;
+      for (const span of spansAt(y)) {
         if (
-          spans[i].x > shaft.x + geo.scale.eps ||
-          spans[i + 1].x < shaft.x + shaft.width - geo.scale.eps
+          span.x1 > shaft.x1 + geo.scale.eps ||
+          span.x2 < shaft.x2 - geo.scale.eps
         )
           continue;
         for (const side of ['left', 'right'] as const) {
-          const x1 = side === 'right' ? shaft.x + shaft.width : spans[i].x;
-          const x2 = side === 'right' ? spans[i + 1].x : shaft.x;
+          const x1 = side === 'right' ? shaft.x2 : span.x1;
+          const x2 = side === 'right' ? span.x2 : shaft.x1;
           const width = x2 - x1;
           if (width < Math.max(shaft.width * 0.65, geo.scale.bboxH * 0.18))
             continue;
-          // A horizontal connector reaching a second backbone is a bar.
+          // A connector reaching another current backbone is a bar.
           if (
-            stems.some(
-              (other) =>
-                other !== stem &&
-                other.shape.type === 'rect' &&
-                other.shape.x < x2 - geo.scale.eps &&
-                other.shape.x + other.shape.width > x1 + geo.scale.eps
-            )
+            stems.some((other) => {
+              if (other === stem) return false;
+              const otherShaft = backboneAtY(other, y, geo.scale.eps);
+              return (
+                otherShaft &&
+                otherShaft.x1 < x2 - geo.scale.eps &&
+                otherShaft.x2 > x1 + geo.scale.eps
+              );
+            })
           )
             continue;
           const measurement = measureOrthogonalThickness(geo, {
@@ -84,39 +415,93 @@ export function detectArm(geo: GeometryCache): FeatureInstance[] {
           )
             continue;
           const centerY = measurement.selectedPairCenterOnProbeAxis;
+          const lowerY = centerY - measurement.thickness / 2;
+          const leftExtension = shaft.x1 - span.x1;
+          const rightExtension = span.x2 - shaft.x2;
+          // Bilateral terminal slabs at the baseline are feet. An L's long
+          // free branch remains distinct from its small opposite serif.
           if (
-            instances.some(
-              (instance) =>
-                instance.shape.type === 'rect' &&
-                Math.abs(
-                  instance.shape.y + instance.shape.height / 2 - centerY
-                ) <
-                  geo.scale.eps * 2
-            )
+            (geo.glyph.codePoints?.[0] === undefined ||
+              String.fromCodePoint(geo.glyph.codePoints[0]).toLowerCase() ===
+                String.fromCodePoint(geo.glyph.codePoints[0])) &&
+            lowerY <=
+              Math.max(geo.metrics.baseline, body.bbox.minY) + geo.scale.eps &&
+            Math.min(leftExtension, rightExtension) > geo.scale.eps &&
+            Math.min(leftExtension, rightExtension) >=
+              Math.max(leftExtension, rightExtension) * 0.25
           )
             continue;
-          const rect = {
-            type: 'rect' as const,
-            x: x1,
-            y: centerY - measurement.thickness / 2,
-            width,
-            height: measurement.thickness,
-          };
+          if (
+            instances.some((instance) => {
+              const attached = instance.anchors?.attached;
+              const free = instance.anchors?.free;
+              return (
+                attached &&
+                free &&
+                free.x > attached.x === (side === 'right') &&
+                Math.abs(attached.y - centerY) < geo.scale.eps * 2
+              );
+            })
+          )
+            continue;
+          const upperY = centerY + measurement.thickness / 2;
+          const lowerShaft = backboneAtY(stem, lowerY, geo.scale.eps);
+          const upperShaft = backboneAtY(stem, upperY, geo.scale.eps);
+          const centerShaft = backboneAtY(stem, centerY, geo.scale.eps);
+          if (!lowerShaft || !upperShaft || !centerShaft) continue;
+          // Source fill determines the free edge near both band boundaries. The
+          // enclosing free-side extent is clipped to ink by the renderer; the
+          // attached side follows the backbone exactly through this whole band.
+          const freeEdges = [
+            lowerY + geo.scale.eps * 0.01,
+            centerY,
+            upperY - geo.scale.eps * 0.01,
+          ].flatMap((row) => {
+            const localShaft = backboneAtY(stem, row, geo.scale.eps);
+            if (!localShaft) return [];
+            const occupied = spansAt(row).find(
+              (candidate) =>
+                candidate.x1 <= localShaft.x1 + geo.scale.eps &&
+                candidate.x2 >= localShaft.x2 - geo.scale.eps
+            );
+            return occupied
+              ? [side === 'right' ? occupied.x2 : occupied.x1]
+              : [];
+          });
+          if (!freeEdges.length) continue;
+          const freeX =
+            side === 'right' ? Math.max(...freeEdges) : Math.min(...freeEdges);
+          const points: Point2D[] =
+            side === 'right'
+              ? [
+                  { x: lowerShaft.x2, y: lowerY },
+                  { x: freeX, y: lowerY },
+                  { x: freeX, y: upperY },
+                  { x: upperShaft.x2, y: upperY },
+                ]
+              : [
+                  { x: freeX, y: lowerY },
+                  { x: lowerShaft.x1, y: lowerY },
+                  { x: upperShaft.x1, y: upperY },
+                  { x: freeX, y: upperY },
+                ];
           instances.push({
             id: 'arm',
-            shape: rect,
-            region: { kind: 'stroke', points: rectToPolygon(rect) },
+            shape: { type: 'polyline', points },
+            region: { kind: 'stroke', points },
             confidence: 0.85,
             anchors: {
-              attached: { x: side === 'right' ? x1 : x2, y: centerY },
-              free: { x: side === 'right' ? x2 : x1, y: centerY },
+              attached: {
+                x: side === 'right' ? centerShaft.x2 : centerShaft.x1,
+                y: centerY,
+              },
+              free: { x: freeX, y: centerY },
             },
             debug: { source: 'attached-free-band', side },
           });
         }
       }
     }
-  }
   return instances;
 }
 

@@ -8,7 +8,10 @@ import {
   containsFilledPoint,
   occupiedRayIntervals,
 } from '@/utils/geometry/filledGeometry';
-import { pointInPolygon } from '@/test/utils/fixtures/fontFixtures';
+import {
+  pointInPolygon,
+  bundledVariationExtremes,
+} from '@/test/utils/fixtures/fontFixtures';
 import { hasApex } from '@/utils/typeAnatomy/apex';
 import { hasVertex } from '@/utils/typeAnatomy/vertex';
 import { hasCrotch } from '@/utils/typeAnatomy/crotch';
@@ -45,6 +48,7 @@ function horizontal(geo: GeometryCache, y: number) {
   );
 }
 const fontCases = [
+  ...bundledVariationExtremes(),
   ...[100, 400, 617.41, 900].map((wght) => ({
     name: 'Nohemi-VF.ttf',
     axes: { wght },
@@ -61,6 +65,59 @@ const fontCases = [
     axes: { wght },
   })),
 ];
+
+it.each([200, 800])(
+  'keeps both slanted T free extensions separate at weight %s',
+  (wght) => {
+    const geo = geometry('MonaspaceNeonVF.ttf', 'T', {
+      wght,
+      wdth: 100,
+      slnt: -11,
+    });
+    const arms = detectFeature(geo, 'arm');
+    expect(arms).toHaveLength(2);
+    const y = geo.metrics.capHeight * 0.95;
+    const span = horizontal(geo, y);
+    expect(span).toHaveLength(1);
+    const shaft = detectFeature(geo, 'stem')[0].region!.points;
+    const edges = shaft
+      .flatMap((a, i) => {
+        const b = shaft[(i + 1) % shaft.length];
+        return a.y !== b.y && y >= Math.min(a.y, b.y) && y <= Math.max(a.y, b.y)
+          ? [a.x + ((b.x - a.x) * (y - a.y)) / (b.y - a.y)]
+          : [];
+      })
+      .sort((a, b) => a - b);
+    expect(edges).toHaveLength(2);
+    const positives = [
+      { x: (span[0].near.x + edges[0]) / 2, y },
+      { x: (edges[1] + span[0].far.x) / 2, y },
+    ];
+    for (const point of positives) {
+      expect(containsFilledPoint(geo.filled!, point)).toBe(true);
+      expect(covers(arms, point)).toBe(true);
+    }
+    expect(covers(arms, { x: (edges[0] + edges[1]) / 2, y })).toBe(false);
+  }
+);
+
+it.each(['f', 't'])(
+  'retains the supported lowercase %s free transverse stroke above a long backbone',
+  (char) => {
+    const geo = geometry('Nohemi-VF.ttf', char, { wght: 100 });
+    const arms = detectFeature(geo, 'arm');
+    const y = 2165;
+    // Native straight edges enclose the 2125..2205 transverse stroke. This
+    // point is beyond the shaft, and the lower shaft remains unselected.
+    expect(containsFilledPoint(geo.filled!, { x: 1000, y })).toBe(true);
+    expect(covers(arms, { x: 1000, y })).toBe(true);
+    expect(arms).toHaveLength(1);
+    const shaft = horizontal(geo, geo.metrics.xHeight * 0.4)[0];
+    expect(
+      covers(arms, { x: (shaft.near.x + shaft.far.x) / 2, y: shaft.near.y })
+    ).toBe(false);
+  }
+);
 
 describe.each(fontCases)(
   '$name $axes occupied stroke anatomy',
@@ -81,6 +138,28 @@ describe.each(fontCases)(
         const point = { x, y: (band.near.y + band.far.y) / 2 };
         expect(containsFilledPoint(geo.filled!, point)).toBe(true);
         expect(covers(arms, point)).toBe(true);
+        // A band may overlap its inclined shaft in x. Exclude that actual
+        // shaft at several heights within every selected stroke, not only in
+        // the empty gaps between strokes.
+        for (const fraction of [0.1, 0.5, 0.9]) {
+          const y = band.near.y + (band.far.y - band.near.y) * fraction;
+          const shaft = detectFeature(geo, 'stem')[0].region!.points;
+          const edges = shaft.flatMap((a, i) => {
+            const b = shaft[(i + 1) % shaft.length];
+            return a.y !== b.y &&
+              y >= Math.min(a.y, b.y) &&
+              y <= Math.max(a.y, b.y)
+              ? [a.x + ((b.x - a.x) * (y - a.y)) / (b.y - a.y)]
+              : [];
+          });
+          expect(edges).toHaveLength(2);
+          const shaftPoint = {
+            x: Math.min(...edges) * 0.1 + Math.max(...edges) * 0.9,
+            y,
+          };
+          expect(containsFilledPoint(geo.filled!, shaftPoint)).toBe(true);
+          expect(covers(arms, shaftPoint)).toBe(false);
+        }
       }
       const y = (bands[0].far.y + bands[1].near.y) / 2;
       expect(covers(arms, { x, y })).toBe(false);
@@ -138,6 +217,7 @@ describe.each(fontCases)(
       const geo = geometry(name, 'r', axes),
         ears = detectFeature(geo, 'ear');
       expect(ears).toHaveLength(1);
+      const arms = detectFeature(geo, 'arm');
       const upperExtent = Math.max(
         ...geo
           .filled!.contours.flatMap((contour) => contour.points)
@@ -155,8 +235,34 @@ describe.each(fontCases)(
       const point = { x, y: (bands[0].near.y + bands[0].far.y) / 2 };
       expect(containsFilledPoint(geo.filled!, point)).toBe(true);
       expect(covers(ears, point)).toBe(true);
+      expect(covers(arms, point)).toBe(true);
+      const reference = horizontal(geo, geo.metrics.xHeight * 0.5).at(-1)!.far
+        .x;
+      const middleX = (reference + x) / 2;
+      const head = occupiedRayIntervals(
+        geo.filled!,
+        { x: middleX, y: geo.metrics.xHeight * 0.5 },
+        Math.PI / 2,
+        geo.scale.overshoot
+      ).at(-1)!;
+      const headPoint = { x: middleX, y: (head.near.y + head.far.y) / 2 };
+      expect(containsFilledPoint(geo.filled!, headPoint)).toBe(true);
+      expect(covers(arms, headPoint)).toBe(true);
+      for (const band of horizontal(geo, geo.metrics.xHeight * 0.05)) {
+        for (const depth of [0.1, 0.5, 0.9]) {
+          const footPoint = {
+            x: band.near.x + (band.far.x - band.near.x) * depth,
+            y: band.near.y,
+          };
+          expect(containsFilledPoint(geo.filled!, footPoint)).toBe(true);
+          expect(covers(arms, footPoint)).toBe(false);
+        }
+      }
       const shaftY = geo.metrics.xHeight * 0.4,
         shaft = horizontal(geo, shaftY)[0];
+      expect(
+        covers(arms, { x: (shaft.near.x + shaft.far.x) / 2, y: shaftY })
+      ).toBe(false);
       expect(
         covers(ears, { x: (shaft.near.x + shaft.far.x) / 2, y: shaftY })
       ).toBe(false);
@@ -165,6 +271,84 @@ describe.each(fontCases)(
       expect(detectFeature(geometry(name, 'a', axes), 'ear')).toEqual([]);
       expect(detectFeature(geometry(name, 'E', axes), 'ear')).toEqual([]);
     });
+  }
+);
+
+describe.each(bundledVariationExtremes())(
+  '$name $axes free diagonal arms',
+  ({ name, axes }) => {
+    it.each(['K', 'Y'])(
+      'covers both proper %s limbs without its persistent backbone or interior gaps',
+      (char) => {
+        const geo = geometry(name, char, axes),
+          arms = detectFeature(geo, 'arm');
+        const probes: Point2D[] = [];
+        for (const fraction of char === 'K' ? [0.1, 0.9] : [0.85]) {
+          const spans = horizontal(geo, geo.metrics.capHeight * fraction);
+          const limbs = char === 'K' ? spans.slice(-1) : spans;
+          expect(limbs).toHaveLength(char === 'K' ? 1 : 2);
+          for (const band of limbs)
+            probes.push({ x: (band.near.x + band.far.x) / 2, y: band.near.y });
+        }
+        expect(probes).toHaveLength(2);
+        for (const point of probes) {
+          expect(containsFilledPoint(geo.filled!, point)).toBe(true);
+          expect(covers(arms, point)).toBe(true);
+          // Each source limb belongs to one distinct free stroke. Duplicate
+          // masks that both cover an entire fork do not establish two arms.
+          expect(arms.filter((arm) => covers([arm], point))).toHaveLength(1);
+        }
+        expect(arms).toHaveLength(2);
+        const shaftY = geo.metrics.capHeight * (char === 'K' ? 0.4 : 0.15),
+          shaft = horizontal(geo, shaftY)[0];
+        // A merged heavy row's midpoint can lie in the diagonal. Source-owned
+        // persistent shaft walls provide the exclusion; confirm current ink.
+        const writing = detectFeature(geo, 'stem').find((stem) => {
+          const points = stem.region!.points;
+          const bottom = Math.min(...points.map((p) => p.y)),
+            top = Math.max(...points.map((p) => p.y));
+          const lower = points.filter((p) => p.y === bottom),
+            upper = points.filter((p) => p.y === top);
+          const dx =
+            upper.reduce((s, p) => s + p.x, 0) / upper.length -
+            lower.reduce((s, p) => s + p.x, 0) / lower.length;
+          return (
+            Math.abs(
+              dx + Math.tan((geo.italicAngle * Math.PI) / 180) * (top - bottom)
+            ) <=
+            geo.scale.eps * 4
+          );
+        });
+        const edges = writing?.region!.points.flatMap((a, i, list) => {
+          const b = list[(i + 1) % list.length];
+          return a.y !== b.y &&
+            shaftY >= Math.min(a.y, b.y) &&
+            shaftY <= Math.max(a.y, b.y)
+            ? [a.x + ((b.x - a.x) * (shaftY - a.y)) / (b.y - a.y)]
+            : [];
+        });
+        const shaftPoint = {
+          x:
+            edges?.length === 2
+              ? (edges[0] + edges[1]) / 2
+              : (shaft.near.x + shaft.far.x) / 2,
+          y: shaftY,
+        };
+        expect(containsFilledPoint(geo.filled!, shaftPoint)).toBe(true);
+        expect(covers(arms, shaftPoint)).toBe(false);
+        const gapY = geo.metrics.capHeight * (char === 'K' ? 0.5 : 0.85),
+          gapSpans = horizontal(geo, gapY);
+        const gapPoint = {
+          x:
+            char === 'K'
+              ? geo.glyph.bbox.maxX - geo.scale.eps * 2
+              : (gapSpans[0].far.x + gapSpans[1].near.x) / 2,
+          y: gapY,
+        };
+        expect(containsFilledPoint(geo.filled!, gapPoint)).toBe(false);
+        expect(covers(arms, gapPoint)).toBe(false);
+      }
+    );
   }
 );
 
