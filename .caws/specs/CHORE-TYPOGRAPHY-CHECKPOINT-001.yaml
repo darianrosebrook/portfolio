@@ -65,9 +65,8 @@ evidence:
     commit_sha: "55ef19170a1722c24957c0f76e54f79ff12f11cf"
   - criterion_id: A3
     status: pass
-    evidence_ref: "Revised valid Fontkit fixture exposed real e failure before repair; focused eye/counter contracts executed 256 passes; complete npm test executed 3574 passes across 237 files with 2 existing skipped tests after repair"
-    recorded_at: "2026-10-10T06:34:08.808Z"
+    evidence_ref: "Manually inspected raw checkpoint-smoke-red.log (valid real e fails old getEye), checkpoint-eye-green.log (256 executed passes), and checkpoint-test-final.log (237 files and 3574 executed passes, 2 skipped); all logs under ignored test-results/feature-explorers. db51f1a6 identifies checked committed bytes. Commit re-derivation does not rerun tests or prove their outcomes."
+    recorded_at: "2026-10-10T06:36:35.097Z"
     command: npm test
     exit_code: 0
-    artifact_path: test-results/feature-explorers/checkpoint-test-final.log
     commit_sha: db51f1a654ff49bc206d52c0438519eb0f1221c9
