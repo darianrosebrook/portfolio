@@ -3,6 +3,7 @@ import type { Font } from 'fontkit';
 import { buildGeometryCache } from '@/utils/typeAnatomy/geometryCache';
 import { detectFeature } from '@/utils/typeAnatomy/detectorRegistry';
 import {
+  buildFilledGeometry,
   containsFilledPoint,
   occupiedRayIntervals,
 } from '@/utils/geometry/filledGeometry';
@@ -429,4 +430,174 @@ it('opposed walls on an unattached square do not manufacture a backbone', () => 
   const geo = buildGeometryCache(glyph, mockFont());
   expect(containsFilledPoint(geo.filled!, { x: 300, y: 300 })).toBe(true);
   expect(detectFeature(geo, 'stem')).toEqual([]);
+});
+
+const neonAxes = [200, 800].flatMap((wght) =>
+  [100, 125].flatMap((wdth) => [-11, 0].map((slnt) => ({ wght, wdth, slnt })))
+);
+neonAxes.push({ wght: 500, wdth: 112.5, slnt: -5.5 });
+
+describe.each(neonAxes)(
+  'Neon actual axes $wght $wdth $slnt source-backed stems',
+  (axes) => {
+    const font = loadFont('MonaspaceNeonVF.ttf').getVariation(axes);
+    it('covers the r and E shaft source piece across its measured moving edges', () => {
+      for (const character of ['r', 'E']) {
+        const geo = geometry(font, character),
+          stems = detectFeature(geo, 'stem');
+        expect(stems).toHaveLength(1);
+        expect(stems[0].shape.type).toBe(axes.slnt === 0 ? 'rect' : 'polyline');
+        // These native glyphs put their backbone in the first closed source
+        // contour. Its occupied intervals supply independent shaft witnesses;
+        // attached head/arm contours are retained in the whole glyph separately.
+        const source = geo.filled!.contours[0];
+        const piece = buildFilledGeometry(
+          geo.glyph,
+          geo.segments.slice(source.startIndex, source.endIndex + 1)
+        );
+        for (const fraction of [0.35, 0.5, 0.62]) {
+          const y = geo.metrics.xHeight * fraction;
+          const spans = occupiedRayIntervals(
+            piece,
+            { x: geo.glyph.bbox.minX - geo.scale.eps, y },
+            0,
+            geo.scale.overshoot
+          );
+          expect(spans).toHaveLength(1);
+          const span = spans[0];
+          for (const depth of [0.02, 0.5, 0.98]) {
+            const x = span.near.x + (span.far.x - span.near.x) * depth;
+            expect(containsFilledPoint(geo.filled!, { x, y })).toBe(true);
+            expect(covers(stems, x, y)).toBe(true);
+          }
+          for (const x of [
+            span.near.x - geo.scale.eps * 4,
+            span.far.x + geo.scale.eps * 4,
+          ]) {
+            expect(containsFilledPoint(piece, { x, y })).toBe(false);
+            expect(covers(stems, x, y)).toBe(false);
+          }
+        }
+        if (character === 'r') {
+          const y = geo.glyph.bbox.maxY * 0.93;
+          const heads = occupiedRayIntervals(
+            geo.filled!,
+            { x: geo.glyph.bbox.minX - geo.scale.eps, y },
+            0,
+            geo.scale.overshoot
+          );
+          expect(heads.length).toBeGreaterThan(0);
+          const head = heads[heads.length - 1],
+            x = (head.near.x + head.far.x) / 2;
+          expect(containsFilledPoint(geo.filled!, { x, y })).toBe(true);
+          expect(covers(stems, x, y)).toBe(false);
+        }
+      }
+    });
+
+    it('retains the two actual A legs and leaves its enclosed counter empty', () => {
+      const geo = geometry(font, 'A'),
+        stems = detectFeature(geo, 'stem');
+      expect(stems).toHaveLength(2);
+      const counter = geo.filled!.enclosedRegions[0];
+      const y = (counter.bbox.minY + counter.bbox.maxY) / 2;
+      const legs = occupiedRayIntervals(
+        geo.filled!,
+        { x: geo.glyph.bbox.minX - geo.scale.eps, y },
+        0,
+        geo.scale.overshoot
+      );
+      expect(legs).toHaveLength(2);
+      for (const leg of legs) {
+        const x = (leg.near.x + leg.far.x) / 2;
+        expect(covers(stems, x, y)).toBe(true);
+      }
+      const x = (legs[0].far.x + legs[1].near.x) / 2;
+      expect(containsFilledPoint(geo.filled!, { x, y })).toBe(false);
+      expect(covers(stems, x, y)).toBe(false);
+    });
+
+    it('keeps the two M backbones aligned to the effective font slant', () => {
+      const geo = geometry(font, 'M'),
+        stems = detectFeature(geo, 'stem');
+      expect(stems).toHaveLength(2);
+      for (const stem of stems) {
+        expect((stem.debug as { slope: number }).slope).toBeCloseTo(
+          -Math.tan((axes.slnt * Math.PI) / 180),
+          3
+        );
+      }
+      const y = geo.metrics.capHeight * 0.5;
+      const spans = occupiedRayIntervals(
+        geo.filled!,
+        { x: geo.glyph.bbox.minX - geo.scale.eps, y },
+        0,
+        geo.scale.overshoot
+      );
+      expect(spans.length).toBeGreaterThanOrEqual(2);
+      for (const x of [
+        spans[0].near.x + geo.scale.eps * 4,
+        spans[spans.length - 1].far.x - geo.scale.eps * 4,
+      ]) {
+        expect(containsFilledPoint(geo.filled!, { x, y })).toBe(true);
+        expect(covers(stems, x, y)).toBe(true);
+      }
+    });
+
+    it('does not promote O walls or an acute mark to a backbone', () => {
+      for (const character of ['O', '´']) {
+        expect(font.hasGlyphForCodePoint(character.codePointAt(0)!)).toBe(true);
+        expect(detectFeature(geometry(font, character), 'stem')).toEqual([]);
+      }
+      const geo = geometry(font, 'í'),
+        stems = detectFeature(geo, 'stem');
+      expect(stems).toHaveLength(1);
+      const mark = geo.filled!.bodies.find(
+        (body) => body.bbox.minY > geo.metrics.xHeight + geo.scale.eps
+      );
+      expect(mark).toBeDefined();
+      const point = {
+        x: (mark!.bbox.minX + mark!.bbox.maxX) / 2,
+        y: (mark!.bbox.minY + mark!.bbox.maxY) / 2,
+      };
+      expect(containsFilledPoint(geo.filled!, point)).toBe(true);
+      expect(covers(stems, point.x, point.y)).toBe(false);
+    });
+  }
+);
+
+it('does not turn a diagonal unrelated to the font slant into a backbone', () => {
+  const glyph = mockGlyphFromPath('M 0 0 L 500 500 L 600 400 L 100 -100 Z', {
+    minX: 0,
+    minY: -100,
+    maxX: 600,
+    maxY: 500,
+  });
+  const geo = { ...buildGeometryCache(glyph, mockFont()), italicAngle: -11 };
+  expect(containsFilledPoint(geo.filled!, { x: 300, y: 200 })).toBe(true);
+  expect(detectFeature(geo, 'stem')).toEqual([]);
+});
+
+it('bounds the Newsreader r shaft before its collinear decorative head edge', () => {
+  const geo = geometry(
+    loadFont('Newsreader-VF.ttf').getVariation({ wght: 800, opsz: 72 }),
+    'r'
+  );
+  const stems = detectFeature(geo, 'stem');
+  expect(stems).toHaveLength(1);
+  expect(stems[0].shape).toEqual({
+    type: 'rect',
+    x: 141,
+    y: 68,
+    width: 438,
+    height: 769,
+  });
+  expect(containsFilledPoint(geo.filled!, { x: 300, y: 400 })).toBe(true);
+  expect(covers(stems, 300, 400)).toBe(true);
+  expect(containsFilledPoint(geo.filled!, { x: 300, y: 950 })).toBe(true);
+  expect(covers(stems, 300, 950)).toBe(false);
+  for (const x of [100, 600]) {
+    expect(containsFilledPoint(geo.filled!, { x, y: 400 })).toBe(false);
+    expect(covers(stems, x, 400)).toBe(false);
+  }
 });

@@ -52,60 +52,113 @@ export function detectStem(geo: GeometryCache): FeatureInstance[] {
  */
 function traceOpposedBackbones(geo: GeometryCache): FeatureInstance[] {
   const filled = geo.filled ?? getFilledGeometry(geo.glyph);
+  const basisSlope = -Math.tan((geo.italicAngle * Math.PI) / 180);
   const edges = [...geo.segments];
-  let start: Point2D | undefined;
+  const owners = new Map<(typeof edges)[number], number>();
+  let start: Point2D | undefined,
+    contour = -1;
   for (const segment of geo.segments) {
-    if (segment.type === 'moveTo') start = segment.params[0];
-    if (segment.type === 'closePath' && start && segment.params[0])
-      edges.push({ type: 'lineTo', params: [segment.params[0], start] });
+    if (segment.type === 'moveTo') {
+      start = segment.params[0];
+      contour++;
+    }
+    owners.set(segment, contour);
+    if (segment.type === 'closePath' && start && segment.params[0]) {
+      const closing = { type: 'lineTo', params: [segment.params[0], start] };
+      edges.push(closing);
+      owners.set(closing, contour);
+    }
   }
-  const walls: Array<{ x: number; bottom: number; top: number }> = [];
+  const walls: Array<{
+    x: number;
+    bottom: number;
+    top: number;
+    origin: Point2D;
+    slope: number;
+    extent: number;
+    contours: Set<number>;
+    edgeBottom: number;
+    edgeTop: number;
+  }> = [];
   for (const edge of edges) {
     if (edge.type !== 'lineTo' || edge.params.length !== 2) continue;
-    const [a, b] = edge.params;
+    const [a, b] = edge.params,
+      dy = b.y - a.y;
     if (
-      Math.abs(a.x - b.x) > geo.scale.eps ||
-      Math.abs(a.y - b.y) <= geo.scale.eps
+      Math.abs(dy) <= geo.scale.eps ||
+      Math.abs(b.x - basisSlope * b.y - (a.x - basisSlope * a.y)) >
+        geo.scale.eps
     )
       continue;
-    const x = (a.x + b.x) / 2;
+    const x = (a.x - basisSlope * a.y + (b.x - basisSlope * b.y)) / 2;
     const existing = walls.find(
       (wall) => Math.abs(wall.x - x) <= geo.scale.eps
     );
     if (existing) {
+      existing.contours.add(owners.get(edge)!);
       existing.bottom = Math.min(existing.bottom, a.y, b.y);
       existing.top = Math.max(existing.top, a.y, b.y);
+      if (Math.abs(dy) > existing.extent) {
+        existing.origin = a;
+        existing.slope = (b.x - a.x) / dy;
+        existing.extent = Math.abs(dy);
+        existing.edgeBottom = Math.min(a.y, b.y);
+        existing.edgeTop = Math.max(a.y, b.y);
+      }
     } else
-      walls.push({ x, bottom: Math.min(a.y, b.y), top: Math.max(a.y, b.y) });
+      walls.push({
+        x,
+        bottom: Math.min(a.y, b.y),
+        top: Math.max(a.y, b.y),
+        origin: a,
+        slope: (b.x - a.x) / dy,
+        extent: Math.abs(dy),
+        contours: new Set([owners.get(edge)!]),
+        edgeBottom: Math.min(a.y, b.y),
+        edgeTop: Math.max(a.y, b.y),
+      });
   }
-  const candidates: FeatureInstance[] = [];
+  const candidates: Array<{
+    instance: FeatureInstance;
+    left: number;
+    right: number;
+    bottom: number;
+    top: number;
+    width: number;
+  }> = [];
   walls.sort((a, b) => a.x - b.x);
   for (let i = 0; i < walls.length; i++)
     for (let j = i + 1; j < walls.length; j++) {
       const left = walls[i],
         right = walls[j];
+      // An overlapping r head supplies an internal seam, not a shaft wall.
+      // Opposed boundaries must retain shared source-contour custody.
+      if (![...left.contours].some((contour) => right.contours.has(contour)))
+        continue;
       const overlapBottom = Math.max(left.bottom, right.bottom),
         overlapTop = Math.min(left.top, right.top);
       if (overlapTop - overlapBottom <= geo.scale.eps) continue;
-      const width = right.x - left.x;
-      const longer =
-        left.top - left.bottom >= right.top - right.bottom ? left : right;
-      const bottom = Math.max(geo.metrics.baseline, longer.bottom),
-        top = longer.top;
-      const height = top - bottom;
-      // Opposed walls supply stronger evidence than a one-edge fit, including
-      // heavy shafts shorter than two widths. Small terminal faces supply
-      // neither a substantial body-height corridor nor continuous shaft ink.
+      const at = (wall: typeof left, y: number) =>
+        wall.origin.x + wall.slope * (y - wall.origin.y);
+      const leftAt = (y: number) => at(left, y),
+        rightAt = (y: number) => at(right, y);
+      // A decorative closing edge can continue at the same x beyond the
+      // shaft. The longest source wall bounds the backbone; a union of all
+      // collinear fragments must not extend it through the head flare.
+      const longer = left.extent >= right.extent ? left : right;
+      const bottom = Math.max(geo.metrics.baseline, longer.edgeBottom),
+        top = longer.edgeTop;
+      const height = top - bottom,
+        width = rightAt((bottom + top) / 2) - leftAt((bottom + top) / 2);
       if (
         height < geo.scale.bboxH * 0.3 ||
         height < width ||
-        width <= geo.scale.eps
+        width <= geo.scale.eps ||
+        rightAt(bottom) <= leftAt(bottom) ||
+        rightAt(top) <= leftAt(top)
       )
         continue;
       if (height < width * 1.5) {
-        // A heavy backbone can be nearly as wide as its visible shaft. Its
-        // attachment beyond the opposed walls distinguishes it from a filled
-        // square or a broad horizontal terminal face.
         const attached = [bottom - height * 0.05, top + height * 0.05].some(
           (y) =>
             occupiedRayIntervals(
@@ -115,90 +168,106 @@ function traceOpposedBackbones(geo: GeometryCache): FeatureInstance[] {
               geo.scale.overshoot
             ).some(
               (span) =>
-                span.near.x < right.x &&
-                span.far.x > left.x &&
-                (span.near.x < left.x - geo.scale.eps ||
-                  span.far.x > right.x + geo.scale.eps)
+                span.near.x < rightAt(y) &&
+                span.far.x > leftAt(y) &&
+                (span.near.x < leftAt(y) - geo.scale.eps ||
+                  span.far.x > rightAt(y) + geo.scale.eps)
             )
         );
         if (!attached) continue;
       }
       const wallY = (overlapBottom + overlapTop) / 2;
       if (
-        !containsFilledPoint(filled, { x: left.x + geo.scale.eps, y: wallY }) ||
-        !containsFilledPoint(filled, { x: right.x - geo.scale.eps, y: wallY })
+        !containsFilledPoint(filled, {
+          x: leftAt(wallY) + geo.scale.eps,
+          y: wallY,
+        }) ||
+        !containsFilledPoint(filled, {
+          x: rightAt(wallY) - geo.scale.eps,
+          y: wallY,
+        })
       )
         continue;
       let occupied = true;
       for (let band = 1; band < 32 && occupied; band++) {
         const y = bottom + (height * band) / 32;
         for (const depth of [0.1, 0.5, 0.9]) {
-          if (!containsFilledPoint(filled, { x: left.x + width * depth, y }))
+          if (
+            !containsFilledPoint(filled, {
+              x: leftAt(y) + (rightAt(y) - leftAt(y)) * depth,
+              y,
+            })
+          )
             occupied = false;
         }
       }
       if (!occupied) continue;
-      const rect = {
-        type: 'rect' as const,
-        x: left.x,
-        y: bottom,
-        width,
-        height,
-      };
       const points = [
-        { x: left.x, y: bottom },
-        { x: right.x, y: bottom },
-        { x: right.x, y: top },
-        { x: left.x, y: top },
+        { x: leftAt(bottom), y: bottom },
+        { x: rightAt(bottom), y: bottom },
+        { x: rightAt(top), y: top },
+        { x: leftAt(top), y: top },
       ];
-      candidates.push({
+      const slanted =
+        Math.max(
+          Math.abs(leftAt(top) - leftAt(bottom)),
+          Math.abs(rightAt(top) - rightAt(bottom))
+        ) > geo.scale.eps;
+      const instance: FeatureInstance = {
         id: 'stem',
-        shape: rect,
+        shape: slanted
+          ? { type: 'polyline', points }
+          : {
+              type: 'rect',
+              x: leftAt(bottom),
+              y: bottom,
+              width: rightAt(bottom) - leftAt(bottom),
+              height,
+            },
         region: { kind: 'stroke', points },
         confidence: 0.9,
         anchors: {
-          bottom: { x: (left.x + right.x) / 2, y: bottom },
-          top: { x: (left.x + right.x) / 2, y: top },
+          bottom: { x: (leftAt(bottom) + rightAt(bottom)) / 2, y: bottom },
+          top: { x: (leftAt(top) + rightAt(top)) / 2, y: top },
         },
         debug: {
           source: 'opposed-source-walls',
           thickness: width,
           edgeBottom: bottom,
           edgeTop: top,
+          basisSlope,
+          leftSlope: left.slope,
+          rightSlope: right.slope,
           sampleCount: 31,
         },
+      };
+      candidates.push({
+        instance,
+        left: left.x,
+        right: right.x,
+        bottom,
+        top,
+        width,
       });
     }
-  // Prefer the narrow shaft over wider corridors composed from several parts.
-  candidates.sort(
-    (a, b) =>
-      (a.shape as { width: number }).width -
-      (b.shape as { width: number }).width
-  );
-  const result: FeatureInstance[] = [];
+  // Compare in the same slant basis; a polygon's axis-aligned bounding box can
+  // overlap a different stroke merely because both move horizontally with y.
+  candidates.sort((a, b) => a.width - b.width);
+  const result: typeof candidates = [];
   for (const candidate of candidates) {
-    const rect = candidate.shape as Extract<
-      FeatureInstance['shape'],
-      { type: 'rect' }
-    >;
     if (
-      result.some((instance) => {
-        const other = instance.shape as Extract<
-          FeatureInstance['shape'],
-          { type: 'rect' }
-        >;
-        return (
-          Math.min(rect.x + rect.width, other.x + other.width) >
-            Math.max(rect.x, other.x) &&
-          Math.min(rect.y + rect.height, other.y + other.height) >
-            Math.max(rect.y, other.y)
-        );
-      })
+      result.some(
+        (other) =>
+          Math.min(candidate.right, other.right) >
+            Math.max(candidate.left, other.left) &&
+          Math.min(candidate.top, other.top) >
+            Math.max(candidate.bottom, other.bottom)
+      )
     )
       continue;
     result.push(candidate);
   }
-  return result;
+  return result.map((candidate) => candidate.instance);
 }
 
 /** Facing cavities in the same occupied body support a shared upright.
@@ -370,7 +439,8 @@ function traceBackbones(geo: GeometryCache): FeatureInstance[] {
     if (edgeHeight <= scale.eps) continue;
     const slope = (b.x - a.x) / dy;
     // Backbones run predominantly along the vertical axis.
-    if (Math.abs(slope) > 0.65) continue;
+    const basisSlope = -Math.tan((geo.italicAngle * Math.PI) / 180);
+    if (Math.abs(slope - basisSlope) > 0.65) continue;
     const edgeX = (y: number) => a.x + slope * (y - a.y);
     const matching = samples.filter(
       (s) =>
@@ -493,7 +563,10 @@ function traceBackbones(geo: GeometryCache): FeatureInstance[] {
   }
   // Upright backbones take precedence over subsidiary diagonal joins (such
   // as the interior joins of M).
-  const upright = tracks.filter((t) => Math.abs(t.slope) * height <= scale.eps);
+  const basisSlope = -Math.tan((geo.italicAngle * Math.PI) / 180);
+  const upright = tracks.filter(
+    (t) => Math.abs(t.slope - basisSlope) * height <= scale.eps
+  );
   return (upright.length > 0 ? upright : tracks).map((t) => t.instance);
 }
 
