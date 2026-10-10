@@ -1,9 +1,11 @@
 id: FIX-TYPOGRAPHY-PUBLISH-WAIT-001
 title: 'Wait for real FontInspector fixture initialization during publication checks'
 mode: fix
-lifecycle_state: active
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Readiness helper b4883c15 retains real asynchronous font loading, all anatomy assertions and the existing test budget while requiring glyph A and exactly four loaded fonts. Focused 16 rendering cases and fresh full concurrent unit suite passed (237 files, 3574 executed passes, 2 existing skips); scoped lint and all five policy gates passed. Independent read-only review questions grounded at the failed wait and committed helper. A1 and matching ac_recorded event 1372 read back. Publication hook and production build remain subsequent operations.'
 created_at: '2026-10-10T06:43:03.089Z'
-updated_at: '2026-10-10T06:43:03.089Z'
+updated_at: '2026-10-10T06:50:26.896Z'
 created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
 blast_radius:
   modules:
