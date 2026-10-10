@@ -43,3 +43,10 @@ evidence:
     command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
     exit_code: 0
     commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "body-regions.test.ts, stem-alignment.test.ts and crossbar-arm-alignment.test.ts execute actual bundled axis corners, A/H/T/b backbones/bars and c/C/G open bowls, rejecting n shoulders, S spine, R leg, G post/bar and detached marks. open-bowl-native-results.json independently checks 25 actual native glyph-ink targets; native rendering Aeacute samples additionally establish the repaired consumer transform. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:34:49.033Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
