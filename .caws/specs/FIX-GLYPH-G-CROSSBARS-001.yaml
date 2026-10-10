@@ -34,3 +34,11 @@ non_functional: {}
 contracts:
   - name: 'actual-crossbars'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "crossbar-arm-alignment.test.ts and body-regions.test.ts cover G plus A/H/e/compound/f/t source bars at supported axis corners, excluding curved roof, decorative cap/foot, cavity, backbone and detached acute. Earlier root crossbar-committed-root.log records 208 focused passes; the integrated candidate reruns these cases successfully. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:36:37.732Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
