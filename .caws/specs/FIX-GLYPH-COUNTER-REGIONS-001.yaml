@@ -1,0 +1,43 @@
+id: FIX-GLYPH-COUNTER-REGIONS-001
+title: 'Represent closed and open counter geometry'
+mode: fix
+lifecycle_state: active
+created_at: '2026-10-10T00:16:06.528Z'
+updated_at: '2026-10-10T00:16:06.528Z'
+created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
+blast_radius:
+  modules:
+    - 'Counter enclosure identity and open-space geometry'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/typeAnatomy/detectors/counter.ts'
+    - 'utils/typeAnatomy/detectors/aperture.ts'
+    - 'utils/typeAnatomy/counter.ts'
+    - 'utils/typeAnatomy/glyphFeatureHints.ts'
+    - 'utils/typeAnatomy/evidence/counterSpaces.ts'
+    - 'test/typeAnatomy/compound-regions.test.ts'
+    - 'test/typeAnatomy/counter-regions.test.ts'
+    - 'test/utils/typeAnatomy/features/counters.test.ts'
+  out: []
+invariants:
+  - 'Counter follows the canonical glossary including closed and partly enclosed negative space'
+  - 'Eye and Aperture retain their distinct current geometry and no counter mask covers unrelated ink marks or exterior whitespace'
+acceptance:
+  - id: A1
+    given: 'closed a O counters open c e n m E counters and negative controls across bundled axes'
+    when: 'Counter is detected'
+    then: 'actual empty enclosed or partly enclosed regions are highlighted without body ink and unrelated outside space'
+  - id: A2
+    given: 'Nohemi Aeacute and source-backed mouth and void targets'
+    when: 'Counter Eye and Aperture are selected together'
+    then: 'the a closed counter e eye open counter interiors and localized mouths retain their proper distinct geometry'
+observability:
+  - 'Current path fill samples closed and open counter masks and browser captures'
+rollback:
+  - 'Revert owned counter-region repair commits'
+non_functional: {}
+contracts:
+  - name: 'counter-negative-space'
+    type: behavior
