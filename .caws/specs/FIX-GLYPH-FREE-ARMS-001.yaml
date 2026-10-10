@@ -1,0 +1,38 @@
+id: FIX-GLYPH-FREE-ARMS-001
+title: 'Trace actual free horizontal and angled strokes'
+mode: fix
+lifecycle_state: active
+created_at: '2026-10-10T00:16:04.496Z'
+updated_at: '2026-10-10T00:16:04.496Z'
+created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
+blast_radius:
+  modules:
+    - 'Arm attachment free ends and current backbone boundaries'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/typeAnatomy/detectors/arm.ts'
+    - 'utils/typeAnatomy/detectors/ear.ts'
+    - 'test/typeAnatomy/stroke-features.test.ts'
+  out: []
+invariants:
+  - 'Actual output masks follow current occupied stroke walls in design coordinates without letter or font coordinate masks'
+  - 'Canonical r head and K Y diagonal arms cannot be rejected through whole-body metrics or replaced with connectors'
+acceptance:
+  - id: A1
+    given: 'E T K Y r f t across bundled supported axes'
+    when: 'Arm is selected'
+    then: 'actual transverse free strokes cover positive ink while excluding persistent backbones counters and decorative feet'
+  - id: A2
+    given: 'independent current path and hostile geometry probes'
+    when: 'arm and ear masks are verified'
+    then: 'source-supported endpoints and meaningful exclusions establish behavior beyond output counts'
+observability:
+  - 'Raw path endpoints independent raster observations and semantic limb probes'
+rollback:
+  - 'Revert owned free-arm commits preserving foreign edits'
+non_functional: {}
+contracts:
+  - name: 'free-stroke-anatomy'
+    type: behavior
