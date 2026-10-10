@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { Font } from 'fontkit';
 import { buildGeometryCache } from '@/utils/typeAnatomy/geometryCache';
 import { detectFeature } from '@/utils/typeAnatomy/detectorRegistry';
+import { counterSpaces } from '@/utils/typeAnatomy/evidence/counterSpaces';
 import {
   buildFilledGeometry,
   containsFilledPoint,
@@ -720,3 +721,195 @@ it('selects the Inter Y lower shaft instead of its diagonal right branch', () =>
   expect(containsFilledPoint(geo.filled!, { x: 1100, y: 1250 })).toBe(true);
   expect(covers(stems, 1100, 1250)).toBe(false);
 });
+
+describe.each(bundledVariationExtremes())(
+  '$name $axes nearly enclosed open bowls',
+  ({ name, axes }) => {
+    const font = loadFont(name).getVariation(axes);
+    for (const character of ['c', 'C', 'G'])
+      it(`${character} covers curved occupied walls and excludes its open counter and attached strokes`, () => {
+        const geo = geometry(font, character);
+        const spaces = counterSpaces(geo.glyph, geo.metrics, geo).filter(
+          (space) => space.closure === 'open'
+        );
+        expect(spaces.length).toBeGreaterThan(0);
+        const bowls = detectFeature(geo, 'bowl');
+        expect(bowls).toHaveLength(1);
+        const parts = [
+          ...detectFeature(geo, 'stem'),
+          ...detectFeature(geo, 'crossbar'),
+        ];
+        const seed = spaces[0].seed;
+        expect(containsFilledPoint(geo.filled!, seed)).toBe(false);
+        expect(covers(bowls, seed.x, seed.y)).toBe(false);
+        for (const angle of [Math.PI / 2, Math.PI, Math.PI * 1.5]) {
+          const ink = occupiedRayIntervals(
+            geo.filled!,
+            seed,
+            angle,
+            geo.scale.overshoot
+          )
+            .map((span) => ({
+              x: (span.near.x + span.far.x) / 2,
+              y: (span.near.y + span.far.y) / 2,
+            }))
+            .filter((point) => !covers(parts, point.x, point.y));
+          expect(ink.length).toBeGreaterThan(0);
+          for (const point of ink) {
+            expect(containsFilledPoint(geo.filled!, point)).toBe(true);
+            expect(covers(bowls, point.x, point.y)).toBe(true);
+          }
+        }
+        const mouth = spaces[0];
+        const voids = [0.25, 0.5, 0.75]
+          .map((fraction) => ({
+            x:
+              mouth.mouthStart!.x +
+              (mouth.mouthEnd!.x - mouth.mouthStart!.x) * fraction,
+            y:
+              mouth.mouthStart!.y +
+              (mouth.mouthEnd!.y - mouth.mouthStart!.y) * fraction,
+          }))
+          .filter((point) => !containsFilledPoint(geo.filled!, point));
+        expect(voids.length).toBeGreaterThan(0);
+        for (const point of voids)
+          expect(covers(bowls, point.x, point.y)).toBe(false);
+        for (const part of parts) {
+          const points = part.region!.points;
+          const point = points.reduce(
+            (sum, p) => ({
+              x: sum.x + p.x / points.length,
+              y: sum.y + p.y / points.length,
+            }),
+            { x: 0, y: 0 }
+          );
+          expect(containsFilledPoint(geo.filled!, point)).toBe(true);
+          expect(covers(bowls, point.x, point.y)).toBe(false);
+        }
+        expect(
+          covers(bowls, geo.glyph.bbox.maxX + geo.scale.stemWidth, seed.y)
+        ).toBe(false);
+      });
+
+    it('does not count n shoulders or the R leg gap as extra bowls', () => {
+      expect(detectFeature(geometry(font, 'n'), 'bowl')).toEqual([]);
+      expect(detectFeature(geometry(font, 's'), 'bowl')).toEqual([]);
+      const geo = geometry(font, 'R');
+      const bowls = detectFeature(geo, 'bowl');
+      expect(bowls).toHaveLength(1);
+      const y = geo.metrics.capHeight * 0.2;
+      const legs = occupiedRayIntervals(
+        geo.filled!,
+        { x: geo.glyph.bbox.minX - geo.scale.eps, y },
+        0,
+        geo.scale.overshoot
+      );
+      expect(legs).toHaveLength(2);
+      const gap = { x: (legs[0].far.x + legs[1].near.x) / 2, y };
+      const leg = { x: (legs[1].near.x + legs[1].far.x) / 2, y };
+      expect(containsFilledPoint(geo.filled!, gap)).toBe(false);
+      expect(covers(bowls, gap.x, gap.y)).toBe(false);
+      expect(containsFilledPoint(geo.filled!, leg)).toBe(true);
+      expect(covers(bowls, leg.x, leg.y)).toBe(false);
+    });
+
+    it('retains the open c bowl without claiming its disconnected acute', () => {
+      const geo = geometry(font, 'ć');
+      const bowls = detectFeature(geo, 'bowl');
+      expect(bowls).toHaveLength(1);
+      const mark = geo.filled!.bodies.find(
+        (body) => body.bbox.minY > geo.metrics.xHeight
+      );
+      expect(mark).toBeDefined();
+      const y = (mark!.bbox.minY + mark!.bbox.maxY) / 2;
+      const markInk = occupiedRayIntervals(
+        geo.filled!,
+        { x: geo.glyph.bbox.minX - geo.scale.eps, y },
+        0,
+        geo.scale.overshoot
+      );
+      expect(markInk).toHaveLength(1);
+      const x = (markInk[0].near.x + markInk[0].far.x) / 2;
+      expect(containsFilledPoint(geo.filled!, { x, y })).toBe(true);
+      expect(covers(bowls, x, y)).toBe(false);
+    });
+  }
+);
+
+it('covers the literal Nohemi c curved enclosure without covering its mouth', () => {
+  const geo = geometry(
+    loadFont('Nohemi-VF.ttf').getVariation({ wght: 400 }),
+    'c'
+  );
+  const bowls = detectFeature(geo, 'bowl');
+  expect(bowls).toHaveLength(1);
+  for (const point of [
+    { x: 250, y: 1103 },
+    { x: 1188, y: 2100 },
+    { x: 1188, y: 100 },
+  ]) {
+    expect(containsFilledPoint(geo.filled!, point)).toBe(true);
+    expect(covers(bowls, point.x, point.y)).toBe(true);
+  }
+  for (const point of [
+    { x: 1158.5, y: 1102.5 },
+    { x: 2100, y: 1103 },
+  ]) {
+    expect(containsFilledPoint(geo.filled!, point)).toBe(false);
+    expect(covers(bowls, point.x, point.y)).toBe(false);
+  }
+});
+
+it('keeps the heavy G upper-right curved stroke while excluding its actual transverse bar', () => {
+  const geo = geometry(
+    loadFont('Nohemi-VF.ttf').getVariation({ wght: 900 }),
+    'G'
+  );
+  const bowls = detectFeature(geo, 'bowl');
+  expect(bowls).toHaveLength(1);
+  const upper = occupiedRayIntervals(
+    geo.filled!,
+    { x: geo.glyph.bbox.minX - geo.scale.eps, y: 2000 },
+    0,
+    geo.scale.overshoot
+  );
+  expect(upper).toHaveLength(2);
+  const curve = upper[1];
+  const point = { x: (curve.near.x + curve.far.x) / 2, y: 2000 };
+  expect(containsFilledPoint(geo.filled!, point)).toBe(true);
+  expect(covers(bowls, point.x, point.y)).toBe(true);
+  expect(containsFilledPoint(geo.filled!, { x: 1800, y: 1250 })).toBe(true);
+  expect(covers(detectFeature(geo, 'crossbar'), 1800, 1250)).toBe(true);
+  expect(covers(bowls, 1800, 1250)).toBe(false);
+});
+
+it.each([6, 72])(
+  'excludes the literal Newsreader G secondary straight post at optical size %s',
+  (opsz) => {
+    const geo = geometry(
+      loadFont('Newsreader-VF.ttf').getVariation({ wght: 800, opsz }),
+      'G'
+    );
+    const bowls = detectFeature(geo, 'bowl');
+    expect(bowls).toHaveLength(1);
+    // Native walls are x1046/x1584,y265..492 at6 and x990/x1481,
+    // y125..543 at72. These occupied probes lie in the post below its bar.
+    for (const point of [
+      { x: 1300, y: 380 },
+      { x: 1200, y: 450 },
+    ]) {
+      expect(containsFilledPoint(geo.filled!, point)).toBe(true);
+      expect(covers(bowls, point.x, point.y)).toBe(false);
+    }
+    const y = geo.glyph.bbox.maxY * 0.6;
+    const curved = occupiedRayIntervals(
+      geo.filled!,
+      { x: geo.glyph.bbox.minX - geo.scale.eps, y },
+      0,
+      geo.scale.overshoot
+    )[0];
+    const x = (curved.near.x + curved.far.x) / 2;
+    expect(containsFilledPoint(geo.filled!, { x, y })).toBe(true);
+    expect(covers(bowls, x, y)).toBe(true);
+  }
+);
