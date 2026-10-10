@@ -64,3 +64,11 @@ evidence:
     command: "git show --stat 55ef1917; git diff 55ef1917..db51f1a6 -- package.json pnpm-lock.yaml AGENTS.md"
     exit_code: 0
     commit_sha: "55ef19170a1722c24957c0f76e54f79ff12f11cf"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "Revised valid Fontkit fixture exposed real e failure before repair; focused eye/counter contracts executed 256 passes; complete npm test executed 3574 passes across 237 files with 2 existing skipped tests after repair"
+    recorded_at: "2026-10-10T06:34:08.808Z"
+    command: npm test
+    exit_code: 0
+    artifact_path: test-results/feature-explorers/checkpoint-test-final.log
+    commit_sha: db51f1a654ff49bc206d52c0438519eb0f1221c9
