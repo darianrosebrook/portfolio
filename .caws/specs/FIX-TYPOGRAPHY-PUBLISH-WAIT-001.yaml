@@ -1,0 +1,33 @@
+id: FIX-TYPOGRAPHY-PUBLISH-WAIT-001
+title: 'Wait for real FontInspector fixture initialization during publication checks'
+mode: fix
+lifecycle_state: active
+created_at: '2026-10-10T06:43:03.089Z'
+updated_at: '2026-10-10T06:43:03.089Z'
+created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
+blast_radius:
+  modules:
+    - 'FontInspector rendering test initialization'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'test/components/FontInspector.rendering.test.tsx'
+    - 'test-results/feature-explorers/'
+  out: []
+invariants:
+  - 'Keep all anatomy assertions and the full pre-push hook checks intact'
+  - 'Retain asynchronous real-font file loading and a bounded test wait'
+acceptance:
+  - id: A1
+    given: 'asynchronous bundled-font initialization under concurrent unit-test load'
+    when: 'the rendering harness mounts the inspector'
+    then: 'it waits for glyph A and all four loaded fonts within the existing test execution budget before asserting geometry'
+observability:
+  - 'Rendering test raw output and pre-push checks report functional failures separately from fixture initialization timeout'
+rollback:
+  - 'Revert the harness wait change in a new commit if it conceals a functional failure'
+non_functional: {}
+contracts:
+  - name: 'inspector-fixture-readiness'
+    type: behavior
