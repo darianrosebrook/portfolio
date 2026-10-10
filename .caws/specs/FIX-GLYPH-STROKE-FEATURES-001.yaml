@@ -51,3 +51,11 @@ rollback:
   - 'Revert bounded stroke feature changes'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "stroke-features.test.ts executes free E/T/K/Y/r/f/t strokes, G spur, g ear, Q/j/y tails and serif exclusions across current supported variations; native-golden-manifest.json grounds Q tail/g ear/H serif; free-arm-native-source-targets.json grounds 72 K/Y source points. Semantic positives and negatives cover the intended strokes rather than merely output counts. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:35:05.404Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
