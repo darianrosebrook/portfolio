@@ -17,6 +17,9 @@ import { test, expect, type Page } from '@playwright/test';
  * Browser projects and screenshot tolerances come from playwright.config.ts.
  * Correct anatomy and effective axis labels are verified before regenerating
  * a baseline; an image diff is not permission to retain a known wrong region.
+ * The goldens use native Chromium desktop and Pixel 5 emulation captures at
+ * the configured viewport. These captures verify anatomy; they do not assert
+ * that the Playwright projects ran or passed on their configured engines.
  *
  * Baselines live next to this file under `feature-overlay.spec.ts-snapshots/`.
  * To regenerate after an intentional rendering change: `npm run test:e2e:update`.
@@ -117,6 +120,7 @@ async function loadInspector(page: Page) {
     }
     header, nav, footer,
     [role="banner"], [role="navigation"], [role="contentinfo"],
+    [data-ds-component="Slinkycursor"],
     [class*="SlinkyCursor"], [class*="slinkyCursor"], [class*="cursorFollower"] {
       visibility: hidden !important;
     }`,
