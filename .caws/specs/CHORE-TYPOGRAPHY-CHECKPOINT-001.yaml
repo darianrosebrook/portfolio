@@ -51,11 +51,10 @@ contracts:
 evidence:
   - criterion_id: A1
     status: pass
-    evidence_ref: "Manifest and pnpm 12 lockfile synchronization checked by frozen offline lockfile-only install (exit 0); final TypeScript check exit 0 at unchanged committed dependency bytes"
-    recorded_at: "2026-10-10T06:34:06.188Z"
+    evidence_ref: "Manually inspected primary executions: frozen offline lockfile-only validation exit 0 in test-results/feature-explorers/checkpoint-lockfile.log and TypeScript checking exit 0 in checkpoint-typecheck-final.log. Logs remain ignored runtime evidence. db51f1a6 identifies checked committed bytes; commit re-derivation does not rerun checks or prove their outcomes."
+    recorded_at: "2026-10-10T06:36:33.568Z"
     command: "pnpm install --lockfile-only --frozen-lockfile --offline --ignore-scripts; npm run typecheck"
     exit_code: 0
-    artifact_path: test-results/feature-explorers/checkpoint-typecheck-final.log
     commit_sha: db51f1a654ff49bc206d52c0438519eb0f1221c9
   - criterion_id: A2
     status: pass
