@@ -36,3 +36,11 @@ non_functional: {}
 contracts:
   - name: 'free-stroke-anatomy'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "stroke-features.test.ts and crossbar-arm-alignment.test.ts execute E/T/K/Y/r/f/t supported variation corners with positive source free bands and backbone/counter/decorative-foot negatives. free-arm-native-source-targets.json independently establishes 36 native cases and 72 K/Y positive ink points, each covered by its intended single arm mask. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:36:07.658Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
