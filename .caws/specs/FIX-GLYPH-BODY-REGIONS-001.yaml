@@ -35,3 +35,11 @@ rollback:
   - 'Revert bounded body-region repair changes'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "body-regions.test.ts pins the user-confirmed Nohemi aeacute w400 positive bowl/stem/bar samples and negative holes, opposite features and acute. actual-svg-paint-current.json samples the actual serialized SVG through native Chromium painting and the live production Canvas: all specified positive/negative targets agree, including the complete e bar and both rounded bodies. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:34:29.567Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
