@@ -27,7 +27,36 @@ import type {
 } from '@/utils/typeAnatomy/types';
 
 export type FontName =
-  'Nohemi-VF.ttf' | 'InterVariable.ttf' | 'Newsreader-VF.ttf';
+  | 'Nohemi-VF.ttf'
+  | 'InterVariable.ttf'
+  | 'Newsreader-VF.ttf'
+  | 'MonaspaceNeonVF.ttf';
+
+/** All supported-axis corner combinations, including width/slant/optical size. */
+export function bundledVariationExtremes(): Array<{
+  name: FontName;
+  axes: Record<string, number>;
+}> {
+  const names: FontName[] = [
+    'Nohemi-VF.ttf',
+    'InterVariable.ttf',
+    'Newsreader-VF.ttf',
+    'MonaspaceNeonVF.ttf',
+  ];
+  return names.flatMap((name) => {
+    const font = loadFont(name);
+    return Object.entries(font.variationAxes)
+      .reduce<Record<string, number>[]>(
+        (settings, [tag, axis]) =>
+          settings.flatMap((setting) => [
+            { ...setting, [tag]: axis.min },
+            { ...setting, [tag]: axis.max },
+          ]),
+        [{}]
+      )
+      .map((axes) => ({ name, axes }));
+  });
+}
 
 export function loadFont(fontName: FontName): Font {
   const fontPath = path.join(process.cwd(), 'public', 'fonts', fontName);
