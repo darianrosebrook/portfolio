@@ -45,3 +45,10 @@ evidence:
     command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
     exit_code: 0
     commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "junction-features.test.ts and legacy vertices tests execute glyph-owned effective variation context and raw hasApex/hasVertex/hasCrotch APIs with real source paths and hostile controls. Source-bound boundaries agree with registry instances without fabricated Font adapters or shifted outlines. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:35:51.936Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
