@@ -4,7 +4,7 @@ import {
   occupiedRayIntervals,
   type FilledBoundary,
 } from '@/utils/geometry/filledGeometry';
-import type { Glyph } from 'fontkit';
+import type { Font, Glyph } from 'fontkit';
 import type {
   FeatureInstance,
   GeometryCache,
@@ -36,13 +36,33 @@ function walk(
   return point;
 }
 
+/** Fontkit glyphs retain their owning variation; synthetic raw glyphs are upright. */
+function glyphSlant(glyph: Glyph): number {
+  const owner = (
+    glyph as Glyph & {
+      _font?: Font & { variationCoords?: number[] | Record<string, number> };
+    }
+  )._font;
+  const coordinates = owner?.variationCoords;
+  const index = Object.keys(owner?.variationAxes ?? {}).indexOf('slnt');
+  const angle =
+    coordinates && index >= 0
+      ? Array.isArray(coordinates)
+        ? coordinates[index]
+        : coordinates.slnt
+      : owner?.italicAngle;
+  return typeof angle === 'number' && Number.isFinite(angle) ? angle : 0;
+}
+
 /** Raw glyph evidence shared by the registered and legacy junction APIs. */
 export function junctionPoints(
   glyph: Glyph,
   metrics: Metrics,
-  kind: JunctionKind
+  kind: JunctionKind,
+  italicAngle: number = glyphSlant(glyph)
 ): Point2D[] {
   if (!glyph?.path?.commands?.length || !glyph.bbox) return [];
+  const shear = Math.tan((italicAngle * Math.PI) / 180);
   const filled = getFilledGeometry(glyph),
     result: Point2D[] = [];
   const tolerance = Math.max(
@@ -102,24 +122,23 @@ export function junctionPoints(
       if (kind === 'crotch' ? (hole ? !convex : convex) : !convex) continue;
       const first = walk(points, i, -1, height * 0.15),
         second = walk(points, end, 1, height * 0.15);
-      const left = Math.min(a.x, b.x),
-        right = Math.max(a.x, b.x);
-      // Free end caps have both walls on the same side, or parallel walls.
-      if (!(
-        (first.x < left - tolerance && second.x > right + tolerance) ||
-        (second.x < left - tolerance && first.x > right + tolerance)
-      ))
-        continue;
       const dy1 = first.y - a.y,
         dy2 = second.y - b.y;
+      const dx1 = first.x - a.x + shear * dy1,
+        dx2 = second.x - b.x + shear * dy2;
+      // Relative to the current slant, genuine diagonals diverge on both
+      // sides. A sheared upright remains upright and cannot supply a leg.
+      if (!(
+        (dx1 < -tolerance && dx2 > tolerance) ||
+        (dx2 < -tolerance && dx1 > tolerance)
+      ))
+        continue;
       if (
         upper
           ? dy1 >= -height * 0.1 || dy2 >= -height * 0.1
           : dy1 <= height * 0.1 || dy2 <= height * 0.1
       )
         continue;
-      const dx1 = first.x - a.x,
-        dx2 = second.x - b.x;
       const angle = Math.acos(
         Math.max(
           -1,
@@ -144,13 +163,17 @@ export function junctionPoints(
           return spans.slice(0, -1).some((left, index) => {
             const right = spans[index + 1],
               gap = right.near.x - left.far.x;
-            const center = (right.near.x + left.far.x) / 2;
+            // The facing empty gap must stay inside these two diverging
+            // outline branches. Its center need not align with an asymmetric
+            // flat tip, and follows a slanted joining stroke through height.
+            const edge1 = a.x + ((first.x - a.x) * (y - a.y)) / dy1;
+            const edge2 = b.x + ((second.x - b.x) * (y - b.y)) / dy2;
+            const near = Math.min(edge1, edge2),
+              far = Math.max(edge1, edge2);
             return (
               gap > tolerance &&
-              Math.abs(center - point.x) <=
-                Math.max(Math.abs(b.x - a.x) / 2, height * 0.15) &&
-              Math.abs(point.x - left.far.x) < height * 0.4 &&
-              Math.abs(right.near.x - point.x) < height * 0.4
+              left.far.x >= near - tolerance &&
+              right.near.x <= far + tolerance
             );
           });
         }
@@ -170,11 +193,13 @@ export function junctionPoints(
 }
 
 export function detectApex(geo: GeometryCache): FeatureInstance[] {
-  return junctionPoints(geo.glyph, geo.metrics, 'apex').map((point) => ({
-    id: 'apex',
-    shape: { type: 'point', ...point, label: 'Apex' },
-    confidence: 0.9,
-    anchors: { tip: point },
-    debug: { source: 'occupied-diagonal-junction' },
-  }));
+  return junctionPoints(geo.glyph, geo.metrics, 'apex', geo.italicAngle).map(
+    (point) => ({
+      id: 'apex',
+      shape: { type: 'point', ...point, label: 'Apex' },
+      confidence: 0.9,
+      anchors: { tip: point },
+      debug: { source: 'occupied-diagonal-junction' },
+    })
+  );
 }

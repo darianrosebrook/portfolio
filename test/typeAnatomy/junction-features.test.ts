@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
 import * as fontkit from 'fontkit';
 import type { Font } from 'fontkit';
+import { bundledVariationExtremes } from '@/test/utils/fixtures/fontFixtures';
 import { buildGeometryCache } from '@/utils/typeAnatomy/geometryCache';
 import { detectFeature } from '@/utils/typeAnatomy/detectorRegistry';
 import {
@@ -19,6 +20,7 @@ import type {
 } from '@/utils/typeAnatomy/types';
 
 const cases = [
+  ...bundledVariationExtremes(),
   ...[100, 400, 617.41, 900].map((wght) => ({
     name: 'Nohemi-VF.ttf',
     axes: { wght },
@@ -136,6 +138,9 @@ describe.each(cases)('$name $axes actual junctions', ({ name, axes }) => {
       vertices = detectFeature(geo, 'vertex'),
       crotches = detectFeature(geo, 'crotch');
     expect(vertices).toHaveLength(2);
+    expect(detectFeature(geo, 'apex')).toHaveLength(1);
+    expect(hasVertex(geo.glyph, geo.metrics)).toBe(true);
+    expect(hasApex(geo.glyph, geo.metrics)).toBe(true);
     expect(crotches).toHaveLength(3);
     const lower = crotches
       .map(point)
@@ -152,6 +157,9 @@ describe.each(cases)('$name $axes actual junctions', ({ name, axes }) => {
       crotches = detectFeature(geo, 'crotch');
     expect(vertices).toHaveLength(1);
     expect(detectFeature(geo, 'apex')).toEqual([]);
+    expect(hasApex(geo.glyph, geo.metrics)).toBe(false);
+    expect(hasVertex(geo.glyph, geo.metrics)).toBe(true);
+    expect(hasCrotch(geo.glyph, geo.metrics)).toBe(true);
     const vertex = point(vertices[0]);
     const interior = crotches.map(point).sort((a, b) => a.y - b.y)[0];
     expect(interior).toBeDefined();
