@@ -77,11 +77,18 @@ async function mountInspector() {
       </InspectorProvider>
     </React.StrictMode>
   );
-  await waitFor(() => expect(inspector.glyph?.name).toBe('A'));
-  await waitFor(() =>
-    expect(inspector.fonts.every((font) => font.loadState === 'loaded')).toBe(
-      true
-    )
+  // Real font I/O and parsing can exceed the default one-second polling wait
+  // under concurrent suite load. Readiness, rather than load speed, owns these
+  // geometry assertions; retain the existing five-second test budget.
+  await waitFor(
+    () => {
+      expect(inspector.glyph?.name).toBe('A');
+      expect(inspector.fonts).toHaveLength(4);
+      expect(inspector.fonts.every((font) => font.loadState === 'loaded')).toBe(
+        true
+      );
+    },
+    { timeout: 5000 }
   );
   flushFrames();
   return view;
