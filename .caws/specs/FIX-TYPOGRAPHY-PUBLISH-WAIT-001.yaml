@@ -31,3 +31,11 @@ non_functional: {}
 contracts:
   - name: 'inspector-fixture-readiness'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Manually inspected failed push output: default one-second readiness wait expired before anatomy assertions. b4883c15 requires glyph A and exactly four loaded fonts in one bounded five-second wait while retaining existing test budget and anatomy assertions. Focused rendering file executed all 16 passes; fresh concurrent npm test executed 3574 passes across 237 files, 2 existing skips. Raw logs checkpoint-push.log, checkpoint-readiness-test.log and checkpoint-readiness-full.log stay ignored under test-results/feature-explorers. Commit verification identifies source and does not rerun checks."
+    recorded_at: "2026-10-10T06:50:01.991Z"
+    command: npm test
+    exit_code: 0
+    commit_sha: b4883c15069da9f0daffff8ec8273e5345688845
