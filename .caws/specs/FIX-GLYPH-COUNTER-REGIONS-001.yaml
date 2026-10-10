@@ -41,3 +41,11 @@ non_functional: {}
 contracts:
   - name: 'counter-negative-space'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "counter-regions.test.ts executes closed a/O and open c/e/n/m/E spaces at actual bundled variation extremes, occupied walls/outside negatives, E-arm partitioning, T/L/r/I rejection, seed emptiness and occupied island/mouth-crossing exclusions. counter-native-source-targets.json and e-counter-native-source-targets.json independently confirm real empty spaces; actual-svg-paint-current.json proves their painted consumers. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:37:05.418Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
