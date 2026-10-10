@@ -9,6 +9,7 @@ import {
 } from '@/utils/geometry/filledGeometry';
 import type { FeatureInstance, GeometryCache } from '@/utils/typeAnatomy/types';
 import {
+  bundledVariationExtremes,
   glyphFor,
   loadFont,
   pointInPolygon,
@@ -600,4 +601,122 @@ it('bounds the Newsreader r shaft before its collinear decorative head edge', ()
     expect(containsFilledPoint(geo.filled!, { x, y: 400 })).toBe(false);
     expect(covers(stems, x, 400)).toBe(false);
   }
+});
+
+describe.each(bundledVariationExtremes())(
+  '$name $axes Y source shaft below the actual fork',
+  ({ name, axes }) => {
+    it('does not promote a closed curved bowl or a detached acute into a fork shaft', () => {
+      const font = loadFont(name).getVariation(axes);
+      for (const character of ['O', '´']) {
+        expect(font.hasGlyphForCodePoint(character.codePointAt(0)!)).toBe(true);
+        expect(detectFeature(geometry(font, character), 'stem')).toEqual([]);
+      }
+      const accented = geometry(font, 'í');
+      const stems = detectFeature(accented, 'stem');
+      expect(stems).toHaveLength(1);
+      const mark = accented.filled!.bodies.find(
+        (body) => body.bbox.minY > accented.metrics.xHeight + accented.scale.eps
+      );
+      expect(mark).toBeDefined();
+      const y = (mark!.bbox.minY + mark!.bbox.maxY) / 2;
+      const markInk = occupiedRayIntervals(
+        accented.filled!,
+        { x: accented.glyph.bbox.minX - accented.scale.eps, y },
+        0,
+        accented.scale.overshoot
+      );
+      expect(markInk).toHaveLength(1);
+      const x = (markInk[0].near.x + markInk[0].far.x) / 2;
+      expect(containsFilledPoint(accented.filled!, { x, y })).toBe(true);
+      expect(covers(stems, x, y)).toBe(false);
+    });
+    it('covers opposed shaft ink and excludes both occupied branches and side voids', () => {
+      const geo = geometry(loadFont(name).getVariation(axes), 'Y');
+      const stems = detectFeature(geo, 'stem');
+      expect(stems).toHaveLength(1);
+      for (const fraction of [0.15, 0.25, 0.3]) {
+        const y = geo.metrics.capHeight * fraction;
+        const spans = occupiedRayIntervals(
+          geo.filled!,
+          { x: geo.glyph.bbox.minX - geo.scale.eps, y },
+          0,
+          geo.scale.overshoot
+        );
+        expect(spans).toHaveLength(1);
+        const span = spans[0];
+        for (const depth of [0.02, 0.5, 0.98]) {
+          const x = span.near.x + (span.far.x - span.near.x) * depth;
+          expect(containsFilledPoint(geo.filled!, { x, y })).toBe(true);
+          expect(covers(stems, x, y)).toBe(true);
+        }
+        for (const x of [
+          span.near.x - geo.scale.eps * 4,
+          span.far.x + geo.scale.eps * 4,
+        ]) {
+          expect(containsFilledPoint(geo.filled!, { x, y })).toBe(false);
+          expect(covers(stems, x, y)).toBe(false);
+        }
+      }
+      const y = geo.metrics.capHeight * 0.85;
+      const branches = occupiedRayIntervals(
+        geo.filled!,
+        { x: geo.glyph.bbox.minX - geo.scale.eps, y },
+        0,
+        geo.scale.overshoot
+      );
+      expect(branches).toHaveLength(2);
+      for (const branch of branches) {
+        const x = (branch.near.x + branch.far.x) / 2;
+        expect(containsFilledPoint(geo.filled!, { x, y })).toBe(true);
+        expect(covers(stems, x, y)).toBe(false);
+      }
+      const x = (branches[0].far.x + branches[1].near.x) / 2;
+      expect(containsFilledPoint(geo.filled!, { x, y })).toBe(false);
+      expect(covers(stems, x, y)).toBe(false);
+    });
+  }
+);
+
+it('retains the short wide Newsreader Y shaft between its literal source walls', () => {
+  const geo = geometry(
+    loadFont('Newsreader-VF.ttf').getVariation({ wght: 800, opsz: 6 }),
+    'Y'
+  );
+  const stems = detectFeature(geo, 'stem');
+  expect(stems).toHaveLength(1);
+  expect(stems[0].shape).toEqual({
+    type: 'rect',
+    x: 660,
+    y: 185,
+    width: 538,
+    height: 417,
+  });
+  for (const x of [662, 929, 1196]) {
+    expect(containsFilledPoint(geo.filled!, { x, y: 400 })).toBe(true);
+    expect(covers(stems, x, 400)).toBe(true);
+  }
+  // The foot is real ink, but the bounded shaft stops at the serif join.
+  expect(containsFilledPoint(geo.filled!, { x: 550, y: 80 })).toBe(true);
+  expect(covers(stems, 550, 80)).toBe(false);
+});
+
+it('selects the Inter Y lower shaft instead of its diagonal right branch', () => {
+  const geo = geometry(
+    loadFont('InterVariable.ttf').getVariation({ wght: 900, opsz: 32 }),
+    'Y'
+  );
+  const stems = detectFeature(geo, 'stem');
+  expect(stems).toHaveLength(1);
+  expect(stems[0].shape).toEqual({
+    type: 'rect',
+    x: 555,
+    y: 0,
+    width: 402,
+    height: 508,
+  });
+  expect(containsFilledPoint(geo.filled!, { x: 750, y: 250 })).toBe(true);
+  expect(covers(stems, 750, 250)).toBe(true);
+  expect(containsFilledPoint(geo.filled!, { x: 1100, y: 1250 })).toBe(true);
+  expect(covers(stems, 1100, 1250)).toBe(false);
 });

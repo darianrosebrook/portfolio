@@ -16,6 +16,7 @@ import {
   getFilledGeometry,
   occupiedRayIntervals,
   containsFilledPoint,
+  contourWinding,
 } from '@/utils/geometry/filledGeometry';
 
 /**
@@ -40,17 +41,43 @@ export function detectStem(geo: GeometryCache): FeatureInstance[] {
     return [];
   }
 
-  const backbones = traceBackbones(geo);
+  // Ascender walls belong to the writing body below x-height. An isolated
+  // mark above that body can have the same straight edges as a thin stem.
+  const filled = geo.filled ?? getFilledGeometry(glyph);
+  const writingBody = (instance: FeatureInstance) => {
+    const points = instance.region?.points;
+    if (!points?.length) return false;
+    const middle = points.reduce(
+      (sum, point) => ({
+        x: sum.x + point.x / points.length,
+        y: sum.y + point.y / points.length,
+      }),
+      { x: 0, y: 0 }
+    );
+    return filled.bodies.some(
+      (body) =>
+        body.bbox.minY < geo.metrics.xHeight - geo.scale.eps &&
+        contourWinding(body.points, middle) !== 0
+    );
+  };
+  const forkShafts = traceOpposedBackbones(geo, true).filter(writingBody);
+  if (forkShafts.length) return forkShafts;
+  const backbones = traceBackbones(geo).filter(writingBody);
   if (backbones.length) return backbones;
-  const opposed = traceOpposedBackbones(geo);
-  return opposed.length ? opposed : traceSharedBackbones(geo);
+  const opposed = traceOpposedBackbones(geo).filter(writingBody);
+  return opposed.length
+    ? opposed
+    : traceSharedBackbones(geo).filter(writingBody);
 }
 
 /** Opposed source walls establish a corridor even when attached arms occupy
  * most horizontal sample rows. Independent filled probes through the entire
  * corridor retain its width through joins and reject arm ends or empty gaps.
  */
-function traceOpposedBackbones(geo: GeometryCache): FeatureInstance[] {
+function traceOpposedBackbones(
+  geo: GeometryCache,
+  forksOnly = false
+): FeatureInstance[] {
   const filled = geo.filled ?? getFilledGeometry(geo.glyph);
   const basisSlope = -Math.tan((geo.italicAngle * Math.PI) / 180);
   const edges = [...geo.segments];
@@ -150,15 +177,17 @@ function traceOpposedBackbones(geo: GeometryCache): FeatureInstance[] {
         top = longer.edgeTop;
       const height = top - bottom,
         width = rightAt((bottom + top) / 2) - leftAt((bottom + top) / 2);
+      const forkAttachment = supportsFork();
+      if (forksOnly && !forkAttachment) continue;
       if (
-        height < geo.scale.bboxH * 0.3 ||
-        height < width ||
+        (!forkAttachment &&
+          (height < geo.scale.bboxH * 0.3 || height < width)) ||
         width <= geo.scale.eps ||
         rightAt(bottom) <= leftAt(bottom) ||
         rightAt(top) <= leftAt(top)
       )
         continue;
-      if (height < width * 1.5) {
+      if (!forkAttachment && height < width * 1.5) {
         const attached = [bottom - height * 0.05, top + height * 0.05].some(
           (y) =>
             occupiedRayIntervals(
@@ -238,6 +267,7 @@ function traceOpposedBackbones(geo: GeometryCache): FeatureInstance[] {
           basisSlope,
           leftSlope: left.slope,
           rightSlope: right.slope,
+          forkAttachment,
           sampleCount: 31,
         },
       };
@@ -249,6 +279,87 @@ function traceOpposedBackbones(geo: GeometryCache): FeatureInstance[] {
         top,
         width,
       });
+
+      /** A short shaft supports two actual outward branches in the same
+       * occupied body. Source directions and separated ink above the junction
+       * distinguish a fork from parallel stems over a bar or a serif flare.
+       */
+      function supportsFork(): boolean {
+        if (height <= geo.scale.eps || width <= geo.scale.eps) return false;
+        const body = filled.bodies.find(
+          (body) =>
+            contourWinding(body.points, {
+              x: (leftAt((bottom + top) / 2) + rightAt((bottom + top) / 2)) / 2,
+              y: (bottom + top) / 2,
+            }) !== 0
+        );
+        if (!body) return false;
+        const branches = (side: 'left' | 'right') =>
+          edges.flatMap((edge) => {
+            if (edge.type !== 'lineTo' || edge.params.length !== 2) return [];
+            const [low, high] = [...edge.params].sort((a, b) => a.y - b.y);
+            const dy = high.y - low.y;
+            if (
+              dy < height * 0.2 ||
+              low.y > top + geo.scale.eps ||
+              low.y < bottom - geo.scale.eps ||
+              top - low.y > width ||
+              low.x < leftAt(low.y) - geo.scale.eps ||
+              low.x > rightAt(low.y) + geo.scale.eps
+            )
+              return [];
+            const drift = high.x - low.x - basisSlope * dy;
+            if (
+              side === 'left' ? drift >= -width * 0.25 : drift <= width * 0.25
+            )
+              return [];
+            const probe = {
+              x: low.x + (side === 'left' ? geo.scale.eps : -geo.scale.eps),
+              y: low.y,
+            };
+            if (contourWinding(body.points, probe) === 0) return [];
+            return [
+              {
+                low,
+                high,
+                x: (y: number) => low.x + ((high.x - low.x) * (y - low.y)) / dy,
+              },
+            ];
+          });
+        for (const first of branches('left'))
+          for (const second of branches('right')) {
+            const join = Math.max(top, first.low.y, second.low.y),
+              limit = Math.min(first.high.y, second.high.y);
+            if (limit - join <= geo.scale.eps) continue;
+            const supported = [0.6, 0.8].every((fraction) => {
+              const y = join + (limit - join) * fraction;
+              const spans = occupiedRayIntervals(
+                filled,
+                { x: geo.glyph.bbox.minX - geo.scale.eps, y },
+                0,
+                geo.scale.overshoot
+              );
+              const leftInk = spans.find(
+                (span) =>
+                  span.near.x <= first.x(y) + geo.scale.eps &&
+                  span.far.x >= first.x(y) + geo.scale.eps
+              );
+              const rightInk = spans.find(
+                (span) =>
+                  span.near.x <= second.x(y) - geo.scale.eps &&
+                  span.far.x >= second.x(y) - geo.scale.eps
+              );
+              return (
+                leftInk &&
+                rightInk &&
+                leftInk !== rightInk &&
+                leftInk.far.x < rightInk.near.x - geo.scale.eps
+              );
+            });
+            if (supported) return true;
+          }
+        return false;
+      }
     }
   // Compare in the same slant basis; a polygon's axis-aligned bounding box can
   // overlap a different stroke merely because both move horizontally with y.
