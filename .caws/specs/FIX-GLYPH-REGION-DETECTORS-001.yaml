@@ -30,3 +30,11 @@ rollback:
   - 'Revert bounded feature detector changes'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "opening-loop-terminal.test.ts executes current c/e aperture lips versus deep counter/ink, g loop bands versus voids/upper body and s/flat source terminal caps versus serifs, balls and internal seams at bundled variation extremes. Native Canvas captures nohemi-e-aperture, newsreader-g-loop and newsreader-s-finial in native-golden-manifest.json ground representative UI pixels. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:34:14.545Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
