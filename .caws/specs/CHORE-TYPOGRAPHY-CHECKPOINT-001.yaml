@@ -57,3 +57,10 @@ evidence:
     exit_code: 0
     artifact_path: test-results/feature-explorers/checkpoint-typecheck-final.log
     commit_sha: db51f1a654ff49bc206d52c0438519eb0f1221c9
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "git show 55ef1917 names exactly package.json, pnpm-lock.yaml, AGENTS.md with the checkpointed working file hashes e4df0ef6, fc4abfc2, af3b7c84; later commits preserve those three bytes"
+    recorded_at: "2026-10-10T06:34:07.618Z"
+    command: "git show --stat 55ef1917; git diff 55ef1917..db51f1a6 -- package.json pnpm-lock.yaml AGENTS.md"
+    exit_code: 0
+    commit_sha: "55ef19170a1722c24957c0f76e54f79ff12f11cf"
