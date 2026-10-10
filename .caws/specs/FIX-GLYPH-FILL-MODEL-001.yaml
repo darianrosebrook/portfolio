@@ -44,3 +44,11 @@ rollback:
   - 'Revert owned shared geometry changes'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "filled-topology.test.ts and filledGeometry.test.ts cover reversed winding, overlapping bodies, real Inter i/O and Nohemi aeacute holes/mark custody. Native raw SVG Path2D observations: fill-native-results-analytic.json has 5766 containment and 665 ray probes with zero mismatches; fill-crossing-native-source-targets.json grounds seven current Neon f source intersections after neighboring-cell repair. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:32:08.078Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
