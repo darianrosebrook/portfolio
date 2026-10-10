@@ -48,3 +48,12 @@ non_functional: {}
 contracts:
   - name: 'dependency-checkpoint'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Manifest and pnpm 12 lockfile synchronization checked by frozen offline lockfile-only install (exit 0); final TypeScript check exit 0 at unchanged committed dependency bytes"
+    recorded_at: "2026-10-10T06:34:06.188Z"
+    command: "pnpm install --lockfile-only --frozen-lockfile --offline --ignore-scripts; npm run typecheck"
+    exit_code: 0
+    artifact_path: test-results/feature-explorers/checkpoint-typecheck-final.log
+    commit_sha: db51f1a654ff49bc206d52c0438519eb0f1221c9
