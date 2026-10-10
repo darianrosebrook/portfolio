@@ -47,3 +47,10 @@ evidence:
     command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
     exit_code: 0
     commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "FontInspector.rendering.test.tsx checks URL Unicode scalars and rejects malformed URLs, DPR2 narrow170x140, zero size and800x600 observer transitions with exact Canvas backing and current SVG matrices. Native comparison navigates H then aeacute, renders current Weight400 and correct targets before/after resetting overrides to normal sizes; aeacute-bowl-both-renderers-proof.png shows both complete explorers. No configured Playwright project execution is claimed. Raw primary evidence directory: /Users/darianrosebrook/Desktop/Projects/portfolio/test-results/feature-explorers/ Integrated executed command applies to committed production/test bytes at f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Commit verification identifies bytes; it does not re-execute the cited command."
+    recorded_at: "2026-10-10T03:37:46.240Z"
+    command: node ./node_modules/vitest/vitest.mjs run --config vitest.config.mjs test/typeAnatomy test/utils/typeAnatomy test/utils/geometry test/components/FontInspector
+    exit_code: 0
+    commit_sha: f45c5dad206ed5800e75d5a9ad5953ab709a41eb
