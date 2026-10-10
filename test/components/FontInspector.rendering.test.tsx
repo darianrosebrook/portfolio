@@ -477,14 +477,19 @@ describe('FontInspector provider and renderer behavior with bundled fonts', () =
       [...highlights].map((path) => path.getAttribute('fill-rule'))
     ).toEqual(['nonzero', 'nonzero']);
     const expectedPoints = instances[0]
-      .region!.points.map(
-        (point) =>
-          `${point.x * viewport.scale + viewport.xOffset},${viewport.baseline - point.y * viewport.scale}`
-      )
+      .region!.points.map((point) => `${point.x},${point.y}`)
       .join(' ');
     expect(
       view.container.querySelector('clipPath[id*="Stem-0"] polygon')
     ).toHaveAttribute('points', expectedPoints);
+    expect(highlights[0]).toHaveAttribute(
+      'transform',
+      createViewportTransform(
+        viewport.scale,
+        viewport.xOffset,
+        viewport.baseline
+      ).toSVGTransform()
+    );
     selectFeature('Stem');
     expect(
       view.container.querySelectorAll('path[aria-label="Stem highlight"]')

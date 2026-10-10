@@ -181,6 +181,121 @@ async function screenshotCanvas(page: Page, name: string) {
   });
 }
 
+test('SVG paints selected H stroke interiors in the same coordinate frame as Canvas', async ({
+  page,
+}) => {
+  await observeCanvasDraws(page);
+  await page.setViewportSize(VIEWPORT);
+  await page.goto('/dev/glyph-compare?gid=0x0048');
+  await waitForInspector(page, 'Nohemi', 'H');
+  await page
+    .getByText('Select anatomy for both views', { exact: true })
+    .click();
+  await enableSwitch(page, 'Show Details');
+
+  // These font-unit interiors are chosen from the native H outline, independent
+  // of the detector polygons. Rasterize the actual SVG, including its clip paths;
+  // isPointInFill on an unclipped path cannot observe a clipping-frame defect.
+  const points = [
+    [380, 2100],
+    [2340, 2100],
+    [1360, 1420],
+  ];
+  for (const [feature, expected] of [
+    ['Stem', [true, true, false]],
+    ['Bar', [false, false, true]],
+  ] as const) {
+    await enableSwitch(page, feature);
+    await expect
+      .poll(async () =>
+        page.locator('svg[role="img"]').evaluate(async (element, targets) => {
+          const svg = element as SVGSVGElement;
+          const rect = svg.getBoundingClientRect();
+          const outline = svg.querySelector<SVGPathElement>('#glyph path')!;
+          const matrix = outline.transform.baseVal.consolidate()!.matrix;
+          const samplePoints = targets.map(([x, y]) =>
+            new DOMPoint(x, y).matrixTransform(matrix)
+          );
+          async function paint(withHighlights: boolean) {
+            const clone = svg.cloneNode(true) as SVGSVGElement;
+            clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            clone.setAttribute('width', String(rect.width));
+            clone.setAttribute('height', String(rect.height));
+            if (!withHighlights)
+              clone
+                .querySelector('[aria-label="Feature highlights"]')!
+                .remove();
+            const url = URL.createObjectURL(
+              new Blob([new XMLSerializer().serializeToString(clone)], {
+                type: 'image/svg+xml',
+              })
+            );
+            try {
+              const image = new Image();
+              image.src = url;
+              await image.decode();
+              const surface = new OffscreenCanvas(
+                Math.ceil(rect.width),
+                Math.ceil(rect.height)
+              );
+              const context = surface.getContext('2d')!;
+              context.drawImage(image, 0, 0);
+              return samplePoints.map((point) => [
+                ...context.getImageData(
+                  Math.round(point.x),
+                  Math.round(point.y),
+                  1,
+                  1
+                ).data,
+              ]);
+            } finally {
+              URL.revokeObjectURL(url);
+            }
+          }
+          const [actual, baseline] = await Promise.all([
+            paint(true),
+            paint(false),
+          ]);
+          const canvas = document.querySelector<HTMLCanvasElement>(
+            '[data-testid="symbol-canvas"]'
+          )!;
+          const canvasRect = canvas.getBoundingClientRect();
+          const context = canvas.getContext('2d')!;
+          const swatch = new OffscreenCanvas(1, 1).getContext('2d')!;
+          swatch.fillStyle = svg
+            .querySelector('path[clip-path]')!
+            .getAttribute('fill')!;
+          swatch.fillRect(0, 0, 1, 1);
+          const highlight = swatch.getImageData(0, 0, 1, 1).data;
+          return {
+            svg: actual.map((pixel, i) =>
+              pixel
+                .slice(0, 3)
+                .some((channel, c) => Math.abs(channel - baseline[i][c]) > 40)
+            ),
+            canvas: samplePoints.map((point) => {
+              const pixel = context.getImageData(
+                Math.round((point.x * canvas.width) / canvasRect.width),
+                Math.round((point.y * canvas.height) / canvasRect.height),
+                1,
+                1
+              ).data;
+              return [...pixel]
+                .slice(0, 3)
+                .every((channel, c) => Math.abs(channel - highlight[c]) < 2);
+            }),
+          };
+        }, points)
+      )
+      .toEqual({ svg: expected, canvas: expected });
+    const previous = await frameNumber(page);
+    await inspector(page)
+      .getByRole('switch', { name: feature, exact: true })
+      .uncheck();
+    await waitForFreshFrame(page, previous);
+  }
+});
+
 test.describe('Feature highlight overlay (Nohemi)', () => {
   // The default font is Nohemi; no font-switch UI interaction needed.
 

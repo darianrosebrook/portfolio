@@ -278,21 +278,27 @@ export const SymbolCanvasSVG: React.FC = () => {
             const idSuffix = `${featureName.replace(/\s+/g, '-')}-${i}`;
 
             if (inst.region && inst.region.points.length >= 3) {
-              const polygonPoints = polygonToScreenPoints(
-                inst.region,
-                viewportTransform
-              );
-
               if (inst.region.kind === 'stroke') {
                 plans.push({
                   kind: 'stroke',
                   idSuffix,
                   clipPathId: `clip-${idSuffix}`,
-                  polygonPoints,
+                  // userSpaceOnUse is local to the transformed glyph path.
+                  // Keep its clip in font units so both receive that transform once.
+                  polygonPoints: inst.region.points
+                    .map((point) => `${point.x},${point.y}`)
+                    .join(' '),
                 });
               } else {
                 // 'enclosed': fill the polygon directly (counters, eyes).
-                plans.push({ kind: 'enclosed', idSuffix, polygonPoints });
+                plans.push({
+                  kind: 'enclosed',
+                  idSuffix,
+                  polygonPoints: polygonToScreenPoints(
+                    inst.region,
+                    viewportTransform
+                  ),
+                });
               }
             } else {
               // No region — fall back to the existing shape renderer.
@@ -329,7 +335,7 @@ export const SymbolCanvasSVG: React.FC = () => {
             // Clip the glyph fill against the polygon.
             elements.push(
               <defs key={`defs-${plan.idSuffix}`}>
-                <clipPath id={plan.clipPathId}>
+                <clipPath id={plan.clipPathId} clipPathUnits="userSpaceOnUse">
                   <polygon points={plan.polygonPoints} />
                 </clipPath>
               </defs>
