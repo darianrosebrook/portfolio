@@ -2,13 +2,13 @@ import {
   getFilledGeometry,
   type FilledBoundary,
 } from '@/utils/geometry/filledGeometry';
-import type { FeatureInstance, GeometryCache, Point2D } from '../types';
-import { counterSpaces } from '../evidence/counterSpaces';
+import type { FeatureInstance, Point2D } from '../types';
+import { counterSpaces, type CounterSource } from '../evidence/counterSpaces';
 
 /** The long lower boundary of an eye is supplied by its horizontal bar. */
 export function eyeFloor(
   hole: FilledBoundary,
-  geo: GeometryCache
+  geo: CounterSource
 ): [Point2D, Point2D] | null {
   const width = hole.bbox.maxX - hole.bbox.minX;
   const height = hole.bbox.maxY - hole.bbox.minY;
@@ -67,7 +67,7 @@ export function eyeFloor(
 }
 
 /** A curved enclosure above a bar, rather than any gap found on a scanline. */
-export function detectEye(geo: GeometryCache): FeatureInstance[] {
+export function detectEye(geo: CounterSource): FeatureInstance[] {
   if (!geo.glyph?.path?.commands || !geo.glyph.bbox) return [];
   const filled = geo.filled ?? getFilledGeometry(geo.glyph);
   const spaces = counterSpaces(geo.glyph, geo.metrics, geo);

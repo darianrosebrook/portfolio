@@ -5,6 +5,8 @@ import type { Glyph, Font } from 'fontkit';
 import type { Point2D } from './geometry';
 import { Bezier } from 'bezier-js';
 import { Metrics } from '@/utils/typeAnatomy';
+import { detectEye } from '@/utils/typeAnatomy/detectors/eye';
+import { counterSource } from '@/utils/typeAnatomy/evidence/counterSpaces';
 import {
   getOvershoot,
   shapeForV2,
@@ -299,21 +301,14 @@ export function getTittle(g: Glyph, m: Metrics, font: Font): FeatureResult {
 }
 
 /**
- * Eye detection for lowercase 'e'-like counters with an open aperture to the right.
+ * The eye is the enclosed empty region above an e bar and its lower opening.
  */
 export function getEye(g: Glyph, m: Metrics): FeatureResult {
   if (!isDrawable(g)) return { found: false };
-  // Find a counter seed in the lowercase band
-  const seed = counterSeed(g, m);
-  if (!seed) return { found: false };
-  const gs = shapeForV2(g);
-  const overshoot = getOvershoot(g);
-  // Cast a ray to the right from the seed; odd intersections imply open aperture
-  const { points } = rayHits(gs, seed, 0, overshoot * 2);
-  const openRight = points.length % 2 === 1;
-  if (!openRight) return { found: false };
-  const poly = traceRegion(g, seed);
-  return poly ? { found: true, shape: poly } : { found: true };
+  const eye = detectEye(counterSource(g, m))[0];
+  return eye?.shape.type === 'polyline'
+    ? { found: true, shape: eye.shape }
+    : { found: false };
 }
 
 /**
