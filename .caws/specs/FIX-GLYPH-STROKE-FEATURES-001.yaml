@@ -1,9 +1,11 @@
 id: FIX-GLYPH-STROKE-FEATURES-001
 title: 'Resolve remaining stroke anatomy and legacy semantic defects'
 mode: fix
-lifecycle_state: active
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Owned repairs committed through f45c5dad206ed5800e75d5a9ad5953ab709a41eb. Declared acceptance records were adjudicated from semantic and hostile bundled-font/synthetic tests and native browser observations, then read back with matching ac_recorded events. Integrated32files1737tests, typecheck/scoped lint and all5CAWSgates pass. Actual native Canvas/SVG Aeacute positive and negative paint targets agree after SVG clip-frame repair. Coverage is representative; configured five-project Playwright execution and strict screenshot comparisons remain unverified. Local branch only; unrelated dependency edits and PerformanceDashboard hydration are outside this work.'
 created_at: '2026-10-09T21:43:56.382Z'
-updated_at: '2026-10-09T22:54:13.218Z'
+updated_at: '2026-10-10T03:43:11.292Z'
 created_by_session: '01a12160-2ad6-7b13-87cc-f11cd6b323a6'
 blast_radius:
   modules:
